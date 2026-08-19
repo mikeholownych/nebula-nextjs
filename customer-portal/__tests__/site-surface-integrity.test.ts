@@ -74,10 +74,19 @@ describe('site surface integrity', () => {
     const files = walk(path.join(repo, 'app'), new Set(['.ts', '.tsx']))
     const stale = 'signals that determine whether paid traffic converts'
     const outcome = 'consistently convert below 1.5%'
+    const adsJob = 'The ads did their job'
+    const anyUrl = 'If it has a URL, Nebula reads it'
+    const coldProof = 'converts more cold traffic than any feature list'
     const offenders: string[] = []
     for (const file of files) {
       const text = readFileSync(file, 'utf8')
-      if (text.includes(stale) || text.includes(outcome)) {
+      if (
+        text.includes(stale) ||
+        text.includes(outcome) ||
+        text.includes(adsJob) ||
+        text.includes(anyUrl) ||
+        text.includes(coldProof)
+      ) {
         offenders.push(path.relative(repo, file))
       }
     }

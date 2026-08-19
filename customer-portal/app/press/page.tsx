@@ -144,8 +144,9 @@ export default function PressPage() {
           <SectionLabel>02 / Research Data</SectionLabel>
           <SectionTitle><span id="signal-failure-title">Signal Failure Frequency</span></SectionTitle>
           <SectionDescription>
-            From our {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.denominator}.
-            These figures are cleared for editorial use with attribution.
+            Historical July 2026 research snapshot from {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.denominator}.
+            Figures use the methodology then in use, not the current production engine or registry.
+            Cleared for editorial use with that dating and attribution.
           </SectionDescription>
 
           <div className="mt-8 overflow-x-auto">
@@ -259,9 +260,9 @@ export default function PressPage() {
               </div>
               <p className="text-sm text-fg-muted leading-relaxed">
                 Former growth engineer. Built and scaled paid acquisition systems before realizing
-                the entire industry optimizes the wrong layer - ad spend and bidding - while the
-                landing page (the thing that actually converts) is treated as a static artifact.
-                Nebula exists to fix that structural failure.
+                the industry often optimizes spend and bidding first, while the landing page
+                remains an uninspected variable. Nebula inspects observable page conditions
+                on that public HTML.
               </p>
               <p className="text-xs text-fg-muted/60">
                 Available for interviews on conversion diagnostics, landing page optimization

@@ -24,16 +24,16 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://nebulacomponents.com'),
   title: {
-    default: 'Find Your Landing Page Conversion Leak | Nebula Components',
+    default: 'Find Failed Page Conditions on Your Landing Page | Nebula Components',
     template: '%s',
   },
-  description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
+  description: 'Free landing page audit that finds failed page conditions on public HTML. Evidence-backed, no signup, results in under 2 minutes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/',
   },
   openGraph: {
-    title: 'Find Your Landing Page Conversion Leak | Nebula Components',
-    description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
+    title: 'Find Failed Page Conditions on Your Landing Page | Nebula Components',
+    description: 'Free landing page audit that finds failed page conditions on public HTML. Evidence-backed, no signup, results in under 2 minutes.',
     siteName: brand.name,
     locale: 'en_US',
     type: 'website',
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
         url: brand.assets.ogDefault,
         width: 1200,
         height: 630,
-        alt: 'Nebula Components - diagnose landing-page conversion leaks before they burn more ad spend',
+        alt: 'Nebula Components - inspect failed page conditions before spending more on ads',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Find Your Landing Page Conversion Leak | Nebula Components',
-    description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
+    title: 'Find Failed Page Conditions on Your Landing Page | Nebula Components',
+    description: 'Free landing page audit that finds failed page conditions on public HTML. Evidence-backed, no signup, results in under 2 minutes.',
     creator: '@NebulaCRO',
     images: [brand.assets.ogDefault],
   },
@@ -82,7 +82,7 @@ export default function RootLayout({
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Nebula Components - diagnose landing-page conversion leaks before they burn more ad spend" />
+        <meta property="og:image:alt" content="Nebula Components - inspect failed page conditions before spending more on ads" />
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
 

@@ -9,7 +9,7 @@ const STEPS = [
     heading: 'Paste your URL',
     body: 'Any public landing page. No account, no signup, no integration.',
     icon: '⌨',
-    detail: 'Works on any stack - Webflow, Shopify, WordPress, hand-coded. If it has a URL, Nebula reads it.',
+    detail: 'Works across common web stacks. If the public page is retrievable, Nebula can inspect it.',
   },
   {
     n: '02',

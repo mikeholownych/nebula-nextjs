@@ -23,7 +23,7 @@ export const verticals: Record<string, Vertical> = {
     pain: "You're spending on Google Ads or LinkedIn. Clicks arrive. Signups don't. The page looks fine, but something between the ad and the form is breaking trust before the visitor reaches the CTA.",
     icp: 'SaaS founders and product marketers running paid acquisition with click-through rates above 2% but trial conversion rates below 3%.',
     top_leak: 'Message match failure. The ad promises a specific outcome; the landing page opens with the product category. That gap is a common failed condition on SaaS pages we audit.',
-    second_leak: 'No proof above the fold. SaaS buyers are risk-averse. A logo wall, a single metric, or a one-line quote near the CTA converts more cold traffic than any feature list.',
+    second_leak: 'No proof above the fold. SaaS buyers are risk-averse. A logo wall, customer metric, or short quote near the CTA gives cold visitors evidence they can evaluate before committing.',
     benchmark: 'SaaS trial pages in the public teardown set often fail message match and above-fold proof. The audit reports those page conditions. It does not measure or predict trial conversion rate.',
     cta_copy: 'Score your SaaS page',
     related_links: [

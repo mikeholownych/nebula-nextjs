@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Nebula Components - diagnose landing-page conversion leaks before they burn more ad spend'
+export const alt = 'Nebula Components - inspect failed page conditions before spending more on ads'
 export const size = {
   width: 1200,
   height: 630,

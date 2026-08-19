@@ -100,14 +100,14 @@ function PressReleasesList() {
     {
       date: '2026-07-29',
       headline: 'Public teardown: Basecamp landing page scores 5.4/10',
-      summary: 'First public teardown reveals 5 structural conversion leaks on basecamp.com. Full evidence published.',
+      summary: 'First public teardown documents 5 failed page conditions on basecamp.com. Full evidence published.',
       type: 'research' as const,
       link: '/teardowns/basecamp',
     },
     {
       date: '2026-07-25',
       headline: `${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize}-page audit study: zero pages score an A`,
-      summary: `Cross-industry analysis of landing pages running paid traffic finds universal above-fold content failures and a ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore} average score.`,
+      summary: `Historical July 2026 research snapshot under the methodology then in use. Cross-industry analysis of landing pages running paid traffic finds universal above-fold content failures and a ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore} average score. Not a claim about the current production registry.`,
       type: 'research' as const,
     },
     {
