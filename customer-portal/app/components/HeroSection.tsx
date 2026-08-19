@@ -60,11 +60,9 @@ export const HeroSection: React.FC = () => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
       >
-        {/* Central Radial Glow in Chartreuse */}
-        <div className="absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[450px] rounded-full bg-accent/[0.06] blur-[120px]" />
-
-        {/* Deep ambient cyan gradient */}
-        <div className="absolute top-[15%] right-[20%] w-[400px] h-[300px] rounded-full bg-[#3b82f6]/[0.03] blur-[100px]" />
+        {/* Heavy blurs stay off mobile. They overflow the viewport and tax the compositor. */}
+        <div className="absolute top-[28%] left-1/2 hidden h-[450px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.06] blur-[120px] md:block" />
+        <div className="absolute top-[15%] right-[20%] hidden h-[300px] w-[400px] rounded-full bg-[#3b82f6]/[0.03] blur-[100px] md:block" />
 
         {/* Diagnostic Hairline Calibration Grid */}
         <div
@@ -190,12 +188,11 @@ export const HeroSection: React.FC = () => {
       {/* Spacer */}
       <div className="h-10 sm:h-14 lg:h-18" />
 
-      {/* 3. Bottom Docked Dashboard Mockup & Diagnostic Horizon */}
-      <div className="relative z-10 w-full overflow-visible -mb-10 sm:-mb-20 lg:-mb-32">
+      {/* Instrument preview is desktop-only. On mobile the scaled 896px mockup
+          plus waveform overlay sits on the CTAs and trust strip. */}
+      <div className="relative z-10 hidden w-full overflow-hidden md:-mb-20 md:block lg:-mb-32">
         <ScaledDashboard />
       </div>
-
-      {/* 4. Unique Signal Horizon Foreground Overlay Layer */}
       <SignalHorizon />
     </section>
   )

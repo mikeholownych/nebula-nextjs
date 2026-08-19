@@ -9,7 +9,7 @@ export const SignalHorizon: React.FC = () => {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute bottom-0 left-0 z-20 w-full select-none overflow-hidden h-20 sm:h-28 lg:h-36 flex items-end"
+      className="pointer-events-none absolute bottom-0 left-0 z-20 hidden w-full select-none overflow-hidden md:flex md:h-28 lg:h-36 items-end"
     >
       {/* Deep gradient fade at the very bottom */}
       <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-bg to-transparent z-10" />
@@ -67,8 +67,8 @@ export const SignalHorizon: React.FC = () => {
         />
 
         {/* Diagnostic Measurement Nodes */}
-        <circle cx="480" cy="45" r="3" fill="#c7ff2f" className="animate-pulse" />
-        <circle cx="720" cy="30" r="3.5" fill="#c7ff2f" className="animate-ping" opacity="0.6" />
+        <circle cx="480" cy="45" r="3" fill="#c7ff2f" />
+        <circle cx="720" cy="30" r="3.5" fill="#c7ff2f" opacity="0.6" />
         <circle cx="720" cy="30" r="2.5" fill="#c7ff2f" />
         <circle cx="960" cy="40" r="3" fill="#c7ff2f" />
         <circle cx="1200" cy="55" r="2.5" fill="#3b82f6" />

@@ -70,6 +70,16 @@ describe('site surface integrity', () => {
     expect(home).not.toContain('Not a sales call in disguise')
   })
 
+  it('keeps the hero instrument off the mobile first screen', () => {
+    const hero = readFileSync(path.join(repo, 'app/components/HeroSection.tsx'), 'utf8')
+    const horizon = readFileSync(path.join(repo, 'app/components/SignalHorizon.tsx'), 'utf8')
+    expect(hero).toContain('hidden w-full overflow-hidden md:-mb-20 md:block')
+    expect(hero).toContain('hidden h-[450px] w-[900px]')
+    expect(horizon).toContain('hidden w-full')
+    expect(horizon).toContain('md:flex')
+    expect(horizon).not.toContain('animate-ping')
+  })
+
   it('bans the stale causal signal-phrase family from current pages', () => {
     const files = walk(path.join(repo, 'app'), new Set(['.ts', '.tsx']))
     const stale = 'signals that determine whether paid traffic converts'

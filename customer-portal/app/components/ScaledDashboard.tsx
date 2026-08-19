@@ -48,7 +48,7 @@ export const ScaledDashboard: React.FC = () => {
   return (
     <div
       ref={outerRef}
-      className="relative w-full flex justify-center overflow-visible"
+      className="relative w-full flex justify-center overflow-hidden"
       style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
     >
       <div
@@ -56,7 +56,6 @@ export const ScaledDashboard: React.FC = () => {
         className="w-[896px] shrink-0 origin-top"
         style={{
           transform: `scale(${scale})`,
-          transition: 'transform 100ms ease-out',
         }}
       >
         <DashboardMockup />
