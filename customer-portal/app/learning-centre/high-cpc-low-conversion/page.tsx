@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'Can fixing my landing page reduce my CPC?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, directly. Improving Landing Page Experience - by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path - improves your Quality Score. A higher Quality Score reduces your CPC in the ad auction for the same ad position. This means a better landing page does two things: improves conversion rate on the traffic you receive, and reduces the cost of each click. The two improvements compound - you pay less per click and convert more of the clicks you do receive.',
+        text: 'According to Google Ads documentation, improving Landing Page Experience — by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path — can improve your Quality Score. A higher Quality Score can reduce your CPC in the ad auction for the same ad position. Separately, fixing observable page-level friction (unclear CTAs, missing trust signals, slow load) may improve conversion rates — though this is not guaranteed by the Quality Score change alone. The two potential improvements are independent: lower CPC is a documented auction mechanic; conversion improvement depends on whether the specific page conditions were actually blocking visitors.',
       },
     },
     {
@@ -243,19 +243,18 @@ export default function HighCpcLowConversion() {
               Why fixing the page improves both CPC and conversion simultaneously
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              The page fix creates a positive compound: better message-match
-              raises Landing Page Experience, which improves Quality Score,
-              which lowers CPC in the auction. At the same time, the same
-              message-match improvement means more of the visitors who do click
-              will recognise they are in the right place and stay - raising
-              conversion rate directly.
+              A page fix can create a compounding effect: better message-match
+              may raise Landing Page Experience, which can improve Quality Score,
+              which lowers CPC in the auction (per Google&apos;s documented mechanics). Separately, the same
+              message-match improvement may help visitors recognise they are in the right place — potentially
+              improving conversion rate, though this outcome is not guaranteed.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
-              The inverse is also true. Raising your bid to compensate for a
+              The inverse is also clear. Raising your bid to compensate for a
               low Quality Score is expensive without improving your position
               proportionally, and it does nothing for conversion rate. The same
-              budget after a landing page fix buys more clicks at lower CPC and
-              converts more of them. The economics move in one direction.
+              budget after a landing page fix may buy more clicks at lower CPC and
+              convert more of them — but this depends on whether the specific page conditions were actually the bottleneck.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               This is why high CPC + low conversion is a page problem before it

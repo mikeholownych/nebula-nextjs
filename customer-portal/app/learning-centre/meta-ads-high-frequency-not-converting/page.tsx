@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Meta Ads High Frequency Not Converting: The Page Is The Problem | Nebula Components',
-  description: 'High-frequency Meta ads that are not converting are usually not an ad fatigue problem. They are a landing page problem.',
+  title: 'Meta Ads High Frequency Not Converting: Check the Landing Page | Nebula Components',
+  description: 'High-frequency Meta ads with stable CTR but flat conversions? The landing page is worth investigating before assuming ad fatigue.',
   alternates: { canonical: 'https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Meta Ads High Frequency? The Page May Be Burning Budget',
-  description: 'High-frequency Meta ads that are not converting are usually not an ad fatigue problem. They are a landing page problem.',
+  headline: 'Meta Ads High Frequency Not Converting: Check the Landing Page',
+  description: 'High-frequency Meta ads with stable CTR but flat conversions? The landing page is worth investigating before assuming ad fatigue.',
   url: 'https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting',
   publishedDate: '2026-01-01',
   modifiedDate: '2026-07-27',
@@ -96,7 +96,7 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When the page is the problem</h2>
           <p className="leading-relaxed text-fg-muted">
-            But here&apos;s the leak most miss: frequency high, clicks still strong, but conversions flat or falling. The ad is doing its job - people are clicking. The page is where they lose interest.
+            But here&apos;s the pattern most miss: frequency high, clicks still strong, but conversions flat or falling. People are clicking — the page is where to investigate next.
           </p>
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -113,7 +113,7 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            This pattern means your ad spend is working - the page is burning the budget after the click.
+            This pattern suggests the page — not the ad — is worth investigating as the friction point.
           </p>
         </section>
 

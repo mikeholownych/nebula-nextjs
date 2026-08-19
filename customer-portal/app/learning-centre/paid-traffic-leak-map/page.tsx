@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Where does most paid traffic get lost before converting?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The highest-volume leak in most paid traffic funnels is often the landing page itself - specifically the first 5 seconds after arrival. If the landing page headline does not match the ad promise (message-match break), or if the page loads slowly on mobile, the visitor exits before engaging with any content. A secondary high-volume leak is the absence of proof before the CTA: the visitor reads the page but abandons because they have no evidence that the offer is credible. High bounce rate combined with low time-on-page suggests an arrival leak, while page engagement without form starts suggests a trust or CTA leak.',
+        text: 'In the pages Nebula audits, the most frequently failing signals appear on the landing page itself - specifically in the first 5 seconds after arrival. If the landing page headline does not match the ad promise (message-match break), or if the page loads slowly on mobile, the visitor may exit before engaging with any content. A second common failure is the absence of proof before the CTA: the visitor reads the page but sees no evidence that the offer is credible. High bounce rate combined with low time-on-page suggests an arrival-level failure, while page engagement without form starts suggests a trust or CTA signal failure.',
       },
     },
     {

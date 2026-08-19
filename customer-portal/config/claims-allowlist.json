@@ -61,5 +61,9 @@
   "conversion-impact": [
     { "file": "content/landing-page-intelligence-stack/workflows/06-fix-verification-workflow.md", "line": 17, "reason": "Internal workflow documentation" },
     { "file": "content/landing-page-intelligence-stack/workflows/01-message-match-checker.md", "line": 44, "reason": "Internal workflow documentation" }
+  ],
+  "improves-conversion-rate": [
+    { "file": "app/why-cro-agencies-dont-work/page.tsx", "line": 44, "reason": "Rhetorical FAQ question about CRO agencies, not a Nebula claim" },
+    { "file": "app/learning-centre/high-cpc-low-conversion/page.tsx", "line": 48, "reason": "Hedged with 'may improve' and explicit caveat that outcome is not guaranteed" }
   ]
 }

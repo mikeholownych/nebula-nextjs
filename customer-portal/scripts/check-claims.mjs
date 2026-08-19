@@ -37,6 +37,10 @@ const BANNED_PHRASES = [
   { pattern: /observable\s+impact/gi, id: 'observable-impact' },
   { pattern: /kills?\s+(?:the\s+)?conversions?/gi, id: 'kills-conversions' },
   { pattern: /lives?\s+entirely\s+on\s+the\s+landing/gi, id: 'entirely-on-page' },
+  { pattern: /the\s+ad\s+is\s+doing\s+its\s+job/gi, id: 'ad-doing-its-job' },
+  { pattern: /(?:the\s+)?page\s+is\s+burning\s+(?:the\s+)?budget/gi, id: 'page-burning-budget' },
+  { pattern: /ad\s+spend\s+is\s+working/gi, id: 'ad-spend-working' },
+  { pattern: /improves?\s+conversion\s+rate/gi, id: 'improves-conversion-rate' },
 ]
 
 const ALLOWLIST_PATH = resolve(root, 'config/claims-allowlist.json')
