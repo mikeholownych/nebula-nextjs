@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     description: 'How slow load times hurt landing page conversions - and the 3 fastest fixes.',
     url: 'https://nebulacomponents.com/page-speed-conversion',
     type: 'article',
-    images: ['https://nebulacomponents.com/og-card.png'],
+    images: ['https://nebulacomponents.com/brand/v2/og-default.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://nebulacomponents.com/og-card.png'],
+    images: ['https://nebulacomponents.com/brand/v2/og-default.png'],
   },
 }
 

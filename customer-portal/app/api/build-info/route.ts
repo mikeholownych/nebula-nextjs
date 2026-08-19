@@ -8,6 +8,7 @@ interface BuildInfo {
   revision: string
   builtAt: string
   environment: string
+  brandVersion?: number
 }
 
 function getBuildInfo(): BuildInfo {

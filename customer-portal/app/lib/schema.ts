@@ -1,13 +1,15 @@
 // Minimal global structured data. Keep schema current - price and availability must match live state.
 // unverified, or route-specific products and claims.
 
+import { brand, brandAbsolute } from './brand'
+
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': 'https://nebulacomponents.com/#organization',
-  name: 'Nebula Components',
-  url: 'https://nebulacomponents.com',
-  logo: 'https://nebulacomponents.com/logo-dark.png',
+  name: brand.name,
+  url: brand.url,
+  logo: brandAbsolute(brand.assets.organizationLogo),
   description: 'Nebula Components provides AI-ready technical audits and GEO optimization services to help brands appear in AI search results from ChatGPT, Perplexity, Gemini, and Claude. We combine evidence-based landing-page conversion guidance with AI search visibility monitoring.',
   foundingDate: '2024',
   dateModified: new Date().toISOString().split('T')[0],

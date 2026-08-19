@@ -34,6 +34,7 @@ const buildInfo = {
   revision,
   builtAt,
   environment,
+  brandVersion: 2,
 }
 
 const targetPath = join(rootDir, 'app', 'lib', 'build-info.json')

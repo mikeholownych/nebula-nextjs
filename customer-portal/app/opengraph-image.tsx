@@ -63,8 +63,7 @@ export default function OpenGraphImage() {
           justifyContent: 'space-between',
           padding: '64px 72px',
           color: '#ffffff',
-          background:
-            'radial-gradient(circle at 86% 18%, rgba(0,194,160,0.28), transparent 34%), #050505',
+          background: '#080909',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -77,10 +76,10 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: 'flex',
-              border: '1px solid rgba(0,194,160,0.55)',
-              borderRadius: 999,
+              border: '1px solid rgba(199,255,47,0.45)',
+              borderRadius: 6,
               padding: '10px 18px',
-              color: '#33d4b8',
+              color: '#c7ff2f',
               fontSize: 16,
               fontWeight: 650,
               letterSpacing: '0.08em',
@@ -92,7 +91,7 @@ export default function OpenGraphImage() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 960 }}>
-          <div style={{ display: 'flex', color: '#33d4b8', fontSize: 22, fontWeight: 650, marginBottom: 20 }}>
+          <div style={{ display: 'flex', color: '#c7ff2f', fontSize: 22, fontWeight: 650, marginBottom: 20 }}>
             For founders burning cash on ads
           </div>
           <div

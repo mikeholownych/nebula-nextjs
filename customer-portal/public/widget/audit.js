@@ -22,7 +22,7 @@
       card: '#111827',
       text: '#e2e8f0',
       muted: '#94a3b8',
-      accent: '#00c2a0',
+      accent: '#c7ff2f',
       border: '#1e293b',
       inputBg: '#0f172a',
       ringTrack: '#1e293b',
@@ -42,7 +42,7 @@
   };
 
   var GRADE_COLORS = {
-    A: '#00c2a0',
+    A: '#c7ff2f',
     B: '#84cc16',
     C: '#f59e0b',
     D: '#f97316',

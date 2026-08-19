@@ -119,6 +119,18 @@
 
 ---
 
+## Brand
+
+Brand identity is versioned product state. Canonical source: `app/lib/brand.ts` (`BRAND_VERSION = 2`).
+
+- Do not add favicon, logo, social-card, theme-color, manifest icon, or schema-logo references outside that registry.
+- A visual redesign is incomplete until favicon, Apple icon, manifest icons, OG image, Twitter card, theme-color, schema logo, and press downloads change in the same set.
+- Do not reuse deprecated assets (`/logo-dark.png`, `/brand/mark-emerald.svg`, `/og-card.png`, teal `#00c2a0`) on current pages.
+- Historical assets live only under `/brand/archive/v1/`.
+- Run `npm run check:brand` before claiming a brand change is done.
+
+---
+
 ## Change Log
 
 - 2026-08-10: Updated by context_watcher - Platform API split into nebula_platform (auth) + nebula_audit (pipeline) DBs; AuditDB reads AUDIT_DATABASE_URL, audits table gained source/partner_id/engine_version columns, INTERNAL_EMAILS exclusion added; GitHub OAuth added; CRM hooks wired on audit completion; Audit Page updated with anonymous-identity pattern and analytics_consent gate; brand color renamed signal-emerald → signal-teal (#00c2a0)

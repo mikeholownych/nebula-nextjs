@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     url: 'https://nebulacomponents.com/mobile-landing-page-optimization',
     siteName: 'Nebula Components',
     type: 'article',
-    images: ['https://nebulacomponents.com/og-card.png'],
+    images: ['https://nebulacomponents.com/brand/v2/og-default.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://nebulacomponents.com/og-card.png'],
+    images: ['https://nebulacomponents.com/brand/v2/og-default.png'],
   },
 }
 

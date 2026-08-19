@@ -458,7 +458,7 @@ export default function BrandPage() {
             <DiagnosticPanel>
               <h4 className="text-[10px] font-mono uppercase tracking-widest text-accent mb-3">Node Ratio</h4>
               <div className="space-y-2">
-                <MetaTag label="Pass" value="6 nodes (teal)" />
+                <MetaTag label="Pass" value="6 nodes (chartreuse)" />
                 <MetaTag label="Neutral" value="3 nodes (gray)" />
                 <MetaTag label="Fail" value="0 (brand mark only)" />
                 <MetaTag label="Pattern" value="Top 2 rows + 1" />
@@ -470,7 +470,7 @@ export default function BrandPage() {
           <div className="mt-8">
             <h3 className="text-sm font-mono uppercase tracking-widest text-fg-muted mb-4">Downloads</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {['mark-dark', 'mark-light', 'mark-mono', 'mark-emerald'].map((slug) => (
+              {['mark-dark', 'mark-light', 'mark-mono', 'mark-accent'].map((slug) => (
                 <div key={slug} className="bg-bg-surface border border-border rounded-lg p-3 space-y-2">
                   <p className="text-xs font-mono text-fg capitalize">{slug.replace('mark-', '')}</p>
                   <div className="flex flex-wrap gap-2">

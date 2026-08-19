@@ -11,11 +11,14 @@ import AnalyticsRuntime from './components/AnalyticsRuntime'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
+import { brand, brandAbsolute } from './lib/brand'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  themeColor: brand.metadata.themeColor,
+  colorScheme: brand.metadata.colorScheme,
 }
 
 export const metadata: Metadata = {
@@ -31,24 +34,33 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Find Your Landing Page Conversion Leak | Nebula Components',
     description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
-    siteName: 'Nebula Components',
+    siteName: brand.name,
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: brand.assets.ogDefault,
+        width: 1200,
+        height: 630,
+        alt: 'Nebula Components - diagnose landing-page conversion leaks before they burn more ad spend',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Find Your Landing Page Conversion Leak | Nebula Components',
     description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
     creator: '@NebulaCRO',
+    images: [brand.assets.ogDefault],
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: brand.assets.faviconSvg, type: 'image/svg+xml' },
+      { url: brand.assets.favicon32, sizes: '32x32', type: 'image/png' },
+      { url: brand.assets.favicon16, sizes: '16x16', type: 'image/png' },
     ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.png',
+    shortcut: brand.assets.faviconSvg,
+    apple: brand.assets.appleTouchIcon,
   },
 }
 
@@ -66,7 +78,7 @@ export default function RootLayout({
         </Suspense>
         {/* Supply a complete image set even when child metadata overrides the
             root Open Graph object. */}
-        <meta property="og:image" content="https://nebulacomponents.com/opengraph-image" />
+        <meta property="og:image" content={brandAbsolute(brand.assets.ogDefault)} />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
