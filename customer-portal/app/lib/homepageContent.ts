@@ -1,7 +1,7 @@
 export const HOMEPAGE_SEO_TITLE = 'Landing Page Audit for Paid Traffic Not Converting | Nebula'
 
 export const HOMEPAGE_DESCRIPTION =
-  'Find conversion leaks wasting paid traffic. Run a free evidence-backed landing page audit to identify friction across message match, trust, mobile, and speed.'
+  'Free evidence-backed landing page audit. Check 9 conversion signals — message match, trust, CTA, mobile, speed — and see findings ranked by priority.'
 
 export const PAID_TRAFFIC_DIAGNOSTIC = [
   {
@@ -10,11 +10,11 @@ export const PAID_TRAFFIC_DIAGNOSTIC = [
   },
   {
     heading: 'The audit follows the visitor’s decision.',
-    body: 'Nebula checks the sequence a paid visitor actually experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, and measurement. Each failed conversion signal is tied to evidence from the page, then ranked by likely impact and implementation effort. You see what was measured, what the page needed to do, the size of the gap, and which fix should happen first. The report does not estimate revenue or promise a conversion lift that has not been measured.',
+    body: 'Nebula checks the sequence a paid visitor actually experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, and measurement. Each failed conversion signal is tied to evidence from the page, then ranked by priority. You see what was measured, what the page needed to do, the size of the gap, and which condition to address first. The report does not estimate revenue or promise a conversion lift that has not been measured.',
   },
   {
     heading: 'Use the result as a stop-or-fix decision.',
-    body: 'If the page passes, you have evidence to investigate audience, offer, or creative instead. If it fails, you have a bounded repair list before spending another dollar on acquisition. Start with the highest-impact low-effort leak, publish the change, and run the same audit again. The comparison will not prove causation by itself, but it will prove which page conditions changed and which remain open. That is a stronger basis for the next campaign decision than another round of assumptions.',
+    body: 'If the page passes, you have evidence to investigate audience, offer, or creative instead. If it fails, you have a bounded repair list before spending another dollar on acquisition. Start with the highest-priority condition, publish the change, and run the same audit again. The comparison will not prove causation by itself, but it will prove which page conditions changed and which remain open. That is a stronger basis for the next campaign decision than another round of assumptions.',
   },
   {
     heading: 'Know what the audit cannot observe.',

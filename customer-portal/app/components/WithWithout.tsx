@@ -4,16 +4,16 @@ const WITHOUT = [
   { label: 'Open Stripe', detail: 'See $0. Again.' },
   { label: 'Change the ad', detail: 'Same result. Better CTR, still no sales.' },
   { label: 'Rewrite the headline', detail: 'Spend a day on copy. Conversions flat.' },
-  { label: 'Blame the audience', detail: 'The page fails before the audience decides anything.' },
-  { label: 'Keep paying', detail: '$500–$3,000/month into a page that can\'t close.' },
+  { label: 'Blame the audience', detail: 'The page may have observable issues you haven\'t checked yet.' },
+  { label: 'Keep paying', detail: '$500–$3,000/month into a page you haven\'t diagnosed.' },
 ]
 
 const WITH = [
-  { label: 'See the exact leak', detail: 'Score + 3 specific findings. Your page. 2 minutes.' },
-  { label: 'Know what to fix first', detail: 'Ranked by conversion impact, not gut feel.' },
-  { label: 'Fix it for $97', detail: '48-hour implementation. One specific structural fix applied to your page.' },
-  { label: 'Stop guessing', detail: 'The anxiety of not knowing what\'s wrong - gone.' },
-  { label: 'Run better campaigns', detail: 'Traffic into a page that\'s built for cold visitors.' },
+  { label: 'See observable conditions', detail: 'Score + specific findings with evidence. Your page. 2 minutes.' },
+  { label: 'Know what to investigate first', detail: 'Findings ranked by priority — not gut feel.' },
+  { label: 'Fix it for $97', detail: '48-hour repair artifact. One verified condition, one concrete fix.' },
+  { label: 'Reduce page-side uncertainty', detail: 'Know which conditions pass and which fail — then decide what to test.' },
+  { label: 'Rule out the page', detail: 'If the page passes, shift investigation to traffic quality or offer.' },
 ]
 
 export default function WithWithout() {

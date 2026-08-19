@@ -87,13 +87,13 @@ const howToSchema = createHowToSchema({
       position: 2,
     },
     {
-      name: 'Review findings ranked by impact',
-      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by observable impact.',
+      name: 'Review findings ranked by priority',
+      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by priority.',
       position: 3,
     },
     {
       name: 'Fix the top leak',
-      text: 'Address the highest-impact failing signal first. The $97 One-Leak Repair Sprint delivers one scoped fix package with exact copy, code, or configuration changes within 48 hours.',
+      text: 'Address the highest-priority failing signal first. The $97 One-Leak Repair Sprint delivers one scoped fix package with exact copy, code, or configuration changes within 48 hours.',
       position: 4,
     },
   ],
@@ -399,7 +399,7 @@ export default async function AuditPage() {
                 },
                 {
                   q: 'What does the $97 One-Leak Repair Sprint include?',
-                  a: 'One scoped repair package for the highest-impact failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+                  a: 'One scoped repair package for the highest-priority failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
                 },
                 {
                   q: 'Which platforms does the audit work with?',

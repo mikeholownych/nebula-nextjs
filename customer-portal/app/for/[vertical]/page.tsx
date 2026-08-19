@@ -18,7 +18,7 @@ export async function generateMetadata({
   const v = getVertical(slug)
   if (!v) return {}
 
-  const title = `Landing Page Audit for ${v.name}, Find What's Killing Conversion | Nebula`
+  const title = `Landing Page Audit for ${v.name}, Find Failed Page Conditions | Nebula`
   const description = `${v.pain.slice(0, 140)} Nebula scores your ${v.name.toLowerCase()} page across 9 conversion signals and shows you exactly what to fix.`
 
   return {
@@ -100,7 +100,7 @@ export default async function VerticalPage({
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-2 h-2 rounded-full bg-[#ef4444] flex-shrink-0" />
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#ef4444]">
-                  Highest-impact leak
+                  Highest-priority finding
                 </span>
               </div>
               <p className="text-fg leading-relaxed">{v.top_leak}</p>
@@ -135,7 +135,7 @@ export default async function VerticalPage({
             {[
               { step: '01', title: 'Enter your URL', desc: 'Paste your landing page URL. The audit runs against the live page, no install, no tracking code.' },
               { step: '02', title: 'Get your score', desc: 'Nebula scores your page across 9 conversion signals. Each signal is evidence-backed, not an opinion.' },
-              { step: '03', title: 'See what to fix', desc: 'Findings are ranked by impact. The top leak is named specifically, not "improve your CTA" but the exact structural problem.' },
+              { step: '03', title: 'See what to fix', desc: 'Findings are ranked by priority. The top leak is named specifically, not "improve your CTA" but the exact structural problem.' },
             ].map(({ step, title, desc }) => (
               <div key={step} className="bg-surface border border-border rounded-xl p-5">
                 <div className="text-2xl font-extrabold text-accent mb-2" style={{ fontFamily: 'IBM Plex Mono, Courier New, monospace' }}>{step}</div>

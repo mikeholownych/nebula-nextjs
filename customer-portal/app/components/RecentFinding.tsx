@@ -17,7 +17,7 @@ const DEPRECATED_FINDING_KEYS = new Set(['above_fold', 'ad_signals'])
 const DEPRECATED_FINDING_LABELS = new Set(['above fold', 'above-fold clarity', 'ad signals'])
 
 /**
- * Shows the highest-impact finding from the most recently completed audit.
+ * Shows the highest-priority finding from the most recently completed audit.
  * Proves the engine is live and running - not a static demo.
  * No URL is exposed - only the finding label, issue, and time-ago.
  * Shows a loading skeleton while fetching (no layout shift).

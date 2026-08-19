@@ -26,7 +26,7 @@ export interface Finding {
   signal_type?: string
   /** Display label for signal type */
   signal_type_label?: string
-  /** Provenance of the impact score (0-10) — source, basis, limitation */
+  /** Provenance of the priority score (0-10) — source, basis, limitation */
   scoring_provenance?: {
     source?: string
     basis?: string

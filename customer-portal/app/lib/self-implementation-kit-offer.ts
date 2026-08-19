@@ -17,27 +17,24 @@ export const REPAIR_SPRINT_OFFER = {
   name: 'One-Leak Repair Sprint',
   priceUsd: 97,
 
-  // THE CLOSED LOOP — what makes this different from a findings report
-  closedLoop: 'Nebula finds the highest-impact leak on your page and delivers the exact fix — copy, code, or configuration — written for your specific URL. A 30-day re-audit then verifies the condition actually changed. You get a finding, the fix, and the proof it worked.',
+  closedLoop: 'Nebula identifies the highest-priority failed condition on your page and delivers the exact fix — copy, code, or configuration — written for your specific URL. A 30-day re-audit then verifies the condition actually changed. You get a finding, the fix, and the proof it resolved.',
 
-  // TIME CLAIM — honest, specific, verifiable
   timeClaim: 'Nebula checks 9 conversion signals against your actual page HTML in under 30 seconds. The same checks done manually take 15–25 minutes in DevTools. A CRO agency discovery call takes 45 minutes before anyone looks at your page.',
 
-  // SPECIFICITY CLAIM — what "exact" means
   specificityClaim: 'Not generic advice. Every fix is written for the specific values found on your page — your H1 text, your CTA label, your meta description, your JSON-LD structure. You receive the replacement, not a recommendation to improve it.',
 
-  summary: 'Nebula finds the highest-impact conversion leak on your landing page, delivers the exact fix — copy, code, or configuration change — and re-audits in 30 days to confirm it held.',
+  summary: 'Nebula identifies the highest-priority failed condition on your landing page, delivers the exact fix — copy, code, or configuration change — for you or your developer to implement. A 30-day re-audit confirms it resolved.',
 
   howItWorks: [
     'Paste your URL — Nebula checks 9 signals against your actual page HTML in under 30 seconds',
     'See your score and the initial findings — specific evidence from your page, not generic advice',
-    'Pay $97 — receive the exact fix for your highest-impact finding within 48 hours',
+    'Pay $97 — receive the exact fix for your highest-priority finding within 48 hours',
     'Apply the fix — exact copy, code snippet, or configuration change written for your specific page',
     'Re-audit in 30 days — Nebula re-checks the same signal to confirm the condition changed',
   ],
 
   includes: [
-    'One scoped repair for your highest-impact failing signal',
+    'One scoped repair for your highest-priority failing signal',
     'Exact replacement copy, code diff, or configuration — not "consider improving X"',
     '30-day same-scope re-audit to verify the fix held',
     'Evidence from your actual page, not a template finding',

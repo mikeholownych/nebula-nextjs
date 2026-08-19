@@ -126,7 +126,7 @@ export default function CtaNotWorkingPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick Wins Checklist</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            If you need to prioritise, start with the items that have the highest conversion impact with the lowest implementation effort.
+            If you need to prioritise, start with the items that have the highest priority with the lowest implementation effort.
           </p>
           <ul className="space-y-3 text-fg-muted">
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Visual contrast.</span> Your primary CTA button must stand out against the page background. If you have to look for it, visitors won't find it.</span></li>

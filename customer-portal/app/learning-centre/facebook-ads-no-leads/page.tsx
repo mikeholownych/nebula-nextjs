@@ -177,7 +177,7 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick Fixes for Meta Landing Pages</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Once you've confirmed the page is the leak, these are the highest-impact changes to implement first - roughly ordered by effort-to-impact ratio.
+            Once you've confirmed the page is the leak, these are the highest-priority changes to implement first - roughly ordered by effort-to-priority ratio.
           </p>
           <ul className="space-y-3 text-fg-muted">
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Match the hero image style to the ad creative.</span> If the ad showed a real person in a casual setting, the landing page should open with the same visual register - not a polished studio product shot.</span></li>

@@ -87,7 +87,7 @@ export default async function ProofPage() {
           <p className="text-xs font-semibold uppercase tracking-[.2em] text-accent mb-4">Evidence, not opinion</p>
           <h1 className="text-4xl font-extrabold text-fg mb-4 leading-tight">
             {auditCount} real landing pages.<br />
-            Here&apos;s what&apos;s killing conversion.
+            Here are the conditions worth fixing first.
           </h1>
           <p className="text-fg-muted text-lg leading-relaxed max-w-2xl">
             Every Nebula audit scores a real page submitted by a real founder.
@@ -117,7 +117,7 @@ export default async function ProofPage() {
           <section className="mb-12">
             <h2 className="text-xl font-bold text-fg mb-2">Most common conversion leaks</h2>
             <p className="text-sm text-fg-muted mb-6">
-              Ranked by how often they appear across {auditCount} audited pages. Impact score shows how much each leak hurts conversion.
+              Ranked by how often they appear across audited pages. Priority score reflects journey position, severity, and reproducibility — not predicted conversion loss.
             </p>
             <div className="flex flex-col gap-4">
               {components.slice(0, 8).map((c) => {

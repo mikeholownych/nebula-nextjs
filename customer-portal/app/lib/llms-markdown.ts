@@ -59,7 +59,7 @@ export function buildTeardownMarkdown(slug: string): string | null {
   if (!t) return null
 
   const findings = t.findings
-    .map((f) => `- **${f.label}** (impact ${f.impact}/10 · ${f.quadrant})\n  - Issue: ${f.issue}\n  - Evidence: ${f.evidence}\n  - Fix: ${f.fix}`)
+    .map((f) => `- **${f.label}** (priority ${f.priority}/10 · ${f.quadrant})\n  - Issue: ${f.issue}\n  - Evidence: ${f.evidence}\n  - Fix: ${f.fix}`)
     .join('\n')
 
   return markdownPage(
@@ -123,7 +123,7 @@ const auditMarkdown = markdownPage(
 6. SEO foundations
 7. AI readiness
 
-Each recorded finding is tied to evidence from the actual page and ranked by likely impact. Public aggregate benchmarks exclude Above Fold and Ad Signals pending rendered verification.
+Each recorded finding is tied to evidence from the actual page and ranked by priority. Public aggregate benchmarks exclude Above Fold and Ad Signals pending rendered verification.
 
 - No account required to run it
 - Initial findings appear before email; email unlocks the full report

@@ -20,10 +20,10 @@ const STEPS = [
   },
   {
     n: '03',
-    heading: 'You stop guessing. You start fixing.',
-    body: 'Every failing signal ranked by observable impact. Specific findings. Not generic advice.',
+    heading: 'Findings ranked. Evidence shown.',
+    body: 'Every failing signal ranked by priority with specific evidence. Not generic advice.',
     icon: '✓',
-    detail: 'You know exactly what to fix first. The $97 sprint fixes the top issue for you in 48 hours.',
+    detail: 'Know which condition to investigate first. The $97 Repair Sprint delivers the exact fix within 48 hours.',
   },
 ]
 
@@ -44,7 +44,7 @@ export default function HowItWorksAnimated() {
     <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-10 text-2xl font-bold tracking-section text-fg md:text-3xl">
-          From URL to knowing exactly what to fix. Under 2 minutes.
+          From URL to prioritized findings. Under 2 minutes.
         </h2>
 
         <div className="grid gap-0 md:grid-cols-3">

@@ -317,7 +317,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           <p className="mb-6 leading-relaxed text-fg-muted">
             Nebula audits your landing page against the LinkedIn ad driving traffic to it - checking
             register consistency, proof placement, CTA alignment, and form friction. You get a
-            specific list of what to fix, ranked by conversion impact.
+            specific list of what to fix, ranked by priority.
           </p>
           <Link
             href="/#audit"

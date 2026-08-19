@@ -167,7 +167,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
 
         <section className="rounded-2xl border border-border bg-bg-panel p-6 text-fg shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#a8a8a1]">Next best action</p>
-          <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-impact leak.</h2>
+          <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-priority condition.</h2>
           <p className="mt-3 text-sm leading-6 text-[#b9b9b2]">Use the latest findings to choose one bounded repair, then re-audit the same page to verify the condition changed.</p>
           <div className="mt-8 flex items-center justify-between border-t border-white/15 pt-4 text-sm"><span className="text-[#b9b9b2]">Latest status</span><span className="font-semibold">{counts.critical > 0 ? `${counts.critical} critical` : 'No critical findings'}</span></div>
           <a href="/workspace?tab=recommendations" className="mt-4 inline-flex w-full justify-center rounded-lg bg-bg-elevated px-4 py-2.5 text-sm font-semibold text-fg hover:bg-[#e9e9e5]">Open fix queue →</a>

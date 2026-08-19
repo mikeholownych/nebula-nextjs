@@ -70,7 +70,7 @@ const CONCEPTS = [
     whyItMatters:
       'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
     howNebulaMeasures:
-      'Nebula identifies leaks at the signal level - each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Repair Sprint targets the highest-ranked leak.',
+      'Nebula identifies failed conditions at the signal level. The audit ranks failed signals by priority — a heuristic incorporating journey position, severity, and reproducibility. Message match and CTA failures are ranked higher for paid traffic; load speed and SEO signals are ranked lower. The One-Leak Repair Sprint targets the highest-priority finding.',
   },
   {
     id: 'message-match',
@@ -106,9 +106,9 @@ const CONCEPTS = [
     id: 'one-leak-self-implementation-kit',
     name: 'One-Leak Repair Sprint',
     definition:
-      'Nebula\'s $97 paid product. Takes the highest-impact finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',
+      'Nebula\'s $97 paid product. Takes the highest-priority finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',
     whyItMatters:
-      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite - not a new design system. The Repair Sprint scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
+      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite - not a new design system. The Repair Sprint scopes the change to the single highest-priority finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
     howNebulaMeasures:
       'The Sprint is triggered by the audit output. The highest-ranked failed signal determines the sprint scope. Deliverables are specific to the signal: for a headline failure, the sprint returns three alternative H1 candidates with rationale. For a load speed failure, it returns the specific asset causing the LCP regression and the implementation path to fix it.',
   },

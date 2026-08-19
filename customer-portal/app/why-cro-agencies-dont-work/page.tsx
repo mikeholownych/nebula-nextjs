@@ -99,7 +99,7 @@ const FAILURES = [
     signal: 'Scope',
     heading: '90-day timelines for problems fixable in a week',
     body: 'A meta description that is 197 characters can be fixed in 90 seconds. A CTA that doesn\'t contrast against its background can be fixed in one CSS line. A headline that doesn\'t match the ad that sent the traffic can be rewritten in an afternoon. Agencies bundle these fixes into multi-month roadmaps because the engagement model requires it.',
-    fix: 'The highest-impact page fixes are almost always structural and fast. Run the audit, find the highest-impact failing signal, fix it, re-audit. The whole loop runs in days, not quarters.',
+    fix: 'The highest-priority page fixes are almost always structural and fast. Run the audit, find the highest-priority failing signal, fix it, re-audit. The whole loop runs in days, not quarters.',
   },
   {
     n: '05',

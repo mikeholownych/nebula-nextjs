@@ -61,7 +61,7 @@ export function WEB_MCP_RUNTIME() {
             grade: data.grade,
             findings: data.findings || [],
             results_url: data.audit_id ? ('https://nebulacomponents.com/audit/' + data.audit_id + '/results') : null,
-            next_step: data.score < 7 ? 'Page has conversion leaks. See findings for specific fixes. The $97 Repair Sprint at https://nebulacomponents.com/pricing delivers the exact fix for the highest-impact finding.' : 'Page is performing above average. Review findings for any remaining improvement opportunities.'
+            next_step: data.score < 7 ? 'Page has conversion leaks. See findings for specific fixes. The $97 Repair Sprint at https://nebulacomponents.com/pricing delivers the exact fix for the highest-priority finding.' : 'Page is performing above average. Review findings for any remaining improvement opportunities.'
           };
         }
       });
@@ -146,7 +146,7 @@ export function WEB_MCP_RUNTIME() {
               {
                 name: 'One-Leak Repair Sprint',
                 price: ${JSON.stringify(ACTIVE_FIX_PACK ? `$${ACTIVE_FIX_PACK.priceCents / 100}` : '$97')},
-                description: 'Delivers the exact fix for your highest-impact failing signal — the replacement copy, code snippet, or configuration change written for your specific page. Not generic advice. A 30-day re-audit confirms the condition changed.',
+                description: 'Delivers the exact fix for your highest-priority failing signal — the replacement copy, code snippet, or configuration change written for your specific page. Not generic advice. A 30-day re-audit confirms the condition changed.',
                 url: 'https://nebulacomponents.com/pricing',
                 delivery: '48 hours',
                 includes: ['Exact replacement written for your page', '30-day re-audit to verify fix held'],

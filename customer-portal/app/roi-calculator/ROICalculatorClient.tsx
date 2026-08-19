@@ -289,7 +289,7 @@ export default function ROICalculatorClient() {
         {!sent ? (
           <div style={{ background: '#0e1a0e', border: '1.5px solid #1e3a1e', borderRadius: 12, padding: 28, marginBottom: 24 }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8, color: '#f0f4ec' }}>
-              See what&apos;s killing your conversion.
+              See which page conditions are failing.
             </h2>
             <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6, marginBottom: 20 }}>
               Enter your landing page URL and email. Nebula audits your page, names the exact leak, and sends the full findings. The top fix is $97, done in 48 hours.

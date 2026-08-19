@@ -2,18 +2,19 @@
   "count": 9,
   "signals": [
     "message match",
-    "trust",
-    "mobile CTA",
-    "load time",
     "CTA clarity",
     "above-fold clarity",
-    "ad signals",
+    "trust signals",
+    "load speed",
+    "mobile viewport",
+    "ad tracking",
     "SEO foundations",
     "AI readiness"
   ],
   "retired": [
     "form friction",
     "mobile layout",
+    "mobile CTA",
     "proof",
     "social proof",
     "offer clarity",

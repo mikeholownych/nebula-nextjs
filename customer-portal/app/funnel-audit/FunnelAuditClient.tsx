@@ -344,7 +344,7 @@ export default function FunnelAuditClient() {
               <div style={{ textAlign: 'center', padding: '24px', background: '#0e1a0e', border: '1.5px solid #1e3a1e', borderRadius: 10 }}>
                 <div style={{ fontSize: 36, marginBottom: 12 }}>✓</div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6, color: '#f0f4ec' }}>Full report on the way.</h3>
-                <p style={{ fontSize: 14, color: '#8a9488' }}>Check your inbox. It includes all friction points, ranked by impact.</p>
+                <p style={{ fontSize: 14, color: '#8a9488' }}>Check your inbox. It includes all friction points, ranked by priority.</p>
               </div>
             )}
 

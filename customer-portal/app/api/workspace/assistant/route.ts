@@ -16,6 +16,7 @@ interface Finding {
   key: string
   label: string
   impact: number
+  priority?: number
   effort?: number
   issue?: string
   fix?: string

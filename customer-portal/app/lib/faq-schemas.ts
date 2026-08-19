@@ -6,7 +6,7 @@ const repairSprintAnswer =
 export const pricingFAQSchema = createFAQPageSchema([
   {
     question: "What's in the free audit?",
-    answer: 'A 9-signal audit scoring message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed. Each signal gets specific findings and prioritized repairs ranked by likely conversion impact.',
+    answer: 'A 9-signal audit scoring message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed. Each signal gets specific findings and prioritized repairs ranked by priority.',
   },
   {
     question: 'How is the $97 One-Leak Repair Sprint delivered?',
@@ -33,7 +33,7 @@ export const pricingFAQSchema = createFAQPageSchema([
 export const homeFAQSchema = createFAQPageSchema([
   {
     question: 'How long does the free landing page audit take?',
-    answer: 'Under 2 minutes. Paste your URL and get a scored 9-signal diagnosis with findings ranked by likely conversion impact.',
+    answer: 'Under 2 minutes. Paste your URL and get a scored 9-signal diagnosis with findings ranked by priority.',
   },
   {
     question: "What's included in the $97 One-Leak Repair Sprint?",
@@ -67,7 +67,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What does the $97 One-Leak Repair Sprint include?',
-    answer: 'One scoped repair package for the highest-impact failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+    answer: 'One scoped repair package for the highest-priority failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
   },
   {
     question: 'Which platforms does the audit work with?',

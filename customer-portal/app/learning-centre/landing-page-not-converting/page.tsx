@@ -430,21 +430,21 @@ export default function LandingPageNotConvertingPage() {
                   surfaces: 'Leak 1',
                 },
                 {
-                  signal: 'Signal 2 - Trust',
+                  signal: 'Signal 2 - Trust signals',
                   test: 'Is there at least one specific, verifiable proof point above the fold?',
                   ifNo:
                     'Add before optimising the CTA. The CTA can only convert visitors who believe the offer. Unresolved purchase objections are also a trust failure - this signal surfaces both Leak 2 and Leak 5.',
                   surfaces: 'Leaks 2 and 5',
                 },
                 {
-                  signal: 'Signal 3 - Mobile CTA',
+                  signal: 'Signal 3 - Mobile viewport',
                   test: 'Is the primary CTA visible on a real phone without scrolling?',
                   ifNo:
                     'Fix before running mobile traffic. Desktop conversion data does not transfer to a broken mobile experience.',
                   surfaces: 'Leak 4',
                 },
                 {
-                  signal: 'Signal 4 - Load time',
+                  signal: 'Signal 4 - Load speed',
                   test: 'Does the page load in under 3 seconds on a mobile connection?',
                   ifNo: (
                     <>
@@ -476,7 +476,7 @@ export default function LandingPageNotConvertingPage() {
                   surfaces: 'Leak 1',
                 },
                 {
-                  signal: 'Signal 7 - Ad signals',
+                  signal: 'Signal 7 - Ad tracking',
                   test: 'Do the page\'s conversion elements (form, CTA, offer framing) align with the campaign objective and audience segment?',
                   ifNo:
                     'Misaligned ad-to-page signals waste spend by attracting clicks that the page cannot convert.',

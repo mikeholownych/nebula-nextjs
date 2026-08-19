@@ -14,7 +14,7 @@ const config: Config = {
     // React 19 removed act from react-dom/test-utils - redirect to react directly
     '^react-dom/test-utils$': '<rootDir>/__mocks__/react-dom-test-utils.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/.legacy/', '<rootDir>/e2e/'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/.legacy/', '<rootDir>/e2e/', '<rootDir>/__tests__/fixtures/'],
 }
 
 export default createJestConfig(config)

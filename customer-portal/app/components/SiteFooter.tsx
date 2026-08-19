@@ -21,7 +21,8 @@ export default function SiteFooter() {
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
               <li><Link href="/audit" className="hover:text-accent transition-colors">Free Landing Page Audit</Link></li>
-              <li><Link href="/pricing" className="hover:text-accent transition-colors">$97 Repair Sprint</Link></li>
+              <li><Link href="/repair-sprint" className="hover:text-accent transition-colors">Repair Sprint</Link></li>
+              <li><Link href="/pricing" className="hover:text-accent transition-colors">Pricing</Link></li>
               <li><Link href="/benchmarks" className="hover:text-accent transition-colors">Conversion Benchmarks</Link></li>
               <li><Link href="/teardowns" className="hover:text-accent transition-colors">Public Teardowns</Link></li>
               <li><Link href="/case-studies" className="hover:text-accent transition-colors">Case Studies</Link></li>
@@ -85,7 +86,7 @@ export default function SiteFooter() {
         {/* CTA strip */}
         <div className="mt-10 pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-fg-muted">
-            Find your conversion leak in under 2 minutes.
+            Check your page against 9 conversion signals in under 2 minutes.
           </p>
           <Link
             href="/audit?utm_source=footer&utm_medium=internal"

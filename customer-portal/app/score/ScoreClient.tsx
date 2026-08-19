@@ -304,8 +304,8 @@ export default function ScoreClient() {
               <div style={{ background: '#0e1a0e', border: '1.5px solid #1e3a1e', borderRadius: 10, padding: 28 }}>
                 <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: '#f0f4ec' }}>Get the full audit + fix list</h2>
                 <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6, marginBottom: 20 }}>
-                  The score above shows your top leak. The full report maps all 9 signals, ranks them by impact, and sends a prioritized fix list.
-                  We fix the highest-impact issue in 48 hours for $97.
+                  The score above shows your top leak. The full report maps all 9 signals, ranks them by priority, and sends a prioritized fix list.
+                  We fix the highest-priority finding in 48 hours for $97.
                 </p>
                 <div style={{ display: 'flex', gap: 10, marginBottom: 8 }}>
                   <input
@@ -361,7 +361,7 @@ export default function ScoreClient() {
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✓</div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6, color: '#f0f4ec' }}>Full audit on the way.</h3>
                 <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6, marginBottom: 20 }}>
-                  Check your inbox, it includes all 9 signals, ranked by impact, with specific fixes.
+                  Check your inbox, it includes all 9 signals, ranked by priority, with specific fixes.
                 </p>
                 <a
                   href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"

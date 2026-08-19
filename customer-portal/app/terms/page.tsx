@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+import { REPAIR_GUARANTEE } from '@/config/repair-guarantee'
 
 
 export const metadata: Metadata = {
@@ -57,7 +58,25 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-lg font-semibold text-fg">4. Intellectual Property</h2>
+            <h2 className="mb-3 text-lg font-semibold text-fg">4. {REPAIR_GUARANTEE.title}</h2>
+            <p className="text-base leading-7 text-fg-muted">
+              {REPAIR_GUARANTEE.statement}
+            </p>
+            <p className="mt-3 text-base leading-7 text-fg-muted">
+              <strong>Exclusions:</strong> The guarantee does not apply when:
+            </p>
+            <ul className="mt-2 ml-4 space-y-1 text-sm text-fg-muted list-disc">
+              {REPAIR_GUARANTEE.exclusions.map((e) => (
+                <li key={e}>{e}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm text-fg-muted">
+              {REPAIR_GUARANTEE.evidenceBoundary}
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-lg font-semibold text-fg">5. Intellectual Property</h2>
             <p className="text-base leading-7 text-fg-muted">
               Our audit methodology and recommendations are proprietary. You retain ownership of your
               landing page content. We grant you a license to use our recommendations for your own
@@ -66,7 +85,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-lg font-semibold text-fg">5. Limitation of Liability</h2>
+            <h2 className="mb-3 text-lg font-semibold text-fg">6. Limitation of Liability</h2>
             <p className="text-base leading-7 text-fg-muted">
               Nebula Components provides analysis and recommendations based on best practices. We cannot
               guarantee specific conversion results. Our liability is limited to the amount paid for
@@ -75,7 +94,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-lg font-semibold text-fg">6. Contact</h2>
+            <h2 className="mb-3 text-lg font-semibold text-fg">7. Contact</h2>
             <p className="text-base leading-7 text-fg-muted">
               For questions about these terms, contact us at{' '}
               <a href="mailto:hello@nebulacomponents.com" className="text-accent hover:underline">

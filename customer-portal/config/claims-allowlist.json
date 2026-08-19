@@ -1,0 +1,69 @@
+{
+  "determines-whether": [
+    { "file": "app/repair-sprint/page.tsx", "line": 126, "reason": "Used in bounded context: 'determine whether the targeted condition moved from FAIL to PASS'" },
+    { "file": "app/why-cro-agencies-dont-work/page.tsx", "line": 49, "reason": "Educational context discussing what a page scan cannot determine" },
+    { "file": "app/vs/[slug]/data.ts", "line": 250, "reason": "Educational comparison context" },
+    { "file": "app/pricing-guides/[slug]/page.tsx", "line": 120, "reason": "Educational pricing context" },
+    { "file": "app/landing-page-audit-tools-pricing/page.tsx", "line": 56, "reason": "Educational context" },
+    { "file": "app/audit/[id]/results/ResultsClient.tsx", "line": 714, "reason": "Operational context: re-audit determines whether condition changed" },
+    { "file": "app/learning-centre/above-fold-landing-page/page.tsx", "line": 267, "reason": "Educational article discussing above-fold role" },
+    { "file": "app/learning-centre/landing-page-not-converting/page.tsx", "line": 207, "reason": "Educational article" },
+    { "file": "app/learning-centre/form-has-zero-friction/page.tsx", "line": 256, "reason": "Educational article" },
+    { "file": "app/best-landing-page-audit-tools/page.tsx", "line": 201, "reason": "Educational comparison content" },
+    { "file": "content/landing-page-intelligence-stack/workflows/06-fix-verification-workflow.md", "line": 7, "reason": "Internal workflow documentation" }
+  ],
+  "guaranteed-conversions": [
+    { "file": "app/terms/page.tsx", "line": 50, "reason": "Terms disclaiming: 'does not guarantee conversion lift'" },
+    { "file": "app/checkout/page.tsx", "line": 121, "reason": "Checkout disclaimer: 'does not guarantee conversion lift'" },
+    { "file": "app/ai-sdr-vs-audit/page.tsx", "line": 153, "reason": "Disclaimer context" },
+    { "file": "app/roas-cliff/page.tsx", "line": 262, "reason": "Educational disclaimer" },
+    { "file": "app/audit/page.tsx", "line": 402, "reason": "FAQ disclaimer: 'Does not guarantee conversion lift'" },
+    { "file": "app/repair-sprint/page.tsx", "line": 108, "reason": "Exclusions list: 'Guaranteed conversion lift'" },
+    { "file": "app/lib/self-implementation-kit-offer.ts", "line": 51, "reason": "Offer disclaiming: 'A guarantee of conversion lift'" },
+    { "file": "app/lib/faq-schemas.ts", "line": 70, "reason": "FAQ schema disclaimer" },
+    { "file": "app/components/MechanismProof.tsx", "line": 0, "reason": "Evidence boundary disclaimer: warns that others cannot guarantee conversion lift" }
+  ],
+  "exactly-why": [
+    { "file": "app/vs/[slug]/data.ts", "line": 116, "reason": "Context: Nebula shows 'exactly why a signal failed' — refers to evidence, not causal business claim" },
+    { "file": "app/teardowns/[slug]/data.ts", "line": 1273, "reason": "Educational context in teardown analysis" },
+    { "file": "app/learning-centre/google-ads-high-ctr-low-conversion/page.tsx", "line": 0, "reason": "SEO meta description targeting search query" },
+    { "file": "app/learning-centre/form-has-zero-friction/page.tsx", "line": 0, "reason": "SEO title and meta targeting search query 'exactly why'" }
+  ],
+  "killing-conversions": [
+    { "file": "app/what-is-landing-page-audit/page.tsx", "line": 39, "reason": "Educational content explaining score ranges — mirrors search query language" },
+    { "file": "app/learning-centre/tiktok-landing-page-scroll-speed-gap/page.tsx", "line": 7, "reason": "SEO meta description targeting search query 'killing conversions'" },
+    { "file": "app/learning-centre/tiktok-landing-page-scroll-speed-gap/page.tsx", "line": 15, "reason": "SEO meta description targeting search query" },
+    { "file": "app/learning-centre/tiktok-ads-not-converting/page.tsx", "line": 7, "reason": "SEO meta description targeting search query" },
+    { "file": "app/learning-centre/tiktok-ads-not-converting/page.tsx", "line": 13, "reason": "SEO meta description targeting search query" },
+    { "file": "app/learning-centre/paid-traffic-leak-map/page.tsx", "line": 100, "reason": "Example of a proof element illustration — not a Nebula claim" }
+  ],
+  "revenue-leak": [
+    { "file": "app/roi-calculator/page.tsx", "line": 10, "reason": "ROI calculator page title — 'revenue leak' used as search-targeted keyword" },
+    { "file": "app/workspace/settingsView.tsx", "line": 396, "reason": "Internal workspace label" },
+    { "file": "app/workspace/pagesView.tsx", "line": 310, "reason": "Internal workspace label" },
+    { "file": "app/workspace/views.tsx", "line": 108, "reason": "Internal workspace label" },
+    { "file": "app/funnel-audit/FunnelAuditClient.tsx", "line": 358, "reason": "Funnel audit UI label" }
+  ],
+  "highest-impact": [
+    { "file": "app/api/workspace/assistant/route.ts", "line": 82, "reason": "Internal assistant response label" },
+    { "file": "app/learning-centre/landing-page-load-time-slow/page.tsx", "line": 283, "reason": "Educational article about load speed" },
+    { "file": "app/learning-centre/cta-below-fold-mobile/page.tsx", "line": 209, "reason": "Educational article" }
+  ],
+  "proves-your-ad": [
+    { "file": "app/learning-centre/google-ads-disapproved-ads-still-spending/page.tsx", "line": 39, "reason": "Educational article discussing ad approval mechanics — not a Nebula product claim" },
+    { "file": "app/learning-centre/google-ads-high-ctr-low-conversion/page.tsx", "line": 0, "reason": "SEO meta description: 'A high CTR proves your ad works' — educational, not a Nebula product claim" }
+  ],
+  "costing-conversions": [
+    { "file": "app/learning-centre/ghost-variant-ab-test/page.tsx", "line": 118, "reason": "Educational article example" },
+    { "file": "app/learning-centre/cta-below-fold-mobile/page.tsx", "line": 192, "reason": "Educational article discussing CTA placement" },
+    { "file": "app/why-is-my-landing-page-not-converting/page.tsx", "line": 108, "reason": "SEO title targeting search query 'costing you conversions'" }
+  ],
+  "will-outperform": [
+    { "file": "app/learning-centre/social-proof-backfire/page.tsx", "line": 168, "reason": "Educational article discussing proof effectiveness — hypothetical, not a Nebula claim" },
+    { "file": "app/why-is-my-landing-page-not-converting/page.tsx", "line": 57, "reason": "Educational diagnostic guide" }
+  ],
+  "conversion-impact": [
+    { "file": "content/landing-page-intelligence-stack/workflows/06-fix-verification-workflow.md", "line": 17, "reason": "Internal workflow documentation" },
+    { "file": "content/landing-page-intelligence-stack/workflows/01-message-match-checker.md", "line": 44, "reason": "Internal workflow documentation" }
+  ]
+}

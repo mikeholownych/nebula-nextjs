@@ -23,8 +23,9 @@
     "package:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs",
     "check:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs --check",
     "check:signal-canon": "node scripts/check-signal-canon.mjs",
+    "check:claims": "node scripts/check-claims.mjs",
     "check:content": "node scripts/check-banned-strings.mjs",
-    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:signal-canon && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
+    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:signal-canon && npm run check:claims && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

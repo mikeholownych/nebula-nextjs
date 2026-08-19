@@ -197,7 +197,7 @@ export default function AdsClicksNoSalesPage() {
             <h2 className="text-xl font-bold text-fg mb-3">Run the audit on your page now</h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-xl">
               The checks above are manual. Nebula runs them automatically on your URL, 9 signals,
-              ranked by impact, with exact evidence. Free, no signup.
+              ranked by priority, with exact evidence. Free, no signup.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link

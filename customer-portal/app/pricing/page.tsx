@@ -55,7 +55,7 @@ const faqItems = [
   },
   {
     q: 'Why only one finding?',
-    a: 'A bounded change is testable and honest. Changing multiple things at once makes it impossible to know what worked. The Repair Sprint fixes the highest-impact finding first, the 30-day re-audit confirms it held, then you have real evidence to act on next.',
+    a: 'A bounded change is testable and honest. Changing multiple things at once makes it impossible to know what worked. The Repair Sprint fixes the highest-priority finding first, the 30-day re-audit confirms it held, then you have real evidence to act on next.',
   },
   {
     q: 'Do I need to give Nebula access to my site?',
@@ -130,12 +130,12 @@ export default function PricingPage() {
 
           <MembershipGrid />
 
-          <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Fix Your Landing Page's Biggest Leak</h2>
+          <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Audit &amp; Repair</h2>
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>
               <h2 className="text-2xl font-semibold text-fg">Automated Audit</h2>
-              <p className="mt-1 text-sm italic text-fg-muted">See what's leaking before you spend another dollar</p>
+              <p className="mt-1 text-sm italic text-fg-muted">See observable page conditions before you change the ad</p>
               <p className="mt-2 text-3xl font-bold text-fg">Free</p>
               <p className="mt-4 text-fg-muted">
                 Drop in a URL and get a scored, evidence-backed diagnosis in minutes - no signup required.
@@ -171,10 +171,11 @@ export default function PricingPage() {
               <p className="mt-1 text-sm text-fg-muted">Find it. Fix it. Verify it held.</p>
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted leading-relaxed">
-                Run the free audit first — Nebula checks 9 signals against your actual page HTML in under 30 seconds.
-                Then pay $97 and receive the exact fix for your highest-impact finding within 48 hours.
+                One landing page, one finding. Run the free audit first — Nebula checks 9 signals against your actual page HTML in under 30 seconds.
+                Then pay $97 and receive the exact fix for your highest-priority finding within 48 hours.
                 Not generic advice — the replacement copy, code snippet, or configuration change written for your specific page.
-                A 30-day re-audit confirms the condition changed.
+                You or your developer implements the change. A 30-day re-audit confirms the condition changed.
+                This service does not promise conversion lift.
               </p>
               <div className="mt-6 space-y-3">
                 {
@@ -190,12 +191,16 @@ export default function PricingPage() {
                 }
               </div>
               <p className="mt-6 text-sm leading-6 text-fg-muted">
-                This service does not promise conversion lift. It proves what page condition was found,
-                what changed, and whether that same condition changed on re-audit.
+                <Link href="/repair-sprint" className="text-accent hover:text-fg transition-colors">See the full Repair Sprint details →</Link>
               </p>
-              <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent">
-                Run the audit first →
-              </Link>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/audit?utm_source=pricing&utm_medium=internal" className="inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent">
+                  Run the audit first →
+                </Link>
+                <Link href="/repair-sprint" className="inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent">
+                  See full details
+                </Link>
+              </div>
             </Card>
           </div>
 
@@ -207,7 +212,7 @@ export default function PricingPage() {
           <div className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
             <p className="text-lg font-semibold text-fg">Not sure yet?</p>
             <p className="mt-2 text-fg-muted">
-              Run the free audit first - see exactly what's leaking before you decide.
+              Run the free audit first — see your page scored against 9 signals before you decide.
             </p>
             <Link
               href="/audit?utm_source=pricing&utm_medium=internal"

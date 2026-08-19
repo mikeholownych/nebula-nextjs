@@ -44,7 +44,7 @@ export default function HonestyGrid() {
               <h3 className="text-lg font-bold text-fg">No 30-Page Fluff PDFs</h3>
             </div>
             <p className="text-sm text-fg-muted leading-6">
-              We won&apos;t drown you in generic agency jargon or 50-page PDF reports that sit in your inbox. Every audit finding is concise, ranked by observable impact with the evidence behind it, and actionable immediately.
+              We won&apos;t drown you in generic agency jargon or 50-page PDF reports that sit in your inbox. Every audit finding is concise, ranked by priority with the evidence behind it, and actionable immediately.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function HonestyGrid() {
               <h3 className="text-lg font-bold text-fg">What We DO Deliver</h3>
             </div>
             <p className="text-sm text-fg-muted leading-6">
-              Evidence-backed analysis across 9 conversion signals, findings ranked by observable impact with the evidence behind each, plain-English fix recommendations, and 30-day re-audit verification included.
+              Evidence-backed analysis across 9 conversion signals, findings ranked by priority with the evidence behind each, plain-English fix recommendations, and 30-day re-audit verification included.
             </p>
           </div>
         </div>

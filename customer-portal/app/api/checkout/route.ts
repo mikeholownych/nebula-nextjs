@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
     'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
     'line_items[0][price_data][product_data][name]': REPAIR_SPRINT_OFFER.name,
     'line_items[0][price_data][product_data][description]':
-      'One targeted fix for your highest-impact conversion leak - exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.',
+      'One targeted fix for your highest-priority failed condition - exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.',
     'line_items[0][quantity]': '1',
     // Allow card, Link (one-click for returning Stripe customers), and wallets
     'payment_method_types[0]': 'card',

@@ -6,6 +6,7 @@ import WithWithout from './components/WithWithout'
 import HowItWorksAnimated from './components/HowItWorksAnimated'
 import StackTaxComparison from './components/StackTaxComparison'
 import HonestyGrid from './components/HonestyGrid'
+import MechanismProof from './components/MechanismProof'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
 import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
 import dynamic from 'next/dynamic'
@@ -18,6 +19,7 @@ import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
 import { homeFAQSchema } from './lib/faq-schemas'
+import { SIGNAL_REGISTRY, SIGNAL_COUNT } from '@/config/signals'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -92,29 +94,20 @@ export default function Home() {
             {/* Left: copy */}
             <div className="flex flex-col">
               <h1 className="heading-1">
-Know exactly what&apos;s likely impacting your conversions, without hiring a consultant.
+Find the page-side conditions worth fixing before you blame the traffic.
                </h1>
                <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
-                 Your ads are working. The page may be leaking budget. Nebula checks 9 conversion signals
-                 against your actual page HTML in under 30 seconds — then provides prioritized fixes for the highest-impact issues found,
-                 not a list of recommendations.
+                 A click confirms interest. The page determines what happens next. Nebula checks {SIGNAL_COUNT} conversion signals
+                 against your actual page HTML in under 30 seconds — then ranks findings by priority so you know what to investigate first.
                </p>
-                 not a list of recommendations.
-              </p>
-              <div className="mt-8">
-                <Link
-                  href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
-                >
-                  Get My Free Conversion Score
-                </Link>
-                <p className="mt-3 text-sm text-fg-muted">Free. No signup. 9 signals checked in under 30 seconds.</p>
+               <div className="mt-8">                 <Link                   href="/audit?utm_source=homepage&utm_medium=internal"                   className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"                 >                   Get My Free Conversion Score                 </Link>
+                <p className="mt-3 text-sm text-fg-muted">Free. No signup. {SIGNAL_COUNT} signals checked in under 30 seconds.</p>
               </div>
               {/* Stat strip - elevated card */}
               <div className="mt-8 rounded-lg border border-border/40 bg-bg-surface/50 p-5">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <p className="stat-number">9</p>
+                    <p className="stat-number">{SIGNAL_COUNT}</p>
                     <p className="stat-label">signals checked</p>
                   </div>
                   <div className="text-center">
@@ -127,7 +120,7 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
                   </div>
                   <div className="text-center">
                     <p className="stat-number">$0</p>
-                    <p className="stat-label">to find the leak</p>
+                    <p className="stat-label">to run the audit</p>
                   </div>
                 </div>
               </div>
@@ -143,7 +136,7 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
                 <AuditCardArtifact />
               </div>
               <p className="mt-4 text-sm text-fg-muted">
-                9 signals. Scored against your actual page. Top issues identified with specific evidence and recommended fixes.
+                {SIGNAL_COUNT} signals. Scored against your actual page. Findings ranked by priority with specific evidence.
               </p>
             </div>
 
@@ -176,7 +169,7 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
               <p className="mt-5 text-base text-fg-muted leading-relaxed">
                 When we have a real client outcome with dates, proof, and a way for you to verify it,
                 it will appear here. Until then: the audit runs on your actual page, returns raw
-                evidence, and ranks findings by impact. No estimates. No hypothetical lift.
+                evidence, and ranks findings by priority. No estimates. No hypothetical lift.
               </p>
               <div className="mt-8 flex items-start gap-4">
                 <Image
@@ -265,7 +258,7 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
                {[
                  {
                    heading: 'What you receive',
-                   body: 'Recorded findings with evidence from your page, and a fix list ranked by impact and effort.',
+                   body: 'Recorded findings with evidence from your page, ranked by priority — a heuristic based on journey position, severity, and reproducibility.',
                  },
                  {
                    heading: 'See a real report',
@@ -274,7 +267,8 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
                  },
                  {
                    heading: 'What happens next',
-                   body: 'After reviewing your free audit report, you can: fix the highest-impact issues yourself; upgrade to a membership for ongoing monitoring and white-label reports; or have Nebula prepare the $97 One-Leak Repair Sprint: one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
+                   body: 'After reviewing your free audit report, you can: fix the highest-priority conditions yourself; upgrade to a membership for ongoing monitoring; or purchase the $97 One-Leak Repair Sprint — one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
+                   link: { href: '/repair-sprint', label: 'See the Repair Sprint' },
                  },
                ].map((item) => (
                 <div key={item.heading} className="card-default">
@@ -293,6 +287,9 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
 
         {/* ── 3b. Clinical Transparency: Honesty Grid ── */}
         <HonestyGrid />
+
+        {/* ── 3c. Mechanism Proof: what Nebula can/cannot prove ── */}
+        <MechanismProof />
 
         {/* ── 4. Teardown proof: named pages, named failures ── */}
         <section className="section-default bg-bg-elevated/60">
@@ -439,10 +436,10 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
                   <p className="mb-4 text-xs font-semibold text-accent uppercase tracking-wide">Nebula audit</p>
                   <ul className="space-y-3 text-sm text-fg-muted">
                     {[
-                      'Real scrape - scored against 9 specific conversion signals',
-                      'Prioritized fixes with impact and effort scores',
+                      'Real scrape — scored against 9 specific conversion signals',
+                      'Findings ranked by priority with evidence for each',
                       'No signup to see your results',
-                      '$97 One-Leak Repair Sprint gives you one scoped repair package within 48 hours',
+                      '$97 One-Leak Repair Sprint: one scoped repair package within 48 hours',
                       'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3">
@@ -462,25 +459,25 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 max-w-2xl">
               <h2 className="heading-2">
-                Know what the click proved - and what it did not.
+                Know what a click proves — and what it does not.
               </h2>
               <p className="mt-4 text-base text-fg-muted leading-relaxed">
-                A click establishes that the ad generated interest. The page determines whether that interest becomes a decision.
+                A click confirms that someone was interested enough to investigate. The page is what they encounter next.
               </p>
             </div>
             <div className="divide-y divide-border/40 border-t border-b border-border/40">
               {[
                 {
                   heading: 'A click is not the finish line.',
-                  body: 'An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward - or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.',
+                  body: 'An ad click confirms the message generated interest. The landing page is what the visitor encounters next. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor may leave — and the ad often takes the blame.',
                 },
                 {
                   heading: 'The audit follows the actual path.',
-                  body: 'Nebula checks what a paid visitor experiences: headline, visible action, proof, mobile usability, performance, and measurement. Each failing signal is tied to raw evidence from your page and ranked by impact. The report does not estimate revenue or promise lift that has not been measured.',
+                  body: 'Nebula checks what a paid visitor encounters: headline, visible action, proof, mobile usability, performance, and measurement. Each failing signal is tied to raw evidence from your page and ranked by priority. The report does not estimate revenue or promise lift.',
                 },
                 {
                   heading: 'Use it as a stop-or-fix decision.',
-                  body: 'If the page passes, look at the audience or offer instead. If it fails, fix the highest-impact issue first, then run the audit again and compare. That\'s the whole loop.',
+                  body: 'If the page passes the relevant checks, shift investigation toward traffic quality, offer, or downstream flow. If it fails, fix the highest-priority condition first, then re-audit and compare.',
                 },
               ].map((item) => (
                 <article
@@ -502,15 +499,15 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
             <div className="grid gap-6 md:grid-cols-3">
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does Nebula provide?</h3>
-                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of the page conditions most likely worth investigating first - not generic advice, not a sales call.</p>
+                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of observable page conditions ranked by priority — not generic advice, not a sales call.</p>
               </div>
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does the free audit check?</h3>
-                <p className="text-sm leading-7 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, ranked by impact. You stop guessing what&apos;s wrong. Under 2 minutes.</p>
+                <p className="text-sm leading-7 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, ranked by priority. Under 2 minutes.</p>
               </div>
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does the $97 repair sprint do?</h3>
-                <p className="text-sm leading-7 text-fg-muted">One targeted fix for your highest-impact finding - exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift - no one can before the fix is live and measured.</p>
+                <p className="text-sm leading-7 text-fg-muted">One targeted fix for your highest-priority finding — exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the condition changed. Does not promise conversion lift.</p>
               </div>
             </div>
           </div>
@@ -593,16 +590,16 @@ Know exactly what&apos;s likely impacting your conversions, without hiring a con
         <section className="px-6 py-20 text-center">
           <div className="mx-auto max-w-xl">
             <h2 className="mb-3 text-2xl font-bold text-fg">
-              Run the leak detection before you spend another dollar.
+              Check the page before you change the ad.
             </h2>
             <p className="mb-8 text-base text-fg-muted">
-              Free, no signup. Find the specific leak costing you conversions.
+              Free, no signup. See observable conditions worth investigating — ranked by priority.
             </p>
             <Link
               href="/audit?utm_source=homepage&utm_medium=internal"
               className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
-              Find the Leak &rarr;
+              Run Free Audit &rarr;
             </Link>
           </div>
         </section>

@@ -502,7 +502,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
             <a href="#remediation" className="font-semibold text-accent hover:underline">
               $97 Repair Sprint
             </a>{' '}
-            delivers the exact copy, code, or configuration change for your highest-impact finding. A 30-day re-audit confirms it held.
+            delivers the exact copy, code, or configuration change for your highest-priority finding. A 30-day re-audit confirms it held.
           </p>
         </div>
 
@@ -580,7 +580,7 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
           {/* Psychology: Loss frame + action verb */}
           <h2 className="text-2xl font-extrabold text-fg">Stop the bleeding</h2>
           <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
-            Your top {queue.length} leaks, ranked by impact. Fix them and recover the money you're losing every day your page stays broken.
+            Your top {queue.length} leaks, ranked by priority. Address the top condition first, then re-audit.
           </p>
 
           {/* Psychology: Anti-marketing honesty */}
@@ -1285,7 +1285,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 Not a 12-point checklist. One specific fix for your highest-confidence finding - exact copy, code, or configuration change - ready to implement today.
               </p>
               <ul className="mb-5 space-y-2 text-sm text-fg-muted">
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-impact leak, prepared within 48 hours</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-priority finding, prepared within 48 hours</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>

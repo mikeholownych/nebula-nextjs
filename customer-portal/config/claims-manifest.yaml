@@ -1,0 +1,179 @@
+# Claims Manifest — Nebula Components
+# Machine-readable registry of all public quantitative and factual claims.
+# Each claim has an evidence basis and boundary statement.
+# CI: scripts/check-claims.mjs enforces banned phrasing; this manifest documents what IS said.
+#
+# Status values:
+#   verified    — measured or sourced; evidence artifact exists
+#   stated      — sourced from third-party research; citation provided
+#   bounded     — claim is explicitly qualified with limitations
+#   retired     — previously used; removed during hardening sprint 2026-08-18
+
+claims:
+
+  # ─── Product mechanics ───────────────────────────────────────────────────
+
+  - id: signal-count
+    claim: "Nebula checks 9 conversion signals"
+    evidence_basis: "Signal registry (config/signals.ts) defines exactly 9 active signals"
+    status: verified
+    canonical_source: config/signals.ts
+    surfaces:
+      - app/page.tsx
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+      - app/lib/self-implementation-kit-offer.ts
+
+  - id: audit-time
+    claim: "Audit completes in under 30 seconds"
+    evidence_basis: "Measured: typical audit returns in 3-12 seconds. 30s is the upper bound including cold-start and slow TTFB targets"
+    status: verified
+    canonical_source: app/lib/self-implementation-kit-offer.ts
+    boundary: "Network conditions, target server response time, and edge caching affect actual time"
+    surfaces:
+      - app/page.tsx
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+
+  - id: audit-no-signup
+    claim: "No signup required to run the free audit"
+    evidence_basis: "Audit endpoint accepts URL without authentication; verified by product flow"
+    status: verified
+    canonical_source: app/audit/page.tsx
+    surfaces:
+      - app/page.tsx
+      - app/pricing/page.tsx
+
+  - id: repair-sprint-price
+    claim: "$97 one-time payment"
+    evidence_basis: "Stripe price object (price_...); locked through 2026-12-31"
+    status: verified
+    canonical_source: app/lib/self-implementation-kit-offer.ts
+    boundary: "Price increases to $147 on 2027-01-01"
+    surfaces:
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+
+  - id: repair-sprint-delivery
+    claim: "Repair kit delivered within 48 hours"
+    evidence_basis: "Operational target; delivery is manual so actual time may vary"
+    status: bounded
+    canonical_source: app/lib/self-implementation-kit-offer.ts
+    boundary: "48 hours is the delivery target, not a guaranteed SLA"
+    surfaces:
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+
+  - id: re-audit-window
+    claim: "30-day re-audit included"
+    evidence_basis: "Product feature: same-signal re-check available within 30 days of purchase"
+    status: verified
+    canonical_source: config/repair-guarantee.ts
+    surfaces:
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+      - app/terms/page.tsx
+
+  - id: html-based-audit
+    claim: "Reads your actual page HTML"
+    evidence_basis: "Audit engine fetches and parses live HTML; does not use screenshots or simulated renders"
+    status: verified
+    canonical_source: app/api/audit/route.ts
+    surfaces:
+      - app/page.tsx
+      - app/pricing/page.tsx
+
+  # ─── Comparative time claims ─────────────────────────────────────────────
+
+  - id: manual-equivalent-time
+    claim: "Manual equivalent takes 15-25 minutes in DevTools"
+    evidence_basis: "Timed by founder checking same 9 signals manually (viewport meta, H1, CTA, social proof, TTFB, title/meta/canonical, JSON-LD, above-fold layout, ad tracking) on 3 sample pages"
+    status: verified
+    canonical_source: app/lib/self-implementation-kit-offer.ts
+    boundary: "Experienced developer may be faster; junior may be slower. Estimate is for a competent front-end developer"
+
+  - id: agency-discovery-time
+    claim: "CRO agency discovery call takes 45 minutes before looking at a page"
+    evidence_basis: "Industry observation from multiple agency intake processes; typical discovery calls are 30-60 min"
+    status: bounded
+    canonical_source: app/lib/self-implementation-kit-offer.ts
+    boundary: "General industry observation, not a universal truth. Some agencies have faster processes"
+
+  # ─── Priority Score ──────────────────────────────────────────────────────
+
+  - id: priority-score-definition
+    claim: "Priority Score is a heuristic based on journey position, severity, and reproducibility"
+    evidence_basis: "Defined in config/priority-score.ts; rule-derived, not a measured conversion metric"
+    status: verified
+    canonical_source: config/priority-score.ts
+    boundary: "Priority Score is NOT a measure of revenue impact, conversion probability, or statistical significance"
+
+  # ─── Third-party research citations ──────────────────────────────────────
+
+  - id: google-3s-bounce
+    claim: "Pages over 3 seconds TTFB lose significant portion of paid traffic"
+    evidence_basis: "Google/SOASTA 2017: 53% mobile abandonment above 3s. Direction confirmed by subsequent CWV data"
+    status: stated
+    citation: "Google/SOASTA, 2017"
+    boundary: "Original study is from 2017; absolute numbers have shifted but direction persists"
+    surfaces:
+      - app/ads-getting-clicks-but-no-sales/page.tsx
+      - app/learning-centre/landing-page-bounce-rate-high/page.tsx
+
+  - id: lcp-bounce-correlation
+    claim: "LCP above 3 seconds correlates with 32% increase in bounce rate vs 1s baseline"
+    evidence_basis: "Google Web Fundamentals, 2018; relative comparison, not absolute guarantee"
+    status: stated
+    citation: "Google, 2018"
+    boundary: "Cited with note that absolute numbers have shifted; direction unchanged"
+    surfaces:
+      - app/ads-getting-clicks-but-no-sales/page.tsx
+
+  - id: portent-load-conversion
+    claim: "Pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds"
+    evidence_basis: "Portent 2022 analysis of 100M+ page views across 20 B2B/B2C sites"
+    status: stated
+    citation: "Portent, 2022"
+    surfaces:
+      - app/learning-centre/landing-page-bounce-rate-high/page.tsx
+
+  # ─── Evidence boundaries (what Nebula explicitly does NOT claim) ──────────
+
+  - id: no-conversion-guarantee
+    claim: "Does not guarantee conversion lift"
+    evidence_basis: "Explicitly disclaimed in repair guarantee, pricing, and terms"
+    status: verified
+    canonical_source: config/repair-guarantee.ts
+    surfaces:
+      - app/pricing/page.tsx
+      - app/repair-sprint/page.tsx
+      - app/terms/page.tsx
+
+  - id: no-revenue-promise
+    claim: "Does not promise revenue outcomes"
+    evidence_basis: "Explicitly disclaimed; repair measures page condition change only"
+    status: verified
+    canonical_source: config/repair-guarantee.ts
+
+  # ─── Retired claims ─────────────────────────────────────────────────────
+
+  - id: impact-score
+    claim: "ranked by impact"
+    status: retired
+    retired_date: "2026-08-18"
+    replacement: "priority-score-definition"
+    reason: "Impact implies measured conversion causality; Priority Score is a rule-derived heuristic"
+
+  - id: leak-language
+    claim: "conversion leak / leaking budget / killing conversions"
+    status: retired
+    retired_date: "2026-08-18"
+    replacement: null
+    reason: "Causal language implies Nebula can prove revenue impact from page conditions alone"
+
+  - id: ads-are-working
+    claim: "Your ads are working. The page is leaking budget."
+    status: retired
+    retired_date: "2026-08-18"
+    replacement: null
+    reason: "Cannot determine from page HTML alone whether ads are performing well"

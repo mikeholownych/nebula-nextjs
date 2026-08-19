@@ -155,7 +155,7 @@ describe('consent-gated analytics loading', () => {
     expect(source).toContain('WEB_MCP_RUNTIME')
     expect(source).toContain('request_audit')
     expect(source).toContain('get_pricing')
-    expect(source).toContain('search_learning')
+    expect(source).toContain('get_signals')
   })
 
   it('keeps the audited static-route shell free of Next Link client boundaries', () => {

@@ -1,129 +1,74 @@
 import Link from 'next/link'
 
+const DIMENSIONS = [
+  { label: 'Free audit available', nebula: true, typical: false },
+  { label: 'No signup required to see results', nebula: true, typical: false },
+  { label: 'Page evidence exposed with each finding', nebula: true, typical: false },
+  { label: 'Rule-based scoring disclosed', nebula: true, typical: false },
+  { label: 'Same-scope re-audit included', nebula: true, typical: false },
+  { label: 'Exact implementation artifact (not advice)', nebula: true, typical: false },
+  { label: 'Customer retains production control', nebula: true, typical: true },
+  { label: 'Recurring monitoring available', nebula: true, typical: true },
+  { label: 'Public methodology', nebula: true, typical: false },
+]
+
 export default function StackTaxComparison() {
   return (
     <section className="border-b border-border bg-bg-surface px-6 py-16">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Unfair Advantage Matrix
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+            What Nebula exposes that most audits do not.
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
+            This compares observable product mechanics — not estimated competitor costs or delivery timelines.
           </p>
-<h2 className="text-3xl font-extrabold tracking-tight text-fg md:text-4xl">
-             Based on industry feedback, founders often report spending on agencies with lengthy timelines or dealing with complex tool stacks. Nebula offers a free audit to identify issues and a repair sprint for targeted fixes.
-           </h2>
-<p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
-             Based on industry observations, many founders either spend $5k/mo on agencies that deliver lengthy reports or stitch together multiple tools requiring manual execution. Nebula provides verified code fixes in under 2 minutes.
-           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {/* Card 1: CRO Agency */}
-          <div className="flex flex-col rounded-lg border border-border bg-bg-panel p-6 shadow-sm">
-            <div className="mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 1</span>
-              <h3 className="text-xl font-bold text-fg">Traditional CRO Agency</h3>
-              <p className="mt-1 text-2xl font-extrabold text-fg-muted">Typically $3,000–$15,000<span className="text-xs font-normal">/mo</span></p>
-            </div>
-            <ul className="mb-8 space-y-3 text-sm text-fg-muted flex-1">
-<li className="flex items-start gap-2">
-                 <span className="text-signal-fail">✕</span>
-                 <span><strong>Time to first fix:</strong> Typically 4 to 12 weeks including discovery and implementation</span>
-               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Deliverable:</strong> Vague Figma mockups &amp; 30-page PDFs</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Code execution:</strong> None (handed back to your dev team)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>AI / GEO Search Audit:</strong> Completely ignored</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Contract:</strong> 3 to 6 month retainer commitment</span>
-              </li>
-            </ul>
-            <div className="text-xs text-fg-muted text-center pt-3 border-t border-border">
-              High risk, slow iteration cycle
-            </div>
-          </div>
+        <div className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-bg-panel/60">
+                <th className="px-4 py-3 text-left font-semibold text-fg">Dimension</th>
+                <th className="px-4 py-3 text-center font-semibold text-accent">Nebula</th>
+                <th className="px-4 py-3 text-center font-semibold text-fg-muted">Typical audit service</th>
+              </tr>
+            </thead>
+            <tbody>
+              {DIMENSIONS.map((d) => (
+                <tr key={d.label} className="border-b border-border/40 last:border-0">
+                  <td className="px-4 py-3 text-fg-muted">{d.label}</td>
+                  <td className="px-4 py-3 text-center">
+                    {d.nebula ? (
+                      <span className="text-accent font-bold">&#10003;</span>
+                    ) : (
+                      <span className="text-fg-dim">—</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {d.typical ? (
+                      <span className="text-fg-muted">Varies</span>
+                    ) : (
+                      <span className="text-fg-dim">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-          {/* Card 2: DIY SaaS Tool Stack */}
-          <div className="flex flex-col rounded-lg border border-border bg-bg-panel p-6 shadow-sm">
-            <div className="mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 2</span>
-              <h3 className="text-xl font-bold text-fg">DIY SaaS Tool Stack</h3>
-              <p className="mt-1 text-2xl font-extrabold text-fg-muted">Typically $1,500+<span className="text-xs font-normal">/mo Stack Tax</span></p>
-            </div>
-            <ul className="mb-8 space-y-3 text-sm text-fg-muted flex-1">
-<li className="flex items-start gap-2">
-                 <span className="text-signal-fail">✕</span>
-                 <span><strong>Time to first fix:</strong> 20+ hours/week manual effort typically required</span>
-               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Deliverable:</strong> 500-row spreadsheets &amp; complex dashboards</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Code execution:</strong> Manual implementation on your time</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>AI / GEO Search Audit:</strong> Requires extra $5k/mo vendor</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Stack:</strong> Clay + Instantly + Ahrefs + Hotjar + Vercel</span>
-              </li>
-            </ul>
-            <div className="text-xs text-fg-muted text-center pt-3 border-t border-border">
-              High effort, fragmented execution
-            </div>
-          </div>
+        <p className="mt-4 text-center text-xs text-fg-dim">
+          &ldquo;Typical audit service&rdquo; reflects common patterns observed across agency and SaaS audit products. Individual services vary.
+        </p>
 
-          {/* Card 3: Nebula Autonomous Engine */}
-          <div className="relative flex flex-col rounded-lg border-2 border-accent bg-bg-elevated p-6 shadow-lifted">
-            <div className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wide text-bg">
-              Best Value
-            </div>
-            <div className="mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-accent">Nebula Engine</span>
-              <h3 className="text-xl font-bold text-fg">Nebula Components</h3>
-              <p className="mt-1 text-2xl font-extrabold text-accent">$0 <span className="text-sm font-normal text-fg-muted">Free Audit</span> / $97 <span className="text-sm font-normal text-fg-muted">Repair Sprint</span></p>
-            </div>
-            <ul className="mb-8 space-y-3 text-sm text-fg flex-1">
-<li className="flex items-start gap-2">
-                 <span className="text-accent font-bold">✓</span>
-                 <span><strong>Time to first fix:</strong> Sub-60s audit; typically 24h code delivery for Repair Sprint</span>
-               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent font-bold">✓</span>
-                <span><strong>Deliverable:</strong> Empirical ad spend leak math + exact diffs</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent font-bold">✓</span>
-                <span><strong>Platform Compatibility:</strong> Webflow, Framer, Shopify, WordPress, or Next.js (delivered as copy rewrites, layout briefs, and code diffs)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent font-bold">✓</span>
-                <span><strong>AI / GEO Search Audit:</strong> Included (ChatGPT / Claude citable)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent font-bold">✓</span>
-                <span><strong>Guarantee:</strong> 30-day re-audit verification included</span>
-              </li>
-            </ul>
-            <Link
-              href="/audit?utm_source=stack_tax_matrix&utm_medium=homepage"
-              className="w-full rounded-lg bg-accent py-3 text-center font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
-            >
-              Get Free Score &amp; Repair Sprint &rarr;
-            </Link>
-          </div>
+        <div className="mt-8 text-center">
+          <Link
+            href="/audit?utm_source=comparison_table&utm_medium=homepage"
+            className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg hover:opacity-85 transition-opacity"
+          >
+            Run the free audit and compare
+          </Link>
         </div>
       </div>
     </section>
