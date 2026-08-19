@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { GetFixLibraryResponse, FixEffectiveness } from '@/app/fix-library/types'
-import { FetchError } from 'next/dist/server/api-utils'
 
 export const metadata: Metadata = {
   title: 'Fix Implementation Library - Nebula Components',
@@ -36,8 +35,6 @@ export default async function FixLibraryPage() {
   } catch (err) {
     error = err instanceof Error ? err.message : 'An unknown error occurred'
     console.error('Fix library error:', err)
-  } finally {
-
   }
 
   // If there was an error, show error state
@@ -56,26 +53,6 @@ export default async function FixLibraryPage() {
         >
           Try Again
         </button>
-      </div>
-    )
-  }
-
-  // If still loading, show loading state
-  if (false) {
-    return (
-      <div className="min-h-[600px] flex flex-col items-center justify-center px-6 py-12">
-        <h1 className="mb-4 text-2xl font-bold">
-          Fix Implementation Library
-        </h1>
-        <div className="flex space-x-3">
-          <div className="h-4 w-4 rounded-full border-2 border-indigo-600 border-t-transparent animate-spin"></div>
-          <div className="h-4 w-4 rounded-full border-2 border-indigo-600 border-r-transparent animate-spin"></div>
-          <div className="h-4 w-4 rounded-full border-2 border-indigo-600 border-b-transparent animate-spin"></div>
-          <div className="h-4 w-4 rounded-full border-2 border-indigo-600 border-l-transparent animate-spin"></div>
-        </div>
-        <p className="mt-4 text-muted-foreground">
-          Loading fix implementation data...
-        </p>
       </div>
     )
   }

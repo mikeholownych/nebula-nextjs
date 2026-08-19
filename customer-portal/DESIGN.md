@@ -2,53 +2,53 @@
 
 ## 1. Visual Theme & Atmosphere
 
-A **high-agency, forensic-grade interface** that feels like a precision instrument, not a SaaS template. The atmosphere is clinical confidence — the visual language of a tool that finds what others miss.
+A **high-agency, forensic-grade interface** that feels like a precision instrument, not a SaaS template. The atmosphere is clinical confidence - the visual language of a tool that finds what others miss.
 
-**Density:** 4 (Art Gallery Airy) — whitespace as power, not emptiness
-**Variance:** 7 (Offset Asymmetric) — deliberate compositional tension
-**Motion:** 5 (Fluid CSS) — purposeful micro-interactions, no decoration
+**Density:** 4 (Art Gallery Airy) - whitespace as power, not emptiness
+**Variance:** 7 (Offset Asymmetric) - deliberate compositional tension
+**Motion:** 5 (Fluid CSS) - purposeful micro-interactions, no decoration
 
-The dark theme is retained but **elevated**: surfaces lift through warm-tinted elevation, not flat grays. The brand color (#00c2a0) punctuates — it does not saturate.
+The dark theme is retained but **elevated**: surfaces lift through warm-tinted elevation, not flat grays. The brand color (#00c2a0) punctuates - it does not saturate.
 
 ---
 
 ## 2. Color Palette & Roles
 
 ### Surfaces (Dark Canvas)
-- **Void Black** `#050505` — Root background, negative space
-- **Elevated Dark** `#0a0a0a` — Card containers, lifted panels
-- **Warm Surface** `#0d1110` — Elevated cards, input backgrounds (warm-tinted)
-- **Panel Slate** `#111111` — Deep containers, modal overlays
+- **Void Black** `#050505` - Root background, negative space
+- **Elevated Dark** `#0a0a0a` - Card containers, lifted panels
+- **Warm Surface** `#0d1110` - Elevated cards, input backgrounds (warm-tinted)
+- **Panel Slate** `#111111` - Deep containers, modal overlays
 
 ### Typography
-- **Pure White** `#FFFFFF` — Primary text, high-emphasis
-- **Steel Muted** `#9E9E9E` — Secondary text, descriptions, metadata (AAA contrast)
-- **Whisper** `#6B6B6B` — Tertiary text, timestamps, hint text
+- **Pure White** `#FFFFFF` - Primary text, high-emphasis
+- **Steel Muted** `#9E9E9E` - Secondary text, descriptions, metadata (AAA contrast)
+- **Whisper** `#6B6B6B` - Tertiary text, timestamps, hint text
 
 ### Accent (Single, Controlled)
-- **Nebula Teal** `#00c2a0` — Primary CTA, active states, focus rings, links
-- **Teal Light** `#33d4b8` — Hover states, hover-lift glow (never used directly)
-- **Teal Dark** `#009980` — Pressed states
-- **Teal Dim** `rgba(0, 194, 160, 0.1)` — Background fills, badges
+- **Nebula Teal** `#00c2a0` - Primary CTA, active states, focus rings, links
+- **Teal Light** `#33d4b8` - Hover states, hover-lift glow (never used directly)
+- **Teal Dark** `#009980` - Pressed states
+- **Teal Dim** `rgba(0, 194, 160, 0.1)` - Background fills, badges
 
 ### Semantic Colors
-- **Signal Pass** `#22c55e` — Passing audit checks, positive states
-- **Signal Fail** `#EF4444` — Failing checks, errors (used sparingly)
-- **Signal Warn** `#F59E0B` — Warning states, attention (audit fail ONLY)
-- **Secondary** — not used; single-accent system enforced
+- **Signal Pass** `#22c55e` - Passing audit checks, positive states
+- **Signal Fail** `#EF4444` - Failing checks, errors (used sparingly)
+- **Signal Warn** `#F59E0B` - Warning states, attention (audit fail ONLY)
+- **Secondary** - not used; single-accent system enforced
 
 ### Structural
-- **Border Whisper** `rgba(255, 255, 255, 0.06)` — Card borders, dividers
-- **Border Focus** `rgba(0, 194, 160, 0.5)` — Focus rings
+- **Border Whisper** `rgba(255, 255, 255, 0.06)` - Card borders, dividers
+- **Border Focus** `rgba(0, 194, 160, 0.5)` - Focus rings
 
 ---
 
 ## 3. Typography Rules
 
 ### Font Stack
-- **Display:** `Geist` — Track-tight headlines, controlled scale. **Inter is BANNED.**
-- **Body:** `Geist` — Relaxed leading, 65ch max
-- **Mono:** `JetBrains Mono` — Code, audit scores, timestamps, financial numbers
+- **Display:** `Geist` - Track-tight headlines, controlled scale. **Inter is BANNED.**
+- **Body:** `Geist` - Relaxed leading, 65ch max
+- **Mono:** `JetBrains Mono` - Code, audit scores, timestamps, financial numbers
 
 ### Scale Hierarchy
 ```css
@@ -81,8 +81,8 @@ The dark theme is retained but **elevated**: surfaces lift through warm-tinted e
 ### Cards
 - **Elevation:** Use ONLY when hierarchy demands. Tint shadows to warm-dark (`rgba(0, 0, 0, 0.4)`).
 - **Border:** 1px Border Whisper, generous `12px` radius.
-- **High-density:** Replace with border-top dividers or negative space — cards only when lifting serves comprehension
-- **Shadow:** `0 4px 24px rgba(0, 0, 0, 0.3)` — diffused, warm-tinted
+- **High-density:** Replace with border-top dividers or negative space - cards only when lifting serves comprehension
+- **Shadow:** `0 4px 24px rgba(0, 0, 0, 0.3)` - diffused, warm-tinted
 
 ### Inputs
 - **Label position:** Above input, Steel Muted, `text-sm`
@@ -160,7 +160,7 @@ Weighty, confident, not bouncy.
 
 **The Audit Card Artifact.**
 
-Every hero and results page features a **composed audit card** — not a screenshot, but a designed artifact:
+Every hero and results page features a **composed audit card** - not a screenshot, but a designed artifact:
 - Score badge (large monospace number + grade)
 - Top leak callout (accent border-left, bold finding text)
 - Signal pills (Pass/Fail badges, 4–6 visible)
@@ -184,7 +184,7 @@ This repeats across:
 - ❌ Screaming headlines (scale > 4rem)
 
 **Color:**
-- ❌ Pure black (`#000000`) — use Void Black instead
+- ❌ Pure black (`#000000`) - use Void Black instead
 - ❌ Neon outer glows
 - ❌ Multiple accent colors
 - ❌ Purple/blue AI neon aesthetic
@@ -217,8 +217,8 @@ This repeats across:
 ### Hero Section
 **Left (55%):**
 - H1: "Know exactly what's killing your conversions."
-- Subhead: "Your ads work. The page doesn't. Nebula runs 9 evidence-backed checks against your actual HTML — finds the leak, with dollar math and the exact fix."
-- Primary CTA: "Find My Leak — Free" (button)
+- Subhead: "Your ads work. The page doesn't. Nebula runs 9 evidence-backed checks against your actual HTML - finds the leak, with dollar math and the exact fix."
+- Primary CTA: "Find My Leak - Free" (button)
 - Secondary: "No signup. Results in <2 min." (text only, no link)
 
 **Right (45%):**

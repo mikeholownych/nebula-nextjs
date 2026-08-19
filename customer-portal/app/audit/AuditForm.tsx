@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
 import { analyticsHeaders, newAuditAttemptId, rememberAuditAttemptId } from '@/app/lib/client-analytics'
+import { trackClientFunnelEvent, getOrCreateJourneyId } from '@/app/lib/client-funnel'
+import VisibilityBeacon from '@/components/VisibilityBeacon'
 
 function AuditFormContent() {
   const [url, setUrl] = useState('')
@@ -32,6 +34,12 @@ function AuditFormContent() {
       if (v) utms[k] = v
     }
     if (Object.keys(utms).length) setUtmParams(utms)
+
+    trackClientFunnelEvent('landing_page_view', {
+      landing_path: window.location.pathname,
+      referrer_class: attribution || (document.referrer ? 'referral' : 'direct'),
+      ...utms,
+    })
 
     posthog.capture('audit_page_viewed', {
       referrer: attribution || undefined,
@@ -67,8 +75,21 @@ function AuditFormContent() {
     // step after it - see newAuditAttemptId in client-analytics.
     const auditAttemptId = newAuditAttemptId()
 
+    const journeyId = getOrCreateJourneyId()
+
+    trackClientFunnelEvent('audit_url_submitted', {
+      audit_attempt_id: auditAttemptId,
+      journey_id: journeyId,
+      page_domain: new URL(processedUrl).hostname,
+      audit_reason_category: reason.trim() || 'none',
+      has_spend_bracket: Boolean(monthlyAdSpend),
+      referrer_class: referrer || 'direct',
+      ...utmParams,
+    }, { auditAttemptId })
+
     posthog.capture('audit_submitted', {
       audit_attempt_id: auditAttemptId,
+      journey_id: journeyId,
       page_url: processedUrl,
       page_domain: new URL(processedUrl).hostname,
       referrer: referrer ?? null,
@@ -76,18 +97,19 @@ function AuditFormContent() {
       ...utmParams,
     })
 
-try {
-       const response = await fetch('/api/audit/start', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
-         body: JSON.stringify({
-           url: processedUrl,
-           referrer: referrer || undefined,
-           audit_reason: reason.trim() || undefined,
-           audit_attempt_id: auditAttemptId,
-           monthly_ad_spend: monthlyAdSpend ? parseFloat(monthlyAdSpend) : undefined,
-         }),
-       })
+    try {
+      const response = await fetch('/api/audit/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
+        body: JSON.stringify({
+          url: processedUrl,
+          referrer: referrer || undefined,
+          audit_reason: reason.trim() || undefined,
+          audit_attempt_id: auditAttemptId,
+          journey_id: journeyId,
+          monthly_ad_spend: monthlyAdSpend ? parseFloat(monthlyAdSpend) : undefined,
+        }),
+      })
 
       if (!response.ok) {
         throw new Error('Failed to start audit')
@@ -111,20 +133,25 @@ try {
   }
 
   return (
-    <Card variant="elevated" className="mb-8">
-      {/* Referral welcome banner - only shown when ?from= is present */}
-      {referrer && (
-        <div className="mb-6 rounded-lg bg-accent/10 border border-accent/30 px-4 py-3 text-sm">
-          <p className="font-semibold text-accent">
-            {referrer} sent you here.
-          </p>
-          <p className="mt-0.5 text-fg-muted">
-            Your free audit will name the exact leaks on your page - same report they got.
-          </p>
-        </div>
-      )}
+    <VisibilityBeacon
+      beaconId="audit_form_cta"
+      eventName="audit_cta_exposed"
+      properties={{ cta_id: 'audit_form_submit', cta_location: 'audit_form_hero' }}
+    >
+      <Card variant="elevated" className="mb-8">
+        {/* Referral welcome banner - only shown when ?from= is present */}
+        {referrer && (
+          <div className="mb-6 rounded-lg bg-accent/10 border border-accent/30 px-4 py-3 text-sm">
+            <p className="font-semibold text-accent">
+              {referrer} sent you here.
+            </p>
+            <p className="mt-0.5 text-fg-muted">
+              Your free audit will name the exact leaks on your page - same report they got.
+            </p>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="url" className="mb-2 block text-sm font-semibold text-fg">
             Drop your landing page URL - see what's leaking
@@ -210,7 +237,7 @@ try {
         <button
           type="submit"
           disabled={!url || loading}
-          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-[color,background-color,transform] duration-[160ms] ease-out hover:opacity-85 hover:bg-accent active:scale-[0.97] disabled:opacity-50"
+          className="w-full rounded bg-accent px-6 py-3 font-semibold text-bg transition-[color,background-color,transform] duration-[160ms] ease-out hover:opacity-85 hover:bg-accent active:scale-[0.97] disabled:opacity-50"
         >
           {loading ? 'Starting audit…' : 'Find the Leak'}
         </button>
@@ -230,6 +257,7 @@ try {
         </p>
       </form>
     </Card>
+    </VisibilityBeacon>
   )
 }
 

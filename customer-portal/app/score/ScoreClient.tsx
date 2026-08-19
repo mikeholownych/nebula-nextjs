@@ -87,7 +87,7 @@ export default function ScoreClient() {
       setDomain(clean)
       setTimeout(() => runAudit(clean), 300)
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   function startPhrases() {
     let idx = 0

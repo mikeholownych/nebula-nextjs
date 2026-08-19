@@ -45,6 +45,7 @@ class AuditRequest(BaseModel):
     # event in the audit chain, so the funnel can be built on the audit itself
     # rather than on a person identity that is still anonymous at this point.
     analytics_attempt_id: Optional[str] = None
+    analytics_journey_id: Optional[str] = None
     source: Optional[str] = None
     partner_id: Optional[str] = None
     monthly_ad_spend: Optional[float] = None
@@ -166,6 +167,11 @@ async def run_audit(request: AuditRequest):
         )
 
         if result.returncode != 0:
+            await analytics.track_audit_failed(
+                reason="script_error",
+                audit_id=str(audit_id),
+                audit_attempt_id=attempt_id,
+            )
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
@@ -186,6 +192,11 @@ async def run_audit(request: AuditRequest):
                 break
 
         if not json_line:
+            await analytics.track_audit_failed(
+                reason="no_json_output",
+                audit_id=str(audit_id),
+                audit_attempt_id=attempt_id,
+            )
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
@@ -237,13 +248,17 @@ async def run_audit(request: AuditRequest):
 
         asyncio.create_task(_fire_content_pipeline())
 
-        # Track audit completed only for the same consented pseudonymous journey.
-        if request.analytics_consent and request.analytics_distinct_id:
-            await analytics.track_audit_completed(
-                email=request.analytics_distinct_id,
-                score=data.get('score', 0),
-                grade=data.get('grade', 'N/A'),
-            )
+        # Track audit completed in both ledger and external analytics
+        await analytics.track_audit_completed(
+            email=request.analytics_distinct_id or distinct_id,
+            score=data.get('score', 0),
+            grade=data.get('grade', 'N/A'),
+            audit_id=str(audit_id),
+            audit_attempt_id=attempt_id,
+            journey_id=request.analytics_journey_id,
+            findings_count=len(data.get('findings', [])),
+        )
+
         if request.analytics_consent and request.analytics_distinct_id and ph:
             with new_context(client=ph):
                 identify_context(distinct_id)

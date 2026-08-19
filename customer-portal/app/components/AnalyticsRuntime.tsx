@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import posthog from '@/app/lib/posthog-browser'
 import { hasAnalyticsConsent, persistAttribution } from '@/app/lib/client-analytics'
+import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
 declare global {
   interface Window {
@@ -31,7 +32,14 @@ export default function AnalyticsRuntime() {
         page_path: pagePath,
       })
     }
+    const funnelPageView = () => {
+      trackClientFunnelEvent('landing_page_view', {
+        landing_path: pagePath,
+        referrer_class: document.referrer ? (document.referrer.includes('google') ? 'search' : 'referral') : 'direct',
+      })
+    }
     const onConsent = () => {
+      funnelPageView()
       if (!hasAnalyticsConsent()) return
       persistAttribution()
       gaPageView()

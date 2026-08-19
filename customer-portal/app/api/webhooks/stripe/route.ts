@@ -8,6 +8,7 @@ import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 import { planFromStripePrice } from '@/app/lib/subscription-plans'
 import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
+import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 
 const execFileAsync = promisify(execFile)
 
@@ -398,6 +399,78 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const transactionId = typeof session.payment_intent === 'string' ? session.payment_intent : session.id
+    const isLive = Boolean(event.livemode)
+    const journeyId = session.metadata?.journey_id || null
+    try {
+      await recordFunnelEvent({
+        eventName: 'purchase_completed',
+        stage: 'purchase',
+        sourceSystem: 'stripe_webhook',
+        journeyId,
+        auditId: typeof auditId === 'string' ? auditId : null,
+        checkoutSessionId: session.id,
+        transactionId,
+        dedupKey: `stripe_${session.id}_purchase`,
+        environment: isLive ? 'production' : 'test',
+        paymentMode: isLive ? 'live' : 'test',
+        isSynthetic: !isLive,
+        utmSource: session.metadata?.utm_source || null,
+        utmMedium: session.metadata?.utm_medium || null,
+        utmCampaign: session.metadata?.utm_campaign || null,
+        properties: {
+          journey_id: journeyId,
+          stripe_session_id: session.id,
+          transaction_id: transactionId,
+          offer_key: session.metadata?.offer_key || 'fix_pack',
+          amount_cents: session.amount_total || 9700,
+          currency: session.currency || 'usd',
+          livemode: event.livemode,
+          provider: 'stripe',
+        },
+      })
+    } catch (ledgerErr) {
+      console.error('Failed to record purchase in analytics ledger:', ledgerErr)
+    }
+
+    // GA4 Measurement Protocol Forwarding (Server-Side Commercial Truth)
+    const gaSecret = process.env.GA4_API_SECRET || process.env.GA_API_SECRET
+    const gaMeasurementId = process.env.GA4_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-KJ9S3450LH'
+    if (gaSecret) {
+      try {
+        const clientId = session.metadata?.analytics_person_id || `client_${session.id.slice(-16)}`
+        await fetch(
+          `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaSecret}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              client_id: clientId,
+              events: [
+                {
+                  name: 'purchase',
+                  params: {
+                    transaction_id: transactionId,
+                    value: (session.amount_total || 9700) / 100,
+                    currency: (session.currency || 'USD').toUpperCase(),
+                    items: [
+                      {
+                        item_name: session.metadata?.offer_key || 'One-Leak Repair Sprint',
+                        price: (session.amount_total || 9700) / 100,
+                        quantity: 1,
+                      },
+                    ],
+                  },
+                },
+              ],
+            }),
+          }
+        )
+      } catch (gaErr) {
+        console.error('Failed to project purchase to GA4:', gaErr)
+      }
+    }
+
     const analyticsPersonId = session.metadata?.analytics_person_id
     if (
       session.metadata?.analytics_consent === 'all'
@@ -410,6 +483,7 @@ export async function POST(request: NextRequest) {
         event: 'purchase_completed',
         properties: {
           stripe_session_id: session.id,
+          transaction_id: transactionId,
           offer_key: session.metadata?.offer_key ?? undefined,
           amount_total: session.amount_total,
           currency: session.currency,

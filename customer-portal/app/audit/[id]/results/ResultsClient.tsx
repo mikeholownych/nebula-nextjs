@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
 import { analyticsHeaders, auditAttemptIdFor } from '@/app/lib/client-analytics'
+import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
+import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
 import RewritePreview from './RewritePreview'
@@ -27,19 +29,7 @@ const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral
 }
 
 
-/** 
- * Signal type icons and labels
- */
-const SIGNAL_TYPE_ICONS: Record<string, string> = {
-  conversion: '🎯',
-  acquisition: '🔍',
-  technical: '⚙️'
-}
-const SIGNAL_TYPE_LABELS: Record<string, string> = {
-  conversion: 'Conversion',
-  acquisition: 'Acquisition', 
-  technical: 'Technical'
-}
+
 
 
 /**
@@ -498,7 +488,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
           {/* Psychology: Endowment effect + autonomy (founder psychology) */}
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
             <span className="font-semibold text-fg">The fix is specific to your page:</span>{' '}
-            Not "improve your H1" — the actual replacement. Not "add social proof" — the specific element and where to put it. The{' '}
+            Not "improve your H1" - the actual replacement. Not "add social proof" - the specific element and where to put it. The{' '}
             <a href="#remediation" className="font-semibold text-accent hover:underline">
               $97 Repair Sprint
             </a>{' '}
@@ -722,7 +712,7 @@ function PersonalizedNextStep({ findings }: { findings: Finding[] }) {
   if (!plain) return null
 
   return (
-    <div className="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-6">
+    <div className="mb-8 rounded border border-accent/30 bg-accent/5 p-6">
       <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Your biggest leak</p>
       <h2 className="text-lg font-bold text-fg leading-snug">{plain.headline}</h2>
       <p className="mt-2 text-sm text-fg-muted leading-6">{plain.why}</p>
@@ -773,6 +763,15 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           parsed = parseAuditResult(await response.json())
         }
         setResults(parsed)
+        const scoreVal = Math.round(parsed.score)
+        const scoreBucket = scoreVal <= 40 ? 'score_0_40' : scoreVal <= 70 ? 'score_41_70' : 'score_71_100'
+        trackClientFunnelEvent('audit_result_viewed', {
+          audit_id: auditId,
+          score_bucket: scoreBucket,
+          grade: parsed.grade,
+          findings_count: parsed.findings.length,
+          unlocked: initialUnlocked,
+        }, { auditId })
         posthog.capture('audit_results_viewed', {
           audit_id: auditId,
           score: parsed.score,
@@ -781,6 +780,10 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           findings_count: parsed.findings.length,
         })
       } catch (err) {
+        trackClientFunnelEvent('audit_result_load_failed', {
+          audit_id: auditId,
+          reason_code: 'network_error',
+        }, { auditId })
         setError(err instanceof Error ? err.message : 'Unknown error')
       } finally {
         setLoading(false)
@@ -1009,7 +1012,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             <span className="text-sm tabular-nums text-fg-muted">Impact × effort ranked</span>
           </div>
 
-          {/* Strategic finding — structural synthesis above the ranked list */}
+          {/* Strategic finding - structural synthesis above the ranked list */}
           {results.strategic_finding && (
             <div className="rounded-md border border-border/60 bg-bg-elevated/60 px-5 py-4">
               <p className="mb-1 text-2xs font-semibold uppercase tracking-label text-fg-dim">Strategic finding</p>
@@ -1086,7 +1089,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                       <strong>Issue:</strong> {finding.issue}
                     </p>
 
-                    {/* Principle explanation — educational layer on why this affects conversion */}
+                    {/* Principle explanation - educational layer on why this affects conversion */}
                     {finding.principle_explanation && (
                       <p className="text-xs leading-5 text-fg-dim border-l-2 border-border/60 pl-3">
                         <span className="font-semibold text-fg-muted">{finding.principle}: </span>
@@ -1210,7 +1213,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <button
                 onClick={sendEmail}
                 disabled={!emailForm.email || sendingEmail}
-                className="w-full rounded-xl bg-accent px-6 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-50"
+                className="w-full rounded bg-accent px-6 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-50"
               >
                 {sendingEmail ? 'Unlocking...' : 'Unlock Full Report'}
               </button>
@@ -1277,38 +1280,52 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             Know exactly which one thing to fix and how to fix it.
           </h2>
 
-          <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
-            <div>
-              <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
-              <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
-              <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                Not a 12-point checklist. One specific fix for your highest-priority finding — exact copy, code, or configuration change — for you or your developer to implement.
-              </p>
-              <ul className="mb-5 space-y-2 text-sm text-fg-muted">
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-priority finding, prepared within 48 hours</li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
-              </ul>
-              <a
-                href={
-                  unlocked && !sharedView
-                    ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
-                    : "#unlock"
-                }
-                onClick={() => posthog.capture("audit_cta_clicked", {
-                  audit_id: auditId,
-                  cta: "remediation_section",
-                  unlocked,
-                })}
-                className="block w-full rounded-lg bg-danger px-4 py-2 text-center font-semibold text-white transition-colors hover:bg-danger-light"
-              >
-                {unlocked && !sharedView
-                  ? `Stop the leak - $${REPAIR_SPRINT_OFFER.priceUsd}`
-                  : "Unlock this audit to select its repair"}
-              </a>
-            </div>
-          </Card>
+          <VisibilityBeacon
+            beaconId={`repair_sprint_results_${auditId}`}
+            eventName="repair_sprint_exposed"
+            properties={{ audit_id: auditId, offer_key: 'fix_pack', placement: 'results_remediation_section' }}
+          >
+            <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
+              <div>
+                <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
+                <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
+                <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
+                  Not a 12-point checklist. One specific fix for your highest-priority finding - exact copy, code, or configuration change - for you or your developer to implement.
+                </p>
+                <ul className="mb-5 space-y-2 text-sm text-fg-muted">
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-priority finding, prepared within 48 hours</li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
+                </ul>
+                <a
+                  href={
+                    unlocked && !sharedView
+                      ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
+                      : "#unlock"
+                  }
+                  onClick={() => {
+                    trackClientFunnelEvent('repair_sprint_clicked', {
+                      audit_id: auditId,
+                      offer_key: 'fix_pack',
+                      placement: 'results_remediation_section',
+                      unlocked,
+                    }, { auditId })
+                    posthog.capture("audit_cta_clicked", {
+                      audit_id: auditId,
+                      cta: "remediation_section",
+                      unlocked,
+                    })
+                  }}
+                  className="block w-full rounded-lg bg-danger px-4 py-2 text-center font-semibold text-white transition-colors hover:bg-danger-light"
+                >
+                  {unlocked && !sharedView
+                    ? `Stop the leak - $${REPAIR_SPRINT_OFFER.priceUsd}`
+                    : "Unlock this audit to select its repair"}
+                </a>
+              </div>
+            </Card>
+          </VisibilityBeacon>
           </div>
         </section>
 

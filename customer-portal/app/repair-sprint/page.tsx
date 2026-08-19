@@ -4,11 +4,12 @@ import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { REPAIR_GUARANTEE, EARLY_STAGE_DISCLOSURE } from '@/config/repair-guarantee'
 import { PRIORITY_SCORE_SHORT } from '@/config/priority-score'
 import { SIGNAL_COUNT } from '@/config/signals'
+import VisibilityBeacon from '@/components/VisibilityBeacon'
 
 export const metadata: Metadata = {
-  title: 'Repair Sprint — One Page, One Condition, One Fix | Nebula',
+  title: 'Repair Sprint - One Page, One Condition, One Fix | Nebula',
   description:
-    'The $97 Repair Sprint: Nebula identifies your highest-priority failed condition and delivers the exact fix — copy, code, or configuration. 30-day re-audit included.',
+    'The $97 Repair Sprint: Nebula identifies your highest-priority failed condition and delivers the exact fix - copy, code, or configuration. 30-day re-audit included.',
   alternates: { canonical: 'https://nebulacomponents.com/repair-sprint' },
 }
 
@@ -18,18 +19,23 @@ export default function RepairSprintPage() {
       <div className="mx-auto max-w-3xl px-6">
 
         {/* Hero */}
+        <VisibilityBeacon
+          beaconId="repair_sprint_page_hero"
+          eventName="repair_sprint_exposed"
+          properties={{ offer_key: 'fix_pack', placement: 'repair_sprint_page' }}
+        >
         <section className="mb-16">
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-4xl">
             One page. One verified condition. One concrete repair.
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-muted leading-relaxed">
             The free audit identifies observable failed conditions on your page. The Repair Sprint
-            produces the exact change required for the highest-priority condition — copy, code, or
+            produces the exact change required for the highest-priority condition - copy, code, or
             configuration written for your specific URL. You implement the change. Nebula re-runs
             the same check afterward.
           </p>
           <p className="mt-3 text-lg font-semibold text-fg">
-            ${REPAIR_SPRINT_OFFER.priceUsd} — one-time, no subscription.
+            ${REPAIR_SPRINT_OFFER.priceUsd} - one-time, no subscription.
           </p>
           <p className="mt-2 text-sm text-fg-dim">
             No conversion lift is promised. The re-audit confirms whether the targeted condition changed.
@@ -49,6 +55,7 @@ export default function RepairSprintPage() {
             </Link>
           </div>
         </section>
+        </VisibilityBeacon>
 
         {/* What you get */}
         <section className="mb-14">
@@ -56,9 +63,9 @@ export default function RepairSprintPage() {
           <ul className="space-y-3 text-fg-muted">
             {[
               'Validation of the selected finding against your live page',
-              'Exact replacement copy, code snippet, or configuration change — not "consider improving X"',
+              'Exact replacement copy, code snippet, or configuration change - not "consider improving X"',
               'Scoped rationale explaining why this specific change addresses the failed condition',
-              'Implementation location — which element, file, or CMS field to change',
+              'Implementation location - which element, file, or CMS field to change',
               'Before-state evidence (what Nebula observed at audit time)',
               'After-state validation criteria (what PASS looks like for this condition)',
               'Same-scope re-audit within 30 days to verify the condition changed',
@@ -88,7 +95,7 @@ export default function RepairSprintPage() {
             <h3 className="text-lg font-semibold text-fg mb-3">What you do</h3>
             <ul className="space-y-2 text-sm text-fg-muted">
               <li>Implement the supplied change on your page</li>
-              <li>Retain full production control — Nebula never accesses your CMS, hosting, or repo</li>
+              <li>Retain full production control - Nebula never accesses your CMS, hosting, or repo</li>
               <li>Request the re-audit when ready (within 30 days)</li>
               <li>Decide whether to address additional findings</li>
             </ul>
@@ -107,10 +114,10 @@ export default function RepairSprintPage() {
               'Backend conversion flows',
               'Guaranteed conversion lift or revenue improvement',
               'Unlimited revisions',
-              'Production deployment by Nebula — you implement the change',
+              'Production deployment by Nebula - you implement the change',
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <span className="mt-0.5 shrink-0 text-fg-dim">—</span>
+                <span className="mt-0.5 shrink-0 text-fg-dim">-</span>
                 {item}
               </li>
             ))}

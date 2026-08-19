@@ -1,7 +1,7 @@
 import { cookies, headers } from 'next/headers'
 import { notFound } from 'next/navigation'
 import ResultsClient from './ResultsClient'
-import { verifyAuditUnlock, readAuditUnlock, signAuditUnlock } from '@/app/lib/audit-unlock-token'
+import { verifyAuditUnlock, readAuditUnlock } from '@/app/lib/audit-unlock-token'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -67,14 +67,14 @@ export default async function ResultsPage({ params, searchParams }: Props) {
   // direct Stripe link and results page URL. Uses the same HMAC-signed token as the
   // cookie unlock path, so the email is verified without a separate DB lookup.
   // This eliminates the email gate for recipients who already received an audit via
-  // outreach — they should land directly on an unlocked results page.
+  // outreach - they should land directly on an unlocked results page.
   let outreachUnlocked = false
   if (!cookieUnlocked && !sessionUnlocked && !tokenUnlocked && unlock) {
     const verified = readAuditUnlock(id, unlock)
     if (verified) {
       outreachUnlocked = true
       // Promote to cookie so the unlock persists across navigation
-      // (the cookie write happens client-side via a header — we return it here
+      // (the cookie write happens client-side via a header - we return it here
       //  as a Set-Cookie header so it lands before the first paint)
     }
   }

@@ -4,6 +4,7 @@ import { getActiveFixPack } from '@/app/lib/public-facts'
 import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { analyticsPersonId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
+import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -29,11 +30,23 @@ const isStripeCheckoutUrl = (value: unknown): value is string => {
 export async function POST(request: NextRequest) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
   if (!stripeSecretKey) {
+    await recordFunnelEvent({
+      eventName: 'checkout_creation_failed',
+      sourceSystem: 'server_api',
+      failureReason: 'checkout_provider_error',
+      properties: { reason_code: 'checkout_provider_error', detail: 'STRIPE_SECRET_KEY missing' },
+    })
     return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
   }
 
   const fixPack = getActiveFixPack()
   if (!fixPack) {
+    await recordFunnelEvent({
+      eventName: 'checkout_creation_failed',
+      sourceSystem: 'server_api',
+      failureReason: 'checkout_provider_error',
+      properties: { reason_code: 'checkout_provider_error', detail: 'Offer unavailable' },
+    })
     return NextResponse.json({ code: 'CHECKOUT_OFFER_UNAVAILABLE' }, { status: 503 })
   }
 
@@ -64,6 +77,13 @@ export async function POST(request: NextRequest) {
     request.cookies.get(`audit_unlock_${auditId}`)?.value,
   )
   if (!auditIdentity) {
+    await recordFunnelEvent({
+      eventName: 'checkout_creation_failed',
+      sourceSystem: 'server_api',
+      auditId,
+      failureReason: 'audit_not_unlocked',
+      properties: { reason_code: 'audit_not_unlocked', audit_id: auditId },
+    })
     return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_UNLOCKED' }, { status: 403 })
   }
 
@@ -83,6 +103,13 @@ export async function POST(request: NextRequest) {
       audit.status !== 'completed' ||
       typeof audit.url !== 'string'
     ) {
+      await recordFunnelEvent({
+        eventName: 'checkout_creation_failed',
+        sourceSystem: 'server_api',
+        auditId,
+        failureReason: 'audit_not_eligible',
+        properties: { reason_code: 'audit_not_eligible', audit_id: auditId },
+      })
       return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
     }
     const auditedUrl = new URL(audit.url)
@@ -95,8 +122,6 @@ export async function POST(request: NextRequest) {
 
   let baseUrl: URL
   try {
-    // Canonical site URL var is NEXT_PUBLIC_SITE_URL (what deployments set);
-    // NEXT_PUBLIC_URL remains as a legacy alias for tests/older configs.
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ||
       process.env.NEXT_PUBLIC_URL ||
@@ -119,6 +144,8 @@ export async function POST(request: NextRequest) {
   const analyticsConsent = hasServerAnalyticsConsent(request)
   const personId = analyticsConsent ? analyticsPersonId(auditIdentity.email) : null
   const attribution = readAttributionHeader(request)
+  const journeyId = request.headers.get('x-nebula-journey-id') || attribution.journey_id || null
+
   const stripeParams = new URLSearchParams({
     'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
     'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
@@ -126,15 +153,11 @@ export async function POST(request: NextRequest) {
     'line_items[0][price_data][product_data][description]':
       'One targeted fix for your highest-priority failed condition - exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.',
     'line_items[0][quantity]': '1',
-    // Allow card, Link (one-click for returning Stripe customers), and wallets
     'payment_method_types[0]': 'card',
     'payment_method_types[1]': 'link',
-    // Enable Apple Pay / Google Pay via wallet detection
     'payment_method_options[card][request_three_d_secure]': 'automatic',
     mode: 'payment',
-    // Stripe Link: allow saving payment method for faster future checkouts
     'payment_intent_data[setup_future_usage]': 'off_session',
-    // Statement descriptor - what appears on the customer's bank statement
     'payment_intent_data[statement_descriptor_suffix]': 'NEBULA KIT',
     submit_type: 'pay',
     success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
@@ -143,11 +166,10 @@ export async function POST(request: NextRequest) {
     'metadata[audit_id]': auditId,
     'metadata[offer_key]': fixPack.checkout.offerKey,
     'metadata[analytics_consent]': analyticsConsent ? 'all' : 'necessary',
-    // Audit URL in metadata for fulfillment context
     'metadata[audit_unlocked_email]': auditIdentity.email,
-    // Stripe sends a recovery email if the session expires with a captured email
     'after_expiration[recovery][enabled]': 'true',
   })
+  if (journeyId) stripeParams.set('metadata[journey_id]', journeyId)
   if (personId) stripeParams.set('metadata[analytics_person_id]', personId)
   for (const [key, value] of Object.entries(attribution)) {
     stripeParams.set(`metadata[${key}]`, value.slice(0, 500))
@@ -166,6 +188,13 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       console.error('[Checkout API] Stripe session creation failed')
+      await recordFunnelEvent({
+        eventName: 'checkout_creation_failed',
+        sourceSystem: 'server_api',
+        auditId,
+        failureReason: 'checkout_provider_error',
+        properties: { reason_code: 'checkout_provider_error', status_code: response.status },
+      })
       return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
     }
 
@@ -175,6 +204,13 @@ export async function POST(request: NextRequest) {
     if (hasServerAnalyticsConsent(request)) {
       captureServerException(error, { route: 'POST /api/checkout' })
     }
+    await recordFunnelEvent({
+      eventName: 'checkout_creation_failed',
+      sourceSystem: 'server_api',
+      auditId,
+      failureReason: 'checkout_provider_error',
+      properties: { reason_code: 'checkout_provider_error' },
+    })
     return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
 
@@ -182,7 +218,34 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
 
-  if (typeof session.id === 'string' && analyticsConsent && personId) {
+  const sessionId = typeof session.id === 'string' ? session.id : null
+
+  // Record canonical checkout_started into internal event ledger
+  if (sessionId) {
+    await recordFunnelEvent({
+      eventName: 'checkout_started',
+      stage: 'checkout',
+      sourceSystem: 'server_api',
+      journeyId,
+      auditId,
+      checkoutSessionId: sessionId,
+      utmSource: attribution.utm_source || null,
+      utmMedium: attribution.utm_medium || null,
+      utmCampaign: attribution.utm_campaign || null,
+      properties: {
+        journey_id: journeyId,
+        audit_id: auditId,
+        checkout_session_id: sessionId,
+        offer_key: fixPack.checkout.offerKey,
+        price_cents: fixPack.priceCents,
+        currency: fixPack.currency,
+        provider: 'stripe',
+        ...attribution,
+      },
+    })
+  }
+
+  if (sessionId && analyticsConsent && personId) {
     try {
       const ph = getPostHogClient()
       ph.capture({
@@ -191,7 +254,7 @@ export async function POST(request: NextRequest) {
         properties: {
           offer_key: fixPack.checkout.offerKey,
           audit_id: auditId,
-          stripe_session_id: session.id,
+          stripe_session_id: sessionId,
           ...attribution,
         },
       })

@@ -1,8 +1,7 @@
-import RelatedContent from '@/components/RelatedContent'
 import Link from 'next/link'
 
 /**
- * RelatedContent — Layer 5 contextual linking module.
+ * RelatedContent - Layer 5 contextual linking module.
  *
  * Usage:
  *   <RelatedContent
@@ -13,7 +12,7 @@ import Link from 'next/link'
  *     heading="Related guides"
  *   />
  *
- * Renders as a clean horizontal card strip — not a link wall.
+ * Renders as a clean horizontal card strip - not a link wall.
  * Max 4 items enforced visually. type='cta' gets accent treatment.
  */
 
@@ -47,7 +46,7 @@ export default function RelatedContent({
   items: RelatedItem[]
   heading?: string
 }) {
-  const capped = items.slice(0, 4) // hard cap — no link walls
+  const capped = items.slice(0, 4) // hard cap - no link walls
   const ctas = capped.filter((i) => i.type === 'cta')
   const rest = capped.filter((i) => i.type !== 'cta')
 
@@ -80,7 +79,7 @@ export default function RelatedContent({
         </div>
       )}
 
-      {/* CTA items — accent treatment, separate row */}
+      {/* CTA items - accent treatment, separate row */}
       {ctas.map((item) => (
         <Link
           key={item.href}

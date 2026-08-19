@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { trackClientFunnelEvent, trackVisibilityExposure } from '@/app/lib/client-funnel'
 
 /**
  * MobileStickyAuditCTA
@@ -8,13 +9,6 @@ import { useEffect, useRef, useState } from 'react'
  * A sticky bottom bar that appears on mobile after the hero section
  * exits the viewport. Gives mobile visitors a persistent conversion
  * path without cluttering the desktop experience.
- *
- * Behaviour:
- * - Hidden until hero sentinel scrolls out of view (IntersectionObserver)
- * - Mobile-only (md:hidden, never shown on desktop)
- * - Dismissable (dismissed state stored in sessionStorage so it resets
- *   on a new session but doesn't reappear on the same visit after dismiss)
- * - Respects prefers-reduced-motion on entrance animation
  */
 export default function MobileStickyAuditCTA() {
   const [visible, setVisible] = useState(false)
@@ -34,13 +28,20 @@ export default function MobileStickyAuditCTA() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Show when the sentinel (bottom of hero) is no longer visible
-        setVisible(!entry.isIntersecting)
+        const isVisible = !entry.isIntersecting
+        setVisible(isVisible)
+        if (isVisible && !dismissed) {
+          trackVisibilityExposure('mobile_sticky_cta', 'audit_cta_exposed', {
+            cta_id: 'mobile_sticky_cta',
+            cta_location: 'mobile_sticky_bottom',
+          })
+        }
       },
       { threshold: 0, rootMargin: '0px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [dismissed])
 
   const handleDismiss = () => {
     setDismissed(true)
@@ -49,9 +50,6 @@ export default function MobileStickyAuditCTA() {
 
   return (
     <>
-      {/* Sentinel, placed at the bottom of the hero section by the parent.
-          We render it here so the component is self-contained; the parent
-          just needs to include <MobileStickyAuditCTA /> once. */}
       <div ref={sentinelRef} id="sticky-cta-sentinel" aria-hidden="true" />
 
       {/* Sticky bar, mobile only */}
@@ -70,7 +68,14 @@ export default function MobileStickyAuditCTA() {
           <div className="flex items-center gap-3">
             <a
               href="/audit?utm_source=mobile-sticky&utm_medium=internal"
-              className="flex-1 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              onClick={() => {
+                trackClientFunnelEvent('audit_cta_clicked', {
+                  cta_id: 'mobile_sticky_cta',
+                  cta_location: 'mobile_sticky_bottom',
+                  target_url: '/audit',
+                })
+              }}
+              className="flex-1 rounded bg-accent py-3 text-center text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               Find My Conversion Leak, Free
             </a>

@@ -1252,6 +1252,33 @@
     "trigger_text": "",
     "url": "https://stripe.com"
   },
+  "anonymous+b6095868-0654-42fd-b55b-a35e0aca5d2f@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+b6095868-0654-42fd-b55b-a35e0aca5d2f@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-18T21:14:04.421841Z",
+    "last_seen": "2026-08-18T21:14:04.421841Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "700edbc1-218c-4dd3-bcfb-0ee0bfe291c4",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-18T21:14:04.421841Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
   "anonymous+bf3ea13d-4bde-4965-9b62-31b3e1b87181@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",

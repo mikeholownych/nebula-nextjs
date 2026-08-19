@@ -139,7 +139,7 @@ export default async function CaseStudyPage({
           <h2 className="text-2xl font-bold text-fg mb-6">Fixes Applied</h2>
           <div className="space-y-4">
             {study.fixes.map((fix, index) => (
-              <div key={index} className="p-4 bg-accent/5 rounded-xl border border-accent/20">
+              <div key={index} className="p-4 bg-accent/5 rounded border border-accent/20">
                 <span className="font-medium text-accent">{fix.category}</span>
                 <p className="text-fg-muted mt-1">{fix.description}</p>
               </div>

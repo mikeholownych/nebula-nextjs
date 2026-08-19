@@ -18,7 +18,7 @@ export interface Finding {
   issue: string
   fix: string
   evidence?: FindingEvidence
-  /** Short conversion principle name — e.g. "message match", "proof proximity" */
+  /** Short conversion principle name - e.g. "message match", "proof proximity" */
   principle?: string
   /** One-sentence explanation of why this principle affects conversion */
   principle_explanation?: string
@@ -26,7 +26,7 @@ export interface Finding {
   signal_type?: string
   /** Display label for signal type */
   signal_type_label?: string
-  /** Provenance of the priority score (0-10) — source, basis, limitation */
+  /** Provenance of the priority score (0-10) - source, basis, limitation */
   scoring_provenance?: {
     source?: string
     basis?: string
@@ -45,7 +45,7 @@ export interface AuditResult {
   findings: Finding[]
   error?: string
   /**
-   * One sentence naming the dominant structural problem on this page —
+   * One sentence naming the dominant structural problem on this page -
    * synthesized from the full finding set, not just the top signal.
    */
   strategic_finding?: string
