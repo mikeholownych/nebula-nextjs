@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Real Landing Page Audit Data, 139 Pages Scored | Nebula',
-  description: 'Live stats from 139 real landing page audits. See the most common conversion leaks, average scores by leak type, and what fixes move the needle.',
+  title: 'Real Landing Page Audit Data | Nebula',
+  description: 'Live stats from real landing page audits. See the most common conversion leaks, average scores by leak type, and what fixes address them.',
   alternates: { canonical: 'https://nebulacomponents.com/proof' },
   openGraph: {
-    title: 'Real Landing Page Audit Data, What Kills Conversion | Nebula',
-    description: 'Evidence from 139 real audits. The most common leaks, real scores, real findings.',
+    title: 'Real Landing Page Audit Data | Nebula',
+    description: 'Evidence from real audits. The most common leaks, real scores, real findings.',
     url: 'https://nebulacomponents.com/proof',
     siteName: 'Nebula Components',
     type: 'website',

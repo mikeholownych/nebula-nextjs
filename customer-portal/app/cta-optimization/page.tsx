@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Landing Page CTA Optimization: Fix Weak Buttons That Kill Conversions | Nebula',
+  title: 'Landing Page CTA Optimization: Fix Weak Buttons That Block Conversions | Nebula',
   description:
     'Most landing page CTAs fail for one of six reasons: vague label, wrong placement, visual competition, low contrast, no friction removal, or dead hover state. This guide covers each pattern with a bounded fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/cta-optimization',
   },
   openGraph: {
-    title: 'Landing Page CTA Optimization: Fix Weak Buttons That Kill Conversions | Nebula',
+    title: 'Landing Page CTA Optimization: Fix Weak Buttons That Block Conversions | Nebula',
     description:
       'Most landing page CTAs fail for one of six reasons: vague label, wrong placement, visual competition, low contrast, no friction removal, or dead hover state.',
     url: 'https://nebulacomponents.com/cta-optimization',
@@ -41,7 +41,7 @@ const faqItems = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Landing Page CTA Optimization: Fix Weak Buttons That Kill Conversions',
+  headline: 'Landing Page CTA Optimization: Fix Weak Buttons That Block Conversions',
   description:
     'Diagnostic guide covering the six most common CTA failures on landing pages - vague labels, buried placement, visual competition, low contrast, missing friction removal, and dead hover states - with a bounded fix for each.',
   author: { '@type': 'Organization', name: 'Nebula Components' },

@@ -189,7 +189,7 @@ export default async function VerticalPage({
             </li>
             <li>
               <Link href="/proof" className="text-sm text-accent hover:underline">
-                Real audit data, what we found in 139 pages →
+                Real audit data from our landing page dataset →
               </Link>
             </li>
           </ul>

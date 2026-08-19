@@ -86,8 +86,8 @@ export const verticals: Record<string, Vertical> = {
   fintech: {
     slug: 'fintech',
     name: 'Fintech & Financial Services',
-    headline: 'Fintech pages lose conversions to trust gaps, not headline failures.',
-    subheadline: 'In financial services, the conversion problem is almost never the offer. It\'s the absence of signals that make a financial product feel safe to try.',
+    headline: 'Trust-signal failures are the most common finding on fintech pages we audit.',
+    subheadline: 'In the fintech pages Nebula has audited, missing trust signals appear more frequently than headline or offer failures.',
     pain: "You're running paid acquisition on a product that solves a real financial problem. Visitors click through, read the page, and leave. The product is legitimate, but the page doesn't prove it at the moment of decision.",
     icp: 'Fintech founders and growth teams spending on paid acquisition for financial products with account-open rates below 3%.',
     top_leak: 'Security and regulatory signals are missing or buried. Visitors considering a financial product want to see regulatory status, security language, or insurance backing within the first scroll. Without it, uncertainty converts to exit.',

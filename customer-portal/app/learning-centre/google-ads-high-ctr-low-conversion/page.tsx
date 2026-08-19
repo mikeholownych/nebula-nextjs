@@ -47,13 +47,13 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             Why High CTR + Low CVR Is the Clearest Diagnostic Signal in Paid Search
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
-            Most paid search problems are ambiguous. A low CTR could mean bad targeting, a weak headline, a mismatched audience, or an irrelevant offer. But when your CTR is high and your CVR is near zero, the signal is unambiguous: the ad is doing its job and the page is not.
+            Most paid search problems are ambiguous. A low CTR could mean bad targeting, a weak headline, a mismatched audience, or an irrelevant offer. But when your CTR is high and your CVR is near zero, the pattern suggests the ad is generating interest — and something on the page is not converting that interest into action.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            High CTR tells you that the query intent, the ad copy, and the audience match well enough that people are choosing your result over competitors'. That's a solved problem. The conversion gap lives entirely between the click and the form submission - which means it lives entirely on the landing page.
+            High CTR tells you that the query intent, the ad copy, and the audience match well enough that people are choosing your result over competitors&apos;. That part of the funnel is working. The conversion gap occurs between the click and the form submission — which makes the landing page the next logical place to investigate.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            This is actually the best position to be in diagnostically. You don't need to fix your targeting. You don't need new creative. You need to find the two or three page-level failures that are absorbing high-intent traffic and sending it back out the door without converting.
+            This is a useful diagnostic position. Targeting and creative are less likely to be the issue. The next step is to check the page for observable conversion-signal failures — the structural conditions that may be creating friction between the click and the action.
           </p>
         </section>
 
@@ -126,7 +126,7 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             <strong className="text-fg">Step 2: Screenshot the above-fold view on mobile without scrolling.</strong> This is what your visitor sees first. Verify that this screenshot contains: (a) an H1 that matches query intent, (b) a price or offer signal of some kind, (c) at least one trust marker - logo, review count, or client name - and (d) a CTA that is visible without scrolling. If any of these four elements are missing from the screenshot, you've found a conversion leak.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            <strong className="text-fg">Step 3: Count the fields in your primary form.</strong> For each field beyond email address, calculate the conversion cost. Industry benchmarks show that moving from a three-field form to a one-field form can increase conversion rate by 25–40% for cold paid traffic. If your form has five or more fields, try a progressive profiling approach: collect email first, then ask for additional details on the thank-you page or in the follow-up sequence.
+            <strong className="text-fg">Step 3: Count the fields in your primary form.</strong> For each field beyond email address, consider the friction cost. Fewer fields generally reduce friction for cold paid traffic — forms with five or more fields are a common finding in low-converting pages. If your form has more fields than necessary for the first interaction, try a progressive profiling approach: collect email first, then ask for additional details on the thank-you page or in the follow-up sequence.
           </p>
         </section>
 
