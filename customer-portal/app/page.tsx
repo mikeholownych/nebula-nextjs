@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import HeroSection from './components/HeroSection'
 import ROICalculator from './components/ROICalculator'
 import WithWithout from './components/WithWithout'
 import HowItWorksAnimated from './components/HowItWorksAnimated'
@@ -9,17 +10,10 @@ import HonestyGrid from './components/HonestyGrid'
 import MechanismProof from './components/MechanismProof'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
 import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
-import dynamic from 'next/dynamic'
-const AuditCardArtifact = dynamic(() => import('./components/AuditCardArtifact'), {
-  loading: () => (
-    <div className="h-[340px] w-full max-w-sm rounded-2xl border border-border/40 bg-bg-muted/20 animate-pulse" aria-hidden="true" />
-  ),
-})
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
 import { homeFAQSchema } from './lib/faq-schemas'
-import { SIGNAL_REGISTRY, SIGNAL_COUNT } from '@/config/signals'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -79,69 +73,8 @@ export default function Home() {
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
-        {/* ── 1. Hero: asymmetric split, copy left, product proof right ── */}
-        <section className="section-hero relative mx-auto max-w-6xl">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                              'radial-gradient(ellipse 55% 45% at 70% 40%, rgba(199, 255, 47, 0.07) 0%, transparent 65%)',
-            }}
-          />
-          <div className="relative grid gap-12 md:grid-cols-[1fr_1.3fr] md:items-center">
-
-            {/* Left: copy */}
-            <div className="flex flex-col">
-              <h1 className="heading-1">
-Find the page-side conditions worth fixing before you blame the traffic.
-               </h1>
-               <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
-                 A click confirms interest. The page is what the visitor encounters next. Nebula checks {SIGNAL_COUNT} conversion signals
-                 against your actual page HTML in under 30 seconds — then ranks findings by priority so you know what to investigate first.
-               </p>
-               <div className="mt-8">                 <Link                   href="/audit?utm_source=homepage&utm_medium=internal"                   className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"                 >                   Get My Free Conversion Score                 </Link>
-                <p className="mt-3 text-sm text-fg-muted">Free. No signup. {SIGNAL_COUNT} signals checked in under 30 seconds.</p>
-              </div>
-              {/* Stat strip - elevated card */}
-              <div className="mt-8 rounded-lg border border-border/40 bg-bg-surface/50 p-5">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <p className="stat-number">{SIGNAL_COUNT}</p>
-                    <p className="stat-label">signals checked</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="stat-number">&lt;2m</p>
-                    <p className="stat-label">to results</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="stat-number">0</p>
-                    <p className="stat-label">pages scored an A</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="stat-number">$0</p>
-                    <p className="stat-label">to run the audit</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: composed audit card artifact */}
-            <div className="flex flex-col">
-              <div className="relative">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_55%_45%_at_70%_40%,rgba(199,255,47,0.06),transparent_65%)]"
-                />
-                <AuditCardArtifact />
-              </div>
-              <p className="mt-4 text-sm text-fg-muted">
-                {SIGNAL_COUNT} signals. Scored against your actual page. Findings ranked by priority with specific evidence.
-              </p>
-            </div>
-
-          </div>
-        </section>
+        {/* ── 1. Hero: Adapted Questly full-viewport composition with SignalHorizon ── */}
+        <HeroSection />
 
         {/* Mobile sticky CTA, sentinel placed here so it appears after hero exits viewport */}
         <MobileStickyAuditCTA />

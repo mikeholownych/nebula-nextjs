@@ -25,7 +25,8 @@
     "check:signal-canon": "node scripts/check-signal-canon.mjs",
     "check:claims": "node scripts/check-claims.mjs",
     "check:content": "node scripts/check-banned-strings.mjs",
-    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:signal-canon && npm run check:claims && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
+    "check:analytics-governance": "node scripts/check-analytics-governance.mjs",
+    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:analytics-governance && npm run check:signal-canon && npm run check:claims && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -40,6 +41,7 @@
     "fast-xml-parser": "5.10.1",
     "framer-motion": "^13.1.0",
     "geist": "^1.7.2",
+    "lucide-react": "^1.32.0",
     "mppx": "^0.8.15",
     "next": "16.2.11",
     "pdfkit": "^0.19.1",
