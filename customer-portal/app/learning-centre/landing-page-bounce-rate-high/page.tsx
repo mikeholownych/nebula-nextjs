@@ -326,7 +326,7 @@ export default function LandingPageBounceRateHigh() {
                 { href: '/learning-centre/landing-page-not-converting', label: 'Landing Page Not Converting? Diagnose These 5 Leaks First' },
                 { href: '/learning-centre/message-match-checklist', label: 'Message Match Checklist For Paid Traffic' },
                 { href: '/learning-centre/landing-page-load-time-slow', label: 'Landing Page Load Time Slow: Signal 4 Diagnosis' },
-                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Kill Paid Traffic' },
+                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Waste Paid Traffic' },
                 { href: '/learning-centre/above-fold-landing-page', label: 'Above The Fold: What Paid Traffic Decides Before Scrolling' },
               ].map(({ href, label }) => (
                 <Link

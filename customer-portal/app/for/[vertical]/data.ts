@@ -105,7 +105,7 @@ export const verticals: Record<string, Vertical> = {
     name: 'HealthTech & Wellness',
     headline: 'Health product pages fail when they lead with mechanism instead of outcome.',
     subheadline: 'Visitors looking for a health solution don\'t want to understand how it works. They want to know if they\'ll feel better.',
-    pain: "You're running Meta Ads to a health product page. Visitors click from ads that show the transformation. The landing page explains the ingredients or the science. The gap between ad promise and page delivery kills conversion.",
+    pain: "You're running Meta Ads to a health product page. Visitors click from ads that show the transformation. The landing page explains the ingredients or the science. The gap between ad promise and page delivery blocks conversion.",
     icp: 'HealthTech and wellness founders spending on paid traffic for supplements, apps, devices, or services with a checkout or signup conversion rate below 2%.',
     top_leak: 'Outcome-to-mechanism inversion. Ads target a specific felt pain; the page pivots to how the product works. Visitors who arrived wanting relief find a product description. The conversion drops before they reach the CTA.',
     second_leak: 'Weak social proof specificity. "I felt better" testimonials are common. Specific testimonials that name the exact problem, the timeframe, and the exact change outperform generic ones by 3-5x in health categories.',

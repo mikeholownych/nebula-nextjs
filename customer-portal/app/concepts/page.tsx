@@ -103,7 +103,7 @@ const CONCEPTS = [
       'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS - no session recording or A/B test data required.',
   },
   {
-    id: 'one-leak-self-implementation-kit',
+    id: 'one-leak-repair-sprint',
     name: 'One-Leak Repair Sprint',
     definition:
       'Nebula\'s $97 paid product. Takes the highest-priority finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',

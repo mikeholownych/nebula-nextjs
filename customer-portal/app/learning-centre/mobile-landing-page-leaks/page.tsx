@@ -154,7 +154,7 @@ export default function MobileLandingPageLeaks() {
               Mobile Conversion · Paid Traffic
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Mobile Landing Page Leaks That Kill Paid Traffic
+              Mobile Landing Page Leaks That Waste Paid Traffic
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               The majority of paid social traffic arrives on mobile. A page that converts

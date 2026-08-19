@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Agency Handoff Debt: 7 Regressions That Kill Conversions',
+  title: 'Agency Handoff Debt: 7 Regressions That Hurt Conversions',
   description:
     'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
   alternates: {

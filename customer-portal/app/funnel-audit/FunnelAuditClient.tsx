@@ -44,8 +44,8 @@ function frictionLabel(score: number) {
 const STEP_LABELS = ['Landing Page', 'Signup / Checkout', 'Confirmation / Thank You']
 const STEP_DESCRIPTIONS = [
   'Where paid traffic lands. This is usually where most of the leak happens.',
-  'The step where visitors decide to act. Friction here kills conversions.',
-  'The confirmation page. Friction here kills referrals and repeat purchases.',
+  'The step where visitors decide to act. Friction here blocks conversions.',
+  'The confirmation page. Friction here blocks referrals and repeat purchases.',
 ]
 
 // ── Component ──────────────────────────────────────────────────────────────

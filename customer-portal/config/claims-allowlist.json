@@ -45,14 +45,9 @@
     { "file": "app/workspace/views.tsx", "line": 108, "reason": "Internal workspace label" },
     { "file": "app/funnel-audit/FunnelAuditClient.tsx", "line": 358, "reason": "Funnel audit UI label" }
   ],
-  "highest-impact": [
-    { "file": "app/api/workspace/assistant/route.ts", "line": 82, "reason": "Internal assistant response label" },
-    { "file": "app/learning-centre/landing-page-load-time-slow/page.tsx", "line": 283, "reason": "Educational article about load speed" },
-    { "file": "app/learning-centre/cta-below-fold-mobile/page.tsx", "line": 209, "reason": "Educational article" }
-  ],
+  "highest-impact": [],
   "proves-your-ad": [
-    { "file": "app/learning-centre/google-ads-disapproved-ads-still-spending/page.tsx", "line": 39, "reason": "Educational article discussing ad approval mechanics — not a Nebula product claim" },
-    { "file": "app/learning-centre/google-ads-high-ctr-low-conversion/page.tsx", "line": 0, "reason": "SEO meta description: 'A high CTR proves your ad works' — educational, not a Nebula product claim" }
+    { "file": "app/learning-centre/google-ads-disapproved-ads-still-spending/page.tsx", "line": 39, "reason": "Educational article discussing ad approval mechanics — not a Nebula product claim" }
   ],
   "costing-conversions": [
     { "file": "app/learning-centre/ghost-variant-ab-test/page.tsx", "line": 118, "reason": "Educational article example" },

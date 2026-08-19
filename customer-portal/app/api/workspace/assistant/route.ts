@@ -75,7 +75,7 @@ function buildFallbackAnswer(
     (a.findings || []).map((f) => ({ ...f, url: a.url, score: a.score }))
   )
 
-  if (questionLower.includes('most impact') || questionLower.includes('work on first') || questionLower.includes('work on today')) {
+  if (questionLower.includes('most impact') || questionLower.includes('highest priority') || questionLower.includes('work on first') || questionLower.includes('work on today')) {
     const sorted = [...allFindings].sort((a, b) => b.impact - a.impact)
     const top = sorted.slice(0, 3)
     if (top.length === 0) return 'All signals are passing - no critical findings to prioritize.'
@@ -146,7 +146,7 @@ function buildFallbackAnswer(
     }
   }
 
-  lines.push(`\nFor "${question}": focus on the highest-severity category above. Each fix moves your conversion score.`)
+  lines.push(`\nFor "${question}": focus on the highest-severity category above. Each fix addresses a failing conversion signal.`)
   return lines.join('\n')
 }
 

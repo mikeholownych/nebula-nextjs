@@ -156,7 +156,7 @@ const diagnostics = [
   {
     title: 'No Next Step After the Primary Action',
     subtitle: 'The conversion path ends in a dead end.',
-    check: 'What happens after someone clicks the CTA? Does the next page continue the message match? Is there a fallback for visitors who are not ready - a secondary offer, a resource, or a clear exit? A checkout or form page that looks nothing like the landing page can kill conversions at the last step.',
+    check: 'What happens after someone clicks the CTA? Does the next page continue the message match? Is there a fallback for visitors who are not ready - a secondary offer, a resource, or a clear exit? A checkout or form page that looks nothing like the landing page can block conversions at the last step.',
     fix: 'Extend message match to the entire post-click path. Keep the same headline promise on the next page. Add a low-friction secondary option (download a guide, watch a demo) for non-ready visitors.',
     signal: 'High CTA click rate but very low final conversion - the leak is downstream.',
   },

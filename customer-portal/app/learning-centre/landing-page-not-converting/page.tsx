@@ -661,7 +661,7 @@ export default function LandingPageNotConvertingPage() {
                 },
                 {
                   href: '/learning-centre/mobile-landing-page-leaks',
-                  label: 'Mobile Landing Page Leaks That Kill Paid Traffic',
+                  label: 'Mobile Landing Page Leaks That Waste Paid Traffic',
                 },
                 {
                   href: '/learning-centre/ecommerce-landing-page-not-converting',

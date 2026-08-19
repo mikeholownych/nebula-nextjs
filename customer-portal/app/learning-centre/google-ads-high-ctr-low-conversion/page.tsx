@@ -4,7 +4,7 @@ import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit | Nebula',
-  description: 'High CTR proves your ad works. A 0.1% conversion rate proves your landing page doesn\'t. Diagnose exactly why the ad-to-page handoff fails when click signals are strong.',
+  description: 'A high CTR with a low conversion rate points to a page-level disconnect. Diagnose which conversion signals fail when click volume is strong but actions are not.',
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion',
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit',
-  description: 'High CTR proves your ad works. A 0.1% conversion rate proves your landing page doesn\'t. Diagnose exactly why the ad-to-page handoff fails when click signals are strong.',
+  description: 'A high CTR with a low conversion rate points to a page-level disconnect. Diagnose which conversion signals fail when click volume is strong but actions are not.',
   url: 'https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -76,7 +76,7 @@ export default function GoogleAdsHighCtrLowConversionPage() {
         {/* Section 3 */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-fg mb-4">
-            The Top 4 Page Failures That Kill High-Intent Traffic
+            The Top 4 Page Failures That Waste High-Intent Traffic
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
             High-intent visitors are not patient. They arrived with a specific goal. Each of these four failures breaks the implicit promise made by the ad that got them there.

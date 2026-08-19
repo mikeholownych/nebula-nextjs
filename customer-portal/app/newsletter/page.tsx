@@ -5,10 +5,10 @@ import NewsletterForm from './NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'Newsletter - Nebula Components',
-  description: 'Weekly landing page diagnostics. Real findings from 847 audits. How founders are fixing conversion leaks.',
+  description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after — from real Nebula audits.',
   openGraph: {
     title: 'Newsletter - Nebula Components',
-    description: 'Weekly landing page diagnostics. Real findings from 847 audits. How founders are fixing conversion leaks.',
+    description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after — from real Nebula audits.',
   },
 }
 
@@ -26,7 +26,7 @@ export default function NewsletterPage() {
             Landing Page Diagnostics
           </h1>
           <p className="text-lg text-fg-muted max-w-[65ch] mx-auto mb-2 leading-relaxed">
-            Real findings from 847 audits. Every week: one pattern, one fix, one before/after.
+            Every week: one conversion signal pattern, one fix, one before/after — from real Nebula audits.
           </p>
           <p className="text-base text-fg-muted max-w-[65ch] mx-auto leading-relaxed">
             No hype. No fluff. Just what&apos;s actually costing you money.
@@ -41,7 +41,7 @@ export default function NewsletterPage() {
               <h3 className="font-semibold text-fg">Specific Findings</h3>
             </div>
             <p className="text-sm text-fg-muted leading-relaxed">
-              Not &quot;improve your CTA.&quot; We show: &quot;This exact CTA phrasing beats your current one by 8%.&quot;
+              Not &quot;improve your CTA.&quot; We show the specific condition that failed, why it matters, and the exact fix.
             </p>
           </Card>
 
@@ -102,7 +102,7 @@ export default function NewsletterPage() {
                     <span className="font-semibold text-fg-muted">Finding:</span> {issue.finding}
                   </p>
                   <p className="text-sm">
-                    <span className="font-semibold text-danger">Impact:</span> {issue.impact}
+                    <span className="font-semibold text-danger">Why it matters:</span> {issue.impact}
                   </p>
                   <p className="text-sm">
                     <span className="font-semibold text-accent">Fix:</span> {issue.fix}
@@ -132,7 +132,7 @@ export default function NewsletterPage() {
               },
               {
                 q: "Is this just for selling your audit?",
-                a: "No. The newsletter stands alone. We share real findings from audits we've run, whether or not the founder buys our implementation kit. The goal is to build trust through expertise.",
+                a: "No. The newsletter stands alone. We share real findings from audits we've run, whether or not the founder buys the Repair Sprint. The goal is to build trust through expertise.",
               },
               {
                 q: "Can I unsubscribe?",
@@ -165,7 +165,7 @@ export default function NewsletterPage() {
             Want a Free Audit First?
           </h2>
           <p className="text-fg-muted mb-6 max-w-[65ch] mx-auto leading-relaxed">
-            Get a full diagnostic of your landing page. See your score, your 3 biggest leaks, and the exact fixes.
+            Get a full diagnostic of your landing page. See your score across 9 conversion signals and the highest-priority findings.
           </p>
           <Link
             href="/audit"

@@ -142,7 +142,7 @@ export default async function AuditPage() {
                   {[
                     'Pass/fail verdict on each conversion signal',
                     'Raw evidence from your page, not generic advice',
-                    'Findings ranked by observable impact',
+                    'Findings ranked by priority',
                     'No email required to see results',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-fg-muted">
@@ -155,7 +155,7 @@ export default async function AuditPage() {
 
               {/* Static benchmark stat, always visible, not API-gated */}
               <p className="mt-4 text-xs text-fg-dim border-l-2 border-accent/40 pl-3">
-                From 139+ audits: avg 2.8 conversion leaks per page.{' '}
+                From our live dataset: avg 2.8 conversion leaks per page.{' '}
                 <Link href="/benchmarks" className="text-accent/80 hover:text-accent transition-colors">
                   See the Leak Index →
                 </Link>

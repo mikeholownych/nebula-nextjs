@@ -324,7 +324,7 @@ export default function LinkedInAuthorityGapPage() {
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Run this checklist before increasing LinkedIn budget. Each item represents a common
-            failure point that kills LinkedIn conversion rates independently of traffic quality.
+            failure point that hurts LinkedIn conversion rates independently of traffic quality.
           </p>
           <ul className="space-y-4 text-fg-muted">
             <li className="flex gap-3">

@@ -36,7 +36,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "What's a good landing page audit score?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Scores range from 1 to 10. Below 5 means critical leaks are killing your conversions. 5–7 is average. 7–8 is solid. 9+ is rare. Most pages land between 4 and 7.",
+                  text: "Scores range from 1 to 10. Below 5 means critical signals are failing. 5–7 is average. 7–8 is solid. 9+ is rare. Most pages land between 4 and 7.",
                 },
               },
               {

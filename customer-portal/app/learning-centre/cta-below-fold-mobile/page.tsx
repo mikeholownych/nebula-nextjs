@@ -43,7 +43,7 @@ export default function CtaBelowFoldMobilePage() {
             recent flagship with a tall screen and plenty of viewport real estate. On an iPhone SE
             or a budget Android - the devices that make up a significant slice of real-world
             traffic - your primary CTA is invisible until the visitor scrolls. Most of them never
-            do. This is the mobile blind spot that quietly kills conversion rates that have
+            do. This is the mobile blind spot that quietly hurts conversion rates that have
             already been &quot;optimised.&quot;
           </p>
         </div>
@@ -206,7 +206,7 @@ export default function CtaBelowFoldMobilePage() {
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             If a complete redesign is not immediately feasible, the sticky CTA bar pattern is the
-            fastest fix with the highest impact. A fixed-position bar at the bottom of the mobile
+            fastest fix with the highest priority. A fixed-position bar at the bottom of the mobile
             viewport - containing only the primary CTA button and a single line of supporting
             text - ensures the call to action is always visible regardless of where the visitor
             is on the page. This pattern consistently outperforms above-fold placement in A/B

@@ -280,7 +280,7 @@ export default function LandingPageLoadTimeSlow() {
           {/* Fix sequence */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              Fix sequence: highest impact first
+              Fix sequence: highest priority first
             </h2>
             <p className="leading-relaxed text-fg-muted">
               Speed optimisation has diminishing returns. Getting from 6s to 3s
@@ -387,7 +387,7 @@ export default function LandingPageLoadTimeSlow() {
             <div className="space-y-1">
               {[
                 { href: '/learning-centre/landing-page-not-converting', label: 'Landing Page Not Converting? Diagnose These 5 Leaks First' },
-                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Kill Paid Traffic' },
+                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Waste Paid Traffic' },
                 { href: '/learning-centre/landing-page-bounce-rate-high', label: 'Landing Page Bounce Rate High: 3 Diagnosable Causes' },
                 { href: '/learning-centre/before-you-raise-ad-budget', label: 'Before You Raise Ad Budget: Check These Landing Page Leaks' },
                 { href: '/learning-centre/google-ads-quality-score-low', label: 'Google Ads Quality Score Low: How The Landing Page Fixes It' },

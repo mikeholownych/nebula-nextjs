@@ -4,7 +4,7 @@ import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
-  description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap killing your conversions - and how to fix it before you scale spend.",
+  description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap that blocks conversions - and how to fix it before you scale spend.",
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap',
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
-  description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap killing your conversions - and how to fix it before you scale spend.",
+  description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap that blocks conversions - and how to fix it before you scale spend.",
   url: 'https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -106,10 +106,10 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         {/* Section 3 */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
-            The Scroll-Depth Problem: Why Paragraph-Heavy Above-Folds Kill Conversions
+            The Scroll-Depth Problem: Why Paragraph-Heavy Above-Folds Block Conversions
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The most common conversion killer on pages receiving TikTok traffic is a dense, text-heavy above-the-fold section. It looks reasonable by Google-traffic standards - a headline, a sub-headline, a few sentences of context, a CTA. For TikTok traffic, it is a wall.
+            The most common conversion failure on pages receiving TikTok traffic is a dense, text-heavy above-the-fold section. It looks reasonable by Google-traffic standards - a headline, a sub-headline, a few sentences of context, a CTA. For TikTok traffic, it is a wall.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             When heatmap and scroll-depth data is overlaid on TikTok-sourced traffic, the pattern is consistent: the majority of exits happen before the first scroll on text-heavy layouts. The person reads approximately the first four words of the headline, does not feel the continuation of what the ad promised, and leaves. The rest of the page - the testimonials, the offer details, the urgency - is never seen.

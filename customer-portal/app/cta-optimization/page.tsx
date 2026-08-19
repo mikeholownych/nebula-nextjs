@@ -152,7 +152,7 @@ export default function CtaOptimizationPage() {
           {/* Six failure patterns */}
           <section className="mb-14">
             <h2 className="text-2xl font-bold tracking-tight text-fg mb-6">
-              Six CTA failures that kill conversions
+              Six CTA failures that block conversions
             </h2>
             <div className="space-y-4">
               {CTA_FAILURES.map((f, i) => (

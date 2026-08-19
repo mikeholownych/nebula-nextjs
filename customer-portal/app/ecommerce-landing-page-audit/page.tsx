@@ -96,7 +96,7 @@ const ECOMMERCE_FAILURES = [
     signal: 'Above the fold',
     label: 'Price not visible before scroll - shipping buried at checkout',
     detail:
-      "Two pricing surprises kill ecommerce conversions: the price appearing only after variant selection, and the shipping cost appearing only at checkout. Both are friction patterns that require the visitor to commit additional steps before receiving information they need to make a purchase decision. Paid traffic is already costly - the visitor's first qualification question is almost always 'how much is this?'",
+      "Two pricing surprises hurt ecommerce conversions: the price appearing only after variant selection, and the shipping cost appearing only at checkout. Both are friction patterns that require the visitor to commit additional steps before receiving information they need to make a purchase decision. Paid traffic is already costly - the visitor's first qualification question is almost always 'how much is this?'",
     fix: 'Display the price - including a shipping estimate or free shipping threshold - above the fold, before the Add to Cart button. If shipping varies, show the range or the free shipping threshold. Do not defer this information to checkout.',
   },
   {

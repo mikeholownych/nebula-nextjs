@@ -352,7 +352,7 @@ export default function EcommerceLandingPageNotConverting() {
             <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
             <div className="space-y-1">
               {[
-                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Kill Paid Traffic' },
+                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Waste Paid Traffic' },
                 { href: '/learning-centre/landing-page-not-converting', label: 'Landing Page Not Converting? Diagnose These 5 Leaks First' },
                 { href: '/learning-centre/google-ads-clicks-no-sales', label: 'Google Ads Clicks But No Sales: Check The Page' },
                 { href: '/learning-centre/proof-before-cta', label: 'Proof Before CTA: The Ordering Rule That Lifts Conversions' },

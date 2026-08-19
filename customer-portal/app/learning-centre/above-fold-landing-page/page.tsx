@@ -402,7 +402,7 @@ export default function AboveFoldLandingPagePage() {
             <div className="space-y-1">
               {[
                 { href: '/learning-centre/landing-page-not-converting', label: 'Landing Page Not Converting? Diagnose These 5 Leaks First' },
-                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Kill Paid Traffic' },
+                { href: '/learning-centre/mobile-landing-page-leaks', label: 'Mobile Landing Page Leaks That Waste Paid Traffic' },
                 { href: '/learning-centre/message-match-checklist', label: 'Message Match Checklist For Paid Traffic' },
                 { href: '/learning-centre/cta-not-working', label: 'CTA Not Working: 4 Failure Patterns' },
                 { href: '/learning-centre/landing-page-load-time-slow', label: 'Landing Page Load Time Slow: Signal 4 Diagnosis' },

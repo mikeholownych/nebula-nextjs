@@ -3,18 +3,18 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: "Your Form Has Zero Friction and That's Exactly Why Nobody Fills It Out | Nebula",
+  title: "Your Form Has Zero Friction — and That May Be Why Nobody Fills It Out | Nebula",
   description:
-    'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction kill conversions and which build confidence.',
+    'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction block conversions and which build confidence.',
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
   },
 }
 
 const articleSchema = createArticleSchema({
-  headline: "Your Form Has Zero Friction and That's Exactly Why Nobody Fills It Out",
+  headline: "Your Form Has Zero Friction — and That May Be Why Nobody Fills It Out",
   description:
-    'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction kill conversions and which build confidence.',
+    'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction block conversions and which build confidence.',
   url: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -59,7 +59,7 @@ export default function FormHasZeroFrictionPage() {
             The advice is everywhere: fewer fields, shorter forms, remove every possible barrier.
             It&rsquo;s not wrong advice. Anxiety-inducing friction - asking for a phone number on
             the first touchpoint, requiring account creation before a free trial, demanding a budget
-            before a conversation - does kill conversions. So founders remove it. All of it.
+            before a conversation - does hurt conversions. So founders remove it. All of it.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             But the optimisation stops at the form itself. Nobody audits what surrounds the form,

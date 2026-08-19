@@ -188,7 +188,7 @@ export default function GoogleAdsClicksNoSales() {
                   n: '5',
                   cause: 'CTA asks for too much too soon',
                   detail:
-                    'If the first action available requires significant commitment - booking a call, entering payment details, or filling out a long form - on a page the visitor has never seen before, the mismatch between trust level and ask size will kill the conversion. For cold search traffic, the CTA should match the temperature of the relationship: a low-commitment first step (free audit, free trial, download) is appropriate before a high-commitment ask.',
+                    'If the first action available requires significant commitment - booking a call, entering payment details, or filling out a long form - on a page the visitor has never seen before, the mismatch between trust level and ask size creates friction that blocks the conversion. For cold search traffic, the CTA should match the temperature of the relationship: a low-commitment first step (free audit, free trial, download) is appropriate before a high-commitment ask.',
                 },
               ].map(({ n, cause, detail }) => (
                 <div

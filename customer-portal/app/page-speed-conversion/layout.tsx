@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Page Speed and Conversion Rate | Nebula Components',
-  description: 'How slow load times kill landing page conversions - and the 3 fastest fixes.',
+  description: 'How slow load times hurt landing page conversions - and the 3 fastest fixes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/page-speed-conversion',
   },
   openGraph: {
     title: 'Page Speed and Conversion Rate',
-    description: 'How slow load times kill landing page conversions - and the 3 fastest fixes.',
+    description: 'How slow load times hurt landing page conversions - and the 3 fastest fixes.',
     url: 'https://nebulacomponents.com/page-speed-conversion',
     type: 'article',
     images: ['https://nebulacomponents.com/og-card.png'],
