@@ -70,6 +70,14 @@ describe('consent-gated analytics loading', () => {
     expect(config).toContain('https://cloudflareinsights.com')
   })
 
+  it('allows GA4 image beacons in img-src', () => {
+    const config = read('next.config.ts')
+    const imgSrc = config.split('\n').find((line) => line.includes('img-src'))
+    expect(imgSrc).toBeDefined()
+    expect(imgSrc).toContain('https://www.googletagmanager.com')
+    expect(imgSrc).toContain('https://www.google-analytics.com')
+  })
+
   it('does not load Google Analytics when the visitor accepts essential cookies only', () => {
     render(<CookieConsent country="DE" />)
     window.eval(getConsentRuntime('DE'))

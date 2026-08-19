@@ -255,6 +255,9 @@ const nextConfig: NextConfig = {
           // gtag.js from googletagmanager.com; PostHog is proxied same-origin
           // through /ingest (see CookieConsent.tsx) so it needs no separate
           // script-src entry, only connect-src for its API/asset hosts.
+          // GA4 also fires an image beacon to googletagmanager.com/td and
+          // google-analytics.com collect endpoints. Those must be in img-src
+          // or Chrome blocks them (visible on /teardowns and every page).
           // Stripe checkout is a plain-link navigation to buy.stripe.com, not
           // an embedded script/iframe, so it needs no CSP entry either.
           // Cloudflare Web Analytics beacon is allowlisted - it defaults on
@@ -265,7 +268,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https://indieascent.com https://nicklaunches.com",
+              "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com",
               "font-src 'self' data:",
               "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com",
               "frame-src 'none'",
