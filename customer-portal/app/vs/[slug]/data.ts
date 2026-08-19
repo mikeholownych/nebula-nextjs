@@ -236,10 +236,10 @@ export const COMPARISONS: Record<string, Comparison> = {
     ],
     faqs: [
       { q: "Does Crazy Egg work without traffic?", a: "No - heatmaps, scrollmaps, and recordings only generate from real visitor sessions. A page without traffic produces no data. Nebula audits any public URL instantly, traffic or not." },
-      { q: "Can Crazy Egg diagnose conversion problems?", a: "Crazy Egg shows behavior data — where people click, scroll, and leave. Nebula evaluates structural conditions — whether specific signals pass or fail — with evidence from your page HTML. Different approaches: one observes users, the other evaluates page structure." },
+      { q: "Can Crazy Egg diagnose conversion problems?", a: "Crazy Egg shows behavior data - where people click, scroll, and leave. Nebula evaluates structural conditions - whether specific signals pass or fail - with evidence from your page HTML. Different approaches: one observes users, the other evaluates page structure." },
       { q: "What does Nebula check that Crazy Egg does not?", a: "Nebula checks conversion structure: headline message match, CTA clarity, trust evidence, above-fold placement, ad-signal readiness, and AI citation readiness - each scored pass/fail with evidence, before you have any traffic." },
     ],
-    verdict: "Crazy Egg is a solid visual analytics tool for teams who already have traffic and want to understand how users interact with a page. It observes actual user behavior. Nebula evaluates page-side structural conditions — whether the headline matches the ad, whether trust signals are visible, whether the CTA is above the fold — without requiring traffic data. Crazy Egg confirms that people leave; Nebula checks which structural conditions are failing. Different evidence, different timing.",
+    verdict: "Crazy Egg is a solid visual analytics tool for teams who already have traffic and want to understand how users interact with a page. It observes actual user behavior. Nebula evaluates page-side structural conditions - whether the headline matches the ad, whether trust signals are visible, whether the CTA is above the fold - without requiring traffic data. Crazy Egg confirms that people leave; Nebula checks which structural conditions are failing. Different evidence, different timing.",
   },
 
   "screaming-frog": {

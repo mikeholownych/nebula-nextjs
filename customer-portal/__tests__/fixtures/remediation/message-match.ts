@@ -23,12 +23,12 @@ export const MESSAGE_MATCH_FIXTURE = {
 </body>
 </html>`,
     adContext: {
-      headline: 'Cut project delays by 40% — Start free trial',
+      headline: 'Cut project delays by 40% - Start free trial',
       targetKeyword: 'project management tool',
     },
     expectedResult: 'FAIL',
     expectedEvidence: {
-      adHeadline: 'Cut project delays by 40% — Start free trial',
+      adHeadline: 'Cut project delays by 40% - Start free trial',
       pageH1: 'Welcome to Acme',
       semanticOverlap: 0,
       outcomeMentioned: false,
@@ -40,23 +40,23 @@ export const MESSAGE_MATCH_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme — Cut Project Delays, Ship Faster</title>
+  <title>Acme - Cut Project Delays, Ship Faster</title>
   <meta name="description" content="Teams using Acme ship 40% faster. Free trial, no credit card.">
 </head>
 <body>
-  <h1>Cut project delays — ship what matters, on time</h1>
+  <h1>Cut project delays - ship what matters, on time</h1>
   <p>Acme keeps your team aligned with one source of truth for tasks, deadlines, and docs.</p>
   <a href="/trial">Start Free Trial</a>
 </body>
 </html>`,
     adContext: {
-      headline: 'Cut project delays by 40% — Start free trial',
+      headline: 'Cut project delays by 40% - Start free trial',
       targetKeyword: 'project management tool',
     },
     expectedResult: 'PASS',
     expectedEvidence: {
-      adHeadline: 'Cut project delays by 40% — Start free trial',
-      pageH1: 'Cut project delays — ship what matters, on time',
+      adHeadline: 'Cut project delays by 40% - Start free trial',
+      pageH1: 'Cut project delays - ship what matters, on time',
       semanticOverlap: 1,
       outcomeMentioned: true,
     },
@@ -68,12 +68,12 @@ export const MESSAGE_MATCH_FIXTURE = {
       {
         target: '<h1>',
         before: 'Welcome to Acme',
-        after: 'Cut project delays — ship what matters, on time',
+        after: 'Cut project delays - ship what matters, on time',
       },
       {
         target: '<title>',
         before: 'Acme Platform',
-        after: 'Acme — Cut Project Delays, Ship Faster',
+        after: 'Acme - Cut Project Delays, Ship Faster',
       },
     ],
   },

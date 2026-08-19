@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Sitemap strip — crawlable, visually quiet ──────────── */}
+        {/* ── Sitemap strip - crawlable, visually quiet ──────────── */}
         <div className="mt-10 pt-6 border-t border-border">
           <nav aria-label="Full site index" className="flex flex-wrap gap-x-3 gap-y-1.5">
             {[

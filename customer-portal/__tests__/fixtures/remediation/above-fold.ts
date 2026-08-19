@@ -3,11 +3,11 @@ export const ABOVE_FOLD_FIXTURE = {
   ruleVersion: '2.0',
 
   failCase: {
-    description: 'CTA not visible above fold — buried below 3 sections of content',
+    description: 'CTA not visible above fold - buried below 3 sections of content',
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme — Project Management Software</title>
+  <title>Acme - Project Management Software</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -40,7 +40,7 @@ export const ABOVE_FOLD_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme — Project Management Software</title>
+  <title>Acme - Project Management Software</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>

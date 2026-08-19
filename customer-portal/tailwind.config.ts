@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss'
 
-// ── Nebula Design System v2 — Editorial Precision ────────────────────────────
+// ── Nebula Design System v2 - Editorial Precision ────────────────────────────
 //
 // Selected direction: chartreuse accent on near-black, NebulaMark as system
 // device, editorial type discipline, structural borders only.
@@ -21,20 +21,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── Backgrounds — four tones for depth layering ──────────────
+        // ── Backgrounds - four tones for depth layering ──────────────
         bg: {
-          DEFAULT: '#080909',    // slightly warmer than pure black — avoids harsh edge
+          DEFAULT: '#080909',    // slightly warmer than pure black - avoids harsh edge
           elevated: '#0d0f0e',   // +5% elevated surface
+          muted: '#0d0f0e',      // alias used by interior pages
           panel: '#131615',      // component panels
-          surface: '#191c1a',    // lifted cards — warmly tinted
+          surface: '#191c1a',    // lifted cards - warmly tinted
         },
         // ── Foreground ───────────────────────────────────────────────
         fg: {
-          DEFAULT: '#e8ebe7',    // warm off-white, not pure #fff — reduces eye strain
-          muted: '#7a8078',      // ~5.2:1 on panel — WCAG AA
+          DEFAULT: '#e8ebe7',    // warm off-white, not pure #fff - reduces eye strain
+          muted: '#7a8078',      // ~5.2:1 on panel - WCAG AA
           dim: '#525750',        // de-emphasized metadata
         },
-        // ── Accent — Nebula Chartreuse ────────────────────────────────
+        // ── Accent - Nebula Chartreuse ────────────────────────────────
         // Single chromatic accent. Use only on: CTAs, active states,
         // pass indicators, key data values, mark in brand contexts.
         // Never decorative.
@@ -45,10 +46,10 @@ const config: Config = {
         },
         // ── Semantic ─────────────────────────────────────────────────
         danger: {
-          DEFAULT: '#f06b6b',   // softened red — still passes AA on panel
+          DEFAULT: '#f06b6b',   // softened red - still passes AA on panel
           dim: 'rgba(240, 107, 107, 0.12)',
         },
-        // info: blue — used for neutral/informational UI states
+        // info: blue - used for neutral/informational UI states
         info: '#3b82f6',
         // signal.fail: RESERVED. Amber only for "conversion signal failed".
         // Do not use for warning states, grades, or any other UI meaning.
@@ -68,7 +69,7 @@ const config: Config = {
       },
       fontSize: {
         // ── Metadata / labels ────────────────────────────────────────
-        '2xs': ['0.6875rem', { lineHeight: '1rem', letterSpacing: '0.06em' }],  // 11px — eyebrows, tags
+        '2xs': ['0.6875rem', { lineHeight: '1rem', letterSpacing: '0.06em' }],  // 11px - eyebrows, tags
         xs:   ['0.75rem',   { lineHeight: '1.125rem' }],   // 12px
         sm:   ['0.875rem',  { lineHeight: '1.375rem' }],   // 14px
         // ── Body ─────────────────────────────────────────────────────
@@ -81,7 +82,7 @@ const config: Config = {
         '4xl':['2.25rem',   { lineHeight: '2.625rem' }],
         '5xl':['3rem',      { lineHeight: '1.15' }],
         '6xl':['3.75rem',   { lineHeight: '1.1' }],
-        '7xl':['4.5rem',    { lineHeight: '1.06' }],      // display — hero
+        '7xl':['4.5rem',    { lineHeight: '1.06' }],      // display - hero
       },
       letterSpacing: {
         tightest: '-0.05em',   // display / hero only
@@ -96,7 +97,7 @@ const config: Config = {
         tight:     '1.15',   // display
         snug:      '1.3',    // headings
       },
-      // ── Spacing — systematic scale ───────────────────────────────
+      // ── Spacing - systematic scale ───────────────────────────────
       spacing: {
         '4.5': '1.125rem',
         '18':  '4.5rem',
@@ -113,10 +114,10 @@ const config: Config = {
         'wide':    '1100px',  // standard page container
         'full':    '1280px',  // max page width
       },
-      // ── Border radius — deliberate, not default ──────────────────
+      // ── Border radius - deliberate, not default ──────────────────
       // Diagnostic surfaces: sharp or very slightly rounded
       // UI controls: small radius
-      // Cards/panels: small — no rounding monoculture
+      // Cards/panels: small - no rounding monoculture
       borderRadius: {
         none:   '0px',
         sm:     '3px',    // default for diagnostic/data surfaces
@@ -124,15 +125,15 @@ const config: Config = {
         md:     '8px',    // cards, panels
         lg:     '12px',   // larger containers
         xl:     '16px',   // sections/heroes
-        full:   '9999px', // pills — used sparingly
+        full:   '9999px', // pills - used sparingly
       },
-      // ── Box shadow — structural only ─────────────────────────────
+      // ── Box shadow - structural only ─────────────────────────────
       boxShadow: {
         // No glow effects. Shadows for elevation only.
         sm:  '0 1px 3px rgba(0,0,0,0.3)',
         md:  '0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)',
         lg:  '0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
-        // Accent ring — for focused/active interactive elements only
+        // Accent ring - for focused/active interactive elements only
         'ring-accent': `0 0 0 2px ${ACCENT}`,
       },
       // ── Animation ───────────────────────────────────────────────

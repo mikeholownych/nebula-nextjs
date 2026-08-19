@@ -24,19 +24,19 @@ export default function TrafficButNoFormFillsPage() {
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-fg transition-colors">
           ← Learning Centre
         </Link>
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Form Leaks · Conversion Diagnosis</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Traffic But No Form Fills: The Form Is Usually Not The First Leak</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">When visitors land but don't fill out the form, the reflex is to redesign the form - more fields, fewer fields, a different layout. That's solving the wrong problem. The form is the last thing a visitor reaches. By the time they get there, they've already decided whether they trust you enough to hand over their details. That decision happens well before the form.</p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Form Is The Last Gate, Not The First</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">Think of the conversion path as a chain: the click brings someone with a specific intent, the hero earns the right to keep them reading, the body builds the case with proof and specifics, and the form closes the argument. If the chain breaks anywhere before the form, no amount of form optimisation will recover the conversion.</p>
           <p className="leading-relaxed text-fg-muted">The most common form-fill failures have nothing to do with the form itself. They're failures of trust, clarity, or credibility that happened in the first 10 seconds - and the visitor who didn't fill out your form left 40 seconds before they even scrolled far enough to see it.</p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Four Reasons Forms Don't Get Filled</h2>
           <div className="space-y-6">
             <div>
@@ -58,7 +58,7 @@ export default function TrafficButNoFormFillsPage() {
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">How To Diagnose Where The Real Leak Is</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">Before you touch the form, get the diagnostic data:</p>
           <ul className="space-y-3 text-fg-muted">
@@ -68,7 +68,7 @@ export default function TrafficButNoFormFillsPage() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Form Fix Checklist</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">Once you've confirmed the form zone itself is the leak (visitors reach it but don't fill it), work through this in order:</p>
           <div className="space-y-3">
@@ -99,11 +99,11 @@ export default function TrafficButNoFormFillsPage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.</p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">Run the free audit</Link>
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">Run the free audit</Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/cta-not-working" className="block text-accent hover:text-fg transition-colors">CTA Not Working: The Five Most Common Button Leaks →</Link>

@@ -80,7 +80,7 @@ const PASS_COUNT = SIGNALS.filter((s) => s.passed).length
 export default function AuditResultMockup() {
   return (
     <div
-      className="relative w-full max-w-lg rounded-2xl border border-border bg-bg-surface shadow-lifted overflow-hidden"
+      className="relative w-full max-w-lg rounded-md border border-border bg-bg-surface shadow-lifted overflow-hidden"
       aria-label="Example audit result output"
     >
       {/* ── Top bar: domain + watermark ─────────────────────────────── */}

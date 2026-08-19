@@ -60,7 +60,7 @@ export default async function ComparisonPage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Tool Comparison · {c.checkedAt}
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           {c.competitorName} vs. Nebula
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">{c.intent}</p>
@@ -76,7 +76,7 @@ export default async function ComparisonPage({
         </section>
 
         {/* Win count */}
-        <div className="mt-8 inline-flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 px-5 py-3">
+        <div className="mt-8 inline-flex items-center gap-3 rounded border border-accent/20 bg-accent/5 px-5 py-3">
           <span className="text-2xl font-bold text-accent">{nebulaWinCount}/{c.rows.length}</span>
           <span className="text-sm text-fg-muted">signals where Nebula is the better fit for conversion auditing</span>
         </div>
@@ -109,7 +109,7 @@ export default async function ComparisonPage({
         </section>
 
         {/* Verdict */}
-        <section className="mt-12 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-12 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-bold text-fg">Bottom line</h2>
           <p className="text-fg-muted leading-relaxed">{c.verdict}</p>
         </section>
@@ -118,7 +118,7 @@ export default async function ComparisonPage({
             JSON-LD so AI engines can cite structured answers */}
         <section className="mt-12" aria-label="Frequently asked questions">
           <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
-          <div className="divide-y divide-border rounded-2xl border border-border bg-bg-panel">
+          <div className="divide-y divide-border rounded-md border border-border bg-bg-panel">
             {c.faqs.map((faq) => (
               <details key={faq.q} className="group px-6 py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-fg">
@@ -166,7 +166,7 @@ export default async function ComparisonPage({
           </p>
           <Link
             href="/audit?utm_source=competitor-page&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Repair Sprint Example Artifact | Nebula',
   description:
-    'A demonstration of the Repair Sprint deliverable — showing the full chain from observation to repair artifact to verification.',
+    'A demonstration of the Repair Sprint deliverable - showing the full chain from observation to repair artifact to verification.',
   alternates: { canonical: 'https://nebulacomponents.com/repair-sprint/example' },
 }
 
@@ -16,7 +16,7 @@ export default function RepairSprintExamplePage() {
         {/* Demonstration label */}
         <div className="mb-8 rounded-lg border border-signal-fail/30 bg-signal-fail/5 px-4 py-3">
           <p className="text-sm font-semibold text-signal-fail">
-            Demonstration artifact — not a customer engagement.
+            Demonstration artifact - not a customer engagement.
           </p>
           <p className="mt-1 text-xs text-fg-muted">
             This example shows the format and depth of a real Repair Sprint deliverable.
@@ -28,7 +28,7 @@ export default function RepairSprintExamplePage() {
           Example Repair Sprint Artifact
         </h1>
         <p className="text-fg-muted mb-12">
-          Target: <span className="font-mono text-fg">basecamp.com</span> — SEO Foundations finding
+          Target: <span className="font-mono text-fg">basecamp.com</span> - SEO Foundations finding
         </p>
 
         {/* Original observation */}
@@ -75,13 +75,13 @@ export default function RepairSprintExamplePage() {
           <div className="rounded-lg border border-border p-4">
             <p className="text-2xl font-bold text-fg">4.0<span className="text-fg-muted text-sm font-normal">/10</span></p>
             <p className="mt-2 text-sm text-fg-muted leading-6">
-              <span className="font-semibold text-fg">Journey position:</span> SEO metadata is encountered before the page renders — it determines how the page appears in search results, which precedes even the first viewport.
+              <span className="font-semibold text-fg">Journey position:</span> SEO metadata is encountered before the page renders - it determines how the page appears in search results, which precedes even the first viewport.
             </p>
             <p className="mt-1 text-sm text-fg-muted leading-6">
               <span className="font-semibold text-fg">Severity:</span> Title is 86% shorter than minimum threshold. Meta description exceeds limit by 19%.
             </p>
             <p className="mt-1 text-sm text-fg-muted leading-6">
-              <span className="font-semibold text-fg">Reproducibility:</span> Deterministic — present in static HTML on every page load.
+              <span className="font-semibold text-fg">Reproducibility:</span> Deterministic - present in static HTML on every page load.
             </p>
           </div>
           <p className="mt-2 text-xs text-fg-dim">
@@ -98,9 +98,9 @@ export default function RepairSprintExamplePage() {
           </p>
           <ul className="mt-2 space-y-1.5 text-sm text-fg-muted">
             <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>The evidence is independently verifiable (view-source on any browser)</li>
-            <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>The remediation is concrete and bounded — three metadata changes</li>
+            <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>The remediation is concrete and bounded - three metadata changes</li>
             <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>The re-audit can deterministically confirm whether the condition changed</li>
-            <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>It classifies as a &ldquo;Quick Win&rdquo; — low implementation effort, no design dependency</li>
+            <li className="flex items-start gap-2"><span className="mt-0.5 text-accent">·</span>It classifies as a &ldquo;Quick Win&rdquo; - low implementation effort, no design dependency</li>
           </ul>
         </section>
 
@@ -116,10 +116,10 @@ export default function RepairSprintExamplePage() {
             <div className="rounded-lg border border-border p-4">
               <p className="text-xs font-semibold text-fg-muted uppercase tracking-wide mb-2">Title tag replacement</p>
               <div className="mb-2">
-                <p className="text-xs text-signal-fail font-mono">— &lt;title&gt;Basecamp&lt;/title&gt;</p>
+                <p className="text-xs text-signal-fail font-mono">- &lt;title&gt;Basecamp&lt;/title&gt;</p>
               </div>
               <div>
-                <p className="text-xs text-accent font-mono">+ &lt;title&gt;Basecamp — Project Management &amp; Team Communication&lt;/title&gt;</p>
+                <p className="text-xs text-accent font-mono">+ &lt;title&gt;Basecamp - Project Management &amp; Team Communication&lt;/title&gt;</p>
               </div>
               <p className="mt-2 text-xs text-fg-dim">52 chars. Includes brand name + primary keyword + secondary descriptor.</p>
             </div>
@@ -128,10 +128,10 @@ export default function RepairSprintExamplePage() {
             <div className="rounded-lg border border-border p-4">
               <p className="text-xs font-semibold text-fg-muted uppercase tracking-wide mb-2">Meta description replacement</p>
               <div className="mb-2">
-                <p className="text-xs text-signal-fail font-mono break-all">— &lt;meta name=&quot;description&quot; content=&quot;[185 chars — truncated in SERP]&quot;&gt;</p>
+                <p className="text-xs text-signal-fail font-mono break-all">- &lt;meta name=&quot;description&quot; content=&quot;[185 chars - truncated in SERP]&quot;&gt;</p>
               </div>
               <div>
-                <p className="text-xs text-accent font-mono break-all">+ &lt;meta name=&quot;description&quot; content=&quot;Basecamp organizes projects, team communication, and schedules in one place. Used by 75,000+ organizations. Start free — no credit card required.&quot;&gt;</p>
+                <p className="text-xs text-accent font-mono break-all">+ &lt;meta name=&quot;description&quot; content=&quot;Basecamp organizes projects, team communication, and schedules in one place. Used by 75,000+ organizations. Start free - no credit card required.&quot;&gt;</p>
               </div>
               <p className="mt-2 text-xs text-fg-dim">153 chars. Within SERP display limit. Includes social proof marker + low-friction CTA.</p>
             </div>
@@ -140,7 +140,7 @@ export default function RepairSprintExamplePage() {
             <div className="rounded-lg border border-border p-4">
               <p className="text-xs font-semibold text-fg-muted uppercase tracking-wide mb-2">H1 replacement</p>
               <div className="mb-2">
-                <p className="text-xs text-signal-fail font-mono break-all">— &lt;h1&gt;The refreshingly straightforward project management system that&apos;s rock-solid and reliable&lt;/h1&gt;</p>
+                <p className="text-xs text-signal-fail font-mono break-all">- &lt;h1&gt;The refreshingly straightforward project management system that&apos;s rock-solid and reliable&lt;/h1&gt;</p>
               </div>
               <div>
                 <p className="text-xs text-accent font-mono break-all">+ &lt;h1&gt;Project management that doesn&apos;t require a project to manage it&lt;/h1&gt;</p>
@@ -207,7 +207,7 @@ export default function RepairSprintExamplePage() {
         {/* Demonstration label repeated */}
         <div className="mb-10 rounded-lg border border-signal-fail/30 bg-signal-fail/5 px-4 py-3">
           <p className="text-sm font-semibold text-signal-fail">
-            Demonstration artifact — not a customer engagement.
+            Demonstration artifact - not a customer engagement.
           </p>
           <p className="mt-1 text-xs text-fg-muted">
             Basecamp has not purchased a Repair Sprint. This example demonstrates the deliverable format

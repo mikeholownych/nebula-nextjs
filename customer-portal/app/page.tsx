@@ -94,7 +94,7 @@ export default function Home() {
               </h2>
               <p className="text-base text-fg-muted leading-relaxed">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid
-                traffic, the same page failures kept showing up — wrong headline, no proof near the
+                traffic, the same page failures kept showing up - wrong headline, no proof near the
                 first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
                 is the instrument that finds them. We run this audit on ourselves first.
@@ -191,7 +191,7 @@ export default function Home() {
                {[
                  {
                    heading: 'What you receive',
-                   body: 'Recorded findings with evidence from your page, ranked by priority — a heuristic based on journey position, severity, and reproducibility.',
+                   body: 'Recorded findings with evidence from your page, ranked by priority - a heuristic based on journey position, severity, and reproducibility.',
                  },
                  {
                    heading: 'See a real report',
@@ -200,7 +200,7 @@ export default function Home() {
                  },
                  {
                    heading: 'What happens next',
-                   body: 'After reviewing your free audit report, you can: fix the highest-priority conditions yourself; upgrade to a membership for ongoing monitoring; or purchase the $97 One-Leak Repair Sprint — one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
+                   body: 'After reviewing your free audit report, you can: fix the highest-priority conditions yourself; upgrade to a membership for ongoing monitoring; or purchase the $97 One-Leak Repair Sprint - one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
                    link: { href: '/repair-sprint', label: 'See the Repair Sprint' },
                  },
                ].map((item) => (
@@ -369,7 +369,7 @@ export default function Home() {
                   <p className="mb-4 text-xs font-semibold text-accent uppercase tracking-wide">Nebula audit</p>
                   <ul className="space-y-3 text-sm text-fg-muted">
                     {[
-                      'Real scrape — scored against 9 specific conversion signals',
+                      'Real scrape - scored against 9 specific conversion signals',
                       'Findings ranked by priority with evidence for each',
                       'No signup to see your results',
                       '$97 One-Leak Repair Sprint: one scoped repair package within 48 hours',
@@ -392,7 +392,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 max-w-2xl">
               <h2 className="heading-2">
-                Know what a click proves — and what it does not.
+                Know what a click proves - and what it does not.
               </h2>
               <p className="mt-4 text-base text-fg-muted leading-relaxed">
                 A click confirms that someone was interested enough to investigate. The page is what they encounter next.
@@ -402,7 +402,7 @@ export default function Home() {
               {[
                 {
                   heading: 'A click is not the finish line.',
-                  body: 'An ad click confirms the message generated interest. The landing page is what the visitor encounters next. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor may leave — and the ad often takes the blame.',
+                  body: 'An ad click confirms the message generated interest. The landing page is what the visitor encounters next. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor may leave - and the ad often takes the blame.',
                 },
                 {
                   heading: 'The audit follows the actual path.',
@@ -432,7 +432,7 @@ export default function Home() {
             <div className="grid gap-6 md:grid-cols-3">
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does Nebula provide?</h3>
-                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of observable page conditions ranked by priority — not generic advice, not a sales call.</p>
+                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of observable page conditions ranked by priority - not generic advice, not a sales call.</p>
               </div>
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does the free audit check?</h3>
@@ -440,7 +440,7 @@ export default function Home() {
               </div>
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does the $97 repair sprint do?</h3>
-                <p className="text-sm leading-7 text-fg-muted">One targeted fix for your highest-priority finding — exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the condition changed. Does not promise conversion lift.</p>
+                <p className="text-sm leading-7 text-fg-muted">One targeted fix for your highest-priority finding - exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the condition changed. Does not promise conversion lift.</p>
               </div>
             </div>
           </div>
@@ -526,7 +526,7 @@ export default function Home() {
               Check the page before you change the ad.
             </h2>
             <p className="mb-8 text-base text-fg-muted">
-              Free, no signup. See observable conditions worth investigating — ranked by priority.
+              Free, no signup. See observable conditions worth investigating - ranked by priority.
             </p>
             <Link
               href="/audit?utm_source=homepage&utm_medium=internal"

@@ -179,7 +179,7 @@ export default function SaasAuditPage() {
           </section>
 
           {/* Real SaaS teardowns callout */}
-          <section className="mb-14 rounded-2xl border border-border bg-bg-surface p-6 md:p-8">
+          <section className="mb-14 rounded-md border border-border bg-bg-surface p-6 md:p-8">
             <h2 className="text-xl font-bold text-fg mb-3">Real SaaS pages audited by the engine</h2>
             <p className="text-sm text-fg-muted leading-6 mb-5">
               Nebula has run its 9-signal audit on several major SaaS products. The engine reads the actual HTML - not a screenshot, not a manual review.
@@ -235,14 +235,14 @@ export default function SaasAuditPage() {
           </section>
 
           {/* CTA */}
-          <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
+          <section className="mb-14 rounded-md border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your SaaS landing page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
               Paste your URL. Nebula checks message match, CTA friction, product proof, and load performance against your actual page - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free SaaS Audit &rarr;
             </Link>

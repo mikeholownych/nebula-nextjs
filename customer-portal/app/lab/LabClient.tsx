@@ -85,7 +85,7 @@ function ComponentCard({
 }) {
   const meta = STATUS_META[result.status] ?? STATUS_META.unknown
   return (
-    <div className="rounded-2xl border border-border bg-bg-panel p-5">
+    <div className="rounded-md border border-border bg-bg-panel p-5">
       <div className="flex items-start justify-between gap-3 mb-2">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-widest text-fg-muted mb-0.5">
@@ -276,7 +276,7 @@ export default function LabClient() {
       <div className="mx-auto max-w-4xl space-y-10">
 
         {/* Input form */}
-        <form onSubmit={handleSubmit} className="rounded-2xl border border-border bg-bg-panel p-6">
+        <form onSubmit={handleSubmit} className="rounded-md border border-border bg-bg-panel p-6">
           <div className="grid gap-4">
             <div>
               <label htmlFor="ad-copy" className="mb-1.5 block text-sm font-semibold text-fg">
@@ -307,7 +307,7 @@ export default function LabClient() {
                 <button
                   type="submit"
                   disabled={loading || !url.trim()}
-                  className="rounded-xl bg-accent px-7 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors disabled:opacity-50"
+                  className="rounded bg-accent px-7 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors disabled:opacity-50"
                 >
                   {loading ? 'Running…' : 'Check All Components'}
                 </button>
@@ -334,7 +334,7 @@ export default function LabClient() {
               <Link
                 href="/audit?from=lab"
                 onClick={() => posthog.capture('lab_full_audit_clicked')}
-                className="rounded-xl border border-accent px-5 py-2.5 text-sm font-semibold text-accent hover:bg-accent hover:text-bg transition-colors"
+                className="rounded border border-accent px-5 py-2.5 text-sm font-semibold text-accent hover:bg-accent hover:text-bg transition-colors"
               >
                 Run full free audit →
               </Link>
@@ -352,13 +352,13 @@ export default function LabClient() {
                 </p>
                 <Link
                   href="/workspace"
-                  className="mt-3 inline-block rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                  className="mt-3 inline-block rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
                 >
                   Open workspace →
                 </Link>
               </div>
             ) : (
-              <form onSubmit={handleSave} className="rounded-2xl border border-border bg-bg-panel p-5">
+              <form onSubmit={handleSave} className="rounded-md border border-border bg-bg-panel p-5">
                 <p className="text-sm font-semibold text-fg">Save this run to your workspace</p>
                 <p className="mt-0.5 text-xs text-fg-muted">
                   Track experiments (Headline A, B, C…), compare scores, and mark the winner as
@@ -396,7 +396,7 @@ export default function LabClient() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="mt-3 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
+                  className="mt-3 rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
                 >
                   {saving ? 'Saving…' : 'Save experiment'}
                 </button>

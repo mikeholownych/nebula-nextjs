@@ -1,5 +1,5 @@
 /**
- * Repair Sprint Telemetry Schema — data model for tracking repair outcomes.
+ * Repair Sprint Telemetry Schema - data model for tracking repair outcomes.
  *
  * This schema is implemented from day one so future customer proof
  * emerges from actual operations rather than being fabricated retroactively.
@@ -30,7 +30,7 @@ export interface RepairTelemetryRecord {
   revision_required: boolean
   refund_requested: boolean
   refund_issued: boolean
-  // Optional customer-supplied business metrics — never inferred by Nebula
+  // Optional customer-supplied business metrics - never inferred by Nebula
   customer_supplied_business_metric: string | null // e.g. "conversion_rate", "revenue"
   customer_supplied_metric_window: string | null // e.g. "7_days_pre_vs_7_days_post"
   customer_supplied_metric_notes: string | null

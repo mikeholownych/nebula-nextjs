@@ -115,7 +115,7 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
               return (
                 <div
                   key={badge.id}
-                  className="rounded-xl border border-accent/30 bg-bg-elevated p-5 flex flex-col gap-3"
+                  className="rounded border border-accent/30 bg-bg-elevated p-5 flex flex-col gap-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold text-accent tracking-widest uppercase">

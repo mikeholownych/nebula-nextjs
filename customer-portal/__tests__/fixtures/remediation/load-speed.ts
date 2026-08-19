@@ -7,7 +7,7 @@ export const LOAD_SPEED_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Store — Premium Goods</title>
+  <title>Acme Store - Premium Goods</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.example.com/analytics.js"></script>
   <script src="https://cdn.example.com/ab-testing.js"></script>
@@ -31,7 +31,7 @@ export const LOAD_SPEED_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Store — Premium Goods</title>
+  <title>Acme Store - Premium Goods</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.example.com/analytics.js" defer></script>
   <script src="https://cdn.example.com/ab-testing.js" defer></script>

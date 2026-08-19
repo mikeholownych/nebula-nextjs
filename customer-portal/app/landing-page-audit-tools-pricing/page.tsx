@@ -87,7 +87,7 @@ export default function ToolPricingPage() {
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Tool Pricing · Updated August 2026
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost
         </h1>
 
@@ -141,7 +141,7 @@ export default function ToolPricingPage() {
               <Link
                 key={guide.slug}
                 href={`/pricing-guides/${guide.slug}`}
-                className="group rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
+                className="group rounded-md border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
               >
                 <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">{guide.category}</p>
                 <h3 className="mt-2 text-xl font-bold text-fg group-hover:text-accent transition-colors">
@@ -155,7 +155,7 @@ export default function ToolPricingPage() {
         </section>
 
         {/* Why pricing matters for paid-traffic founders */}
-        <section className="mt-14 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-14 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why pricing matters when you are bleeding ad spend</h2>
           <p className="text-fg-muted leading-relaxed">
             A founder running paid traffic to a page that does not convert is paying twice: the ad cost every day,
@@ -169,7 +169,7 @@ export default function ToolPricingPage() {
         {/* FAQs */}
         <section className="mt-14" aria-label="Frequently asked questions">
           <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
-          <div className="divide-y divide-border rounded-2xl border border-border bg-bg-panel">
+          <div className="divide-y divide-border rounded-md border border-border bg-bg-panel">
             {HUB_FAQS.map((faq) => (
               <details key={faq.q} className="group px-6 py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-fg">
@@ -196,7 +196,7 @@ export default function ToolPricingPage() {
           </p>
           <Link
             href="/audit?utm_source=pricing-hub&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>

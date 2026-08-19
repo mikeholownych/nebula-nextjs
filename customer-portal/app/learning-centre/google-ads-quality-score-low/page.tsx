@@ -28,7 +28,7 @@ export default function LearningCentrePage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Google Ads Leaks · Quality Score Low
           </p>
@@ -40,7 +40,7 @@ export default function LearningCentrePage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">What Quality Score actually measures</h2>
           <p className="leading-relaxed text-fg-muted">
             Quality Score is Google&apos;s prediction of how relevant your ad and landing page are to the person searching. It is not a judgment of your business-it is a signal about match quality between search intent and arrival experience.
@@ -65,7 +65,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The page factors that tank Quality Score</h2>
           <p className="leading-relaxed text-fg-muted">Google evaluates your landing page on factors you can actually control:</p>
           <ul className="mt-4 space-y-2 text-fg-muted">
@@ -87,7 +87,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick wins: match the headline to the keyword</h2>
           <p className="leading-relaxed text-fg-muted">
             A consistent Quality Score improvement is also the simplest: make the hero headline repeat the exact keyword phrase the searcher used.
@@ -131,7 +131,7 @@ export default function LearningCentrePage() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Read the component breakdown, not just the 1-10 number</h2>
           <p className="leading-relaxed text-fg-muted">
             The single Quality Score number is a diagnostic summary, not the diagnosis itself. Google
@@ -160,7 +160,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When to give up on the keyword</h2>
           <p className="leading-relaxed text-fg-muted">
             Not every keyword deserves to be saved. Some Quality Score problems are symptoms of a deeper mismatch: the keyword does not align with what you actually offer.
@@ -195,16 +195,16 @@ export default function LearningCentrePage() {
             Before you rewrite ads or restructure campaigns, run the free Nebula audit. It will show you exactly where the landing page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/message-match-checklist" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/message-match-checklist" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Open message match checklist
             </Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/google-ads-clicks-no-sales" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">

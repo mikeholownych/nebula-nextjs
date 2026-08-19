@@ -158,7 +158,7 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
       )}
 
       {/* New experiment */}
-      <div className="rounded-2xl border border-border bg-bg-elevated p-6">
+      <div className="rounded-md border border-border bg-bg-elevated p-6">
         <h2 className="text-base font-semibold text-fg">Start an experiment</h2>
         <p className="mt-1 mb-4 text-sm text-fg-muted">
           Log what you changed. Nebula captures a baseline now and tracks whether the numbers move.
@@ -210,7 +210,7 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
 
       {/* Experiment list */}
       {experiments.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center">
+        <div className="rounded-md border border-border bg-bg-elevated p-10 text-center">
           <h3 className="text-lg font-semibold text-fg">Log what you change. Nebula tracks whether it worked.</h3>
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-fg-muted">
             Every experiment captures a baseline score (and GSC position/CTR when connected), then tracks
@@ -220,7 +220,7 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
       ) : (
         <div className="space-y-4">
           {experiments.map((exp) => (
-            <div key={exp.id} className="rounded-2xl border border-border bg-bg-elevated p-6">
+            <div key={exp.id} className="rounded-md border border-border bg-bg-elevated p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">

@@ -34,7 +34,7 @@ export default function The11pmFounderSpiralPage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
             Landing Page Leaks
           </span>
@@ -47,7 +47,7 @@ export default function The11pmFounderSpiralPage() {
         </div>
 
         {/* Section 1: Name the spiral */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             This Is What the Midnight Refresh Loop Actually Is
           </h2>
@@ -63,7 +63,7 @@ export default function The11pmFounderSpiralPage() {
         </section>
 
         {/* Section 2: What the midnight audit misses */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             What the Midnight Audit Always Misses
           </h2>
@@ -79,7 +79,7 @@ export default function The11pmFounderSpiralPage() {
         </section>
 
         {/* Section 3: What the page is doing while you sleep */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             What Your Page Is Actually Doing While You Spiral
           </h2>
@@ -95,7 +95,7 @@ export default function The11pmFounderSpiralPage() {
         </section>
 
         {/* Section 4: Why self-diagnosis at midnight makes it worse */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Why the 11pm Edit Always Makes It Worse
           </h2>
@@ -114,7 +114,7 @@ export default function The11pmFounderSpiralPage() {
         </section>
 
         {/* Section 5: The one thing different tomorrow */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             The Only Thing That Is Different Tomorrow
           </h2>
@@ -140,7 +140,7 @@ export default function The11pmFounderSpiralPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the Free Audit →
             </Link>
@@ -154,7 +154,7 @@ export default function The11pmFounderSpiralPage() {
         </section>
 
         {/* Related links section */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">Related Articles</h2>
           <ul className="mt-4 space-y-3">
             <li>

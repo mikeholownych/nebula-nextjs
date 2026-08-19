@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicy() {
   return (
     <main id="main-content" className="max-w-3xl mx-auto px-5 pt-32 pb-24">
-      <h1 className="text-4xl font-bold text-fg mb-3 tracking-tight">
+      <h1 className="heading-1 text-fg mb-3 tracking-tight">
         Privacy Policy
       </h1>
       <p className="text-sm text-fg-muted mb-10">

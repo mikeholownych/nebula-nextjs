@@ -97,7 +97,7 @@ export default function MistakesChecklistClient() {
         </section>
 
         {/* Download Form */}
-        <section className="mb-16 bg-bg-muted rounded-xl border border-accent/20 p-8">
+        <section className="mb-16 bg-bg-muted rounded border border-accent/20 p-8">
           <div className="max-w-md mx-auto">
             <h2 className="text-2xl font-extrabold text-fg mb-2">Get The Checklist</h2>
             <p className="text-fg-muted mb-6">

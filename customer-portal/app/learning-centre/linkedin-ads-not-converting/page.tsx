@@ -26,7 +26,7 @@ export default function LinkedinAdsNotConvertingPage() {
         </Link>
 
         {/* Hero card */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             LinkedIn Ads Leaks · linkedin ad to landing page conversion
           </p>
@@ -44,7 +44,7 @@ export default function LinkedinAdsNotConvertingPage() {
         {/* Direct answer */}
         <section
           data-editorial="answer-first"
-          className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+          className="mt-6 rounded-md border border-border bg-bg-panel p-8"
         >
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Direct answer: test the post-click journey, not an assumption
@@ -85,7 +85,7 @@ export default function LinkedinAdsNotConvertingPage() {
         </section>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Cost of Every Page Leak Is Amplified on LinkedIn</h2>
           <p className="leading-relaxed text-fg-muted">
             Use your own CPC and observed conversion rate to model the
@@ -106,7 +106,7 @@ export default function LinkedinAdsNotConvertingPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">B2B Decision Makers Need Peer Proof, Not Feature Lists</h2>
           <p className="leading-relaxed text-fg-muted">
             The professional scrolling LinkedIn is not evaluating your product emotionally - they're evaluating risk. A VP of Marketing who clicks your ad is asking: "Will this embarrass me if I recommend it? Will it actually do what it claims? Has anyone like me used it and gotten results?"
@@ -129,7 +129,7 @@ export default function LinkedinAdsNotConvertingPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Demo Request Is Too High-Commitment for Cold Traffic</h2>
           <p className="leading-relaxed text-fg-muted">
             A common LinkedIn ad funnel sends awareness traffic directly to a
@@ -155,7 +155,7 @@ export default function LinkedinAdsNotConvertingPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Message Match: The Ad Made a Promise, The Page Must Keep It</h2>
           <p className="leading-relaxed text-fg-muted">
             LinkedIn lets you target with precision: seniority, function, company size, industry. You can show a CFO at a 200-person SaaS company a specific ad about financial reporting. That ad created a specific expectation about what the landing page would contain.
@@ -175,17 +175,17 @@ export default function LinkedinAdsNotConvertingPage() {
             Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Browse all leaks
             </Link>
           </div>
         </section>
 
         {/* Related links */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/b2b-saas-landing-page-not-converting" className="block py-2 text-accent hover:text-fg transition-colors font-medium">

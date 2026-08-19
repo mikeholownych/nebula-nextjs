@@ -66,7 +66,7 @@ export default function CitableReleasesPage() {
               projection, not a manually maintained release history.
             </p>
 
-            <dl className="mt-7 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-7 grid gap-px overflow-hidden rounded-md border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ['Detectors', citableReleaseFacts.detectorCount],
                 ['Namespaces', citableReleaseFacts.namespaceCount],
@@ -112,7 +112,7 @@ export default function CitableReleasesPage() {
             </ul>
           </section>
 
-          <section aria-labelledby="verification-boundary-heading" className="mt-12 rounded-2xl border border-border p-7">
+          <section aria-labelledby="verification-boundary-heading" className="mt-12 rounded-md border border-border p-7">
             <h2 id="verification-boundary-heading" className="text-2xl font-bold tracking-tight text-fg">
               Verification boundary
             </h2>

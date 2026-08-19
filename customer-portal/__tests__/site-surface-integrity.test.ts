@@ -1,0 +1,58 @@
+import { readFileSync, readdirSync, statSync } from 'node:fs'
+import path from 'node:path'
+import { describe, expect, it } from '@jest/globals'
+
+const repo = path.resolve(__dirname, '..')
+const EM_DASH = '\u2014'
+
+function walk(dir: string, exts: Set<string>, acc: string[] = []): string[] {
+  for (const entry of readdirSync(dir)) {
+    if (entry === 'node_modules' || entry === '.next' || entry === 'coverage') continue
+    const full = path.join(dir, entry)
+    const st = statSync(full)
+    if (st.isDirectory()) walk(full, exts, acc)
+    else if (exts.has(path.extname(entry))) acc.push(full)
+  }
+  return acc
+}
+
+describe('site surface integrity', () => {
+  it('bans em dashes from live app and component source', () => {
+    const files = [
+      ...walk(path.join(repo, 'app'), new Set(['.ts', '.tsx', '.css'])),
+      ...walk(path.join(repo, 'components'), new Set(['.ts', '.tsx'])),
+    ]
+    const offenders: string[] = []
+    for (const file of files) {
+      const text = readFileSync(file, 'utf8')
+      if (text.includes(EM_DASH)) {
+        const rel = path.relative(repo, file)
+        const lines = text
+          .split('\n')
+          .map((line, i) => (line.includes(EM_DASH) ? `${rel}:${i + 1}` : ''))
+          .filter(Boolean)
+        offenders.push(...lines)
+      }
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('exposes Client Workspace in the live nav and footer', () => {
+    const nav = readFileSync(path.join(repo, 'components/SiteNav.tsx'), 'utf8')
+    const footer = readFileSync(path.join(repo, 'app/components/SiteFooter.tsx'), 'utf8')
+    expect(nav).toContain('href="/workspace"')
+    expect(nav).toMatch(/Client Workspace|Workspace/)
+    expect(footer).toContain('href="/workspace"')
+    expect(footer).toMatch(/Client Workspace/)
+  })
+
+  it('does not assign retired teal as a live accent token', () => {
+    const styles = readFileSync(path.join(repo, 'app/styles.css'), 'utf8')
+    const publicDs = readFileSync(path.join(repo, 'public/styles/nebula-design-system.css'), 'utf8')
+    expect(styles).not.toMatch(/--accent:\s*#00c2a0/)
+    expect(publicDs).not.toMatch(/--accent:\s*#00c2a0/)
+    expect(publicDs).not.toContain('.glow-orb')
+    expect(styles).toMatch(/--accent:\s*#c7ff2f/)
+    expect(publicDs).toMatch(/--accent:\s*#c7ff2f/)
+  })
+})

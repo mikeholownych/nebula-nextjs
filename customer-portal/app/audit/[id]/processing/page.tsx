@@ -237,7 +237,7 @@ export default function ProcessingPage() {
               <button
                 type="submit"
                 disabled={!email || submitting}
-                className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? 'Sending...' : 'Send Full Results'}
               </button>
@@ -269,7 +269,7 @@ export default function ProcessingPage() {
             </p>
             <button
               onClick={() => router.push('/audit')}
-              className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+              className="rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Try Again
             </button>

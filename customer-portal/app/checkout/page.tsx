@@ -36,7 +36,7 @@ export default async function CheckoutPage({
           </Link>
           <h1 className="mb-2 mt-6 text-3xl font-bold text-fg">Secure Checkout</h1>
           {returnedFromStripe ? (
-            <div className="mt-3 rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
+            <div className="mt-3 rounded border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
               <p className="font-semibold text-fg">Your audit is still here.</p>
               <p className="mt-1">You left the payment page - that's fine. Your findings are saved and your checkout is ready when you are.</p>
             </div>
@@ -79,7 +79,7 @@ export default async function CheckoutPage({
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="mt-4 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg"
+              className="mt-4 inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg"
             >
               Run the free audit
             </Link>

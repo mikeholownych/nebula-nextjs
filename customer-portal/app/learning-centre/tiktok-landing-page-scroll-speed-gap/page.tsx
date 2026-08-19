@@ -55,7 +55,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </header>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             The Attention Cadence Mismatch
           </h2>
@@ -74,7 +74,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             What TikTok Traffic Expects Above the Fold
           </h2>
@@ -104,7 +104,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             The Scroll-Depth Problem: Why Paragraph-Heavy Above-Folds Block Conversions
           </h2>
@@ -123,7 +123,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             Four Specific Failure Patterns
           </h2>
@@ -163,7 +163,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             The Offer Continuity Test
           </h2>
@@ -185,7 +185,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             What to Check and Fix Before Scaling Spend
           </h2>
@@ -228,7 +228,7 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/"
-              className="inline-flex items-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="inline-flex items-center rounded bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               Browse Components
             </Link>

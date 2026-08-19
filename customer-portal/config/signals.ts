@@ -1,5 +1,5 @@
 /**
- * Canonical signal registry — single source of truth for all signal metadata.
+ * Canonical signal registry - single source of truth for all signal metadata.
  *
  * Every public-facing projection of signal names, count, descriptions,
  * and ordering MUST derive from this registry.

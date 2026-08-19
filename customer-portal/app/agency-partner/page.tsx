@@ -13,7 +13,7 @@ export default function AgencyPartnerPage() {
     <main className="min-h-screen bg-[#0a0f1a] text-slate-200 px-4 py-16 md:py-24">
       <div className="max-w-3xl mx-auto">
         {/* Hero */}
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
           Turn your agency site into a lead machine
         </h1>
         <p className="text-lg text-slate-400 mb-10 max-w-2xl">

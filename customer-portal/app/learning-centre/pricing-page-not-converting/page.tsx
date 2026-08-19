@@ -28,7 +28,7 @@ export default function LearningCentrePage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Industry Specific · Pricing Page Not Converting
           </p>
@@ -40,7 +40,7 @@ export default function LearningCentrePage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The pricing page leak chain</h2>
           <p className="leading-relaxed text-fg-muted">
             Most pricing pages lose visitors before they ever see the price. Confusion comes first. Then comparison paralysis. Then fear. Each stage leaks potential customers who might otherwise buy.
@@ -50,7 +50,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Common tier mistakes</h2>
           <ul className="space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -72,7 +72,7 @@ export default function LearningCentrePage() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Good tier structure</h2>
           <p className="leading-relaxed text-fg-muted">
             Three tiers. This is not a rule but a strong default. Three gives enough choice without overwhelming. It creates a natural comparison: good, better, best.
@@ -88,7 +88,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Usage-based and seat-based pricing add a specific anxiety</h2>
           <p className="leading-relaxed text-fg-muted">
             Flat-tier pricing has a tier-selection problem. Usage-based or per-seat pricing has a
@@ -116,7 +116,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick wins</h2>
           <ul className="space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -145,16 +145,16 @@ export default function LearningCentrePage() {
               delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/landing-page-not-converting" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/landing-page-not-converting" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Diagnose landing page leaks
             </Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/landing-page-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">

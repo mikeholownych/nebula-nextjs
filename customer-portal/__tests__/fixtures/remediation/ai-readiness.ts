@@ -7,7 +7,7 @@ export const AI_READINESS_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme CRM — Sales Pipeline Management</title>
+  <title>Acme CRM - Sales Pipeline Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Manage your sales pipeline with Acme CRM.">
 </head>
@@ -37,7 +37,7 @@ export const AI_READINESS_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme CRM — Sales Pipeline Management</title>
+  <title>Acme CRM - Sales Pipeline Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Manage your sales pipeline with Acme CRM.">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Acme CRM","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"29","priceCurrency":"USD"}}</script>

@@ -20,7 +20,7 @@ export default function ComparePage() {
   return (
     <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold mb-3">Nebula Components vs the tools founders actually use</h1>
+        <h1 className="heading-1 mb-3">Nebula Components vs the tools founders actually use</h1>
         <p className="text-fg-muted text-lg mb-10">
           Landing page builders create pages. Performance meters measure speed. Nebula audits
           conversion readiness against observable checks. These pages state the boundary

@@ -69,7 +69,7 @@ export default async function PricingGuidePage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           {guide.category} · Pricing verified August 2026
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           {guide.toolName} Pricing (2026): What It Really Costs
         </h1>
 
@@ -84,7 +84,7 @@ export default async function PricingGuidePage({
           <h2 className="mb-6 text-2xl font-bold text-fg">{guide.toolName} pricing plans</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {guide.tiers.map((tier) => (
-              <div key={tier.name} className="rounded-2xl border border-border bg-bg-panel p-6">
+              <div key={tier.name} className="rounded-md border border-border bg-bg-panel p-6">
                 <p className="text-sm font-semibold uppercase tracking-widest text-fg-muted">{tier.name}</p>
                 <p className="mt-2 text-3xl font-bold text-fg">{tier.price}</p>
                 {tier.note ? <p className="mt-2 text-sm text-fg-muted">{tier.note}</p> : null}
@@ -101,13 +101,13 @@ export default async function PricingGuidePage({
         </section>
 
         {/* What you get */}
-        <section className="mt-12 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-12 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-bold text-fg">What you actually get for the price</h2>
           <p className="text-fg-muted leading-relaxed">{guide.whatYouGet}</p>
         </section>
 
         {/* When worth it */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-bold text-fg">When {guide.toolName} is still worth it</h2>
           <p className="text-fg-muted leading-relaxed">{guide.whenWorthIt}</p>
         </section>
@@ -125,13 +125,13 @@ export default async function PricingGuidePage({
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/audit?utm_source=pricing-guide&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
             >
               Audit Your Page Free →
             </Link>
             <Link
               href={`/vs/${guide.vsSlug}`}
-              className="inline-block rounded-xl border border-accent/40 px-8 py-4 font-semibold text-accent hover:bg-accent/10 transition-colors"
+              className="inline-block rounded border border-accent/40 px-8 py-4 font-semibold text-accent hover:bg-accent/10 transition-colors"
             >
               Full {guide.toolName} vs. Nebula Comparison →
             </Link>
@@ -141,7 +141,7 @@ export default async function PricingGuidePage({
         {/* FAQs */}
         <section className="mt-14" aria-label="Frequently asked questions">
           <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
-          <div className="divide-y divide-border rounded-2xl border border-border bg-bg-panel">
+          <div className="divide-y divide-border rounded-md border border-border bg-bg-panel">
             {guide.faqs.map((faq) => (
               <details key={faq.q} className="group px-6 py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-fg">

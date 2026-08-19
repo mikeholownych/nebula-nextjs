@@ -42,7 +42,7 @@ export default function MechanismProof() {
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-border bg-bg-surface p-6">
+          <div className="rounded-md border border-border bg-bg-surface p-6">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-fg-dim">
               Outside our evidence boundary
             </h3>

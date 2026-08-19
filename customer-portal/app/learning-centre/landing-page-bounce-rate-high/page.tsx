@@ -104,7 +104,7 @@ export default function LandingPageBounceRateHigh() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Landing Page Leaks · Bounce Rate
             </p>
@@ -122,7 +122,7 @@ export default function LandingPageBounceRateHigh() {
           </div>
 
           {/* Bounce vs Exit */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Bounce vs exit: which one is the problem
             </h2>
@@ -147,7 +147,7 @@ export default function LandingPageBounceRateHigh() {
           </section>
 
           {/* 3 causes */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 3 diagnosable causes
             </h2>
@@ -171,7 +171,7 @@ export default function LandingPageBounceRateHigh() {
               ].map(({ n, label, body }) => (
                 <div
                   key={n}
-                  className="rounded-xl border border-accent/20 bg-accent/5 p-6"
+                  className="rounded border border-accent/20 bg-accent/5 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-1">
                     Cause {n}
@@ -184,7 +184,7 @@ export default function LandingPageBounceRateHigh() {
           </section>
 
           {/* Diagnosis */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Segment first, fix second
             </h2>
@@ -228,7 +228,7 @@ export default function LandingPageBounceRateHigh() {
           </section>
 
           {/* Fix sequence */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Fix sequence: cause determines order
             </h2>
@@ -270,7 +270,7 @@ export default function LandingPageBounceRateHigh() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -303,13 +303,13 @@ export default function LandingPageBounceRateHigh() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -317,7 +317,7 @@ export default function LandingPageBounceRateHigh() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Related leak checks
             </h2>

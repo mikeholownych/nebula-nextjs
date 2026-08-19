@@ -31,11 +31,11 @@ export default function CtaBelowFoldMobilePage() {
       <div className="mx-auto max-w-3xl px-6 py-14">
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="text-accent uppercase tracking-[0.12em] text-sm font-semibold mb-4">
             Mobile Leaks
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-fg leading-tight mb-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-fg leading-tight mb-6">
             Your CTA May Be Below the Fold on Smaller Phones
           </h1>
           <p className="text-lg leading-relaxed text-fg-muted">
@@ -49,7 +49,7 @@ export default function CtaBelowFoldMobilePage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             The Device Blind Spot Founders Never Catch
           </h2>
@@ -75,7 +75,7 @@ export default function CtaBelowFoldMobilePage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             The 375px Problem: Why This Specific Width Breaks Layouts
           </h2>
@@ -100,7 +100,7 @@ export default function CtaBelowFoldMobilePage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             What &quot;Below the Fold&quot; Actually Means on Mobile
           </h2>
@@ -128,7 +128,7 @@ export default function CtaBelowFoldMobilePage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             Three Layout Patterns That Bury CTAs on Small Screens
           </h2>
@@ -165,7 +165,7 @@ export default function CtaBelowFoldMobilePage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             How to Check Your Page Right Now
           </h2>
@@ -194,7 +194,7 @@ export default function CtaBelowFoldMobilePage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-2xl font-bold text-fg mb-4">
             The Fix: CTA Placement Rules for Mobile-First Layouts
           </h2>
@@ -242,14 +242,14 @@ export default function CtaBelowFoldMobilePage() {
           </p>
           <Link
             href="/#audit"
-            className="inline-block rounded-xl bg-accent px-8 py-4 text-base font-semibold text-white hover:bg-accent/90 transition-colors"
+            className="inline-block rounded bg-accent px-8 py-4 text-base font-semibold text-white hover:bg-accent/90 transition-colors"
           >
             Audit Your Landing Page Free →
           </Link>
         </section>
 
         {/* Related section */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg mb-6">Related Articles</h2>
           <ul className="space-y-4">
             <li>

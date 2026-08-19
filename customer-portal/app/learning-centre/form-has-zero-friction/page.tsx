@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: "Your Form Has Zero Friction — and That May Be Why Nobody Fills It Out | Nebula",
+  title: "Your Form Has Zero Friction - and That May Be Why Nobody Fills It Out | Nebula",
   description:
     'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction block conversions and which build confidence.',
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: "Your Form Has Zero Friction — and That May Be Why Nobody Fills It Out",
+  headline: "Your Form Has Zero Friction - and That May Be Why Nobody Fills It Out",
   description:
     'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction block conversions and which build confidence.',
   url: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
@@ -36,7 +36,7 @@ export default function FormHasZeroFrictionPage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Form Leaks
           </span>
@@ -53,7 +53,7 @@ export default function FormHasZeroFrictionPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">The Friction Removal Trap</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The advice is everywhere: fewer fields, shorter forms, remove every possible barrier.
@@ -70,7 +70,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">What Friction Actually Signals</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Effort signals legitimacy. A form that takes two minutes to fill out - a short
@@ -88,7 +88,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">
             Three Friction Types That Kill vs. the One That Builds Confidence
           </h2>
@@ -119,7 +119,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">
             What a &lsquo;Zero Trust&rsquo; Form Looks Like from the Visitor&rsquo;s Side
           </h2>
@@ -143,7 +143,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">The Post-Submit Experience Failure</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Assume for a moment that someone does fill out the form. What happens? If the answer is
@@ -166,7 +166,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">
             The Specific Fix: What the Form Area Needs Around It
           </h2>
@@ -212,7 +212,7 @@ export default function FormHasZeroFrictionPage() {
           </p>
           <Link
             href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            className="mt-6 inline-block rounded bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             Get Your Free Audit
           </Link>
@@ -228,7 +228,7 @@ export default function FormHasZeroFrictionPage() {
         </section>
 
         {/* Related articles */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">Related Articles</h2>
           <ul className="mt-5 space-y-4">
             <li>

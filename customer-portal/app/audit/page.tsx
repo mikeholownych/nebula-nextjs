@@ -129,7 +129,7 @@ export default async function AuditPage() {
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
             {/* Form first on mobile (order-1 on mobile, order-2 on md+) */}
-            <div id="run-audit" className="order-1 rounded-2xl border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
+            <div id="run-audit" className="order-1 rounded-md border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
               <p className="mb-4 text-sm font-semibold text-fg">
                 Paste your landing page URL
               </p>
@@ -164,7 +164,7 @@ export default async function AuditPage() {
 
             {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
             <div className="order-2 flex flex-col justify-center md:order-1">
-              <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+              <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
                 Check your page before you change the ad.
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
@@ -210,13 +210,13 @@ export default async function AuditPage() {
               </p>
             </div>
 
-            <div className="mb-4 rounded-2xl border border-border bg-bg-muted/20 p-5">
+            <div className="mb-4 rounded-md border border-border bg-bg-muted/20 p-5">
               <p className="font-semibold text-fg text-sm">example-startup.com</p>
               <p className="mt-1 text-xs text-fg-muted">{failCount} of {SAMPLE_FINDINGS.length} verified checks failing</p>
             </div>
 
             {/* Signal rows */}
-            <div className="rounded-2xl border border-border overflow-hidden">
+            <div className="rounded-md border border-border overflow-hidden">
               {SAMPLE_FINDINGS.map((f, i) => (
                 <div
                   key={f.key}
@@ -363,7 +363,7 @@ export default async function AuditPage() {
               </p>
               <a
                 href="#run-audit"
-                className="block w-full rounded-xl bg-accent py-3.5 text-center font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
+                className="block w-full rounded bg-accent py-3.5 text-center font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
               >
                 Run the audit first &rarr;
               </a>

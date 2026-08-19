@@ -60,7 +60,7 @@ export default function CitableComparisonPage() {
               external source.
             </p>
 
-            <div className="mt-7 overflow-x-auto rounded-2xl border border-border">
+            <div className="mt-7 overflow-x-auto rounded-md border border-border">
               <table className="min-w-[760px] w-full border-collapse text-left text-sm">
                 <thead className="bg-bg-elevated text-fg">
                   <tr>
@@ -94,14 +94,14 @@ export default function CitableComparisonPage() {
           <section aria-labelledby="fit-heading" className="mt-12 border-t border-border pt-10">
             <h2 id="fit-heading" className="text-2xl font-bold tracking-tight text-fg">Use the tools together</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-border bg-bg-panel p-6">
+              <div className="rounded-md border border-border bg-bg-panel p-6">
                 <h3 className="text-lg font-semibold text-fg">Citable is appropriate when</h3>
                 <p className="mt-3 text-sm leading-relaxed text-fg-muted">
                   You need a bounded technical or semantic observation, its inputs and limits, and a
                   retained evidence package before a person makes a publication or remediation decision.
                 </p>
               </div>
-              <div className="rounded-2xl border border-border bg-bg-panel p-6">
+              <div className="rounded-md border border-border bg-bg-panel p-6">
                 <h3 className="text-lg font-semibold text-fg">Citable is not a monitoring replacement</h3>
                 <p className="mt-3 text-sm leading-relaxed text-fg-muted">
                   Use an external source whenever the decision depends on observed crawler behavior,

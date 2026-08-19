@@ -3,11 +3,11 @@ export const MOBILE_VIEWPORT_FIXTURE = {
   ruleVersion: '2.0',
 
   failCase: {
-    description: 'Missing viewport meta tag — page renders at desktop width on mobile',
+    description: 'Missing viewport meta tag - page renders at desktop width on mobile',
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Consulting — Strategy & Execution</title>
+  <title>Acme Consulting - Strategy & Execution</title>
   <meta name="description" content="Acme Consulting helps B2B companies grow revenue.">
 </head>
 <body>
@@ -27,7 +27,7 @@ export const MOBILE_VIEWPORT_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Consulting — Strategy & Execution</title>
+  <title>Acme Consulting - Strategy & Execution</title>
   <meta name="description" content="Acme Consulting helps B2B companies grow revenue.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>

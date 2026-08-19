@@ -7,7 +7,7 @@ export const AD_TRACKING_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Fitness — Online Personal Training</title>
+  <title>Acme Fitness - Online Personal Training</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Get fit with personalized training plans.">
 </head>
@@ -30,7 +30,7 @@ export const AD_TRACKING_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme Fitness — Online Personal Training</title>
+  <title>Acme Fitness - Online Personal Training</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Get fit with personalized training plans.">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>

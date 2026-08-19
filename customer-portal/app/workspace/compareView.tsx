@@ -253,7 +253,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
             <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">Before</p>
-            <p className="text-4xl font-bold text-fg-muted">
+            <p className="text-4xl font-bold tabular-nums text-fg-muted">
               {Math.round(beforeScore * 10)}
               <span className="text-base text-fg-dim font-normal">/100</span>
             </p>
@@ -280,7 +280,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
           </div>
           <div className="flex-1 text-right">
             <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">After</p>
-            <p className="text-4xl font-bold text-accent">
+            <p className="text-4xl font-bold tabular-nums text-accent">
               {Math.round(afterScore * 10)}
               <span className="text-base text-fg-dim font-normal">/100</span>
             </p>

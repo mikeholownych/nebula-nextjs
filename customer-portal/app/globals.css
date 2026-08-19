@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* ══════════════════════════════════════════════════════════
-   NEBULA — Editorial Precision design system v2
+   NEBULA - Editorial Precision design system v2
    Accent: Nebula Chartreuse #c7ff2f  (replaces teal #00c2a0)
    Mark:   3×3 NebulaMark as scaled design device
-   Type:   Editorial discipline — weight and scale carry hierarchy
+   Type:   Editorial discipline - weight and scale carry hierarchy
 ══════════════════════════════════════════════════════════ */
 
 /* ─── Cookie consent hide (returning visitors) ─────────── */
@@ -138,7 +138,7 @@ a {
 ══════════════════════════════════════════════════════════ */
 
 /* ─── Site nav ─────────────────────────────────────────── */
-/* Tailwind-driven — bare header{} rule removed to prevent bleed */
+/* Tailwind-driven - bare header{} rule removed to prevent bleed */
 header nav { display: flex; gap: 24px; }
 header nav a {
   color: var(--fg-muted);
@@ -163,7 +163,7 @@ header nav a:focus-visible {
 }
 
 /* ══════════════════════════════════════════════════════════
-   DESIGN SYSTEM — Component primitives
+   DESIGN SYSTEM - Component primitives
 ══════════════════════════════════════════════════════════ */
 
 /* ─── Heading hierarchy ────────────────────────────────── */
@@ -226,7 +226,7 @@ header nav a:focus-visible {
   border-radius: var(--radius-lg);
   padding: 32px;
 }
-/* Hover affordance — no glow, just border elevation */
+/* Hover affordance - no glow, just border elevation */
 .card-interactive {
   transition: border-color var(--motion-duration-base) var(--motion-ease-standard);
 }
@@ -395,9 +395,9 @@ header nav a:focus-visible {
   contain: layout style;
 }
 
-/* ═══ NEBULA MARK — display-scale device ════════════════════
+/* ═══ NEBULA MARK - display-scale device ════════════════════
    Use NebulaMark at 80-200px for section devices.
-   The mark is the product — treat it as such.
+   The mark is the product - treat it as such.
 ══════════════════════════════════════════════════════════ */
 .mark-bg {
   position: absolute;
@@ -1093,7 +1093,7 @@ header nav a:focus-visible {
 }
 
 /* ═══ FOOTER ═════════════════════════════════════════════════ */
-/* SiteFooter uses Tailwind — bare footer{} removed */
+/* SiteFooter uses Tailwind - bare footer{} removed */
 .footer-inner { max-width: 600px; margin: 0 auto; text-align: center; }
 .footer-links {
   display: flex;
@@ -1112,7 +1112,7 @@ header nav a:focus-visible {
 .footer-copy { font-size: var(--text-xs); color: var(--fg-dim); }
 
 /* ═══ POLISH UTILITIES ═══════════════════════════════════════ */
-/* card-hover: border elevation only — no glow */
+/* card-hover: border elevation only - no glow */
 .card-hover {
   @apply transition-colors duration-200;
 }

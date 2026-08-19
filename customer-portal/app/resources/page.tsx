@@ -48,7 +48,7 @@ export default function ResourcesPage() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Components
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">Resources</h1>
+          <h1 className="heading-1 tracking-tight text-fg md:text-6xl">Resources</h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
             Open-source tools built from real problems on real sites. Each one addresses a specific, reproducible failure mode we encountered while diagnosing and fixing landing pages.
           </p>
@@ -56,7 +56,7 @@ export default function ResourcesPage() {
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
             <Link
               href="/resources/citable"
-              className="flex flex-col gap-2.5 rounded-2xl border border-border bg-bg-panel p-7 transition-colors hover:border-accent/30"
+              className="flex flex-col gap-2.5 rounded-md border border-border bg-bg-panel p-7 transition-colors hover:border-accent/30"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Open Source CLI</p>
               <h2 className="text-xl font-semibold tracking-tight text-fg">Citable</h2>

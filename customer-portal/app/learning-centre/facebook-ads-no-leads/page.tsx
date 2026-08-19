@@ -25,7 +25,7 @@ export default function FacebookAdsNoLeadsPage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Meta Ads Leaks · Facebook Ads</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain
@@ -41,7 +41,7 @@ export default function FacebookAdsNoLeadsPage() {
         {/* Direct answer */}
         <section
           data-editorial="answer-first"
-          className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+          className="mt-6 rounded-md border border-border bg-bg-panel p-8"
         >
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Direct answer: inspect the ad-to-page handoff
@@ -81,7 +81,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Facebook-to-Landing-Page Transition Shock</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Facebook and Instagram are passive scroll environments. People are not there to evaluate products. They're looking at photos of people they know, watching short videos, or following a news thread. When your ad interrupts that experience, you've created a pattern-break - and if it's compelling enough, they click.
@@ -95,7 +95,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Message Match Problem on Meta</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Meta ads work by pattern-breaking the feed. A strong ad creates a specific tone, makes a specific promise, and shows a specific visual style. The visitor clicked because something in that combination resonated. When they arrive on the landing page, they're looking - consciously or not - for confirmation that they're in the right place.
@@ -109,7 +109,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Trust Gap: Meta Traffic Is Cold</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             There's a fundamental difference between Google search traffic and Meta traffic that most advertisers underestimate. Google visitors have declared intent - they typed a query that tells you exactly what they're looking for. Meta visitors have done no such thing. They were living their lives and your ad interrupted them. They have no prior relationship with your brand and no expressed need.
@@ -130,7 +130,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Lead Forms vs Landing Pages: Choosing the Right Friction</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Meta&apos;s native Lead Ads - where the form lives inside Facebook
@@ -155,7 +155,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Diagnosing the Leak: Is the Ad Working or Is the Page Failing?</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Before you change your landing page, confirm that it is actually the leak. Meta's ad analytics give you the data to make this call precisely, and acting on the wrong diagnosis is expensive.
@@ -174,7 +174,7 @@ export default function FacebookAdsNoLeadsPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick Fixes for Meta Landing Pages</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Once you've confirmed the page is the leak, these are the highest-priority changes to implement first - roughly ordered by effort-to-priority ratio.
@@ -195,17 +195,17 @@ export default function FacebookAdsNoLeadsPage() {
             Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Open leak map
             </Link>
           </div>
         </section>
 
         {/* Related Links */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/message-match-checklist" className="block py-2 text-accent hover:text-fg transition-colors font-medium">

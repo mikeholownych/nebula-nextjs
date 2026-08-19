@@ -38,7 +38,7 @@ export default function ProofBeforeCTAPage() {
         </nav>
 
         {/* Article header */}
-        <div className="rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Trust Leaks · Proof Before CTA
           </p>
@@ -53,7 +53,7 @@ export default function ProofBeforeCTAPage() {
         </div>
 
         {/* Section 1 - Psychology */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Why Asking Before Proving Fails
           </h2>
@@ -80,7 +80,7 @@ export default function ProofBeforeCTAPage() {
         </section>
 
         {/* Section 2 - What counts as proof */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             What Actually Counts as Proof
           </h2>
@@ -134,7 +134,7 @@ export default function ProofBeforeCTAPage() {
         </section>
 
         {/* Section 3 - Proof placement */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Where to Place Proof Relative to the CTA
           </h2>
@@ -187,7 +187,7 @@ export default function ProofBeforeCTAPage() {
         </section>
 
         {/* Section 4 - 3 quick implementations */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             3 Implementations That Don&apos;t Require a Redesign
           </h2>
@@ -230,7 +230,7 @@ export default function ProofBeforeCTAPage() {
         </section>
 
         {/* Section 5 - Zero testimonials */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             What to Use When You Have Zero Testimonials Yet
           </h2>
@@ -285,13 +285,13 @@ export default function ProofBeforeCTAPage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
             <Link
               href="/learning-centre/paid-traffic-leak-map"
-              className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
+              className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
             >
               Open the leak map
             </Link>

@@ -38,7 +38,7 @@ export default function SocialProofBackfirePage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Trust Leaks
           </span>
@@ -56,7 +56,7 @@ export default function SocialProofBackfirePage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Configuration 1: Stock-Photo Avatars
           </h2>
@@ -81,7 +81,7 @@ export default function SocialProofBackfirePage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Configuration 2: Undated or Obviously Stale Reviews
           </h2>
@@ -106,7 +106,7 @@ export default function SocialProofBackfirePage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Configuration 3: ICP Mismatch
           </h2>
@@ -133,7 +133,7 @@ export default function SocialProofBackfirePage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Configuration 4: Generic Outcome Claims
           </h2>
@@ -160,7 +160,7 @@ export default function SocialProofBackfirePage() {
         </section>
 
         {/* Section 5 - Removing beats keeping */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Removing Broken Testimonials Outperforms Keeping Them
           </h2>
@@ -190,7 +190,7 @@ export default function SocialProofBackfirePage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               Get your free audit →
             </Link>
@@ -204,7 +204,7 @@ export default function SocialProofBackfirePage() {
         </section>
 
         {/* Related articles */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-lg font-bold text-fg">Related Articles</h2>
           <ul className="mt-4 space-y-3">
             <li>

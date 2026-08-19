@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page Conversion Score — Nebula</title>
-  <meta name="description" content="Enter your domain. See your conversion score and top leak instantly — no signup required.">
+  <title>Landing Page Conversion Score - Nebula</title>
+  <meta name="description" content="Enter your domain. See your conversion score and top leak instantly - no signup required.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -196,7 +196,7 @@
   <!-- Hero -->
   <div class="hero">
     <h1>See your landing page<br>conversion score <em>now.</em></h1>
-    <p>Enter your domain. Your score and top conversion leak appear instantly — no signup, no call, no agency pitch.</p>
+    <p>Enter your domain. Your score and top conversion leak appear instantly - no signup, no call, no agency pitch.</p>
   </div>
 
   <!-- Input -->
@@ -221,7 +221,7 @@
     <!-- Score block -->
     <div class="score-block">
       <div class="score-row">
-        <div class="score-number" id="scoreNum">—</div>
+        <div class="score-number" id="scoreNum">-</div>
         <div class="score-meta">
           <div class="score-label">Conversion score</div>
           <div class="score-grade" id="scoreGrade"></div>
@@ -256,7 +256,7 @@
     <div class="sent-state" id="sentState">
       <div class="check">✓</div>
       <h3>Full audit on the way.</h3>
-      <p>Check your inbox — it includes all 9 signals, ranked by impact, with specific fixes.<br>We'll follow up with the implementation offer.</p>
+      <p>Check your inbox - it includes all 9 signals, ranked by impact, with specific fixes.<br>We'll follow up with the implementation offer.</p>
     </div>
 
   </div>
@@ -373,7 +373,7 @@ async function runAudit() {
     renderResult(data);
 
   } catch (e) {
-    showError('Network error — check your connection and try again.');
+    showError('Network error - check your connection and try again.');
   } finally {
     stopPhrases();
     document.getElementById('loading').style.display = 'none';
@@ -469,7 +469,7 @@ async function sendAudit() {
     document.getElementById('sentState').style.display = 'block';
 
   } catch (e) {
-    // Still show sent state — email likely captured
+    // Still show sent state - email likely captured
     document.getElementById('ctaBlock').style.display = 'none';
     document.getElementById('sentState').style.display = 'block';
   } finally {

@@ -35,7 +35,7 @@ export default function CpcBreakEvenLandingPagePage() {
           <span className="mb-4 inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
             Paid Traffic Economics
           </span>
-          <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-fg lg:text-5xl">
+          <h1 className="mb-6 heading-1 leading-tight tracking-tight text-fg lg:text-5xl">
             What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even
           </h1>
           <p className="text-xl leading-relaxed text-fg-muted">

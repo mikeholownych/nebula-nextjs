@@ -22,7 +22,7 @@ export default function CategoryAccordion({ categoryOrder, categories }: Props) 
             key={cat}
             id={id}
             open={cat === 'Landing Page Leaks'}
-            className="group overflow-hidden rounded-2xl border border-border"
+            className="group overflow-hidden rounded-md border border-border"
           >
             <summary
               className="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 text-left transition-colors hover:bg-bg-muted/30 [&::-webkit-details-marker]:hidden"

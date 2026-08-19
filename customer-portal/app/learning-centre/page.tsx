@@ -55,7 +55,7 @@ export default function LearningCentreIndex() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Learning Centre
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">
+          <h1 className="heading-1 tracking-tight text-fg md:text-6xl">
             Fix the page, not the ad
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">
@@ -64,13 +64,13 @@ export default function LearningCentreIndex() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </a>
             <a
               href="/learning-centre/paid-traffic-leak-map"
-              className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/5 transition-colors"
+              className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/5 transition-colors"
             >
               Open leak map
             </a>
@@ -92,7 +92,7 @@ export default function LearningCentreIndex() {
           </p>
           <a
             href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+            className="mt-8 inline-flex rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run the free audit →
           </a>

@@ -81,11 +81,11 @@ function buildFallbackAnswer(
     if (top.length === 0) return 'All signals are passing - no critical findings to prioritize.'
     const lines = ['**Highest-priority findings** (sorted by priority):\n']
     for (const f of top) {
-      lines.push(`1. **${f.label}** (priority: ${f.impact}/10) — ${f.url}`)
+      lines.push(`1. **${f.label}** (priority: ${f.impact}/10) - ${f.url}`)
       if (f.issue) lines.push(`   Problem: ${f.issue}`)
       if (f.fix) lines.push(`   Fix: ${f.fix}`)
     }
-    lines.push('\nStart with #1 — it has the highest priority based on journey position, severity, and reproducibility.')
+    lines.push('\nStart with #1 - it has the highest priority based on journey position, severity, and reproducibility.')
     return lines.join('\n')
   }
 

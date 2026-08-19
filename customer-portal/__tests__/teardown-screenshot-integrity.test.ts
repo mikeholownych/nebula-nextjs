@@ -19,7 +19,7 @@ describe('public teardown screenshot integrity', () => {
   test.each(Object.values(TEARDOWNS).map((teardown) => [teardown.slug, teardown] as const))(
     '%s has a screenshot asset (PNG or WebP)',
     (slug, teardown) => {
-      // Accept either .png or .webp — WebP is preferred (smaller, same quality)
+      // Accept either .png or .webp - WebP is preferred (smaller, same quality)
       const isPng = teardown.screenshotUrl?.endsWith('.png')
       const isWebp = teardown.screenshotUrl?.endsWith('.webp')
       expect(isPng || isWebp).toBe(true)

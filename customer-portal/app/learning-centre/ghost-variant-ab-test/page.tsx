@@ -37,7 +37,7 @@ export default function GhostVariantAbTestPage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
             Landing Page Leaks
           </span>
@@ -55,7 +55,7 @@ export default function GhostVariantAbTestPage() {
         </div>
 
         {/* Section 1: What a ghost variant is */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             What a Ghost Variant Is: The False Positive Win
           </h2>
@@ -82,7 +82,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Section 2: How this happens */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             How This Happens: Four Named Failure Modes
           </h2>
@@ -121,7 +121,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Section 3: Why standard analytics won't catch it */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Why Standard Analytics Won't Catch It
           </h2>
@@ -153,7 +153,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Section 4: Compounding damage */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             The Compounding Damage: Baseline Rot
           </h2>
@@ -179,7 +179,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Section 5: How to detect it */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             How to Detect a Ghost Variant Before You Declare a Winner
           </h2>
@@ -226,7 +226,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Section 6: What to do if you have one */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             What to Do If You Think You Have a Ghost Variant
           </h2>
@@ -272,7 +272,7 @@ export default function GhostVariantAbTestPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:opacity-85 hover:bg-accent"
+              className="inline-flex items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run Your Free Audit →
             </Link>
@@ -286,7 +286,7 @@ export default function GhostVariantAbTestPage() {
         </section>
 
         {/* Related links section */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">Related Articles</h2>
           <ul className="mt-4 space-y-3">
             <li>

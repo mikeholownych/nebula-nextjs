@@ -28,7 +28,7 @@ export default function LearningCentrePage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Meta Ads Leaks · Retargeting Not Converting
           </p>
@@ -40,7 +40,7 @@ export default function LearningCentrePage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The retargeting misconception</h2>
           <p className="leading-relaxed text-fg-muted">
             Most teams assume retargeting ads aren&apos;t working when conversions stay low. But retargeting doesn&apos;t create demand-it reminds. If the first visit didn&apos;t move the visitor toward action, the tenth visit won&apos;t either.
@@ -50,7 +50,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">How the first page affects retargeting</h2>
           <p className="leading-relaxed text-fg-muted">
             <strong className="text-fg">Trust:</strong> If the first impression felt generic, manipulative, or unclear, retargeting reminds them of that feeling. You&apos;re not re-engaging-you&apos;re reinforcing distrust.
@@ -63,7 +63,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Segment retargeting by drop-off point, not just by &quot;visited&quot;</h2>
           <p className="leading-relaxed text-fg-muted">
             A single &quot;all site visitors&quot; retargeting audience treats a visitor who bounced
@@ -91,7 +91,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Diagnosing the real leak</h2>
           <p className="leading-relaxed text-fg-muted">Compare cold traffic vs returning traffic conversion rates:</p>
           <ul className="mt-4 space-y-2 text-fg-muted">
@@ -113,7 +113,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick fix</h2>
           <p className="leading-relaxed text-fg-muted">Before adjusting retargeting budgets, frequency, or creative:</p>
           <ul className="mt-4 space-y-2 text-fg-muted">
@@ -146,16 +146,16 @@ export default function LearningCentrePage() {
               delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Open leak map
             </Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/facebook-ads-no-leads" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">

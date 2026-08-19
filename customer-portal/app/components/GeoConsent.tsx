@@ -1,5 +1,5 @@
 /**
- * CookieConsentStatic — static version of GeoConsent.
+ * CookieConsentStatic - static version of GeoConsent.
  *
  * Renders the CookieConsent banner with country=null (EU-conservative default).
  * Country detection moved to the consent runtime script itself, which reads
@@ -9,7 +9,7 @@
  * This is the privacy-correct default: show the banner to everyone.
  * Analytics only load after explicit "Accept all" click.
  *
- * Does NOT call headers() — keeps the layout statically renderable.
+ * Does NOT call headers() - keeps the layout statically renderable.
  */
 import CookieConsent from './CookieConsent'
 

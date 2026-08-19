@@ -23,7 +23,7 @@ export default function PaidTrafficLeakScorecardPage() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-10 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Nebula Components</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-fg md:text-5xl">
+          <h1 className="mt-3 heading-1 tracking-tight text-fg md:text-5xl">
             Before you raise ad spend, find out whether the page is leaking the clicks.
           </h1>
           <p className="mt-5 text-lg leading-8 text-fg-muted">
@@ -43,7 +43,7 @@ export default function PaidTrafficLeakScorecardPage() {
         <section className="mt-20 border-t border-border pt-12" aria-labelledby="scorecard-faq-heading">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Questions</p>
           <h2 id="scorecard-faq-heading" className="mt-2 text-2xl font-bold tracking-tight text-fg">About this scorecard</h2>
-          <div className="mt-6 divide-y divide-border rounded-2xl border border-border bg-bg-muted/15">
+          <div className="mt-6 divide-y divide-border rounded-md border border-border bg-bg-muted/15">
             {scorecardFaqItems.map((item) => (
               <article key={item.question} className="p-5 md:p-6">
                 <h3 className="font-semibold text-fg">{item.question}</h3>

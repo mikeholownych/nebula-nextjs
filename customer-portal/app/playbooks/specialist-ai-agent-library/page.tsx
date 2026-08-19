@@ -90,7 +90,7 @@ export default function SpecialistAiAgentLibraryPage() {
       </nav>
 
       <div className="mx-auto max-w-3xl px-6 py-8">
-        <div className="rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Founder Systems · extracted from NipPro AI
           </p>
@@ -102,14 +102,14 @@ export default function SpecialistAiAgentLibraryPage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The stolen pattern</h2>
           <p className="leading-relaxed text-fg-muted">
             <strong className="text-fg">One specialist per role.</strong> Each agent gets a narrow mission, a trigger, a tool boundary, reusable prompts, handoff logic, and review gate. No one-agent-does-everything sludge.
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">7-element agent card</h2>
           <ul className="space-y-2 text-fg-muted">
             {AGENT_CARD_ELEMENTS.map((item) => (
@@ -126,7 +126,7 @@ export default function SpecialistAiAgentLibraryPage() {
         <h2 className="mb-4 mt-10 text-2xl font-bold text-fg">Nebula domain map</h2>
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {DOMAIN_MAP.map((item) => (
-            <article key={item.eyebrow} className="rounded-2xl border border-border bg-bg-panel p-6">
+            <article key={item.eyebrow} className="rounded-md border border-border bg-bg-panel p-6">
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.1em] text-accent">{item.eyebrow}</p>
               <h3 className="mb-2 text-lg font-semibold text-fg">{item.title}</h3>
               <p className="text-sm leading-relaxed text-fg-muted">{item.description}</p>
@@ -134,7 +134,7 @@ export default function SpecialistAiAgentLibraryPage() {
           ))}
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Anti-patterns to avoid</h2>
           <ul className="space-y-2 text-fg-muted">
             {ANTI_PATTERNS.map((item) => (
@@ -146,7 +146,7 @@ export default function SpecialistAiAgentLibraryPage() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-6">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-lg font-semibold text-fg">Related playbooks</h2>
           <ul className="space-y-2 text-sm">
             <li><Link href="/playbooks/founder-second-brain" className="text-accent hover:underline">Founder Second Brain: Capture and Reuse Your Best Thinking</Link></li>
@@ -161,10 +161,10 @@ export default function SpecialistAiAgentLibraryPage() {
               delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Run the audit before checkout
             </Link>
           </div>

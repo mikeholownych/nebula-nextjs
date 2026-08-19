@@ -55,10 +55,10 @@ export default function WhatIsLandingPageAudit() {
       <main id="main-content">
       <header className="bg-[#0d1117] pt-28 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-emerald-400 text-xs font-bold mb-4">
+          <p className="text-accent text-xs font-bold mb-4">
             Landing Page Guide
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight mb-4">
             What Is a Landing Page Audit? The Complete Guide for Founders
           </h1>
           <p className="text-gray-400 text-lg">
@@ -81,7 +81,7 @@ export default function WhatIsLandingPageAudit() {
             A landing page audit is a <strong className="text-white">systematic evaluation</strong> of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness.
           </p>
           <p className="text-gray-300 mb-4">
-            It evaluates each signal and produces a prioritized fix list. It is not a subjective opinion — it is a scored diagnostic that shows which observable page conditions are failing and which are passing.
+            It evaluates each signal and produces a prioritized fix list. It is not a subjective opinion - it is a scored diagnostic that shows which observable page conditions are failing and which are passing.
           </p>
           <div className="bg-[#161b22] border border-[#30363d] rounded-lg p-6 my-6">
             <p className="text-emerald-400 font-semibold mb-2">The 9 Signals:</p>
@@ -120,7 +120,7 @@ export default function WhatIsLandingPageAudit() {
           <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-6 my-6">
             <p className="text-red-400 font-semibold mb-2">⚠️ Warning Sign</p>
             <p className="text-gray-300">
-              If you have spent $1,000+ on ads with zero conversions, the landing page is worth investigating. It may not be the only factor — but it is the one you can check in under 2 minutes without changing your ad account.
+              If you have spent $1,000+ on ads with zero conversions, the landing page is worth investigating. It may not be the only factor - but it is the one you can check in under 2 minutes without changing your ad account.
             </p>
           </div>
         </section>

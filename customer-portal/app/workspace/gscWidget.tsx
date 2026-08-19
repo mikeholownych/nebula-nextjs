@@ -135,7 +135,7 @@ export default function GscWidget({ email }: { email: string }) {
   // Loading
   if (loading) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="text-sm text-fg-muted">Checking Search Console connection…</p>
       </div>
     )
@@ -144,7 +144,7 @@ export default function GscWidget({ email }: { email: string }) {
   // Error
   if (error && !status) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="text-sm text-danger">{error}</p>
       </div>
     )
@@ -153,7 +153,7 @@ export default function GscWidget({ email }: { email: string }) {
   // NOT connected
   if (!status?.connected) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Integrations</p>
@@ -190,7 +190,7 @@ export default function GscWidget({ email }: { email: string }) {
   const rows = metrics?.rows || []
 
   return (
-    <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+    <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
       <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Integrations · Last 28 days</p>

@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'Can fixing my landing page reduce my CPC?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'According to Google Ads documentation, improving Landing Page Experience — by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path — can improve your Quality Score. A higher Quality Score can reduce your CPC in the ad auction for the same ad position. Separately, fixing observable page-level friction (unclear CTAs, missing trust signals, slow load) may improve conversion rates — though this is not guaranteed by the Quality Score change alone. The two potential improvements are independent: lower CPC is a documented auction mechanic; conversion improvement depends on whether the specific page conditions were actually blocking visitors.',
+        text: 'According to Google Ads documentation, improving Landing Page Experience - by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path - can improve your Quality Score. A higher Quality Score can reduce your CPC in the ad auction for the same ad position. Separately, fixing observable page-level friction (unclear CTAs, missing trust signals, slow load) may improve conversion rates - though this is not guaranteed by the Quality Score change alone. The two potential improvements are independent: lower CPC is a documented auction mechanic; conversion improvement depends on whether the specific page conditions were actually blocking visitors.',
       },
     },
     {
@@ -88,7 +88,7 @@ export default function HighCpcLowConversion() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Paid Traffic Economics · CPC and Conversion
             </p>
@@ -105,7 +105,7 @@ export default function HighCpcLowConversion() {
           </div>
 
           {/* Quality Score mechanics */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Why CPC and conversion are linked through Quality Score
             </h2>
@@ -153,7 +153,7 @@ export default function HighCpcLowConversion() {
           </section>
 
           {/* Two-layer diagnosis */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Two-layer diagnosis: ad layer vs page layer
             </h2>
@@ -196,7 +196,7 @@ export default function HighCpcLowConversion() {
           </section>
 
           {/* Landing page fixes for QS */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Landing page fixes that improve Quality Score
             </h2>
@@ -238,7 +238,7 @@ export default function HighCpcLowConversion() {
           </section>
 
           {/* The compound effect */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Why fixing the page improves both CPC and conversion simultaneously
             </h2>
@@ -246,7 +246,7 @@ export default function HighCpcLowConversion() {
               A page fix can create a compounding effect: better message-match
               may raise Landing Page Experience, which can improve Quality Score,
               which lowers CPC in the auction (per Google&apos;s documented mechanics). Separately, the same
-              message-match improvement may help visitors recognise they are in the right place — potentially
+              message-match improvement may help visitors recognise they are in the right place - potentially
               improving conversion rate, though this outcome is not guaranteed.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
@@ -254,7 +254,7 @@ export default function HighCpcLowConversion() {
               low Quality Score is expensive without improving your position
               proportionally, and it does nothing for conversion rate. The same
               budget after a landing page fix may buy more clicks at lower CPC and
-              convert more of them — but this depends on whether the specific page conditions were actually the bottleneck.
+              convert more of them - but this depends on whether the specific page conditions were actually the bottleneck.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               This is why high CPC + low conversion is a page problem before it
@@ -265,7 +265,7 @@ export default function HighCpcLowConversion() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -296,13 +296,13 @@ export default function HighCpcLowConversion() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -310,7 +310,7 @@ export default function HighCpcLowConversion() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
             <div className="space-y-1">
               {[

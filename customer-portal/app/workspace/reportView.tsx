@@ -142,7 +142,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
 
       {/* Report body - shown on screen and in print */}
       {detail && !loading && (
-        <div className="rounded-2xl border border-border bg-bg-elevated p-8 print:border-none print:bg-white print:text-bg print:p-0">
+        <div className="rounded-md border border-border bg-bg-elevated p-8 print:border-none print:bg-white print:text-bg print:p-0">
 
           {/* Header */}
           <div className="mb-8 border-b border-border pb-8 print:border-gray-200">
@@ -157,18 +157,18 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
             <div className="mt-6 flex flex-wrap gap-6">
               <div>
                 <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Score</p>
-                <p className="text-4xl font-bold text-fg print:text-bg">
+                <p className="text-4xl font-bold tabular-nums text-fg print:text-bg">
                   {detail.composite ?? detail.score}
                   <span className="text-xl text-fg-muted print:text-fg-dim">/10</span>
                 </p>
               </div>
               <div>
                 <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Grade</p>
-                <p className="text-4xl font-bold text-fg print:text-bg">{detail.grade}</p>
+                <p className="text-4xl font-bold tabular-nums text-fg print:text-bg">{detail.grade}</p>
               </div>
               <div>
                 <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Findings</p>
-                <p className="text-4xl font-bold text-fg print:text-bg">{detail.findings?.length ?? 0}</p>
+                <p className="text-4xl font-bold tabular-nums text-fg print:text-bg">{detail.findings?.length ?? 0}</p>
               </div>
             </div>
           </div>

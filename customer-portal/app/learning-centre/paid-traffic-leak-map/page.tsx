@@ -160,7 +160,7 @@ export default function PaidTrafficLeakMapPage() {
 
         <div className="mx-auto max-w-3xl px-6 py-10">
           {/* Hero */}
-          <div className="rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Diagnostic Framework · Paid Traffic
             </p>
@@ -176,7 +176,7 @@ export default function PaidTrafficLeakMapPage() {
           </div>
 
           {/* How to use the map */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">How to use this map</h2>
             <p className="leading-relaxed text-fg-muted">
               Work through the leaks in sequence - each stage gates the next. A visitor
@@ -193,7 +193,7 @@ export default function PaidTrafficLeakMapPage() {
           {/* Leak cards */}
           <section className="mt-6 space-y-5">
             {LEAKS.map((leak, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-bg-panel p-7">
+              <div key={i} className="rounded-md border border-border bg-bg-panel p-7">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="rounded-full border border-accent/30 px-3 py-1 text-xs font-bold text-accent">
                     {leak.stage}
@@ -234,7 +234,7 @@ export default function PaidTrafficLeakMapPage() {
           </section>
 
           {/* Triage table */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-5 text-2xl font-bold text-fg">
               Quick-triage table: what you see → where to look
             </h2>
@@ -257,7 +257,7 @@ export default function PaidTrafficLeakMapPage() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -286,13 +286,13 @@ export default function PaidTrafficLeakMapPage() {
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-8 py-4 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-8 py-4 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>

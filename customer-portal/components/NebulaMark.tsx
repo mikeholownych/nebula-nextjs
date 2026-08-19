@@ -117,7 +117,7 @@ export function NebulaMark({
  */
 export function NebulaLogo({ size = 24, ...props }: { size?: number } & SVGProps<SVGSVGElement>) {
   // Fixed decorative state: top-left cluster pass, rest neutral.
-  // Chartreuse passes, neutral dimmed — matches new accent system.
+  // Chartreuse passes, neutral dimmed - matches new accent system.
   const decorativeStates: SignalState[] = [
     'pass', 'pass', 'neutral',
     'pass', 'neutral', 'neutral',

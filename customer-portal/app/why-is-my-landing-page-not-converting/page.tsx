@@ -201,7 +201,7 @@ export default function WhyNotConvertingPage() {
             </p>
           </header>
 
-          <section className="mb-12 rounded-2xl border border-border bg-bg-muted/20 p-6 md:p-8">
+          <section className="mb-12 rounded-md border border-border bg-bg-muted/20 p-6 md:p-8">
             <h2 className="text-xl font-bold text-fg mb-4">The Diagnosis Order Matters</h2>
             <div className="space-y-4 text-sm text-fg-muted leading-relaxed">
               <p>
@@ -308,7 +308,7 @@ export default function WhyNotConvertingPage() {
             </p>
           </section>
 
-          <section className="mb-12 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
+          <section className="mb-12 rounded-md border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">
               Skip the Guessing - Run the 9-Signal Audit
             </h2>
@@ -320,7 +320,7 @@ export default function WhyNotConvertingPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Landing Page Audit &rarr;
             </Link>

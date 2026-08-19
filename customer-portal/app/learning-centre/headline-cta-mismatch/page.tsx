@@ -34,7 +34,7 @@ export default function HeadlineCtaMismatchPage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Conversion Copy
           </span>
@@ -47,7 +47,7 @@ export default function HeadlineCtaMismatchPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">What a Headline Promise Actually Is</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             A headline is not just a collection of keywords. It is an implied contract. When a visitor reads your headline, their brain immediately begins constructing a prediction: what will I be able to do, feel, or have in the next ten seconds? That prediction is the promise.
@@ -61,7 +61,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">The Mismatch Pattern in the Wild</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Two examples. Both are real patterns found across dozens of SaaS landing pages.
@@ -81,7 +81,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">Why Founders Don&apos;t See It</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The headline and the CTA were almost certainly written in different sessions. The headline was written early, when you were thinking about positioning and who you were trying to reach. The CTA was written later, when you were thinking about the funnel and what action you needed users to take. They evolved independently. Nobody was in the room when both existed at the same time.
@@ -95,7 +95,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">The Verb Gap</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Most CTA copy failure is a verb mismatch. The pattern is consistent enough to have a name.
@@ -112,7 +112,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">The Fix: Cover the Page Test</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             There is a simple diagnostic that takes thirty seconds. Read your headline out loud. Then cover the rest of the page - physically or mentally - and ask yourself: &ldquo;Based on that headline alone, what do I expect to be able to <em>do</em> in the next ten seconds?&rdquo;
@@ -126,7 +126,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">Three Rewrite Patterns That Close the Gap</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             These patterns work without changing the underlying offer. They close the verb gap by aligning the emotional register of the CTA with the promise made by the headline.
@@ -167,7 +167,7 @@ export default function HeadlineCtaMismatchPage() {
         </section>
 
         {/* Related articles */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">Related Articles</h2>
           <ul className="mt-4 space-y-3">
             <li>

@@ -112,7 +112,7 @@ export default function AboveFoldLandingPagePage() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Landing Page Leaks · Above The Fold
             </p>
@@ -129,7 +129,7 @@ export default function AboveFoldLandingPagePage() {
           </div>
 
           {/* Section 1 - 5 required elements */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 5 elements required above the fold
             </h2>
@@ -179,7 +179,7 @@ export default function AboveFoldLandingPagePage() {
           </section>
 
           {/* Section 2 - Common failures */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The most common above-fold failures
             </h2>
@@ -221,7 +221,7 @@ export default function AboveFoldLandingPagePage() {
           </section>
 
           {/* Section 3 - fold varies by device */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The fold is different on every device - test both
             </h2>
@@ -257,7 +257,7 @@ export default function AboveFoldLandingPagePage() {
           </section>
 
           {/* Section 4 - visual hierarchy */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Visual hierarchy: the reading order is the sales sequence
             </h2>
@@ -284,7 +284,7 @@ export default function AboveFoldLandingPagePage() {
           </section>
 
           {/* Section 5 - speed + fold */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Speed and the fold: slow pages lose visitors before they see the
               first screen
@@ -340,14 +340,14 @@ export default function AboveFoldLandingPagePage() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
           </div>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -381,13 +381,13 @@ export default function AboveFoldLandingPagePage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -395,7 +395,7 @@ export default function AboveFoldLandingPagePage() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Related leak checks
             </h2>

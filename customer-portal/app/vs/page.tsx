@@ -25,7 +25,7 @@ export default function VsIndexPage() {
         </nav>
 
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Tool Comparisons</p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           Nebula vs. Other Audit Tools
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
@@ -50,7 +50,7 @@ export default function VsIndexPage() {
 
         <Link
           href="/landing-page-audit-tools-pricing"
-          className="mt-4 block rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
+          className="mt-4 block rounded-md border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Pricing</p>
           <h2 className="mt-2 text-xl font-bold text-fg">
@@ -68,7 +68,7 @@ export default function VsIndexPage() {
             <Link
               key={c.slug}
               href={`/vs/${c.slug}`}
-              className="group rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
+              className="group rounded-md border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
             >
               <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">vs.</p>
               <h2 className="mt-2 text-xl font-bold text-fg group-hover:text-accent transition-colors">

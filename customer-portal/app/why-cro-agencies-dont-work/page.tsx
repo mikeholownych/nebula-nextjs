@@ -159,7 +159,7 @@ export default function WhyCROAgenciesDontWork() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+              className="rounded bg-accent px-7 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Run the free audit first &rarr;
             </Link>
@@ -192,7 +192,7 @@ export default function WhyCROAgenciesDontWork() {
             </p>
             <div className="space-y-6">
               {FAILURES.map((f) => (
-                <div key={f.n} className="rounded-2xl border border-border bg-bg-muted/20 p-6 md:p-8">
+                <div key={f.n} className="rounded-md border border-border bg-bg-muted/20 p-6 md:p-8">
                   <div className="mb-4 flex items-start gap-4">
                     <span className="font-mono text-xs text-fg-muted shrink-0 mt-1">{f.n}</span>
                     <div>
@@ -236,7 +236,7 @@ export default function WhyCROAgenciesDontWork() {
                 The retainer comes after the loop is proven, not before.
               </p>
             </div>
-            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
+            <div className="rounded-md border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted uppercase tracking-wider">Example finding</p>
               <div className="space-y-3 text-xs">
                 <div className="border-b border-border pb-3">
@@ -312,7 +312,7 @@ export default function WhyCROAgenciesDontWork() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Find the Leak &rarr;
             </Link>

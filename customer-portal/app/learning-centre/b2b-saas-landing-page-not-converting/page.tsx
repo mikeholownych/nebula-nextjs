@@ -98,7 +98,7 @@ export default function B2BSaaSLandingPageNotConverting() {
 
         <article className="mx-auto max-w-4xl px-6 py-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent">Industry Specific</p>
-          <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+          <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
             B2B SaaS Landing Page Not Converting? The Demo Ask Is Too Soon
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted">
@@ -106,7 +106,7 @@ export default function B2BSaaSLandingPageNotConverting() {
           </p>
 
           {/* Problem / solution */}
-          <div className="mt-10 grid gap-6 rounded-2xl border border-border bg-bg-muted/30 p-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 rounded-md border border-border bg-bg-muted/30 p-6 md:grid-cols-2">
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-destructive">The Problem</p>
               <p className="text-sm leading-relaxed text-fg-muted">Demo CTA before any proof. Buyer has no context, no evidence, no reason to give 30 minutes to a salesperson they don&apos;t trust yet.</p>
@@ -231,7 +231,7 @@ export default function B2BSaaSLandingPageNotConverting() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+              className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run Free Audit →
             </Link>

@@ -36,8 +36,8 @@ export const SEO_FOUNDATIONS_FIXTURE = {
     html: `<!DOCTYPE html>
 <html>
 <head>
-  <title>Acme — Workflow Automation for Enterprise Teams</title>
-  <meta name="description" content="Acme automates your team workflows. Used by 500+ companies. Start free — no credit card required.">
+  <title>Acme - Workflow Automation for Enterprise Teams</title>
+  <meta name="description" content="Acme automates your team workflows. Used by 500+ companies. Start free - no credit card required.">
 </head>
 <body>
   <h1>Automate workflows your team actually uses</h1>
@@ -54,10 +54,10 @@ export const SEO_FOUNDATIONS_FIXTURE = {
   },
 
   remediation: {
-    description: 'Apply prescribed repair to FAIL fixture — should produce PASS',
+    description: 'Apply prescribed repair to FAIL fixture - should produce PASS',
     changes: [
-      { target: '<title>', before: '<title>Acme</title>', after: '<title>Acme — Workflow Automation for Enterprise Teams</title>' },
-      { target: '<meta name="description">', before: `<meta name="description" content="${'A'.repeat(185)}">`, after: '<meta name="description" content="Acme automates your team workflows. Used by 500+ companies. Start free — no credit card required.">' },
+      { target: '<title>', before: '<title>Acme</title>', after: '<title>Acme - Workflow Automation for Enterprise Teams</title>' },
+      { target: '<meta name="description">', before: `<meta name="description" content="${'A'.repeat(185)}">`, after: '<meta name="description" content="Acme automates your team workflows. Used by 500+ companies. Start free - no credit card required.">' },
       { target: '<h1>', before: `<h1>${'Acme provides the most comprehensive enterprise-grade solution for all your workflow automation needs today'.slice(0, 95)}</h1>`, after: '<h1>Automate workflows your team actually uses</h1>' },
     ],
   },

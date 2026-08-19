@@ -118,7 +118,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
 
   if (!latest) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">Your workspace is ready</p>
         <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Start with a real page diagnosis</h2>
         <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">Run a free audit to establish your first baseline. Scores, findings, and history will appear here without fabricated data.</p>
@@ -136,7 +136,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         {hasCpc ? (
           <MetricCard label="Est. Monthly Leak" value={`$${totalLeak.toLocaleString('en-US', { maximumFractionDigits: 0 })}`} detail="Based on your CPC settings" tone="red" />
         ) : (
-          <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <section className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">Est. Monthly Leak</p>
             <p className="mt-4 text-lg font-semibold text-fg-muted">-</p>
             <a href="/workspace?tab=settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
@@ -147,7 +147,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
       <CompetitorCard />
 
       <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">
-        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Page health</p>
@@ -165,7 +165,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
           {trendPoints.length >= 2 ? <div className="mt-6"><Sparkline points={trendPoints} width={560} height={92} /><p className="mt-2 text-xs text-fg-dim">Score history · {trendPoints.length} audits on this page</p></div> : <div className="mt-6 rounded-xl bg-bg px-4 py-3 text-xs text-fg-muted">Run another audit on this page to create a measured trend.</div>}
         </section>
 
-        <section className="rounded-2xl border border-border bg-bg-panel p-6 text-fg shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+        <section className="rounded-md border border-border bg-bg-panel p-6 text-fg shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#a8a8a1]">Next best action</p>
           <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-priority condition.</h2>
           <p className="mt-3 text-sm leading-6 text-[#b9b9b2]">Use the latest findings to choose one bounded repair, then re-audit the same page to verify the condition changed.</p>
@@ -175,12 +175,12 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Recent audit</p><h2 className="mt-2 text-lg font-semibold text-fg">{latestUrl}</h2></div><span className="text-xs text-fg-dim">{fmtDate(latest.completed_at || latest.created_at)}</span></div>
           <div className="mt-5 flex items-center justify-between rounded-xl bg-bg px-4 py-3"><span className="text-sm text-fg-muted">Grade</span><span className="text-2xl font-semibold text-fg">{latest.grade || '-'}</span></div>
           <a href={`/audit/${latest.id}/results`} className="mt-4 inline-flex text-sm font-semibold text-[#444] hover:text-fg">Review findings →</a>
         </section>
-        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Keep your baseline current</p>
           <h2 className="mt-2 text-lg font-semibold text-fg">Verify the next change</h2>
           <p className="mt-2 text-sm leading-6 text-fg-muted">Run a follow-up after implementing a fix. New runs are preserved as immutable versions in your audit history.</p>
@@ -194,7 +194,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
 }
 
 function MetricCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: 'dark' | 'red' }) {
-  return <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-fg'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
+  return <section className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-fg'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
 }
 
 // ── Competitor benchmark card ─────────────────────────────────────────
@@ -223,7 +223,7 @@ function CompetitorCard() {
 
   if (!loaded) {
     return (
-      <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">You vs Competitors</p>
         <p className="mt-4 text-sm text-fg-dim">Loading benchmark…</p>
       </section>
@@ -234,7 +234,7 @@ function CompetitorCard() {
   const yourScore = data?.your_score ?? null
 
   return (
-    <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+    <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">You vs Competitors</p>

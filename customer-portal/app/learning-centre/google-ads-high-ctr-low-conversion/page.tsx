@@ -33,11 +33,11 @@ export default function GoogleAdsHighCtrLowConversionPage() {
           <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent mb-6">
             Google Ads Leaks
           </span>
-          <h1 className="text-4xl font-bold tracking-tight text-fg mb-6 leading-tight">
+          <h1 className="heading-1 tracking-tight text-fg mb-6 leading-tight">
             Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit
           </h1>
           <p className="text-xl leading-relaxed text-fg-muted">
-            An 8% click-through rate indicates the ad is generating interest. A 0.1% conversion rate on the other side of that click means something may be breaking the moment a high-intent visitor lands on your page. The landing page is one of the variables worth investigating — and it is the one you can check without changing your ad account.
+            An 8% click-through rate indicates the ad is generating interest. A 0.1% conversion rate on the other side of that click means something may be breaking the moment a high-intent visitor lands on your page. The landing page is one of the variables worth investigating - and it is the one you can check without changing your ad account.
           </p>
         </div>
 
@@ -47,13 +47,13 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             Why High CTR + Low CVR Is the Clearest Diagnostic Signal in Paid Search
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
-            Most paid search problems are ambiguous. A low CTR could mean bad targeting, a weak headline, a mismatched audience, or an irrelevant offer. But when your CTR is high and your CVR is near zero, the pattern suggests the ad is generating interest — and something on the page is not converting that interest into action.
+            Most paid search problems are ambiguous. A low CTR could mean bad targeting, a weak headline, a mismatched audience, or an irrelevant offer. But when your CTR is high and your CVR is near zero, the pattern suggests the ad is generating interest - and something on the page is not converting that interest into action.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            High CTR tells you that the query intent, the ad copy, and the audience match well enough that people are choosing your result over competitors&apos;. That part of the funnel is working. The conversion gap occurs between the click and the form submission — which makes the landing page the next logical place to investigate.
+            High CTR tells you that the query intent, the ad copy, and the audience match well enough that people are choosing your result over competitors&apos;. That part of the funnel is working. The conversion gap occurs between the click and the form submission - which makes the landing page the next logical place to investigate.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            This is a useful diagnostic position. Targeting and creative are less likely to be the issue. The next step is to check the page for observable conversion-signal failures — the structural conditions that may be creating friction between the click and the action.
+            This is a useful diagnostic position. Targeting and creative are less likely to be the issue. The next step is to check the page for observable conversion-signal failures - the structural conditions that may be creating friction between the click and the action.
           </p>
         </section>
 
@@ -126,7 +126,7 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             <strong className="text-fg">Step 2: Screenshot the above-fold view on mobile without scrolling.</strong> This is what your visitor sees first. Verify that this screenshot contains: (a) an H1 that matches query intent, (b) a price or offer signal of some kind, (c) at least one trust marker - logo, review count, or client name - and (d) a CTA that is visible without scrolling. If any of these four elements are missing from the screenshot, you've found a conversion leak.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
-            <strong className="text-fg">Step 3: Count the fields in your primary form.</strong> For each field beyond email address, consider the friction cost. Fewer fields generally reduce friction for cold paid traffic — forms with five or more fields are a common finding in low-converting pages. If your form has more fields than necessary for the first interaction, try a progressive profiling approach: collect email first, then ask for additional details on the thank-you page or in the follow-up sequence.
+            <strong className="text-fg">Step 3: Count the fields in your primary form.</strong> For each field beyond email address, consider the friction cost. Fewer fields generally reduce friction for cold paid traffic - forms with five or more fields are a common finding in low-converting pages. If your form has more fields than necessary for the first interaction, try a progressive profiling approach: collect email first, then ask for additional details on the thank-you page or in the follow-up sequence.
           </p>
         </section>
 

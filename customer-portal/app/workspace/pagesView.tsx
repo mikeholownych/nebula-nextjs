@@ -63,7 +63,7 @@ function DonutCard({
   const display = value !== null ? Math.round(value) : '-'
 
   return (
-    <div className="rounded-2xl border border-border bg-bg-elevated p-5 flex flex-col items-center gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+    <div className="rounded-md border border-border bg-bg-elevated p-5 flex flex-col items-center gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
       <svg width={80} height={80} viewBox="0 0 80 80" aria-hidden="true">
         <circle cx={40} cy={40} r={r} fill="none" stroke="currentColor" strokeWidth={7} className="text-border" />
         <circle
@@ -325,7 +325,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
 
   if (audits.length === 0 && sitemapPages.length === 0) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">No pages yet</p>
         <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Your topical map starts here</h2>
         <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">
@@ -376,7 +376,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
       </div>
 
       {/* Domain header + search */}
-      <div className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Site</p>

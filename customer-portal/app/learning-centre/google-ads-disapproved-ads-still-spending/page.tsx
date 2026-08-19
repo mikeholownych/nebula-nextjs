@@ -28,7 +28,7 @@ export default function LearningCentrePage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Google Ads Leaks · Disapproved But Still Spending
           </p>
@@ -40,7 +40,7 @@ export default function LearningCentrePage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Hidden landing page violations</h2>
           <p className="leading-relaxed text-fg-muted">
             Google&apos;s landing page policies go beyond what appears on screen. Common hidden triggers include:
@@ -68,7 +68,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why the ad can keep spending after disapproval</h2>
           <p className="leading-relaxed text-fg-muted">
             The specific mechanic advertisers miss: disapproval and delivery are not always the same
@@ -95,7 +95,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Account-level fallout</h2>
           <p className="leading-relaxed text-fg-muted">
             A single landing page violation can cascade beyond the ad itself:
@@ -123,7 +123,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Checklist for the page</h2>
           <p className="leading-relaxed text-fg-muted">
             Before launching or troubleshooting a disapproved ad, run through these landing page checks:
@@ -173,16 +173,16 @@ export default function LearningCentrePage() {
             and the 30-day re-audit verifies the page condition. It does not promise conversion lift or account reinstatement.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/google-ads-clicks-no-sales" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/google-ads-clicks-no-sales" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Check clicks no sales
             </Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/google-ads-clicks-no-sales" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">

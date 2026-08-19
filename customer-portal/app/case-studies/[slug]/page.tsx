@@ -77,7 +77,7 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
         </p>
 
         {/* Company headline */}
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           {study.company}
         </h1>
 
@@ -94,20 +94,20 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-border bg-bg-muted/40 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Score before</p>
-            <p className="text-4xl font-bold text-fg">{study.results.scoreBefore || '-'}</p>
+            <p className="text-4xl font-bold tabular-nums text-fg">{study.results.scoreBefore || '-'}</p>
           </div>
-          <div className="rounded-xl border border-accent/30 bg-accent/10 p-5 text-center">
+          <div className="rounded border border-accent/30 bg-accent/10 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Score after</p>
-            <p className="text-4xl font-bold text-accent">{study.results.scoreAfter || '-'}</p>
+            <p className="text-4xl font-bold tabular-nums text-accent">{study.results.scoreAfter || '-'}</p>
           </div>
           <div className="col-span-2 sm:col-span-1 rounded-xl border border-border bg-bg-muted/40 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Grade</p>
-            <p className="text-4xl font-bold text-fg">{study.results.grade || '-'}</p>
+            <p className="text-4xl font-bold tabular-nums text-fg">{study.results.grade || '-'}</p>
           </div>
         </div>
 
         {/* Outcome */}
-        <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 px-6 py-4">
+        <div className="mt-6 rounded border border-accent/30 bg-accent/10 px-6 py-4">
           <p className="text-sm font-semibold uppercase tracking-widest text-fg-muted mb-1">Outcome</p>
           <p className="text-lg font-semibold text-fg">{study.results.outcome}</p>
         </div>
@@ -180,7 +180,7 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →
           </Link>
@@ -221,10 +221,10 @@ export default async function CaseStudyPage({ params }: Props) {
 
       <article className="mx-auto max-w-4xl px-6 py-12">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">{study.eyebrow}</p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">{study.title}</h1>
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">{study.title}</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">{study.description}</p>
 
-        <div className="mt-8 inline-flex items-center gap-3 rounded-xl border border-accent/30 bg-accent/10 px-6 py-4">
+        <div className="mt-8 inline-flex items-center gap-3 rounded border border-accent/30 bg-accent/10 px-6 py-4">
           <span className="text-3xl font-bold text-accent">{study.outcome}</span>
           <span className="text-sm text-fg-muted">{study.outcomeLabel}</span>
         </div>
@@ -251,7 +251,7 @@ export default async function CaseStudyPage({ params }: Props) {
           </ul>
         </section>
 
-        <section className="mt-10 rounded-xl border border-accent/30 bg-bg-muted/40 p-6">
+        <section className="mt-10 rounded border border-accent/30 bg-bg-muted/40 p-6">
           <h2 className="mb-3 text-xl font-bold text-fg">Result</h2>
           <p className="text-fg-muted leading-relaxed">{study.result}</p>
         </section>
@@ -261,7 +261,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →
           </Link>

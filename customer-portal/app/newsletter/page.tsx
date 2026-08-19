@@ -5,10 +5,10 @@ import NewsletterForm from './NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'Newsletter - Nebula Components',
-  description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after — from real Nebula audits.',
+  description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after - from real Nebula audits.',
   openGraph: {
     title: 'Newsletter - Nebula Components',
-    description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after — from real Nebula audits.',
+    description: 'Weekly landing page diagnostics. One conversion signal, one fix, one before/after - from real Nebula audits.',
   },
 }
 
@@ -26,7 +26,7 @@ export default function NewsletterPage() {
             Landing Page Diagnostics
           </h1>
           <p className="text-lg text-fg-muted max-w-[65ch] mx-auto mb-2 leading-relaxed">
-            Every week: one conversion signal pattern, one fix, one before/after — from real Nebula audits.
+            Every week: one conversion signal pattern, one fix, one before/after - from real Nebula audits.
           </p>
           <p className="text-base text-fg-muted max-w-[65ch] mx-auto leading-relaxed">
             No hype. No fluff. Just what&apos;s actually costing you money.
@@ -61,7 +61,7 @@ export default function NewsletterPage() {
               <h3 className="font-semibold text-fg">What You Get</h3>
             </div>
             <p className="text-sm text-fg-muted leading-relaxed">
-              Subscribers get the same conversion signal checks we publish in our public teardowns — applied to timely examples with specific fixes.
+              Subscribers get the same conversion signal checks we publish in our public teardowns - applied to timely examples with specific fixes.
             </p>
           </Card>
         </section>
@@ -89,7 +89,7 @@ export default function NewsletterPage() {
               {
                 title: "Meta Description Missing",
                 finding: "No meta description. Google shows first 100 chars of page text (out of context).",
-                impact: "Google auto-generates a snippet from page text — often out of context.",
+                impact: "Google auto-generates a snippet from page text - often out of context.",
                 fix: "Write 155-char meta description: Problem + promise.",
               },
             ].map((issue, idx) => (

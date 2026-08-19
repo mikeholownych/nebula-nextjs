@@ -42,7 +42,7 @@ export default function MessageMatchChecklistPage() {
 
         {/* Article header */}
         <article>
-          <div className="rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Conversion Diagnostics · Message Match
             </p>
@@ -58,7 +58,7 @@ export default function MessageMatchChecklistPage() {
           </div>
 
           {/* Section 1: What message match is */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">What Message Match Actually Means</h2>
             <p className="leading-relaxed text-fg-muted">
               Message match is the measurable degree of continuity between the specific words and offer in
@@ -81,7 +81,7 @@ export default function MessageMatchChecklistPage() {
           </section>
 
           {/* Section 2: Why it breaks */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Three Message-Match Failure Shapes</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               Message match breaks in three distinct ways. Each has a different root cause and a different fix.
@@ -128,7 +128,7 @@ export default function MessageMatchChecklistPage() {
           </section>
 
           {/* Section 3: 60-second audit */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">The 60-Second Audit Method</h2>
             <p className="mb-4 leading-relaxed text-fg-muted">
               Open your top-spending ad in one tab. Open the destination URL in another. Now do three
@@ -171,7 +171,7 @@ export default function MessageMatchChecklistPage() {
           </section>
 
           {/* Section 4: Checklist */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Pre-Launch Checklist</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run this before activating any paid campaign. Each item is a binary pass/fail.
@@ -213,13 +213,13 @@ export default function MessageMatchChecklistPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/learning-centre/paid-traffic-leak-map"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent transition-colors hover:bg-accent/10"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent transition-colors hover:bg-accent/10"
               >
                 See the leak map
               </Link>
@@ -227,7 +227,7 @@ export default function MessageMatchChecklistPage() {
           </div>
 
           {/* Related articles */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-5 text-2xl font-bold text-fg">Related diagnostics</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {[

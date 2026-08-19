@@ -48,7 +48,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">What Message Match Actually Is</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Message match is not keyword repetition. It is not simply making sure the word in your ad headline appears somewhere on your landing page. That misunderstanding leads marketers to optimise the wrong thing - sprinkling copy triggers across the page while the visitor still feels a jarring discontinuity the moment they arrive.
@@ -62,7 +62,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The Three Ways Ads and Pages Diverge</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Message match failures are not random. They cluster into three predictable patterns, each with a distinct mechanism and a distinct fix.
@@ -85,7 +85,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">Why You Built This Mismatch Without Noticing</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Message match failures almost never happen through carelessness. They happen through process. Ads and landing pages are written at different stages of a campaign, often by different people, almost always in different emotional states - and no one ever sits down to read them back-to-back as the visitor will.
@@ -99,7 +99,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The Continuity Test</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             You do not need a heat map tool or a split-testing platform to inspect message match. You need the ad, the destination page, and a willingness to read your own work as a stranger.
@@ -116,7 +116,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">Platform-Specific Message Match Failures</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Each ad platform creates a distinct visitor state, and each has its own characteristic way of breaking message match when the page does not account for that state.
@@ -144,7 +144,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The First Fix to Test: Restore the Handoff in the H1</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             You do not need to rebuild the page. You do not need a new design, a new layout, or a new offer. A practical first edit is to <strong className="text-fg">rewrite the H1 to echo the specific promise of the ad.</strong>
@@ -183,7 +183,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         </section>
 
         {/* Related Articles */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">Related Articles</h2>
           <ul className="space-y-3">
             <li>

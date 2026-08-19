@@ -74,7 +74,7 @@ export default function ScorecardClient() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 md:p-8">
+        <div className="rounded-md border border-border bg-bg-muted/30 p-6 md:p-8">
           <p className="text-sm font-semibold text-accent">{bandCopy.label}</p>
           <h3 className="mt-2 text-xl font-semibold text-fg">{bandCopy.title}</h3>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-fg-muted">{bandCopy.description}</p>
@@ -107,7 +107,7 @@ export default function ScorecardClient() {
           <a
             href={AUDIT_HREF}
             onClick={handleAuditClick}
-            className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-center font-semibold text-bg transition hover:opacity-85 hover:bg-accent"
+            className="inline-flex items-center justify-center rounded bg-accent px-6 py-3 text-center font-semibold text-bg transition hover:opacity-85 hover:bg-accent"
           >
             Run the free evidence-backed audit
           </a>
@@ -143,7 +143,7 @@ export default function ScorecardClient() {
         <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${((stepIndex + 1) / scorecardQuestions.length) * 100}%` }} />
       </div>
 
-      <div className="rounded-2xl border border-border bg-bg-muted/25 p-6 md:p-8">
+      <div className="rounded-md border border-border bg-bg-muted/25 p-6 md:p-8">
         <h3 className="text-xl font-semibold leading-8 text-fg md:text-2xl">{question.prompt}</h3>
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           <button

@@ -857,7 +857,7 @@ function ApiKeysSection({ email }: { email: string }) {
 
       {/* New key banner */}
       {newKey && (
-        <div className="mb-4 rounded-xl border border-accent/40 bg-accent/5 px-5 py-4">
+        <div className="mb-4 rounded border border-accent/40 bg-accent/5 px-5 py-4">
           <p className="mb-2 text-sm font-semibold text-accent">
             ⚠️ Copy this key now - it will not be shown again.
           </p>

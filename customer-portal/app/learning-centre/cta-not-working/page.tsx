@@ -25,7 +25,7 @@ export default function CtaNotWorkingPage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Conversion Copy · CTA Optimisation</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             CTA Not Working? Fix Commitment, Clarity, And Timing
@@ -36,7 +36,7 @@ export default function CtaNotWorkingPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why CTAs Fail: The Commitment Mismatch</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Every CTA is a request. You're asking a stranger - someone who arrived at your page seconds ago - to hand over their email, their time, or their money. Whether they comply depends almost entirely on one thing: whether the page has built enough trust to justify what you're asking.
@@ -50,7 +50,7 @@ export default function CtaNotWorkingPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The 4 CTA Failure Modes</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             When a CTA underperforms, it's almost always one of four things. Identify which failure mode you're dealing with before making any changes.
@@ -72,7 +72,7 @@ export default function CtaNotWorkingPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Commitment Ladder: Match Your Ask to Traffic Temperature</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Not all visitors are equal. Someone clicking a retargeting ad who's visited your site three times is in a very different state than someone who found you from a cold Meta ad. Your CTA should reflect where that visitor sits on the commitment ladder - not where you'd like them to be.
@@ -89,7 +89,7 @@ export default function CtaNotWorkingPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">CTA Copy Formula: Action + Outcome + Risk Reducer</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             The single highest-leverage CTA improvement is almost always the copy. Generic verbs ('Submit', 'Go', 'Start') say nothing about what happens next. The formula that consistently outperforms is: <span className="font-semibold text-fg">[Action verb] + [specific outcome] + [risk reducer]</span>.
@@ -109,7 +109,7 @@ export default function CtaNotWorkingPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The One CTA Rule</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Every competing link, secondary CTA, or navigation item on a landing page pulls attention away from your primary action. Research on attention and decision-making is consistent: more choices reduce the probability of any choice being made. On a landing page, this effect is compounding.
@@ -123,7 +123,7 @@ export default function CtaNotWorkingPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick Wins Checklist</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             If you need to prioritise, start with the items that have the highest priority with the lowest implementation effort.
@@ -145,17 +145,17 @@ export default function CtaNotWorkingPage() {
             Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Open leak map
             </Link>
           </div>
         </section>
 
         {/* Related Links */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/proof-before-cta" className="block py-2 text-accent hover:text-fg transition-colors font-medium">

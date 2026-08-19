@@ -1,13 +1,13 @@
-# Claims Manifest — Nebula Components
+# Claims Manifest - Nebula Components
 # Machine-readable registry of all public quantitative and factual claims.
 # Each claim has an evidence basis and boundary statement.
 # CI: scripts/check-claims.mjs enforces banned phrasing; this manifest documents what IS said.
 #
 # Status values:
-#   verified    — measured or sourced; evidence artifact exists
-#   stated      — sourced from third-party research; citation provided
-#   bounded     — claim is explicitly qualified with limitations
-#   retired     — previously used; removed during hardening sprint 2026-08-18
+#   verified    - measured or sourced; evidence artifact exists
+#   stated      - sourced from third-party research; citation provided
+#   bounded     - claim is explicitly qualified with limitations
+#   retired     - previously used; removed during hardening sprint 2026-08-18
 
 claims:
 

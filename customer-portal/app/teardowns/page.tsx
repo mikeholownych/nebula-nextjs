@@ -390,7 +390,7 @@ export default function TeardownsPage() {
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardowns
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           Real audits on well-known pages
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
@@ -408,7 +408,7 @@ export default function TeardownsPage() {
             return (
               <article
                 key={t.slug}
-                className="rounded-2xl border border-border bg-bg-panel p-6"
+                className="rounded-md border border-border bg-bg-panel p-6"
               >
                 <div className="flex items-start justify-between">
                   <div>
@@ -449,7 +449,7 @@ export default function TeardownsPage() {
         <p className="mt-4 text-fg-muted">Free, no signup. Same engine as every teardown above.</p>
         <Link
           href="/audit?from=%2Fteardowns"
-          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+          className="mt-8 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
         >
           Find the Leak →
         </Link>

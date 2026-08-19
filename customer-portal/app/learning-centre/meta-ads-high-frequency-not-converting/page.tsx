@@ -28,7 +28,7 @@ export default function LearningCentrePage() {
           ← Learning Centre
         </Link>
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Meta Ads Leaks · High Frequency, No Conversions
           </p>
@@ -40,7 +40,7 @@ export default function LearningCentrePage() {
           </p>
         </div>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When frequency matters</h2>
           <p className="leading-relaxed text-fg-muted">
             Frequency indicates how many times the average person has seen your ad. A frequency above 5 with CTR dropping signals genuine audience fatigue - the creative has worn out its welcome.
@@ -64,7 +64,7 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why placement changes the threshold</h2>
           <p className="leading-relaxed text-fg-muted">
             &quot;Frequency above 5&quot; is not a single universal ceiling - it moves with where the
@@ -93,10 +93,10 @@ export default function LearningCentrePage() {
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When the page is the problem</h2>
           <p className="leading-relaxed text-fg-muted">
-            But here&apos;s the pattern most miss: frequency high, clicks still strong, but conversions flat or falling. People are clicking — the page is where to investigate next.
+            But here&apos;s the pattern most miss: frequency high, clicks still strong, but conversions flat or falling. People are clicking - the page is where to investigate next.
           </p>
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -113,11 +113,11 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            This pattern suggests the page — not the ad — is worth investigating as the friction point.
+            This pattern suggests the page - not the ad - is worth investigating as the friction point.
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why the page fails first at high frequency</h2>
           <p className="leading-relaxed text-fg-muted">
             A visitor who has seen the same ad four or five times has already formed an
@@ -136,7 +136,7 @@ export default function LearningCentrePage() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Test: change the page not the ad</h2>
           <p className="leading-relaxed text-fg-muted">
             Before you pause a high-performing ad or overhaul your targeting, run this test:
@@ -171,16 +171,16 @@ export default function LearningCentrePage() {
               delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre/paid-traffic-leak-map" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Open leak map
             </Link>
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/facebook-ads-no-leads" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">

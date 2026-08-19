@@ -88,7 +88,7 @@ export default function BeforeYouRaiseAdBudget() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Budget Leaks · Before You Scale
             </p>
@@ -104,7 +104,7 @@ export default function BeforeYouRaiseAdBudget() {
           </div>
 
           {/* The budget multiplier problem */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The budget multiplier problem
             </h2>
@@ -130,7 +130,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* Is it the page or the targeting */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Is this a page problem or a targeting problem?
             </h2>
@@ -173,7 +173,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* 9-signal pre-spend checklist */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 9-signal pre-spend checklist
             </h2>
@@ -238,7 +238,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* When budget is the right lever */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               When raising budget is the right move
             </h2>
@@ -268,7 +268,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* The QS bonus */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Fixing the page reduces CPC - you get more from current budget
             </h2>
@@ -296,7 +296,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -330,13 +330,13 @@ export default function BeforeYouRaiseAdBudget() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -344,7 +344,7 @@ export default function BeforeYouRaiseAdBudget() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
             <div className="space-y-1">
               {[

@@ -64,8 +64,8 @@ export default function MistakesChecklistPage() {
           </div>
         </section>
 
-        {/* Download Form — client component for form interactivity */}
-        <section className="mb-16 bg-bg-muted rounded-xl border border-accent/20 p-8">
+        {/* Download Form - client component for form interactivity */}
+        <section className="mb-16 bg-bg-muted rounded border border-accent/20 p-8">
           <div className="max-w-md mx-auto">
             <h2 className="text-2xl font-extrabold text-fg mb-2">Get The Checklist</h2>
             <p className="text-fg-muted mb-6">
@@ -83,7 +83,7 @@ export default function MistakesChecklistPage() {
           </p>
           <Link
             href="/audit?utm_source=magnet&utm_medium=content&utm_campaign=mistakes_to_audit"
-            className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+            className="inline-block rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
           >
             Start Free Audit →
           </Link>

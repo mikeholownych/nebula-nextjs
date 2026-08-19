@@ -88,7 +88,7 @@ export default function LandingPageLoadTimeSlow() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Landing Page Leaks · Load Time (Signal 4)
             </p>
@@ -105,7 +105,7 @@ export default function LandingPageLoadTimeSlow() {
           </div>
 
           {/* What the data says */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               What the data says about speed and conversion
             </h2>
@@ -187,7 +187,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* Google thresholds */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The thresholds that matter: LCP
             </h2>
@@ -246,7 +246,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* 4 causes */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 4 most common causes of slow LCP
             </h2>
@@ -278,7 +278,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* Fix sequence */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Fix sequence: highest priority first
             </h2>
@@ -310,7 +310,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* Quality Score connection */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Load time and Google Ads Quality Score
             </h2>
@@ -332,7 +332,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -366,13 +366,13 @@ export default function LandingPageLoadTimeSlow() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -380,7 +380,7 @@ export default function LandingPageLoadTimeSlow() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Related leak checks
             </h2>

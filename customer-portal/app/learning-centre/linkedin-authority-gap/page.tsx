@@ -58,7 +58,7 @@ export default function LinkedInAuthorityGapPage() {
         </header>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             The LinkedIn Visitor Mental Model
           </h2>
@@ -83,7 +83,7 @@ export default function LinkedInAuthorityGapPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             What LinkedIn Traffic Actually Scrutinises
           </h2>
@@ -135,7 +135,7 @@ export default function LinkedInAuthorityGapPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The CPL Inflation Trap</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             LinkedIn CPCs typically run 3–5× higher than Facebook for comparable B2B audiences.
@@ -186,7 +186,7 @@ export default function LinkedInAuthorityGapPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The B2B Proof Hierarchy</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Not all social proof is equal to a LinkedIn audience. There is a strict hierarchy of
@@ -261,7 +261,7 @@ export default function LinkedInAuthorityGapPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The Form Length Paradox</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             The conventional wisdom - shorter forms convert better - breaks down for LinkedIn
@@ -318,7 +318,7 @@ export default function LinkedInAuthorityGapPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">
             Specific Checks Before Scaling LinkedIn Spend
           </h2>
@@ -404,7 +404,7 @@ export default function LinkedInAuthorityGapPage() {
           </p>
           <Link
             href="https://nebulacomponents.com"
-            className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+            className="inline-block rounded bg-accent px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
           >
             See Nebula components →
           </Link>

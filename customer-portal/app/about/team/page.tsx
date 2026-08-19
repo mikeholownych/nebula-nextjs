@@ -52,7 +52,7 @@ export default function TeamPage() {
             className="rounded-xl object-cover shrink-0 border border-border"
           />
           <div>
-            <h1 className="mb-2 text-4xl font-bold">Mike Holownych</h1>
+            <h1 className="mb-2 heading-1">Mike Holownych</h1>
             <p className="mb-4 font-medium text-accent">Founder, Nebula Components</p>
           </div>
         </div>
@@ -62,11 +62,11 @@ export default function TeamPage() {
           landing pages weren&apos;t converting. The same failures showed up page after page -
           message-match gaps, missing trust signals, mobile friction, slow load times, unclear CTAs.
           In the cases I was working on, these were structural issues on the page
-          itself — and they could all be diagnosed from the HTML.
+          itself - and they could all be diagnosed from the HTML.
         </p>
         <p className="mb-4 text-lg leading-relaxed text-fg-muted">
           What I kept seeing: founders spending thousands on traffic to pages with a broken headline,
-          a hidden CTA, and no proof above the fold — then changing the ad without checking the page
+          a hidden CTA, and no proof above the fold - then changing the ad without checking the page
           first. In my experience, the page is often worth investigating before the ad. The fix is
           usually specific and verifiable. I built Nebula to surface it without a consulting engagement.
         </p>

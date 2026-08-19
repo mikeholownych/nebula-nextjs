@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 
 /**
- * SiteNav — Global primary navigation.
+ * SiteNav - Global primary navigation.
  *
  * Layer 1: 5 items max. Orient visitors, expose major destinations.
  * No SEO link dumps. No mega-menus for their own sake.
@@ -80,7 +80,7 @@ export default function SiteNav() {
         <Link
           href="/"
           className="flex items-center gap-2 text-sm font-semibold text-fg hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-          aria-label="Nebula Components — home"
+          aria-label="Nebula Components - home"
         >
           <span className="font-mono text-accent text-base">⬡</span>
           <span>Nebula</span>
@@ -150,10 +150,10 @@ export default function SiteNav() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/login"
+            href="/workspace"
             className="text-sm text-fg-muted hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
-            Sign in
+            Workspace
           </Link>
           <Link
             href="/audit"
@@ -190,7 +190,7 @@ export default function SiteNav() {
         </div>
       </div>
 
-      {/* Mobile drawer — hierarchical, not a link dump */}
+      {/* Mobile drawer - hierarchical, not a link dump */}
       {mobileOpen && (
         <div
           className="md:hidden border-t border-border/40 bg-bg"
@@ -246,10 +246,10 @@ export default function SiteNav() {
             ))}
             <div className="pt-2 border-t border-border/40">
               <Link
-                href="/login"
+                href="/workspace"
                 className="block rounded-lg px-3 py-2.5 text-sm text-fg-muted hover:text-fg hover:bg-white/5 transition-colors"
               >
-                Sign in
+                Workspace
               </Link>
             </div>
           </div>

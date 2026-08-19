@@ -126,7 +126,7 @@ export default function PressPage() {
                 <p className="text-sm text-fg-muted leading-relaxed">
                   Nebula Components evaluates landing pages against 9 observable conversion signals
                   and delivers a scored report with pass/fail findings ranked by priority. The $97
-                  Repair Sprint provides the exact fix for the highest-priority failing signal — you
+                  Repair Sprint provides the exact fix for the highest-priority failing signal - you
                   or your developer implements it. No retainer, no subscription.
                 </p>
                 <p className="text-xs text-fg-muted/60 italic">
@@ -314,12 +314,12 @@ export default function PressPage() {
             <CopyPanel
               label="Medium boilerplate"
               filename="boilerplate-medium.txt"
-              value={`Nebula Components evaluates landing pages against 9 observable conversion signals — from message match and trust signals to mobile viewport and AI readiness — in under 30 seconds. Each audit produces a scored report with pass/fail findings ranked by priority.\n\nThe $97 One-Leak Repair Sprint delivers a tailored implementation artifact for the highest-priority failing signal, designed for the customer or their developer to execute. No retainer, no subscription. A same-scope re-audit verifies the condition changed within 30 days.\n\n(Data current as of August 2026. Live benchmarks at nebulacomponents.com/benchmarks.)`}
+              value={`Nebula Components evaluates landing pages against 9 observable conversion signals - from message match and trust signals to mobile viewport and AI readiness - in under 30 seconds. Each audit produces a scored report with pass/fail findings ranked by priority.\n\nThe $97 One-Leak Repair Sprint delivers a tailored implementation artifact for the highest-priority failing signal, designed for the customer or their developer to execute. No retainer, no subscription. A same-scope re-audit verifies the condition changed within 30 days.\n\n(Data current as of August 2026. Live benchmarks at nebulacomponents.com/benchmarks.)`}
             />
             <CopyPanel
               label="Long boilerplate"
               filename="boilerplate-long.txt"
-              value={`Nebula Components is a conversion diagnostics platform for founders and operators running paid traffic to landing pages. The platform evaluates pages against 9 evidence-based conversion signals — message match, above-fold clarity, trust signals, CTA clarity, mobile viewport, load speed, ad tracking, SEO foundations, and AI readiness — delivering a scored report in under 30 seconds.\n\nThe company publishes live aggregate benchmark data from completed audits (see nebulacomponents.com/benchmarks for current sample size and averages). Common structural failures — missing above-fold CTA, absent trust signals near the primary action — are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Repair Sprint: a tailored implementation artifact for the highest-priority failing signal, written for the customer or their developer to execute. A same-scope re-audit within 30 days verifies the condition changed. The service does not promise conversion lift — it verifies whether a specific page condition moved from FAIL to PASS.`}
+              value={`Nebula Components is a conversion diagnostics platform for founders and operators running paid traffic to landing pages. The platform evaluates pages against 9 evidence-based conversion signals - message match, above-fold clarity, trust signals, CTA clarity, mobile viewport, load speed, ad tracking, SEO foundations, and AI readiness - delivering a scored report in under 30 seconds.\n\nThe company publishes live aggregate benchmark data from completed audits (see nebulacomponents.com/benchmarks for current sample size and averages). Common structural failures - missing above-fold CTA, absent trust signals near the primary action - are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Repair Sprint: a tailored implementation artifact for the highest-priority failing signal, written for the customer or their developer to execute. A same-scope re-audit within 30 days verifies the condition changed. The service does not promise conversion lift - it verifies whether a specific page condition moved from FAIL to PASS.`}
             />
           </div>
         </div>

@@ -31,7 +31,7 @@ export default function TiktokTrustCollapsePage() {
         <div className="mb-2 text-sm font-medium uppercase tracking-widest text-accent">
           TikTok Ads Leaks
         </div>
-        <h1 className="mb-4 text-4xl font-bold leading-tight text-fg">
+        <h1 className="mb-4 heading-1 leading-tight text-fg">
           The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019
         </h1>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
@@ -39,7 +39,7 @@ export default function TiktokTrustCollapsePage() {
         </p>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Why TikTok Trains Buyers to Detect Inauthenticity
           </h2>
@@ -58,7 +58,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             What a 2019-Looking Page Actually Signals
           </h2>
@@ -77,7 +77,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Trust Elements TikTok Traffic Specifically Requires
           </h2>
@@ -96,7 +96,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             The Price Signal Problem
           </h2>
@@ -115,7 +115,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Social Proof Format Mismatch
           </h2>
@@ -134,7 +134,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Authenticity Audit: Questions to Ask Before Running TikTok Spend
           </h2>
@@ -173,7 +173,7 @@ export default function TiktokTrustCollapsePage() {
         </section>
 
         {/* Related Articles */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">Related Articles</h2>
           <ul className="space-y-3">
             <li>
@@ -221,7 +221,7 @@ export default function TiktokTrustCollapsePage() {
           </p>
           <Link
             href="/#audit"
-            className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+            className="inline-block rounded bg-accent px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
           >
             Get Your Free Page Audit
           </Link>

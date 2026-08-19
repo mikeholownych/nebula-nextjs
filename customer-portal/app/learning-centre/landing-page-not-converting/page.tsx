@@ -62,7 +62,7 @@ export default function LandingPageNotConvertingPage() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Landing Page Leaks · 9 Conversion Signals
             </p>
@@ -80,7 +80,7 @@ export default function LandingPageNotConvertingPage() {
           {/* Direct answer - AEO extraction target */}
           <section
             data-editorial="answer-first"
-            className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+            className="mt-6 rounded-md border border-border bg-bg-panel p-8"
           >
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Direct answer: diagnose the sequence before changing the page
@@ -152,7 +152,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Leak 1 - Message match / Trust */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 1: The ad promise does not match the page headline
             </h2>
@@ -210,7 +210,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Leak 2 - Proof / Trust */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 2: Proof is generic, anonymous, or absent
             </h2>
@@ -254,7 +254,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Leak 3 - CTA clarity / Form friction */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 3: The CTA does not match where the visitor is in their
               decision
@@ -313,14 +313,14 @@ export default function LandingPageNotConvertingPage() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
           </div>
 
           {/* Leak 4 - Mobile layout */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 4: The mobile experience breaks the message
             </h2>
@@ -365,7 +365,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Leak 5 - Trust / objection coverage */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 5: Objections are not handled before the final ask
             </h2>
@@ -409,7 +409,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Decision tree - canonical 9 signals */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Which leak do you fix first?
             </h2>
@@ -530,7 +530,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* FAQ - visible answers without duplicated FAQPage structured data */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -550,7 +550,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Real audit screenshot - not a mockup */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Not a mockup
             </p>
@@ -561,7 +561,7 @@ export default function LandingPageNotConvertingPage() {
               We ran nebulacomponents.com through the same audit engine every visitor uses.
               No edits, no cherry-picked run - this is the actual results screen.
             </p>
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <div className="overflow-hidden rounded-md border border-border">
               <Image
                 src="/press/scorecard-example.png"
                 alt="Real Nebula audit results for nebulacomponents.com showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
@@ -587,13 +587,13 @@ export default function LandingPageNotConvertingPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -601,7 +601,7 @@ export default function LandingPageNotConvertingPage() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Related leak checks
             </h2>

@@ -101,13 +101,13 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
   if (data.audit_count === 0) {
     return (
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl rounded-2xl border border-border bg-bg-muted/10 p-8">
+        <div className="mx-auto max-w-6xl rounded-md border border-border bg-bg-muted/10 p-8">
           <h2 className="text-xl font-bold text-fg">No verified audit data yet</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-fg-muted">
             The Leak Index appears after completed audits are added to the published evidence
             dataset. We will not substitute sample averages or placeholder charts.
           </p>
-          <a href="/audit?utm_source=content&utm_medium=organic-content" className="mt-5 inline-flex rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-bg">
+          <a href="/audit?utm_source=content&utm_medium=organic-content" className="mt-5 inline-flex rounded bg-accent px-5 py-3 text-sm font-semibold text-bg">
             Run the first audit →
           </a>
         </div>
@@ -122,7 +122,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl space-y-12">
-        <p className="rounded-xl border border-accent/20 bg-accent/5 px-5 py-3 text-sm leading-6 text-fg-muted">
+        <p className="rounded border border-accent/20 bg-accent/5 px-5 py-3 text-sm leading-6 text-fg-muted">
           Verified sample only: this page publishes rates from the current nine-signal registry.
           Deprecated source-only checks are omitted until rendered verification is available.
         </p>
@@ -254,7 +254,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
         </div>
 
         {/* Methodology */}
-        <div className="rounded-2xl border border-border bg-bg-muted/10 p-8">
+        <div className="rounded-md border border-border bg-bg-muted/10 p-8">
           <h2 className="text-xl font-bold tracking-tight text-fg">Methodology</h2>
           <div className="mt-4 grid gap-6 md:grid-cols-2">
             <div>

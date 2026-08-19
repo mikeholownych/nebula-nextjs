@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 /**
- * SiteFooter — Layer 7: curated navigation surface.
+ * SiteFooter - Layer 7: curated navigation surface.
  *
  * 4 columns (desktop): Product | Audit Types | Learn | Company
  * Each column: max 6 items + optional "View all →" to hub page.
@@ -30,7 +30,7 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          {/* Audit Types — expose the cluster, link to hub */}
+          {/* Audit Types - expose the cluster, link to hub */}
           <div>
             <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
               Audit Types
@@ -45,7 +45,7 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          {/* Learn — expose category not inventory; hub carries the rest */}
+          {/* Learn - expose category not inventory; hub carries the rest */}
           <div>
             <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
               Learn
@@ -70,6 +70,7 @@ export default function SiteFooter() {
               Nebula
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
+              <li><Link href="/workspace" className="hover:text-accent transition-colors">Client Workspace</Link></li>
               <li><Link href="/about" className="hover:text-accent transition-colors">About</Link></li>
               <li><Link href="/press" className="hover:text-accent transition-colors">Press</Link></li>
               <li><Link href="/brand" className="hover:text-accent transition-colors">Brand Assets</Link></li>
@@ -90,7 +91,7 @@ export default function SiteFooter() {
           </p>
           <Link
             href="/audit?utm_source=footer&utm_medium=internal"
-            className="shrink-0 rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+            className="btn-primary shrink-0 px-6 py-2.5 text-sm"
           >
             Get Your Free Audit →
           </Link>

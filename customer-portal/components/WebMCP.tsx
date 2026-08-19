@@ -14,7 +14,7 @@ const ACTIVE_FIX_PACK = getActiveFixPack()
  *
  * Design principles:
  *   - Every tool returns structured data an AI agent can reason over
- *   - No browser redirects — agents need data, not navigation
+ *   - No browser redirects - agents need data, not navigation
  *   - Findings include pass/fail, evidence, and the specific fix for each signal
  *   - The repair_sprint tool exists so agents can explain the closed loop to users
  */
@@ -26,7 +26,7 @@ export function WEB_MCP_RUNTIME() {
 
       // ── Tool 1: analyze_page ────────────────────────────────────────────────
       // Runs a full 9-signal audit synchronously and returns structured findings.
-      // This is the primary tool — agents use this to diagnose a page.
+      // This is the primary tool - agents use this to diagnose a page.
       context.registerTool({
         name: 'analyze_page',
         description: 'Run a full Nebula landing page audit and return structured findings. Checks 9 conversion signals against the actual page HTML. Returns pass/fail for each signal with evidence from the page and a specific fix. Use this when a user wants to know what is wrong with their landing page.',
@@ -103,7 +103,7 @@ export function WEB_MCP_RUNTIME() {
       });
 
       // ── Tool 3: get_signals ─────────────────────────────────────────────────
-      // Returns the 9 signals Nebula checks — useful for explaining what the audit does.
+      // Returns the 9 signals Nebula checks - useful for explaining what the audit does.
       context.registerTool({
         name: 'get_signals',
         description: 'Return the 9 conversion signals Nebula checks on every landing page audit, with a description of what each signal measures and why it matters for paid traffic conversion.',
@@ -146,7 +146,7 @@ export function WEB_MCP_RUNTIME() {
               {
                 name: 'One-Leak Repair Sprint',
                 price: ${JSON.stringify(ACTIVE_FIX_PACK ? `$${ACTIVE_FIX_PACK.priceCents / 100}` : '$97')},
-                description: 'Delivers the exact fix for your highest-priority failing signal — the replacement copy, code snippet, or configuration change written for your specific page. Not generic advice. A 30-day re-audit confirms the condition changed.',
+                description: 'Delivers the exact fix for your highest-priority failing signal - the replacement copy, code snippet, or configuration change written for your specific page. Not generic advice. A 30-day re-audit confirms the condition changed.',
                 url: 'https://nebulacomponents.com/pricing',
                 delivery: '48 hours',
                 includes: ['Exact replacement written for your page', '30-day re-audit to verify fix held'],

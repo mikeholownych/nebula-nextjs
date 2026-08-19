@@ -88,7 +88,7 @@ export default function GoogleAdsClicksNoSales() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Google Ads Leaks · Clicks Without Conversions
             </p>
@@ -107,7 +107,7 @@ export default function GoogleAdsClicksNoSales() {
           {/* Direct answer */}
           <section
             data-editorial="answer-first"
-            className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+            className="mt-6 rounded-md border border-border bg-bg-panel p-8"
           >
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Direct answer: isolate the post-click leak before changing budget
@@ -154,7 +154,7 @@ export default function GoogleAdsClicksNoSales() {
           </section>
 
           {/* 5 page-side causes */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               5 page-side causes of zero conversions from paid search
             </h2>
@@ -206,7 +206,7 @@ export default function GoogleAdsClicksNoSales() {
           </section>
 
           {/* Diagnosis by analytics */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Diagnosing the specific cause from analytics
             </h2>
@@ -253,7 +253,7 @@ export default function GoogleAdsClicksNoSales() {
           </section>
 
           {/* Fix sequence */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Fix sequence for paid search with zero conversions
             </h2>
@@ -276,7 +276,7 @@ export default function GoogleAdsClicksNoSales() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -307,13 +307,13 @@ export default function GoogleAdsClicksNoSales() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -321,7 +321,7 @@ export default function GoogleAdsClicksNoSales() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
             <div className="space-y-1">
               {[

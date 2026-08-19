@@ -94,7 +94,7 @@ export default function CitablePage() {
                 <li>· Reusable by teams, tools, and applications</li>
               </ul>
             </div>
-            <div className="rounded-2xl border border-border bg-bg-panel p-6">
+            <div className="rounded-md border border-border bg-bg-panel p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Nebula</p>
               <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">Commercial optimization platform</h3>
               <ul className="mt-4 space-y-2 text-sm leading-relaxed text-fg-muted">
@@ -124,7 +124,7 @@ export default function CitablePage() {
             </p>
           </div>
 
-          <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="mt-6 grid gap-px overflow-hidden rounded-md border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {[
               ['Detectors', citableReleaseFacts.detectorCount],
               ['Namespaces', citableReleaseFacts.namespaceCount],
@@ -162,7 +162,7 @@ export default function CitablePage() {
                 key={supportingRoute.path}
                 href={supportingRoute.path}
                 prefetch={false}
-                className="group rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent/30"
+                className="group rounded-md border border-border bg-bg-panel p-6 transition-colors hover:border-accent/30"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
                   {supportingRoute.eyebrow}
@@ -200,7 +200,7 @@ export default function CitablePage() {
                 body: 'Keep owner exports, logs, prompt experiments, workflow receipts, and deployment receipts distinct from package capability.',
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-border p-6">
+              <div key={item.title} className="rounded-md border border-border p-6">
                 <h3 className="text-lg font-semibold text-fg">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-fg-muted">{item.body}</p>
               </div>
@@ -221,7 +221,7 @@ export default function CitablePage() {
           </h2>
           <div className="mt-7 grid gap-4 md:grid-cols-2">
             {citableFaqItems.map((item) => (
-              <article key={item.question} className="rounded-2xl border border-border bg-bg-panel p-6">
+              <article key={item.question} className="rounded-md border border-border bg-bg-panel p-6">
                 <h3 className="text-lg font-semibold text-fg">{item.question}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-fg-muted">{item.answer}</p>
               </article>
@@ -235,7 +235,7 @@ export default function CitablePage() {
           <Link
             href="/resources/citable/quick-start"
             prefetch={false}
-            className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+            className="rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
           >
             Run the quick start
           </Link>

@@ -21,7 +21,7 @@ export default function StackTaxComparison() {
             What Nebula exposes that most audits do not.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
-            This compares observable product mechanics — not estimated competitor costs or delivery timelines.
+            This compares observable product mechanics - not estimated competitor costs or delivery timelines.
           </p>
         </div>
 
@@ -42,14 +42,14 @@ export default function StackTaxComparison() {
                     {d.nebula ? (
                       <span className="text-accent font-bold">&#10003;</span>
                     ) : (
-                      <span className="text-fg-dim">—</span>
+                      <span className="text-fg-dim">-</span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-center">
                     {d.typical ? (
                       <span className="text-fg-muted">Varies</span>
                     ) : (
-                      <span className="text-fg-dim">—</span>
+                      <span className="text-fg-dim">-</span>
                     )}
                   </td>
                 </tr>

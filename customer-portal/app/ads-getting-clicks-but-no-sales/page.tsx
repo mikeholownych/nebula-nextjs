@@ -142,7 +142,7 @@ export default function AdsClicksNoSalesPage() {
           </header>
 
           {/* Pre-Click vs Post-Click framing */}
-          <section className="mb-12 rounded-2xl border border-border bg-bg-muted/20 p-6 md:p-8">
+          <section className="mb-12 rounded-md border border-border bg-bg-muted/20 p-6 md:p-8">
             <h2 className="text-xl font-bold text-fg mb-4">Pre-Click Success vs Post-Click Failure</h2>
             <p className="text-sm text-fg-muted leading-relaxed mb-4">
               High ad click-through rate proves that your hook, creative, and target audience alignment generated interest. Post-click conversion requires strict continuity across six operational dimensions:
@@ -202,7 +202,7 @@ export default function AdsClicksNoSalesPage() {
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link
                 href="/audit?utm_source=content&utm_medium=organic-content&utm_campaign=ads-clicks-no-sales"
-                className="inline-block rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
+                className="inline-block rounded bg-accent px-6 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
               >
                 Find the Leak, Free &rarr;
               </Link>
@@ -271,14 +271,14 @@ export default function AdsClicksNoSalesPage() {
           </section>
 
           {/* CTA */}
-          <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
+          <section className="mb-14 rounded-md border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Diagnose Your Paid Traffic Landing Page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
               Run a free audit on your ad destination URL to pinpoint observable page friction and receive a prioritized fix list.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Audit Now &rarr;
             </Link>

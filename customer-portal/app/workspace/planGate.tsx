@@ -76,7 +76,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
   return (
     <div className="flex min-h-[40vh] flex-col items-center justify-center px-6 py-16 text-center">
       {/* Lock icon */}
-      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-bg-elevated">
+      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-md border border-border bg-bg-elevated">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-fg-muted"/>
           <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-fg-muted"/>

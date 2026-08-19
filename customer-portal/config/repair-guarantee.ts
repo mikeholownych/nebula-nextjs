@@ -1,5 +1,5 @@
 /**
- * Repair Guarantee — canonical wording.
+ * Repair Guarantee - canonical wording.
  *
  * All surfaces that mention the guarantee MUST import from here
  * to prevent wording drift.

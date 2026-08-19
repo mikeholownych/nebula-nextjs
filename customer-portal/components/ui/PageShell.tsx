@@ -12,9 +12,9 @@ export function PageShell({ children, title, description }: PageShellProps) {
       <main id="main-content">
         {title && (
           <div className="max-w-7xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold text-fg">{title}</h1>
+            <h1 className="heading-1 text-fg">{title}</h1>
             {description && (
-              <p className="mt-4 text-lg text-fg-muted">{description}</p>
+              <p className="mt-4 max-w-reading text-lg text-fg-muted leading-relaxed">{description}</p>
             )}
           </div>
         )}

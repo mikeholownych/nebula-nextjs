@@ -33,7 +33,7 @@ export default function PlaybooksIndex() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Playbooks
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+          <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
             Founder systems, not conversion diagnosis
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">

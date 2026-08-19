@@ -38,7 +38,7 @@ export default function AgencyHandoffDebtPage() {
         </Link>
 
         {/* Opening panel */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
             Landing Page Leaks
           </span>
@@ -57,7 +57,7 @@ export default function AgencyHandoffDebtPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             1. The Meta Description That Got "Cleaned Up"
           </h2>
@@ -77,7 +77,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             2. The Social Proof Section That Moved Below the Fold
           </h2>
@@ -96,7 +96,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             3. The Conversion Pixel Deleted During Script Deduplication
           </h2>
@@ -116,7 +116,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             4. The H1 That Got Rewritten to Be "Cleaner"
           </h2>
@@ -136,7 +136,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 5 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             5. The Page Load Time That Ballooned After New Libraries Were Added
           </h2>
@@ -157,7 +157,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 6 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             6. The Trust Logos That Started 404ing After an Asset Reorganisation
           </h2>
@@ -177,7 +177,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Section 7 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             7. The CTA That Lost Its Action Verb
           </h2>
@@ -199,7 +199,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Conclusion section */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">The Compounding Problem</h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             None of these seven changes would crater a page on its own. A slightly shorter meta
@@ -231,7 +231,7 @@ export default function AgencyHandoffDebtPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit →
             </Link>
@@ -245,7 +245,7 @@ export default function AgencyHandoffDebtPage() {
         </section>
 
         {/* Related links */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">Related Articles</h2>
           <ul className="mt-4 space-y-3">
             <li>

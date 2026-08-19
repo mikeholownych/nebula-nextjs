@@ -112,7 +112,7 @@ export default function EcommerceLandingPageNotConverting() {
           </Link>
 
           {/* Hero */}
-          <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+          <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
               Industry Specific · Ecommerce
             </p>
@@ -128,7 +128,7 @@ export default function EcommerceLandingPageNotConverting() {
           </div>
 
           {/* The conversion sequence */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               How the ecommerce conversion sequence works - and where it breaks
             </h2>
@@ -177,7 +177,7 @@ export default function EcommerceLandingPageNotConverting() {
           </section>
 
           {/* 5 leaks */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 5 ecommerce landing page leaks
             </h2>
@@ -235,7 +235,7 @@ export default function EcommerceLandingPageNotConverting() {
           </section>
 
           {/* Is it price or page */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               How to tell if it is a price problem, not a page problem
             </h2>
@@ -275,7 +275,7 @@ export default function EcommerceLandingPageNotConverting() {
           </section>
 
           {/* Quick wins before next ad spend */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               5 quick wins before the next ad spend
             </h2>
@@ -300,7 +300,7 @@ export default function EcommerceLandingPageNotConverting() {
           </section>
 
           {/* FAQ */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
@@ -334,13 +334,13 @@ export default function EcommerceLandingPageNotConverting() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+                className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
+                className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
                 See the One-Leak Repair Sprint
               </Link>
@@ -348,7 +348,7 @@ export default function EcommerceLandingPageNotConverting() {
           </section>
 
           {/* Related */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
             <div className="space-y-1">
               {[

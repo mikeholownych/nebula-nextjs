@@ -34,7 +34,7 @@ export function Card({
     <div
       id={id}
       className={`
-        rounded-2xl
+        rounded-md
         ${variantStyles[variant]}
         ${paddingStyles[padding]}
         ${className}

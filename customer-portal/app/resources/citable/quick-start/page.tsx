@@ -50,7 +50,7 @@ export default function CitableQuickStartPage() {
         <article>
           <ol className="space-y-6">
             {citableQuickStartSteps.map((step, index) => (
-              <li key={step.key} className="rounded-2xl border border-border bg-bg-panel p-6 md:p-8">
+              <li key={step.key} className="rounded-md border border-border bg-bg-panel p-6 md:p-8">
                 <div className="flex items-baseline gap-4">
                   <span className="text-sm font-semibold text-accent">{String(index + 1).padStart(2, '0')}</span>
                   <h2 className="text-2xl font-bold tracking-tight text-fg">{step.label}</h2>
@@ -72,7 +72,7 @@ export default function CitableQuickStartPage() {
             ))}
           </ol>
 
-          <section className="mt-12 rounded-2xl border border-border p-7">
+          <section className="mt-12 rounded-md border border-border p-7">
             <h2 className="text-2xl font-bold tracking-tight text-fg">Keep the first run bounded</h2>
             <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-relaxed text-fg-muted">
               <li>Use a declared build target and base URL; do not mix local and live observations.</li>

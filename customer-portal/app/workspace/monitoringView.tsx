@@ -169,7 +169,7 @@ export default function MonitoringView({ email }: { email: string }) {
   return (
     <div className="space-y-6">
       {/* Add monitor */}
-      <section className="rounded-2xl border border-border bg-bg-elevated p-6">
+      <section className="rounded-md border border-border bg-bg-elevated p-6">
         <h2 className="text-lg font-semibold mb-1">Watch a page</h2>
         <p className="text-sm text-fg-muted mb-4">
           Nebula re-runs the audit on your cadence and alerts you when the score moves or a

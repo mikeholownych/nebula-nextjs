@@ -1,5 +1,5 @@
 /**
- * Priority Score — canonical definition.
+ * Priority Score - canonical definition.
  *
  * This file is the single source of truth for what "Priority Score" means
  * across all buyer-facing surfaces.

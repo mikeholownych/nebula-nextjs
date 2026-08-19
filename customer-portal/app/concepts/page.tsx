@@ -70,7 +70,7 @@ const CONCEPTS = [
     whyItMatters:
       'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
     howNebulaMeasures:
-      'Nebula identifies failed conditions at the signal level. The audit ranks failed signals by priority — a heuristic incorporating journey position, severity, and reproducibility. Message match and CTA failures are ranked higher for paid traffic; load speed and SEO signals are ranked lower. The One-Leak Repair Sprint targets the highest-priority finding.',
+      'Nebula identifies failed conditions at the signal level. The audit ranks failed signals by priority - a heuristic incorporating journey position, severity, and reproducibility. Message match and CTA failures are ranked higher for paid traffic; load speed and SEO signals are ranked lower. The One-Leak Repair Sprint targets the highest-priority finding.',
   },
   {
     id: 'message-match',
@@ -98,7 +98,7 @@ const CONCEPTS = [
     definition:
       'Page-level obstacles that cost conversions regardless of ad quality or offer strength. Structural friction is fixable; it does not require a new product or a different audience.',
     whyItMatters:
-      'Founders and operators running paid traffic often assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction — a five-field form, a CTA below fold, a page that loads in six seconds on mobile — is an observable, fixable variable that can be checked without making any of those assumptions. Addressing structural friction does not guarantee conversion lift, but it removes conditions that are measurably outside documented standards.',
+      'Founders and operators running paid traffic often assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction - a five-field form, a CTA below fold, a page that loads in six seconds on mobile - is an observable, fixable variable that can be checked without making any of those assumptions. Addressing structural friction does not guarantee conversion lift, but it removes conditions that are measurably outside documented standards.',
     howNebulaMeasures:
       'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS - no session recording or A/B test data required.',
   },
@@ -189,14 +189,14 @@ export default function ConceptsPage() {
           </section>
 
           {/* CTA */}
-          <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
+          <section className="mb-14 rounded-md border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">See these concepts applied to your page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
               Paste your URL. Nebula runs all 9 signals and returns each finding with the raw evidence atom - H1 text, CTA label, payload bytes, trust signal count. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Audit &rarr;
             </Link>

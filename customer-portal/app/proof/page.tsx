@@ -117,7 +117,7 @@ export default async function ProofPage() {
           <section className="mb-12">
             <h2 className="text-xl font-bold text-fg mb-2">Most common conversion leaks</h2>
             <p className="text-sm text-fg-muted mb-6">
-              Ranked by how often they appear across audited pages. Priority score reflects journey position, severity, and reproducibility — not predicted conversion loss.
+              Ranked by how often they appear across audited pages. Priority score reflects journey position, severity, and reproducibility - not predicted conversion loss.
             </p>
             <div className="flex flex-col gap-4">
               {components.slice(0, 8).map((c) => {

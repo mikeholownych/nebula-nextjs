@@ -47,11 +47,11 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 const faqItems = [
   {
     q: 'What exactly is included in the Repair Sprint?',
-    a: 'The exact replacement — copy, code snippet, or configuration change — written specifically for what was found on your page. Not "improve your H1." The actual replacement H1 text. Not "add social proof." The specific proof element and where to place it. Plus a 30-day re-audit to confirm the condition changed.',
+    a: 'The exact replacement - copy, code snippet, or configuration change - written specifically for what was found on your page. Not "improve your H1." The actual replacement H1 text. Not "add social proof." The specific proof element and where to place it. Plus a 30-day re-audit to confirm the condition changed.',
   },
   {
     q: 'How is this different from a generic CRO audit report?',
-    a: 'A report tells you what is wrong. The Repair Sprint tells you what to change it to. Nebula reads your actual page HTML — your specific H1, your CTA label, your meta description — and writes the replacement for that page. Generic advice is not included because it is not useful.',
+    a: 'A report tells you what is wrong. The Repair Sprint tells you what to change it to. Nebula reads your actual page HTML - your specific H1, your CTA label, your meta description - and writes the replacement for that page. Generic advice is not included because it is not useful.',
   },
   {
     q: 'Why only one finding?',
@@ -59,15 +59,15 @@ const faqItems = [
   },
   {
     q: 'Do I need to give Nebula access to my site?',
-    a: 'No. The kit is sent to your email after payment — you or your developer applies it. Nebula never needs CMS, hosting, or repository access. The audit reads your public page HTML.',
+    a: 'No. The kit is sent to your email after payment - you or your developer applies it. Nebula never needs CMS, hosting, or repository access. The audit reads your public page HTML.',
   },
   {
     q: 'How long does the whole process take?',
-    a: 'The audit completes in under 30 seconds. The repair kit arrives within 48 hours of payment. Implementation time depends on what the fix requires — copy changes are minutes, code changes depend on your stack.',
+    a: 'The audit completes in under 30 seconds. The repair kit arrives within 48 hours of payment. Implementation time depends on what the fix requires - copy changes are minutes, code changes depend on your stack.',
   },
   {
     q: 'Does the repair guarantee more conversions?',
-    a: 'No — and any service that guarantees conversion lift without a controlled traffic test is making it up. The 30-day re-audit confirms whether the specific page condition changed. Conversion outcomes also depend on traffic quality and offer strength. You get verifiable evidence of what changed, not a revenue promise.',
+    a: 'No - and any service that guarantees conversion lift without a controlled traffic test is making it up. The 30-day re-audit confirms whether the specific page condition changed. Conversion outcomes also depend on traffic quality and offer strength. You get verifiable evidence of what changed, not a revenue promise.',
   },
 ]
 
@@ -110,7 +110,7 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <section aria-labelledby="pricing-answers" className="mb-12 rounded-2xl border border-border bg-bg-muted/10 p-6">
+          <section aria-labelledby="pricing-answers" className="mb-12 rounded-md border border-border bg-bg-muted/10 p-6">
             <h2 id="pricing-answers" className="mb-4 text-lg font-semibold text-fg">Direct answers</h2>
             <div className="grid gap-4 md:grid-cols-3">
               <div>
@@ -169,11 +169,11 @@ export default function PricingPage() {
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time · no subscription</p>
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
               <p className="mt-1 text-sm text-fg-muted">Find it. Fix it. Verify it held.</p>
-              <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
+              <p className="mt-2 text-4xl font-bold tabular-nums text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted leading-relaxed">
-                One landing page, one finding. Run the free audit first — Nebula checks 9 signals against your actual page HTML in under 30 seconds.
+                One landing page, one finding. Run the free audit first - Nebula checks 9 signals against your actual page HTML in under 30 seconds.
                 Then pay $97 and receive the exact fix for your highest-priority finding within 48 hours.
-                Not generic advice — the replacement copy, code snippet, or configuration change written for your specific page.
+                Not generic advice - the replacement copy, code snippet, or configuration change written for your specific page.
                 You or your developer implements the change. A 30-day re-audit confirms the condition changed.
                 This service does not promise conversion lift.
               </p>
@@ -194,7 +194,7 @@ export default function PricingPage() {
                 <Link href="/repair-sprint" className="text-accent hover:text-fg transition-colors">See the full Repair Sprint details →</Link>
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/audit?utm_source=pricing&utm_medium=internal" className="inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent">
+                <Link href="/audit?utm_source=pricing&utm_medium=internal" className="inline-flex rounded bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent">
                   Run the audit first →
                 </Link>
                 <Link href="/repair-sprint" className="inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent">
@@ -212,17 +212,17 @@ export default function PricingPage() {
           <div className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
             <p className="text-lg font-semibold text-fg">Not sure yet?</p>
             <p className="mt-2 text-fg-muted">
-              Run the free audit first — see your page scored against 9 signals before you decide.
+              Run the free audit first - see your page scored against 9 signals before you decide.
             </p>
             <Link
               href="/audit?utm_source=pricing&utm_medium=internal"
-              className="mt-5 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+              className="mt-5 inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run free audit →
             </Link>
           </div>
 
-          <section className="mt-16 rounded-2xl border border-border bg-bg-muted/20 p-8">
+          <section className="mt-16 rounded-md border border-border bg-bg-muted/20 p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Frequently asked questions</h2>
             <dl className="space-y-6">
               {

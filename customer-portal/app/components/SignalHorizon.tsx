@@ -1,7 +1,7 @@
 import React from 'react'
 
 /**
- * SignalHorizon — Foreground diagnostic waveform and calibration terrain overlay.
+ * SignalHorizon - Foreground diagnostic waveform and calibration terrain overlay.
  * Adapts Questly's bottom silhouette grounding layer into a unique, proprietary
  * technical measurement horizon for Nebula.
  */

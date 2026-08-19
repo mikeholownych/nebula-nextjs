@@ -85,7 +85,7 @@ export default function ConfessionsPage() {
         </Link>
 
         {/* Header */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Landing Page Leaks · Founder Stories
           </p>
@@ -105,7 +105,7 @@ export default function ConfessionsPage() {
           {CONFESSIONS.map((c) => (
             <section
               key={c.id}
-              className="rounded-2xl border border-border bg-bg-panel p-8"
+              className="rounded-md border border-border bg-bg-panel p-8"
             >
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
@@ -127,7 +127,7 @@ export default function ConfessionsPage() {
         </div>
 
         {/* Submit yours */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-2 text-xl font-bold text-fg">Submit yours</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
             If you have a story - how long, how much, what you blamed - send it. All submissions are anonymous. We'll publish the ones that other founders will recognise in themselves.
@@ -137,7 +137,7 @@ export default function ConfessionsPage() {
           </p>
           <a
             href="mailto:nebulashop@agentmail.to?subject=My%20confession&body=Industry%3A%20%0ASpend%3A%20%0ADuration%3A%20%0AWhat%20I%20blamed%3A%20%0A%0AThe%20story%3A%20%0A%0AMy%20page%20URL%20(optional%2C%20for%20the%20free%20audit)%3A"
-            className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
+            className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
           >
             Submit anonymously →
           </a>
@@ -152,13 +152,13 @@ export default function ConfessionsPage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+              className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
             <Link
               href="/learning-centre/the-11pm-founder-spiral"
-              className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
+              className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
             >
               The 11pm spiral →
             </Link>
@@ -166,7 +166,7 @@ export default function ConfessionsPage() {
         </section>
 
         {/* Related */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-bold text-fg">Related reading</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/the-11pm-founder-spiral" className="block py-2 text-accent hover:text-fg transition-colors font-medium">

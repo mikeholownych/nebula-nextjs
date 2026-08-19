@@ -26,7 +26,7 @@ export default function TiktokAdsNotConvertingPage() {
         </Link>
 
         {/* Hero card */}
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+        <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             TikTok Ads Leaks · tiktok ad to landing page mismatch
           </p>
@@ -39,7 +39,7 @@ export default function TiktokAdsNotConvertingPage() {
         </div>
 
         {/* Section 1 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Emotional State Mismatch</h2>
           <p className="leading-relaxed text-fg-muted">
             TikTok creative is engineered to spike emotional engagement - fast cuts, pattern-interrupts, social proof in the form of UGC and reactions, raw authenticity. When that ad works, the user who clicks is in a heightened state: curious, excited, maybe impulsive. They are primed to buy.
@@ -53,7 +53,7 @@ export default function TiktokAdsNotConvertingPage() {
         </section>
 
         {/* Section 2 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Mobile Speed Is the First Filter</h2>
           <p className="leading-relaxed text-fg-muted">
             TikTok is 100% mobile. Your TikTok traffic lands on a phone, on a cellular connection, often in the middle of a session. If your page doesn't render meaningfully in under 2.5 seconds, a significant portion of those clicks bounce before the page is usable - and you'll never know they were there.
@@ -67,7 +67,7 @@ export default function TiktokAdsNotConvertingPage() {
         </section>
 
         {/* Section 3 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Social Proof That Actually Works for TikTok Traffic</h2>
           <p className="leading-relaxed text-fg-muted">
             TikTok users have calibrated BS detectors for polished testimonials. A headshot photo with a 5-star rating and three sentences in a grid layout reads as staged - because it usually is. TikTok traffic responds to social proof that looks and feels like the platform they just came from.
@@ -87,7 +87,7 @@ export default function TiktokAdsNotConvertingPage() {
         </section>
 
         {/* Section 4 */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Trust Gap for Unknown Brands</h2>
           <p className="leading-relaxed text-fg-muted">
             TikTok advertising is one of the few channels where genuinely unknown brands can interrupt a scrolling session and earn attention. But that means your landing page is often the first time a user encounters your brand at any depth. They have no prior brand equity to draw on.
@@ -113,17 +113,17 @@ export default function TiktokAdsNotConvertingPage() {
             Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
-            <Link href="/learning-centre" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <Link href="/learning-centre" className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Browse all leaks
             </Link>
           </div>
         </section>
 
         {/* Related links */}
-        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
             <Link href="/learning-centre/mobile-landing-page-leaks" className="block py-2 text-accent hover:text-fg transition-colors font-medium">

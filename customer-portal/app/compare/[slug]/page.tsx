@@ -68,7 +68,7 @@ export default async function ComparisonPage({
         <p className="text-sm text-accent font-medium mb-2">
           <a href="/compare" className="hover:underline">← All comparisons</a>
         </p>
-        <h1 className="text-4xl font-bold mb-3">
+        <h1 className="heading-1 mb-3">
           Nebula Components vs {comparison.toolName}
         </h1>
         <p className="text-fg-muted text-lg mb-8">

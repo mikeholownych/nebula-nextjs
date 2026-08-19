@@ -98,7 +98,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
   // Empty state
   if (auditsByUrl.size === 0) {
     return (
-      <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">No diff available</p>
         <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Run a follow-up audit on the same page to see what changed</h2>
         <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">
@@ -124,7 +124,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
   return (
     <div className="space-y-6">
       {/* Selectors */}
-      <div className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Compare two audits</p>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-4">
           <div className="flex-1">
@@ -175,7 +175,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
       {diff && !loading && (
         <div className="space-y-5">
           {/* Score comparison */}
-          <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Score comparison</p>
             <div className="flex items-center justify-center gap-6">
               <div className="text-center">
@@ -197,7 +197,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
           </div>
 
           {/* Findings diff */}
-          <div className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <div className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Findings diff</p>
 
             {diff.findings_removed.length > 0 && (

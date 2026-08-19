@@ -27,6 +27,9 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
     <a href="/pricing" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
       Pricing
     </a>
+    <a href="/workspace" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
+      Workspace
+    </a>
     <a
       href="/audit?utm_source=site-nav&utm_medium=internal"
       className={`${mobile ? 'mt-3 w-full text-center' : ''} btn-primary text-sm py-2 px-4 rounded`}
@@ -57,7 +60,7 @@ export default function SiteNav() {
             aria-label="Toggle navigation"
             aria-controls="mobile-nav"
           >
-            {/* Hamburger — closed */}
+            {/* Hamburger - closed */}
             <svg
               className="block group-open:hidden"
               width="20" height="20" viewBox="0 0 24 24"
@@ -66,7 +69,7 @@ export default function SiteNav() {
             >
               <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
-            {/* X — open */}
+            {/* X - open */}
             <svg
               className="hidden group-open:block"
               width="20" height="20" viewBox="0 0 24 24"

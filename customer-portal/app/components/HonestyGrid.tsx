@@ -16,7 +16,7 @@ export default function HonestyGrid() {
 
         <div className="grid gap-6 sm:grid-cols-2">
           {/* Card 1 */}
-          <div className="rounded-2xl border border-border bg-bg-surface p-6">
+          <div className="rounded-md border border-border bg-bg-surface p-6">
             <div className="mb-3 flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-signal-fail/10 font-bold text-signal-fail text-sm">✕</span>
               <h3 className="text-lg font-bold text-fg">No Fabricated Proof</h3>
@@ -27,7 +27,7 @@ export default function HonestyGrid() {
           </div>
 
           {/* Card 2 */}
-          <div className="rounded-2xl border border-border bg-bg-surface p-6">
+          <div className="rounded-md border border-border bg-bg-surface p-6">
             <div className="mb-3 flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-signal-fail/10 font-bold text-signal-fail text-sm">✕</span>
               <h3 className="text-lg font-bold text-fg">No Fake PMF Fixes</h3>
@@ -38,7 +38,7 @@ export default function HonestyGrid() {
           </div>
 
           {/* Card 3 */}
-          <div className="rounded-2xl border border-border bg-bg-surface p-6">
+          <div className="rounded-md border border-border bg-bg-surface p-6">
             <div className="mb-3 flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-signal-fail/10 font-bold text-signal-fail text-sm">✕</span>
               <h3 className="text-lg font-bold text-fg">No 30-Page Fluff PDFs</h3>

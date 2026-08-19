@@ -77,7 +77,7 @@ export default async function TeardownPage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardown
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           {t.domain} - What the Audit Engine Found
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
@@ -95,7 +95,7 @@ export default async function TeardownPage({
         </p>
 
         {/* Score card */}
-        <div className="mt-8 flex flex-wrap items-center gap-6 rounded-2xl border border-border bg-bg-panel p-6">
+        <div className="mt-8 flex flex-wrap items-center gap-6 rounded-md border border-border bg-bg-panel p-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Score</p>
             <p className={`text-5xl font-bold ${scoreColor}`}>
@@ -158,7 +158,7 @@ export default async function TeardownPage({
           </p>
           <div className="space-y-6">
             {t.findings.map((f, i) => (
-              <div key={f.key} className="rounded-2xl border border-border bg-bg-panel p-6">
+              <div key={f.key} className="rounded-md border border-border bg-bg-panel p-6">
                 <div className="mb-3 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
@@ -211,7 +211,7 @@ export default async function TeardownPage({
           </p>
           <Link
             href={`/audit?from=${encodeURIComponent(`/teardowns/${t.slug}`)}`}
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>
@@ -219,7 +219,7 @@ export default async function TeardownPage({
             <p className="text-xs text-fg-muted mb-3">Already know your page has issues? Skip the audit.</p>
             <a
               href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
-              className="inline-block rounded-xl border border-accent/60 px-6 py-3 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors"
+              className="inline-block rounded border border-accent/60 px-6 py-3 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors"
             >
               Fix one leak now, $97 →
             </a>

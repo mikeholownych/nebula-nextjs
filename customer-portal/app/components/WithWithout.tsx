@@ -10,9 +10,9 @@ const WITHOUT = [
 
 const WITH = [
   { label: 'See observable conditions', detail: 'Score + specific findings with evidence. Your page. 2 minutes.' },
-  { label: 'Know what to investigate first', detail: 'Findings ranked by priority — not gut feel.' },
+  { label: 'Know what to investigate first', detail: 'Findings ranked by priority - not gut feel.' },
   { label: 'Fix it for $97', detail: '48-hour repair artifact. One verified condition, one concrete fix.' },
-  { label: 'Reduce page-side uncertainty', detail: 'Know which conditions pass and which fail — then decide what to test.' },
+  { label: 'Reduce page-side uncertainty', detail: 'Know which conditions pass and which fail - then decide what to test.' },
   { label: 'Rule out the page', detail: 'If the page passes, shift investigation to traffic quality or offer.' },
 ]
 

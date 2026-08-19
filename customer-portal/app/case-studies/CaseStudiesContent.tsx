@@ -14,7 +14,7 @@ export default function CaseStudiesContent({
     <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           {hasPublishedStudies
             ? 'Published, evidence-backed case studies'
             : <>No client case studies yet - here is what the engine does instead.</>}
@@ -38,7 +38,7 @@ export default function CaseStudiesContent({
         <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
           <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
             {studies.map((study) => (
-              <article key={study.slug} className="rounded-2xl border border-border bg-bg-panel p-6">
+              <article key={study.slug} className="rounded-md border border-border bg-bg-panel p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
                   {study.eyebrow}
                 </p>
@@ -92,7 +92,7 @@ export default function CaseStudiesContent({
                   return (
                     <article
                       key={t.slug}
-                      className="rounded-2xl border border-border bg-bg-panel p-6"
+                      className="rounded-md border border-border bg-bg-panel p-6"
                     >
                       <div className="flex items-start justify-between">
                         <div>
@@ -148,7 +148,7 @@ export default function CaseStudiesContent({
         <p className="mt-4 text-fg-muted">Same engine. Your URL. No signup required.</p>
         <Link
           href="/audit?utm_source=content&utm_medium=organic-content"
-          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+          className="mt-8 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
         >
           Find the Leak →
         </Link>

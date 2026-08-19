@@ -101,7 +101,7 @@ export default function LandingPageIntelligenceStackPage() {
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             Evidence-grade workflow bundle
           </p>
-          <h1 className="max-w-4xl text-4xl font-bold leading-tight text-fg sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-4xl heading-1 leading-tight text-fg sm:text-5xl lg:text-6xl">
             Six landing-page checks. Every conclusion tied to evidence.
           </h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-fg-muted sm:text-xl">

@@ -34,7 +34,7 @@ export default function LinkedInSkillEnginePage() {
 
       <article className="mx-auto max-w-4xl px-6 py-12">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Founder Systems</p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
           LinkedIn Skill Engine: Post From What You Actually Know
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
@@ -100,14 +100,14 @@ export default function LinkedInSkillEnginePage() {
           </ul>
         </section>
 
-        <section className="mt-10 rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
+        <section className="mt-10 rounded border border-accent/30 bg-accent/5 p-8 text-center">
           <h2 className="text-2xl font-bold text-fg">Fix the Landing Page First</h2>
           <p className="mt-4 max-w-xl mx-auto text-fg-muted">
             Before optimising your LinkedIn presence, ensure the page your traffic lands on is ready to convert. Run the free audit.
           </p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
+            className="mt-6 inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run Free Audit →
           </Link>
