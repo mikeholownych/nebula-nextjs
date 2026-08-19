@@ -92,7 +92,7 @@ export const verticals: Record<string, Vertical> = {
     icp: 'Fintech founders and growth teams spending on paid acquisition for financial products with account-open rates below 3%.',
     top_leak: 'Security and regulatory signals are missing or buried. Visitors considering a financial product want to see regulatory status, security language, or insurance backing within the first scroll. Without it, uncertainty converts to exit.',
     second_leak: 'No specific proof of user outcomes. Aggregate numbers ("10,000 users") are less convincing than specific outcomes ("£312 saved in the first month"). The financial category has high stakes; visitors need evidence, not volume.',
-    benchmark: 'Fintech acquisition page benchmark: 3% account open rate on paid traffic. Pages with explicit compliance signals and specific outcome proof outperform by 40-80%.',
+    benchmark: 'Fintech acquisition pages often fail on trust signals — regulatory status, security language, and insurance backing are frequently missing or buried below the fold. The audit checks whether these conditions are observable in your page HTML.',
     cta_copy: 'Score your fintech page',
     related_links: [
       ['/landing-page-trust-signals', 'Trust signals on landing pages'],

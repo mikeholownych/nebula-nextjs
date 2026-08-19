@@ -19,6 +19,8 @@ const BANNED_PHRASES = [
   { pattern: /proves?\s+your\s+ad/gi, id: 'proves-your-ad' },
   { pattern: /your\s+ads?\s+(?:are|is)\s+working/gi, id: 'ads-are-working' },
   { pattern: /killing\s+(?:your\s+)?conversions?/gi, id: 'killing-conversions' },
+  { pattern: /killing\s+your\s+ads?/gi, id: 'killing-ads' },
+  { pattern: /(?:where|exactly where)\s+you(?:'re| are)\s+losing\s+money/gi, id: 'losing-money' },
   { pattern: /determines?\s+whether/gi, id: 'determines-whether' },
   { pattern: /will\s+outperform/gi, id: 'will-outperform' },
   { pattern: /conversion\s+impact/gi, id: 'conversion-impact' },

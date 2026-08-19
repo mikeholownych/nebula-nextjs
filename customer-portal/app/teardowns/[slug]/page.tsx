@@ -175,7 +175,7 @@ export default async function TeardownPage({
                     </h3>
                   </div>
                   <div className="flex shrink-0 flex-col items-end gap-1">
-                    <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent" title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent" aria-label="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">
                       Priority {f.priority}/10
                     </span>
                     <span className={`text-xs font-semibold ${QUADRANT_COLORS[f.quadrant] ?? 'text-fg-muted'}`}>

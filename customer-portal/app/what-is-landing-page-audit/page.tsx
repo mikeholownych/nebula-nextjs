@@ -81,7 +81,7 @@ export default function WhatIsLandingPageAudit() {
             A landing page audit is a <strong className="text-white">systematic evaluation</strong> of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness.
           </p>
           <p className="text-gray-300 mb-4">
-            It scores each signal on a 1–10 scale and produces a prioritized fix list. It is not a subjective opinion - it's a scored diagnostic that reveals exactly where you're losing money.
+            It evaluates each signal and produces a prioritized fix list. It is not a subjective opinion — it is a scored diagnostic that shows which observable page conditions are failing and which are passing.
           </p>
           <div className="bg-[#161b22] border border-[#30363d] rounded-lg p-6 my-6">
             <p className="text-emerald-400 font-semibold mb-2">The 9 Signals:</p>
@@ -112,15 +112,15 @@ export default function WhatIsLandingPageAudit() {
             Why Audit Before Spending More on Ads?
           </h2>
           <p className="text-gray-300 mb-4">
-            Ad platforms optimize for <strong className="text-white">clicks, not conversions</strong>. It's common to spend $2,000–$5,000 on ads and see zero sales because the landing page leaks the traffic.
+            Ad platforms optimize for <strong className="text-white">clicks, not conversions</strong>. If you are spending on ads and not seeing results, the page is one of the variables worth investigating.
           </p>
           <p className="text-gray-300 mb-4">
-            A verified audit should identify those leaks before you spend another dollar on ad traffic.
+            A verified audit checks observable page conditions so you can rule the page in or out before spending more on ad traffic.
           </p>
           <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-6 my-6">
             <p className="text-red-400 font-semibold mb-2">⚠️ Warning Sign</p>
             <p className="text-gray-300">
-              If you've spent $1,000+ on ads with zero conversions, your landing page is the problem. Not the targeting. Not the creative. The page.
+              If you have spent $1,000+ on ads with zero conversions, the landing page is worth investigating. It may not be the only factor — but it is the one you can check in under 2 minutes without changing your ad account.
             </p>
           </div>
         </section>

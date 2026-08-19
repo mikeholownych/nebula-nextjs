@@ -21,10 +21,13 @@ interface AuditCardArtifactProps {
 }
 
 const DEFAULT_SIGNALS = [
-  { key: 'headline', label: 'Headline', pass: true },
+  { key: 'message_match', label: 'Message match', pass: true },
   { key: 'cta', label: 'CTA clarity', pass: false },
-  { key: 'social_proof', label: 'Social proof', pass: false },
+  { key: 'above_fold', label: 'Above fold', pass: true },
+  { key: 'social_proof', label: 'Trust signals', pass: false },
+  { key: 'load_time', label: 'Load speed', pass: true },
   { key: 'mobile', label: 'Mobile viewport', pass: true },
+  { key: 'ad_signals', label: 'Ad tracking', pass: false },
   { key: 'seo', label: 'SEO foundations', pass: true },
   { key: 'ai', label: 'AI readiness', pass: false },
 ]
@@ -105,7 +108,7 @@ export default function AuditCardArtifact({
             </svg>
             <div>
               <p className="text-sm font-medium text-fg">{topLeak}</p>
-              <p className="mt-0.5 text-xs text-fg-muted">Top conversion leak</p>
+              <p className="mt-0.5 text-xs text-fg-muted">Highest-priority finding</p>
             </div>
           </div>
         </div>

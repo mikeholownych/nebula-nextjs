@@ -354,10 +354,9 @@ describe('production safety containment', () => {
 
   it('shows a real audit submission form now that scoring is live', () => {
     const source = readFileSync(path.join(process.cwd(), 'app/audit/page.tsx'), 'utf8')
-    expect(source).toContain("See if the page is what&apos;s killing your ads.")
+    expect(source).toContain("Check your page before you change the ad.")
     expect(source).toContain('<AuditForm />')
     expect(source).not.toContain('7.7/10')
-    expect(source).not.toContain('9 conversion signals')
   })
 
   it('does not claim a direct thank-you visit is paid', () => {

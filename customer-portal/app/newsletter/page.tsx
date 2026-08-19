@@ -58,10 +58,10 @@ export default function NewsletterPage() {
           <Card variant="bordered" className="p-6">
             <div className="flex items-start gap-3 mb-3">
               <span className="text-2xl">📈</span>
-              <h3 className="font-semibold text-fg">Real Results</h3>
+              <h3 className="font-semibold text-fg">What You Get</h3>
             </div>
             <p className="text-sm text-fg-muted leading-relaxed">
-              Founders who implement these fixes average +2 points (out of 10) in 30 days.
+              Subscribers get the same conversion signal checks we publish in our public teardowns — applied to timely examples with specific fixes.
             </p>
           </Card>
         </section>
@@ -77,19 +77,19 @@ export default function NewsletterPage() {
               {
                 title: "H1 Doesn't Match Ad Copy",
                 finding: "Visitor clicks ad for 'Fast checkout in 3 clicks' → lands on page saying 'Streamlined payment experience'",
-                impact: "Forces re-qualification of page. Bounce rate +12%",
+                impact: "Forces re-qualification of page. Visitor expected one thing, got another.",
                 fix: "Copy your ad headline directly into your H1. Test for 7 days.",
               },
               {
                 title: "CTA Button Says 'Submit'",
                 finding: "Generic CTA text. Visitor unsure what happens after click.",
-                impact: "Click-through rate -8%. Abandonment rate +15%",
+                impact: "Generic label gives no indication of what happens next. Visitor hesitates.",
                 fix: "Change to action-specific: 'Start my 7-day free trial' or 'Get my custom quote in 2 min'",
               },
               {
                 title: "Meta Description Missing",
                 finding: "No meta description. Google shows first 100 chars of page text (out of context).",
-                impact: "CTR in search results -5%",
+                impact: "Google auto-generates a snippet from page text — often out of context.",
                 fix: "Write 155-char meta description: Problem + promise.",
               },
             ].map((issue, idx) => (

@@ -165,11 +165,11 @@ export default async function AuditPage() {
             {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
             <div className="order-2 flex flex-col justify-center md:order-1">
               <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
-                See if the page is what&apos;s killing your ads.
+                Check your page before you change the ad.
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Leak detection runs core conversion checks against your actual page.
-                See the verified findings before sharing an email.
+                Paste your URL. Nebula checks 9 conversion signals against your actual page HTML.
+                See findings ranked by priority before sharing an email.
               </p>
               <ul className="mt-6 space-y-2">
                 {[

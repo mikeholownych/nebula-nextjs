@@ -97,7 +97,7 @@ export default function Home() {
 Find the page-side conditions worth fixing before you blame the traffic.
                </h1>
                <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
-                 A click confirms interest. The page determines what happens next. Nebula checks {SIGNAL_COUNT} conversion signals
+                 A click confirms interest. The page is what the visitor encounters next. Nebula checks {SIGNAL_COUNT} conversion signals
                  against your actual page HTML in under 30 seconds — then ranks findings by priority so you know what to investigate first.
                </p>
                <div className="mt-8">                 <Link                   href="/audit?utm_source=homepage&utm_medium=internal"                   className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"                 >                   Get My Free Conversion Score                 </Link>

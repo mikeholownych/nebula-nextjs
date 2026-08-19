@@ -220,7 +220,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     competitorUrl: "https://crazyegg.com",
     tagline: "Crazy Egg vs. Nebula - visual analytics vs. conversion audit",
     intent: "Crazy Egg shows you user behaviour data from existing traffic. Nebula diagnoses your conversion structure before you have a single visitor.",
-    bluf: "Crazy Egg visualizes behavior with heatmaps once you have traffic. Nebula diagnoses the conversion structure before you have a single visitor. If the page has a weak headline or a buried CTA, Crazy Egg shows people leaving; Nebula names the failure on day one.",
+    bluf: "Crazy Egg visualizes actual user behavior with heatmaps once you have traffic. Nebula evaluates page-side structural conditions without requiring traffic. Crazy Egg shows where people leave; Nebula checks whether observable conversion signals pass or fail before you have visitors.",
     checkedAt: "August 2026",
     targetQuery: "crazy egg alternative conversion audit no traffic needed",
     rows: [
@@ -236,10 +236,10 @@ export const COMPARISONS: Record<string, Comparison> = {
     ],
     faqs: [
       { q: "Does Crazy Egg work without traffic?", a: "No - heatmaps, scrollmaps, and recordings only generate from real visitor sessions. A page without traffic produces no data. Nebula audits any public URL instantly, traffic or not." },
-      { q: "Can Crazy Egg diagnose conversion problems?", a: "Crazy Egg shows behavior data but does not diagnose the cause. A weak headline or buried CTA shows up as people leaving; Nebula names the specific failing signal with evidence and a fix." },
+      { q: "Can Crazy Egg diagnose conversion problems?", a: "Crazy Egg shows behavior data — where people click, scroll, and leave. Nebula evaluates structural conditions — whether specific signals pass or fail — with evidence from your page HTML. Different approaches: one observes users, the other evaluates page structure." },
       { q: "What does Nebula check that Crazy Egg does not?", a: "Nebula checks conversion structure: headline message match, CTA clarity, trust evidence, above-fold placement, ad-signal readiness, and AI citation readiness - each scored pass/fail with evidence, before you have any traffic." },
     ],
-    verdict: "Crazy Egg is a solid visual analytics tool for teams who already have traffic and want to understand how users interact with a page. The problem: if your page has a structural conversion failure - weak headline, missing trust signals, CTA below the fold - Crazy Egg will confirm people are leaving, but it cannot tell you why before you burn ad spend finding out. Nebula works before you have data.",
+    verdict: "Crazy Egg is a solid visual analytics tool for teams who already have traffic and want to understand how users interact with a page. It observes actual user behavior. Nebula evaluates page-side structural conditions — whether the headline matches the ad, whether trust signals are visible, whether the CTA is above the fold — without requiring traffic data. Crazy Egg confirms that people leave; Nebula checks which structural conditions are failing. Different evidence, different timing.",
   },
 
   "screaming-frog": {

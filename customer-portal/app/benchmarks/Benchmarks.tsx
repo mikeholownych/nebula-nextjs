@@ -232,7 +232,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
                     </p>
                   </div>
                   <p className="text-xs font-mono text-fg-muted">
-                    avg impact {c.avg_impact.toFixed(1)}/10
+                    avg priority {c.avg_impact.toFixed(1)}/10
                   </p>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-bg-muted">
@@ -275,7 +275,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               <h3 className="text-sm font-semibold text-fg">Privacy</h3>
               <p className="mt-2 text-sm leading-6 text-fg-muted">
                 No page URLs, emails, or personal data are shown. Only aggregate failure rates,
-                average impact across verified documented checks are published.
+                average priority scores across verified documented checks are published.
               </p>
               <h3 className="mt-5 text-sm font-semibold text-fg">Freshness</h3>
               <p className="mt-2 text-sm leading-6 text-fg-muted">
