@@ -101,7 +101,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
           See plans →
         </Link>
         <Link
-          href="/billing"
+          href="/workspace?tab=billing"
           className="rounded-lg border border-border px-6 py-3 text-sm font-semibold text-fg-muted transition-colors hover:border-accent hover:text-fg"
         >
           View billing

@@ -83,4 +83,16 @@ describe('site surface integrity', () => {
     }
     expect(offenders).toEqual([])
   })
+
+  it('does not link to the missing /billing page', () => {
+    const files = [
+      ...walk(path.join(repo, 'app'), new Set(['.ts', '.tsx'])),
+      ...walk(path.join(repo, 'components'), new Set(['.ts', '.tsx'])),
+    ]
+    const offenders = files.filter((file) => {
+      const text = readFileSync(file, 'utf8')
+      return /href=["']\/billing["']/.test(text)
+    }).map((file) => path.relative(repo, file))
+    expect(offenders).toEqual([])
+  })
 })

@@ -67,6 +67,7 @@ const nextConfig: NextConfig = {
       // Trailing-slash duplicate (skipTrailingSlashRedirect is on globally for
       // the PostHog /ingest proxy, so this one page needs its own explicit rule)
       { source: '/pricing/', destination: '/pricing', permanent: true },
+      { source: '/billing', destination: '/workspace?tab=billing', permanent: false },
       // Legacy .html → current app routes (301)
       { source: '/blog-trigger-aware-outreach.html',    destination: '/learning-centre', permanent: true },
       { source: '/why-landing-pages-dont-convert.html', destination: '/learning-centre/landing-page-not-converting', permanent: true },
