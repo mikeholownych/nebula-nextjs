@@ -15,8 +15,10 @@ export type AccessLevel = 'free' | 'pro' | 'growth' | 'agency'
 
 // Which plan level is required to access each workspace tab
 export const TAB_ACCESS_REQUIREMENTS: Record<string, AccessLevel> = {
+  aiSearch: 'free',
+  roiCalculator: 'free',
+  compare: 'free',
   monitoring: 'pro',
-  compare: 'pro',
   timeline: 'pro',
   reports: 'pro',
   experiments: 'pro',

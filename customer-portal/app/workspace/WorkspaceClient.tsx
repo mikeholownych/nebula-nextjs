@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { DashboardView, AuditsView, ProjectsView } from './views'
 import CompareView from './compareView'
+import CompetitorView from './competitorView'
+import AiSearchView from './aiSearchView'
+import RoiCalculatorView from './roiCalculatorView'
 import RecsView from './recsView'
 import PagesView from './pagesView'
 import ExperimentsView from './experimentsView'
@@ -61,7 +64,26 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'pages' | 'diff' | 'compare' | 'recommendations' | 'experiments' | 'tracker' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
+type TabId =
+  | 'dashboard'
+  | 'audits'
+  | 'projects'
+  | 'pages'
+  | 'diff'
+  | 'compare'
+  | 'recommendations'
+  | 'experiments'
+  | 'tracker'
+  | 'aiSearch'
+  | 'roiCalculator'
+  | 'billing'
+  | 'monitoring'
+  | 'timeline'
+  | 'reports'
+  | 'achievements'
+  | 'assistant'
+  | 'team'
+  | 'settings'
 
 export default function WorkspaceClient() {
   const [email, setEmail] = useState('')
@@ -181,28 +203,45 @@ export default function WorkspaceClient() {
       label: 'Workspace',
       items: [
         { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
-        { id: 'audits', label: 'Audits', icon: 'scan' },
+        { id: 'audits', label: 'All Audits', icon: 'scan' },
+        { id: 'pages', label: 'Monitored Pages', icon: 'map' },
         { id: 'projects', label: 'Projects', icon: 'folder' },
-        { id: 'pages', label: 'Pages', icon: 'map' },
-        { id: 'diff', label: 'Audit Diff', icon: 'diff' },
-        { id: 'recommendations', label: 'Fix queue', icon: 'check' },
       ],
     },
     {
-      label: 'Analyze',
+      label: 'Conversion (CRO)',
       items: [
-        { id: 'compare', label: 'Compare', icon: 'compare' },
+        { id: 'recommendations', label: 'Fix Queue & Sprint', icon: 'check' },
+        { id: 'diff', label: 'Audit Diff', icon: 'diff' },
         { id: 'experiments', label: 'Component Lab', icon: 'flask' },
         { id: 'tracker', label: 'Experiments', icon: 'pulse' },
-        { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
-        { id: 'timeline', label: 'Timeline', icon: 'clock' },
       ],
     },
     {
-      label: 'Account',
+      label: 'AI Search (AEO/GEO)',
       items: [
-        { id: 'reports', label: 'Reports', icon: 'report' },
-        { id: 'billing', label: 'Billing', icon: 'card' },
+        { id: 'aiSearch', label: 'AI Citability & LLM Tests', icon: 'spark' },
+      ],
+    },
+    {
+      label: 'Competitor Intel',
+      items: [
+        { id: 'compare', label: 'Head-to-Head Compare', icon: 'compare' },
+      ],
+    },
+    {
+      label: 'Tools',
+      items: [
+        { id: 'roiCalculator', label: 'Conversion ROI', icon: 'calculator' },
+      ],
+    },
+    {
+      label: 'Account & Reports',
+      items: [
+        { id: 'billing', label: 'Billing & Credits', icon: 'card' },
+        { id: 'reports', label: 'PDF Reports', icon: 'report' },
+        { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
+        { id: 'timeline', label: 'Score Timeline', icon: 'clock' },
         { id: 'assistant', label: 'AI Assistant', icon: 'spark' },
         { id: 'team', label: 'Team', icon: 'users' },
         { id: 'settings', label: 'Settings', icon: 'gear' },
@@ -215,11 +254,11 @@ export default function WorkspaceClient() {
       <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
         <aside className="hidden w-56 shrink-0 border-r border-border pr-5 lg:block" aria-label="Workspace navigation">
           <div className="sticky top-28">
-            <div className="mb-8 px-3">
+            <div className="mb-6 px-3">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-fg-dim">Nebula</p>
               <p className="mt-1 text-sm font-semibold text-fg-dim">Customer workspace</p>
             </div>
-            <div className="space-y-7">
+            <div className="space-y-6">
               {navGroups.map((group) => (
                 <div key={group.label}>
                   <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-fg-dim">{group.label}</p>
@@ -232,7 +271,7 @@ export default function WorkspaceClient() {
                             key={item.id}
                             onClick={() => setTab(item.id)}
                             aria-current={tab === item.id ? 'page' : undefined}
-                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
+                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-left text-[13px] font-medium transition-colors ${
                               tab === item.id ? 'bg-bg-panel text-fg' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
                             }`}
                           >
@@ -246,9 +285,29 @@ export default function WorkspaceClient() {
                 </div>
               ))}
             </div>
-            <div className="mt-10 border-t border-border px-3 pt-4">
+
+            {/* Account / Plan Status Card */}
+            <div className="mt-6 rounded-xl border border-border bg-bg-panel p-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-fg-dim">Plan</span>
+                <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] font-bold text-accent capitalize">
+                  {planLevel}
+                </span>
+              </div>
+              <div className="mt-2 text-xs text-fg-muted">
+                <span className="font-semibold text-fg">{audits?.length || 0}</span> audits saved
+              </div>
+              <a
+                href="/pricing"
+                className="mt-2.5 flex w-full items-center justify-center rounded-lg bg-accent/10 border border-accent/30 py-1 text-[11px] font-bold text-accent hover:bg-accent hover:text-bg transition-colors"
+              >
+                Upgrade / Credits →
+              </a>
+            </div>
+
+            <div className="mt-4 border-t border-border px-3 pt-3">
               <p className="truncate text-xs text-fg-dim" title={email}>{email}</p>
-              <button onClick={signOut} className="mt-2 text-xs font-medium text-fg-muted hover:text-fg">Sign out</button>
+              <button onClick={signOut} className="mt-1 text-xs font-medium text-fg-muted hover:text-fg">Sign out</button>
             </div>
           </div>
         </aside>
@@ -298,11 +357,9 @@ export default function WorkspaceClient() {
           {tab === 'projects' && <ProjectsView audits={audits || []} />}
           {tab === 'pages' && <PagesView audits={audits || []} latestDetail={latestDetail} />}
           {tab === 'diff' && <DiffView audits={audits || []} />}
-          {tab === 'compare' && (
-            canAccess(planLevel, 'pro')
-              ? <CompareView audits={audits || []} />
-              : <LockedTab tabLabel="Compare" requiredPlan="pro" currentPlan={planLevel} />
-          )}
+          {tab === 'compare' && <CompetitorView audits={audits || []} email={email} />}
+          {tab === 'aiSearch' && <AiSearchView audits={audits || []} email={email} />}
+          {tab === 'roiCalculator' && <RoiCalculatorView />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
           {tab === 'experiments' && (
             canAccess(planLevel, 'pro')
