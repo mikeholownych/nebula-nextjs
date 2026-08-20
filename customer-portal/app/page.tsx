@@ -343,7 +343,7 @@ export default function Home() {
               </div>
             </div>
             <p className="mt-8 max-w-2xl text-sm text-fg-muted">
-              See initial findings before sharing an email. If the page passes the relevant checks, look at traffic, offer, or downstream flow. If it fails, fix the highest-priority condition first, then re-audit.
+              We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, it will appear here. Until then: see initial findings before sharing an email. If the page passes the relevant checks, look at traffic, offer, or downstream flow. If it fails, fix the highest-priority condition first, then re-audit.
             </p>
           </div>
         </section>

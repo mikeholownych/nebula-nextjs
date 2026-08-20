@@ -189,7 +189,7 @@ export default function CookieConsent({ country = null }: { country?: string | n
         tabIndex={-1}
         aria-labelledby="cookie-banner-title"
         aria-describedby="cookie-banner-description"
-        className="fixed bottom-0 left-0 right-0 z-50 max-h-[32vh] overflow-y-auto translate-y-0 border-t border-border bg-bg-panel p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] opacity-100 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 md:max-h-none md:p-6"
+        className="fixed bottom-0 left-0 right-0 z-50 max-h-[42vh] overflow-y-auto translate-y-0 border-t border-border bg-bg-panel p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] opacity-100 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 md:max-h-none md:p-6"
       >
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">

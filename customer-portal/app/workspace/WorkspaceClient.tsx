@@ -24,6 +24,7 @@ import {
   LockBadge,
   type AccessLevel,
 } from './planGate'
+import { analytics } from '@heycatch/sdk'
 
 export interface WorkspaceAudit {
   id: string
@@ -110,6 +111,13 @@ export default function WorkspaceClient() {
         }
         const user = await response.json()
         setEmail(user.email || '')
+        if (user.id) {
+          analytics.setIdentity(
+            user.id,
+            { email: user.email, name: user.name, plan: user.plan },
+            user.created_at ? { signup_date: user.created_at } : undefined,
+          )
+        }
       })
       .catch(() => window.location.replace('/login'))
       .finally(() => setAuthLoading(false))
@@ -120,15 +128,19 @@ export default function WorkspaceClient() {
       load(email)
       // Fetch billing plan - non-blocking; defaults to 'free' on failure
       fetch(`/api/billing/summary?email=${encodeURIComponent(email)}`)
-        .then((r) => r.ok ? r.json() : null)
+        .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
-          if (data?.plan) setPlanLevel(resolvePlanLevel(data.plan))
+          if (data?.plan) {
+            setPlanLevel(resolvePlanLevel(data.plan))
+            analytics.setPersonProperties({ plan: data.plan })
+          }
         })
         .catch(() => undefined)
     }
   }, [email, load])
 
   const signOut = async () => {
+    analytics.resetIdentity()
     await fetch('/api/auth/logout', { method: 'POST' }).catch(() => undefined)
     window.location.replace('/login')
   }

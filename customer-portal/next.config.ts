@@ -51,6 +51,12 @@ const nextConfig: NextConfig = {
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
   async redirects() {
     return [
+      // HeyCatch channel attribution short links (single-character paths)
+      {
+        source: '/:l([a-z0-9])',
+        destination: '/?utm_source=heycatch&utm_campaign=:l',
+        permanent: false,
+      },
       // www variants → canonical .com apex (single hop)
       {
         source: '/:path*',
@@ -257,7 +263,7 @@ const nextConfig: NextConfig = {
           // through /ingest (see CookieConsent.tsx) so it needs no separate
           // script-src entry, only connect-src for its API/asset hosts.
           // GA4 also fires an image beacon to googletagmanager.com/td and
-          // google-analytics.com collect endpoints. Those must be in img-src
+          // google-analytics.com collect endpoints. Those must be allowlisted
           // or Chrome blocks them (visible on /teardowns and every page).
           // Stripe checkout is a plain-link navigation to buy.stripe.com, not
           // an embedded script/iframe, so it needs no CSP entry either.
@@ -267,11 +273,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai",
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",

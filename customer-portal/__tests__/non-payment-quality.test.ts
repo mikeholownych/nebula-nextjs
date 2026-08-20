@@ -32,10 +32,10 @@ describe('non-payment public quality invariants', () => {
     expect(source).toContain('overflow-y-auto')
   })
 
-  test('favicon metadata uses current bare asset paths', () => {
+  test('favicon metadata uses current brand asset paths', () => {
     const source = read('app/layout.tsx')
-    expect(source).toContain("url: '/favicon.svg'")
-    expect(source).toContain("apple: '/favicon.png'")
+    expect(source).toContain('brand.assets.faviconSvg')
+    expect(source).toContain('brand.assets.appleTouchIcon')
     expect(source).not.toContain('favicon.svg?v=')
   })
 })

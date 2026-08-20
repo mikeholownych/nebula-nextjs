@@ -9,6 +9,9 @@ import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 import { planFromStripePrice } from '@/app/lib/subscription-plans'
 import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
+import { analytics as heycatch } from '@heycatch/sdk'
+
+heycatch.init({ projectKey: 'hck_pk_UDEJlnGqF84u4i2q08NwcTvTYGrXLns_' })
 
 const execFileAsync = promisify(execFile)
 
@@ -494,6 +497,29 @@ export async function POST(request: NextRequest) {
     } catch {
       // Fulfillment must not depend on analytics.
     }
+
+    if (customerEmail) {
+      try {
+        const userId = session.metadata?.analytics_person_id || customerEmail
+        const offerKey = session.metadata?.offer_key ?? 'fix_pack'
+        await heycatch.setIdentity(userId, {
+          email: customerEmail,
+          plan: offerKey,
+        })
+        await heycatch.trackEvent(
+          'purchase_completed',
+          {
+            offer_key: offerKey,
+            amount_cents: session.amount_total || 9700,
+            currency: session.currency || 'usd',
+            transaction_id: transactionId,
+          },
+          { userId },
+        )
+      } catch {
+        // Analytics failure must never block webhook response
+      }
+    }
   }
 
   if (event.type === 'invoice.payment_succeeded') {
@@ -599,11 +625,39 @@ export async function POST(request: NextRequest) {
            WHERE stripe_subscription_id = $1`,
           [sub.id, welcomeSent],
         )
+
+        try {
+          await heycatch.setIdentity(email, {
+            email,
+            plan: resolved.plan,
+          })
+          await heycatch.trackEvent(
+            'subscription_started',
+            { plan: resolved.plan, interval: resolved.interval },
+            { userId: email },
+          )
+        } catch {
+          // Analytics failure must not block webhook response
+        }
       }
       if (event.livemode && event.type === 'customer.subscription.deleted') {
         void sendSaleAlert(
           `🔻 *SUBSCRIPTION CANCELED* - ${resolved.plan.toUpperCase()} - ${email}\nsubscription: ${sub.id}`,
         )
+
+        try {
+          await heycatch.setIdentity(email, {
+            email,
+            plan: 'canceled',
+          })
+          await heycatch.trackEvent(
+            'subscription_canceled',
+            { plan: resolved.plan },
+            { userId: email },
+          )
+        } catch {
+          // Analytics failure must not block webhook response
+        }
       }
     }
   }

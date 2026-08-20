@@ -8,6 +8,7 @@ import WebMCP from '@/components/WebMCP'
 import GeoConsent from './components/GeoConsent'
 import OgUrl from './components/OgUrl'
 import AnalyticsRuntime from './components/AnalyticsRuntime'
+import HeyCatch from './components/HeyCatch'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
@@ -143,6 +144,7 @@ export default function RootLayout({
           <GeoConsent />
         </Suspense>
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
+        <HeyCatch />
         <ExitIntentPopup />
         <WebMCP />
 
