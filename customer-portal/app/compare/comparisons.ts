@@ -30,6 +30,7 @@ export interface Comparison {
   table: ComparisonRow[]
   useBoth: string
   verdict: string
+  faqs?: { q: string; a: string }[]
 }
 
 export const comparisons: Comparison[] = [
@@ -183,6 +184,105 @@ export const comparisons: Comparison[] = [
       'Leadpages gets you live in an afternoon; Nebula tells you whether the live page is actually built for conversion. Run the free audit the same day you publish, before you spend on traffic.',
     verdict:
       'Leadpages solves publishing, not conversion. The cheapest fix for a template page that is not converting is usually diagnosis, not another template.',
+  },
+  {
+    slug: 'whyiq',
+    toolName: 'WhyIQ',
+    toolUrl: 'https://whyiq.com',
+    category: 'Synthetic user testing',
+    shortDescription:
+      'AI-simulated visitor feedback and personas vs deterministic HTML DOM conversion inspection.',
+    intro:
+      'WhyIQ uses AI to simulate visitor behavior, generating synthetic reactions and qualitative persona feedback on landing pages. Nebula Components takes a deterministic, evidence-based approach: scanning the actual HTML DOM against 9 concrete conversion signals.',
+    whatItDoesWell: [
+      'Simulates audience personas and rapid qualitative feedback',
+      'Generates synthetic visitor thoughts and perceived clarity scores',
+      'Explores subjective visitor interpretations without running live traffic tests',
+      'Fast turnaround for initial design brainstorming',
+    ],
+    whereItStops: [
+      'Simulations are synthetic: AI personas do not spend money or click real ads.',
+      'It does not inspect technical DOM conditions (mobile viewport clipping, tracking pixel firing, schema markup).',
+      'Advice can be probabilistic and non-reproducible between runs.',
+      'No verifiable re-audit benchmark to prove whether an HTML failure was resolved.',
+    ],
+    nebulaFit: [
+      'Nebula audits deterministic, observable HTML conditions (message match, CTA positioning, trust proximity, speed).',
+      'Every check is 100% reproducible and backed by exact element selectors and measurements.',
+      'Includes the $97 One-Leak Repair Sprint and a 30-day verifiable re-audit.',
+    ],
+    table: [
+      { dimension: 'Methodology', tool: 'LLM persona simulation & synthetic reactions', nebula: 'Deterministic HTML DOM inspection against 9 signals' },
+      { dimension: 'Evidence', tool: 'Simulated quotes & sentiment ratings', nebula: 'Raw HTML selectors, distances, and load times' },
+      { dimension: 'Reproducibility', tool: 'Probabilistic (varies with model prompts)', nebula: 'Deterministic (same HTML = same finding)' },
+      { dimension: 'Verification', tool: 'Re-run AI simulation', nebula: '30-day re-audit against identical pass standards' },
+      { dimension: 'Engine', tool: 'Proprietary AI prompt layer', nebula: 'Open-source Citable CLI (123 detectors, Apache 2.0)' },
+      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Repair Sprint' },
+    ],
+    useBoth:
+      'Use WhyIQ during early concepting if you want to explore different audience angles and persona reactions. Use Nebula on your live landing page to verify that the technical mechanics, message match, CTA visibility, and proof elements actually conform to conversion standards.',
+    verdict:
+      'WhyIQ guesses what an AI persona might think. Nebula measures what your page actually does. For paid traffic where every click costs real money, start with deterministic page-side diagnosis.',
+    faqs: [
+      {
+        q: 'How does Nebula differ from WhyIQ?',
+        a: 'WhyIQ uses AI models to simulate how personas might read your page. Nebula inspects the actual HTML DOM directly, measuring exact message match, CTA viewport positioning, load speed, and tracking signals without synthetic guesswork.',
+      },
+      {
+        q: 'Can Nebula and WhyIQ be used together?',
+        a: 'Yes. You can use WhyIQ for early qualitative brainstorming and persona reactions, and Nebula for verifiable, technical conversion leak audits on your live page.',
+      },
+    ],
+  },
+  {
+    slug: 'landing-doctors',
+    toolName: 'Landing Doctors',
+    toolUrl: 'https://landingdoctors.com',
+    category: 'CRO agency & redesigns',
+    shortDescription:
+      'Full-page agency rewrites and design overhauls vs bounded single-condition repairs.',
+    intro:
+      'Landing Doctors is a conversion rate optimization agency that audits and redesigns entire landing pages. Nebula Components provides automated evidence-based diagnosis and the $97 One-Leak Repair Sprint: a bounded, single-condition repair package with a verifiable 30-day re-audit.',
+    whatItDoesWell: [
+      'Full custom redesigns and agency copywriting overhauls',
+      'Turnkey design and development for complete page replacements',
+      'Custom graphics, illustrations, and branding alignment',
+      'End-to-end project management for large marketing teams',
+    ],
+    whereItStops: [
+      'High cost: agency engagements typically cost thousands of dollars per page.',
+      'Multi-variable changes: rewriting the entire page at once makes it impossible to know which change moved the needle.',
+      'Long turnaround: complete redesigns often take 2-4 weeks to deliver.',
+      'Black-box methods: proprietary agency feedback rather than transparent, open-source diagnostic rules.',
+    ],
+    nebulaFit: [
+      'Instant free audit: scans 9 conversion signals in under 30 seconds.',
+      'Bounded $97 Repair Sprint: focuses on fixing the single highest-priority leak first.',
+      'Transparent engine: powered by open-source Citable CLI with 123 detectors.',
+      'Verifiable re-audit: 30-day check confirms the specific HTML condition was fixed.',
+    ],
+    table: [
+      { dimension: 'Deliverable', tool: 'Full page rewrite & redesign', nebula: 'Bounded single-condition repair kit ($97)' },
+      { dimension: 'Turnaround', tool: '2 to 4 weeks', nebula: 'Instant audit; 48-hour repair kit delivery' },
+      { dimension: 'Isolation', tool: 'Multi-variable (entire page changes)', nebula: 'Single-variable (one leak repaired and verified)' },
+      { dimension: 'Transparency', tool: 'Proprietary agency opinions', nebula: 'Open-source Citable CLI (Apache 2.0)' },
+      { dimension: 'Verification', tool: 'Post-launch traffic monitoring', nebula: 'Automated 30-day re-audit against exact pass rule' },
+      { dimension: 'Cost', tool: '$2,000 - $5,000+ per page', nebula: 'Free audit; $97 one-time repair' },
+    ],
+    useBoth:
+      'If you have an unviable legacy design that requires a total brand overhaul and have several thousand dollars in budget, an agency like Landing Doctors can redesign the whole asset. Once live, use Nebula to ensure the page maintains strict conversion hygiene across message match, mobile visibility, and trust proximity.',
+    verdict:
+      'Landing Doctors is for when you need a full agency rebuild. Nebula is for when you are actively spending on ads, want to find the exact leak right now, and want a bounded fix without an agency retainer.',
+    faqs: [
+      {
+        q: 'Why choose a $97 Repair Sprint instead of a full agency redesign?',
+        a: 'Changing everything at once makes it impossible to isolate what worked or broke. The Repair Sprint fixes your highest-priority failed condition for $97, allowing you to test and verify the fix with a 30-day re-audit before doing a costly redesign.',
+      },
+      {
+        q: 'Does Nebula require access to our code repository or CMS?',
+        a: 'No. Nebula operates purely on public HTML. The repair kit is delivered directly to you with exact code snippets or copy replacements to apply.',
+      },
+    ],
   },
 ]
 

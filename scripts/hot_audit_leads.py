@@ -221,21 +221,14 @@ def main() -> int:
             print(f"  {l['email']} | {l['url']} | {l['score10']}/{l['grade']}")
         return 0
 
-    import time as _time
-    sent = 0
-    failed = 0
+    # Alert only. Sending is the unlocked-unpaid pipeline (recovery + followup_sequence).
+    if not hot:
+        return 0
+    print(f"{len(hot)} hot unlocked lead(s). Draft only. Pipeline owns the send.")
     for l in hot:
-        ok = send_pitch(l)
-        if ok:
-            sent += 1
-            print(f"✓ Sent + staged pitch_sent: {l['email']} | {l['url']} | {l['score10']}/10 ({l['grade']})")
-        else:
-            failed += 1
-            print(f"✗ Send failed: {l['email']}")
-        _time.sleep(5)  # trickle - never blast
-
-    if sent:
-        print(f"\n{sent} pitch(es) sent, {failed} failed.")
+        print("---")
+        print(l["email"], l["url"], f"{l['score10']}/10", l["grade"])
+        print(draft_email(l["url"], l["score10"], l["oneliner"], l["audit_id"]))
     return 0
 
 

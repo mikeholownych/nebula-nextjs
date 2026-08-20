@@ -156,18 +156,37 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 2-Line Description with Inline Diagnostic Mark */}
-        <p className="mt-6 text-sm sm:text-base text-fg-muted max-w-xl mx-auto leading-relaxed flex items-center justify-center flex-wrap gap-1.5">
-          <span>Inspect observable DOM conditions against 9 conversion signals</span>
-          <span className="inline-flex items-center gap-1 text-fg font-medium">
-            <NebulaMark size={14} />
-            with inspectable evidence
-          </span>
-          <span>before spending more on ads.</span>
+        {/* Plain Audience Language Subhead (D1.6, D2.1, D1.1) */}
+        <p className="mt-6 text-sm sm:text-base text-fg-muted max-w-xl mx-auto leading-relaxed">
+          Check your landing page against 9 conversion signals before spending more on ads. See what&apos;s wrong. Ranked by priority. No signup.
         </p>
 
+        {/* Quantity Proof & Recent Audits Texture (D3.1) */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex items-center -space-x-2 overflow-hidden py-1">
+            {[
+              { initial: 'LC', bg: 'bg-emerald-800 text-emerald-200' },
+              { initial: 'NS', bg: 'bg-blue-800 text-blue-200' },
+              { initial: 'FR', bg: 'bg-purple-800 text-purple-200' },
+              { initial: 'ZP', bg: 'bg-amber-800 text-amber-200' },
+              { initial: 'BC', bg: 'bg-rose-800 text-rose-200' },
+              { initial: 'NT', bg: 'bg-cyan-800 text-cyan-200' },
+            ].map((av, idx) => (
+              <div
+                key={idx}
+                className={`inline-flex h-6 w-6 items-center justify-center rounded-full border border-border text-[9px] font-bold font-mono ${av.bg}`}
+              >
+                {av.initial}
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-fg-muted font-mono">
+            <span className="font-semibold text-fg">147+ landing pages analyzed</span> · <span className="text-accent font-semibold">2.9 avg leaks</span> found
+          </p>
+        </div>
+
         {/* Diagnostic Trust Signals Strip */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-fg-muted">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-fg-muted">
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
             <span>Inspectable findings</span>

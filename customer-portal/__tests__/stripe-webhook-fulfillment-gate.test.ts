@@ -182,6 +182,18 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(fulfillmentStatus).toBe('delivered')
   })
 
+  it('runs deliver_prompt_pack.py for the D7 $67 close of the same sprint', async () => {
+    mockConstructEvent(makeSession({ amount_total: 6700 }))
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const pythonCalls = execFileMock.mock.calls.filter((c) =>
+      String(c[0]).includes('venv/bin/python3')
+    )
+    expect(pythonCalls).toHaveLength(1)
+    expect(fulfillmentStatus).toBe('delivered')
+  })
+
   it('does NOT run deliver_prompt_pack.py for a $7 Audit Lite purchase', async () => {
     mockConstructEvent(makeSession({ amount_total: 700 }))
     const response = await postWebhook()

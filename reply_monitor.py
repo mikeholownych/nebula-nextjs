@@ -71,7 +71,9 @@ def get_sender_email(thread: dict, our_inbox: str = "ops@launchcrate.io") -> str
         # Skip system / our own addresses
         if any(skip in addr for skip in
                ["agentmail.to", "mailer-daemon", "amazonses.com",
-                "postmaster", inbox_lower, "launchcrate.io"]):
+                "postmaster", inbox_lower, "launchcrate.io",
+                "sedrick@nebulacomponents.com", "nebulashop@agentmail.to",
+                "@nebulacomponents.com"]):
             continue
         return addr
     return None

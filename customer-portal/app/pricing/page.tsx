@@ -4,6 +4,7 @@ import { getActiveFixPack, type FixPackPublicFact } from '@/app/lib/public-facts
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card, PageShell } from '@/components/ui'
 import MembershipGrid from './MembershipGrid'
+import PricingComparisonTable from './PricingComparisonTable'
 
 
 export const metadata: Metadata = {
@@ -130,6 +131,8 @@ export default function PricingPage() {
 
           <MembershipGrid />
 
+          <PricingComparisonTable />
+
           <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Audit &amp; Repair</h2>
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
@@ -170,6 +173,9 @@ export default function PricingPage() {
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
               <p className="mt-1 text-sm text-fg-muted">Find it. Fix it. Verify it held.</p>
               <p className="mt-2 text-4xl font-bold tabular-nums text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
+              <p className="mt-2 text-xs font-medium text-accent">
+                Less than one day of ad spend. Less than 5% of a CRO consultant&apos;s audit fee.
+              </p>
               <p className="mt-4 text-fg-muted leading-relaxed">
                 One landing page, one finding. Run the free audit first - Nebula checks 9 signals against your actual page HTML in under 30 seconds.
                 Then pay $97 and receive the exact fix for your highest-priority finding within 48 hours.
@@ -201,6 +207,12 @@ export default function PricingPage() {
                   See full details
                 </Link>
               </div>
+              <p className="mt-4 text-xs text-fg-muted">
+                🛡️ <span className="font-semibold text-fg">30-day money-back guarantee:</span> If we cannot produce a repair that satisfies the agreed check, we refund the $97.{' '}
+                <Link href="/repair-sprint#repair-guarantee" className="text-accent hover:underline">
+                  View guarantee terms →
+                </Link>
+              </p>
             </Card>
           </div>
 

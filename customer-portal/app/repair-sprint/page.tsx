@@ -37,6 +37,9 @@ export default function RepairSprintPage() {
           <p className="mt-3 text-lg font-semibold text-fg">
             ${REPAIR_SPRINT_OFFER.priceUsd} - one-time, no subscription.
           </p>
+          <p className="mt-1 text-xs font-medium text-accent">
+            Less than one day of ad spend. Less than 5% of a CRO consultant&apos;s audit fee.
+          </p>
           <p className="mt-2 text-sm text-fg-dim">
             No conversion lift is promised. The re-audit confirms whether the targeted condition changed.
           </p>
@@ -54,6 +57,12 @@ export default function RepairSprintPage() {
               See example artifact
             </Link>
           </div>
+          <p className="mt-4 text-xs text-fg-muted">
+            🛡️ <span className="font-semibold text-fg">30-day money-back guarantee:</span> If we cannot produce a repair that satisfies the agreed check within scope, we refund the $97.{' '}
+            <a href="#repair-guarantee" className="text-accent hover:underline">
+              Read guarantee →
+            </a>
+          </p>
         </section>
         </VisibilityBeacon>
 
@@ -136,7 +145,7 @@ export default function RepairSprintPage() {
         </section>
 
         {/* Repair Guarantee */}
-        <section className="mb-14 rounded-lg border border-accent/30 bg-accent/5 p-6">
+        <section id="repair-guarantee" className="mb-14 rounded-lg border border-accent/30 bg-accent/5 p-6">
           <h2 className="text-xl font-bold text-fg mb-3">{REPAIR_GUARANTEE.title}</h2>
           <p className="text-sm text-fg-muted leading-7 mb-4">
             {REPAIR_GUARANTEE.statement}
@@ -252,6 +261,9 @@ export default function RepairSprintPage() {
           >
             Run Free Audit
           </Link>
+          <p className="mt-4 text-xs text-fg-muted">
+            🛡️ <span className="font-semibold text-fg">30-day money-back guarantee:</span> Full refund if we cannot produce a verified passing repair within stated scope.
+          </p>
         </section>
 
       </div>

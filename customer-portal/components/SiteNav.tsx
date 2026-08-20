@@ -27,6 +27,12 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
     <a href="/pricing" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
       Pricing
     </a>
+    <a href="/learning-centre" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
+      Learn
+    </a>
+    <a href="/about" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
+      About
+    </a>
     <a href="/workspace" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
       Workspace
     </a>

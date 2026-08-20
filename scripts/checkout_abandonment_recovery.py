@@ -36,9 +36,7 @@ CHANNEL = "checkout_abandonment_recovery"
 SEND_AFTER_HOURS = 2
 STOP_AFTER_HOURS = 72
 
-# Excluded addresses - internal / test
-EXCLUDED_DOMAINS = {"example.com", "example.invalid", "invalid.nebulacomponents.com"}
-EXCLUDED_PREFIXES = ("anonymous+", "qa-", "test@", "ux-audit-test@", "e2e-")
+from unlocked_unpaid_pipeline import is_pipeline_excluded, score_out_of_ten
 
 
 def log(msg: str) -> None:
@@ -47,11 +45,7 @@ def log(msg: str) -> None:
 
 
 def is_excluded(email: str) -> bool:
-    email_lower = email.lower()
-    domain = email_lower.split("@")[-1] if "@" in email_lower else ""
-    if domain in EXCLUDED_DOMAINS:
-        return True
-    return any(email_lower.startswith(p) for p in EXCLUDED_PREFIXES)
+    return is_pipeline_excluded(email)
 
 
 def build_email(email: str, audit_id: str, url: str, score: int, grade: str, findings: list) -> dict:
@@ -83,9 +77,10 @@ def build_email(email: str, audit_id: str, url: str, score: int, grade: str, fin
 
     subject = f"Your {domain} audit - the fix is ready"
 
+    score_label = score_out_of_ten(score)
     text = f"""Your audit findings for {url} are saved.
 
-Score: {score}/10 (Grade {grade}){finding_line}
+Score: {score_label} (Grade {grade}){finding_line}
 
 The $97 One-Leak Repair Sprint delivers the targeted fix for your highest-impact finding - exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.
 
@@ -124,7 +119,7 @@ nebulacomponents.com"""
 <h1 style="font-size:22px;font-weight:700;margin-bottom:8px">Your audit findings for {domain} are saved.</h1>
 
 <div style="background:#f7f7f7;border-radius:10px;padding:16px;margin:20px 0;font-family:monospace;font-size:14px">
-  <span style="color:#1a1a1a;font-weight:700">{score}/10</span>
+  <span style="color:#1a1a1a;font-weight:700">{score_label}</span>
   <span style="color:#666;font-size:12px;margin-left:8px">Grade {grade} - {url}</span>
 </div>
 
@@ -216,7 +211,7 @@ def main(dry_run: bool = False) -> None:
                 log(f"SKIP excluded address: {email}")
                 continue
 
-            log(f"{'[DRY RUN] ' if dry_run else ''}Sending recovery email to {email} for audit {audit_id} ({url}, {score}/10)")
+            log(f"{'[DRY RUN] ' if dry_run else ''}Sending recovery email to {email} for audit {audit_id} ({url}, {score_out_of_ten(score)})")
 
             payload = build_email(email, str(audit_id), url, score or 0, grade or "?", findings or [])
 
@@ -246,6 +241,11 @@ def main(dry_run: bool = False) -> None:
                         json.dumps({"audit_id": str(audit_id), "url": url, "score": score}),
                     ))
                 conn.commit()
+                try:
+                    from followup_sequence import mark_sent
+                    mark_sent(email, url, "t0_recovery", payload["subject"], False)
+                except Exception as exc:
+                    log(f"followup_state_record_failed: {email} | {exc}")
 
             sent += 1
 

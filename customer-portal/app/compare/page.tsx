@@ -4,11 +4,11 @@ import { comparisons } from './comparisons'
 export const metadata: Metadata = {
   title: 'Nebula Components vs Landing Page Tools - Comparisons',
   description:
-    'Honest, evidence-led comparisons of Nebula Components against landing page builders and performance tools: Unbounce, Instapage, PageSpeed Insights, Leadpages.',
+    'Honest, evidence-led comparisons of Nebula Components against landing page builders, CRO agencies, and synthetic testing tools: WhyIQ, Landing Doctors, Unbounce, Instapage, PageSpeed Insights, Leadpages.',
   openGraph: {
     title: 'Nebula Components vs Landing Page Tools - Comparisons',
     description:
-      'Evidence-led landing page audit vs the builders and meters. Honest boundaries and observable checks.',
+      'Evidence-led landing page audit vs builders, agencies, and testing tools. Honest boundaries and observable checks.',
     url: 'https://nebulacomponents.com/compare',
   },
   alternates: {

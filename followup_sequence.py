@@ -13,6 +13,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote_plus
 from outbound_release_gate import OutboundReleaseGate
+from unlocked_unpaid_pipeline import is_pipeline_excluded
 
 # ── Stripe personalised checkout links ────────────────────────────
 sys.path.insert(0, str(Path("/home/mike/nebula")))
@@ -55,16 +56,16 @@ STRIPE    = "https://nebulacomponents.com/audit?source=followup_sequence"
 # Rules enforced: one CTA, low-friction ask before payment link, no "just bumping" copy.
 AUDIT_SEQ = [
     (1, "email1_direct",
-     "re: {domain} audit - did that make sense?",
+     "re: {domain} audit - one leftover",
      """Hey,
 
-Quick check - the {domain} audit flagged {top_issue_short}. I wrote {top_fix}
+The leftover on {domain} is {top_issue_short}.
 
-Did that match what you were seeing, or is there a different piece you'd want addressed first?
+{top_fix}
 
-Either way, the $97 implementation path is here whenever: {stripe}
+Does that match what you were seeing, or is there a different condition you want first?
 
-- Nebula Audit Agent"""),
+- Nebula"""),
 
     (2, "email2_methodology",
      "why {domain}'s page is losing money before the pitch",
@@ -117,19 +118,19 @@ No call required. No scheduling. If you want the $97 implementation, start here:
      "closing this out for now",
      """Hey,
 
-Totally fine if now's not the right time - seriously.
+Totally fine if now's not the right time.
 
-The audit on {domain} won't expire. If you come back to this later, the fix is the same:
+The leftover on {domain} is still {top_issue_short}. The fix is the same:
 
 {top_fix}
 
-Implementation: {stripe}
+If you want that leftover done this week: $67 for the headline and first CTA pass. The link expires in 24 hours.
 
-Won't follow up again on this round. If something changes, the audit link is always live:
+{d7_checkout}
 
-https://nebulacomponents.com/audit.html?url=https://{domain}
+After that the $97 path stays if you come back later. I will not follow up again on this round.
 
-- Nebula Audit Agent"""),
+- Nebula"""),
 ]
 
 COLD_SEQ = [
@@ -641,6 +642,10 @@ def main():
         url   = (lead.get("url")   or "").strip()
         if not email or not url or email in paid or email in replied or lead.get("status") == "bounced":
             continue
+        if is_pipeline_excluded(email):
+            continue
+        if "example.com" in url.lower() or "example.invalid" in url.lower():
+            continue
         try:
             lead_time = datetime.fromisoformat(
                 lead.get("timestamp", "").rstrip("Z")
@@ -655,12 +660,31 @@ def main():
                 continue
             if (email, label) in sent:
                 continue
+            # T1 recovery owns the first 24h. Do not stack D1 on the same calendar day.
+            if day_offset == 1 and (email, "t0_recovery") in sent and age_days < 1.5:
+                continue
             total_due += 1
             if audit_data is None:
                 audit_data = get_audit_data(url)
             d    = domain(url)
+            d7_checkout = STRIPE
+            if day_offset == 7:
+                try:
+                    from d7_close_checkout import create_d7_session
+                    session_url = create_d7_session(
+                        email=email,
+                        audit_id=str(lead.get("audit_id") or ""),
+                        audit_url=url,
+                    )
+                    if session_url:
+                        d7_checkout = session_url
+                except Exception as exc:
+                    print(f"  [d7_checkout_failed] {email}: {exc}")
             subj = subj_tmpl.format(domain=d, **audit_data)
-            body = body_tmpl.format(domain=d, stripe=STRIPE, **audit_data)
+            fmt = {"domain": d, "stripe": STRIPE, **audit_data}
+            if "{d7_checkout}" in body_tmpl:
+                fmt["d7_checkout"] = d7_checkout
+            body = body_tmpl.format(**fmt)
             body += "\n\n-\nReply STOP to opt out."
             print(f"  [{label}] {email} ({d})")
             ok = send_email(email, subj, body, DRY_RUN)

@@ -48,6 +48,21 @@ function PlanCard({
           ${Math.round(plan.annualUsd / 12)}/mo effective - 2 months free
         </p>
       )}
+      {planKey === 'pro' && (
+        <p className="mt-2 text-xs text-accent font-medium">
+          Less than one stalled ad campaign per month.
+        </p>
+      )}
+      {planKey === 'growth' && (
+        <p className="mt-2 text-xs text-accent font-medium">
+          Less than the cost of a single A/B testing tool seat.
+        </p>
+      )}
+      {planKey === 'agency' && (
+        <p className="mt-2 text-xs text-accent font-medium">
+          Deliver white-label client audits at scale.
+        </p>
+      )}
       <ul className="mt-5 flex-1 space-y-2 text-sm text-fg-muted">
         {plan.features.map((f) => (
           <li key={f} className="flex items-start gap-2">

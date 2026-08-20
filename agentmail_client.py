@@ -407,6 +407,16 @@ class AgentMailClient:
         body_lower = message_body.lower()
         subject_lower = thread.get("subject", "").lower()
         combined = body_lower + " " + subject_lower
+        first_line = ""
+        for raw in message_body.replace("\r", "").split("\n"):
+            line = raw.strip().strip(".").lower()
+            if line:
+                first_line = line
+                break
+
+        # CAN-SPAM magic word. "STOP" alone is the instruction we print in every footer.
+        if first_line in {"stop", "unsubscribe", "remove", "remove me", "opt out", "opt-out"}:
+            return "unsubscribe"
 
         # Unsubscribe signals (highest priority - must act immediately)
         unsub_signals = ["unsubscribe", "remove me", "take me off", "stop emailing",

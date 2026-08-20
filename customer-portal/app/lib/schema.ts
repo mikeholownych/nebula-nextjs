@@ -83,10 +83,24 @@ export const organizationSchema = {
   },
   brand: 'Nebula Components',
   slogan: 'Evidence, not projections',
-  areaServed: {
-    '@type': 'Country',
-    name: 'Canada'
-  },
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'United States',
+    },
+    {
+      '@type': 'Country',
+      name: 'Canada',
+    },
+    {
+      '@type': 'Country',
+      name: 'United Kingdom',
+    },
+    {
+      '@type': 'Country',
+      name: 'Australia',
+    },
+  ],
   availableChannel: [
     {
       '@type': 'ServiceChannel',

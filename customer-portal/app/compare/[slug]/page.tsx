@@ -46,15 +46,32 @@ export default async function ComparisonPage({
   const comparison = getComparison(slug)
   if (!comparison) notFound()
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: `Nebula Components vs ${comparison.toolName}`,
-    description: comparison.intro,
-    about: [
-      { '@type': 'Organization', name: 'Nebula Components', url: BASE_URL },
-      { '@type': 'Product', name: comparison.toolName, url: comparison.toolUrl },
-    ],
+  const jsonLd: Record<string, unknown>[] = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: `Nebula Components vs ${comparison.toolName}`,
+      description: comparison.intro,
+      about: [
+        { '@type': 'Organization', name: 'Nebula Components', url: BASE_URL },
+        { '@type': 'Product', name: comparison.toolName, url: comparison.toolUrl },
+      ],
+    },
+  ]
+
+  if (comparison.faqs && comparison.faqs.length > 0) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: comparison.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      })),
+    })
   }
 
   return (
@@ -154,6 +171,21 @@ export default async function ComparisonPage({
           <h2 className="text-xl font-bold mb-2">Verdict</h2>
           <p className="text-fg-muted leading-relaxed">{comparison.verdict}</p>
         </section>
+
+        {/* FAQs */}
+        {comparison.faqs && comparison.faqs.length > 0 && (
+          <section className="bg-bg-elevated border border-border rounded-lg p-6 mb-10">
+            <h2 className="text-xl font-bold mb-4">Frequently asked questions</h2>
+            <dl className="space-y-4">
+              {comparison.faqs.map((faq) => (
+                <div key={faq.q}>
+                  <dt className="font-semibold text-fg text-sm sm:text-base">{faq.q}</dt>
+                  <dd className="mt-1 text-sm text-fg-muted leading-relaxed">{faq.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
 
         {/* CTA */}
         <section className="bg-bg-elevated border border-border rounded-lg p-8 text-center">

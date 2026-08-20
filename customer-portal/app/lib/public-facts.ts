@@ -127,11 +127,19 @@ const currentFixPackReceipt = {
   offerKey: 'fix-pack',
 } as const satisfies FixPackReceiptFact
 
+const d7CloseReceipt = {
+  id: 'fix-pack-usd-67-d7-close-2026',
+  provider: 'stripe',
+  amountCents: 6700,
+  currency: 'usd',
+  offerKey: 'fix-pack',
+} as const satisfies FixPackReceiptFact
+
 const fixPackFulfillment = {
   currentReceiptId: currentFixPackReceipt.id,
   // Append-only receipt history. Replacing the public offer must not make a
   // delayed or retried payment for a retired offer impossible to fulfill.
-  receipts: [currentFixPackReceipt],
+  receipts: [currentFixPackReceipt, d7CloseReceipt],
 } as const satisfies FixPackFulfillmentFacts
 
 export const publicFacts = {

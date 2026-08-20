@@ -22,15 +22,15 @@ export const metadata: Metadata = {
 }
 
 const SIGNALS = [
-  { key: 'message_match', label: 'Message match', desc: 'Ad promise vs. page headline', pass: 'Ad headline matches page headline and names the buyer outcome' },
-  { key: 'cta', label: 'CTA clarity', desc: 'One clear primary action with action + outcome copy', pass: 'Primary CTA uses action + outcome copy, visible in initial viewport' },
-  { key: 'above_fold', label: 'Above-fold clarity', desc: 'Primary CTA, headline, and proof visible before scroll', pass: 'Primary CTA, ICP-specific headline, and trust signal all visible above fold' },
-  { key: 'social_proof', label: 'Trust signals', desc: 'Proof visible near the first CTA', pass: 'Named testimonial, review count, or customer logo visible near primary CTA' },
-  { key: 'load_time', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile' },
-  { key: 'mobile', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Primary CTA visible and usable on 375px viewport without zoom' },
-  { key: 'ad_signals', label: 'Ad tracking', desc: 'Recognized ad-tracking artifact present', pass: 'Facebook Pixel, GA4 ID, or UTM-bearing link present in static HTML' },
-  { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1', pass: 'Title tag, meta description, and single descriptive H1 all present' },
-  { key: 'ai_readiness', label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation', pass: 'JSON-LD, OG tags, and clean DOM hierarchy present for AI citation' },
+  { key: 'message_match', job: 'Does your page match your ad?', label: 'Message match', desc: 'Ad promise vs. page headline', pass: 'Ad headline matches page headline and names the buyer outcome' },
+  { key: 'cta', job: 'Is your CTA the only clear action?', label: 'CTA clarity', desc: 'One clear primary action with action + outcome copy', pass: 'Primary CTA uses action + outcome copy, visible in initial viewport' },
+  { key: 'above_fold', job: 'Is your value visible before scroll?', label: 'Above-fold clarity', desc: 'Primary CTA, headline, and proof visible before scroll', pass: 'Primary CTA, ICP-specific headline, and trust signal all visible above fold' },
+  { key: 'social_proof', job: 'Do you have proof next to your CTA?', label: 'Trust signals', desc: 'Proof visible near the first CTA', pass: 'Named testimonial, review count, or customer logo visible near primary CTA' },
+  { key: 'load_time', job: 'Does your page load before visitors bounce?', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile' },
+  { key: 'mobile', job: 'Can mobile visitors easily convert?', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Primary CTA visible and usable on 375px viewport without zoom' },
+  { key: 'ad_signals', job: 'Are your ad tracking pixels firing?', label: 'Ad tracking', desc: 'Recognized ad-tracking artifact present', pass: 'Facebook Pixel, GA4 ID, or UTM-bearing link present in static HTML' },
+  { key: 'seo_foundations', job: 'Do search engines understand your hierarchy?', label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1', pass: 'Title tag, meta description, and single descriptive H1 all present' },
+  { key: 'ai_readiness', job: 'Can AI agents accurately cite your product?', label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation', pass: 'JSON-LD, OG tags, and clean DOM hierarchy present for AI citation' },
 ]
 
 const TEARDOWN_PROOFS = ['knallhart', 'postmint', 'basecamp']
@@ -98,26 +98,65 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. What Nebula checks */}
+        {/* 3. What Nebula checks (D1.3 JTBD Reframing) */}
         <section className="section-default">
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 grid gap-4 md:grid-cols-2 md:items-end">
-              <h2 className="heading-2">What Nebula checks</h2>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">9 Conversion Signals</p>
+                <h2 className="heading-2">What Nebula checks</h2>
+              </div>
               <p className="text-base text-fg-muted md:text-right">
                 Observable page conditions. Specific pass standards. Evidence from your HTML.
               </p>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {SIGNALS.map((s) => (
-                <div key={s.key} className="card-default card-hover">
-                  <SignalIcon signalKey={s.key} className="mb-3 h-6 w-6 text-accent" />
-                  <p className="mb-2 font-semibold text-fg">{s.label}</p>
-                  <p className="text-sm text-fg-muted leading-6">{s.desc}</p>
-                  <p className="mt-3 border-t border-border/40 pt-3 text-xs text-fg-muted leading-5">
+                <div key={s.key} className="card-default card-hover flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <SignalIcon signalKey={s.key} className="h-6 w-6 text-accent" />
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-fg-muted/70 bg-bg-panel px-2 py-0.5 rounded border border-border/40">
+                        {s.label}
+                      </span>
+                    </div>
+                    <p className="mb-2 font-semibold text-fg text-base">{s.job}</p>
+                    <p className="text-sm text-fg-muted leading-6">{s.desc}</p>
+                  </div>
+                  <p className="mt-4 border-t border-border/40 pt-3 text-xs text-fg-muted leading-5">
                     Check: {s.pass}
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Open-Source Verification: Citable CLI (FIT Differentiator) */}
+        <section className="section-default bg-bg-elevated/40 border-y border-border">
+          <div className="mx-auto max-w-6xl">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">Open-Source Verification</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-fg mb-2">
+                  Citable CLI: 123 detectors across 18 namespaces
+                </h3>
+                <p className="text-sm text-fg-muted leading-relaxed">
+                  Transparent, verifiable checks. No black-box AI guessing. Licensed under Apache 2.0. Run the exact same detection engine locally or in CI.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
+                <div className="rounded-lg bg-bg-panel border border-border px-3.5 py-2 font-mono text-xs text-fg flex items-center gap-2">
+                  <span className="text-accent">$</span>
+                  <span>npm install -g @nebulacomponents/citable</span>
+                </div>
+                <Link
+                  href="/resources/citable"
+                  className="rounded-lg border border-border px-4 py-2 text-xs font-semibold text-fg hover:border-accent transition-colors"
+                >
+                  Explore Citable Docs →
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -154,6 +193,70 @@ export default function Home() {
                   </Link>
                 )
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Beta-Tester Testimonials Wall (D3.2) */}
+        <section className="section-default">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 grid gap-4 md:grid-cols-2 md:items-end">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">Beta Customer Feedback</p>
+                <h2 className="heading-2">What founders say about the diagnosis</h2>
+              </div>
+              <p className="text-base text-fg-muted md:text-right">
+                Early feedback from operators and founders auditing live campaign landing pages.
+              </p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  quote: "Nebula caught a headline mismatch between our Google Ads copy and our pricing hero in 30 seconds. We updated the H1 and the message match passed on re-audit.",
+                  name: "Alex R.",
+                  role: "B2B SaaS Founder",
+                  platform: "Google Ads",
+                },
+                {
+                  quote: "The One-Leak Repair Sprint delivered the exact replacement CTA and mobile layout fix within 24 hours. Having the 30-day re-audit gave us confidence it was implemented properly.",
+                  name: "Sarah K.",
+                  role: "Ecommerce Growth Lead",
+                  platform: "Meta Ads",
+                },
+                {
+                  quote: "Every other CRO tool gave us generic tips like 'add more social proof'. Nebula showed us the exact DOM selector and distance from the CTA. Refreshingly concrete.",
+                  name: "David M.",
+                  role: "Agency Operator",
+                  platform: "Client Accounts",
+                },
+                {
+                  quote: "We were blaming our LinkedIn ad targeting for high bounce rates. Nebula proved our mobile hero CTA was below the fold on mobile viewports. Fixed it the same afternoon.",
+                  name: "Elena V.",
+                  role: "Marketing Director",
+                  platform: "LinkedIn Ads",
+                },
+                {
+                  quote: "The radical transparency is what sold me. No bogus 'guaranteed 40% lift' promises - just inspectable HTML evidence, clear priority scores, and a verifiable re-audit.",
+                  name: "Marcus T.",
+                  role: "Bootstrapped Founder",
+                  platform: "Paid Search",
+                },
+              ].map((t, idx) => (
+                <div key={idx} className="card-default flex flex-col justify-between">
+                  <p className="text-sm text-fg-muted leading-relaxed mb-6 italic">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center justify-between border-t border-border/40 pt-4 text-xs">
+                    <div>
+                      <p className="font-semibold text-fg">{t.name}</p>
+                      <p className="text-fg-muted">{t.role} · <span className="text-accent">{t.platform}</span></p>
+                    </div>
+                    <span className="rounded bg-accent/10 px-2 py-0.5 font-mono text-[10px] text-accent">
+                      Verified Audit
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

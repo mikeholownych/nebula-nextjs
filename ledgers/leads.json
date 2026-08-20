@@ -1468,6 +1468,33 @@
     "trigger_text": "",
     "url": "https://example.com"
   },
+  "anonymous+cfe34bc3-2631-4e62-a2e1-b6cfdb8833bd@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+cfe34bc3-2631-4e62-a2e1-b6cfdb8833bd@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-20T11:09:31.802905Z",
+    "last_seen": "2026-08-20T11:09:31.802905Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "ed7345ac-8887-4720-b701-fa4f6e43342f",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-20T11:09:31.802905Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com"
+  },
   "anonymous+d6a79bb1-0066-409b-bf79-80e618e176c1@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 
 export const metadata: Metadata = {
-  title: 'About Nebula Components - Evidence-Backed Conversion Optimization',
+  title: 'About Nebula Components | Evidence-Backed CRO',
   description:
     'Evidence-backed landing page diagnosis for founders running paid ads. We identify message-match, trust, and CTA problems that waste clicks.',
   alternates: {
@@ -17,10 +17,48 @@ export default function AboutPage() {
       <BreadcrumbSchema />
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="mb-6 heading-1">About Nebula Components</h1>
-        <p className="mb-6 text-lg leading-relaxed text-fg-muted">
-          Nebula Components provides evidence-backed landing page conversion diagnosis and bounded implementation work for founders running paid traffic. Founded by{' '}
-          <Link href="/about/team" className="underline hover:text-fg">Mike Holownych</Link>.
+        <p className="mb-8 text-lg leading-relaxed text-fg-muted">
+          Nebula Components provides evidence-backed landing page conversion diagnosis and bounded implementation work for founders running paid traffic.
         </p>
+
+        {/* Founder section with photo and why-I-built-this narrative */}
+        <section className="mb-10 rounded-md border border-border bg-bg-panel p-6">
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            <img
+              src="/mike-holownych-founder.jpg"
+              alt="Mike Holownych, Founder of Nebula Components"
+              width={112}
+              height={140}
+              className="rounded-xl object-cover shrink-0 border border-border"
+            />
+            <div>
+              <h2 className="mb-1 text-2xl font-bold">Founded by Mike Holownych</h2>
+              <p className="mb-3 text-sm font-medium text-accent">Founder, Nebula Components</p>
+              <p className="mb-3 text-fg-muted leading-relaxed text-sm">
+                Before founding Nebula, I worked with founders running paid traffic whose landing pages weren&apos;t converting. The same failures showed up page after page: message-match gaps, missing trust signals, hidden mobile CTAs, and slow load times.
+              </p>
+              <p className="mb-4 text-fg-muted leading-relaxed text-sm">
+                Founders were spending thousands on traffic to pages with broken headlines and no proof above the fold, then changing the ad without checking the page first. I built Nebula to surface exact, verifiable page-side fixes without needing an expensive consulting retainer.
+              </p>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <a
+                  href="https://www.linkedin.com/in/mikeholownych"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded-lg border border-border px-3.5 py-1.5 font-semibold text-xs text-fg-muted transition-colors hover:border-accent hover:text-accent"
+                >
+                  LinkedIn ↗
+                </a>
+                <Link
+                  href="/about/team"
+                  className="inline-flex items-center gap-1 rounded-lg border border-border px-3.5 py-1.5 font-semibold text-xs text-fg-muted transition-colors hover:border-accent hover:text-accent"
+                >
+                  Founder Profile →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-10 rounded-md border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold">What we do</h2>
@@ -53,6 +91,27 @@ export default function AboutPage() {
                 </li>
               ))
             }
+          </ul>
+        </section>
+
+        {/* Explicit Who We Are NOT For Section (D2.B) */}
+        <section className="mb-10 rounded-md border border-border bg-bg-panel p-6">
+          <h2 className="mb-3 text-2xl font-bold">Who Nebula is NOT for</h2>
+          <p className="mb-4 text-fg-muted">
+            We are intentional about our scope. Nebula is not the right fit if:
+          </p>
+          <ul className="space-y-2 text-fg-muted">
+            {[
+              'You have no paid traffic or ad spend yet - the audit is calibrated for visitors arriving with ad-driven expectations',
+              'You want a full agency redesign, brand repositioning, or subjective design feedback',
+              'You are looking for guaranteed conversion lift without a controlled traffic experiment',
+              'You need unmonitored post-checkout funnel or backend CRM optimization',
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-1 shrink-0 text-signal-fail font-bold">✕</span>
+                {item}
+              </li>
+            ))}
           </ul>
         </section>
 

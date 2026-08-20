@@ -200,7 +200,7 @@ export const DashboardMockup: React.FC = () => {
               >
                 <div className="flex items-center gap-2.5">
                   <FileCode2 className="h-3.5 w-3.5" />
-                  <span>Evidence Atoms</span>
+                  <span>Page Findings</span>
                 </div>
                 <span className="rounded bg-signal-fail/10 text-signal-fail px-1.5 py-0.5 text-[10px] font-mono">
                   3 Leaks
@@ -474,17 +474,17 @@ export const DashboardMockup: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom Evidence Atom Inspection Footer */}
+          {/* Bottom Page Element Inspection Footer */}
           <div className="mt-3 rounded-lg bg-bg-panel border border-border p-2.5 flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-accent" />
-              <span className="text-fg-muted">Selected Evidence Atom:</span>
+              <span className="text-fg-muted">Selected Page Element:</span>
               <span className="font-mono text-[11px] text-fg">
                 {findings[selectedRow ?? 0]?.selector}
               </span>
             </div>
             <div className="flex items-center gap-1 text-accent font-mono text-[11px]">
-              <span>Rule-derived diagnosis</span>
+              <span>Evidence-based diagnosis</span>
               <ArrowRight className="h-3 w-3" />
             </div>
           </div>
