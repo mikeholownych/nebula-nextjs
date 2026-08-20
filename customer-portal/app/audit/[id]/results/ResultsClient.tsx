@@ -448,7 +448,13 @@ function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: 
   )
 }
 
-function ReportOverview({ results }: { results: AuditResult }) {
+function ReportOverview({
+  results,
+  onGoToRemediation,
+}: {
+  results: AuditResult
+  onGoToRemediation?: () => void
+}) {
   const summary = summarizeFindings(results.findings)
   const hostname = new URL(results.url).hostname
   const headline = results.composite ?? results.score
@@ -491,9 +497,17 @@ function ReportOverview({ results }: { results: AuditResult }) {
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
             <span className="font-semibold text-fg">The fix is specific to your page:</span>{' '}
             Not "improve your H1" - the actual replacement. Not "add social proof" - the specific element and where to put it. The{' '}
-            <a href="#remediation" className="font-semibold text-accent hover:underline">
-              $97 Repair Sprint
-            </a>{' '}
+            {onGoToRemediation ? (
+              <button
+                type="button"
+                onClick={onGoToRemediation}
+                className="font-semibold text-accent hover:underline inline p-0 bg-transparent border-0 cursor-pointer"
+              >
+                $97 Repair Sprint
+              </button>
+            ) : (
+              <span className="font-semibold text-accent">$97 Repair Sprint</span>
+            )}{' '}
             delivers the exact copy, code, or configuration change for your highest-priority finding. A 30-day re-audit confirms it held.
           </p>
         </div>
@@ -562,7 +576,17 @@ function ReportOverview({ results }: { results: AuditResult }) {
   )
 }
 
-function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Finding[]; auditId: string; onGoToRemediation?: () => void }) {
+function FixFirstQueue({
+  findings,
+  auditId,
+  onGoToRemediation,
+  onViewEvidence,
+}: {
+  findings: Finding[]
+  auditId: string
+  onGoToRemediation?: () => void
+  onViewEvidence?: (finding: Finding) => void
+}) {
   const queue = buildPriorityQueue(findings).slice(0, 3)
 
   return (
@@ -615,7 +639,14 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
               <div className="flex items-center gap-4 md:flex-col md:items-end">
                 <span className="text-xs tabular-nums text-fg-muted" aria-label="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">Priority {finding.impact}/10</span>
                 <span className="text-xs tabular-nums text-fg-muted">Effort {finding.effort}/10</span>
-                <a href={`#${findingAnchor(finding)}`} className="text-sm font-semibold text-accent hover:text-fg">View evidence ↓</a>
+                <button
+                  type="button"
+                  onClick={() => onViewEvidence?.(finding)}
+                  className="text-sm font-semibold text-accent hover:text-fg hover:underline transition-colors inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>View evidence</span>
+                  <span aria-hidden="true">↓</span>
+                </button>
               </div>
             </li>
           ))}
@@ -706,7 +737,13 @@ const DIMENSION_PLAIN: Record<string, { headline: string; why: string }> = {
   ai_readiness:  { headline: 'AI tools can\'t read or cite your page.', why: 'Structured data and proper metadata determine whether ChatGPT, Perplexity, and Google AI mention you.' },
 }
 
-function PersonalizedNextStep({ findings }: { findings: Finding[] }) {
+function PersonalizedNextStep({
+  findings,
+  onViewEvidence,
+}: {
+  findings: Finding[]
+  onViewEvidence?: (finding: Finding) => void
+}) {
   if (!findings.length) return null
   // Use impact (inverted - higher impact = more broken) to find worst
   const worst = [...findings].sort((a, b) => b.impact - a.impact)[0]
@@ -715,13 +752,26 @@ function PersonalizedNextStep({ findings }: { findings: Finding[] }) {
 
   return (
     <div className="mb-8 rounded border border-accent/30 bg-accent/5 p-6">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Your biggest leak</p>
-      <h2 className="text-lg font-bold text-fg leading-snug">{plain.headline}</h2>
-      <p className="mt-2 text-sm text-fg-muted leading-6">{plain.why}</p>
-      <p className="mt-3 text-xs text-fg-muted">
-        This is the <span className="font-semibold text-fg">{worst.label}</span> signal.
-        {' '}The $97 repair fixes this specific issue, not a generic template.
-      </p>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Your biggest leak</p>
+          <h2 className="text-lg font-bold text-fg leading-snug">{plain.headline}</h2>
+          <p className="mt-2 text-sm text-fg-muted leading-6">{plain.why}</p>
+          <p className="mt-3 text-xs text-fg-muted">
+            This is the <span className="font-semibold text-fg">{worst.label}</span> signal.
+            {' '}The $97 repair fixes this specific issue, not a generic template.
+          </p>
+        </div>
+        {onViewEvidence && (
+          <button
+            type="button"
+            onClick={() => onViewEvidence(worst)}
+            className="shrink-0 self-start rounded-lg border border-accent/40 bg-accent/10 px-3.5 py-2 text-xs font-bold text-accent hover:bg-accent hover:text-bg transition-colors cursor-pointer"
+          >
+            View Evidence →
+          </button>
+        )}
+      </div>
     </div>
   )
 }
@@ -740,6 +790,55 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   const [emailSent, setEmailSent] = useState(false)
   const [emailError, setEmailError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<ReportTabId>('overview')
+
+  const navigateToFinding = (finding: Finding) => {
+    setActiveTab('evidence')
+    const anchor = findingAnchor(finding)
+    try {
+      window.history.pushState(null, '', `#${anchor}`)
+    } catch {
+      // noop
+    }
+    setTimeout(() => {
+      const el = document.getElementById(anchor)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        el.classList.add('ring-2', 'ring-accent', 'ring-offset-4', 'ring-offset-bg')
+        setTimeout(() => {
+          el.classList.remove('ring-2', 'ring-accent', 'ring-offset-4', 'ring-offset-bg')
+        }, 2500)
+      }
+    }, 80)
+  }
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace(/^#/, '')
+      if (!hash) return
+
+      if (['overview', 'fix-first', 'signals', 'evidence', 'remediation'].includes(hash)) {
+        setActiveTab(hash as ReportTabId)
+      } else if (hash.startsWith('finding-')) {
+        setActiveTab('evidence')
+        setTimeout(() => {
+          const el = document.getElementById(hash)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            el.classList.add('ring-2', 'ring-accent', 'ring-offset-4', 'ring-offset-bg')
+            setTimeout(() => {
+              el.classList.remove('ring-2', 'ring-accent', 'ring-offset-4', 'ring-offset-bg')
+            }, 2500)
+          }
+        }, 120)
+      } else if (hash === 'repair') {
+        setActiveTab('remediation')
+      }
+    }
+
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [])
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -931,9 +1030,20 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
         {activeTab === 'overview' && (
           <>
-            <PersonalizedNextStep findings={results.findings} />
-            <ReportOverview results={results} />
-            <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
+            <PersonalizedNextStep
+              findings={results.findings}
+              onViewEvidence={navigateToFinding}
+            />
+            <ReportOverview
+              results={results}
+              onGoToRemediation={() => setActiveTab('remediation')}
+            />
+            <FixFirstQueue
+              findings={results.findings}
+              auditId={auditId}
+              onGoToRemediation={() => setActiveTab('remediation')}
+              onViewEvidence={navigateToFinding}
+            />
             {/* Inline email gate - shown on Overview for unlocked visitors and non-shared locked views */}
             {!unlocked && !sharedView && !emailSent && (
               <section className="border-y border-border py-12 my-4">
@@ -985,7 +1095,12 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
         {activeTab === 'fix-first' && (
           <>
-            <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
+            <FixFirstQueue
+              findings={results.findings}
+              auditId={auditId}
+              onGoToRemediation={() => setActiveTab('remediation')}
+              onViewEvidence={navigateToFinding}
+            />
             {unlocked && results.findings.length > 0 && <SlackSnippet findings={results.findings} />}
           </>
         )}
