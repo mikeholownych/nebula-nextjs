@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
 import GscWidget from './gscWidget'
+import SiteHealthHero from './SiteHealthHero'
 
 // ── Helpers ───────────────────────────────────────────────────────────
 
@@ -129,6 +130,9 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
 
   return (
     <div className="space-y-6">
+      {/* Site Health Hero with Area Curve, Benchmark Lines, and Sub-Score Gauges */}
+      <SiteHealthHero audits={audits} latestDetail={latestDetail} primaryDomain={latestUrl} />
+
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Latest score" value={`${Math.round(scoreOf(latest) * 10)}/100`} detail={delta === null ? 'Baseline established' : `${scoreOf(latest).toFixed(1)}/10 · ${delta >= 0 ? '+' : ''}${Number.isInteger(delta) ? delta : delta.toFixed(1)} since last audit`} tone={delta !== null && delta < 0 ? 'red' : 'dark'} />
         <MetricCard label="Critical findings" value={String(counts.critical)} detail={`${counts.warning} warnings · ${counts.advisory} advisory`} tone={counts.critical > 0 ? 'red' : 'dark'} />

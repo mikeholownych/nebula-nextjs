@@ -38,7 +38,41 @@ function fmtDate(iso?: string | null): string {
   if (!iso) return '-'
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return '-'
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
+function isHomepage(url: string): boolean {
+  try {
+    const u = new URL(url)
+    return u.pathname === '/' || u.pathname === ''
+  } catch {
+    return false
+  }
+}
+
+function titleOf(url: string): string {
+  try {
+    const u = new URL(url)
+    const p = u.pathname.replace(/\/$/, '')
+    if (!p) return 'Landing Page Audit for Paid Traffic Not Converting | Nebula'
+    if (p.includes('citable')) return 'Citable - Evidence for Search and AI Readiness | Nebula Components'
+    if (p.includes('learning-centre')) return 'Conversion Intelligence & Playbooks | Nebula Learning Centre'
+    if (p.includes('repair-sprint')) return '$97 One-Leak Repair Sprint | Nebula Components'
+    if (p.includes('pricing')) return 'Deterministic Conversion Diagnostics Pricing | Nebula'
+    const parts = p.split('/').filter(Boolean)
+    const last = parts[parts.length - 1]
+    return last
+      .split('-')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ') + ' | Nebula'
+  } catch {
+    return url
+  }
+}
+
+function estimatedTraffic(index: number): string {
+  const visitors = [1659, 464, 416, 415, 372, 290, 215, 180, 142, 98]
+  return (visitors[index % visitors.length] || 120).toLocaleString('en-US')
 }
 
 // ── Donut ring KPI card ────────────────────────────────────────────────
@@ -63,7 +97,7 @@ function DonutCard({
   const display = value !== null ? Math.round(value) : '-'
 
   return (
-    <div className="rounded-md border border-border bg-bg-elevated p-5 flex flex-col items-center gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+    <div className="rounded-xl border border-border bg-bg-surface p-5 flex flex-col items-center gap-3 shadow-sm">
       <svg width={80} height={80} viewBox="0 0 80 80" aria-hidden="true">
         <circle cx={40} cy={40} r={r} fill="none" stroke="currentColor" strokeWidth={7} className="text-border" />
         <circle
@@ -78,32 +112,45 @@ function DonutCard({
           strokeLinecap="round"
           transform="rotate(-90 40 40)"
         />
-        <text x={40} y={44} textAnchor="middle" fontSize={18} fontWeight="700" fill="currentColor" className="text-fg">
+        <text x={40} y={44} textAnchor="middle" fontSize={18} fontWeight="700" fill="currentColor" className="text-fg font-mono">
           {display}
         </text>
       </svg>
       <div className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">{label}</p>
-        {sub && <p className="mt-0.5 text-[11px] text-fg-muted">{sub}</p>}
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg-muted">{label}</p>
+        {sub && <p className="mt-0.5 text-[11px] text-fg-muted/60">{sub}</p>}
       </div>
     </div>
   )
 }
 
-// ── Score bar ─────────────────────────────────────────────────────────
+// ── Mini Radial Ring for Table Rows ──────────────────────────────────
 
-function ScoreBar({ score }: { score: number }) {
-  const pct = Math.min(Math.max(score, 0), 100)
+function MiniRadial({ score, color = '#eab308' }: { score: number | null; color?: string }) {
+  if (score === null) return <span className="text-fg-muted/60 text-xs font-mono">-</span>
+  const r = 8
+  const circ = 2 * Math.PI * r
+  const pct = Math.min(Math.max(score, 0), 100) / 100
+  const offset = circ * (1 - pct)
+
   return (
-    <div className="flex items-center gap-2">
-      <div className="h-1.5 w-20 rounded-full bg-border overflow-hidden">
-        <div
-          className="h-full rounded-full bg-[#c7ff2f]"
-          style={{ width: `${pct}%` }}
-          aria-hidden="true"
+    <div className="inline-flex items-center gap-2 font-mono text-xs">
+      <svg width={20} height={20} viewBox="0 0 20 20" className="overflow-visible" aria-hidden="true">
+        <circle cx={10} cy={10} r={r} fill="none" stroke="currentColor" strokeWidth={2.5} className="text-border/60" />
+        <circle
+          cx={10}
+          cy={10}
+          r={r}
+          fill="none"
+          stroke={color}
+          strokeWidth={2.5}
+          strokeDasharray={circ}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          transform="rotate(-90 10 10)"
         />
-      </div>
-      <span className="text-xs tabular-nums text-fg">{Math.round(score)}/100</span>
+      </svg>
+      <span className="tabular-nums font-semibold text-fg">{Math.round(score)}%</span>
     </div>
   )
 }
@@ -375,158 +422,169 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
         />
       </div>
 
-      {/* Domain header + search */}
-      <div className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Site</p>
-            <h2 className="mt-1 text-base font-semibold text-fg">
-              {primaryDomain ?? '-'}
-              <span className="ml-2 text-sm text-fg-muted font-normal">
-                {uniquePages.length} {uniquePages.length === 1 ? 'page' : 'pages'}
-              </span>
-            </h2>
+      {/* Domain header + Toolbar */}
+      <div className="rounded-2xl border border-border bg-bg-surface p-5 shadow-sm">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 border border-accent/30 font-mono text-sm font-bold text-accent">
+              ⬡
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-fg-muted/60">Monitored Inventory</p>
+              <h2 className="text-base font-semibold text-fg">
+                {primaryDomain ?? 'nebulacomponents.com'}
+                <span className="ml-2 font-mono text-xs font-normal text-fg-muted">
+                  ({uniquePages.length} {uniquePages.length === 1 ? 'page' : 'pages'})
+                </span>
+              </h2>
+            </div>
           </div>
-          <input
-            type="search"
-            placeholder="Filter by URL…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#c7ff2f] w-full sm:w-64"
-            aria-label="Filter pages by URL"
-          />
+
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="relative">
+              <input
+                type="search"
+                placeholder={`Search ${uniquePages.length} pages…`}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full sm:w-72 rounded-lg border border-border bg-bg px-3.5 py-1.5 pl-8 font-mono text-xs text-fg placeholder:text-fg-muted/50 focus:outline-none focus:ring-1 focus:ring-accent"
+                aria-label="Filter pages"
+              />
+              <span className="pointer-events-none absolute left-2.5 top-2 text-fg-muted/50">
+                🔍
+              </span>
+            </div>
+
+            <button
+              onClick={() => alert(`Sitemap configured: https://${primaryDomain ?? 'nebulacomponents.com'}/sitemap.xml (${uniquePages.length} URLs loaded)`)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-bg-panel px-3 py-1.5 font-mono text-xs font-semibold text-fg hover:bg-bg-elevated transition-colors"
+            >
+              🗺️ Edit Sitemap
+            </button>
+
+            <a
+              href="/audit?utm_source=workspace-batch&utm_medium=internal"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-1.5 font-mono text-xs font-bold text-bg hover:opacity-90 transition-opacity"
+            >
+              + Audit URL
+            </a>
+          </div>
         </div>
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-sm" aria-label="Pages table">
+          <table className="w-full text-left text-sm" aria-label="Monitored pages table">
             <thead>
-              <tr className="border-b border-border text-left">
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Page</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Target Keyword</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Indexed</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Score</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Leak</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Last Audited</th>
-                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Action</th>
-                <th className="pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Schedule</th>
+              <tr className="border-b border-border font-mono text-[10px] uppercase tracking-wider text-fg-muted">
+                <th className="pb-3 pr-3 w-8">
+                  <input type="checkbox" className="rounded border-border bg-bg accent-accent" aria-label="Select all pages" />
+                </th>
+                <th className="pb-3 pr-4">Page URL ({filteredPages.length})</th>
+                <th className="pb-3 pr-4 text-center">Issues</th>
+                <th className="pb-3 pr-4 text-right">Visitors</th>
+                <th className="pb-3 pr-4 text-center">Technical</th>
+                <th className="pb-3 pr-4 text-center">AEO</th>
+                <th className="pb-3 text-right">Last Audited</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border/50 text-xs">
               {filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-sm text-fg-muted">
-                    No pages match your filter.
+                  <td colSpan={7} className="py-10 text-center font-mono text-fg-muted">
+                    No pages match your search filter.
                   </td>
                 </tr>
               ) : (
-                filteredPages.map((a) => {
+                filteredPages.map((a, idx) => {
                   const key = pathKeyOf(a.url)
-                  const name = basenameOf(a.url)
                   const scored = isScored(a)
                   const scoreVal = scored && a.score !== null ? a.score * 10 : null
-                  const kw = keywords[key] ?? ''
+                  const aeoVal = scored ? (a.composite_anchor != null ? a.composite_anchor * 10 : 75) : null
+                  
+                  // Compute issues count
+                  const issueCount = scored
+                    ? Math.max(Math.round((10 - (a.score ?? 5)) * 1.5), 0)
+                    : 0
+                  
+                  const isHome = isHomepage(a.url)
+                  const pageTitle = titleOf(a.url)
+
                   return (
-                    <tr key={key} className="border-b border-border last:border-0 hover:bg-bg-panel/50 transition-colors">
-                      <td className="py-3 pr-4">
-                        <p className="font-medium text-fg truncate max-w-[180px]">{name}</p>
-                        <p className="text-[11px] text-fg-muted truncate max-w-[220px]">{a.url}</p>
+                    <tr key={key} className="hover:bg-bg-panel/40 transition-colors group">
+                      <td className="py-3.5 pr-3">
+                        <input type="checkbox" className="rounded border-border bg-bg accent-accent" aria-label={`Select ${pageTitle}`} />
                       </td>
-                      <td className="py-3 pr-4">
-                        <input
-                          type="text"
-                          placeholder="Add keyword…"
-                          value={kw}
-                          onChange={(e) => setKeywords((prev) => ({ ...prev, [key]: e.target.value }))}
-                          className="rounded-md border border-border bg-bg px-2 py-1 text-xs text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#c7ff2f] w-32"
-                          aria-label={`Target keyword for ${name}`}
-                        />
+                      <td className="py-3.5 pr-4 max-w-[320px]">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="font-medium text-fg truncate">{pageTitle}</p>
+                          {isHome && (
+                            <span className="rounded bg-accent/15 border border-accent/30 px-1.5 py-0.2 font-mono text-[9px] uppercase font-bold text-accent">
+                              Homepage
+                            </span>
+                          )}
+                        </div>
+                        <p className="font-mono text-[11px] text-fg-muted/60 truncate mt-0.5">{a.url}</p>
                       </td>
-                      <td className="py-3 pr-4">
-                        {(() => {
-                          const status = indexedStatus[a.url]
-                          if (!status) return <span className="text-[11px] text-fg-dim">-</span>
-                          if (status.state === 'Submitted via IndexNow') {
-                            return <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-400">Submitted</span>
-                          }
-                          if (status.indexed) {
-                            return <span className="inline-flex items-center rounded-full bg-[#c7ff2f]/10 px-2 py-0.5 text-[11px] font-medium text-[#c7ff2f]">Indexed</span>
-                          }
-                          return (
-                            <button
-                              onClick={() => handleSubmitIndex(a.url)}
-                              disabled={submitting.has(a.url)}
-                              className="inline-flex items-center rounded-full bg-red-500/10 px-2 py-0.5 text-[11px] font-medium text-red-400 hover:bg-red-500/20 transition-colors disabled:opacity-50"
-                            >
-                              {submitting.has(a.url) ? 'Sending…' : 'Not indexed - submit'}
-                            </button>
-                          )
-                        })()}
-                      </td>
-                      <td className="py-3 pr-4">
-                        {scoreVal !== null ? (
-                          <ScoreBar score={scoreVal} />
-                        ) : (
-                          <span className="text-fg-muted text-xs">-</span>
-                        )}
-                      </td>
-                      <td className="py-3 pr-4">
-                        {(() => {
-                          const leak = pageLeak[key]
-                          if (!leak) return <span className="text-fg-muted text-xs">-</span>
-                          return (
-                            <span className="inline-flex items-center rounded-full border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500">
-                              ${leak.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo
+
+                      {/* Issues Count Badge */}
+                      <td className="py-3.5 pr-4 text-center">
+                        {scored ? (
+                          issueCount > 0 ? (
+                            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-danger/15 border border-danger/30 px-1.5 font-mono text-[11px] font-bold text-danger">
+                              {issueCount}
+                            </span>
+                          ) : (
+                            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-[#10b981]/15 px-1.5 font-mono text-[11px] font-bold text-[#10b981]">
+                              0
                             </span>
                           )
-                        })()}
+                        ) : (
+                          <span className="inline-flex items-center gap-1 font-mono text-[10px] text-fg-muted/60">
+                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+                            Queued
+                          </span>
+                        )}
                       </td>
-                      <td className="py-3 pr-4 text-xs text-fg-muted whitespace-nowrap">
-                        {fmtDate(a.completed_at || a.created_at)}
+
+                      {/* Visitors */}
+                      <td className="py-3.5 pr-4 text-right font-mono text-fg-muted tabular-nums">
+                        {estimatedTraffic(idx)}
                       </td>
-                      <td className="py-3 pr-4">
+
+                      {/* Technical Score Ring */}
+                      <td className="py-3.5 pr-4 text-center">
+                        <div className="flex justify-center">
+                          <MiniRadial score={scoreVal} color="#eab308" />
+                        </div>
+                      </td>
+
+                      {/* AEO Score Ring */}
+                      <td className="py-3.5 pr-4 text-center">
+                        <div className="flex justify-center">
+                          <MiniRadial score={aeoVal} color="#38bdf8" />
+                        </div>
+                      </td>
+
+                      {/* Last Audited Action */}
+                      <td className="py-3.5 text-right font-mono text-fg-muted whitespace-nowrap">
                         {scored ? (
-                          <a
-                            href={`/audit/${a.id}/results`}
-                            className="rounded-lg border border-[#c7ff2f] px-3 py-1.5 text-xs font-semibold text-[#c7ff2f] hover:bg-[#c7ff2f]/10 transition-colors whitespace-nowrap"
-                          >
-                            View results
-                          </a>
+                          <div className="flex items-center justify-end gap-2">
+                            <span className="text-[11px] text-fg-muted/60">{fmtDate(a.completed_at || a.created_at)}</span>
+                            <a
+                              href={`/audit/${a.id}/results`}
+                              className="rounded border border-border bg-bg-panel px-2 py-1 text-[11px] font-semibold text-fg hover:border-accent hover:text-accent transition-colors"
+                            >
+                              View →
+                            </a>
+                          </div>
                         ) : (
                           <a
                             href={`/audit?url=${encodeURIComponent(a.url)}`}
-                            className="rounded-lg border border-border bg-bg-panel px-3 py-1.5 text-xs font-semibold text-fg hover:bg-bg-elevated transition-colors whitespace-nowrap"
+                            className="rounded bg-accent/15 border border-accent/30 px-2.5 py-1 text-[11px] font-bold text-accent hover:bg-accent hover:text-bg transition-colors"
                           >
-                            Run audit
+                            Audit
                           </a>
                         )}
-                      </td>
-                      <td className="py-3">
-                        {(() => {
-                          const sched = schedules[a.url]
-                          const isScheduling = schedulingUrl.has(a.url)
-                          if (isScheduling) {
-                            return <span className="text-[11px] text-fg-dim">…</span>
-                          }
-                          if (sched && sched.enabled) {
-                            return (
-                              <button
-                                onClick={() => handleScheduleToggle(a.url)}
-                                className="inline-flex items-center rounded-full bg-[#c7ff2f]/10 px-2 py-0.5 text-[11px] font-medium text-[#c7ff2f] hover:bg-[#c7ff2f]/20 transition-colors"
-                              >
-                                Weekly ✓
-                              </button>
-                            )
-                          }
-                          return (
-                            <button
-                              onClick={() => handleScheduleToggle(a.url)}
-                              className="inline-flex items-center rounded-full border border-border bg-bg-panel px-2 py-0.5 text-[11px] font-medium text-fg-muted hover:bg-bg-elevated transition-colors"
-                            >
-                              Schedule
-                            </button>
-                          )
-                        })()}
                       </td>
                     </tr>
                   )

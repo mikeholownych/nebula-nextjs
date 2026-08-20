@@ -198,11 +198,11 @@ export default function WorkspaceClient() {
   }
 
   // ── Workspace ───────────────────────────────────────────────────────
-  const navGroups: { label: string; items: { id: TabId; label: string; icon: string }[] }[] = [
+  const navGroups: { label: string; items: { id: TabId; label: string; icon: string; badge?: string }[] }[] = [
     {
-      label: 'Workspace',
+      label: 'Analytics',
       items: [
-        { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
+        { id: 'dashboard', label: 'Site Health', icon: 'grid' },
         { id: 'audits', label: 'All Audits', icon: 'scan' },
         { id: 'pages', label: 'Monitored Pages', icon: 'map' },
         { id: 'projects', label: 'Projects', icon: 'folder' },
@@ -211,7 +211,7 @@ export default function WorkspaceClient() {
     {
       label: 'Conversion (CRO)',
       items: [
-        { id: 'recommendations', label: 'Fix Queue & Sprint', icon: 'check' },
+        { id: 'recommendations', label: 'Fix Queue & Sprint', icon: 'check', badge: latestDetail?.findings?.length ? String(latestDetail.findings.length) : undefined },
         { id: 'diff', label: 'Audit Diff', icon: 'diff' },
         { id: 'experiments', label: 'Component Lab', icon: 'flask' },
         { id: 'tracker', label: 'Experiments', icon: 'pulse' },
@@ -220,48 +220,80 @@ export default function WorkspaceClient() {
     {
       label: 'AI Search (AEO/GEO)',
       items: [
-        { id: 'aiSearch', label: 'AI Citability & LLM Tests', icon: 'spark' },
+        { id: 'aiSearch', label: 'AEO Citability Tests', icon: 'spark' },
+        { id: 'compare', label: 'Competitor Intel', icon: 'compare' },
       ],
     },
     {
-      label: 'Competitor Intel',
-      items: [
-        { id: 'compare', label: 'Head-to-Head Compare', icon: 'compare' },
-      ],
-    },
-    {
-      label: 'Tools',
+      label: 'Actions & Tools',
       items: [
         { id: 'roiCalculator', label: 'Conversion ROI', icon: 'calculator' },
+        { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
+        { id: 'reports', label: 'PDF Reports', icon: 'report' },
+        { id: 'timeline', label: 'Score Timeline', icon: 'clock' },
       ],
     },
     {
-      label: 'Account & Reports',
+      label: 'Account & Team',
       items: [
-        { id: 'billing', label: 'Billing & Credits', icon: 'card' },
-        { id: 'reports', label: 'PDF Reports', icon: 'report' },
-        { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
-        { id: 'timeline', label: 'Score Timeline', icon: 'clock' },
-        { id: 'assistant', label: 'AI Assistant', icon: 'spark' },
+        { id: 'assistant', label: 'AI Fix Agent', icon: 'spark' },
+        { id: 'billing', label: 'Billing & Quota', icon: 'card' },
         { id: 'team', label: 'Team', icon: 'users' },
         { id: 'settings', label: 'Settings', icon: 'gear' },
       ],
     },
   ]
 
+  const isAgentMode = tab === 'assistant' || tab === 'recommendations'
+
   return (
     <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
       <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
-        <aside className="hidden w-56 shrink-0 border-r border-border pr-5 lg:block" aria-label="Workspace navigation">
+        <aside className="hidden w-60 shrink-0 border-r border-border pr-5 lg:block" aria-label="Workspace navigation">
           <div className="sticky top-28">
-            <div className="mb-6 px-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-fg-dim">Nebula</p>
-              <p className="mt-1 text-sm font-semibold text-fg-dim">Customer workspace</p>
+            {/* Org Switcher Header */}
+            <div className="mb-4 flex items-center justify-between rounded-xl border border-border bg-bg-surface px-3 py-2">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent/20 border border-accent/40 font-mono text-xs font-bold text-accent">
+                  ⬡
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-semibold text-fg">Nebula Components</p>
+                  <p className="truncate font-mono text-[10px] text-fg-muted/60">Workspace</p>
+                </div>
+              </div>
+              <span className="font-mono text-[10px] text-fg-muted">⌄</span>
             </div>
-            <div className="space-y-6">
+
+            {/* Segmented Mode Switcher: Dashboard vs Autonomous Agent */}
+            <div className="mb-5 flex rounded-lg border border-border bg-bg p-0.5">
+              <button
+                onClick={() => setTab('dashboard')}
+                className={`flex-1 rounded-md py-1.5 font-mono text-xs font-semibold transition-all ${
+                  !isAgentMode
+                    ? 'bg-bg-panel text-fg shadow-sm border border-border/50'
+                    : 'text-fg-muted hover:text-fg'
+                }`}
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={() => setTab('assistant')}
+                className={`flex-1 rounded-md py-1.5 font-mono text-xs font-semibold transition-all ${
+                  isAgentMode
+                    ? 'bg-accent text-bg shadow-sm font-bold'
+                    : 'text-fg-muted hover:text-fg'
+                }`}
+              >
+                AI Agent
+              </button>
+            </div>
+
+            {/* Categorized Navigation */}
+            <div className="space-y-5">
               {navGroups.map((group) => (
                 <div key={group.label}>
-                  <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-fg-dim">{group.label}</p>
+                  <p className="mb-1.5 px-3 font-mono text-[10px] font-bold uppercase tracking-wider text-fg-muted/60">{group.label}</p>
                   <div className="space-y-0.5">
                     {group.items.map((item) => {
                         const required = TAB_ACCESS_REQUIREMENTS[item.id] ?? 'free'
@@ -271,13 +303,22 @@ export default function WorkspaceClient() {
                             key={item.id}
                             onClick={() => setTab(item.id)}
                             aria-current={tab === item.id ? 'page' : undefined}
-                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-left text-[13px] font-medium transition-colors ${
-                              tab === item.id ? 'bg-bg-panel text-fg' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
+                            className={`flex w-full items-center justify-between rounded-lg px-3 py-1.5 text-left text-[13px] font-medium transition-colors ${
+                              tab === item.id ? 'bg-bg-panel text-fg border border-border/50' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
                             }`}
                           >
-                            <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-accent' : 'bg-fg-muted'}`} aria-hidden="true" />
-                            {item.label}
-                            {locked && <LockBadge />}
+                            <div className="flex items-center gap-2.5 truncate">
+                              <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${tab === item.id ? 'bg-accent' : 'bg-fg-muted/40'}`} aria-hidden="true" />
+                              <span className="truncate">{item.label}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              {item.badge && (
+                                <span className="rounded-full bg-accent/15 px-1.5 py-0.2 font-mono text-[10px] font-bold text-accent">
+                                  {item.badge}
+                                </span>
+                              )}
+                              {locked && <LockBadge />}
+                            </div>
                           </button>
                         )
                       })}
@@ -287,41 +328,49 @@ export default function WorkspaceClient() {
             </div>
 
             {/* Account / Plan Status Card */}
-            <div className="mt-6 rounded-xl border border-border bg-bg-panel p-3">
+            <div className="mt-5 rounded-xl border border-border bg-bg-surface p-3">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-fg-dim">Plan</span>
-                <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] font-bold text-accent capitalize">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-fg-muted">Tier</span>
+                <span className="rounded bg-accent/15 px-1.5 py-0.5 font-mono text-[10px] font-bold text-accent capitalize">
                   {planLevel}
                 </span>
               </div>
-              <div className="mt-2 text-xs text-fg-muted">
-                <span className="font-semibold text-fg">{audits?.length || 0}</span> audits saved
+              <div className="mt-1.5 font-mono text-xs text-fg-muted">
+                <span className="font-semibold text-fg">{audits?.length || 0}</span> audits tracked
               </div>
-              <a
-                href="/pricing"
-                className="mt-2.5 flex w-full items-center justify-center rounded-lg bg-accent/10 border border-accent/30 py-1 text-[11px] font-bold text-accent hover:bg-accent hover:text-bg transition-colors"
-              >
-                Upgrade / Credits →
-              </a>
             </div>
 
-            <div className="mt-4 border-t border-border px-3 pt-3">
-              <p className="truncate text-xs text-fg-dim" title={email}>{email}</p>
-              <button onClick={signOut} className="mt-1 text-xs font-medium text-fg-muted hover:text-fg">Sign out</button>
+            <div className="mt-3 border-t border-border px-3 pt-3 flex items-center justify-between">
+              <p className="truncate font-mono text-[11px] text-fg-muted/60" title={email}>{email}</p>
+              <button onClick={signOut} className="font-mono text-[11px] text-fg-muted hover:text-fg">Sign out</button>
             </div>
           </div>
         </aside>
 
         <div className="min-w-0 flex-1 lg:pl-8">
-          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
-            <div>
-              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">{tab === 'dashboard' ? 'Overview' : 'Workspace'}</p>
-              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-fg">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
-              <p className="mt-1 max-w-xl text-sm text-fg-muted">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
+          <header className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
+            <div className="flex items-center gap-3">
+              <div>
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
+                  {tab === 'dashboard' ? 'Executive Overview' : 'Workspace'}
+                </p>
+                <h1 className="text-xl font-semibold tracking-tight text-fg">
+                  {tab === 'dashboard' ? 'Site Health & Conversion Diagnosis' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}
+                </h1>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="hidden text-xs text-fg-dim sm:inline">{email}</span>
-              <a href="/audit?utm_source=workspace&utm_medium=internal" className="rounded-lg bg-bg-panel px-4 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-bg-elevated">Run new audit</a>
+
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-border bg-bg-surface px-3 py-1 font-mono text-xs text-fg-muted">
+                <span>Quota:</span>
+                <span className="font-bold text-accent">{audits?.length || 0}/Unlimited</span>
+              </div>
+              <a
+                href="/audit?utm_source=workspace-top&utm_medium=internal"
+                className="rounded-lg bg-accent px-4 py-2 font-mono text-xs font-bold text-bg hover:opacity-90 transition-opacity"
+              >
+                + New Audit
+              </a>
             </div>
           </header>
           {email && (
