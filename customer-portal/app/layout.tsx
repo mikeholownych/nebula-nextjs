@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Suspense } from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
@@ -119,14 +120,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
 
-        {/* Searchable tracking */}
-        <script
+        {/* Searchable tracking (non-blocking) */}
+        <Script
+          id="searchable-tracking-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `window.sa=window.sa||function(){(sa.q=sa.q||[]).push(arguments)}`
           }}
         />
-        <script
-          defer
+        <Script
+          id="searchable-tracker"
+          strategy="afterInteractive"
           src="https://searchable-tracker.searchable.workers.dev/s.js"
           data-domain="nebulacomponents.com"
           data-site-token="pst_14b9bc17bc3d1a0a51465b65"
