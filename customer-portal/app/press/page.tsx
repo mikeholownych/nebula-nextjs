@@ -104,8 +104,8 @@ export default function PressPage() {
       {/* ─── Company Facts Panel ──────────────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="company-facts-title">
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>01 / Company Facts</SectionLabel>
-          <SectionTitle><span id="company-facts-title">Diagnostic Overview</span></SectionTitle>
+          <SectionLabel>01 / Key Company Metrics for Press</SectionLabel>
+          <SectionTitle><span id="company-facts-title">Key Company Metrics for Press</span></SectionTitle>
           <SectionDescription>
             Core metrics and positioning data for press reference.
           </SectionDescription>
@@ -164,8 +164,8 @@ export default function PressPage() {
       {/* ─── Signal Failure Frequency ────────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="signal-failure-title">
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>02 / Research Data</SectionLabel>
-          <SectionTitle><span id="signal-failure-title">Signal Failure Frequency</span></SectionTitle>
+          <SectionLabel>02 / Insights from Conversion Diagnostics Research</SectionLabel>
+          <SectionTitle><span id="signal-failure-title">Insights from Conversion Diagnostics Research</span></SectionTitle>
           <SectionDescription>
             Historical July 2026 research snapshot from {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.denominator}.
             Figures use the methodology then in use, not the current production engine or registry.
