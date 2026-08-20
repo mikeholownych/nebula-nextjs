@@ -14,7 +14,7 @@ Secondary: marketing agencies managing client ad accounts who hit the same disap
 
 ## Product Purpose
 
-Nebula Components diagnoses why a landing page is leaking ad spend and, if the visitor wants it, fixes it. The audit checks seven conversion signals — message-match, trust, mobile layout, load time, CTA clarity, form friction, and proof — and returns a prioritized, evidence-backed fix list rather than generic opinions. Success is a visitor purchasing the $97 One-Leak Repair Sprint: the audit is the diagnosis, the Repair Sprint is the cure, and there's no retainer waiting behind either one.
+Nebula Components diagnoses why a landing page is leaking ad spend and, if the visitor wants it, fixes it. The audit checks nine conversion signals — message-match, trust signals, above-fold clarity, mobile layout, load speed, CTA clarity, ad tracking, SEO foundations, and AI readiness — and returns a prioritized, evidence-backed fix list rather than generic opinions. Success is a visitor purchasing the $97 One-Leak Repair Sprint: the audit is the diagnosis, the Repair Sprint is the cure, and there's no retainer waiting behind either one.
 
 ## Positioning
 
@@ -28,7 +28,7 @@ The problem was never the ad. It was the page. Nebula tests this premise with a 
 
 ## Capabilities and Constraints
 
-- Automated & assisted 7-signal landing page audit: message-match, trust, mobile layout, load time, CTA clarity, form friction, and proof.
+- Automated & assisted 9-signal landing page audit: message-match, trust signals, above-fold clarity, mobile layout, load speed, CTA clarity, ad tracking, SEO foundations, and AI readiness.
 - Prioritized, evidence-backed fix recommendations with estimated revenue impact.
 - One-Leak Repair Sprint delivery in 24–48 hours.
 - Strict anti-retainer policy: one-time transactions only.
@@ -45,7 +45,7 @@ The problem was never the ad. It was the page. Nebula tests this premise with a 
 ## Evidence on Hand
 
 - Zero published case studies currently. `/case-studies` remains empty until records have inspectable evidence, measurement windows, publication permission, disclosure, and publication metadata.
-- Diagnostic audit engine and 7-signal inspection rules.
+- Diagnostic audit engine and 9-signal inspection rules.
 
 ## Product Principles
 

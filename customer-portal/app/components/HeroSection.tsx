@@ -18,11 +18,15 @@ export const HeroSection: React.FC = () => {
   const router = useRouter()
   const [url, setUrl] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   const handleAuditSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const trimmed = url.trim()
-    if (!trimmed) return
+    if (!trimmed) {
+      inputRef.current?.focus()
+      return
+    }
 
     setIsSubmitting(true)
     const formatted = trimmed.startsWith('http://') || trimmed.startsWith('https://')
@@ -89,8 +93,13 @@ export const HeroSection: React.FC = () => {
               Landing Page URL
             </label>
             <input
+              ref={inputRef}
               id="hero-landing-url"
-              type="text"
+              type="url"
+              inputMode="url"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://yourlandingpage.com/pricing"

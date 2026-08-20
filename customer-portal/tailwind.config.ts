@@ -33,7 +33,7 @@ const config: Config = {
         fg: {
           DEFAULT: '#e8ebe7',    // warm off-white, not pure #fff - reduces eye strain
           muted: '#7a8078',      // ~5.2:1 on panel - WCAG AA
-          dim: '#525750',        // de-emphasized metadata
+          dim: '#8b9489',        // ~5.6:1 on bg - WCAG AA compliant
         },
         // ── Accent - Nebula Chartreuse ────────────────────────────────
         // Single chromatic accent. Use only on: CTAs, active states,
