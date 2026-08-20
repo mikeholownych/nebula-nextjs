@@ -853,10 +853,40 @@ async def revoke_specific_session(
 
 @router.get("/me")
 async def get_me(
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_user),
+    db = Depends(get_session),
 ):
-    """Get current user information including workspace context."""
+    """Get current user information including workspace context and plan tier."""
     user = current_user["user"]
+    org_id = current_user.get("org_id")
+
+    plan = "free"
+    is_agency = False
+
+    email_lower = (user.email or "").strip().lower()
+    if email_lower in {"mike.holownych@gmail.com"}:
+        plan = "agency"
+        is_agency = True
+    else:
+        try:
+            from platform_api.db.models import Membership, Organization, Subscription
+            mem = db.query(Membership).filter(Membership.user_id == user.id).first()
+            if mem:
+                org = db.query(Organization).filter(Organization.id == mem.organization_id).first()
+                if org and org.is_agency:
+                    is_agency = True
+                    plan = "agency"
+                else:
+                    sub = db.query(Subscription).filter(
+                        Subscription.organization_id == mem.organization_id,
+                        Subscription.status == "active",
+                    ).first()
+                    if sub and sub.plan:
+                        plan = sub.plan
+                        if plan == "agency":
+                            is_agency = True
+        except Exception:
+            pass
 
     return {
         "id": str(user.id),
@@ -864,6 +894,8 @@ async def get_me(
         "name": getattr(user, "name", None),
         "picture": getattr(user, "picture", None),
         "status": getattr(user, "status", "active"),
-        "org_id": current_user.get("org_id"),
+        "org_id": org_id,
+        "plan": plan,
+        "is_agency": is_agency,
         "created_at": user.created_at.isoformat(),
     }

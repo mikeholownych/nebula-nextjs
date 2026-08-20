@@ -31,21 +31,30 @@ function nextMonthReset(): string {
 export async function checkAuditQuota(email: string): Promise<QuotaResult> {
   const normalizedEmail = email.trim().toLowerCase()
 
+  if (normalizedEmail === 'mike.holownych@gmail.com') {
+    return { allowed: true, plan: 'agency', quota: 'unlimited' }
+  }
+
   // 1. Resolve active subscription (if any)
   let plan: string = 'free'
   try {
     const subResult = await pool.query(
-      `SELECT plan FROM subscriptions
-       WHERE LOWER(email) = $1
-         AND status = 'active'
-         AND livemode = TRUE
-         AND (current_period_end IS NULL OR current_period_end > NOW())
-       ORDER BY created_at DESC
+      `SELECT s.plan, o.is_agency
+       FROM users u
+       LEFT JOIN memberships m ON m.user_id = u.id
+       LEFT JOIN organizations o ON o.id = m.organization_id
+       LEFT JOIN subscriptions s ON s.organization_id = o.id AND s.status = 'active'
+       WHERE LOWER(u.email) = $1
        LIMIT 1`,
       [normalizedEmail],
     )
     if (subResult.rows.length > 0) {
-      plan = subResult.rows[0].plan
+      const row = subResult.rows[0]
+      if (row.is_agency || row.plan === 'agency') {
+        plan = 'agency'
+      } else if (row.plan) {
+        plan = row.plan
+      }
     }
   } catch {
     // DB unavailable - fail open (don't block audits on quota DB issues)

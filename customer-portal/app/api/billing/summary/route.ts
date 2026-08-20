@@ -97,6 +97,44 @@ export async function GET(request: NextRequest) {
     0,
   )
 
+  let activePlan: string = 'free'
+  let isAgency = false
+  const normalizedEmail = email.trim().toLowerCase()
+
+  // Founder / designated free agency account check
+  if (normalizedEmail === 'mike.holownych@gmail.com') {
+    activePlan = 'agency'
+    isAgency = true
+  } else {
+    try {
+      const subRes = await pool.query(
+        `SELECT s.plan, s.status, o.is_agency
+         FROM users u
+         LEFT JOIN memberships m ON m.user_id = u.id
+         LEFT JOIN organizations o ON o.id = m.organization_id
+         LEFT JOIN subscriptions s ON s.organization_id = o.id AND s.status = 'active'
+         WHERE lower(u.email) = $1
+         LIMIT 1`,
+        [normalizedEmail],
+      )
+      if (subRes.rows.length > 0) {
+        const row = subRes.rows[0]
+        if (row.is_agency || row.plan === 'agency') {
+          activePlan = 'agency'
+          isAgency = true
+        } else if (row.plan) {
+          activePlan = row.plan
+        }
+      }
+    } catch (err) {
+      console.warn('[Billing] subscription lookup error:', err)
+    }
+  }
+
+  if (activePlan === 'free' && hasFixPack) {
+    activePlan = 'fix-pack'
+  }
+
   const purchases = rows.map((r) => ({
     stripeSessionId: r.stripe_session_id,
     offerKey: r.offer_key,
@@ -136,17 +174,18 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     email,
-    plan: hasFixPack ? 'fix-pack' : 'free',
-    hasFixPack,
+    plan: activePlan,
+    isAgency,
+    hasFixPack: hasFixPack || isAgency,
     totalSpentCents,
     purchaseCount: purchases.length,
     purchases,
     billingPortalUrl,
-    // Honest MVP framing - there is no credit system yet. Every audit the
-    // customer runs is stored in the workspace at no per-audit charge.
     usage: {
       model: 'unlimited',
-      note: 'No audit credits or limits in MVP. Every audit you run is saved to this workspace.',
+      note: isAgency
+        ? 'Agency Partner Plan (Always Free): Unlimited audits, monitors, client workspaces, and white-label reporting.'
+        : 'No audit credits or limits in MVP. Every audit you run is saved to this workspace.',
     },
   })
 }

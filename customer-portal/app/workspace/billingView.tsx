@@ -15,8 +15,9 @@ export interface BillingPurchase {
 
 export interface BillingSummary {
   email: string
-  plan: 'fix-pack' | 'free'
+  plan: 'agency' | 'growth' | 'pro' | 'fix-pack' | 'free' | string
   hasFixPack: boolean
+  isAgency?: boolean
   totalSpentCents: number
   purchaseCount: number
   purchases: BillingPurchase[]
@@ -87,7 +88,8 @@ export default function BillingView({ email }: { email: string }) {
     )
   }
 
-  const isOwner = summary.plan === 'fix-pack'
+  const isAgency = summary.plan === 'agency' || summary.isAgency
+  const isOwner = summary.plan === 'fix-pack' || isAgency
 
   return (
     <div className="space-y-6">
@@ -99,37 +101,53 @@ export default function BillingView({ email }: { email: string }) {
         </p>
         <div
           className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border p-5 ${
-            isOwner
+            isAgency
+              ? 'border-accent bg-accent/10'
+              : isOwner
               ? 'border-accent/40 bg-accent-dim'
               : 'border-border bg-bg-panel'
           }`}
         >
           <div>
-            <p className="text-xl font-bold">
-              {isOwner ? 'One-Leak Repair Sprint' : 'Free'}
+            <p className="text-xl font-bold text-fg">
+              {isAgency
+                ? 'Agency Partner (Always Free)'
+                : isOwner
+                ? 'One-Leak Repair Sprint'
+                : 'Free'}
             </p>
             <p className="text-sm text-fg-muted mt-1">
-              {isOwner
+              {isAgency
+                ? 'Full unrestricted agency access: unlimited audits, 25 client workspaces, unlimited monitors & team seats, and white-label reporting.'
+                : isOwner
                 ? 'Targeted implementation instructions for one failing conversion signal, sent after successful payment. Includes a 30-day re-audit.'
                 : 'Free landing page audit - diagnosis across conversion, technical, and discoverability signals.'}
             </p>
           </div>
           <span
             className={`rounded-full border px-3 py-1 text-xs font-semibold ${
-              isOwner
+              isAgency
+                ? 'border-accent bg-accent text-bg'
+                : isOwner
                 ? 'border-accent/40 bg-accent-dim text-accent'
                 : 'border-border bg-bg-elevated text-fg-muted'
             }`}
           >
-            {isOwner ? 'OWNED' : 'NO PURCHASES YET'}
+            {isAgency ? 'AGENCY ACTIVE' : isOwner ? 'OWNED' : 'NO PURCHASES YET'}
           </span>
         </div>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-border bg-bg-panel p-4">
             <p className="text-xs uppercase tracking-wide text-fg-dim">Audits</p>
-            <p className="text-lg font-semibold mt-1">Unlimited in MVP</p>
-            <p className="text-xs text-fg-dim mt-1">Every run saved to this workspace.</p>
+            <p className="text-lg font-semibold mt-1">
+              {isAgency ? 'Unlimited (Agency)' : 'Unlimited in MVP'}
+            </p>
+            <p className="text-xs text-fg-dim mt-1">
+              {isAgency
+                ? 'Unlimited client audit quota with instant reporting.'
+                : 'Every run saved to this workspace.'}
+            </p>
           </div>
           <div className="rounded-xl border border-border bg-bg-panel p-4">
             <p className="text-xs uppercase tracking-wide text-fg-dim">Total paid</p>
@@ -140,8 +158,14 @@ export default function BillingView({ email }: { email: string }) {
           </div>
           <div className="rounded-xl border border-border bg-bg-panel p-4">
             <p className="text-xs uppercase tracking-wide text-fg-dim">Billing</p>
-            <p className="text-lg font-semibold mt-1">One-time</p>
-            <p className="text-xs text-fg-dim mt-1">No subscription, no auto-renewal.</p>
+            <p className="text-lg font-semibold mt-1">
+              {isAgency ? 'Always Free (Lifetime)' : 'One-time'}
+            </p>
+            <p className="text-xs text-fg-dim mt-1">
+              {isAgency
+                ? 'Permanent complimentary Agency tier unlocked.'
+                : 'No subscription, no auto-renewal.'}
+            </p>
           </div>
         </div>
       </section>
