@@ -91,8 +91,14 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
   if (!data) {
     return (
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm text-fg-muted">Loading real audit data&hellip;</p>
+        <div className="mx-auto max-w-6xl space-y-12 animate-pulse min-h-[600px]">
+          <div className="h-12 w-full rounded border border-border/30 bg-bg-muted/10" />
+          <div className="h-44 w-full rounded-2xl border border-border/30 bg-bg-muted/20" />
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="h-24 rounded-xl border border-border/30 bg-bg-muted/10" />
+            <div className="h-24 rounded-xl border border-border/30 bg-bg-muted/10" />
+          </div>
+          <div className="h-72 w-full rounded-xl border border-border/30 bg-bg-muted/10" />
         </div>
       </section>
     )

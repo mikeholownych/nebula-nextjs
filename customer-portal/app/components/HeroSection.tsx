@@ -53,11 +53,11 @@ export const HeroSection: React.FC = () => {
       {/* 1. Atmospheric Ambient Background Lighting & Calibration Grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden [contain:paint_layout]"
       >
         {/* Heavy blurs stay off mobile */}
-        <div className="absolute top-[28%] left-1/2 hidden h-[450px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.06] blur-[120px] md:block" />
-        <div className="absolute top-[15%] right-[20%] hidden h-[300px] w-[400px] rounded-full bg-[#3b82f6]/[0.03] blur-[100px] md:block" />
+        <div className="absolute top-24 left-1/2 hidden h-[450px] w-[900px] -translate-x-1/2 rounded-full bg-accent/[0.06] blur-[120px] md:block" />
+        <div className="absolute top-16 right-[20%] hidden h-[300px] w-[400px] rounded-full bg-[#3b82f6]/[0.03] blur-[100px] md:block" />
 
         {/* Diagnostic Hairline Calibration Grid */}
         <div

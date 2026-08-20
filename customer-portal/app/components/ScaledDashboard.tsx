@@ -4,11 +4,12 @@ import React, { useRef, useState, useEffect } from 'react'
 import { DashboardMockup } from './DashboardMockup'
 
 const DESIGN_WIDTH = 896
+const DESIGN_HEIGHT = 612
 
 /**
  * ScaledDashboard wraps the fixed-width 896px DashboardMockup in a dynamic
  * ResizeObserver scale container that shrinks proportionally on smaller viewports
- * without horizontal overflow.
+ * without horizontal overflow or cumulative layout shift.
  */
 export const ScaledDashboard: React.FC = () => {
   const outerRef = useRef<HTMLDivElement>(null)
@@ -27,7 +28,7 @@ export const ScaledDashboard: React.FC = () => {
         setScale(newScale)
 
         if (innerRef.current) {
-          const naturalHeight = innerRef.current.offsetHeight
+          const naturalHeight = innerRef.current.offsetHeight || DESIGN_HEIGHT
           setContainerHeight(naturalHeight * newScale)
         }
       }
@@ -36,7 +37,7 @@ export const ScaledDashboard: React.FC = () => {
     ro.observe(el)
 
     if (innerRef.current) {
-      const naturalHeight = innerRef.current.offsetHeight
+      const naturalHeight = innerRef.current.offsetHeight || DESIGN_HEIGHT
       const initialScale = Math.min(1, el.offsetWidth / DESIGN_WIDTH)
       setScale(initialScale)
       setContainerHeight(naturalHeight * initialScale)
@@ -48,8 +49,8 @@ export const ScaledDashboard: React.FC = () => {
   return (
     <div
       ref={outerRef}
-      className="relative w-full flex justify-center overflow-hidden"
-      style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
+      className="relative w-full max-w-[896px] mx-auto flex justify-center overflow-hidden [aspect-ratio:896/612]"
+      style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
     >
       <div
         ref={innerRef}
