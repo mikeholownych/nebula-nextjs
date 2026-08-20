@@ -13,6 +13,8 @@ import {
 import { ScaledDashboard } from './ScaledDashboard'
 import { SignalHorizon } from './SignalHorizon'
 import { NebulaMark } from '@/components/NebulaMark'
+import VisibilityBeacon from '@/components/VisibilityBeacon'
+import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
 export const HeroSection: React.FC = () => {
   const router = useRouter()
@@ -32,6 +34,13 @@ export const HeroSection: React.FC = () => {
     const formatted = trimmed.startsWith('http://') || trimmed.startsWith('https://')
       ? trimmed
       : `https://${trimmed}`
+
+    trackClientFunnelEvent('audit_cta_clicked', {
+      cta_id: 'hero_run_free_audit',
+      cta_location: 'homepage_hero',
+      target_url: '/audit',
+      has_url: true,
+    })
 
     router.push(`/audit?url=${encodeURIComponent(formatted)}&utm_source=hero-search`)
   }
@@ -84,6 +93,14 @@ export const HeroSection: React.FC = () => {
 
         {/* Unified Pill Search / Primary CTA Bar */}
         <div className="mt-6 sm:mt-8 max-w-xl mx-auto">
+          <VisibilityBeacon
+            beaconId="homepage_hero_audit_cta"
+            eventName="audit_cta_exposed"
+            properties={{
+              cta_id: 'hero_run_free_audit',
+              cta_location: 'homepage_hero',
+            }}
+          >
           <form
             onSubmit={handleAuditSubmit}
             className="relative overflow-hidden flex items-center rounded-full bg-bg-panel/90 backdrop-blur-xl border border-border p-1.5 pl-4 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_30px_rgba(199,255,47,0.08)] focus-within:border-accent/60 focus-within:shadow-[0_0_35px_rgba(199,255,47,0.18)] transition-all"
@@ -124,6 +141,7 @@ export const HeroSection: React.FC = () => {
               )}
             </button>
           </form>
+          </VisibilityBeacon>
 
           {/* Secondary Discovery Link */}
           <div className="mt-3.5 flex items-center justify-center gap-1.5 text-xs sm:text-sm text-fg-muted">

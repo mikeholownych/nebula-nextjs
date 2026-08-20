@@ -80,6 +80,14 @@ describe('site surface integrity', () => {
     expect(horizon).not.toContain('animate-ping')
   })
 
+  it('instruments homepage hero CTA exposure and click without changing the offer', () => {
+    const hero = readFileSync(path.join(repo, 'app/components/HeroSection.tsx'), 'utf8')
+    expect(hero).toContain('eventName="audit_cta_exposed"')
+    expect(hero).toContain("trackClientFunnelEvent('audit_cta_clicked'")
+    expect(hero).toContain("cta_location: 'homepage_hero'")
+    expect(hero).toContain('beaconId="homepage_hero_audit_cta"')
+  })
+
   it('bans the stale causal signal-phrase family from current pages', () => {
     const files = walk(path.join(repo, 'app'), new Set(['.ts', '.tsx']))
     const stale = 'signals that determine whether paid traffic converts'
