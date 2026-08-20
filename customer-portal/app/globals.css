@@ -84,7 +84,10 @@ html[data-cookie-consent="given"] #cookie-consent-banner {
 
 /* ─── Base reset ───────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
 
 /* ─── Typography base ──────────────────────────────────── */
 h1, h2, h3, h4 { text-wrap: balance; }

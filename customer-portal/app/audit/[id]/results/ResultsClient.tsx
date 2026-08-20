@@ -421,7 +421,7 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
 
 function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: ReportTabId) => void }) {
   return (
-    <nav aria-label="Audit report sections" className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4 backdrop-blur-sm">
+    <nav aria-label="Audit report sections" className="sticky top-14 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4 backdrop-blur-sm">
       <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center" role="tablist">
         {REPORT_NAVIGATION.map((item) => {
           const selected = item.id === active
@@ -846,7 +846,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
       <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-5xl">
           {/* Skeleton nav - matches ReportNavigation height */}
-          <nav aria-label="Loading" className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
+          <nav aria-label="Loading" className="sticky top-14 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
             <div className="mx-auto flex w-full max-w-5xl gap-2 sm:justify-center">
               {['Overview', 'Fix first', 'Signals', 'Evidence', 'Repair'].map((label) => (
                 <span key={label} className="min-h-11 shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-fg-muted/30">
