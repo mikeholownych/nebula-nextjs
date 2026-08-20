@@ -50,11 +50,34 @@ function StatCard({ label, value, note }: { label: string; value: string; note?:
   )
 }
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://nebulacomponents.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Press & Media',
+      item: 'https://nebulacomponents.com/press',
+    },
+  ],
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function PressPage() {
   return (
     <main className="min-h-screen bg-bg text-fg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* ─── Hero ──────────────────────────────────────────────────── */}
       <section className="relative py-24 sm:py-32 px-6 overflow-hidden" aria-labelledby="press-hero-title">
         <ScanLine />
