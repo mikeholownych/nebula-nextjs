@@ -370,7 +370,13 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
 
 // ── Projects (domain grouping) ────────────────────────────────────────
 
-export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
+export function ProjectsView({
+  audits,
+  onSelectProject,
+}: {
+  audits: WorkspaceAudit[]
+  onSelectProject?: (domain: string) => void
+}) {
   const projects = useMemo(() => {
     const map = new Map<string, WorkspaceAudit[]>()
     for (const a of audits) {
@@ -408,34 +414,52 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {projects.map((project) => (
-        <section key={project.domain} className="bg-bg-elevated border border-border rounded-lg p-6">
+        <section key={project.domain} className="bg-bg-elevated border border-border rounded-xl p-6 transition-all hover:border-accent/30">
           <div className="flex items-center justify-between mb-1">
-            <h2 className="text-lg font-semibold text-fg">{project.domain}</h2>
-            <span className="text-2xl font-bold text-accent">
+            <div className="flex items-center gap-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded bg-accent/15 font-mono text-xs font-bold text-accent">
+                ⬡
+              </div>
+              <h2 className="text-lg font-semibold text-fg">{project.domain}</h2>
+            </div>
+            <span className="font-mono text-2xl font-bold text-accent">
               {Math.round(scoreOf(project.latest) * 10)}
             </span>
           </div>
-          <p className="text-xs text-fg-dim mb-4">
+          <p className="text-xs font-mono text-fg-dim mb-4">
             {project.paths.length} {project.paths.length === 1 ? 'page' : 'pages'} ·{' '}
             {project.count} {project.count === 1 ? 'audit' : 'audits'} · last{' '}
             {fmtDate(project.latest.completed_at || project.latest.created_at)}
           </p>
-          <ul className="space-y-1 mb-4">
+          <ul className="space-y-1 mb-5">
             {project.paths.slice(0, 4).map((path) => (
-              <li key={path} className="text-sm text-fg-muted truncate">
+              <li key={path} className="text-sm font-mono text-fg-muted truncate">
                 {path}
               </li>
             ))}
             {project.paths.length > 4 && (
-              <li className="text-xs text-fg-dim">+{project.paths.length - 4} more</li>
+              <li className="text-xs font-mono text-fg-dim">+{project.paths.length - 4} more</li>
             )}
           </ul>
-          <a
-            href={`/audit?url=${encodeURIComponent(project.latest.url)}`}
-            className="text-sm text-accent hover:text-fg"
-          >
-            Run follow-up →
-          </a>
+          <div className="flex items-center justify-between border-t border-border/50 pt-3">
+            {onSelectProject ? (
+              <button
+                type="button"
+                onClick={() => onSelectProject(project.domain)}
+                className="font-mono text-xs font-semibold text-accent hover:underline"
+              >
+                Select & View Dashboard →
+              </button>
+            ) : (
+              <span />
+            )}
+            <a
+              href={`/audit?url=${encodeURIComponent(project.latest.url)}`}
+              className="font-mono text-xs text-fg-muted hover:text-fg"
+            >
+              Run follow-up ↗
+            </a>
+          </div>
         </section>
       ))}
     </div>

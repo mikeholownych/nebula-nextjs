@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DashboardView, AuditsView, ProjectsView } from './views'
 import CompareView from './compareView'
 import CompetitorView from './competitorView'
@@ -85,6 +85,15 @@ type TabId =
   | 'team'
   | 'settings'
 
+function getDomain(url?: string): string {
+  if (!url) return ''
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return url
+  }
+}
+
 export default function WorkspaceClient() {
   const [email, setEmail] = useState('')
   const [authLoading, setAuthLoading] = useState(true)
@@ -92,6 +101,8 @@ export default function WorkspaceClient() {
   const [error, setError] = useState<string | null>(null)
   const [audits, setAudits] = useState<WorkspaceAudit[] | null>(null)
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
+  const [selectedProject, setSelectedProject] = useState<string>('all')
+  const [projectMenuOpen, setProjectMenuOpen] = useState(false)
   // Read searchParams only after mount to avoid SSR/client mismatch
   const [tab, setTab] = useState<TabId>('dashboard')
   const [planLevel, setPlanLevel] = useState<AccessLevel>('free')
@@ -123,6 +134,61 @@ export default function WorkspaceClient() {
       setLoading(false)
     }
   }, [])
+
+  // Unique projects/domains
+  const projectsList = useMemo(() => {
+    if (!audits || audits.length === 0) return []
+    const map = new Map<string, { domain: string; count: number; latestScore: number | null; latestId: string }>()
+    for (const a of audits) {
+      const domain = getDomain(a.url)
+      if (!domain) continue
+      const existing = map.get(domain)
+      const score = a.composite ?? a.score ?? null
+      if (!existing) {
+        map.set(domain, {
+          domain,
+          count: 1,
+          latestScore: score != null ? Math.round(score * 10) : null,
+          latestId: a.id,
+        })
+      } else {
+        existing.count += 1
+      }
+    }
+    return [...map.values()]
+  }, [audits])
+
+  // Filter audits for the active project
+  const displayedAudits = useMemo(() => {
+    if (!audits) return []
+    if (selectedProject === 'all') return audits
+    return audits.filter((a) => getDomain(a.url) === selectedProject)
+  }, [audits, selectedProject])
+
+  // Project-specific detail findings
+  const [projectDetail, setProjectDetail] = useState<AuditDetail | null>(null)
+
+  useEffect(() => {
+    if (selectedProject === 'all') {
+      setProjectDetail(latestDetail)
+      return
+    }
+    const firstInProject = displayedAudits[0]
+    if (!firstInProject) {
+      setProjectDetail(null)
+      return
+    }
+    if (latestDetail && latestDetail.audit_id === firstInProject.id) {
+      setProjectDetail(latestDetail)
+      return
+    }
+    if (email) {
+      fetch(`/api/audit/${firstInProject.id}?email=${encodeURIComponent(email)}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => setProjectDetail(d))
+        .catch(() => setProjectDetail(null))
+    }
+  }, [selectedProject, displayedAudits, latestDetail, email])
 
   useEffect(() => {
     fetch('/api/auth/me', { cache: 'no-store' })
@@ -251,18 +317,110 @@ export default function WorkspaceClient() {
       <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
         <aside className="hidden w-60 shrink-0 border-r border-border pr-5 lg:block" aria-label="Workspace navigation">
           <div className="sticky top-28">
-            {/* Org Switcher Header */}
-            <div className="mb-4 flex items-center justify-between rounded-xl border border-border bg-bg-surface px-3 py-2">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent/20 border border-accent/40 font-mono text-xs font-bold text-accent">
-                  ⬡
+            {/* Top Pill: Interactive Project Selector */}
+            <div className="relative mb-4">
+              <button
+                type="button"
+                onClick={() => setProjectMenuOpen((v) => !v)}
+                className="flex w-full items-center justify-between rounded-xl border border-border bg-bg-surface px-3 py-2 text-left transition-all hover:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent"
+                aria-label="Select Project"
+                aria-haspopup="listbox"
+                aria-expanded={projectMenuOpen}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent/20 border border-accent/40 font-mono text-xs font-bold text-accent">
+                    ⬡
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-xs font-semibold text-fg">
+                      {selectedProject === 'all' ? 'All Projects' : selectedProject}
+                    </p>
+                    <p className="truncate font-mono text-[10px] text-fg-muted/60">
+                      {displayedAudits.length} {displayedAudits.length === 1 ? 'page / audit' : 'pages / audits'}
+                    </p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className="truncate text-xs font-semibold text-fg">Nebula Components</p>
-                  <p className="truncate font-mono text-[10px] text-fg-muted/60">Workspace</p>
-                </div>
-              </div>
-              <span className="font-mono text-[10px] text-fg-muted">⌄</span>
+                <span className="font-mono text-[11px] text-fg-muted">⌄</span>
+              </button>
+
+              {/* Project Selection Dropdown Menu */}
+              {projectMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setProjectMenuOpen(false)}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute left-0 top-full z-50 mt-1.5 w-full rounded-xl border border-border bg-bg-surface p-1.5 shadow-xl">
+                    <div className="px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-fg-muted/60">
+                      Projects ({projectsList.length})
+                    </div>
+                    
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedProject('all')
+                        setProjectMenuOpen(false)
+                      }}
+                      className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors ${
+                        selectedProject === 'all'
+                          ? 'bg-accent/15 text-accent font-semibold'
+                          : 'text-fg hover:bg-bg-panel'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="font-mono text-xs">🌐</span>
+                        <span className="truncate">All Projects</span>
+                      </div>
+                      <span className="font-mono text-[10px] text-fg-muted">
+                        {audits?.length || 0}
+                      </span>
+                    </button>
+
+                    {projectsList.length > 0 && <div className="my-1 border-t border-border/50" />}
+
+                    <div className="max-h-48 overflow-y-auto space-y-0.5">
+                      {projectsList.map((p) => (
+                        <button
+                          key={p.domain}
+                          type="button"
+                          onClick={() => {
+                            setSelectedProject(p.domain)
+                            setProjectMenuOpen(false)
+                          }}
+                          className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors ${
+                            selectedProject === p.domain
+                              ? 'bg-accent/15 text-accent font-semibold'
+                              : 'text-fg hover:bg-bg-panel'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2 truncate">
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                            <span className="truncate">{p.domain}</span>
+                          </div>
+                          <div className="flex items-center gap-1 font-mono text-[10px]">
+                            {p.latestScore !== null && (
+                              <span className="rounded bg-bg-panel px-1 text-fg-muted">
+                                {p.latestScore}
+                              </span>
+                            )}
+                            <span className="text-fg-muted/60">({p.count})</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="my-1 border-t border-border/50" />
+
+                    <a
+                      href="/audit?utm_source=project-selector&utm_medium=internal"
+                      className="flex w-full items-center justify-center rounded-lg bg-bg-panel py-1.5 font-mono text-[11px] font-semibold text-fg hover:bg-bg-elevated hover:text-accent transition-colors"
+                    >
+                      + Audit New Domain
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Segmented Mode Switcher: Dashboard vs Autonomous Agent */}
@@ -336,7 +494,7 @@ export default function WorkspaceClient() {
                 </span>
               </div>
               <div className="mt-1.5 font-mono text-xs text-fg-muted">
-                <span className="font-semibold text-fg">{audits?.length || 0}</span> audits tracked
+                <span className="font-semibold text-fg">{displayedAudits.length}</span> {displayedAudits.length === 1 ? 'audit' : 'audits'} in view
               </div>
             </div>
 
@@ -353,6 +511,11 @@ export default function WorkspaceClient() {
               <div>
                 <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-fg-muted">
                   {tab === 'dashboard' ? 'Executive Overview' : 'Workspace'}
+                  {selectedProject !== 'all' && (
+                    <span className="ml-2 rounded bg-accent/15 px-1.5 py-0.5 font-mono text-[10px] font-bold text-accent">
+                      {selectedProject}
+                    </span>
+                  )}
                 </p>
                 <h1 className="text-xl font-semibold tracking-tight text-fg">
                   {tab === 'dashboard' ? 'Site Health & Conversion Diagnosis' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}
@@ -362,14 +525,14 @@ export default function WorkspaceClient() {
 
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-border bg-bg-surface px-3 py-1 font-mono text-xs text-fg-muted">
-                <span>Quota:</span>
-                <span className="font-bold text-accent">{audits?.length || 0}/Unlimited</span>
+                <span>Audits:</span>
+                <span className="font-bold text-accent">{displayedAudits.length}</span>
               </div>
               <a
-                href="/audit?utm_source=workspace-top&utm_medium=internal"
+                href={selectedProject !== 'all' ? `/audit?url=https://${encodeURIComponent(selectedProject)}` : '/audit?utm_source=workspace-top&utm_medium=internal'}
                 className="rounded-lg bg-accent px-4 py-2 font-mono text-xs font-bold text-bg hover:opacity-90 transition-opacity"
               >
-                + New Audit
+                + Audit URL
               </a>
             </div>
           </header>
@@ -380,8 +543,20 @@ export default function WorkspaceClient() {
           )}
 
           <nav className="mb-6 lg:hidden" aria-label="Workspace sections">
-            {/* Mobile: select dropdown */}
-            <div className="block sm:hidden">
+            {/* Mobile: Project + Section Selectors */}
+            <div className="space-y-2 block sm:hidden">
+              <select
+                value={selectedProject}
+                onChange={(e) => setSelectedProject(e.target.value)}
+                className="w-full rounded-lg border border-border bg-bg-panel py-2 px-3 text-fg text-sm focus:outline-none"
+                aria-label="Select active project"
+              >
+                <option value="all">All Projects ({audits?.length || 0})</option>
+                {projectsList.map((p) => (
+                  <option key={p.domain} value={p.domain}>{p.domain} ({p.count})</option>
+                ))}
+              </select>
+
               <select
                 value={tab}
                 onChange={(e) => setTab(e.target.value as TabId)}
@@ -401,15 +576,15 @@ export default function WorkspaceClient() {
             </div>
           </nav>
 
-          {tab === 'dashboard' && <DashboardView audits={audits || []} latestDetail={latestDetail} email={email} />}
-          {tab === 'audits' && <AuditsView audits={audits || []} />}
-          {tab === 'projects' && <ProjectsView audits={audits || []} />}
-          {tab === 'pages' && <PagesView audits={audits || []} latestDetail={latestDetail} />}
-          {tab === 'diff' && <DiffView audits={audits || []} />}
-          {tab === 'compare' && <CompetitorView audits={audits || []} email={email} />}
-          {tab === 'aiSearch' && <AiSearchView audits={audits || []} email={email} />}
+          {tab === 'dashboard' && <DashboardView audits={displayedAudits} latestDetail={projectDetail} email={email} />}
+          {tab === 'audits' && <AuditsView audits={displayedAudits} />}
+          {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { setSelectedProject(d); setTab('dashboard'); }} />}
+          {tab === 'pages' && <PagesView audits={displayedAudits} latestDetail={projectDetail} />}
+          {tab === 'diff' && <DiffView audits={displayedAudits} />}
+          {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} />}
+          {tab === 'aiSearch' && <AiSearchView audits={displayedAudits} email={email} />}
           {tab === 'roiCalculator' && <RoiCalculatorView />}
-          {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
+          {tab === 'recommendations' && <RecsView email={email} latestDetail={projectDetail} />}
           {tab === 'experiments' && (
             canAccess(planLevel, 'pro')
               ? <ExperimentsView email={email} />
@@ -433,11 +608,11 @@ export default function WorkspaceClient() {
           )}
           {tab === 'reports' && (
             canAccess(planLevel, 'pro')
-              ? <ReportView audits={audits || []} />
+              ? <ReportView audits={displayedAudits} />
               : <LockedTab tabLabel="Reports" requiredPlan="pro" currentPlan={planLevel} />
           )}
-          {tab === 'achievements' && <AchievementsView email={email} latestAuditId={audits?.[0]?.id ?? null} />}
-          {tab === 'assistant' && <AssistantView email={email} audits={audits || []} />}
+          {tab === 'achievements' && <AchievementsView email={email} latestAuditId={displayedAudits[0]?.id ?? null} />}
+          {tab === 'assistant' && <AssistantView email={email} audits={displayedAudits} />}
           {tab === 'team' && (
             canAccess(planLevel, 'growth')
               ? <TeamView email={email} />
