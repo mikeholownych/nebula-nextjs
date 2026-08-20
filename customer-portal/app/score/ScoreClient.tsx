@@ -262,7 +262,7 @@ export default function ScoreClient() {
 
               {/* Bar */}
               <div style={{ height: 6, background: '#1e231e', borderRadius: 3, marginBottom: 20, overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${score * 10}%`, background: scoreColor(score), borderRadius: 3, transition: 'width .6s ease' }} />
+                <div style={{ height: '100%', width: '100%', transform: `scaleX(${Math.max(0, Math.min(1, (score || 0) / 10))})`, transformOrigin: 'left', background: scoreColor(score), borderRadius: 3, transition: 'transform .6s ease' }} />
               </div>
 
               {/* Top finding */}

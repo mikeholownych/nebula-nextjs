@@ -107,20 +107,20 @@ const systems = [
 
 export default function SevenSystemsPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-bg text-fg">
       {/* Header */}
-      <header className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 md:py-20">
+      <header className="bg-bg-elevated border-b border-border py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
             7 Systems Every Ecom Brand Needs<br />
-            <span className="text-emerald-400">(That Most Skip)</span>
+            <span className="text-accent">(That Most Skip)</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-xl mx-auto">
+          <p className="text-lg md:text-xl text-fg-muted max-w-xl mx-auto">
             You&apos;re running ads. You&apos;re getting traffic. But your landing page isn&apos;t converting.
           </p>
-          <div className="mt-6 text-sm text-slate-400">
+          <div className="mt-6 text-sm text-fg-dim">
             Based on published landing page teardowns ·{' '}
-            <a href="#free-audit" className="text-emerald-400 hover:text-emerald-300 transition">
+            <a href="#free-audit" className="text-accent hover:underline transition">
               Skip to free audit →
             </a>
           </div>
@@ -130,14 +130,14 @@ export default function SevenSystemsPage() {
       {/* Main Content */}
       <main id="main-content" className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6">
-          <p className="text-lg text-slate-300 mb-6">
+          <p className="text-lg text-fg-muted mb-6">
             It&apos;s not one thing. It&apos;s almost always a missing system - not a missing button color or a better font.
           </p>
-          <p className="text-slate-300 mb-6">
+          <p className="text-fg-muted mb-6">
             Across our published landing page teardowns, we&apos;ve traced every conversion leak back to one of seven systems. Brands that fix{' '}
-            <strong className="text-white">all seven</strong> see 2-4x conversion improvements. Brands that skip even one leave money on the table - and usually don&apos;t know which one.
+            <strong className="text-fg">all seven</strong> see 2-4x conversion improvements. Brands that skip even one leave money on the table - and usually don&apos;t know which one.
           </p>
-          <p className="text-lg font-semibold text-emerald-400 mb-12">
+          <p className="text-lg font-semibold text-accent mb-12">
             This is the checklist.
           </p>
 
@@ -145,27 +145,27 @@ export default function SevenSystemsPage() {
           {systems.map((system) => (
             <section key={system.num} className="mb-16">
               <h2 className="flex items-center gap-4 text-xl md:text-2xl font-bold mb-4">
-                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm font-bold">
+                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-accent-dim text-accent flex items-center justify-center text-sm font-bold border border-border-accent">
                   {system.num}
                 </span>
-                <span className="text-white">{system.title}</span>
+                <span className="text-fg">{system.title}</span>
               </h2>
 
-              <p className="text-lg font-semibold text-emerald-400 mb-4">
+              <p className="text-lg font-semibold text-accent mb-4">
                 {system.subtitle}
               </p>
 
-              <p className="text-slate-300 mb-6">
+              <p className="text-fg-muted mb-6">
                 {system.description}
               </p>
 
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">
+              <h3 className="text-sm font-semibold text-fg-dim uppercase tracking-wide mb-3">
                 What working looks like:
               </h3>
               <ul className="space-y-2 mb-6">
                 {system.checklist.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-slate-300">
-                    <svg className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li key={idx} className="flex items-start gap-3 text-fg-muted">
+                    <svg className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>{item}</span>
@@ -173,26 +173,26 @@ export default function SevenSystemsPage() {
                 ))}
               </ul>
 
-              <blockquote className="border-l-4 border-emerald-500 pl-4 py-3 my-6 bg-slate-900/50 rounded-r-lg">
-                <p className="text-slate-300 italic">
-                  <strong className="text-emerald-400 not-italic">Most common miss:</strong>{' '}
+              <blockquote className="border border-border bg-bg-panel p-4 my-6 rounded-lg">
+                <p className="text-fg-muted italic">
+                  <strong className="text-accent not-italic">Most common miss:</strong>{' '}
                   {system.commonMiss}
                 </p>
               </blockquote>
 
-              <p className="text-slate-300">
-                <strong className="text-white">ROI of fixing:</strong>{' '}
+              <p className="text-fg-muted">
+                <strong className="text-fg">ROI of fixing:</strong>{' '}
                 {system.roi}
               </p>
             </section>
           ))}
 
           {/* Order Matters */}
-          <section className="mb-16 pt-24 border-t border-slate-800">
+          <section className="mb-16 pt-24 border-t border-border">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
               The Order Matters
             </h2>
-            <p className="text-lg font-semibold text-emerald-400 mb-6">
+            <p className="text-lg font-semibold text-accent mb-6">
               Fix in this order:
             </p>
             <ol className="space-y-4">
@@ -206,11 +206,11 @@ export default function SevenSystemsPage() {
                 { name: 'Analytics', reason: 'so you keep getting better permanently' },
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 text-emerald-400 flex items-center justify-center text-sm font-bold border border-slate-700">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-bg-panel text-accent flex items-center justify-center text-sm font-bold border border-border">
                     {idx + 1}
                   </span>
-                  <p className="text-slate-300">
-                    <strong className="text-white">{item.name}</strong> - {item.reason}
+                  <p className="text-fg-muted">
+                    <strong className="text-fg">{item.name}</strong> - {item.reason}
                   </p>
                 </li>
               ))}
@@ -218,39 +218,39 @@ export default function SevenSystemsPage() {
           </section>
 
           {/* Lead Magnet */}
-          <div id="free-audit" className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-8 md:p-10 text-center mb-12 border border-slate-700">
-            <h3 className="text-2xl font-bold text-white mb-3">
+          <div id="free-audit" className="bg-bg-panel rounded-xl p-8 md:p-10 text-center mb-12 border border-border">
+            <h3 className="text-2xl font-bold text-fg mb-3">
               How Does Your Page Score?
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="text-fg-muted mb-6">
               Automated audit scoring is live and evidence-backed - no signup required.
             </p>
             <a
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition text-lg"
+              className="inline-block bg-accent hover:opacity-90 text-bg font-bold px-8 py-4 rounded-lg transition text-lg"
             >
               View Audit Status →
             </a>
-            <p className="mt-4 text-sm text-slate-500">
+            <p className="mt-4 text-sm text-fg-dim">
               No call. No credit card. Just a Fix Map with specific steps.
             </p>
           </div>
 
           {/* Repair Sprint CTA */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 text-center">
-            <p className="text-lg text-slate-300 mb-6">
-              <strong className="text-white">Want one high-confidence leak repaired?</strong> $97 - Nebula scopes, implements, and verifies one bounded page-level change. No retainer.
+          <div className="bg-bg-panel/50 border border-border rounded-xl p-8 text-center">
+            <p className="text-lg text-fg-muted mb-6">
+              <strong className="text-fg">Want one high-confidence leak repaired?</strong> $97 - Nebula scopes, implements, and verifies one bounded page-level change. No retainer.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/audit?utm_source=content&utm_medium=organic-content"
-                className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition"
+                className="bg-accent hover:opacity-90 text-bg font-bold px-8 py-4 rounded-lg transition"
               >
                 Run the audit before checkout →
               </a>
               <a
                 href="/audit?utm_source=content&utm_medium=organic-content"
-                className="border-2 border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white font-semibold px-8 py-4 rounded-lg transition"
+                className="border border-border-accent text-accent hover:bg-accent-dim font-semibold px-8 py-4 rounded-lg transition"
               >
                 Run the Free Audit
               </a>
@@ -260,8 +260,8 @@ export default function SevenSystemsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-8">
-        <div className="max-w-3xl mx-auto px-6 text-center text-slate-500 text-sm">
+      <footer className="border-t border-border py-8">
+        <div className="max-w-3xl mx-auto px-6 text-center text-fg-dim text-sm">
           <p>
             Nebula Components · Autonomous conversion engineering · No retainers · No calls · Audit → Fix → Done
           </p>

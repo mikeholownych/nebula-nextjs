@@ -245,7 +245,7 @@ export default function FunnelAuditClient() {
                     <>
                       {/* Friction bar */}
                       <div style={{ height: 5, background: '#1e231e', borderRadius: 3, overflow: 'hidden', marginBottom: 12 }}>
-                        <div style={{ height: '100%', width: `${step.score * 10}%`, background: scoreColor(step.score), borderRadius: 3, transition: 'width .5s ease' }} />
+                        <div style={{ height: '100%', width: '100%', transform: `scaleX(${Math.max(0, Math.min(1, (step.score || 0) / 10))})`, transformOrigin: 'left', background: scoreColor(step.score), borderRadius: 3, transition: 'transform .5s ease' }} />
                       </div>
                       {/* Friction label */}
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: step.topIssue ? 10 : 0 }}>

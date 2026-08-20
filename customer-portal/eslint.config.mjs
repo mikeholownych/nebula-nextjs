@@ -18,6 +18,7 @@ export default [{
     'scripts/**',
     '__tests__/**',
     'storybook-static/**',
+    '.agents/**',
   ],
 }, js.configs.recommended, {
   files: ['**/*.{ts,tsx}'],

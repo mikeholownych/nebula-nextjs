@@ -712,6 +712,33 @@
     "trigger_text": "",
     "url": "https://example.com"
   },
+  "anonymous+319b9c47-a453-43e9-9292-9569ad783989@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+319b9c47-a453-43e9-9292-9569ad783989@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-20T09:12:45.235545Z",
+    "last_seen": "2026-08-20T09:12:45.235545Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "300b3e06-dd38-4769-a93f-d6568eee50dd",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-20T09:12:45.235545Z",
+    "trigger_text": "",
+    "url": "https://vidern.com/"
+  },
   "anonymous+32c23bb2-da9e-4929-bee6-e4ab057df58e@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -1629,6 +1656,33 @@
     "track_started_at": "2026-08-05T10:29:47.822286Z",
     "trigger_text": "",
     "url": "https://example.com?utm_source=google&utm_medium=cpc"
+  },
+  "anonymous+e927076a-0d31-48f9-8728-5f6e14f4ca1a@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+e927076a-0d31-48f9-8728-5f6e14f4ca1a@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-20T09:13:49.211946Z",
+    "last_seen": "2026-08-20T09:13:49.211946Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "ff0b920c-dcee-4ba1-903f-ff3ceda5b316",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-20T09:13:49.211946Z",
+    "trigger_text": "",
+    "url": "http://roamveo.com/"
   },
   "anonymous+ead1d414-b2c7-4824-a719-e4a04e2a426a@invalid.nebulacomponents.com": {
     "content_posts": [],

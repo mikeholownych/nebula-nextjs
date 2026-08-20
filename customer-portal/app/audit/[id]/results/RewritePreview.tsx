@@ -195,7 +195,7 @@ export default function RewritePreview({
               </p>
             </div>
           )}
-          <div className="rounded-lg border border-border border-l-2 border-l-accent bg-accent/5 p-3">
+          <div className="rounded-lg border border-border-accent/40 bg-accent-dim/40 p-3">
             <div className="mb-1 flex items-center justify-between gap-4">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
                 AI Rewrite

@@ -56,9 +56,9 @@ function fmtDate(iso?: string | null) {
 }
 
 function impactMeta(impact: number) {
-  if (impact >= 8) return { label: 'Critical', cls: 'text-red-400 bg-red-500/10 border-red-500/30' }
-  if (impact >= 5) return { label: 'Warning', cls: 'text-amber-400 bg-amber-500/10 border-amber-500/30' }
-  return { label: 'Advisory', cls: 'text-gray-400 bg-gray-500/10 border-gray-500/30' }
+  if (impact >= 8) return { label: 'Critical', cls: 'text-danger bg-danger-dim border-danger/30' }
+  if (impact >= 5) return { label: 'Warning', cls: 'text-signal-fail bg-signal-fail/10 border-signal-fail/30' }
+  return { label: 'Advisory', cls: 'text-fg-muted bg-bg-panel border-border' }
 }
 
 function evidenceText(evidence: unknown): string {
@@ -117,10 +117,10 @@ export default async function SharedPortalPage({
   const auditId = audit.audit_id ?? audit.id
   const pdfUrl = `/api/report/pdf?audit_id=${encodeURIComponent(auditId)}&share=${encodeURIComponent(token)}`
 
-  const scoreColor = audit.score >= 7 ? 'text-emerald-400' : audit.score >= 5 ? 'text-amber-400' : 'text-red-400'
+  const scoreColor = audit.score >= 7 ? 'text-accent' : audit.score >= 5 ? 'text-signal-fail' : 'text-danger'
 
   return (
-    <main id="main-content" className="min-h-screen bg-[#050505] text-white py-16 px-6">
+    <main id="main-content" className="min-h-screen bg-bg text-fg py-16 px-6">
       <div className="mx-auto max-w-3xl">
 
         {/* Header */}
@@ -130,32 +130,32 @@ export default async function SharedPortalPage({
               {branding.agency_logo_url && (
                 <img src={branding.agency_logo_url} alt={branding.agency_name} className="h-8 w-auto" />
               )}
-              <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
                 Prepared by {branding.agency_name}
               </p>
             </div>
           ) : (
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-emerald-400">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">
               Audit Report · Shared via Nebula Components
             </p>
           )}
-          <h1 className="text-3xl font-bold text-white break-all">{audit.url}</h1>
-          <p className="mt-2 text-sm text-gray-400">Audited {fmtDate(audit.completed_at ?? audit.created_at)}</p>
+          <h1 className="text-3xl font-bold text-fg break-all">{audit.url}</h1>
+          <p className="mt-2 text-sm text-fg-muted">Audited {fmtDate(audit.completed_at ?? audit.created_at)}</p>
 
           <div className="mt-6 flex flex-wrap gap-6">
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-widest">Score</p>
+              <p className="text-xs text-fg-dim uppercase tracking-widest">Score</p>
               <p className={`text-5xl font-bold ${scoreColor}`}>
-                {audit.score}<span className="text-2xl text-gray-500">/10</span>
+                {audit.score}<span className="text-2xl text-fg-dim">/10</span>
               </p>
             </div>
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-widest">Grade</p>
+              <p className="text-xs text-fg-dim uppercase tracking-widest">Grade</p>
               <p className={`text-5xl font-bold ${scoreColor}`}>{audit.grade}</p>
             </div>
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-widest">Findings</p>
-              <p className="text-5xl font-bold text-white">{audit.findings?.length ?? 0}</p>
+              <p className="text-xs text-fg-dim uppercase tracking-widest">Findings</p>
+              <p className="text-5xl font-bold text-fg">{audit.findings?.length ?? 0}</p>
             </div>
           </div>
         </div>
@@ -164,47 +164,47 @@ export default async function SharedPortalPage({
         <div className="mb-8">
           <a
             href={pdfUrl}
-            className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20"
+            className="inline-flex items-center gap-2 rounded-xl border border-border-accent/40 bg-accent-dim/30 px-5 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-accent-dim/50"
           >
             <span>↓</span> Download PDF report
           </a>
         </div>
 
         {/* Disclosure */}
-        <div className="mb-8 rounded-xl border border-amber-500/20 bg-amber-500/5 px-5 py-3 text-sm text-gray-400">
+        <div className="mb-8 rounded-xl border border-signal-fail/30 bg-signal-fail/10 px-5 py-3 text-sm text-fg-muted">
           This is a read-only report shared with you. It reflects a snapshot of{' '}
-          <span className="text-white">{audit.url}</span> at the time of the audit.
+          <span className="text-fg font-medium">{audit.url}</span> at the time of the audit.
         </div>
 
         {/* Findings */}
         {audit.findings && audit.findings.length > 0 ? (
           <div className="space-y-5">
-            <h2 className="text-xl font-bold text-white">Findings</h2>
+            <h2 className="text-xl font-bold text-fg">Findings</h2>
             {audit.findings.map((f, i) => {
               const tone = impactMeta(f.impact)
               const ev = evidenceText(f.evidence)
               return (
-                <div key={f.key} className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-6">
+                <div key={f.key} className="rounded-2xl border border-border bg-bg-panel p-6">
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-widest mb-0.5">Finding {i + 1}</p>
-                      <h3 className="font-bold text-white">{f.label}</h3>
+                      <p className="text-xs text-fg-dim uppercase tracking-widest mb-0.5">Finding {i + 1}</p>
+                      <h3 className="font-bold text-fg">{f.label}</h3>
                     </div>
                     <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${tone.cls}`}>
                       {tone.label} · {f.impact}/10
                     </span>
                   </div>
-                  {f.issue && <p className="text-sm text-gray-300 mb-3">{f.issue}</p>}
+                  {f.issue && <p className="text-sm text-fg-muted mb-3">{f.issue}</p>}
                   {ev && (
-                    <div className="rounded-lg bg-[#111] border border-gray-800 px-4 py-2.5 mb-3">
-                      <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Evidence</p>
-                      <p className="text-xs font-mono text-gray-400">{ev}</p>
+                    <div className="rounded-lg bg-bg-surface border border-border px-4 py-2.5 mb-3">
+                      <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">Evidence</p>
+                      <p className="text-xs font-mono text-fg-muted">{ev}</p>
                     </div>
                   )}
                   {f.fix && (
                     <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Recommended fix</p>
-                      <p className="text-sm text-gray-300">{f.fix}</p>
+                      <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">Recommended fix</p>
+                      <p className="text-sm text-fg-muted">{f.fix}</p>
                     </div>
                   )}
                 </div>
@@ -212,28 +212,28 @@ export default async function SharedPortalPage({
             })}
           </div>
         ) : (
-          <p className="text-gray-400">No findings - all signals passed.</p>
+          <p className="text-fg-muted">No findings - all signals passed.</p>
         )}
 
         {/* CTA */}
-        <div className="mt-16 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
-          <h2 className="text-xl font-bold text-white">Run your own free audit</h2>
-          <p className="mt-2 text-sm text-gray-400">
+        <div className="mt-16 rounded-2xl border border-border-accent/30 bg-accent-dim/20 p-8 text-center">
+          <h2 className="text-xl font-bold text-fg">Run your own free audit</h2>
+          <p className="mt-2 text-sm text-fg-muted">
             Same engine. Any public landing page. No signup required.
           </p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-5 inline-block rounded-xl bg-emerald-500 px-8 py-3 font-semibold text-black hover:bg-emerald-400 transition-colors"
+            className="mt-5 inline-block rounded-xl bg-accent px-8 py-3 font-bold text-bg hover:opacity-90 transition-opacity"
           >
             Find the Leak →
           </Link>
-          <p className="mt-3 text-xs text-gray-500">Under 2 minutes · no signup · no sales call</p>
+          <p className="mt-3 text-xs text-fg-dim">Under 2 minutes · no signup · no sales call</p>
         </div>
 
         {/* Footer */}
-        <p className="mt-12 text-center text-xs text-gray-600">
+        <p className="mt-12 text-center text-xs text-fg-dim">
           This report was generated by{' '}
-          <Link href="/" className="text-gray-500 hover:text-gray-400">Nebula Components</Link>
+          <Link href="/" className="text-fg-muted hover:text-fg">Nebula Components</Link>
           {' '}· nebulacomponents.com
         </p>
       </div>
