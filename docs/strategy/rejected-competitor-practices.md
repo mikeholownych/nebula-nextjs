@@ -28,6 +28,9 @@
 | Roast-tone gimmick | Cruelx 1–5 savage OBSERVED | Tone theater. Specific failed conditions beat "savage" |
 | Agency white-label before 1 sale | Cruelx / Unbounce agency | Premature expansion |
 | Paid acquisition into an unconverted funnel | Category default | OS rule. Ledger: 0 purchases |
+| Stale analyzer URL that 301s to homepage | Unbounce `/landing-page-analyzer/` OBSERVED 2026-08-20 | Dead tool still linked from toolkit/content |
+| Email wall after the URL scan | VWO UX Audit OBSERVED | "Enter your email to receive the detailed report." Second teaser. Ahrefs pattern is opposite: email delivers the same report |
+| $249 content audit as the first SKU | Crazy Egg OBSERVED | Too slow/expensive for zero-conversion founders. Nebula $97 must stay faster and cheaper, not climb to agency pricing before a sale |
 
 ---
 

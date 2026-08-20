@@ -107,6 +107,26 @@ Recurring enough to use as differentiation vectors:
 
 ---
 
+## Addendum: Capterra quotes (OBSERVED 2026-08-20)
+
+Reddit and Trustpilot bodies were CAPTCHA-blocked. Capterra extracts:
+
+**Price hikes / caps (strongest recurring pattern):**
+
+Unbounce, Dennis S., 1.0, 29 Jul 2025, https://www.capterra.com/p/145639/Unbounce/reviews/
+
+> Our subscription cost increased by an astonishing 415% in less than a year, with no added value to justify the hike. Even more concerning, they introduced new usage caps—previously nonexistent—and imposed a monthly penalty of 30% of the total annual subscription for exceeding these limits.
+
+One severe review is not a market. Combined with Unbounce overage FAQ (OBSERVED) and VWO Geoffrey J. (Capterra, 24 Jan 2022): "$49/months a few years ago... now you can't do anything for less than $299/month." Direction is recurring: **usage meters punish success.**
+
+**Data without a ranked next action:** Crazy Egg and Hotjar reviews cluster on "show recordings, don't tell me what to fix." That is Nebula's leftover-conditions wedge.
+
+**Fibr G2:** child reported "no longer valid." Parent earlier extracted `https://www.g2.com/products/fibr-ai/reviews` at 4.6/134. Treat Fibr review volume as **UNSTABLE**. Do not cite Fibr G2 as durable proof.
+
+Attention Insight G2: 4.8/5, 31 reviews, all Small Business (child extract). Small-n.
+
+---
+
 ## What this does **not** prove
 
 - That Unbounce customers would buy a $97 audit

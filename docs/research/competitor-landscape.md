@@ -189,6 +189,39 @@ Flint and AdAmigo are **lead magnets for other products**, not CRO diagnostic co
 
 ---
 
+## Addendum 2026-08-20 (delegation + re-fetch)
+
+Direct-competitor subagent failed (timeout). Adjacent, best-in-class, and review agents produced files under `/tmp/nebula-comp-intel/`. Parent re-fetched the new SKUs.
+
+### Crazy Egg Audit (`https://www.crazyegg.com/audit`) — OBSERVED
+
+Closest **diagnose-then-fix** ladder in the adjacent set, not a SaaS meter:
+
+| SKU | Price | What is sold |
+|---|---|---|
+| Page Content Audit | $249/page | 5 ranked improvements, 48h, no follow-up pitch |
+| Content + Behavioral | $749/page starting | 2 weeks of their heatmaps, 8–12 changes, **your team implements** |
+| + New Design | $2,500/page starting | They design a shippable page |
+| Enterprise | Let's talk | Custom |
+
+Hero: "Send the URL. We'll send back 3 specific things to fix. No commitment." Self-proof on their own analytics page: 55.7% → 80.6% CVR, +45% from 8 changes, with view/signup counts. Class: **PLAUSIBLE BUT UNVERIFIED** (first-party test, n is small: 176 vs 124 views).
+
+Nebula $97 sits **below** Crazy Egg's diagnosis SKU. Only coherent if leftover conditions are real and fulfillment is a sprint, not a $249 PDF.
+
+### Unbounce Landing Page Analyzer — OBSERVED dead
+
+`https://unbounce.com/landing-page-analyzer/` now renders the homepage ("Launch faster. Convert more."). Toolkit still advertised the analyzer. **DO NOT COPY** stale tool URLs.
+
+### VWO Website UX Audit — OBSERVED
+
+`https://vwo.com/tools/website-ux-audit/`: URL-in, no login to start, severity ranks, click-to-highlight on the live page, then **email wall** ("Enter your email to receive the detailed report"). Upsell is 30-day trial / demo. Transfer the highlight-on-page mechanic. Reject the second teaser wall.
+
+### Grammarly / Ahrefs / Semrush (from best-in-class file)
+
+Transfer: diagnose in public, withhold the fix; ungated taste vs gated depth; same-page checkout with context; email delivers the **same** report, not a second tease. Do not copy seats, crawl credits, or $20k research retainers.
+
+---
+
 ## Companies considered and not used as primary
 
 | Name | Reason |

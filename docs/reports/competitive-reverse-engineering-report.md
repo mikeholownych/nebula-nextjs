@@ -158,6 +158,16 @@ Live baseline 2026-08-20 (production): views 733, starts 66 (9.0%), purchases 0.
 
 ---
 
+## Addendum (delegation 2026-08-20)
+
+Direct-competitor child **failed** (timeout). Do not treat `/tmp/nebula-comp-intel/direct-competitors.md` as a source (missing).
+
+Verified adds: Crazy Egg Audit $249/$749/$2,500; Unbounce analyzer dead; VWO UX audit email wall; Capterra Unbounce 415% hike quote; Grammarly/Ahrefs leftover-depth mechanisms. Parent re-fetched Crazy Egg, VWO UX audit, Unbounce analyzer.
+
+Closest paid analog is now Crazy Egg's page audit (implementation ladder), not Unbounce's builder.
+
+---
+
 ## Proof boundary
 
 **Proves:** public competitor mechanisms, SERP occupancy, Nebula ledger counts, hero was uninstrumented.
