@@ -419,6 +419,43 @@ def get_audit(audit_id: str) -> str:
         return f"Could not retrieve audit: {e}"
 
 
+@mcp.tool()
+def get_fix_instructions(target: str) -> str:
+    """
+    Retrieve direct, actionable conversion and SEO fix instructions for autonomous AI coding agents.
+
+    Accepts either a public URL (e.g. 'https://example.com') or an audit UUID.
+    Returns prioritized conversion leaks, exact target DOM selectors, measured vs required evidence,
+    remediation steps, and suggested replacement code snippets.
+
+    Args:
+        target: Target URL or audit UUID to get fix directives for.
+    """
+    try:
+        denied = _auth_check("get_fix_instructions")
+        if denied:
+            return f"⛔ {denied}"
+
+        import urllib.request, urllib.parse
+        target_param = target.strip()
+
+        if "/" not in target_param and len(target_param) >= 20:
+            api_url = f"http://127.0.0.1:3000/api/v1/fixes/{target_param}?format=md"
+        else:
+            api_url = f"http://127.0.0.1:3000/api/v1/fixes?url={urllib.parse.quote(target_param)}&format=md"
+
+        raw_key = os.environ.get("NEBULA_API_KEY", "").strip()
+        headers = {"Accept": "text/markdown"}
+        if raw_key:
+            headers["Authorization"] = f"Bearer {raw_key}"
+
+        req = urllib.request.Request(api_url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return resp.read().decode("utf-8")
+    except Exception as e:
+        return f"Failed to get fix instructions for {target}: {e}"
+
+
 # ── Entry point ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
