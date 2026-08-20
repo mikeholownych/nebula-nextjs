@@ -78,13 +78,6 @@ export default function RootLayout({
         <Suspense fallback={<meta property="og:url" content="https://nebulacomponents.com/" />}>
           <OgUrl />
         </Suspense>
-        {/* Supply a complete image set even when child metadata overrides the
-            root Open Graph object. */}
-        <meta property="og:image" content={brandAbsolute(brand.assets.ogDefault)} />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Nebula Components - inspect failed page conditions before spending more on ads" />
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
 
