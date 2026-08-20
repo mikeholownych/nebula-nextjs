@@ -69,6 +69,25 @@ const breadcrumbSchema = {
   ],
 }
 
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Nebula Components Press Kit - Conversion Diagnostics Research',
+  description:
+    'Editorial press kit for Nebula Components with governed conversion-diagnostics research, approved boilerplate, founder facts, and downloadable brand assets.',
+  url: 'https://nebulacomponents.com/press',
+  datePublished: '2026-08-01',
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: 'https://nebulacomponents.com/press/scorecard-example.png',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nebula Components',
+    url: 'https://nebulacomponents.com',
+  },
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function PressPage() {
@@ -77,6 +96,10 @@ export default function PressPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
       {/* ─── Hero ──────────────────────────────────────────────────── */}
       <section className="relative py-24 sm:py-32 px-6 overflow-hidden" aria-labelledby="press-hero-title">
