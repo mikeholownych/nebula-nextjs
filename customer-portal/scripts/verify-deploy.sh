@@ -19,6 +19,9 @@ ROUTES=(
   "/case-studies"
   "/company/about"
   "/company/team"
+  "/audit/compare"
+  "/vs/fixroast"
+  "/compare/fixroast"
   "/sitemap.xml"
   "/robots.txt"
 )
