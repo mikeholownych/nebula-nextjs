@@ -72,7 +72,7 @@ const breadcrumbSchema = {
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Nebula Components Press Kit - Conversion Diagnostics Research',
+  name: 'Nebula Components Press Kit - Conversion Diagnostics',
   description:
     'Editorial press kit for Nebula Components with governed conversion-diagnostics research, approved boilerplate, founder facts, and downloadable brand assets.',
   url: 'https://nebulacomponents.com/press',
