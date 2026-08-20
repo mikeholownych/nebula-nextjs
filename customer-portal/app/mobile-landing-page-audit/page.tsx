@@ -3,16 +3,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Mobile Landing Page Audit: CTA Visibility, 44px Tap Targets & Viewport Failures for Meta and TikTok Traffic | Nebula',
+  title: 'Mobile Landing Page Audit: Fix Mobile Ad Leaks | Nebula',
   description:
-    'When 60–80% of your paid ad clicks land on mobile and conversion rates lag desktop, the cause is specific and observable: CTA not visible at 375px, tap targets under 44px, missing viewport meta, desktop-resolution images, and font sizes triggering iOS zoom. This guide covers each failure with evidence and a fix.',
+    'When 60-80% of your paid ad clicks land on mobile and conversion rates lag desktop, the cause is specific and observable: CTA not visible at 375px, tap targets under 44px, missing viewport meta, desktop-resolution images, and font sizes triggering iOS zoom. This guide covers each failure with evidence and a fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/mobile-landing-page-audit',
   },
   openGraph: {
-    title: 'Mobile Landing Page Audit: CTA Visibility, 44px Tap Targets & Viewport Failures for Meta and TikTok Traffic | Nebula',
+    title: 'Mobile Landing Page Audit: Fix Mobile Ad Leaks | Nebula',
     description:
-      'When 60–80% of your paid ad clicks land on mobile and conversion rates lag desktop, the cause is specific and observable: CTA not visible at 375px, tap targets under 44px, missing viewport meta, desktop-resolution images.',
+      'When 60-80% of your paid ad clicks land on mobile and conversion rates lag desktop, the cause is specific and observable: CTA not visible at 375px, tap targets under 44px, missing viewport meta, desktop-resolution images.',
     url: 'https://nebulacomponents.com/mobile-landing-page-audit',
     siteName: 'Nebula Components',
     type: 'article',

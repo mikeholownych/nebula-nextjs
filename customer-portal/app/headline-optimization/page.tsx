@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Headline Optimization: Fix H1s That Lose Cold Traffic in 3 Seconds | Nebula',
+  title: 'Headline Optimization Guide: Fix High-Bounce H1s | Nebula',
   description:
     'Most landing page headlines describe the product instead of the outcome. Six repeatable failures - product name as H1, category jargon, no ICP signal, ad mismatch, over-length, vague benefit - each with a bounded fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/headline-optimization',
   },
   openGraph: {
-    title: 'Landing Page Headline Optimization: Fix H1s That Lose Cold Traffic in 3 Seconds | Nebula',
+    title: 'Headline Optimization Guide: Fix High-Bounce H1s | Nebula',
     description:
       'Most landing page headlines describe the product instead of the outcome. Six repeatable failures with bounded fixes.',
     url: 'https://nebulacomponents.com/headline-optimization',

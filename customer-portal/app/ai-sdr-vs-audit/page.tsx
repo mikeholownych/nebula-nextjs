@@ -2,11 +2,32 @@ import RelatedContent from '@/components/RelatedContent'
 import type { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
-
 export const metadata: Metadata = {
-  title: "You Don't Need an AI SDR - Fix Your Landing Page First | Nebula Components",
-  description: "Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 9 conversion signals.",
+  title: 'Why Audit Your Landing Page Before an AI SDR | Nebula',
+  description: 'Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 9 conversion signals.',
   alternates: { canonical: 'https://nebulacomponents.com/ai-sdr-vs-audit' },
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.com' },
+    { '@type': 'ListItem', position: 2, name: 'AI SDR vs Landing Page Audit', item: 'https://nebulacomponents.com/ai-sdr-vs-audit' },
+  ],
+}
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Why Audit Your Landing Page Before an AI SDR',
+  description: 'Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 9 conversion signals.',
+  url: 'https://nebulacomponents.com/ai-sdr-vs-audit',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nebula Components',
+    url: 'https://nebulacomponents.com',
+  },
 }
 
 export default function AiSdrVsAuditPage() {
@@ -15,6 +36,14 @@ export default function AiSdrVsAuditPage() {
 
   return (
     <div className="min-h-screen bg-bg text-fg font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       {/* Hero */}
       <section className="bg-bg border-b border-border py-20 px-6">
         <div className="max-w-[720px] mx-auto text-center">
@@ -28,7 +57,7 @@ export default function AiSdrVsAuditPage() {
           </p>
 
           <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-r-lg text-left mb-8">
-            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ({fixPackPrice ? `$0–${fixPackPrice}` : '$0; no paid offer is currently verified'}). More outbound volume cannot resolve an unverified landing-page baseline.
+            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k-$25k/year), audit your landing page first ({fixPackPrice ? `$0-${fixPackPrice}` : '$0; no paid offer is currently verified'}). More outbound volume cannot resolve an unverified landing-page baseline.
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">

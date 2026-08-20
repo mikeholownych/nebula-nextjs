@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Best Landing Page Audit Tools (2026): 8 Compared for Paid-Traffic Founders',
+  title: '8 Best Landing Page Audit Tools in 2026 Compared | Nebula',
   description:
     'We compared 8 landing page audit tools for founders running paid traffic - Nebula, PageSpeed Insights, Hotjar, Crazy Egg, SEMrush Site Audit, Screaming Frog, HubSpot Website Grader, and Unbounce. One tool checks conversion leaks; the others check adjacent problems. Here is the honest breakdown, with pricing.',
   alternates: {
     canonical: 'https://nebulacomponents.com/best-landing-page-audit-tools',
   },
   openGraph: {
-    title: 'Best Landing Page Audit Tools (2026): 8 Compared for Paid-Traffic Founders',
+    title: '8 Best Landing Page Audit Tools in 2026 Compared | Nebula',
     description:
       'Honest comparison of 8 landing page audit tools for founders spending on ads. Pricing, what each one actually checks, and which one finds conversion leaks.',
     url: 'https://nebulacomponents.com/best-landing-page-audit-tools',

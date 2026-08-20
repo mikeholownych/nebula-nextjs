@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Ecommerce Landing Page Audit: H1 Clarity, Price Visibility & CTA Focus for Product Pages | Nebula',
+  title: 'Ecommerce Landing Page Audit: Fix Product Page Leaks | Nebula',
   description:
     'DTC product pages receiving paid Meta and Google traffic fail for specific, observable reasons: product-name H1s, price buried below fold, CTA competing with wishlist, no social proof adjacent to buy button. This guide covers each failure with evidence and a bounded fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/ecommerce-landing-page-audit',
   },
   openGraph: {
-    title: 'Ecommerce Landing Page Audit: H1 Clarity, Price Visibility & CTA Focus for Product Pages | Nebula',
+    title: 'Ecommerce Landing Page Audit: Fix Product Page Leaks | Nebula',
     description:
       'DTC product pages receiving paid Meta and Google traffic fail for specific, observable reasons: product-name H1s, price buried below fold, CTA competing with wishlist, no social proof adjacent to buy button.',
     url: 'https://nebulacomponents.com/ecommerce-landing-page-audit',

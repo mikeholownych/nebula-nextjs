@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Page Speed and Conversion: How Load Time Hurts Landing Page Performance | Nebula',
+  title: 'Page Speed & Conversion: Fix Slow Landing Pages | Nebula',
   description:
     'Page speed failures reduce landing page conversion before the visitor reaches the CTA. LCP over 2.5s, 400KB+ HTML payloads, render-blocking JavaScript, oversized images, and Cumulative Layout Shift each reduce conversion independently. This guide covers every failure with the signal and the fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/page-speed-conversion',
   },
   openGraph: {
-    title: 'Page Speed and Conversion: How Load Time Hurts Landing Page Performance | Nebula',
+    title: 'Page Speed & Conversion: Fix Slow Landing Pages | Nebula',
     description:
       'Page speed failures reduce landing page conversion before the visitor reaches the CTA. LCP over 2.5s, 400KB+ HTML payloads, render-blocking JavaScript, oversized images, and Cumulative Layout Shift each reduce conversion independently.',
     url: 'https://nebulacomponents.com/page-speed-conversion',

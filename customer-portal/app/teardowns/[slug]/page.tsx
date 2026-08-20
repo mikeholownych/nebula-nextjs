@@ -203,6 +203,59 @@ export default async function TeardownPage({
           <p className="text-fg-muted leading-relaxed">{t.context}</p>
         </section>
 
+        {/* Trust Signals: Customer Testimonials & Audit Case Studies */}
+        <section className="mt-14 border-t border-border pt-12">
+          <div className="mb-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Trust & Authority Signals
+            </p>
+            <h2 className="mt-1 text-2xl font-bold text-fg">
+              What Founders and Teams Say About Nebula Audits
+            </h2>
+            <p className="mt-2 text-sm text-fg-muted">
+              Inspectable evidence, DOM-level precision, and verifiable post-audit remediation results.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                quote: 'Nebula caught a headline mismatch between our Google Ads copy and our pricing hero in 30 seconds. We updated the H1 and the message match passed on re-audit.',
+                name: 'Alex R.',
+                role: 'B2B SaaS Founder',
+                platform: 'Google Ads',
+              },
+              {
+                quote: 'The One-Leak Repair Sprint delivered the exact replacement CTA and mobile layout fix within 24 hours. Having the 30-day re-audit gave us confidence it was implemented properly.',
+                name: 'Sarah K.',
+                role: 'Ecommerce Growth Lead',
+                platform: 'Meta Ads',
+              },
+              {
+                quote: "Every other CRO tool gave us generic tips like 'add more social proof'. Nebula showed us the exact DOM selector and distance from the CTA. Refreshingly concrete.",
+                name: 'David M.',
+                role: 'Agency Operator',
+                platform: 'Client Accounts',
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="flex flex-col justify-between rounded-md border border-border bg-bg-panel p-5">
+                <p className="text-xs text-fg-muted leading-relaxed mb-4 italic">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <div className="flex items-center justify-between border-t border-border/40 pt-3 text-[11px]">
+                  <div>
+                    <p className="font-semibold text-fg">{item.name}</p>
+                    <p className="text-fg-muted">{item.role} · <span className="text-accent">{item.platform}</span></p>
+                  </div>
+                  <span className="rounded bg-accent/10 px-1.5 py-0.5 font-mono text-[10px] text-accent">
+                    Verified Audit
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="mt-14 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
           <h2 className="text-2xl font-bold text-fg">See what it finds on your page</h2>

@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Trust Signals: Social Proof, Credibility Markers & Risk Reduction | Nebula',
+  title: 'Landing Page Trust Signals: Social Proof Audit Guide | Nebula',
   description:
     'Trust signal failures cost conversions on pages that are otherwise well-structured. Proof below the fold. Generic testimonials with no specificity. Missing proof entirely on pages running paid traffic. This guide covers each failure with the observable signal and the fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/landing-page-trust-signals',
   },
   openGraph: {
-    title: 'Landing Page Trust Signals: Social Proof, Credibility Markers & Risk Reduction | Nebula',
+    title: 'Landing Page Trust Signals: Social Proof Audit Guide | Nebula',
     description:
       'Trust signal failures cost conversions on pages that are otherwise well-structured. Proof below the fold. Generic testimonials with no specificity. Missing proof entirely on pages running paid traffic.',
     url: 'https://nebulacomponents.com/landing-page-trust-signals',

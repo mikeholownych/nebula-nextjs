@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Landing Page CTA Audit: Label Clarity, Placement, Contrast & Hierarchy | Nebula',
+  title: 'Landing Page CTA Audit: Placement & Contrast Guide | Nebula',
   description:
     'Landing page CTAs fail for specific, observable reasons: generic labels with no outcome, multiple CTAs at equal visual weight, below-fold placement, and contrast ratios that fail WCAG AA. This guide covers each failure with the signal, the finding, and the fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/landing-page-cta-audit',
   },
   openGraph: {
-    title: 'Landing Page CTA Audit: Label Clarity, Placement, Contrast & Hierarchy | Nebula',
+    title: 'Landing Page CTA Audit: Placement & Contrast Guide | Nebula',
     description:
       'Landing page CTAs fail for specific, observable reasons: generic labels with no outcome, multiple CTAs at equal visual weight, below-fold placement, and contrast ratios that fail WCAG AA.',
     url: 'https://nebulacomponents.com/landing-page-cta-audit',

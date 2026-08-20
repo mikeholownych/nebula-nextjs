@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Mobile Landing Page Optimization: 6 Conversion Failures and How to Fix Them | Nebula',
+  title: 'Mobile Landing Page Optimization: Fix 6 Leaks | Nebula',
   description:
     'Most mobile landing page failures are structural - CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable. This guide covers all six with pass/fail evidence.',
   alternates: { canonical: 'https://nebulacomponents.com/mobile-landing-page-optimization' },
   openGraph: {
-    title: 'Mobile Landing Page Optimization: 6 Conversion Failures and How to Fix Them | Nebula',
+    title: 'Mobile Landing Page Optimization: Fix 6 Leaks | Nebula',
     description:
       'Most mobile landing page failures are structural - CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable.',
     url: 'https://nebulacomponents.com/mobile-landing-page-optimization',

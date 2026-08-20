@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'SaaS Landing Page Audit: Demo Friction, ICP Clarity & Trial Conversion | Nebula',
+  title: 'SaaS Landing Page Audit: Fix Trial & Demo Leaks | Nebula',
   description:
     'B2B SaaS landing pages fail for specific reasons: feature jargon where the ICP statement should be, demo CTAs on self-serve products, and no product UI above the fold. This guide covers each failure with observable evidence and a fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/saas-landing-page-audit',
   },
   openGraph: {
-    title: 'SaaS Landing Page Audit: Demo Friction, ICP Clarity & Trial Conversion | Nebula',
+    title: 'SaaS Landing Page Audit: Fix Trial & Demo Leaks | Nebula',
     description:
       'B2B SaaS landing pages fail for specific reasons: feature jargon where the ICP statement should be, demo CTAs on self-serve products, and no product UI above the fold.',
     url: 'https://nebulacomponents.com/saas-landing-page-audit',

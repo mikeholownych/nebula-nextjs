@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Message Match: Ad-to-Page Alignment and Quality Score | Nebula',
+  title: 'Landing Page Message Match: Boost Ad Quality Score | Nebula',
   description:
     'Message match failures waste correctly targeted clicks. Ad targets a keyword, landing page headline ignores it. Ad promises a free tool, page leads with pricing. Ad addresses one ICP, page speaks to a different audience. This guide covers each mismatch pattern with the signal and the fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/landing-page-message-match',
   },
   openGraph: {
-    title: 'Landing Page Message Match: Ad-to-Page Alignment and Quality Score | Nebula',
+    title: 'Landing Page Message Match: Boost Ad Quality Score | Nebula',
     description:
       'Message match failures waste correctly targeted clicks. Ad targets a keyword, landing page headline ignores it. Ad promises a free tool, page leads with pricing. Ad addresses one ICP, page speaks to a different audience.',
     url: 'https://nebulacomponents.com/landing-page-message-match',

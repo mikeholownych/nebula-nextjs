@@ -5,14 +5,14 @@ import { PRICING_GUIDES, PRICING_GUIDE_SLUGS } from '../pricing-guides/data'
 const PRICING_GUIDE_LIST = PRICING_GUIDE_SLUGS.map((slug) => PRICING_GUIDES[slug])
 
 export const metadata: Metadata = {
-  title: 'Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost',
+  title: 'Landing Page Audit Tool Pricing (2026 Guide) | Nebula',
   description:
     'The real, verified pricing of 8 landing page audit tools - Nebula, Unbounce, Hotjar, Crazy Egg, SEMrush, Screaming Frog, HubSpot Website Grader, PageSpeed Insights - compared head-to-head, with the honest alternative.',
   alternates: {
     canonical: 'https://nebulacomponents.com/landing-page-audit-tools-pricing',
   },
   openGraph: {
-    title: 'Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost',
+    title: 'Landing Page Audit Tool Pricing (2026 Guide) | Nebula',
     description:
       'Verified pricing for 8 landing page audit tools, compared head-to-head. Free options, subscription traps, and the honest alternative.',
     url: 'https://nebulacomponents.com/landing-page-audit-tools-pricing',
