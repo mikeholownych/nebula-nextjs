@@ -113,7 +113,7 @@ export default function Home() {
                   <SignalIcon signalKey={s.key} className="mb-3 h-6 w-6 text-accent" />
                   <p className="mb-2 font-semibold text-fg">{s.label}</p>
                   <p className="text-sm text-fg-muted leading-6">{s.desc}</p>
-                  <p className="mt-3 border-t border-border/40 pt-3 text-xs text-fg-dim leading-5">
+                  <p className="mt-3 border-t border-border/40 pt-3 text-xs text-fg-muted leading-5">
                     Check: {s.pass}
                   </p>
                 </div>
@@ -145,7 +145,7 @@ export default function Home() {
                     <p className="text-sm text-fg-muted leading-7">
                       {t.summary.replace(/Score: \d+(?:\.\d+)?\/10, Grade [A-F]\.\s*/g, '')}
                     </p>
-                    <p className="mt-4 text-xs text-fg-dim font-mono">
+                    <p className="mt-4 text-xs text-fg-muted font-mono">
                       {t.findings.length} findings documented
                     </p>
                     <p className="mt-5 text-sm font-semibold text-accent group-hover:text-fg transition-colors">

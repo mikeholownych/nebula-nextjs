@@ -45,7 +45,7 @@ html[data-cookie-consent="given"] #cookie-consent-banner {
   --bg-surface:    #191c1a;
   --fg:            #e8ebe7;
   --fg-muted:      #7a8078;
-  --fg-dim:        #525750;
+  --fg-dim:        #8b9489;
   --accent:        #c7ff2f;
   --accent-dim:    rgba(199, 255, 47, 0.10);
   --accent-mid:    rgba(199, 255, 47, 0.20);
@@ -179,7 +179,7 @@ header nav a:focus-visible {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 800;
   line-height: 1.06;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.035em;
   color: var(--fg);
 }
 .heading-1 {
