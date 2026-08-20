@@ -284,7 +284,62 @@ export const comparisons: Comparison[] = [
       },
     ],
   },
+  {
+    slug: 'fixroast',
+    toolName: 'FixRoast',
+    toolUrl: 'https://fixroast.com',
+    category: 'AI website roast & search optimization',
+    shortDescription:
+      'AI landing page roaster and search scoring vs. deterministic DOM conversion leak inspection.',
+    intro:
+      'FixRoast is an AI-powered website roaster that evaluates pages across conversion, speed, and AEO/GEO search visibility using LLM evaluation. Nebula Components provides deterministic HTML inspection, ad-to-page message match analysis, and the $97 One-Leak Repair Sprint.',
+    whatItDoesWell: [
+      'Memetic, engaging roast format for rapid qualitative feedback',
+      'AI Search scoring (AEO/GEO) and LLM citation simulation',
+      'Flexible pricing with micro-credit packs ($5-$25) and subscriptions',
+      'Google PageSpeed integration for Core Web Vitals',
+    ],
+    whereItStops: [
+      'Relies on probabilistic LLM evaluation which can hallucinate or misclassify business models.',
+      'Does not check ad-to-page message match (Google/Meta/LinkedIn ad copy alignment).',
+      'No human implementation guarantee or verified 30-day re-audit service.',
+      'Closed-source black box engine without inspectable rules or local CLI.',
+    ],
+    nebulaFit: [
+      'Deterministic DOM inspection powered by open-source Citable CLI (123 detectors, Apache 2.0).',
+      'Deep ad campaign analysis: message match, UTM survival, and paid traffic bounce leaks.',
+      '$97 One-Leak Repair Sprint: human-guaranteed copy/code replacement within 48h and 30-day re-audit.',
+      'WebMCP agentic integration: native tool execution for AI coding agents.',
+    ],
+    table: [
+      { dimension: 'Diagnostic engine', tool: 'Probabilistic LLM evaluation', nebula: 'Deterministic DOM inspection (123 detectors)' },
+      { dimension: 'Ad message match', tool: 'Not checked (page in isolation)', nebula: 'Yes - ad headline, keywords & UTM validation' },
+      { dimension: 'Evidence standard', tool: 'Generated AI commentary', nebula: 'Raw HTML selectors, distances & load metrics' },
+      { dimension: 'Engine transparency', tool: 'Closed proprietary AI wrapper', nebula: 'Open-source Citable CLI (Apache 2.0)' },
+      { dimension: 'Implementation', tool: 'Automated copy rewrites', nebula: '$97 One-Leak Repair Sprint + 30-day re-audit' },
+      { dimension: 'Price', tool: 'Credit packs ($5-$25); SaaS ($12-$79/mo)', nebula: 'Free audit; $97 one-time repair sprint' },
+    ],
+    useBoth:
+      'Use FixRoast for creative headline brainstorming and checking LLM search visibility scores. Use Nebula on your live landing page to verify that the technical mechanics, ad message match, CTA visibility, and proof elements actually conform to conversion standards.',
+    verdict:
+      'FixRoast generates AI feedback and roasts. Nebula measures observable HTML conditions and fixes paid traffic leaks. For advertisers spending real ad budget, deterministic diagnosis and verified repair sprints deliver the highest ROI.',
+    faqs: [
+      {
+        q: 'How does Nebula differ from FixRoast?',
+        a: 'FixRoast uses LLM prompts to generate subjective feedback and "roasts" of a webpage. Nebula uses deterministic HTML inspection to check observable failure conditions (message match, CTA positioning, trust proximity, mobile viewport leaks) with exact DOM selectors and measured evidence.',
+      },
+      {
+        q: 'Why is deterministic inspection important for landing page CRO?',
+        a: 'LLM-only roasters can hallucinate or misclassify page categories. Deterministic DOM inspection tests the exact code your visitors and ad crawlers interact with, ensuring every finding is reproducible and actionable.',
+      },
+      {
+        q: 'Can I use both Nebula and FixRoast?',
+        a: 'Yes. You can use FixRoast for creative headline brainstorming and AEO search score checks, and Nebula for verifiable, technical conversion leak detection and guaranteed single-leak implementation.',
+      },
+    ],
+  },
 ]
 
 export const getComparison = (slug: string): Comparison | undefined =>
   comparisons.find((c) => c.slug === slug)
+

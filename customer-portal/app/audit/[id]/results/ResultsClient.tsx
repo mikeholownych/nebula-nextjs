@@ -9,6 +9,8 @@ import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
 import RewritePreview from './RewritePreview'
+import JsonLdGeneratorModal from '@/app/components/JsonLdGeneratorModal'
+import AiAgentFixPromptModal from '@/app/components/AiAgentFixPromptModal'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import {
   REPORT_NAVIGATION,
@@ -913,8 +915,9 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   return (
     <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-5xl">
-        {unlocked && !sharedView && (
-          <div className="mb-4 flex justify-end">
+        <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
+          <AiAgentFixPromptModal results={results} />
+          {unlocked && !sharedView && (
             <a
               href={`/api/report/pdf?audit_id=${encodeURIComponent(auditId)}`}
               download
@@ -922,8 +925,8 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             >
               <span>↓</span> Download PDF
             </a>
-          </div>
-        )}
+          )}
+        </div>
         <ReportTabs active={activeTab} onSelect={setActiveTab} />
 
         {activeTab === 'overview' && (
@@ -1109,6 +1112,17 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                       findingKey={finding.key}
                       findingCount={results.findings.length}
                     />
+
+                    {/* Instant JSON-LD Schema Generator - shown for AI Readiness & SEO findings */}
+                    {(finding.key === 'ai_readiness' || finding.key === 'seo_foundations') && (
+                      <div className="mt-4">
+                        <JsonLdGeneratorModal
+                          initialType={finding.key === 'ai_readiness' ? 'FAQPage' : 'SoftwareApplication'}
+                          pageUrl={results.url}
+                          className="border-accent/20 bg-accent/5"
+                        />
+                      </div>
+                    )}
 
                     {/* Evidence block - shown when audit engine provides measurement data */}
                     {finding.evidence && (

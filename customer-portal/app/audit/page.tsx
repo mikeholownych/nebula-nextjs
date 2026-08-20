@@ -4,6 +4,7 @@ import { auditWebApplicationSchema, createHowToSchema } from '@/app/lib/schema'
 import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 import HonestyGrid from '@/app/components/HonestyGrid'
+import AskAiCitability from '@/app/components/AskAiCitability'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
@@ -405,6 +406,12 @@ export default async function AuditPage() {
                 Run the free audit first &rarr;
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className="border-t border-border px-6 py-12">
+          <div className="mx-auto max-w-3xl">
+            <AskAiCitability />
           </div>
         </section>
 

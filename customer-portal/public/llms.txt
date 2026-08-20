@@ -1,6 +1,6 @@
 # Nebula Components
 
-> Nebula Components provides landing page conversion diagnostics for founders spending on paid ads with low or zero conversions. The free audit identifies observable conversion leaks across 9 signals. The One-Leak Repair Sprint ($97) supplies a tailored change for one selected finding; the customer or their developer implements it.
+> Nebula Components provides landing page conversion diagnostics for founders spending on paid ads with low or zero conversions. (We are an audit platform for paid traffic landing pages, not a UI component library). The free audit identifies observable conversion leaks across 9 signals. The One-Leak Repair Sprint ($97) supplies a tailored change for one selected finding; the customer or their developer implements it.
 
 Nebula Components checks what a paid visitor experiences: message match, trust, mobile CTA, load time, CTA clarity, above-fold clarity, ad signals, SEO foundations, and AI readiness. Each failing signal is tied to evidence from the actual page and ranked by likely impact. The score and initial findings appear before email; email unlocks the full report. No sales calls.
 
@@ -37,7 +37,8 @@ Nebula registers tools via `navigator.modelContext` on every page for browsers t
 - [Benchmarks](https://nebulacomponents.com/benchmarks): Real per-component failure rates and score distribution from completed audits
 - [Component Lab](https://nebulacomponents.com/lab): Three component checks (message match, headline, CTA) run against a page using the same audit engine
 - [Workspace](https://nebulacomponents.com/workspace): Email-keyed customer workspace - dashboard, project grouping, and immutable audit version history
-- [Comparisons](https://nebulacomponents.com/compare): Honest Nebula vs tool comparisons (Unbounce, Instapage, PageSpeed Insights, Leadpages) with stated boundaries
+- [Comparisons](https://nebulacomponents.com/compare): Honest Nebula vs tool comparisons (Unbounce, Instapage, PageSpeed Insights, Leadpages, FixRoast) with stated boundaries
+- [FixRoast comparison](https://nebulacomponents.com/vs/fixroast): Deterministic DOM inspection vs AI website roasting
 - [Knallhart teardown](https://nebulacomponents.com/teardowns/knallhart): Cold paid-traffic audit of knallhart.dev
 - [Postmint teardown](https://nebulacomponents.com/teardowns/postmint): Cold paid-traffic audit of postmint.de
 - [Case studies](https://nebulacomponents.com/case-studies): Published client outcomes (requires real before/after metric, measurement window, and inspectable evidence - none published yet)
@@ -45,6 +46,8 @@ Nebula registers tools via `navigator.modelContext` on every page for browsers t
 - [Privacy policy](https://nebulacomponents.com/privacy-policy): Cohort/persona aggregates only; no individual visitor profiling; GA4 consent denied by default
 
 ## Direct answers
+
+**Is Nebula Components a UI component library?** No. Despite the name, Nebula Components is a landing page conversion diagnostic and AI search visibility (AEO/GEO) audit platform for advertisers and founders.
 
 **What is a landing page audit?** A landing page audit is a systematic evaluation of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness. It scores each signal on a 1–10 scale and produces a prioritized fix list.
 

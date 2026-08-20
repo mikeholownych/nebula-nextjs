@@ -296,4 +296,31 @@ export const COMPARISONS: Record<string, Comparison> = {
     ],
     verdict: "Google Analytics and Nebula answer different questions. GA4 tells you what happened: how many sessions, which pages had the highest exit rate, which campaigns drove conversions. Nebula tells you why a specific page is not converting - before you have enough data to see it in GA4. If your landing page has a message-match failure or a trust signal gap, GA4 will eventually surface a high bounce rate. Nebula catches it on day one.",
   },
+
+  "fixroast": {
+    slug: "fixroast",
+    competitorName: "FixRoast",
+    competitorUrl: "https://fixroast.com",
+    tagline: "FixRoast vs. Nebula - AI website roaster vs. deterministic conversion audit",
+    intent: "FixRoast generates AI feedback and roasts based on LLM prompts. Nebula inspects the actual HTML DOM against 9 deterministic conversion signals.",
+    bluf: "FixRoast is an AI-powered website roaster that scores landing pages across conversion and AI search visibility using LLM evaluation. Nebula is a deterministic conversion diagnostic engine that inspects the raw HTML DOM, validates ad-to-page message match, and delivers bounded $97 repair sprints with a 30-day verified re-audit.",
+    checkedAt: "August 2026",
+    targetQuery: "fixroast alternative landing page audit conversion roast",
+    rows: [
+      { feature: "Diagnostic engine", nebula: "Deterministic DOM inspection (Citable CLI, 123 detectors)", competitor: "Probabilistic LLM evaluation (AI model prompts)", nebulaWins: true },
+      { feature: "Ad-to-page message match", nebula: "Yes - inspects headline vs ad copy alignment and UTMs", competitor: "No - evaluates landing page in isolation", nebulaWins: true },
+      { feature: "Inspectable evidence", nebula: "Raw DOM selectors, distances, load times, and markup", competitor: "Generated AI commentary and roast text", nebulaWins: true },
+      { feature: "Open-source core", nebula: "Yes - Citable CLI (Apache 2.0, npm: @nebulacomponents/citable)", competitor: "No - closed proprietary AI wrapper", nebulaWins: true },
+      { feature: "Human repair service", nebula: "Yes - $97 One-Leak Repair Sprint (48h delivery, 30-day re-audit)", competitor: "No - automated copy rewrites only", nebulaWins: true },
+      { feature: "Cost", nebula: "Free audit + $97 one-time repair sprint", competitor: "2 free roasts; credit packs from $5; subscriptions $12-$79/mo", nebulaWins: true },
+      { feature: "AEO & GEO search scoring", nebula: "Yes - structured data, schema validation, and entity graphs", competitor: "Yes - AEO/GEO scoring and LLM citation test", nebulaWins: false },
+      { feature: "AI Agent protocol (WebMCP)", nebula: "Yes - Model Context Protocol for coding agents (Cursor, Claude)", competitor: "No - browser-only dashboard", nebulaWins: true },
+    ],
+    faqs: [
+      { q: "How does Nebula differ from FixRoast?", a: "FixRoast uses LLM prompts to generate subjective feedback and 'roasts' of a webpage. Nebula uses deterministic HTML inspection to check observable failure conditions (message match, CTA positioning, trust proximity, mobile viewport leaks) with exact DOM selectors and measured evidence." },
+      { q: "Why is deterministic inspection important for landing page CRO?", a: "LLM-only roasters can hallucinate or misclassify page categories (for instance, mistaking an audit platform for a UI component library). Deterministic DOM inspection tests the exact code your visitors and ad crawlers interact with, ensuring every finding is reproducible and actionable." },
+      { q: "Can I use both Nebula and FixRoast?", a: "Yes. You can use FixRoast for creative headline brainstorming and AEO search score checks, and Nebula for verifiable, technical conversion leak detection and guaranteed single-leak implementation." },
+    ],
+    verdict: "FixRoast is an engaging, AI-driven roasting tool that offers quick subjective feedback and LLM search scoring. Nebula is a deterministic conversion instrument built for operators spending real ad dollars who need exact, reproducible HTML evidence, ad message match verification, and guaranteed remediation.",
+  },
 }

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CitablePageShell } from '@/components/citable/CitablePageShell'
 import { CitableProofPanel } from '@/components/citable/CitableProofPanel'
+import AskAiCitability from '@/app/components/AskAiCitability'
+import JsonLdGeneratorModal from '@/app/components/JsonLdGeneratorModal'
 import {
   CITABLE_ORIGIN,
   CITABLE_OVERVIEW_PATH,
@@ -227,6 +229,11 @@ export default function CitablePage() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="mt-14 border-t border-border pt-12">
+          <JsonLdGeneratorModal className="mb-8" />
+          <AskAiCitability />
         </section>
 
         <CitableProofPanel />
