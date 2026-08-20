@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -138,75 +139,83 @@ export default function ROICalculator() {
         </div>
 
         {/* Results */}
-        {hasEnoughData && (
-          <div className="mt-8 rounded-lg border border-border bg-bg-surface overflow-hidden">
-{isBelow ? (
-               <>
-                 {/* Main number - the gut punch */}
-                 <div className="bg-signal-fail/8 border-b border-signal-fail/20 p-6 text-center">
-                   <p className="text-xs font-semibold uppercase tracking-wider text-signal-fail mb-1">
-                     Estimated monthly ad spend gap vs. 2% baseline
-                   </p>
-                   <p className="text-5xl font-extrabold text-fg tracking-tight">
-                     {fmt(wastedMonthly)}
-                   </p>
-                   <p className="mt-1 text-sm text-fg-muted">
-                     That&apos;s {fmt(wastedAnnual)} this year if performance remains unchanged.
-                   </p>
-                 </div>
+        <AnimatePresence>
+          {hasEnoughData && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 rounded-lg border border-border bg-bg-surface overflow-hidden"
+            >
+              {isBelow ? (
+                <>
+                  {/* Main number - the gut punch */}
+                  <div className="bg-signal-fail/8 border-b border-signal-fail/20 p-6 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-signal-fail mb-1">
+                      Estimated monthly ad spend gap vs. 2% baseline
+                    </p>
+                    <p className="text-5xl font-extrabold text-fg tracking-tight font-mono tabular-nums">
+                      {fmt(wastedMonthly)}
+                    </p>
+                    <p className="mt-1 text-sm text-fg-muted">
+                      That&apos;s {fmt(wastedAnnual)} this year if performance remains unchanged.
+                    </p>
+                  </div>
 
-{/* Supporting math */}
-                 <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                   <div className="p-5 text-center">
-                     <p className="text-2xl font-bold text-fg">{monthlyClicks.toLocaleString()}</p>
-                     <p className="mt-0.5 text-xs text-fg-muted">clicks bought this month</p>
-                   </div>
-                   <div className="p-5 text-center">
-                     <p className="text-2xl font-bold text-fg">{missedConversions}</p>
-                     <p className="mt-0.5 text-xs text-fg-muted">conversions missed vs. 2% baseline</p>
-                   </div>
-                   <div className="p-5 text-center">
-                     <p className="text-2xl font-bold text-fg">{(currentCR * 100).toFixed(1)}% → 2%</p>
-                     <p className="mt-0.5 text-xs text-fg-muted">the gap the page would need to close to reach baseline</p>
-                   </div>
-                 </div>
-                 {/* Disclaimer */}
-                 <div className="p-4 text-center text-sm text-fg-muted">
-                   <p>Note: This calculation assumes a 2% baseline conversion rate for landing pages with paid traffic - a conservative industry benchmark. It estimates the potential opportunity cost if your page performed at this baseline, not actual revenue lost. Many factors affect conversion rate including audience quality, offer strength, and competition. The audit identifies specific, fixable page conditions that may contribute to performance gaps.</p>
-                 </div>
+                  {/* Supporting math */}
+                  <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+                    <div className="p-5 text-center">
+                      <p className="text-2xl font-bold text-fg font-mono tabular-nums">{monthlyClicks.toLocaleString()}</p>
+                      <p className="mt-0.5 text-xs text-fg-muted">clicks bought this month</p>
+                    </div>
+                    <div className="p-5 text-center">
+                      <p className="text-2xl font-bold text-fg font-mono tabular-nums">{missedConversions}</p>
+                      <p className="mt-0.5 text-xs text-fg-muted">conversions missed vs. 2% baseline</p>
+                    </div>
+                    <div className="p-5 text-center">
+                      <p className="text-2xl font-bold text-fg font-mono tabular-nums">{(currentCR * 100).toFixed(1)}% → 2%</p>
+                      <p className="mt-0.5 text-xs text-fg-muted">the gap the page would need to close to reach baseline</p>
+                    </div>
+                  </div>
+                  {/* Disclaimer */}
+                  <div className="p-4 text-center text-sm text-fg-muted">
+                    <p>Note: This calculation assumes a 2% baseline conversion rate for landing pages with paid traffic - a conservative industry benchmark. It estimates the potential opportunity cost if your page performed at this baseline, not actual revenue lost. Many factors affect conversion rate including audience quality, offer strength, and competition. The audit identifies specific, fixable page conditions that may contribute to performance gaps.</p>
+                  </div>
 
-                {/* CTA */}
-                <div className="border-t border-border p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <p className="text-sm text-fg-muted">
-                    Find exactly what&apos;s causing this - free, no signup, under 2 minutes.
+                  {/* CTA */}
+                  <div className="border-t border-border p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <p className="text-sm text-fg-muted">
+                      Find exactly what&apos;s causing this - free, no signup, under 2 minutes.
+                    </p>
+                    <Link
+                      href="/audit?utm_source=calculator&utm_medium=homepage"
+                      className="shrink-0 rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm whitespace-nowrap"
+                    >
+                      Show Me the Leak &rarr;
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                /* Already at or above baseline */
+                <div className="p-6 text-center">
+                  <p className="text-lg font-semibold text-fg">
+                    Your conversion rate is at or above the 2% baseline.
+                  </p>
+                  <p className="mt-1 text-sm text-fg-muted">
+                    Still worth auditing - most pages above 2% have at least one fixable signal holding them back from higher performance.
                   </p>
                   <Link
                     href="/audit?utm_source=calculator&utm_medium=homepage"
-                    className="shrink-0 rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm whitespace-nowrap"
+                    className="mt-4 inline-block rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
                   >
-                    Show Me the Leak &rarr;
+                    Find What&apos;s Still Leaking &rarr;
                   </Link>
                 </div>
-              </>
-            ) : (
-/* Already at or above baseline */
-             <div className="p-6 text-center">
-               <p className="text-lg font-semibold text-fg">
-                 Your conversion rate is at or above the 2% baseline.
-               </p>
-               <p className="mt-1 text-sm text-fg-muted">
-                 Still worth auditing - most pages above 2% have at least one fixable signal holding them back from higher performance.
-               </p>
-               <Link
-                 href="/audit?utm_source=calculator&utm_medium=homepage"
-                 className="mt-4 inline-block rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
-               >
-                 Find What&apos;s Still Leaking &rarr;
-               </Link>
-             </div>
-            )}
-          </div>
-        )}
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Empty state prompt */}
         {!hasEnoughData && touched && (

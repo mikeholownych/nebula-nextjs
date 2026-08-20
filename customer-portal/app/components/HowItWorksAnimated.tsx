@@ -63,28 +63,32 @@ export default function HowItWorksAnimated() {
                 {/* Progress bar */}
                 <div className="mb-4 h-0.5 w-full bg-border overflow-hidden rounded-full">
                   <div
-                    className="h-full bg-accent rounded-full transition-all duration-[3000ms] ease-linear"
-                    style={{ width: isActive && !paused ? '100%' : isActive ? '100%' : '0%',
-                             transitionDuration: isActive && !paused ? '3000ms' : '0ms' }}
+                    className="h-full bg-accent rounded-full origin-left transition-transform ease-linear"
+                    style={{
+                      transform: isActive && !paused ? 'scaleX(1)' : isActive ? 'scaleX(1)' : 'scaleX(0)',
+                      transitionDuration: isActive && !paused ? '3000ms' : '0ms',
+                    }}
                   />
                 </div>
 
                 <p className="mb-2 font-mono text-xs text-fg-muted">{step.n}</p>
 
                 <div className="mb-1 flex items-center gap-2">
-                  <span className={`text-lg transition-colors ${isActive ? 'text-accent' : 'text-fg-muted/40 group-hover:text-fg-muted'}`}>
+                  <span className={`text-lg transition-colors duration-200 ${isActive ? 'text-accent' : 'text-fg-dim group-hover:text-fg-muted'}`}>
                     {step.icon}
                   </span>
-                  <h3 className={`font-semibold transition-colors ${isActive ? 'text-fg' : 'text-fg-muted group-hover:text-fg'}`}>
+                  <h3 className={`font-semibold transition-colors duration-200 ${isActive ? 'text-fg' : 'text-fg-muted group-hover:text-fg'}`}>
                     {step.heading}
                   </h3>
                 </div>
 
                 <p className="text-sm text-fg-muted leading-6">{step.body}</p>
 
-                {/* Expanded detail on active */}
-                <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-20 mt-3 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <p className="text-xs text-accent/80 leading-5">{step.detail}</p>
+                {/* Smooth grid disclosure for active detail */}
+                <div className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0'}`}>
+                  <div className="overflow-hidden">
+                    <p className="text-xs text-accent/80 leading-5">{step.detail}</p>
+                  </div>
                 </div>
               </button>
             )

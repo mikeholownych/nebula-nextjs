@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import {
   Globe,
   ArrowUp,
@@ -100,9 +101,19 @@ export const HeroSection: React.FC = () => {
         <div className="mt-6 sm:mt-8 max-w-xl mx-auto">
           <form
             onSubmit={handleAuditSubmit}
-            className="relative flex items-center rounded-full bg-bg-panel/90 backdrop-blur-xl border border-border p-1.5 pl-4 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_30px_rgba(199,255,47,0.08)] focus-within:border-accent/60 focus-within:shadow-[0_0_35px_rgba(199,255,47,0.18)] transition-all"
+            className="relative overflow-hidden flex items-center rounded-full bg-bg-panel/90 backdrop-blur-xl border border-border p-1.5 pl-4 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_30px_rgba(199,255,47,0.08)] focus-within:border-accent/60 focus-within:shadow-[0_0_35px_rgba(199,255,47,0.18)] transition-all"
           >
-            <Globe className="h-4 w-4 text-fg-muted shrink-0 mr-2.5" />
+            {/* Animated Radar Scanning Line */}
+            {isScanning && (
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: '200%' }}
+                transition={{ repeat: Infinity, duration: 1.4, ease: 'linear' }}
+                className="pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-accent/20 to-transparent"
+              />
+            )}
+
+            <Globe className={`h-4 w-4 shrink-0 mr-2.5 transition-colors ${isScanning ? 'text-accent animate-pulse' : 'text-fg-muted'}`} />
             <label htmlFor="hero-landing-url" className="sr-only">
               Landing Page URL
             </label>
@@ -113,7 +124,7 @@ export const HeroSection: React.FC = () => {
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://yourlandingpage.com/pricing"
               disabled={isScanning}
-              className="w-full bg-transparent text-sm sm:text-base text-fg placeholder:text-fg-dim focus:outline-none disabled:opacity-50"
+              className="w-full bg-transparent text-sm sm:text-base text-fg placeholder:text-fg-dim focus:outline-none disabled:opacity-75"
             />
 
             {/* Circular Chartreuse Submit Button */}
@@ -121,7 +132,7 @@ export const HeroSection: React.FC = () => {
               type="submit"
               disabled={isScanning}
               aria-label="Run Diagnostic Audit"
-              className="group relative flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-accent text-bg transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
+              className="group relative flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-accent text-bg transition-transform hover:scale-105 active:scale-95 disabled:opacity-75"
             >
               {isScanning ? (
                 <div className="h-4 w-4 rounded-full border-2 border-bg border-t-transparent animate-spin" />
@@ -133,10 +144,21 @@ export const HeroSection: React.FC = () => {
 
           {/* Real-time Scanning Step Feedback */}
           {isScanning && (
-            <div className="mt-3 flex items-center justify-center gap-2 text-xs font-mono text-accent">
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-3 flex items-center justify-center gap-2 text-xs font-mono text-accent"
+            >
               <span className="h-2 w-2 rounded-full bg-accent animate-ping" />
-              <span>{scanSteps[scanStep]}</span>
-            </div>
+              <motion.span
+                key={scanStep}
+                initial={{ opacity: 0, y: 2 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {scanSteps[scanStep]}
+              </motion.span>
+            </motion.div>
           )}
         </div>
 
