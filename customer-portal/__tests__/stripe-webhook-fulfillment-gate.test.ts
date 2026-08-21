@@ -87,8 +87,16 @@ async function postWebhook() {
 }
 
 describe('POST /api/webhooks/stripe fulfillment gating', () => {
+  const originalFetch = global.fetch
+
   beforeEach(() => {
     jest.resetModules()
+    global.fetch = jest.fn().mockResolvedValue(
+      new Response(JSON.stringify({ url: 'https://audited.example/landing' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    )
     execFileMock.mockReset().mockImplementation(successfulExecFile)
     fulfillmentStatus = undefined
     poolQueryMock.mockReset().mockResolvedValue({
@@ -151,10 +159,15 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     flush.mockClear()
     process.env.STRIPE_SECRET_KEY = '[REDACTED]'
     process.env.STRIPE_WEBHOOK_SECRET = '[REDACTED]'
+    process.env.INTERNAL_API_SECRET = 'test-internal'
+    process.env.PLATFORM_API_URL = 'http://127.0.0.1:8001'
+    process.env.INTERNAL_API_SECRET = 'internal-secret'
+    process.env.PLATFORM_API_URL = 'http://127.0.0.1:8001'
   })
 
   afterEach(() => {
     jest.useRealTimers()
+    global.fetch = originalFetch
   })
 
   it('delivers the active repair sprint through processing and records a sale', async () => {
@@ -165,12 +178,13 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const pythonCalls = execFileMock.mock.calls.filter((c) =>
       String(c[0]).includes('venv/bin/python3')
     )
-    expect(pythonCalls).toHaveLength(1)
-    expect(pythonCalls[0][1]).toEqual(expect.arrayContaining([
-      '--email', 'buyer@example.com',
-      '--stripe-session-id', 'cs_live_test',
-      '--audit-id', '123e4567-e89b-12d3-a456-426614174000',
-    ]))
+    expect(pythonCalls).toHaveLength(0)
+    const enqueue = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )
+    expect(enqueue).toBeDefined()
+    expect(String(enqueue?.[1]?.body)).toContain('cs_live_test')
+    expect(String(enqueue?.[1]?.body)).toContain('buyer@example.com')
 
     const hermesCalls = execFileMock.mock.calls.filter((c) => c[0] === 'hermes')
     expect(hermesCalls).toHaveLength(1)
@@ -179,10 +193,10 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(clientQueryMock.mock.calls.some((call) =>
       String(call[0]).includes("SET fulfillment_status = 'processing'")
     )).toBe(true)
-    expect(fulfillmentStatus).toBe('delivered')
+    expect(fulfillmentStatus).toBe('processing')
   })
 
-  it('runs deliver_prompt_pack.py for the D7 $67 close of the same sprint', async () => {
+  it('enqueues kit send for the D7 $67 close of the same sprint', async () => {
     mockConstructEvent(makeSession({ amount_total: 6700 }))
     const response = await postWebhook()
 
@@ -190,8 +204,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const pythonCalls = execFileMock.mock.calls.filter((c) =>
       String(c[0]).includes('venv/bin/python3')
     )
-    expect(pythonCalls).toHaveLength(1)
-    expect(fulfillmentStatus).toBe('delivered')
+    expect(pythonCalls).toHaveLength(0)
+    expect((global.fetch as jest.Mock).mock.calls.some((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )).toBe(true)
+    expect(fulfillmentStatus).toBe('processing')
   })
 
   it('does NOT run deliver_prompt_pack.py for a $7 Audit Lite purchase', async () => {
@@ -259,7 +276,10 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const pythonCalls = execFileMock.mock.calls.filter((c) =>
       String(c[0]).includes('venv/bin/python3')
     )
-    expect(pythonCalls).toHaveLength(1)
+    expect(pythonCalls).toHaveLength(0)
+    expect((global.fetch as jest.Mock).mock.calls.some((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )).toBe(true)
   })
 
   it('sends a review alert for a non-$97 purchase so a human sees it without a false sale label', async () => {
@@ -296,10 +316,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const pythonCalls = execFileMock.mock.calls.filter((call) =>
       String(call[0]).includes('venv/bin/python3')
     )
-    expect(pythonCalls).toHaveLength(1)
-    expect(pythonCalls[0][1]).toEqual(
-      expect.arrayContaining(['--email', 'details@example.com']),
+    expect(pythonCalls).toHaveLength(0)
+    const enqueue = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
     )
+    expect(String(enqueue?.[1]?.body)).toContain('details@example.com')
     const insertCall = clientQueryMock.mock.calls.find((call) =>
       String(call[0]).includes('INSERT INTO purchases')
     )
@@ -324,7 +345,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(releaseMock).toHaveBeenCalledTimes(2)
     expect(execFileMock.mock.calls.filter((call) =>
       String(call[0]).includes('venv/bin/python3')
-    )).toHaveLength(1)
+    )).toHaveLength(0)
     expect(execFileMock.mock.calls.filter((call) => call[0] === 'hermes')).toHaveLength(1)
     expect(captureMock.mock.calls.filter((call) =>
       call[0]?.event === 'purchase_completed'
@@ -360,37 +381,21 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
         release: releaseMock,
       }
     })
-    let deliveryCallback:
-      | ((error: unknown, result: { stdout: string; stderr: string }) => void)
-      | undefined
-    execFileMock.mockImplementation((...args: unknown[]) => {
-      if (String(args[0]).includes('venv/bin/python3')) {
-        deliveryCallback = args[args.length - 1] as typeof deliveryCallback
-        return
-      }
-      successfulExecFile(...args)
-    })
     mockConstructEvent(makeSession())
 
     const first = postWebhook()
     await new Promise((resolve) => setImmediate(resolve))
-    expect(deliveryCallback).toBeDefined()
-
     const second = postWebhook()
     await new Promise((resolve) => setImmediate(resolve))
     expect(connectMock).toHaveBeenCalledTimes(2)
-    expect(execFileMock.mock.calls.filter((call) =>
-      String(call[0]).includes('venv/bin/python3')
-    )).toHaveLength(1)
 
-    deliveryCallback?.(null, { stdout: '', stderr: '' })
     const [firstResponse, secondResponse] = await Promise.all([first, second])
 
     expect(firstResponse.status).toBe(200)
     expect(secondResponse.status).toBe(200)
     expect(execFileMock.mock.calls.filter((call) =>
       String(call[0]).includes('venv/bin/python3')
-    )).toHaveLength(1)
+    )).toHaveLength(0)
     expect(releaseMock).toHaveBeenCalledTimes(2)
   })
 
@@ -401,17 +406,19 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     // Fail only the delivery subprocess, not the fire-and-forget sale alert
     // that fires first (the alert's own execFile call must not be mistaken
     // for the delivery call this test is actually exercising).
-    let deliveryAttempts = 0
-    execFileMock.mockImplementation((...args: unknown[]) => {
-      if (String(args[0]).includes('venv/bin/python3')) {
-        deliveryAttempts += 1
-        const callback = args[args.length - 1] as (error: Error | null, res?: { stdout: string; stderr: string }) => void
-        if (deliveryAttempts === 1) {
-          callback(new Error('delivery command failed'))
-          return
+    let enqueueAttempts = 0
+    ;(global.fetch as jest.Mock).mockImplementation(async (url: unknown) => {
+      if (String(url).includes('/api/outbox/enqueue')) {
+        enqueueAttempts += 1
+        if (enqueueAttempts === 1) {
+          return new Response('enqueue failed', { status: 503 })
         }
+        return new Response(JSON.stringify({ id: 'msg-1' }), { status: 200 })
       }
-      successfulExecFile(...args)
+      return new Response(JSON.stringify({ url: 'https://audited.example/landing' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
     })
     mockConstructEvent(makeSession())
 
@@ -420,16 +427,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
 
     expect(failed.status).toBe(500)
     expect(retried.status).toBe(200)
-    const pythonCalls = execFileMock.mock.calls.filter((call) =>
-      String(call[0]).includes('venv/bin/python3')
-    )
-    expect(pythonCalls).toHaveLength(2)
+    expect(enqueueAttempts).toBe(2)
     expect(clientQueryMock.mock.calls.some((call) =>
       String(call[0]).includes("fulfillment_status = 'failed'")
     )).toBe(true)
-    expect(clientQueryMock.mock.calls.some((call) =>
-      String(call[0]).includes("fulfillment_status = 'delivered'")
-    )).toBe(true)
+    expect(fulfillmentStatus).toBe('processing')
     expect(captureMock.mock.calls.filter((call) =>
       call[0]?.event === 'purchase_completed'
     )).toHaveLength(1)
@@ -450,8 +452,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     )).toBe(true)
     expect(execFileMock.mock.calls.filter((call) =>
       String(call[0]).includes('venv/bin/python3')
-    )).toHaveLength(1)
-    expect(fulfillmentStatus).toBe('delivered')
+    )).toHaveLength(0)
+    expect((global.fetch as jest.Mock).mock.calls.some((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )).toBe(true)
+    expect(fulfillmentStatus).toBe('processing')
   })
 
   it('returns 500 before side effects when persistence fails so Stripe can retry safely', async () => {
@@ -463,5 +468,150 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(response.status).toBe(500)
     expect(execFileMock).not.toHaveBeenCalled()
     expect(captureMock).not.toHaveBeenCalled()
+  })
+
+  it('sets purchases.audit_url from Stripe metadata instead of platform audits', async () => {
+    mockConstructEvent(makeSession({
+      metadata: {
+        offer_key: 'fix-pack',
+        audit_id: '123e4567-e89b-12d3-a456-426614174000',
+        url: 'https://buyer.example/landing',
+        analytics_consent: 'all',
+        analytics_person_id: `person_${'a'.repeat(32)}`,
+      },
+    }))
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const enqueue = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )
+    expect(enqueue).toBeDefined()
+    expect(String(enqueue?.[1]?.body)).toContain('https://buyer.example/landing')
+    expect(String(enqueue?.[1]?.body)).not.toMatch(/FROM\s+audits/i)
+  })
+
+  it('falls back to FastAPI GET /audit/{id} when Stripe metadata has no url', async () => {
+    mockConstructEvent(makeSession())
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const auditLookup = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/audit/123e4567-e89b-12d3-a456-426614174000'),
+    )
+    expect(auditLookup).toBeDefined()
+    const enqueue = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/api/outbox/enqueue'),
+    )
+    expect(String(enqueue?.[1]?.body)).toContain('https://audited.example/landing')
+  })
+
+  it('notifies FastAPI CRM after persist with the internal secret', async () => {
+    mockConstructEvent(makeSession({
+      metadata: {
+        offer_key: 'fix-pack',
+        audit_id: '123e4567-e89b-12d3-a456-426614174000',
+        url: 'https://buyer.example/landing',
+        analytics_consent: 'all',
+        analytics_person_id: `person_${'a'.repeat(32)}`,
+      },
+    }))
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const crmCall = (global.fetch as jest.Mock).mock.calls.find((call) =>
+      String(call[0]).includes('/api/crm/purchase-completed'),
+    )
+    expect(crmCall).toBeDefined()
+    const init = crmCall?.[1] as RequestInit
+    const headers = new Headers(init.headers)
+    expect(headers.get('authorization')).toBe('Bearer internal-secret')
+    const body = JSON.parse(String(init.body))
+    expect(body.email).toBe('buyer@example.com')
+    expect(body.audit_id).toBe('123e4567-e89b-12d3-a456-426614174000')
+    expect(body.audit_url).toBe('https://buyer.example/landing')
+  })
+
+  it('logs non-2xx CRM notify responses without failing the Stripe webhook', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    global.fetch = jest.fn().mockImplementation(async (url: unknown) => {
+      if (String(url).includes('/api/crm/purchase-completed')) {
+        return new Response('crm unavailable', { status: 503 })
+      }
+      return new Response(JSON.stringify({ url: 'https://audited.example/landing' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    })
+    mockConstructEvent(makeSession({
+      metadata: {
+        offer_key: 'fix-pack',
+        audit_id: '123e4567-e89b-12d3-a456-426614174000',
+        url: 'https://buyer.example/landing',
+        analytics_consent: 'all',
+        analytics_person_id: `person_${'a'.repeat(32)}`,
+      },
+    }))
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    expect(errorSpy).toHaveBeenCalledWith(
+      'CRM purchase hook failed:',
+      503,
+      expect.any(String),
+    )
+    errorSpy.mockRestore()
+  })
+
+  it('notifies CRM again on an already-delivered Stripe retry', async () => {
+    fulfillmentStatus = 'delivered'
+    mockConstructEvent(makeSession({
+      metadata: {
+        offer_key: 'fix-pack',
+        audit_id: '123e4567-e89b-12d3-a456-426614174000',
+        url: 'https://buyer.example/landing',
+        analytics_consent: 'all',
+        analytics_person_id: `person_${'a'.repeat(32)}`,
+      },
+    }))
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    expect(await response.json()).toEqual({ received: true, duplicate: true })
+    expect(execFileMock.mock.calls.filter((call) =>
+      String(call[0]).includes('venv/bin/python3'),
+    )).toHaveLength(0)
+    const crmCalls = (global.fetch as jest.Mock).mock.calls.filter((call) =>
+      String(call[0]).includes('/api/crm/purchase-completed'),
+    )
+    expect(crmCalls).toHaveLength(1)
+    const body = JSON.parse(String((crmCalls[0][1] as RequestInit).body))
+    expect(body.email).toBe('buyer@example.com')
+    expect(body.audit_url).toBe('https://buyer.example/landing')
+  })
+
+  it('releases the advisory-lock client when persistence fails after connect', async () => {
+    clientQueryMock.mockImplementation(async (sql: unknown) => {
+      const statement = String(sql)
+      if (statement.includes('pg_advisory_lock') || statement.includes('pg_advisory_unlock')) {
+        return { rowCount: 1, rows: [] }
+      }
+      if (statement.includes('INSERT INTO purchases')) {
+        throw new Error('insert failed')
+      }
+      throw new Error(`Unexpected query: ${statement}`)
+    })
+    mockConstructEvent(makeSession())
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(500)
+    expect(connectMock).toHaveBeenCalled()
+    expect(releaseMock).toHaveBeenCalled()
+    expect(execFileMock).not.toHaveBeenCalled()
   })
 })

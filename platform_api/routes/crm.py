@@ -7,16 +7,20 @@ Endpoints:
   GET  /api/crm/objections/summary     Objection frequency
   POST /api/crm/feedback               Log a feedback / objection
   POST /api/crm/weekly-review          Save / update weekly review
+  POST /api/crm/purchase-completed     Internal CRM hook from portal webhook
 """
 
 from __future__ import annotations
 
+import os
 from datetime import date
+from typing import Optional
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 
+from platform_api.services.crm_hooks import purchase_completed
 from platform_api.services.crm import (
     get_daily_funnel,
     get_prospects_by_source,
@@ -29,6 +33,46 @@ from platform_api.services.crm import (
 )
 
 router = APIRouter(prefix="/crm")
+
+
+def _require_internal_secret(request: Request) -> None:
+    secret = (os.getenv("INTERNAL_API_SECRET") or "").strip()
+    if not secret:
+        raise HTTPException(status_code=503, detail="INTERNAL_API_SECRET not configured")
+    auth = request.headers.get("authorization", "")
+    if auth != f"Bearer {secret}":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+class PurchaseCompletedIn(BaseModel):
+    email: str
+    amount_cents: int
+    product_type: str = "fix_pack"
+    stripe_payment_intent_id: Optional[str] = None
+    audit_id: str = ""
+    audit_url: str = ""
+    first_name: str = ""
+
+
+@router.post("/purchase-completed")
+async def purchase_completed_hook(body: PurchaseCompletedIn, request: Request):
+    """Portal-initiated CRM update after nebula_platform.purchases persist.
+
+    Fulfillment stays on the Next.js Stripe webhook. This hook must not
+    re-deliver the kit.
+    """
+    _require_internal_secret(request)
+    await purchase_completed(
+        email=body.email,
+        amount_cents=body.amount_cents,
+        product_type=body.product_type,
+        stripe_payment_intent_id=body.stripe_payment_intent_id,
+        audit_id=body.audit_id,
+        audit_url=body.audit_url,
+        first_name=body.first_name,
+        trigger_delivery=False,
+    )
+    return {"ok": True}
 
 
 # ── Attribution dashboards ────────────────────────────────────────────────────

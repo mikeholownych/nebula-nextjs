@@ -506,42 +506,13 @@ def score_audit(page):
     else:
         proof_score = 3
         proof_issue = "A stranger landing here sees nothing that proves this worked for anyone else. No quotes, no names, no numbers. They're being asked to trust a page that hasn't earned it yet."
-    # HTML-size heuristic (fallback if PageSpeed API unavailable)
+    # Load speed on the request path uses HTML size only. Live PageSpeed/Lighthouse
+    # is off this path (up to 5s extra, plus a second network hop).
     html_size_score = 8 if len(html_text) < 120000 else 5
     html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB - large pages slow first paint."
     mobile_score = 8 if "viewport" in lower else 4
-
-    # --- PageSpeed dimension ---
-    pagespeed_score = 5
-    pagespeed_issue = "Could not fetch live speed data"
-    try:
-        ps_url = (
-            "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
-            f"?url={url}&strategy=mobile"
-            "&fields=lighthouseResult.categories.performance.score"
-            ",lighthouseResult.audits.first-contentful-paint"
-        )
-        ps_resp = requests.get(ps_url, timeout=5)
-        ps_data = ps_resp.json()
-        perf_score = (
-            ps_data.get("lighthouseResult", {})
-                   .get("categories", {})
-                   .get("performance", {})
-                   .get("score")
-        )
-        if perf_score is not None:
-            pagespeed_score = round(float(perf_score) * 10)
-            pagespeed_issue = f"Lighthouse performance: {round(float(perf_score) * 100)}/100"
-    except Exception:
-        pass  # fallback score/issue already set
-
-    # Merge: prefer real Lighthouse data; fall back to HTML-size heuristic (MECE: one bucket)
-    if pagespeed_score != 5:
-        load_speed_score = pagespeed_score
-        load_speed_issue = pagespeed_issue
-    else:
-        load_speed_score = html_size_score
-        load_speed_issue = html_size_issue
+    load_speed_score = html_size_score
+    load_speed_issue = html_size_issue
     load_speed_fix = (
         "Compress images, remove render-blocking scripts, enable caching. "
         "Target Lighthouse performance >= 70 on mobile."

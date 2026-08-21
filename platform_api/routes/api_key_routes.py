@@ -3,11 +3,12 @@ API Key routes: create, list, revoke.
 Gated to Growth+ plan. Plan is inferred from the workspace's active subscription.
 """
 
-from fastapi import APIRouter, HTTPException, Header, Query
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel
 from typing import Optional
 import logging
 
+from platform_api.auth.routes import get_current_user
 from platform_api.services.api_key_service import api_key_service, API_KEY_PLANS
 
 logger = logging.getLogger(__name__)
@@ -17,49 +18,79 @@ router = APIRouter(prefix="/workspace/api-keys", tags=["api-keys"])
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 async def _resolve_plan(workspace_email: str) -> str:
-    """
-    Look up the workspace's active subscription plan.
-    Returns plan key string or 'free' if no paid sub.
-    """
-    from platform_api.services.audit_db import audit_db
-    await audit_db.connect()
-    assert audit_db.pool is not None
-    pool = audit_db.pool
-    async with pool.acquire() as conn:
-        row = await conn.fetchrow(
-            """
-            SELECT plan FROM subscriptions
-            WHERE email = $1
-            AND status = 'active'
-            ORDER BY created_at DESC LIMIT 1
-            """,
-            workspace_email,
-        )
-    return row["plan"] if row else "free"
+    """Look up the workspace's active plan from the platform DB via session_scope."""
+    import asyncio
+
+    from sqlalchemy import func
+
+    from platform_api.db.models import Membership, Organization, Subscription, User
+    from platform_api.db.session import session_scope
+
+    email = (workspace_email or "").strip().lower()
+    if not email:
+        return "free"
+
+    def _query() -> str:
+        try:
+            with session_scope() as session:
+                row = (
+                    session.query(Subscription.plan, Organization.is_agency)
+                    .select_from(User)
+                    .join(Membership, Membership.user_id == User.id)
+                    .join(Organization, Organization.id == Membership.organization_id)
+                    .outerjoin(
+                        Subscription,
+                        (Subscription.organization_id == Organization.id)
+                        & (Subscription.status == "active"),
+                    )
+                    .filter(func.lower(User.email) == email)
+                    .filter(Membership.status == "active")
+                    .order_by(Subscription.created_at.desc())
+                    .first()
+                )
+        except Exception:
+            return "free"
+        if not row:
+            return "free"
+        plan, is_agency = row
+        if is_agency or plan == "agency":
+            return "agency"
+        return plan or "free"
+
+    return await asyncio.to_thread(_query)
 
 
 # ── Request/Response models ───────────────────────────────────────────────────
 
 class CreateKeyRequest(BaseModel):
-    email: str
+    email: Optional[str] = None  # ignored; identity comes from the session JWT
     label: str = "Default"
 
 
 class RevokeKeyRequest(BaseModel):
-    email: str
+    email: Optional[str] = None  # ignored
     key_id: str
+
+
+def _email_from_user(current_user) -> str:
+    user = current_user["user"]
+    email = (getattr(user, "email", None) or "").strip().lower()
+    if not email:
+        raise HTTPException(status_code=401, detail={"error": "Authenticated email required"})
+    return email
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
 
 @router.post("")
-async def create_api_key(body: CreateKeyRequest):
+async def create_api_key(body: CreateKeyRequest, current_user=Depends(get_current_user)):
     """
     Create a new API key for a workspace.
     Plan is derived from the workspace's active subscription.
     The raw key is returned ONCE - store it immediately.
     """
-    plan = await _resolve_plan(body.email)
+    email = _email_from_user(current_user)
+    plan = await _resolve_plan(email)
     if plan not in API_KEY_PLANS:
         raise HTTPException(
             status_code=403,
@@ -71,7 +102,7 @@ async def create_api_key(body: CreateKeyRequest):
         )
     try:
         result = await api_key_service.create_key(
-            workspace_email=body.email,
+            workspace_email=email,
             plan=plan,
             label=body.label,
         )
@@ -85,8 +116,9 @@ async def create_api_key(body: CreateKeyRequest):
 
 
 @router.get("")
-async def list_api_keys(email: str = Query(...)):
+async def list_api_keys(current_user=Depends(get_current_user)):
     """List active API keys for a workspace (prefixes only, no raw keys)."""
+    email = _email_from_user(current_user)
     keys = await api_key_service.list_keys(email)
     plan = await _resolve_plan(email)
     from platform_api.services.api_key_service import PLAN_KEY_LIMITS, PLAN_QUOTAS
@@ -100,8 +132,9 @@ async def list_api_keys(email: str = Query(...)):
 
 
 @router.delete("/{key_id}")
-async def revoke_api_key(key_id: str, email: str = Query(...)):
+async def revoke_api_key(key_id: str, current_user=Depends(get_current_user)):
     """Revoke an API key by ID."""
+    email = _email_from_user(current_user)
     revoked = await api_key_service.revoke_key(workspace_email=email, key_id=key_id)
     if not revoked:
         raise HTTPException(status_code=404, detail={"error": "Key not found or already revoked"})

@@ -19,7 +19,7 @@ Open [http://localhost:3000](http://localhost:3000)
 Create `.env.local`:
 
 ```bash
-NEXT_PUBLIC_API_URL=http://localhost:8769
+PLATFORM_API_URL=http://127.0.0.1:8001
 ```
 
 ## Features

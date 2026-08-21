@@ -20,6 +20,26 @@ describe('Internal Funnel Event Ledger & Analytics Query Engine', () => {
     jest.clearAllMocks()
   })
 
+  it('does not insert unknown event names', async () => {
+    const result = await recordFunnelEvent({
+      eventName: 'not_a_canonical_event',
+      sourceSystem: 'client_beacon',
+    })
+
+    expect(result.success).toBe(false)
+    expect(pool.query).not.toHaveBeenCalled()
+  })
+
+  it('does not insert invalid payloads that fail registry validation', async () => {
+    const result = await recordFunnelEvent({
+      eventName: 'landing_page_view',
+      sourceSystem: 'client_beacon',
+    })
+
+    expect(result.success).toBe(false)
+    expect(pool.query).not.toHaveBeenCalled()
+  })
+
   it('records funnel event with defaults and returns success', async () => {
     ;(pool.query as jest.Mock).mockResolvedValueOnce({
       rowCount: 1,

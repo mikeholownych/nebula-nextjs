@@ -27,27 +27,14 @@ export default function ProcessingPage() {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    // Simulate progress animation. Stepped coarsely (10 ticks, not 50) and
-    // driven by `transform: scaleX()` rather than `width` in the JSX below -
-    // width changes force a layout recalc on every tick; transform is
-    // compositor-only, so this scales to slow/low-end mobile without jank.
+    let cancelled = false
     const totalDuration = STATUS_MESSAGES.reduce((sum, m) => sum + m.duration, 0)
     const steps = 10
     const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval)
-          posthog.capture('audit_ready', { audit_id: auditId })
-          setStatus('ready')
-          return 100
-        }
-        return prev + 100 / steps
-      })
+      setProgress(prev => (prev >= 90 ? prev : prev + 100 / steps))
     }, totalDuration / steps)
 
-    // Cycle through messages
     const messageTimeouts: NodeJS.Timeout[] = []
-
     STATUS_MESSAGES.forEach((_, index) => {
       if (index > 0) {
         const timeout = setTimeout(() => {
@@ -57,11 +44,35 @@ export default function ProcessingPage() {
       }
     })
 
+    const poll = async () => {
+      try {
+        const res = await fetch(`/api/audit/${auditId}/status`, { cache: 'no-store' })
+        if (!res.ok || cancelled) return
+        const body = await res.json() as { status?: string }
+        if (body.status === 'completed') {
+          clearInterval(progressInterval)
+          setProgress(100)
+          posthog.capture('audit_ready', { audit_id: auditId })
+          setStatus('ready')
+        } else if (body.status === 'failed') {
+          clearInterval(progressInterval)
+          setStatus('error')
+        }
+      } catch {
+        // keep polling
+      }
+    }
+
+    void poll()
+    const pollInterval = setInterval(() => { void poll() }, 1500)
+
     return () => {
+      cancelled = true
       clearInterval(progressInterval)
+      clearInterval(pollInterval)
       messageTimeouts.forEach(clearTimeout)
     }
-  }, [])
+  }, [auditId])
 
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)

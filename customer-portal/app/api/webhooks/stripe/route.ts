@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { execFile } from 'child_process'
-import { promisify } from 'util'
 import type { PoolClient } from 'pg'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
@@ -10,139 +8,17 @@ import { planFromStripePrice } from '@/app/lib/subscription-plans'
 import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 import { analytics as heycatch } from '@heycatch/sdk'
+import {
+  enqueueKitSend,
+  metadataAuditUrl,
+  notifyCrmPurchaseCompleted,
+  provisionAgencyPartner,
+  resolvePurchaseAuditUrl,
+  restoreFailedFulfillment,
+  sendSaleAlert,
+} from './fulfillment'
 
 heycatch.init({ projectKey: 'hck_pk_UDEJlnGqF84u4i2q08NwcTvTYGrXLns_' })
-
-const execFileAsync = promisify(execFile)
-
-// Real-time Telegram alert on a real (non-test-mode) sale. Uses the same
-// `hermes send` mechanism as the Python side (sre_responder.py,
-// notify_production_health.py) - this repo has no Telegram bot token
-// configured, `hermes send` is the only working delivery path.
-// sre_responder.py also checks for new payments every 15 min as a backstop
-// in case this call fails silently (network blip, hermes gateway down, etc).
-async function sendSaleAlert(message: string): Promise<void> {
-  try {
-    await execFileAsync('hermes', ['send', '--to', 'telegram:5920497760', message], { timeout: 15_000 })
-  } catch (err) {
-    console.error('Sale alert failed to send:', err)
-  }
-}
-
-// The exact One-Leak Repair Sprint price, in cents. Other live Stripe prices
-// still receive a sale alert, but only this amount creates a self-implementation-kit
-// kickoff. The first customer loops are intentionally manual: the persisted
-// purchase and fulfillment state are the source of truth. Canonical receipts
-// trigger the bounded self-implementation-kit delivery automatically.
-
-// The database processing claim prevents concurrent dispatch. The delivery
-// script provides the second idempotency boundary, keyed by Stripe session ID,
-// for recovery after a successful send but before the DB can record delivered.
-async function deliverPromptPack(
-  auditId: string,
-  email: string,
-  stripeSessionId: string,
-): Promise<void> {
-  await execFileAsync(
-    '/home/mike/nebula/venv/bin/python3',
-    [
-      '/home/mike/nebula/scripts/deliver_prompt_pack.py',
-      '--email',
-      email,
-      '--stripe-session-id',
-      stripeSessionId,
-      '--audit-id',
-      auditId,
-    ],
-    { timeout: 120_000 },
-  )
-}
-
-async function restoreFailedFulfillment(
-  client: PoolClient,
-  stripeSessionId: string,
-): Promise<void> {
-  try {
-    await client.query(
-      `UPDATE purchases
-       SET fulfillment_status = 'failed'
-       WHERE stripe_session_id = $1
-         AND fulfillment_status = 'processing'`,
-      [stripeSessionId],
-    )
-  } catch (statusError) {
-    console.error('Failed to restore retryable fulfillment state:', statusError)
-  }
-}
-
-/**
- * Auto-provision a widget partner account on $497 agency checkout.
- *
- * The payment link collects `agency_domain` as a custom_field. We derive a
- * partner_id from the email, create the partner in nebula_audit via the
- * platform API, and send the embed snippet + onboarding via Telegram alert.
- */
-async function provisionAgencyPartner(
-  session: Stripe.Checkout.Session,
-  email: string,
-): Promise<void> {
-  // Extract the domain from Stripe's custom_fields response
-  const customFields = (session as unknown as { custom_fields?: Array<{ key: string; text?: { value: string } }> }).custom_fields
-  const domainField = customFields?.find(f => f.key === 'agency_domain')
-  const rawDomain = domainField?.text?.value?.trim().toLowerCase() || ''
-
-  // Normalize: strip protocol, path, trailing slash
-  const domain = rawDomain
-    .replace(/^https?:\/\//, '')
-    .replace(/\/.*$/, '')
-    .replace(/\/$/, '')
-
-  if (!domain || !domain.includes('.')) {
-    throw new Error(`Invalid agency_domain: "${rawDomain}"`)
-  }
-
-  // Derive partner_id from email prefix (before @), slugified
-  const emailPrefix = email.split('@')[0]
-    .replace(/[^a-z0-9]/gi, '_')
-    .toLowerCase()
-    .slice(0, 32)
-  const partnerId = `agency_${emailPrefix}_${Date.now().toString(36)}`
-
-  const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001')
-    .replace(/\/$/, '')
-
-  const createResp = await fetch(`${platformApiUrl}/audit/partners`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      partner_id: partnerId,
-      name: email.split('@')[1]?.replace(/\.[^.]+$/, '') || email,
-      email,
-      domains: [domain],
-      plan: 'agency',
-      status: 'active',
-    }),
-    signal: AbortSignal.timeout(15_000),
-  })
-
-  if (!createResp.ok) {
-    const errBody = await createResp.text().catch(() => '')
-    throw new Error(`Platform API partner creation failed: ${createResp.status} ${errBody}`)
-  }
-
-  // Send onboarding Telegram alert with embed code
-  const embedCode = `<div id="nebula-audit-widget" data-partner="${partnerId}" data-theme="dark"></div>\n<script src="https://nebulacomponents.com/widget/audit.js" async></script>`
-  const alertMessage =
-    `🤝 *AGENCY PARTNER PROVISIONED*\n` +
-    `Email: ${email}\n` +
-    `Partner ID: \`${partnerId}\`\n` +
-    `Domain: ${domain}\n` +
-    `Stripe session: ${session.id}\n\n` +
-    `Embed code:\n\`\`\`\n${embedCode}\n\`\`\`\n\n` +
-    `Next: send welcome email with embed instructions.`
-
-  void sendSaleAlert(alertMessage)
-}
 
 function getStripeClient(): Stripe {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -249,12 +125,25 @@ export async function POST(request: NextRequest) {
           `session: ${session.id}`,
         )
       }
+      if (inserted && customerEmail) {
+        await notifyCrmPurchaseCompleted({
+          email: customerEmail,
+          amount_cents: session.amount_total ?? 0,
+          product_type: session.metadata?.offer_key ?? 'review',
+          stripe_payment_intent_id: typeof session.payment_intent === 'string' ? session.payment_intent : session.id,
+          audit_id: typeof auditId === 'string' ? auditId : '',
+          audit_url: metadataAuditUrl(session),
+        })
+      }
       return NextResponse.json({ received: true, review: true })
     }
 
     let client: PoolClient | undefined
     let locked = false
-    let alreadyDelivered = false
+    let persistedAuditUrl: string | null = null
+    let shouldNotifyCrm = false
+    let recordPurchaseAnalytics = false
+    let alreadyDeliveredDuplicate = false
     try {
       client = await pool.connect()
       await client.query(
@@ -289,37 +178,22 @@ export async function POST(request: NextRequest) {
       // case a redelivery must not re-alert, re-run fulfillment, or
       // re-capture analytics for.
       const statusResult = await client.query(
-        `SELECT fulfillment_status FROM purchases WHERE stripe_session_id = $1`,
+        `SELECT fulfillment_status, audit_url FROM purchases WHERE stripe_session_id = $1`,
         [session.id],
       )
-      alreadyDelivered = statusResult.rows[0]?.fulfillment_status === 'delivered'
-    } catch (err) {
-      console.error('Failed to persist purchase - will let Stripe retry:', err)
-      if (session.metadata?.analytics_consent === 'all') {
-        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
-      }
-      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
-    }
-
-    if (alreadyDelivered) {
-      if (locked) {
-        try {
-          await client.query(
-            'SELECT pg_advisory_unlock(hashtextextended($1, 0))',
-            [session.id],
-          )
-        } catch (unlockError) {
-          console.error('Failed to release fulfillment advisory lock:', unlockError)
-        }
-      }
-      client.release()
-      return NextResponse.json({ received: true, duplicate: true })
-    }
-
-    // Claim the receipt for fulfillment before any delivery side effect. The
-    // delivery script is independently idempotent by Stripe session ID, so a
-    // retry of a crash-sticky processing row is safe.
-    try {
+      const priorStatus = statusResult.rows[0]?.fulfillment_status
+      const alreadyDelivered = priorStatus === 'delivered'
+      if (alreadyDelivered) {
+        alreadyDeliveredDuplicate = true
+        shouldNotifyCrm = Boolean(customerEmail)
+        persistedAuditUrl = metadataAuditUrl(session)
+          ?? (typeof statusResult.rows[0]?.audit_url === 'string'
+            ? statusResult.rows[0].audit_url
+            : null)
+      } else {
+      // Claim the receipt for fulfillment before any delivery side effect. The
+      // delivery script is independently idempotent by Stripe session ID, so a
+      // retry of a crash-sticky processing row is safe.
       const processingResult = await client.query(
         `UPDATE purchases
          SET fulfillment_status = 'processing'
@@ -331,61 +205,47 @@ export async function POST(request: NextRequest) {
       if (processingResult.rowCount !== 1) {
         throw new Error('Fulfillment could not be claimed for processing')
       }
+
+      const firstClaim = priorStatus !== 'processing'
+      if (firstClaim && event.livemode) {
+        const amount = session.amount_total != null
+          ? `$${(session.amount_total / 100).toFixed(2)}`
+          : 'unknown amount'
+        const offerKey = session.metadata?.offer_key ?? 'unknown offer'
+        const email = customerEmail
+        const message = `💰 *SALE* - ${amount} - ${offerKey} - ${email}\nsession: ${session.id}`
+
+        void sendSaleAlert(message)
+      }
+
+      try {
+        persistedAuditUrl = await resolvePurchaseAuditUrl(session, auditId)
+        await enqueueKitSend({
+          auditId,
+          email: customerEmail,
+          stripeSessionId: session.id,
+          auditUrl: persistedAuditUrl,
+        })
+        shouldNotifyCrm = firstClaim
+        recordPurchaseAnalytics = firstClaim
+      } catch (err) {
+        console.error('repair sprint enqueue failed:', err)
+        if (session.metadata?.analytics_consent === 'all') {
+          captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
+        }
+        await restoreFailedFulfillment(client, session.id)
+        return NextResponse.json(
+          { error: 'Fulfillment failed' },
+          { status: 500 },
+        )
+      }
+      }
     } catch (err) {
-      console.error('Failed to claim fulfillment - will let Stripe retry:', err)
-      return NextResponse.json({ error: 'Fulfillment claim failed' }, { status: 500 })
-    }
-
-    if (event.livemode) {
-      const amount = session.amount_total != null
-        ? `$${(session.amount_total / 100).toFixed(2)}`
-        : 'unknown amount'
-      const offerKey = session.metadata?.offer_key ?? 'unknown offer'
-      const email = customerEmail
-      const message = `💰 *SALE* - ${amount} - ${offerKey} - ${email}\nsession: ${session.id}`
-
-      void sendSaleAlert(message)
-    }
-
-    try {
-      await deliverPromptPack(auditId, customerEmail, session.id)
-    } catch (err) {
-      console.error('repair sprint delivery failed:', err)
+      console.error('Failed to persist purchase - will let Stripe retry:', err)
       if (session.metadata?.analytics_consent === 'all') {
-        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
+        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
       }
-      if (client && locked) {
-        await restoreFailedFulfillment(client, session.id)
-      }
-      return NextResponse.json(
-        { error: 'Fulfillment failed' },
-        { status: 500 },
-      )
-    }
-
-    try {
-      const deliveredResult = await client.query(
-        `UPDATE purchases
-         SET fulfillment_status = 'delivered',
-             audit_url          = (SELECT url FROM audits WHERE id = $2::uuid LIMIT 1),
-             reaudit_due_at     = now() + INTERVAL '30 days'
-         WHERE stripe_session_id = $1
-           AND fulfillment_status = 'processing'
-         RETURNING stripe_session_id`,
-        [session.id, auditId],
-      )
-      if (deliveredResult.rowCount !== 1) {
-        throw new Error('Fulfillment could not be marked delivered')
-      }
-    } catch (err) {
-      console.error('Failed to process fulfillment - will let Stripe retry:', err)
-      if (client && locked) {
-        await restoreFailedFulfillment(client, session.id)
-      }
-      return NextResponse.json(
-        { error: 'Fulfillment processing failed' },
-        { status: 500 },
-      )
+      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
     } finally {
       if (client) {
         if (locked) {
@@ -400,6 +260,24 @@ export async function POST(request: NextRequest) {
         }
         client.release()
       }
+    }
+
+    if (shouldNotifyCrm && customerEmail) {
+      await notifyCrmPurchaseCompleted({
+        email: customerEmail,
+        amount_cents: session.amount_total ?? 0,
+        product_type: session.metadata?.offer_key ?? 'fix_pack',
+        stripe_payment_intent_id: typeof session.payment_intent === 'string' ? session.payment_intent : session.id,
+        audit_id: auditId,
+        audit_url: persistedAuditUrl,
+      })
+    }
+
+    if (alreadyDeliveredDuplicate) {
+      return NextResponse.json({ received: true, duplicate: true })
+    }
+    if (!recordPurchaseAnalytics) {
+      return NextResponse.json({ received: true, queued: true })
     }
 
     const transactionId = typeof session.payment_intent === 'string' ? session.payment_intent : session.id
@@ -493,7 +371,7 @@ export async function POST(request: NextRequest) {
           payment_status: session.payment_status,
         },
       })
-      await ph.flush()
+      void ph.flush().catch(() => undefined)
     } catch {
       // Fulfillment must not depend on analytics.
     }

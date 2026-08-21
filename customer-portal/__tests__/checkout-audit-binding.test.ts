@@ -82,6 +82,7 @@ describe('POST /api/checkout audit binding', () => {
     const stripeInit = (global.fetch as jest.Mock).mock.calls[1][1] as RequestInit
     const stripeBody = new URLSearchParams(String(stripeInit.body))
     expect(stripeBody.get('metadata[audit_id]')).toBe(auditId)
+    expect(stripeBody.get('metadata[url]')).toBe('https://example.com/landing')
     expect(stripeBody.get('customer_email')).toBe('buyer@example.com')
   })
 

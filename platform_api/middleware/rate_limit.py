@@ -27,6 +27,7 @@ RATE_LIMITS = {
     "/api/auth/logout": (10, 60),       # 10 req/min
     "/api/webhook/stripe": (1000, 60),  # 1000 req/min (webhooks)
     "/audit/run": (5, 60),              # 5 req/min - core audit engine
+    "/audit/accept": (5, 60),           # 5 req/min - fast persist path
     "/audit/lab": (10, 60),             # 10 req/min - component lab
     "/audit/by-email": (20, 60),        # 20 req/min - prevents bulk email enumeration
     "default_authenticated": (100, 60), # 100 req/min
@@ -122,6 +123,16 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
         return RATE_LIMITS["default_anonymous"]
 
+    def _client_ip(self, request: Request) -> str:
+        """Visitor IP. Prefer X-Forwarded-For and skip loopback hops."""
+        forwarded = request.headers.get("X-Forwarded-For")
+        if forwarded:
+            for part in forwarded.split(","):
+                candidate = part.strip()
+                if candidate and candidate not in ("127.0.0.1", "::1", "unknown"):
+                    return candidate
+        return request.client.host if request.client else "unknown"
+
     def _get_identifier(self, request: Request) -> str:
         """Get identifier for rate-limiting (user_id or IP)."""
         # Try user_id from JWT (if authenticated)
@@ -138,12 +149,14 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             except Exception:
                 pass
 
-        # Fall back to IP address
-        forwarded = request.headers.get("X-Forwarded-For")
-        if forwarded:
-            return forwarded.split(",")[0].strip()
-
-        return request.client.host if request.client else "unknown"
+        ip = self._client_ip(request)
+        # Portal traffic arrives from 127.0.0.1. Key /audit/run by visitor IP
+        # plus email so concurrent founders are not collapsed onto loopback.
+        if request.url.path in ("/audit/run", "/audit/accept"):
+            email = (request.headers.get("X-Audit-Email") or "").strip().lower()
+            if email:
+                return f"{ip}:{email}"
+        return ip
 
     async def _check_rate_limit(
         self,

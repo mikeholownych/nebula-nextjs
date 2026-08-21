@@ -49,28 +49,30 @@ async def lifespan(_app: FastAPI):
     elif settings.is_development:
         warn_missing_token("POSTHOG_PROJECT_TOKEN")
 
-    # On startup: fail any audits that are stuck in 'pending' from a previous
-    # crashed/restarted run. These can never self-resolve - a fresh start is the
-    # only recovery path for pending audits older than 5 minutes.
     try:
         from platform_api.services.audit_db import audit_db
         await audit_db.connect()
-        if audit_db.pool is not None:
-            async with audit_db.pool.acquire() as conn:
-                updated = await conn.execute(
-                    """UPDATE audits SET status='failed', completed_at=now()
-                       WHERE status='pending'
-                         AND created_at < now() - interval '5 minutes'"""
-                )
-                count = int(updated.split()[-1]) if updated else 0
-                if count > 0:
-                    print(f"⚠️  Startup: cleared {count} stuck-pending audit(s) → failed")
+        swept = await audit_db.sweep_stale_audits()
+        if swept:
+            print(f"⚠️  Startup: swept {swept} stale audit(s) → failed")
     except Exception as exc:
-        print(f"⚠️  Startup pending-audit cleanup failed: {exc}")
+        print(f"⚠️  Audit DB connect/sweep failed: {exc}")
+
+    try:
+        from platform_api.services.audit_runner import start_runner
+        await start_runner()
+        print("✅ Audit runner started (max_in_flight=2)")
+    except Exception as exc:
+        print(f"⚠️  Audit runner startup failed: {exc}")
 
     try:
         yield
     finally:
+        try:
+            from platform_api.services.audit_runner import stop_runner
+            await stop_runner()
+        except Exception:
+            pass
         await redis_client.disconnect()
         print("✅ Redis disconnected")
         shutdown_posthog()
@@ -147,12 +149,14 @@ from platform_api.routes.crm import router as crm_router
 from platform_api.routes.ab_and_scoring import router as ab_router
 from platform_api.routes.stripe_webhook import router as stripe_webhook_router
 from platform_api.routes.checkout import router as checkout_router
+from platform_api.routes.outbox_api import router as outbox_router
 app.include_router(newsletter_router, prefix="/api")
 app.include_router(newsletter_events_router, prefix="/api")
 app.include_router(crm_router, prefix="/api")
 app.include_router(ab_router, prefix="/api")
 app.include_router(stripe_webhook_router, prefix="/api")
 app.include_router(checkout_router, prefix="/api")
+app.include_router(outbox_router, prefix="/api")
 if LEAD_GEN_AVAILABLE:
   app.include_router(lead_gen_router)
 
@@ -215,18 +219,27 @@ async def health_check_post(request: Request) -> dict:
 @app.get("/readyz", response_model=dict)
 async def readiness_check(request: Request) -> dict:
     """Readiness check endpoint with settings validation."""
-    if settings.ready():
-        return {"status": "ready"}
-    else:
+    from platform_api.services.audit_runner import runner_started
+
+    request_id = request.headers.get("X-Request-ID") or (
+        request.state.request_id if hasattr(request.state, "request_id") else None
+    )
+    if not settings.ready():
         missing = settings.missing_required_settings()
         raise APIError(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             code="not_ready",
             message=f"Missing required settings: {missing}",
-            request_id=request.headers.get("X-Request-ID") or request.state.request_id
-            if hasattr(request.state, "request_id")
-            else None,
+            request_id=request_id,
         )
+    if not runner_started():
+        raise APIError(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            code="not_ready",
+            message="Audit runner unavailable",
+            request_id=request_id,
+        )
+    return {"status": "ready"}
 
 
 # Add a test endpoint to verify the service works

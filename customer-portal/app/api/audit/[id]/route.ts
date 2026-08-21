@@ -1,22 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { hasValidUnlockCookie, requireUnlockCookieOrSession } from '@/app/lib/audit-access'
 
 /**
  * Fetch audit by ID from database
  * GET /api/audit/[id]
+ *
+ * HMAC unlock cookie holders and the owning workspace session may read
+ * the report JSON. Unauthenticated callers without a cookie get 401.
+ * A logged-in user who does not own the audit gets 404.
  */
+
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const auth = await requireWorkspaceUser(request)
-  if ('response' in auth) return auth.response
   try {
     const { id } = await params
-    
-    // Call FastAPI to fetch audit
-    const response = await fetch(`http://127.0.0.1:8001/audit/${id}`, {
+    const cookieUnlocked = hasValidUnlockCookie(request, id)
+    let sessionEmail: string | undefined
+    if (!cookieUnlocked) {
+      const access = await requireUnlockCookieOrSession(request, id)
+      if ('response' in access) return access.response
+      sessionEmail = access.email
+    }
+
+    const response = await fetch(`${API_BASE}/audit/${id}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(10000)
@@ -36,8 +46,11 @@ export async function GET(
     }
     
     const data = await response.json()
-    if (data.email && data.email.trim().toLowerCase() !== auth.user.email) {
-      return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
+    if (sessionEmail) {
+      const owner = typeof data.email === 'string' ? data.email.trim().toLowerCase() : ''
+      if (!owner || owner !== sessionEmail) {
+        return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
+      }
     }
     
     return NextResponse.json({

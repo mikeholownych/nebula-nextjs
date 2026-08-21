@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getVertical, getAllVerticalSlugs } from './data'
 
+// Canonical vertical lander template. Add a vertical in ./data.ts; do not add
+// a second lander system.
+
 // ── Static params for programmatic pages ──────────────────────────────────
 export function generateStaticParams() {
   return getAllVerticalSlugs().map(slug => ({ vertical: slug }))

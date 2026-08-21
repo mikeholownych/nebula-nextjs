@@ -10,7 +10,7 @@ router = APIRouter(prefix="/verify", tags=["verify"])
 
 
 @router.post("/recommendation/{rec_id}")
-async def verify_recommendation(rec_id: str):
+async def verify_recommendation(rec_id: str, email: Optional[str] = Query(default=None)):
     """Verify a single recommendation's signal against the live page."""
     await audit_db.connect()
 
@@ -26,6 +26,11 @@ async def verify_recommendation(rec_id: str):
 
     if not rec:
         raise HTTPException(status_code=404, detail="Recommendation not found")
+
+    if email:
+        owner = (rec["email"] or "").strip().lower()
+        if not owner or owner != email.strip().lower():
+            raise HTTPException(status_code=404, detail="Recommendation not found")
 
     url = rec["url"]
     if not url:

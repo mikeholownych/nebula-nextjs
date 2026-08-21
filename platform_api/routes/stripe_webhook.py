@@ -3,6 +3,9 @@
 Mounted at: POST /api/stripe/webhook
 Stripe signing secret: STRIPE_WEBHOOK_SECRET env var
 
+Money writer is Next.js POST /api/webhooks/stripe (nebula_platform.purchases).
+This receiver stays fail-closed and projects CRM only; it does not fulfill kits.
+
 Events handled:
   charge.succeeded              → purchase_completed() in CRM
   customer.subscription.created → subscription_activated() — suppresses drip
@@ -31,7 +34,7 @@ _processed_event_ids: set[str] = set()  # in-process dedup; swap for Redis at sc
 def _verify_stripe_signature(payload: bytes, sig_header: str, secret: str) -> bool:
     """Verify Stripe webhook signature (HMAC-SHA256)."""
     if not secret:
-        return True  # Dev mode - no secret configured, allow all
+        return False
 
     try:
         # Parse timestamp and signatures from header
@@ -80,8 +83,11 @@ async def stripe_webhook(request: Request):
     """Receive Stripe events and update CRM."""
     payload = await request.body()
     sig_header = request.headers.get("stripe-signature", "")
+    secret = (os.getenv("STRIPE_WEBHOOK_SECRET") or "").strip() or _STRIPE_SECRET
+    if not secret:
+        raise HTTPException(status_code=503, detail="Stripe webhook secret not configured")
 
-    if _STRIPE_SECRET and not _verify_stripe_signature(payload, sig_header, _STRIPE_SECRET):
+    if not _verify_stripe_signature(payload, sig_header, secret):
         raise HTTPException(status_code=400, detail="Invalid Stripe signature")
 
     try:
@@ -121,6 +127,7 @@ async def stripe_webhook(request: Request):
                 amount_cents=amount_cents,
                 product_type=product_type,
                 stripe_payment_intent_id=payment_intent_id,
+                trigger_delivery=False,
             )
 
     # ── checkout.session.completed ──────────────────────────────────────────
@@ -131,6 +138,8 @@ async def stripe_webhook(request: Request):
         metadata = stripe_obj.get("metadata") or {}
 
         if email and amount_cents > 0:
+            # CRM projection only. nebula_platform.purchases is written by
+            # Next.js POST /api/webhooks/stripe.
             await purchase_completed(
                 email=email,
                 amount_cents=amount_cents,
@@ -139,6 +148,7 @@ async def stripe_webhook(request: Request):
                 audit_id=metadata.get("audit_id") or "",
                 audit_url=metadata.get("url") or "",
                 first_name=metadata.get("first_name") or "",
+                trigger_delivery=False,
             )
 
     # ── customer.subscription.deleted ──────────────────────────────────────

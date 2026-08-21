@@ -17,6 +17,7 @@
  */
 
 import { pool } from '@/app/lib/db'
+import { logApiError } from '@/app/lib/ops-log'
 import { getEventDefinition, validateEventPayload, type EventStage, type SourceOfTruth } from './analytics-registry'
 
 export interface FunnelEventPayload {
@@ -140,13 +141,16 @@ export async function recordFunnelEvent(payload: FunnelEventPayload): Promise<{ 
     ...(payload.failureReason ? { reason_code: payload.failureReason } : {}),
     ...(payload.journeyId ? { journey_id: payload.journeyId } : {}),
   }
-  const validation = validateEventPayload(payload.eventName, mergedProps)
-  
-  if (!validation.valid) {
-    console.warn(`[FunnelLedger] Validation warnings for ${payload.eventName}:`, validation.errors)
+  if (!def) {
+    return { success: false, error: `Unknown canonical event: ${payload.eventName}` }
   }
 
-  const stage = payload.stage || def?.stage || 'acquisition'
+  const validation = validateEventPayload(payload.eventName, mergedProps)
+  if (!validation.valid) {
+    return { success: false, error: validation.errors.join('; ') }
+  }
+
+  const stage = payload.stage || def.stage || 'acquisition'
   const version = payload.eventVersion || def?.version || 1
   const occurredAt = payload.occurredAt ? new Date(payload.occurredAt) : new Date()
   const status = payload.status || (payload.failureReason ? 'failed' : 'success')
@@ -238,7 +242,14 @@ export async function recordFunnelEvent(payload: FunnelEventPayload): Promise<{ 
     return { success: true, id: result.rows[0].id }
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error)
-    console.error('[FunnelLedger] Failed to persist event:', errorMsg)
+    const requestId = payload.properties && typeof payload.properties.request_id === 'string'
+      ? payload.properties.request_id
+      : null
+    logApiError('[FunnelLedger] Failed to persist event', {
+      request_id: requestId,
+      journey_id: journeyId,
+      error,
+    })
     return { success: false, error: errorMsg }
   }
 }

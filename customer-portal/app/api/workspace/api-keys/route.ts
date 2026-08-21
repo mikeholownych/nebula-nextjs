@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { authHeaders, requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 export async function GET(request: NextRequest) {
-  const email = request.nextUrl.searchParams.get('email')
-  if (!email) return NextResponse.json({ error: 'email required' }, { status: 400 })
-  const res = await fetch(`${API_BASE}/workspace/api-keys?email=${encodeURIComponent(email)}`, {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+
+  const res = await fetch(`${API_BASE}/workspace/api-keys`, {
+    headers: authHeaders(request),
     signal: AbortSignal.timeout(8000),
   })
   const data = await res.json()
@@ -13,11 +16,20 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json()
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+
+  let body: { label?: string } = {}
+  try {
+    body = await request.json()
+  } catch {
+    body = {}
+  }
+
   const res = await fetch(`${API_BASE}/workspace/api-keys`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
+    body: JSON.stringify({ label: typeof body.label === 'string' ? body.label : 'Default' }),
     signal: AbortSignal.timeout(8000),
   })
   const data = await res.json()

@@ -1,24 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DashboardView, AuditsView, ProjectsView } from './views'
-import CompareView from './compareView'
-import CompetitorView from './competitorView'
-import AiSearchView from './aiSearchView'
-import RoiCalculatorView from './roiCalculatorView'
-import RecsView from './recsView'
-import PagesView from './pagesView'
-import ExperimentsView from './experimentsView'
-import ExperimentTrackerView from './experimentTrackerView'
-import BillingView from './billingView'
-import MonitoringView from './monitoringView'
-import DiffView from './diffView'
-import TimelineView from './timelineView'
-import ReportView from './reportView'
-import AchievementsView from './achievementsView'
-import AssistantView from './assistantView'
-import TeamView from './teamView'
-import SettingsView from './settingsView'
+import dynamic from 'next/dynamic'
 import {
   TAB_ACCESS_REQUIREMENTS,
   resolvePlanLevel,
@@ -28,6 +11,26 @@ import {
   type AccessLevel,
 } from './planGate'
 import { analytics } from '@heycatch/sdk'
+
+const DashboardView = dynamic(() => import('./views').then((mod) => mod.DashboardView))
+const AuditsView = dynamic(() => import('./views').then((mod) => mod.AuditsView))
+const ProjectsView = dynamic(() => import('./views').then((mod) => mod.ProjectsView))
+const CompetitorView = dynamic(() => import('./competitorView'))
+const AiSearchView = dynamic(() => import('./aiSearchView'))
+const RoiCalculatorView = dynamic(() => import('./roiCalculatorView'))
+const RecsView = dynamic(() => import('./recsView'))
+const PagesView = dynamic(() => import('./pagesView'))
+const ExperimentsView = dynamic(() => import('./experimentsView'))
+const ExperimentTrackerView = dynamic(() => import('./experimentTrackerView'))
+const BillingView = dynamic(() => import('./billingView'))
+const MonitoringView = dynamic(() => import('./monitoringView'))
+const DiffView = dynamic(() => import('./diffView'))
+const TimelineView = dynamic(() => import('./timelineView'))
+const ReportView = dynamic(() => import('./reportView'))
+const AchievementsView = dynamic(() => import('./achievementsView'))
+const AssistantView = dynamic(() => import('./assistantView'))
+const TeamView = dynamic(() => import('./teamView'))
+const SettingsView = dynamic(() => import('./settingsView'))
 
 export interface WorkspaceAudit {
   id: string

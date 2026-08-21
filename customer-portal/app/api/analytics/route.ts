@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { readCappedJson } from "@/app/lib/request-limits";
 
 /**
  * POST /api/analytics
@@ -15,8 +16,10 @@ interface GAEvent {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { events, client_id } = body as { events: GAEvent[]; client_id?: string };
+    const parsed = await readCappedJson<{ events: GAEvent[]; client_id?: string }>(request);
+    if (!parsed.ok) return parsed.response;
+    const body = parsed.body;
+    const { events, client_id } = body;
 
     if (!events || !Array.isArray(events)) {
       return NextResponse.json(

@@ -67,7 +67,7 @@ export async function GET(
     }
   } else {
     // No workspace session - check unlock cookie using the same token format as unlock/route.ts
-    const unlockToken = request.cookies.get('nebula_audit_unlock')?.value
+    const unlockToken = request.cookies.get(`audit_unlock_${auditId}`)?.value
     if (unlockToken && verifyAuditUnlock(auditId, unlockToken)) {
       planLabel = 'Free (unlocked)'
     }

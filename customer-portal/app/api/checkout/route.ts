@@ -89,6 +89,7 @@ export async function POST(request: NextRequest) {
 
   const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001')
     .replace(/\/$/, '')
+  let auditedPageUrl = ''
   try {
     const auditResponse = await fetch(`${platformApiUrl}/audit/${auditId}`, {
       signal: AbortSignal.timeout(10_000),
@@ -112,6 +113,7 @@ export async function POST(request: NextRequest) {
       })
       return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
     }
+    auditedPageUrl = audit.url
     const auditedUrl = new URL(audit.url)
     if (!['http:', 'https:'].includes(auditedUrl.protocol)) {
       return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
@@ -164,6 +166,7 @@ export async function POST(request: NextRequest) {
     cancel_url: new URL(`${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}&from=stripe_cancel`, baseUrl).toString(),
     customer_email: auditIdentity.email,
     'metadata[audit_id]': auditId,
+    'metadata[url]': auditedPageUrl.slice(0, 500),
     'metadata[offer_key]': fixPack.checkout.offerKey,
     'metadata[analytics_consent]': analyticsConsent ? 'all' : 'necessary',
     'metadata[audit_unlocked_email]': auditIdentity.email,

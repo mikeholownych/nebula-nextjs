@@ -13,12 +13,13 @@ class Settings(BaseSettings):
 
     # Database
     DATABASE_URL: Optional[str] = None
+    AUDIT_DATABASE_URL: Optional[str] = None
 
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
 
     # Server
-    PORT: int = 8769  # Changed from 8766 (Apache) and 8767 (conflict)
+    PORT: int = 8001
 
     # OIDC Authentication
     OIDC_ISSUER: Optional[str] = None
@@ -75,7 +76,7 @@ class Settings(BaseSettings):
         "extra": "ignore",
     }
 
-    @field_validator("DATABASE_URL")
+    @field_validator("DATABASE_URL", "AUDIT_DATABASE_URL")
     @classmethod
     def validate_postgres_url(cls, v: Optional[str]) -> Optional[str]:
         """Validate PostgreSQL URL scheme."""
@@ -138,6 +139,14 @@ class Settings(BaseSettings):
             # and at least one allowed origin for CORS
             if len(self.ALLOWED_ORIGINS) == 0:
                 missing.append("ALLOWED_ORIGINS")
+            if not self.STRIPE_WEBHOOK_SECRET:
+                missing.append("STRIPE_WEBHOOK_SECRET")
+            if not self.SECRET_KEY:
+                missing.append("SECRET_KEY")
+            if not self.DATABASE_URL:
+                missing.append("DATABASE_URL")
+            if not self.AUDIT_DATABASE_URL:
+                missing.append("AUDIT_DATABASE_URL")
 
         return missing
 

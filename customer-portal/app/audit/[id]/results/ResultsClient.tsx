@@ -319,6 +319,7 @@ interface Props {
   auditId: string
   unlocked: boolean
   sharedView?: boolean
+  initialResults?: AuditResult | null
 }
 
 /**
@@ -776,9 +777,14 @@ function PersonalizedNextStep({
   )
 }
 
-export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView = false }: Props) {
-  const [loading, setLoading] = useState(true)
-  const [results, setResults] = useState<AuditResult | null>(null)
+export default function ResultsClient({
+  auditId,
+  unlocked: initialUnlocked,
+  sharedView = false,
+  initialResults = null,
+}: Props) {
+  const [loading, setLoading] = useState(!initialResults)
+  const [results, setResults] = useState<AuditResult | null>(initialResults)
   const [error, setError] = useState<string | null>(null)
 
   // Client-side unlock state - starts from server-determined value but can
@@ -841,45 +847,37 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   }, [])
 
   useEffect(() => {
+    const trackViewed = (parsed: AuditResult) => {
+      const scoreVal = Math.round(parsed.score)
+      const scoreBucket = scoreVal <= 40 ? 'score_0_40' : scoreVal <= 70 ? 'score_41_70' : 'score_71_100'
+      trackClientFunnelEvent('audit_result_viewed', {
+        audit_id: auditId,
+        score_bucket: scoreBucket,
+        grade: parsed.grade,
+        findings_count: parsed.findings.length,
+        unlocked: initialUnlocked,
+      }, { auditId })
+      posthog.capture('audit_results_viewed', {
+        audit_id: auditId,
+        score: parsed.score,
+        grade: parsed.grade,
+        unlocked: initialUnlocked,
+        findings_count: parsed.findings.length,
+      })
+    }
+
+    if (initialResults) {
+      trackViewed(initialResults)
+      return
+    }
+
     const fetchResults = async () => {
       try {
-        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(auditId)
-
-        let parsed: ReturnType<typeof parseAuditResult>
-        if (isUuid) {
-          const response = await fetch(`/api/audit/${auditId}`)
-          if (!response.ok) throw new Error('Failed to fetch audit')
-          parsed = parseAuditResult(await response.json())
-        } else {
-          // Legacy: run new audit from URL in path
-          const response = await fetch('/api/audit/run', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              url: decodeURIComponent(auditId),
-              email: 'results@example.com',
-            }),
-          })
-          if (!response.ok) throw new Error('Failed to fetch results')
-          parsed = parseAuditResult(await response.json())
-        }
+        const response = await fetch(`/api/audit/${auditId}`)
+        if (!response.ok) throw new Error('Failed to fetch audit')
+        const parsed = parseAuditResult(await response.json())
         setResults(parsed)
-        const scoreVal = Math.round(parsed.score)
-        const scoreBucket = scoreVal <= 40 ? 'score_0_40' : scoreVal <= 70 ? 'score_41_70' : 'score_71_100'
-        trackClientFunnelEvent('audit_result_viewed', {
-          audit_id: auditId,
-          score_bucket: scoreBucket,
-          grade: parsed.grade,
-          findings_count: parsed.findings.length,
-          unlocked: initialUnlocked,
-        }, { auditId })
-        posthog.capture('audit_results_viewed', {
-          audit_id: auditId,
-          score: parsed.score,
-          grade: parsed.grade,
-          unlocked: initialUnlocked,
-          findings_count: parsed.findings.length,
-        })
+        trackViewed(parsed)
       } catch (err) {
         trackClientFunnelEvent('audit_result_load_failed', {
           audit_id: auditId,
@@ -892,7 +890,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     }
 
     fetchResults()
-  }, [auditId])
+  }, [auditId, initialResults, initialUnlocked])
 
   const sendEmail = async () => {
     if (!emailForm.email || !results) return

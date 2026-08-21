@@ -27,6 +27,7 @@ interface AuditData {
   composite?: number
   findings: AuditFinding[]
   created_at?: string
+  email?: string
 }
 
 async function validateKey(rawKey: string): Promise<{ valid: boolean; email?: string; plan?: string }> {
@@ -38,7 +39,9 @@ async function validateKey(rawKey: string): Promise<{ valid: boolean; email?: st
     })
     if (!res.ok) return { valid: false }
     const data = await res.json()
-    return { valid: data.valid === true, email: data.email, plan: data.plan }
+    const emailRaw = data.email || data.workspace_email
+    const email = typeof emailRaw === 'string' ? emailRaw.trim().toLowerCase() : undefined
+    return { valid: data.valid === true, email, plan: data.plan }
   } catch {
     return { valid: false }
   }
@@ -148,18 +151,24 @@ export async function GET(request: NextRequest) {
   const acceptHeader = request.headers.get('accept') || ''
   const isMarkdown = format === 'md' || format === 'markdown' || acceptHeader.includes('text/markdown')
 
-  // Check auth
-  if (rawKey) {
-    const keyAuth = await validateKey(rawKey)
-    if (!keyAuth.valid) {
-      return NextResponse.json(
-        {
-          error: 'Invalid or expired Nebula API key.',
-          hint: 'Generate an API key in your customer workspace at https://nebulacomponents.com/workspace?tab=settings',
-        },
-        { status: 401 }
-      )
-    }
+  if (!rawKey.startsWith('nbk_')) {
+    return NextResponse.json(
+      {
+        error: 'Nebula API key required.',
+        hint: 'Generate an API key in your customer workspace at https://nebulacomponents.com/workspace?tab=settings',
+      },
+      { status: 401 }
+    )
+  }
+  const keyAuth = await validateKey(rawKey)
+  if (!keyAuth.valid) {
+    return NextResponse.json(
+      {
+        error: 'Invalid or expired Nebula API key.',
+        hint: 'Generate an API key in your customer workspace at https://nebulacomponents.com/workspace?tab=settings',
+      },
+      { status: 401 }
+    )
   }
 
   if (!targetUrl) {
@@ -180,23 +189,94 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  try {
-    // Run audit scan or fetch recent for this URL
-    const runRes = await fetch(`${API_BASE}/audit/run`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: targetUrl }),
-      signal: AbortSignal.timeout(20000),
-    })
+  const keyEmail = typeof keyAuth.email === 'string' ? keyAuth.email.trim().toLowerCase() : ''
+  if (!keyEmail) {
+    return NextResponse.json({ error: 'Workspace email required.' }, { status: 403 })
+  }
 
-    if (!runRes.ok) {
+  try {
+    const listRes = await fetch(
+      `${API_BASE}/audit/by-email?email=${encodeURIComponent(keyEmail)}`,
+      { signal: AbortSignal.timeout(8000) },
+    )
+    if (!listRes.ok) {
       return NextResponse.json(
-        { error: 'Failed to retrieve conversion audit for URL', status: runRes.status },
+        { error: 'Failed to retrieve conversion audit for URL', status: listRes.status },
         { status: 502 }
       )
     }
 
-    const auditData: AuditData = await runRes.json()
+    const listData = await listRes.json() as {
+      audits?: Array<{ id?: string; url?: string; status?: string }>
+    }
+    const normalizeUrl = (value: string) => value.replace(/\/$/, '')
+    const urlMatch = (row: { id?: string; url?: string; status?: string }) => (
+      typeof row.url === 'string'
+      && typeof row.id === 'string'
+      && normalizeUrl(row.url) === normalizeUrl(targetUrl)
+    )
+    const rows = listData.audits || []
+    const match = rows.find((row) => row.status === 'completed' && urlMatch(row))
+    const open = rows.find((row) => (
+      (row.status === 'pending' || row.status === 'running') && urlMatch(row)
+    ))
+
+    if (!match?.id && open?.id) {
+      return NextResponse.json(
+        {
+          protocol: 'nebula-agent-fix/v1',
+          status: 'pending',
+          audit_id: open.id,
+          url: targetUrl,
+          message: 'Audit accepted. Poll GET /api/v1/fixes/{audit_id} when complete.',
+        },
+        { status: 202 },
+      )
+    }
+
+    if (!match?.id) {
+      const acceptRes = await fetch(`${API_BASE}/audit/accept`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: targetUrl, email: keyEmail }),
+        signal: AbortSignal.timeout(10_000),
+      })
+      if (!acceptRes.ok) {
+        return NextResponse.json(
+          { error: 'Failed to retrieve conversion audit for URL', status: acceptRes.status },
+          { status: 502 }
+        )
+      }
+      const accepted = await acceptRes.json() as { audit_id?: string }
+      return NextResponse.json(
+        {
+          protocol: 'nebula-agent-fix/v1',
+          status: 'pending',
+          audit_id: accepted.audit_id,
+          url: targetUrl,
+          message: 'Audit accepted. Poll GET /api/v1/fixes/{audit_id} when complete.',
+        },
+        { status: 202 },
+      )
+    }
+
+    const detailRes = await fetch(`${API_BASE}/audit/${match.id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (!detailRes.ok) {
+      return NextResponse.json(
+        { error: 'Failed to retrieve conversion audit for URL', status: detailRes.status },
+        { status: 502 }
+      )
+    }
+
+    const auditData: AuditData = await detailRes.json()
+    const owner = typeof auditData.email === 'string' ? auditData.email.trim().toLowerCase() : ''
+    if (!owner || owner !== keyEmail) {
+      return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
+    }
     const payload = formatAgentPayload(auditData, isMarkdown)
 
     if (isMarkdown && typeof payload === 'string') {

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import {
   Globe,
   ArrowRight,
@@ -10,30 +10,27 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react'
-import { ScaledDashboard } from './ScaledDashboard'
 import { SignalHorizon } from './SignalHorizon'
 import { NebulaMark } from '@/components/NebulaMark'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
-export const HeroSection: React.FC = () => {
-  const router = useRouter()
-  const [url, setUrl] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const inputRef = React.useRef<HTMLInputElement>(null)
+const ScaledDashboard = dynamic(() => import('./ScaledDashboard'), { ssr: false })
 
-  const handleAuditSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const trimmed = url.trim()
-    if (!trimmed) {
-      inputRef.current?.focus()
-      return
+export const HeroSection: React.FC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleAuditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget
+    const input = form.elements.namedItem('url')
+    if (input instanceof HTMLInputElement) {
+      const trimmed = input.value.trim()
+      if (trimmed && !/^https?:\/\//i.test(trimmed)) {
+        input.value = `https://${trimmed}`
+      }
     }
 
     setIsSubmitting(true)
-    const formatted = trimmed.startsWith('http://') || trimmed.startsWith('https://')
-      ? trimmed
-      : `https://${trimmed}`
 
     trackClientFunnelEvent('audit_cta_clicked', {
       cta_id: 'hero_run_free_audit',
@@ -41,8 +38,6 @@ export const HeroSection: React.FC = () => {
       target_url: '/audit',
       has_url: true,
     })
-
-    router.push(`/audit?url=${encodeURIComponent(formatted)}&utm_source=hero-search`)
   }
 
   return (
@@ -102,6 +97,8 @@ export const HeroSection: React.FC = () => {
             }}
           >
           <form
+            action="/audit"
+            method="get"
             onSubmit={handleAuditSubmit}
             className="relative overflow-hidden flex items-center rounded-full bg-bg-panel/90 backdrop-blur-xl border border-border p-1.5 pl-4 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_30px_rgba(199,255,47,0.08)] focus-within:border-accent/60 focus-within:shadow-[0_0_35px_rgba(199,255,47,0.18)] transition-all"
           >
@@ -110,19 +107,18 @@ export const HeroSection: React.FC = () => {
               Landing Page URL
             </label>
             <input
-              ref={inputRef}
               id="hero-landing-url"
-              type="url"
+              name="url"
+              type="text"
               inputMode="url"
               autoCapitalize="none"
               autoCorrect="off"
               spellCheck={false}
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              required
               placeholder="https://yourlandingpage.com/pricing"
-              disabled={isSubmitting}
-              className="w-full bg-transparent text-sm sm:text-base text-fg placeholder:text-fg-muted/70 focus:outline-none disabled:opacity-75"
+              className="w-full bg-transparent text-sm sm:text-base text-fg placeholder:text-fg-muted/70 focus:outline-none"
             />
+            <input type="hidden" name="utm_source" value="hero-search" />
 
             {/* Unified Submit CTA Button */}
             <button

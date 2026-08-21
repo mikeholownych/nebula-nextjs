@@ -1,22 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { recordFunnelEvent, type FunnelEventPayload } from '@/app/lib/funnel-ledger'
-import type { EventStage } from '@/app/lib/analytics-registry'
+import { getEventDefinition, type EventStage } from '@/app/lib/analytics-registry'
+import { MAX_JSON_BODY_BYTES, jsonBodyTooLarge, payloadTooLargeResponse } from '@/app/lib/request-limits'
 
 /**
  * POST /api/analytics/funnel
  * Ingests canonical client funnel events into the internal append-only event ledger.
+ * Server-owned and payment events are rejected; invalid payloads are not inserted.
  */
 export async function POST(request: NextRequest) {
   try {
+    if (jsonBodyTooLarge(request)) {
+      return payloadTooLargeResponse()
+    }
     const text = await request.text()
     if (!text) {
       return NextResponse.json({ error: 'Empty body' }, { status: 400 })
     }
+    if (new TextEncoder().encode(text).byteLength > MAX_JSON_BODY_BYTES) {
+      return payloadTooLargeResponse()
+    }
 
-    const raw = JSON.parse(text) as Record<string, unknown>
+    let raw: Record<string, unknown>
+    try {
+      raw = JSON.parse(text) as Record<string, unknown>
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+    }
     const eventName = (raw.eventName || raw.event_name) as string
     if (!eventName) {
       return NextResponse.json({ error: 'eventName is required' }, { status: 400 })
+    }
+    if (eventName === 'purchase_completed') {
+      return NextResponse.json({ error: 'Event is not client-ingestible' }, { status: 400 })
+    }
+    const def = getEventDefinition(eventName)
+    if (!def || def.source_of_truth !== 'client') {
+      return NextResponse.json({ error: 'Event is not client-ingestible' }, { status: 400 })
     }
 
     const payload: FunnelEventPayload = {
@@ -46,6 +66,9 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await recordFunnelEvent(payload)
+    if (!result.success) {
+      return NextResponse.json({ error: result.error || 'Invalid payload' }, { status: 400 })
+    }
 
     return NextResponse.json({
       received: true,

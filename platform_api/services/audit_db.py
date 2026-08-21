@@ -35,23 +35,15 @@ class AuditDB:
         self.pool = None
 
     async def connect(self):
-        """Create connection pool"""
+        """Create connection pool. Schema changes belong in migrations, not connect()."""
         if not self.pool:
-            self.pool = await asyncpg.create_pool(self.db_url, min_size=2, max_size=10, statement_cache_size=0)
-            # Ensure schema columns exist (idempotent, cheap).
-            try:
-                async with self.pool.acquire() as conn:
-                    await conn.execute(
-                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS engine_version TEXT"
-                    )
-                    await conn.execute(
-                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS guided_implementation jsonb"
-                    )
-                    await conn.execute(
-                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS strategic_finding text"
-                    )
-            except Exception:
-                pass
+            self.pool = await asyncpg.create_pool(
+                self.db_url,
+                min_size=2,
+                max_size=10,
+                statement_cache_size=0,
+                server_settings={"statement_timeout": "15s"},
+            )
 
     async def close(self):
         """Close connection pool"""
@@ -59,27 +51,24 @@ class AuditDB:
             await self.pool.close()
 
     async def get_or_create_customer(self, email: str, name: Optional[str] = None) -> UUID:
-        """Get or create customer by email"""
+        """Get or create customer by email."""
         async with self.pool.acquire() as conn:
-            # Try to get existing
             row = await conn.fetchrow(
-                "SELECT id FROM customers WHERE email = $1",
-                email
-            )
-            if row:
-                return row['id']
-
-            # Create new
-            row = await conn.fetchrow(
-                "INSERT INTO customers (email, name) VALUES ($1, $2) RETURNING id",
+                """
+                INSERT INTO customers (email, name) VALUES ($1, $2)
+                ON CONFLICT (email) DO UPDATE
+                SET name = COALESCE(EXCLUDED.name, customers.name)
+                RETURNING id
+                """,
                 email, name
             )
             return row['id']
 
     async def create_audit(self, url: str, email: str, name: Optional[str] = None,
                            source: Optional[str] = None,
-                           partner_id: Optional[str] = None) -> UUID:
-        """Create a new audit record"""
+                           partner_id: Optional[str] = None,
+                           engine_input: Optional[dict] = None) -> UUID:
+        """Create a new audit record in pending state."""
         await self.connect()
 
         customer_id = await self.get_or_create_customer(email, name)
@@ -87,13 +76,125 @@ class AuditDB:
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
-                INSERT INTO audits (customer_id, url, email, name, status, source, partner_id)
-                VALUES ($1, $2, $3, $4, 'pending', $5, $6)
+                INSERT INTO audits (customer_id, url, email, name, status, source, partner_id, engine_input)
+                VALUES ($1, $2, $3, $4, 'pending', $5, $6, $7::jsonb)
                 RETURNING id
                 """,
-                customer_id, url, email, name, source, partner_id
+                customer_id, url, email, name, source, partner_id,
+                json.dumps(engine_input) if engine_input is not None else None,
             )
             return row['id']
+
+    async def find_open_by_attempt_id(self, attempt_id: str) -> Optional[dict]:
+        """Return existing pending/running audit for this analytics_attempt_id."""
+        attempt_id = (attempt_id or "").strip()
+        if not attempt_id:
+            return None
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT id, url, email, name, status, engine_input
+                FROM audits
+                WHERE engine_input->>'analytics_attempt_id' = $1
+                  AND status IN ('pending', 'running')
+                ORDER BY created_at ASC
+                LIMIT 1
+                """,
+                attempt_id,
+            )
+        if not row:
+            return None
+        data = dict(row)
+        if data.get("engine_input") and isinstance(data["engine_input"], str):
+            try:
+                data["engine_input"] = json.loads(data["engine_input"])
+            except json.JSONDecodeError:
+                pass
+        return data
+
+    async def mark_audit_failed(self, audit_id: UUID, reason: Optional[str] = None) -> bool:
+        """Persist engine failure without overwriting a completed audit."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                """
+                UPDATE audits SET status = 'failed',
+                    engine_input = CASE
+                        WHEN $2::text IS NULL THEN engine_input
+                        ELSE COALESCE(engine_input, '{}'::jsonb)
+                             || jsonb_build_object('failure_reason', $2::text)
+                    END
+                WHERE id = $1 AND status <> 'completed'
+                """,
+                audit_id, reason,
+            )
+            return result == 'UPDATE 1'
+
+    async def claim_pending_audit(self) -> Optional[dict]:
+        """Claim the next pending audit with SKIP LOCKED. Marks it running."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE audits
+                SET status = 'running', heartbeat_at = NOW()
+                WHERE id = (
+                    SELECT id FROM audits
+                    WHERE status = 'pending'
+                    ORDER BY created_at ASC
+                    FOR UPDATE SKIP LOCKED
+                    LIMIT 1
+                )
+                RETURNING id, url, email, name, source, partner_id, engine_input, status
+                """
+            )
+            if not row:
+                return None
+            data = dict(row)
+            if data.get("engine_input") and isinstance(data["engine_input"], str):
+                data["engine_input"] = json.loads(data["engine_input"])
+            return data
+
+    async def heartbeat_audit(self, audit_id: UUID) -> None:
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            await conn.execute(
+                """
+                UPDATE audits SET heartbeat_at = NOW()
+                WHERE id = $1 AND status = 'running'
+                """,
+                audit_id,
+            )
+
+    async def sweep_stale_audits(self) -> int:
+        """Fail stale running (missed heartbeat) and abandoned pending rows."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            running = await conn.execute(
+                """
+                UPDATE audits SET status = 'failed', completed_at = NOW(),
+                    engine_input = COALESCE(engine_input, '{}'::jsonb)
+                        || jsonb_build_object('failure_reason', 'stale_heartbeat')
+                WHERE status = 'running'
+                  AND COALESCE(heartbeat_at, created_at) < NOW() - INTERVAL '3 minutes'
+                """
+            )
+            pending = await conn.execute(
+                """
+                UPDATE audits SET status = 'failed', completed_at = NOW(),
+                    engine_input = COALESCE(engine_input, '{}'::jsonb)
+                        || jsonb_build_object('failure_reason', 'stale_pending')
+                WHERE status = 'pending'
+                  AND created_at < NOW() - INTERVAL '30 minutes'
+                """
+            )
+            def _count(tag: str) -> int:
+                try:
+                    return int(tag.split()[-1])
+                except (IndexError, ValueError):
+                    return 0
+            return _count(running) + _count(pending)
 
     async def update_audit(self, audit_id: UUID, score: float, grade: str,
                           findings: List[dict], status: str = 'completed',
@@ -101,7 +202,8 @@ class AuditDB:
                           composite_anchor: Optional[float] = None,
                           engine_version: Optional[str] = None,
                           guided_implementation: Optional[dict] = None,
-                          strategic_finding: Optional[str] = None) -> bool:
+                          strategic_finding: Optional[str] = None,
+                          engine_output: Optional[dict] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -114,13 +216,15 @@ class AuditDB:
                     composite = $6, composite_anchor = $7,
                     engine_version = COALESCE($8, engine_version),
                     guided_implementation = $9,
-                    strategic_finding = $10
+                    strategic_finding = $10,
+                    engine_output = COALESCE($11::jsonb, engine_output)
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, json.dumps(findings), status,
                 composite, composite_anchor, engine_version,
                 json.dumps(guided_implementation) if guided_implementation is not None else None,
                 strategic_finding,
+                json.dumps(engine_output) if engine_output is not None else None,
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':
@@ -566,7 +670,9 @@ class AuditDB:
                 SELECT id, customer_id, url, email, name, status,
                        score, grade, composite, composite_anchor, findings,
                        created_at, completed_at,
-                       email_sent_at, paid_at, paid_product
+                       email_sent_at, paid_at, paid_product,
+                       engine_input, engine_output,
+                       guided_implementation, strategic_finding
                 FROM audits WHERE id = $1
                 """,
                 audit_id
@@ -588,6 +694,13 @@ class AuditDB:
                 data['audit_id'] = str(data.pop('id'))
                 if data.get('customer_id'):
                     data['customer_id'] = str(data['customer_id'])
+                for json_key in ('engine_input', 'engine_output', 'guided_implementation'):
+                    value = data.get(json_key)
+                    if value and isinstance(value, str):
+                        try:
+                            data[json_key] = json.loads(value)
+                        except json.JSONDecodeError:
+                            pass
                 return data
             return None
 
@@ -659,6 +772,23 @@ class AuditDB:
 
             # Claimed by a different email - caller should return 400
             return {"claimed": False, "audit_id": str(audit_id), "email": current_norm}
+
+    async def count_completed_this_month(self, email: str) -> int:
+        """Completed audits this UTC calendar month for quota (nebula_audit)."""
+        await self.connect()
+        normalized = email.strip().lower()
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT COUNT(*) AS cnt
+                FROM audits
+                WHERE LOWER(email) = $1
+                  AND status = 'completed'
+                  AND created_at >= date_trunc('month', NOW() AT TIME ZONE 'UTC')
+                """,
+                normalized,
+            )
+            return int(row["cnt"] or 0) if row else 0
 
     async def get_audits_by_email(self, email: str, limit: int = 10) -> List[dict]:
         """Get audits by email"""
@@ -1127,6 +1257,9 @@ class AuditDB:
                 WHERE status = 'completed'
                   AND score IS NOT NULL
                   AND email != ALL($1::text[])
+                  AND COALESCE(completed_at, created_at) > NOW() - INTERVAL '90 days'
+                ORDER BY COALESCE(completed_at, created_at) DESC
+                LIMIT 500
                 """,
                 list(INTERNAL_EMAILS),
             )

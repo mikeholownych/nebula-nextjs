@@ -1,5 +1,4 @@
 import re
-import time
 from typing import Optional
 
 import httpx
@@ -112,18 +111,15 @@ async def verify_social_proof(url: str, html: Optional[str] = None) -> SignalRes
 
 async def verify_load_speed(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        start = time.monotonic()
-        async with httpx.AsyncClient(timeout=TIMEOUT, follow_redirects=True) as client:
-            resp = await client.head(url, headers={"User-Agent": "NebulaVerifier/1.0"})
-            resp.raise_for_status()
-        ttfb = time.monotonic() - start
-        if ttfb < 1.0:
-            return _result(True, 1.0, None, f"TTFB: {ttfb:.2f}s")
-        if ttfb < 3.0:
-            return _result(True, 0.7, None, f"TTFB: {ttfb:.2f}s (acceptable)")
-        return _result(False, 0.3, f"TTFB too slow: {ttfb:.2f}s", f"{ttfb:.2f}s")
+        if html is None:
+            html = await _fetch_html(url)
+        html_bytes = len(html.encode("utf-8", errors="ignore"))
+        html_kib = html_bytes / 1024
+        if html_kib < 120:
+            return _result(True, 0.8, None, f"HTML {html_kib:.0f} KiB")
+        return _result(False, 0.5, f"HTML is {html_kib:.0f} KiB", f"{html_kib:.0f} KiB")
     except Exception as e:
-        return _result(False, 0.0, f"Request failed: {str(e)[:100]}")
+        return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
 async def verify_mobile(url: str, html: Optional[str] = None) -> SignalResult:

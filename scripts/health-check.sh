@@ -64,9 +64,9 @@ send_alert() {
 # Health checks
 log_info "Starting health check cycle"
 
-# 1. Check Next.js server
-if ! curl -f -s http://localhost:3000 > /dev/null 2>&1; then
-    send_alert "nextjs_down" "🚨 *NEXT.JS DOWN* - server not responding on port 3000. Time: $(date)"
+# 1. Check Next.js process readiness (not HTML /)
+if ! curl -f -s http://127.0.0.1:3000/api/readyz > /dev/null 2>&1; then
+    send_alert "nextjs_down" "🚨 *NEXT.JS DOWN* - /api/readyz not responding on port 3000. Time: $(date)"
 else
     log_info "Next.js server: OK"
 fi

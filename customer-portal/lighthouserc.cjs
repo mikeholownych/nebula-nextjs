@@ -2,6 +2,9 @@ module.exports = {
   ci: {
     collect: {
       url: [
+        'http://localhost:3102/',
+        'http://localhost:3102/audit',
+        'http://localhost:3102/checkout',
         'http://localhost:3102/learning-centre',
         'http://localhost:3102/learning-centre/landing-page-not-converting',
         'http://localhost:3102/resources/citable',

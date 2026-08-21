@@ -156,23 +156,43 @@ describe('production safety containment', () => {
   })
 
   it('forwards audit email requests to the scoring backend rather than fabricating a send', async () => {
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ status: 'sent' }),
-    })
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          audit_id: checkoutAuditId,
+          url: 'https://example.com',
+          email: 'person@example.com',
+          score: 71,
+          grade: 'B',
+          findings: [{ key: 'cta' }],
+        }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ status: 'sent' }),
+      })
 
+    process.env.AUDIT_UNLOCK_SECRET = 'test-unlock-secret'
+    const token = signAuditUnlock(checkoutAuditId, 'person@example.com')
     const response = await auditEmailPost(jsonRequest('http://localhost/api/audit/email', {
-      url: 'https://example.com',
-      email: 'person@example.com',
+      auditId: checkoutAuditId,
+      url: 'https://forged.example',
+      email: 'victim@example.com',
       score: 42,
       grade: 'C',
       findings: [],
-    }))
+    }, { cookie: `audit_unlock_${checkoutAuditId}=${token}` }))
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(global.fetch).toHaveBeenNthCalledWith(
+      2,
       'http://127.0.0.1:8001/audit/email',
       expect.objectContaining({ method: 'POST' }),
     )
+    const sent = JSON.parse((global.fetch as jest.Mock).mock.calls[1][1].body as string)
+    expect(sent.email).toBe('person@example.com')
+    expect(sent.score).toBe(71)
+    expect(sent.findings).toEqual([{ key: 'cta' }])
     await expect(response.json()).resolves.toEqual({ status: 'sent' })
   })
 

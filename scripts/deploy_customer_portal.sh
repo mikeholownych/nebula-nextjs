@@ -32,7 +32,36 @@ cd "$PORTAL_DIR"
 npm ci --include=dev
 npm run ci
 
-log "Build succeeded. Confirming $SITE_UNIT's cgroup before restart ..."
+# Revision alignment (do not stamp from this script by default).
+# After a full rebuild+restart, these four values must match:
+#   1. git rev-parse HEAD
+#   2. customer-portal/app/lib/build-info.json `revision` (written by npm run build)
+#   3. HTML `X-Nebula-Revision` (baked from build-info.json at next build)
+#   4. FastAPI GET /healthz `revision` via systemd drop-in NEBULA_BUILD_REVISION
+# This script restarts nebula-nextjs only. It does NOT write a SHA into systemd
+# and does NOT restart nebula-platform-api. To stamp the API revision after a
+# coordinated deploy, write a 0400 drop-in then restart the API unit separately:
+#   printf '[Service]\nEnvironment=NEBULA_BUILD_REVISION=%s\n' "$(git rev-parse HEAD)" \
+#     | sudo tee /etc/systemd/system/nebula-platform-api.service.d/revision.conf
+#   sudo chmod 0400 /etc/systemd/system/nebula-platform-api.service.d/revision.conf
+#   sudo systemctl daemon-reload
+#   sudo systemctl restart nebula-platform-api.service
+# Gate that sequence behind an explicit operator action — never as a side effect
+# of a portal-only deploy. See customer-portal/docs/architecture/deployment-revision.md.
+
+log "Build succeeded. Confirming FastAPI already serves POST /audit/accept ..."
+# Production FastAPI sets openapi_url=None. GET on a POST-only route is 405 when
+# the path exists; 404 means the accept handler is not mounted.
+accept_code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 5 \
+  "http://127.0.0.1:8001/audit/accept" || echo 000)
+if [[ "$accept_code" == "404" || "$accept_code" == "000" || -z "$accept_code" ]]; then
+  log "FAIL: refuse to restart Next until FastAPI serves POST /audit/accept (GET probe HTTP ${accept_code})."
+  log "Operator order: apply platform_api/migrations/20260820_audit_runner_queue.sql on nebula_audit → restart nebula-platform-api → then retry this script → stamp SHA."
+  exit 1
+fi
+log "FastAPI /audit/accept reachable (GET HTTP ${accept_code})"
+
+log "Confirming $SITE_UNIT's cgroup before restart ..."
 pre_cgroup=$(systemctl show "$SITE_UNIT" -p ControlGroup --value)
 log "Current cgroup: ${pre_cgroup:-<not running>}"
 
@@ -41,7 +70,7 @@ sudo systemctl restart "$SITE_UNIT"
 
 # Give the new process a moment to bind and become ready before verifying.
 for i in $(seq 1 15); do
-  if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:3000/; then
+  if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:3000/api/readyz; then
     break
   fi
   sleep 1

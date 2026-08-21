@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireUnlockCookieOrOwner } from '@/app/lib/audit-access'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -10,7 +11,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * Only returns the token - never the full audit - so there's no PII leak.
  */
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params
@@ -19,6 +20,9 @@ export async function GET(
   if (!uuidRe.test(id)) {
     return NextResponse.json({ error: 'Invalid audit ID' }, { status: 400 })
   }
+
+  const access = await requireUnlockCookieOrOwner(req, id, 403)
+  if ('response' in access) return access.response
 
   try {
     const upstream = await fetch(`${API_BASE}/audit/${id}/share-token`, {

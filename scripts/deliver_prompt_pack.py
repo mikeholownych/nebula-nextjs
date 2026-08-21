@@ -6,8 +6,8 @@ the moment a real checkout.session.completed event lands for the Fix Pack offer.
 
 The paid offer is one customer-implemented copy, code, or configuration change
 for the highest-impact failing signal. The script re-resolves the exact paid
-audit, re-scrapes its URL, generates candidate artifacts, selects the worst
-scoring signal, and emails that one bounded implementation kit.
+audit from stored engine findings, generates the implementation kit from that
+payload, and emails it. It does not re-scrape or re-score the live page.
 
 Usage: venv/bin/python3 scripts/deliver_prompt_pack.py \
   --email buyer@example.com --stripe-session-id cs_live_... \
@@ -23,7 +23,7 @@ from pathlib import Path
 NEBULA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(NEBULA_DIR))
 
-from deliver_audit import scrape_page, score_audit, send_via_agentmail, HOT_LEAD_PATH  # noqa: E402
+from deliver_audit import send_via_agentmail, HOT_LEAD_PATH  # noqa: E402
 from audit_pipeline.prompts.real_generator import generate_real_pack  # noqa: E402
 
 LEDGER_FILE = NEBULA_DIR / "ledgers" / "customer-ledger.jsonl"
@@ -79,8 +79,8 @@ def find_audited_url(audit_id, email, rows):
     return matches[0].get("url") if len(matches) == 1 else None
 
 
-def fetch_audited_url(audit_id, _email):
-    """Resolve the exact completed audit from the platform authority."""
+def fetch_stored_audit(audit_id):
+    """Return the completed audit payload already stored by the engine."""
     import os
     import requests
 
@@ -94,8 +94,78 @@ def fetch_audited_url(audit_id, _email):
         or audit.get("status") != "completed"
     ):
         return None
+    return audit
+
+
+def fetch_audited_url(audit_id, _email):
+    """Resolve the exact completed audit URL from the platform authority."""
+    audit = fetch_stored_audit(audit_id)
+    if not audit:
+        return None
     url = audit.get("url")
     return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
+
+
+_FINDING_KEY_MAP = (
+    ("headline", "headline"),
+    ("h1", "headline"),
+    ("cta", "cta"),
+    ("contrast", "cta"),
+    ("social", "social_proof"),
+    ("proof", "social_proof"),
+    ("speed", "load_speed"),
+    ("load", "load_speed"),
+    ("mobile", "mobile"),
+    ("viewport", "mobile"),
+    ("fold", "above_fold"),
+    ("ad_", "ad_signals"),
+    ("tracking", "ad_signals"),
+    ("seo", "seo_foundations"),
+    ("schema", "seo_foundations"),
+    ("ai_", "ai_readiness"),
+    ("citation", "ai_readiness"),
+)
+
+
+def _dimension_key(finding_key):
+    from audit_pipeline.prompts.generator import TEMPLATE_MAP
+
+    key = (finding_key or "").lower()
+    if key in TEMPLATE_MAP:
+        return key
+    for needle, mapped in _FINDING_KEY_MAP:
+        if needle in key:
+            return mapped
+    return None
+
+
+def audit_from_stored(stored):
+    """Build the pack generator's audit shape from stored findings, not a live re-score."""
+    findings = stored.get("findings") or []
+    if not isinstance(findings, list):
+        findings = []
+    dimensions = {}
+    for finding in findings:
+        if not isinstance(finding, dict):
+            continue
+        dim_key = _dimension_key(str(finding.get("key") or ""))
+        if not dim_key or dim_key in dimensions:
+            continue
+        try:
+            impact = float(finding.get("impact") or 8)
+        except (TypeError, ValueError):
+            impact = 8
+        dimensions[dim_key] = {
+            "score": max(0, min(10, 10 - impact)),
+            "issue": finding.get("issue") or finding.get("label") or "",
+            "fix": finding.get("fix") or "",
+        }
+    return {
+        "overall": stored.get("score") or stored.get("composite") or 0,
+        "overall_grade": stored.get("grade") or "N/A",
+        "dimensions": dimensions,
+        "findings": findings,
+    }
 
 
 def append_ledger(entry):
@@ -457,11 +527,12 @@ def main():
         return 1
 
     try:
-        url = fetch_audited_url(audit_id, email)
+        stored = fetch_stored_audit(audit_id)
     except Exception as e:
         log(f"exact audit lookup failed for {audit_id}: {e}")
-        url = None
-    if not url:
+        stored = None
+    url = stored.get("url") if isinstance(stored, dict) else None
+    if not stored or not isinstance(url, str) or not url.startswith(("http://", "https://")):
         log(f"exact completed audit {audit_id} could not be resolved for {email}")
         telegram_notify(
             f"⚠️ Prompt pack purchase from {email}, but exact audit {audit_id} could not be "
@@ -470,22 +541,24 @@ def main():
         return 1
 
     log(f"building repair sprint for {email} ({url})")
+    audit = audit_from_stored(stored)
+    page = {
+        "url": url,
+        "title": stored.get("page_title") or stored.get("title") or "",
+        "h1": stored.get("page_h1") or stored.get("h1") or "",
+    }
     try:
-        page = scrape_page(url)
-        audit = score_audit(page)
         pack = generate_real_pack(audit, page, email=email, stated_goal="conversions")
     except Exception as e:
-        log(f"failed to build prompt pack: {e}")
-        telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) - pack generation failed: {e}. Needs manual follow-up.")
-        return 1
-
-    if pack["count"] == 0:
-        # Page scores well across the board - nothing below the 7/10 threshold
-        # to generate a prompt for. Real edge case, needs a human, not a silent no-op.
-        log(f"{email}: page scored too well to generate any prompts (count=0)")
+        log(f"failed to build prompt pack from stored findings: {e}")
         telegram_notify(
-            f"⚠️ Prompt pack purchase from {email} ({url}) - the page now scores well enough "
-            f"that no prompts qualify (all dimensions >= 7/10). Needs a manual response, not an empty email."
+            f"⚠️ Prompt pack purchase from {email} ({url}) - pack generation failed: {e}. Needs manual follow-up."
+        )
+        return 1
+    if not pack or not pack.get("teaser"):
+        log("pack generation produced no teaser - refusing to mark delivered")
+        telegram_notify(
+            f"⚠️ Prompt pack purchase from {email} ({url}) - pack generation produced no teaser. Needs manual follow-up."
         )
         return 1
 

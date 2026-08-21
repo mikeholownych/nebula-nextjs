@@ -9,8 +9,23 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     global.fetch = originalFetch
   })
 
+  function mockValidKey() {
+    return {
+      ok: true,
+      json: async () => ({ valid: true, email: 'owner@example.com' }),
+    }
+  }
+
   it('returns usage documentation when no URL or audit ID is provided', async () => {
-    const req = new NextRequest('http://localhost:3000/api/v1/fixes')
+    global.fetch = jest.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) })
+    })
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
     const res = await getFixes(req)
     expect(res.status).toBe(200)
 
@@ -45,6 +60,7 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     const mockAuditData = {
       audit_id: 'test_audit_456',
       url: 'https://example.com',
+      email: 'owner@example.com',
       score: 62,
       grade: 'C',
       composite: 62,
@@ -67,7 +83,20 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     }
 
     global.fetch = jest.fn().mockImplementation((url: string) => {
-      if (url.includes('/audit/run')) {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      if (String(url).includes('/audit/by-email')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            email: 'owner@example.com',
+            audits: [{ id: 'test_audit_456', url: 'https://example.com', status: 'completed' }],
+          }),
+        })
+      }
+      if (String(url).includes('/audit/test_audit_456')) {
         return Promise.resolve({
           ok: true,
           status: 200,
@@ -77,9 +106,12 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
       return Promise.resolve({ ok: true, json: async () => ({}) })
     })
 
-    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com')
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
     const res = await getFixes(req)
     expect(res.status).toBe(200)
+    expect(JSON.stringify((global.fetch as jest.Mock).mock.calls.map((c) => String(c[0])))).not.toContain('/audit/run')
 
     const data = await res.json()
     expect(data.protocol).toBe('nebula-agent-fix/v1')
@@ -92,10 +124,48 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     expect(data.leaks[0].suggested_snippet).toContain('#c7ff2f')
   })
 
+  it('reuses a pending audit for the same owner URL instead of accepting again', async () => {
+    global.fetch = jest.fn().mockImplementation((url: string, init?: RequestInit) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      if (String(url).includes('/audit/by-email')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            email: 'owner@example.com',
+            audits: [{ id: 'pending-audit-1', url: 'https://example.com/', status: 'pending' }],
+          }),
+        })
+      }
+      if (String(url).includes('/audit/accept')) {
+        return Promise.resolve({
+          ok: true,
+          status: 202,
+          json: async () => ({ audit_id: 'should-not-be-used' }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) })
+    })
+
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
+    const res = await getFixes(req)
+    expect(res.status).toBe(202)
+    const data = await res.json()
+    expect(data.audit_id).toBe('pending-audit-1')
+    expect(data.status).toBe('pending')
+    const called = (global.fetch as jest.Mock).mock.calls.map((c) => String(c[0]))
+    expect(called.some((u) => u.includes('/audit/accept'))).toBe(false)
+  })
+
   it('returns markdown formatted directives when format=md is requested', async () => {
     const mockAuditData = {
       audit_id: 'test_audit_789',
       url: 'https://example.com',
+      email: 'owner@example.com',
       score: 55,
       grade: 'D',
       findings: [
@@ -113,7 +183,20 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     }
 
     global.fetch = jest.fn().mockImplementation((url: string) => {
-      if (url.includes('/audit/run')) {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      if (String(url).includes('/audit/by-email')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            email: 'owner@example.com',
+            audits: [{ id: 'test_audit_789', url: 'https://example.com', status: 'completed' }],
+          }),
+        })
+      }
+      if (String(url).includes('/audit/test_audit_789')) {
         return Promise.resolve({
           ok: true,
           status: 200,
@@ -123,7 +206,9 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
       return Promise.resolve({ ok: true, json: async () => ({}) })
     })
 
-    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com&format=md')
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com&format=md', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
     const res = await getFixes(req)
     expect(res.status).toBe(200)
     expect(res.headers.get('Content-Type')).toContain('text/markdown')
@@ -138,12 +223,17 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
     const mockAuditData = {
       audit_id: 'audit_abc_xyz',
       url: 'https://mysite.com',
+      status: 'completed',
       score: 75,
       grade: 'B',
       findings: [],
+      email: 'owner@example.com',
     }
 
     global.fetch = jest.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
       if (url.includes('/audit/audit_abc_xyz')) {
         return Promise.resolve({
           ok: true,
@@ -154,12 +244,142 @@ describe('Direct AI Agent Fix API Protocol (/api/v1/fixes)', () => {
       return Promise.resolve({ ok: true, json: async () => ({}) })
     })
 
-    const req = new NextRequest('http://localhost:3000/api/v1/fixes/audit_abc_xyz')
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes/audit_abc_xyz', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
     const res = await getFixById(req, { params: Promise.resolve({ auditId: 'audit_abc_xyz' }) })
     expect(res.status).toBe(200)
 
     const data = await res.json()
     expect(data.audit_id).toBe('audit_abc_xyz')
     expect(data.url).toBe('https://mysite.com')
+    expect(data.status).toBe('success')
+  })
+
+  it.each(['pending', 'running'] as const)(
+    'returns 202 when polling a %s audit by id instead of a success payload',
+    async (status) => {
+      global.fetch = jest.fn().mockImplementation((url: string) => {
+        if (String(url).includes('/workspace/api-keys/validate')) {
+          return Promise.resolve(mockValidKey())
+        }
+        if (String(url).includes('/audit/pending-or-running')) {
+          return Promise.resolve({
+            ok: true,
+            status: 200,
+            json: async () => ({
+              audit_id: 'pending-or-running',
+              url: 'https://example.com',
+              status,
+              email: 'owner@example.com',
+              findings: [],
+            }),
+          })
+        }
+        return Promise.resolve({ ok: true, json: async () => ({}) })
+      })
+
+      const req = new NextRequest('http://localhost:3000/api/v1/fixes/pending-or-running', {
+        headers: { Authorization: 'Bearer nbk_test_key' },
+      })
+      const res = await getFixById(req, { params: Promise.resolve({ auditId: 'pending-or-running' }) })
+      expect(res.status).toBe(202)
+      const data = await res.json()
+      expect(data.status).toBe('pending')
+      expect(data.audit_id).toBe('pending-or-running')
+      expect(data.leaks).toBeUndefined()
+    },
+  )
+
+  it('returns 422 when polling a failed audit by id', async () => {
+    global.fetch = jest.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      if (String(url).includes('/audit/failed-audit')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            audit_id: 'failed-audit',
+            url: 'https://example.com',
+            status: 'failed',
+            email: 'owner@example.com',
+            findings: [],
+          }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) })
+    })
+
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes/failed-audit', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
+    const res = await getFixById(req, { params: Promise.resolve({ auditId: 'failed-audit' }) })
+    expect(res.status).toBe(422)
+    const data = await res.json()
+    expect(data.status).toBe('failed')
+    expect(data.leaks).toBeUndefined()
+  })
+
+  it('fails closed when the API key has no owner email', async () => {
+    global.fetch = jest.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ valid: true }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) })
+    })
+
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
+    const res = await getFixes(req)
+    expect(res.status).toBeGreaterThanOrEqual(400)
+    expect(res.status).toBeLessThan(500)
+    const urls = (global.fetch as jest.Mock).mock.calls.map((c) => String(c[0]))
+    expect(urls.some((u) => u.includes('/audit/run'))).toBe(false)
+    expect(urls.some((u) => u.includes('/audit/accept'))).toBe(false)
+  })
+
+  it('enqueues via /audit/accept when no completed row exists and does not wait on /audit/run', async () => {
+    global.fetch = jest.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/workspace/api-keys/validate')) {
+        return Promise.resolve(mockValidKey())
+      }
+      if (String(url).includes('/audit/by-email')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({ email: 'owner@example.com', audits: [] }),
+        })
+      }
+      if (String(url).includes('/audit/accept')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            audit_id: '123e4567-e89b-12d3-a456-426614174000',
+            url: 'https://example.com',
+            status: 'pending',
+          }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) })
+    })
+
+    const req = new NextRequest('http://localhost:3000/api/v1/fixes?url=https://example.com', {
+      headers: { Authorization: 'Bearer nbk_test_key' },
+    })
+    const res = await getFixes(req)
+    expect(res.status).toBe(202)
+    const body = await res.json()
+    expect(body.status).toBe('pending')
+    expect(body.audit_id).toBe('123e4567-e89b-12d3-a456-426614174000')
+    const urls = (global.fetch as jest.Mock).mock.calls.map((c) => String(c[0]))
+    expect(urls.some((u) => u.includes('/audit/run'))).toBe(false)
+    expect(urls.some((u) => u.includes('/audit/accept'))).toBe(true)
   })
 })

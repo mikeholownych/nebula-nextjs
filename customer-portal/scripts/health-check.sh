@@ -29,6 +29,11 @@ ROUTES=(
 
 FAILED_ROUTES=""
 
+READY_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:3000/api/readyz" --max-time 10 2>/dev/null || echo "000")
+if [ "$READY_STATUS" != "200" ]; then
+  FAILED_ROUTES="$FAILED_ROUTES\n- /api/readyz (origin) -> HTTP $READY_STATUS"
+fi
+
 for route in "${ROUTES[@]}"; do
   URL="$BASE_URL$route"
   STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL" --max-time 10 2>/dev/null || echo "000")

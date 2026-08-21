@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
-const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8769'
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 export async function GET(request: NextRequest) {
   const auth = await requireWorkspaceUser(request)

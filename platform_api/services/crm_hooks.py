@@ -188,13 +188,13 @@ async def purchase_completed(
     audit_id: str = "",
     audit_url: str = "",
     first_name: str = "",
+    trigger_delivery: bool = False,
 ) -> None:
-    """Called on Stripe checkout.session.completed or charge.succeeded.
-    Updates CRM, stops outreach sequence, and triggers automated Fix Pack delivery.
+    """CRM projection after a portal-persisted purchase.
 
-    audit_id and audit_url are sourced from Stripe session metadata when using
-    the /api/checkout route. For static payment links (no metadata), we fall back
-    to the most recent audit in customer-ledger.jsonl for this email.
+    Kit delivery is owned by Next.js POST /api/webhooks/stripe. Pass
+    trigger_delivery=True only for the legacy FastAPI webhook path if it
+    must recover a missed portal fulfillment — default is off.
     """
     if not email:
         return
@@ -231,8 +231,9 @@ async def purchase_completed(
     except Exception as exc:
         log.warning("purchase_completed sequence stop failed: %s", exc)
 
-    # Trigger fix pack delivery (fail-silent - never block the payment record)
-    if product_type in ("fix_pack", "fix-pack", "97"):
+    # Trigger fix pack delivery (fail-silent - never block the payment record).
+    # Portal webhook is the money/fulfillment writer; skip unless explicitly asked.
+    if trigger_delivery and product_type in ("fix_pack", "fix-pack", "97"):
         try:
             import asyncio as _aio
             from pathlib import Path as _Path

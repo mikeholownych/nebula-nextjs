@@ -31,7 +31,7 @@ export default function AiAgentFixPromptModal({
     else setInternalIsOpen(false)
   }
 
-  const effectiveAuditId = results?.id || auditId || 'audit_latest'
+  const effectiveAuditId = results?.audit_id || auditId || 'audit_latest'
   const effectiveUrl = results?.url || pageUrl || 'https://example.com'
   const findings = results?.findings || []
 

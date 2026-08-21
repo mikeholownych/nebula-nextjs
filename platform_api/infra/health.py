@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 
 from platform_api.redis_client import redis_client
 from platform_api.services.audit_db import audit_db
@@ -16,52 +17,55 @@ async def ping():
 @router.get("/deep")
 async def deep_health():
     components = {}
-    overall = True
+    postgres_ok = False
 
-    # Redis
+    # Redis failure degrades the component without failing overall readiness.
     try:
         await redis_client.connect()
         redis_ok = await redis_client.ping()
         components["redis"] = {"status": "ok" if redis_ok else "degraded"}
-        if not redis_ok:
-            overall = False
     except Exception as exc:
         components["redis"] = {"status": "error", "detail": str(exc)}
-        overall = False
 
-    # Postgres
     try:
         await audit_db.connect()
         async with audit_db.pool.acquire() as conn:
             await conn.fetchval("SELECT 1")
         components["postgres"] = {"status": "ok"}
+        postgres_ok = True
     except Exception as exc:
         components["postgres"] = {"status": "error", "detail": str(exc)}
-        overall = False
 
-    # Last audit completed
-    try:
-        async with audit_db.pool.acquire() as conn:
-            last_completed = await conn.fetchval(
-                "SELECT MAX(completed_at) FROM audits WHERE completed_at IS NOT NULL"
-            )
-        if last_completed is None:
-            components["last_audit"] = {"status": "warning", "detail": "No completed audits found"}
-        else:
-            if last_completed.tzinfo is None:
-                last_completed = last_completed.replace(tzinfo=timezone.utc)
-            threshold = datetime.now(timezone.utc) - timedelta(hours=1)
-            if last_completed < threshold:
-                components["last_audit"] = {
-                    "status": "warning",
-                    "detail": f"Last audit completed at {last_completed.isoformat()}",
-                }
+    if postgres_ok:
+        try:
+            async with audit_db.pool.acquire() as conn:
+                last_completed = await conn.fetchval(
+                    "SELECT MAX(completed_at) FROM audits WHERE completed_at IS NOT NULL"
+                )
+            if last_completed is None:
+                components["last_audit"] = {"status": "warning", "detail": "No completed audits found"}
             else:
-                components["last_audit"] = {"status": "ok", "last": last_completed.isoformat()}
-    except Exception as exc:
-        components["last_audit"] = {"status": "error", "detail": str(exc)}
+                if last_completed.tzinfo is None:
+                    last_completed = last_completed.replace(tzinfo=timezone.utc)
+                threshold = datetime.now(timezone.utc) - timedelta(hours=1)
+                if last_completed < threshold:
+                    components["last_audit"] = {
+                        "status": "warning",
+                        "detail": f"Last audit completed at {last_completed.isoformat()}",
+                    }
+                else:
+                    components["last_audit"] = {"status": "ok", "last": last_completed.isoformat()}
+        except Exception as exc:
+            components["last_audit"] = {"status": "error", "detail": str(exc)}
+    else:
+        components["last_audit"] = {"status": "error", "detail": "postgres unavailable"}
 
-    return {
-        "status": "ok" if overall else "degraded",
-        "components": components,
-    }
+    if not postgres_ok:
+        return JSONResponse(
+            status_code=503,
+            content={"status": "error", "components": components},
+        )
+
+    redis_status = components.get("redis", {}).get("status")
+    overall_status = "ok" if redis_status == "ok" else "degraded"
+    return {"status": overall_status, "components": components}

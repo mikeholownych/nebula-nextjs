@@ -3,6 +3,25 @@ import { NextResponse } from 'next/server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
 
+function resolveRequestId(request: NextRequest): string {
+  const incoming = request.headers.get('x-request-id')?.trim()
+  return incoming || crypto.randomUUID()
+}
+
+function withRequestId(request: NextRequest, response: NextResponse): NextResponse {
+  response.headers.set('X-Request-ID', resolveRequestId(request))
+  return response
+}
+
+function nextWithRequestId(request: NextRequest): NextResponse {
+  const requestId = resolveRequestId(request)
+  const headers = new Headers(request.headers)
+  headers.set('X-Request-ID', requestId)
+  const res = NextResponse.next({ request: { headers } })
+  res.headers.set('X-Request-ID', requestId)
+  return res
+}
+
 /**
  * Proxy / edge middleware for Nebula Components.
  *
@@ -39,7 +58,7 @@ export function proxy(request: NextRequest) {
     if (!token) {
       const loginUrl = new URL('/login', SITE_URL)
       loginUrl.searchParams.set('returnTo', pathname)
-      return NextResponse.redirect(loginUrl)
+      return withRequestId(request, NextResponse.redirect(loginUrl))
     }
   }
 
@@ -48,10 +67,13 @@ export function proxy(request: NextRequest) {
     const token = request.cookies.get('access_token')?.value
     const authHeader = request.headers.get('authorization')
     if (!token && !authHeader) {
-      return new NextResponse(JSON.stringify({ error: 'Authentication required' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return withRequestId(
+        request,
+        new NextResponse(JSON.stringify({ error: 'Authentication required' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      )
     }
   }
 
@@ -67,7 +89,7 @@ export function proxy(request: NextRequest) {
     url.protocol = 'https:'
     url.hostname = 'nebulacomponents.com'
     url.port = ''
-    return NextResponse.redirect(url, 301)
+    return withRequestId(request, NextResponse.redirect(url, 301))
   }
 
   // Cloudflare forwards the visitor-facing scheme in this header. Keep the
@@ -82,20 +104,23 @@ export function proxy(request: NextRequest) {
     url.protocol = 'https:'
     url.hostname = 'nebulacomponents.com'
     url.port = ''
-    return NextResponse.redirect(url, 301)
+    return withRequestId(request, NextResponse.redirect(url, 301))
   }
 
   // ── 2. Legacy HTML/static aliases - definitive 410 ─────────────────────────
   // Block legacy .html routes
   if (pathname.toLowerCase().endsWith('.html')) {
-    return new NextResponse('Not Found', {
-      status: 404,
-      headers: {
-        'Cache-Control': 'no-store',
-        'Content-Type': 'text/plain; charset=utf-8',
-        'X-Robots-Tag': 'noindex, nofollow',
-      },
-    })
+    return withRequestId(
+      request,
+      new NextResponse('Not Found', {
+        status: 404,
+        headers: {
+          'Cache-Control': 'no-store',
+          'Content-Type': 'text/plain; charset=utf-8',
+          'X-Robots-Tag': 'noindex, nofollow',
+        },
+      }),
+    )
   }
 
   // Markdown for Agents - content negotiation
@@ -111,7 +136,7 @@ export function proxy(request: NextRequest) {
     if (prefersMarkdown) {
       const mdUrl = request.nextUrl.clone()
       mdUrl.pathname = '/llms.txt'
-      const res = NextResponse.rewrite(mdUrl)
+      const res = withRequestId(request, NextResponse.rewrite(mdUrl))
       res.headers.set('x-nebula-pathname', pathname)
       res.headers.set('x-nebula-country', country)
       res.headers.set('Content-Type', 'text/markdown; charset=utf-8')
@@ -121,7 +146,7 @@ export function proxy(request: NextRequest) {
     }
 
     // Add Vary: Accept so caches don't serve HTML to markdown agents
-    const res = NextResponse.next()
+    const res = nextWithRequestId(request)
     res.headers.set('x-nebula-pathname', pathname)
     res.headers.set('x-nebula-country', country)
     res.headers.set('Vary', 'Accept')
@@ -130,7 +155,7 @@ export function proxy(request: NextRequest) {
 
   // For all other routes (assets, API, well-known): still stamp country for any
   // server component that may read it, but skip the Vary/pathname overhead.
-  const res = NextResponse.next()
+  const res = nextWithRequestId(request)
   if (country) res.headers.set('x-nebula-country', country)
   return res
 }

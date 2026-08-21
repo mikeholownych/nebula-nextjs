@@ -43,17 +43,24 @@ function loadLighthouseConfig(): LighthouseConfig {
 }
 
 describe('Lighthouse CI lab performance budgets', () => {
-  const expectedUrls = [
+  const originalUrls = [
     'http://localhost:3102/learning-centre',
     'http://localhost:3102/learning-centre/landing-page-not-converting',
     'http://localhost:3102/resources/citable',
     'http://localhost:3102/resources/citable/jobs/technical-retrieval-audit',
   ]
+  const funnelUrls = [
+    'http://localhost:3102/',
+    'http://localhost:3102/audit',
+    'http://localhost:3102/checkout',
+  ]
 
-  it('audits the four representative routes against explicit median lab gates', () => {
+  it('audits the original four routes plus funnel URLs against explicit median lab gates', () => {
     const config = loadLighthouseConfig()
 
-    expect(config.ci.collect.url).toEqual(expectedUrls)
+    expect(config.ci.collect.url).toEqual(expect.arrayContaining([...funnelUrls, ...originalUrls]))
+    expect(config.ci.collect.url).toEqual(expect.arrayContaining(originalUrls))
+    expect(config.ci.collect.url).toEqual(expect.arrayContaining(funnelUrls))
     expect(config.ci.collect.numberOfRuns).toBeGreaterThanOrEqual(3)
     expect(config.ci.collect.startServerCommand).toBe('npm run start -- --port 3102')
     expect(new RegExp(config.ci.collect.startServerReadyPattern, 'i').test('✓ Ready in 250ms'))

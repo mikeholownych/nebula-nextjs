@@ -23,11 +23,23 @@ const handler = async (request: NextRequest) => {
   try {
     const body = await request.json()
 
-    // Forward to local FastAPI
-    const response = await fetch('http://127.0.0.1:8001/audit/run', {
+    const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')
+    const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
+    const forwardedFor = request.headers.get('x-forwarded-for')?.trim()
+      || request.headers.get('x-real-ip')?.trim()
+      || ''
+    const upstreamHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'X-Request-ID': request.headers.get('x-request-id')?.trim() || crypto.randomUUID(),
+    }
+    if (forwardedFor) upstreamHeaders['X-Forwarded-For'] = forwardedFor
+    if (email) upstreamHeaders['X-Audit-Email'] = email
+
+    const response = await fetch(`${platformApiUrl}/audit/run`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: upstreamHeaders,
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(120_000),
     })
 
     if (!response.ok) {
@@ -40,6 +52,10 @@ const handler = async (request: NextRequest) => {
     const data = await response.json()
     return NextResponse.json(data)
   } catch (error) {
+    const name = error instanceof Error ? error.name : ''
+    if (name === 'TimeoutError' || name === 'AbortError') {
+      return NextResponse.json({ error: 'Audit timed out' }, { status: 504 })
+    }
     console.error('Audit API proxy error:', error)
     return NextResponse.json(
       { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
@@ -86,7 +102,8 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   // Health check - proxy to FastAPI health endpoint (no payment required)
   try {
-    const response = await fetch('http://127.0.0.1:8001/audit/health')
+    const healthUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')
+    const response = await fetch(`${healthUrl}/audit/health`)
     const data = await response.json()
     return NextResponse.json(data)
   } catch {

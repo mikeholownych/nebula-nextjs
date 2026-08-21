@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
           ...readAttributionHeader(request),
         },
       })
-      await ph.flush()
+      void ph.flush().catch(() => undefined)
     } catch {
       // Non-fatal
     }

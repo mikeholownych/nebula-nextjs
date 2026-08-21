@@ -10,6 +10,23 @@ permissions:
   contents: read
 
 jobs:
+  pytest-platform-api:
+    name: Platform API pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Pytest platform_api
+        run: PYTHONPATH=. pytest tests/platform_api -q
+        env:
+          ENVIRONMENT: development
+
   # Job 1: Governance validation
   governance:
     name: Governance Register Validation
@@ -35,6 +52,10 @@ jobs:
         run: npm run check:public-proof
       - name: Verify intelligence stack projection
         run: npm run check:intelligence-stack
+      - name: Claims gate
+        run: npm run check:claims
+      - name: Analytics governance
+        run: npm run check:analytics-governance
 
   # Job 2: Lint and Typecheck
   lint:
@@ -157,3 +178,31 @@ jobs:
       - run: npm ci
       - name: npm audit (production deps only)
         run: npm audit --omit=dev --audit-level=moderate || true
+
+  # Job 7: Playwright e2e (installs browsers in GH; do not skip with || true)
+  e2e:
+    name: Playwright e2e
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/package-lock.json
+      - run: npm ci
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build
+          path: customer-portal/.next
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Playwright
+        run: npm run test:e2e

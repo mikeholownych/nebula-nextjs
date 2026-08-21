@@ -9,6 +9,8 @@
 import { pool } from '@/app/lib/db'
 import { auditQuotaFor } from '@/app/lib/subscription-plans'
 
+const PLATFORM_API_URL = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')
+
 export interface QuotaResult {
   allowed: boolean
   reason?: string
@@ -68,16 +70,27 @@ export async function checkAuditQuota(email: string): Promise<QuotaResult> {
     return { allowed: true, plan, quota }
   }
 
-  // Count audits started this calendar month for this email
+  // Count completed audits this calendar month from nebula_audit via FastAPI.
+  // Do not query nebula_platform.audits — that table is not the audit store.
   let usedThisMonth = 0
   try {
-    const countResult = await pool.query(
-      `SELECT COUNT(*) AS cnt FROM audits
-       WHERE LOWER(email) = $1
-         AND created_at >= date_trunc('month', NOW() AT TIME ZONE 'UTC')`,
-      [normalizedEmail],
+    const quotaResponse = await fetch(
+      `${PLATFORM_API_URL}/audit/quota?email=${encodeURIComponent(normalizedEmail)}`,
+      { signal: AbortSignal.timeout(5_000) },
     )
-    usedThisMonth = parseInt(countResult.rows[0]?.cnt ?? '0', 10)
+    if (!quotaResponse.ok) {
+      return { allowed: true, plan, quota }
+    }
+    const quotaBody: unknown = await quotaResponse.json()
+    const completed = (
+      quotaBody
+      && typeof quotaBody === 'object'
+      && 'completed_this_month' in quotaBody
+    ) ? (quotaBody as { completed_this_month: unknown }).completed_this_month : 0
+    usedThisMonth = typeof completed === 'number'
+      ? completed
+      : parseInt(String(completed ?? '0'), 10)
+    if (Number.isNaN(usedThisMonth)) usedThisMonth = 0
   } catch {
     // Fail open
     return { allowed: true, plan, quota }

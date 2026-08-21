@@ -13,19 +13,23 @@ jobs:
     steps:
       - name: Check homepage
         run: |
-          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/ | grep -q "200"
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.com/ | grep -q "200"
 
       - name: Check audit page
         run: |
-          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/audit/ | grep -q "200"
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.com/audit | grep -q "200"
 
       - name: Check pricing
         run: |
-          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/pricing/ | grep -q "200"
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.com/pricing | grep -q "200"
 
-      - name: Check API health
+      - name: Check API liveness
         run: |
-          curl -f -s https://nebulacomponents.shop/api/webhooks/rb2b | grep -q "ok"
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.com/api/healthz | grep -q "200"
+
+      - name: Check API readiness
+        run: |
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.com/api/readyz | grep -q "200"
 
   alert:
     needs: health

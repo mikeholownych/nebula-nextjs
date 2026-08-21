@@ -96,7 +96,7 @@ class DeliverPromptPackTests(unittest.TestCase):
             MockStore.return_value.is_bounced.return_value = False
             with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test", "--audit-id", "audit-selected"]), \
                  patch.object(dpp, "load_ledger_rows", return_value=[]), \
-                 patch.object(dpp, "fetch_audited_url", return_value=None), \
+                 patch.object(dpp, "fetch_stored_audit", return_value=None), \
                  patch.object(dpp, "telegram_notify") as mock_notify:
                 rc = dpp.main()
         self.assertEqual(rc, 1)
@@ -120,9 +120,14 @@ class DeliverPromptPackTests(unittest.TestCase):
                      patch.object(dpp, "LEDGER_FILE", ledger_path), \
                      patch.object(dpp, "HOT_LEAD_PATH", hot_lead_path), \
                      patch.object(dpp, "load_ledger_rows", return_value=rows), \
-                     patch.object(dpp, "fetch_audited_url", return_value="https://lead.example"), \
-                     patch.object(dpp, "scrape_page", return_value={"url": "https://lead.example"}), \
-                     patch.object(dpp, "score_audit", return_value={"overall": 7.0, "overall_grade": "B", "dimensions": {}}), \
+                     patch.object(dpp, "fetch_stored_audit", return_value={
+                         "audit_id": "audit-selected",
+                         "url": "https://lead.example",
+                         "status": "completed",
+                         "score": 7.0,
+                         "grade": "B",
+                         "findings": [{"key": "headline", "impact": 8, "issue": "Weak headline", "fix": "Rewrite"}],
+                     }), \
                      patch.object(dpp, "generate_real_pack", return_value=fake_pack), \
                      patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_123"}) as mock_send, \
                      patch.object(dpp, "telegram_notify") as mock_notify:
@@ -151,6 +156,83 @@ class DeliverPromptPackTests(unittest.TestCase):
             self.assertIn("teaser prompt", sent_body)
             self.assertNotIn("second prompt", sent_body)
 
+    def test_main_fulfills_from_stored_findings_without_live_rescore(self):
+        stored = {
+            "audit_id": "audit-selected",
+            "url": "https://lead.example",
+            "status": "completed",
+            "score": 4.0,
+            "grade": "D",
+            "page_title": "Acme Landing",
+            "page_h1": "Get started",
+            "findings": [
+                {"key": "cta", "label": "CTA", "impact": 9, "issue": "Weak CTA", "fix": "Make the CTA specific"},
+            ],
+        }
+        fake_pack = {
+            "count": 1,
+            "teaser": {"key": "cta", "label": "CTA", "prompt_md": "stored finding prompt"},
+            "full_pack": [],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            ledger_path = Path(td) / "customer-ledger.jsonl"
+            hot_lead_path = Path(td) / "HOT_LEAD.json"
+            hot_lead_path.write_text("[]")
+
+            with patch("lead_store.LeadStore") as MockStore:
+                MockStore.return_value.is_bounced.return_value = False
+                with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test", "--audit-id", "audit-selected"]), \
+                     patch.object(dpp, "LEDGER_FILE", ledger_path), \
+                     patch.object(dpp, "HOT_LEAD_PATH", hot_lead_path), \
+                     patch.object(dpp, "load_ledger_rows", return_value=[]), \
+                     patch.object(dpp, "fetch_stored_audit", return_value=stored), \
+                     patch.object(dpp, "generate_real_pack", return_value=fake_pack) as mock_gen, \
+                     patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_stored"}), \
+                     patch.object(dpp, "telegram_notify"):
+                    rc = dpp.main()
+
+        self.assertEqual(rc, 0)
+        self.assertFalse(hasattr(dpp, "scrape_page"))
+        self.assertFalse(hasattr(dpp, "score_audit"))
+        mock_gen.assert_called_once()
+        audit_arg = mock_gen.call_args[0][0]
+        page_arg = mock_gen.call_args[0][1]
+        self.assertEqual(audit_arg.get("findings"), stored["findings"])
+        self.assertEqual(page_arg.get("url"), stored["url"])
+        self.assertEqual(page_arg.get("title"), stored.get("page_title") or "")
+        self.assertEqual(page_arg.get("h1"), stored.get("page_h1") or "")
+
+    def test_main_exits_1_when_pack_has_no_teaser(self):
+        stored = {
+            "audit_id": "audit-selected",
+            "url": "https://lead.example",
+            "status": "completed",
+            "score": 8.0,
+            "grade": "B",
+            "findings": [{"key": "cta", "label": "CTA", "impact": 3, "issue": "Minor", "fix": "Nit"}],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            ledger_path = Path(td) / "customer-ledger.jsonl"
+            hot_lead_path = Path(td) / "HOT_LEAD.json"
+            hot_lead_path.write_text("[]")
+
+            with patch("lead_store.LeadStore") as MockStore:
+                MockStore.return_value.is_bounced.return_value = False
+                with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test", "--audit-id", "audit-selected"]), \
+                     patch.object(dpp, "LEDGER_FILE", ledger_path), \
+                     patch.object(dpp, "HOT_LEAD_PATH", hot_lead_path), \
+                     patch.object(dpp, "load_ledger_rows", return_value=[]), \
+                     patch.object(dpp, "fetch_stored_audit", return_value=stored), \
+                     patch.object(dpp, "generate_real_pack", return_value={"count": 0, "teaser": None, "full_pack": []}), \
+                     patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_fallback"}) as mock_send, \
+                     patch.object(dpp, "telegram_notify"):
+                    rc = dpp.main()
+
+        self.assertEqual(rc, 1)
+        mock_send.assert_not_called()
+        self.assertFalse(ledger_path.exists() and ledger_path.read_text().strip())
+
 
 if __name__ == "__main__":
     unittest.main()
+

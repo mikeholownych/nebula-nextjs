@@ -5,6 +5,8 @@ SITE_UNIT=nebula-nextjs.service
 TUNNEL_UNIT=cloudflared-tunnel.service
 PUBLIC_URL=https://nebulacomponents.com/
 LOCAL_URL=http://127.0.0.1:3000/
+READYZ_URL=http://127.0.0.1:3000/api/readyz
+API_HEALTHZ_URL=http://127.0.0.1:8001/healthz
 
 assert_state() {
   local unit=$1 expected_enabled=$2 expected_active=$3
@@ -53,6 +55,10 @@ cloudflared_count=$(pgrep -xc cloudflared || true)
 }
 echo 'PASS: exactly one cloudflared process'
 
+code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "$READYZ_URL")
+[[ "$code" == 200 ]] || { printf 'FAIL: %s returned %s\n' "$READYZ_URL" "$code" >&2; exit 1; }
+printf 'PASS: %s returned HTTP 200\n' "$READYZ_URL"
+
 for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "$target")
   [[ "$code" == 200 ]] || { printf 'FAIL: %s returned %s\n' "$target" "$code" >&2; exit 1; }
@@ -74,9 +80,18 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
 done
 
 # Verify build-info SHA assertion against repository HEAD on BOTH Origin and Edge
+# Also require FastAPI /healthz.revision to match Next /api/build-info.revision.
+# Do not stamp systemd from this check.
 expected_sha=$(git -C /home/mike/nebula/customer-portal rev-parse HEAD 2>/dev/null || true)
+origin_sha=$(curl -fsS --max-time 5 http://127.0.0.1:3000/api/build-info | grep -oE '"revision":"[^"]+"' | cut -d'"' -f4 || true)
+api_sha=$(curl -fsS --max-time 5 "$API_HEALTHZ_URL" | grep -oE '"revision":"[^"]+"' | cut -d'"' -f4 || true)
+[[ -n "$origin_sha" && "$origin_sha" == "$api_sha" ]] || {
+  printf 'FAIL: Next /api/build-info revision %s does not match FastAPI /healthz revision %s\n' "${origin_sha:-<none>}" "${api_sha:-<none>}" >&2
+  exit 1
+}
+printf 'PASS: Next /api/build-info and FastAPI /healthz revisions match (%s)\n' "$origin_sha"
+
 if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
-  origin_sha=$(curl -fsS --max-time 5 http://127.0.0.1:3000/api/build-info | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
   [[ "$origin_sha" == "$expected_sha" ]] || {
     printf 'FAIL: origin SHA %s does not match repository HEAD %s\n' "${origin_sha:-<none>}" "$expected_sha" >&2
     exit 1

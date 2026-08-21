@@ -3,6 +3,7 @@ from unittest.mock import AsyncMock
 from uuid import uuid4
 
 import pytest
+from fastapi import HTTPException
 
 from platform_api.routes import audit_api
 
@@ -103,7 +104,9 @@ async def test_successful_email_is_marked_sent(monkeypatch):
 async def test_script_failure_does_not_expose_stderr(monkeypatch):
     audit_id = uuid4()
     monkeypatch.setattr(audit_api.audit_db, "create_audit", AsyncMock(return_value=audit_id))
+    monkeypatch.setattr(audit_api.audit_db, "mark_audit_failed", AsyncMock(return_value=True))
     monkeypatch.setattr(audit_api.analytics, "track_audit_started", AsyncMock())
+    monkeypatch.setattr(audit_api.analytics, "track_audit_failed", AsyncMock())
     monkeypatch.setattr(audit_api, "get_posthog", lambda: None)
     secret = "/internal/path provider-secret attacker-controlled"
     monkeypatch.setattr(
@@ -112,11 +115,12 @@ async def test_script_failure_does_not_expose_stderr(monkeypatch):
         lambda *args, **kwargs: SimpleNamespace(returncode=1, stdout="", stderr=secret),
     )
 
-    result = await audit_api.run_audit(audit_api.AuditRequest(url="https://example.com"))
+    with pytest.raises(HTTPException) as excinfo:
+        await audit_api.run_audit(audit_api.AuditRequest(url="https://example.com"))
 
-    assert result.status == "error"
-    assert result.error == "Audit processing failed"
-    assert secret not in result.error
+    assert excinfo.value.status_code == 500
+    assert excinfo.value.detail == "Audit processing failed"
+    assert secret not in str(excinfo.value.detail)
 
 
 @pytest.mark.asyncio
@@ -128,11 +132,12 @@ async def test_unexpected_audit_exception_has_stable_public_error(monkeypatch):
         AsyncMock(side_effect=RuntimeError(secret)),
     )
 
-    result = await audit_api.run_audit(audit_api.AuditRequest(url="https://example.com"))
+    with pytest.raises(HTTPException) as excinfo:
+        await audit_api.run_audit(audit_api.AuditRequest(url="https://example.com"))
 
-    assert result.status == "error"
-    assert result.error == "Audit processing unavailable"
-    assert secret not in result.error
+    assert excinfo.value.status_code == 500
+    assert excinfo.value.detail == "Audit processing unavailable"
+    assert secret not in str(excinfo.value.detail)
 
 
 @pytest.mark.asyncio

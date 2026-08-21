@@ -5,39 +5,74 @@ import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 import { clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
 import { checkAuditQuota } from '@/app/lib/audit-quota'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
+import { logApiError } from '@/app/lib/ops-log'
+import { readCappedJson } from '@/app/lib/request-limits'
 
 /**
  * Start an audit by calling FastAPI directly
  * POST /api/audit/start
  */
 
+function isTimeoutError(error: unknown): boolean {
+  const name = error instanceof Error ? error.name : ''
+  const message = error instanceof Error ? error.message : String(error)
+  return name === 'TimeoutError' || name === 'AbortError' || /timeout|aborted/i.test(message)
+}
+
+function platformApiUrl(): string {
+  return (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')
+}
+
+function visitorForwardedFor(request: NextRequest): string | null {
+  const forwarded = request.headers.get('x-forwarded-for')?.trim()
+  if (forwarded) return forwarded
+  const realIp = request.headers.get('x-real-ip')?.trim()
+  return realIp || null
+}
+
+function auditRunHeaders(request: NextRequest, email: string): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'X-Request-ID': request.headers.get('x-request-id')?.trim() || randomUUID(),
+  }
+  const forwardedFor = visitorForwardedFor(request)
+  if (forwardedFor) headers['X-Forwarded-For'] = forwardedFor
+  if (email) headers['X-Audit-Email'] = email
+  return headers
+}
+
 export async function POST(request: NextRequest) {
   const attribution = readAttributionHeader(request)
   const analyticsConsent = hasServerAnalyticsConsent(request)
   const distinctId = clientAnalyticsDistinctId(request)
+  const requestId = request.headers.get('x-request-id')?.trim() || null
+  let auditAttemptId: string | null = null
+  let journeyId: string | null = null
+
+  const withRequestId = (properties: Record<string, unknown>): Record<string, unknown> => (
+    requestId ? { ...properties, request_id: requestId } : properties
+  )
 
   try {
-    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string; audit_attempt_id?: string; journey_id?: string; monthly_ad_spend?: number }
-    try {
-      body = await request.json()
-    } catch {
-      await recordFunnelEvent({
-        eventName: 'audit_submission_rejected',
-        sourceSystem: 'server_api',
-        failureReason: 'invalid_payload',
-        properties: { reason_code: 'invalid_payload' },
-      })
-      return NextResponse.json(
-        { error: 'Invalid request body' },
-        { status: 400 }
-      )
+    const parsed = await readCappedJson<{ url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string; audit_attempt_id?: string; journey_id?: string; monthly_ad_spend?: number }>(request)
+    if (!parsed.ok) {
+      if (parsed.response.status !== 413) {
+        await recordFunnelEvent({
+          eventName: 'audit_submission_rejected',
+          sourceSystem: 'server_api',
+          failureReason: 'invalid_payload',
+          properties: withRequestId({ reason_code: 'invalid_payload' }),
+        })
+      }
+      return parsed.response
     }
+    const body = parsed.body
     const { url, referrer, audit_reason, monthly_ad_spend } = body
-    const auditAttemptId =
+    auditAttemptId =
       typeof body.audit_attempt_id === 'string' && body.audit_attempt_id.trim().length > 0
         ? body.audit_attempt_id.trim().slice(0, 100)
         : null
-    const journeyId =
+    journeyId =
       typeof body.journey_id === 'string' && body.journey_id.trim().length > 0
         ? body.journey_id.trim().slice(0, 100)
         : null
@@ -49,7 +84,7 @@ export async function POST(request: NextRequest) {
         sourceSystem: 'server_api',
         auditAttemptId,
         failureReason: 'invalid_url',
-        properties: { reason_code: 'invalid_url' },
+        properties: withRequestId({ reason_code: 'invalid_url' }),
       })
       return NextResponse.json(
         { error: 'URL is required' },
@@ -73,7 +108,7 @@ export async function POST(request: NextRequest) {
         sourceSystem: 'server_api',
         auditAttemptId,
         failureReason: 'invalid_url',
-        properties: { reason_code: 'invalid_url' },
+        properties: withRequestId({ reason_code: 'invalid_url' }),
       })
       return NextResponse.json(
         { error: 'Invalid URL format' },
@@ -88,7 +123,7 @@ export async function POST(request: NextRequest) {
         sourceSystem: 'server_api',
         auditAttemptId,
         failureReason: 'unsupported_scheme',
-        properties: { reason_code: 'unsupported_scheme' },
+        properties: withRequestId({ reason_code: 'unsupported_scheme' }),
       })
       return NextResponse.json(
         { error: 'URL must be HTTP or HTTPS' },
@@ -105,7 +140,7 @@ export async function POST(request: NextRequest) {
         sourceSystem: 'server_api',
         auditAttemptId,
         failureReason: 'blocked_target',
-        properties: { reason_code: 'blocked_target' },
+        properties: withRequestId({ reason_code: 'blocked_target' }),
       })
       return NextResponse.json(
         { error: 'URL is not a public address' },
@@ -123,7 +158,7 @@ export async function POST(request: NextRequest) {
           sourceSystem: 'server_api',
           auditAttemptId,
           failureReason: 'quota_exceeded',
-          properties: { reason_code: 'quota_exceeded' },
+          properties: withRequestId({ reason_code: 'quota_exceeded' }),
         })
         return NextResponse.json(
           {
@@ -140,58 +175,9 @@ export async function POST(request: NextRequest) {
 
     const anonymousEmail = submittedEmail ?? `anonymous+${randomUUID()}@invalid.nebulacomponents.com`
 
-    // Audit accepted & started event records in internal ledger
-    await recordFunnelEvent({
-      eventName: 'audit_accepted',
-      stage: 'audit_intake',
-      sourceSystem: 'server_api',
-      auditAttemptId,
-      journeyId,
-      properties: {
-        audit_attempt_id: auditAttemptId,
-        journey_id: journeyId,
-        page_domain: parsedUrl.hostname,
-        referrer_class: referrer || null,
-      },
-    })
-
-    await recordFunnelEvent({
-      eventName: 'audit_started',
-      stage: 'audit_execution',
-      sourceSystem: 'server_api',
-      auditAttemptId,
-      journeyId,
-      properties: {
-        audit_attempt_id: auditAttemptId,
-        journey_id: journeyId,
-        page_domain: parsedUrl.hostname,
-        referrer_class: referrer || null,
-      },
-    })
-
-    if (analyticsConsent && distinctId) try {
-      const ph = getPostHogClient()
-      ph.capture({
-        distinctId,
-        event: 'audit_started',
-        properties: {
-          audit_attempt_id: auditAttemptId,
-          journey_id: journeyId,
-          page_url: processedUrl,
-          page_domain: parsedUrl.hostname,
-          referrer: referrer || null,
-          audit_reason: audit_reason || null,
-          ...attribution,
-        },
-      })
-      await ph.flush()
-    } catch {
-      // Non-fatal - never let analytics block the response
-    }
-
-    const apiResponse = await fetch('http://127.0.0.1:8001/audit/run', {
+    const apiResponse = await fetch(`${platformApiUrl()}/audit/accept`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: auditRunHeaders(request, anonymousEmail),
       body: JSON.stringify({
         url: processedUrl,
         email: anonymousEmail,
@@ -202,22 +188,23 @@ export async function POST(request: NextRequest) {
         analytics_journey_id: journeyId,
         monthly_ad_spend: monthly_ad_spend,
       }),
-      signal: AbortSignal.timeout(120000) // 2 minute timeout
+      signal: AbortSignal.timeout(10_000),
     })
 
     if (!apiResponse.ok) {
+      const failureReason = apiResponse.status === 504 ? 'fetch_timeout' : 'internal_error'
       await recordFunnelEvent({
         eventName: 'audit_failed',
         stage: 'audit_execution',
         sourceSystem: 'server_api',
         auditAttemptId,
         journeyId,
-        failureReason: 'internal_error',
-        properties: { reason_code: 'internal_error', status_code: apiResponse.status },
+        failureReason,
+        properties: withRequestId({ reason_code: failureReason, status_code: apiResponse.status }),
       })
       return NextResponse.json(
         { error: 'Audit service unavailable' },
-        { status: 503 }
+        { status: apiResponse.status === 504 ? 504 : 503 }
       )
     }
 
@@ -225,14 +212,17 @@ export async function POST(request: NextRequest) {
     try {
       data = await apiResponse.json()
     } catch {
-      console.error('Audit start error: FastAPI returned a 2xx with a non-JSON/empty body')
+      logApiError('Audit start error: FastAPI returned a 2xx with a non-JSON/empty body', {
+        request_id: requestId,
+        journey_id: journeyId,
+      })
       await recordFunnelEvent({
         eventName: 'audit_failed',
         stage: 'audit_execution',
         sourceSystem: 'server_api',
         auditAttemptId,
         failureReason: 'invalid_payload',
-        properties: { reason_code: 'invalid_payload' },
+        properties: withRequestId({ reason_code: 'invalid_payload' }),
       })
       return NextResponse.json(
         { error: 'Audit service returned an invalid response' },
@@ -240,24 +230,102 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    if (data.status === 'error' || data.status === 'failed') {
+      await recordFunnelEvent({
+        eventName: 'audit_failed',
+        stage: 'audit_execution',
+        sourceSystem: 'server_api',
+        auditAttemptId,
+        journeyId,
+        failureReason: 'internal_error',
+        properties: withRequestId({ reason_code: 'internal_error', engine_status: data.status }),
+      })
+      return NextResponse.json(
+        { error: 'Audit failed' },
+        { status: 502 }
+      )
+    }
+
+    const auditId = typeof data.audit_id === 'string' ? data.audit_id : null
+
+    await recordFunnelEvent({
+      eventName: 'audit_accepted',
+      stage: 'audit_intake',
+      sourceSystem: 'server_api',
+      auditAttemptId,
+      auditId,
+      journeyId,
+      properties: withRequestId({
+        audit_attempt_id: auditAttemptId,
+        audit_id: auditId,
+        journey_id: journeyId,
+        page_domain: parsedUrl.hostname,
+        referrer_class: referrer || null,
+      }),
+    })
+
+    await recordFunnelEvent({
+      eventName: 'audit_started',
+      stage: 'audit_execution',
+      sourceSystem: 'server_api',
+      auditAttemptId,
+      auditId,
+      journeyId,
+      properties: withRequestId({
+        audit_attempt_id: auditAttemptId,
+        audit_id: auditId,
+        journey_id: journeyId,
+        page_domain: parsedUrl.hostname,
+        referrer_class: referrer || null,
+      }),
+    })
+
+    if (analyticsConsent && distinctId) try {
+      const ph = getPostHogClient()
+      ph.capture({
+        distinctId,
+        event: 'audit_started',
+        properties: {
+          audit_id: auditId,
+          audit_attempt_id: auditAttemptId,
+          journey_id: journeyId,
+          page_url: processedUrl,
+          page_domain: parsedUrl.hostname,
+          referrer: referrer || null,
+          audit_reason: audit_reason || null,
+          ...attribution,
+        },
+      })
+    } catch {
+      // Non-fatal - never let analytics block the response
+    }
+
     return NextResponse.json({
-      audit_id: data.audit_id,
+      audit_id: auditId,
       audit_attempt_id: auditAttemptId,
       url: data.url,
-      status: data.status,
-      score: data.score,
-      grade: data.grade,
-      findings: data.findings,
-      message: 'Audit completed'
+      status: data.status || 'pending',
+      message: 'Audit accepted',
     })
   } catch (error) {
-    console.error('Audit start error:', error)
+    logApiError('Audit start error', { request_id: requestId, journey_id: journeyId, error })
     if (hasServerAnalyticsConsent(request)) {
       captureServerException(error, { route: 'POST /api/audit/start' })
     }
+    const timeout = isTimeoutError(error)
+    const failureReason = timeout ? 'fetch_timeout' : 'network_error'
+    await recordFunnelEvent({
+      eventName: 'audit_failed',
+      stage: 'audit_execution',
+      sourceSystem: 'server_api',
+      auditAttemptId,
+      journeyId,
+      failureReason,
+      properties: withRequestId({ reason_code: failureReason }),
+    })
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: timeout ? 'Audit timed out' : 'Internal server error' },
+      { status: timeout ? 504 : 500 }
     )
   }
 }

@@ -3,16 +3,16 @@ Nebula Audit API
 FastAPI routes for audit processing (called by n8n workflows)
 """
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 from uuid import UUID, uuid4
-import subprocess
 import json
 import sys
 import os
 import asyncio
 import httpx
+from asyncpg.exceptions import UniqueViolationError
 
 from posthog import identify_context, new_context  # type: ignore[import-untyped]
 
@@ -74,6 +74,15 @@ class AuditResponse(BaseModel):
     strategic_finding: Optional[str] = None
 
 
+async def _persist_audit_failed(audit_id) -> None:
+    if not audit_id:
+        return
+    try:
+        await audit_db.mark_audit_failed(audit_id)
+    except Exception as exc:
+        print(f"[audit_api] failed to persist failed status for {audit_id}: {exc}")
+
+
 async def _crm_audit_completed(email: str, score: int, utm_source: Optional[str] = None) -> None:
     """Non-blocking CRM update after audit completes. Fire-and-forget via asyncio.create_task."""
     try:
@@ -84,339 +93,256 @@ async def _crm_audit_completed(email: str, score: int, utm_source: Optional[str]
         pass  # never block audit response
 
 
-@router.post("/run", response_model=AuditResponse)
-async def run_audit(request: AuditRequest):
+@router.post("/accept", response_model=AuditResponse)
+async def accept_audit(request: AuditRequest):
+    """Persist pending and return immediately. Scoring runs on the worker."""
+    from platform_api.services.audit_runner import kick, runner_started
+
+    if not runner_started():
+        raise HTTPException(status_code=503, detail="Audit runner unavailable")
+
+    audit_email = request.email or f"anonymous+{uuid4()}@invalid.nebulacomponents.com"
+    attempt_id = (request.analytics_attempt_id or "").strip() or None
+    engine_input = {
+        "monthly_ad_spend": request.monthly_ad_spend,
+        "analytics_consent": request.analytics_consent,
+        "analytics_distinct_id": request.analytics_distinct_id,
+        "analytics_attempt_id": attempt_id or request.analytics_attempt_id,
+        "analytics_journey_id": request.analytics_journey_id,
+        "source": request.source,
+        "name": request.name,
+    }
+    if attempt_id:
+        existing = await audit_db.find_open_by_attempt_id(attempt_id)
+        if existing:
+            await kick()
+            return AuditResponse(
+                audit_id=str(existing.get("id") or existing.get("audit_id")),
+                url=existing.get("url") or request.url,
+                status=existing.get("status") or "pending",
+            )
     try:
-        # Anonymous audits receive a unique non-deliverable identity so unrelated
-        # visitors never collapse into a shared customer or analytics person.
-        audit_email = request.email or f"anonymous+{uuid4()}@invalid.nebulacomponents.com"
-        # Create audit record in DB
         audit_id = await audit_db.create_audit(
             url=request.url,
             email=audit_email,
             name=request.name,
             source=request.source,
-            partner_id=request.partner_id
+            partner_id=request.partner_id,
+            engine_input=engine_input,
         )
-
-        # Track audit started only after explicit analytics consent. The ID is
-        # browser- or server-derived and must never be a raw email address.
-        if request.analytics_consent and request.analytics_distinct_id:
-            await analytics.track_audit_started(
-                url=request.url,
-                email=request.analytics_distinct_id,
-            )
-        ph = get_posthog()
-        distinct_id = request.analytics_distinct_id or str(audit_id)
-        attempt_id = request.analytics_attempt_id
-
-        # No PostHog `audit_started` here on purpose. It belongs to the caller
-        # (the portal's /api/audit/start route), which holds the referrer and
-        # attribution context this service never sees. Emitting it here as well
-        # produced two `audit_started` events per audit under the same
-        # distinct_id, inflating the funnel's first step and depressing every
-        # conversion rate measured against it. This service owns `audit_completed`
-        # and `audit_failed`, both stamped with the shared correlation key.
-
-        # Build command
-        # Fetch historical data for personalization if we have an email
-        historical_data_json = None
-        if request.email and "@invalid" not in request.email:
-            try:
-                # Get audit history and score trend for this user and URL
-                history = await audit_db.get_audit_history(request.email, request.url, limit=5)
-                score_trend = await audit_db.get_score_trend(request.email, request.url, limit=5)
-                recurring_issues = await audit_db.get_recurring_issues(request.email, limit=3)
-                effective_fixes = await audit_db.get_effective_fixes(request.email, limit=3)
-                
-                historical_data = {
-                    "history": history,
-                    "score_trend": score_trend,
-                    "recurring_issues": recurring_issues,
-                    "effective_fixes": effective_fixes
-                }
-                historical_data_json = json.dumps(historical_data)
-            except Exception as e:
-                # Don't fail the audit if historical data fetching fails
-                print(f"[audit_api] Failed to fetch historical data: {e}")
-        
-        cmd = [
-            "/home/mike/nebula/venv/bin/python3",
-            AUDIT_SCRIPT,
-            request.url,
-            audit_email,
-            "--json",
-            "--dry-run",
-        ]
-        
-        # Add historical data if available
-        if historical_data_json:
-            cmd.extend(["--historical-data", historical_data_json])
-            
-        # Add monthly ad spend if provided
-        if request.monthly_ad_spend is not None:
-            cmd.extend(["--monthly-ad-spend", str(request.monthly_ad_spend)])
-
-        # Execute
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=120,
-            cwd="/home/mike/nebula"
-        )
-
-        if result.returncode != 0:
-            await analytics.track_audit_failed(
-                reason="script_error",
-                audit_id=str(audit_id),
-                audit_attempt_id=attempt_id,
-            )
-            if request.analytics_consent and request.analytics_distinct_id and ph:
-                with new_context(client=ph):
-                    identify_context(distinct_id)
-                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "audit_attempt_id": attempt_id, "reason": "script_error"})
-            return AuditResponse(
-                audit_id=str(audit_id),
-                url=request.url,
-                status="error",
-                error="Audit processing failed"
-            )
-
-        # Parse JSON output
-        lines = result.stdout.strip().split('\n')
-        json_line = None
-        for line in reversed(lines):
-            if line.strip().startswith('{'):
-                json_line = line
-                break
-
-        if not json_line:
-            await analytics.track_audit_failed(
-                reason="no_json_output",
-                audit_id=str(audit_id),
-                audit_attempt_id=attempt_id,
-            )
-            if request.analytics_consent and request.analytics_distinct_id and ph:
-                with new_context(client=ph):
-                    identify_context(distinct_id)
-                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "audit_attempt_id": attempt_id, "reason": "no_json_output"})
-            return AuditResponse(
-                audit_id=str(audit_id),
-                url=request.url,
-                status="error",
-                error="No JSON output found"
-            )
-
-        data = json.loads(json_line)
-
-        # Update database
-        await audit_db.update_audit(
-            audit_id=audit_id,
-            score=data.get('score', 0),
-            grade=data.get('grade', 'N/A'),
-            composite=data.get('composite'),
-            composite_anchor=data.get('composite_anchor'),
-            findings=data.get('findings', []),
-            status='completed',
-            engine_version=data.get('engine_version'),
-            guided_implementation=data.get('guided_implementation'),
-            strategic_finding=data.get('strategic_finding'),
-        )
-
-        # CRM: upsert prospect with UTM + score (fail-silent)
-        asyncio.create_task(_crm_audit_completed(
-            email=audit_email,
-            score=data.get('score', 0),
-            utm_source=request.source,
-        ))
-
-        # Fire content extraction pipeline (non-blocking, best-effort)
-        async def _fire_content_pipeline():
-            try:
-                async with httpx.AsyncClient(timeout=5.0) as client:
-                    await client.post(
-                        "https://n8n.mikeholownych.com/webhook/content-extract",
-                        json={
-                            "audit_id": str(audit_id),
-                            "url": request.url,
-                            "findings": data.get('findings', []),
-                        }
-                    )
-            except Exception:
-                pass  # Non-fatal - never block audit response
-
-        asyncio.create_task(_fire_content_pipeline())
-
-        # Track audit completed in both ledger and external analytics
-        await analytics.track_audit_completed(
-            email=request.analytics_distinct_id or distinct_id,
-            score=data.get('score', 0),
-            grade=data.get('grade', 'N/A'),
-            audit_id=str(audit_id),
-            audit_attempt_id=attempt_id,
-            journey_id=request.analytics_journey_id,
-            findings_count=len(data.get('findings', [])),
-        )
-
-        if request.analytics_consent and request.analytics_distinct_id and ph:
-            with new_context(client=ph):
-                identify_context(distinct_id)
-                ph.capture(
-                    "audit_completed",
-                    properties={
-                        "audit_id": str(audit_id),
-                        "audit_attempt_id": attempt_id,
-                        "score": data.get("score"),
-                        "grade": data.get("grade"),
-                        "findings_count": len(data.get("findings", [])),
-                    },
+    except HTTPException:
+        raise
+    except UniqueViolationError:
+        if attempt_id:
+            existing = await audit_db.find_open_by_attempt_id(attempt_id)
+            if existing:
+                await kick()
+                return AuditResponse(
+                    audit_id=str(existing.get("id") or existing.get("audit_id")),
+                    url=existing.get("url") or request.url,
+                    status=existing.get("status") or "pending",
                 )
-
-        # Assign nurture track based on findings
-        if request.email and data.get('findings'):
-            try:
-                track_id = trigger_track_assignment(
-                    email=request.email,
-                    audit_id=str(audit_id),
-                    findings=data.get('findings', []),
-                    url=request.url
-                )
-                # Add track_id to response
-                data['nurture_track'] = track_id
-            except Exception as e:
-                # Don't fail audit on track assignment error
-                print(f"[audit_api] Track assignment failed: {e}")
-
-        # Auto-send audit results email for real (non-anonymous, non-internal) addresses.
-        # Fire-and-forget: email failure must never block the audit response.
-        _real_email = (
-            request.email
-            and "@invalid" not in request.email
-            and request.email.strip()
-            and request.email.strip().lower() not in {
-                "mike.holownych@gmail.com",
-                "mcp-agent@nebula.internal",
-                "test@example.com",
-                "e2e-crawler-test@example.com",
-                "qa-workspace-20260803-001@example.invalid",
-            }
-        )
-        if _real_email:
-            _send_email = str(request.email)
-            _send_name = request.name
-            _send_url = request.url
-            _send_score = data.get('score', 0)
-            _send_grade = data.get('grade', 'N/A')
-            _send_findings = data.get('findings', [])
-            async def _auto_send_email():
-                try:
-                    result_email = await email_service.send_audit_results(
-                        AuditEmailData(
-                            url=_send_url,
-                            email=_send_email,
-                            name=_send_name,
-                            score=_send_score,  # already on 0-10 scale from audit engine
-                            grade=_send_grade,
-                            findings=_send_findings,
-                            guided_implementation=data.get('guided_implementation')
-                        )
-                    )
-                    if result_email.get("status") == "sent":
-                        await audit_db.mark_email_sent(audit_id)
-                        ph2 = get_posthog()
-                        if ph2:
-                            with new_context(client=ph2):
-                                identify_context(request.email)
-                                ph2.capture(
-                                    "audit_email_sent",
-                                    properties={
-                                        "audit_id": str(audit_id),
-                                        "grade": data.get("grade"),
-                                        "score": data.get("score"),
-                                        "message_id": result_email.get("message_id"),
-                                        "source": "auto_completion",
-                                    },
-                                )
-                    else:
-                        print(f"[audit_api] email send failed for {audit_id}: {result_email.get('error')}")
-                except Exception as _email_exc:
-                    print(f"[audit_api] email auto-send exception for {audit_id}: {_email_exc}")
-
-            asyncio.create_task(_auto_send_email())
-
-        return AuditResponse(
-            audit_id=str(audit_id),
-            url=request.url,
-            status="completed",
-            score=data.get("score"),
-            grade=data.get("grade"),
-            composite=data.get("composite"),
-            composite_anchor=data.get("composite_anchor"),
-            findings=data.get("findings", []),
-            dimensions=data.get("dimensions", {}),
-            page_title=data.get("page_title", ""),
-            page_h1=data.get("page_h1", ""),
-            # Historical tracking and personalization fields
-            historical_data=data.get("historical_data"),
-            score_trend=data.get("historical_insights", {}).get("score_trend") if data.get("historical_insights") else None,
-            recurring_issues=data.get("historical_data", {}).get("recurring_issues") if data.get("historical_data") else None,
-            effective_fixes=data.get("historical_data", {}).get("effective_fixes") if data.get("historical_data") else None,
-            historical_insights=data.get("historical_insights"),
-            guided_implementation=data.get("guided_implementation"),
-            strategic_finding=data.get("strategic_finding"),
-        )
-
-    except subprocess.TimeoutExpired:
-        ph = get_posthog()
-        if request.analytics_consent and request.analytics_distinct_id and ph:
-            distinct_id = request.analytics_distinct_id
-            with new_context(client=ph):
-                identify_context(distinct_id)
-                ph.capture("audit_failed", properties={"reason": "timeout"})
-        return AuditResponse(
-            audit_id=request.audit_id,
-            url=request.url,
-            status="error",
-            error="Audit timed out (120s limit)",
-            historical_data=None,
-            score_trend=None,
-            recurring_issues=None,
-            effective_fixes=None,
-            historical_insights=None
-        )
-    except json.JSONDecodeError:
-        ph = get_posthog()
-        if request.analytics_consent and request.analytics_distinct_id and ph:
-            distinct_id = request.analytics_distinct_id
-            with new_context(client=ph):
-                identify_context(distinct_id)
-                ph.capture("audit_failed", properties={"reason": "json_parse_error"})
-        return AuditResponse(
-            audit_id=request.audit_id,
-            url=request.url,
-            status="error",
-            error="Audit response was invalid",
-            historical_data=None,
-            score_trend=None,
-            recurring_issues=None,
-            effective_fixes=None,
-            historical_insights=None
-        )
+        raise HTTPException(status_code=500, detail="Audit processing unavailable")
     except Exception as _exc:
         import logging as _log
-        _log.exception("[audit/run] Unhandled exception: %s", _exc)
-        return AuditResponse(
-            audit_id=request.audit_id,
-            url=request.url,
-            status="error",
-            error="Audit processing unavailable",
-            historical_data=None,
-            score_trend=None,
-            recurring_issues=None,
-            effective_fixes=None,
-            historical_insights=None
-        )
+        _log.exception("[audit/accept] persist failed: %s", _exc)
+        raise HTTPException(status_code=500, detail="Audit processing unavailable")
+
+    await kick()
+    return AuditResponse(audit_id=str(audit_id), url=request.url, status="pending")
+
+
+@router.post("/run", response_model=AuditResponse)
+async def run_audit(request: AuditRequest):
+    """Compatibility wait path for widget/lab/monitors. Does not block the event loop with subprocess."""
+    from platform_api.services.audit_runner import wait_for_result
+
+    accepted = await accept_audit(request)
+    try:
+        row = await wait_for_result(UUID(accepted.audit_id))
+    except TimeoutError:
+        raise HTTPException(status_code=504, detail="Audit timed out (120s limit)")
+    except HTTPException:
+        raise
+    except Exception as _exc:
+        import logging as _log
+        _log.exception("[audit/run] wait failed: %s", _exc)
+        raise HTTPException(status_code=500, detail="Audit processing unavailable")
+
+    if row.get("status") == "failed":
+        reason = None
+        engine_input = row.get("engine_input") or {}
+        if isinstance(engine_input, dict):
+            reason = engine_input.get("failure_reason")
+        if reason == "timeout":
+            raise HTTPException(status_code=504, detail="Audit timed out (120s limit)")
+        raise HTTPException(status_code=500, detail="Audit processing failed")
+
+    output = row.get("engine_output") if isinstance(row.get("engine_output"), dict) else {}
+    return _response_from_row(request, row, output)
+
+
+def _response_from_row(request: AuditRequest, row: dict, data: dict) -> AuditResponse:
+    return AuditResponse(
+        audit_id=str(row.get("audit_id") or ""),
+        url=row.get("url") or request.url,
+        status="completed",
+        score=row.get("score") if row.get("score") is not None else data.get("score"),
+        grade=row.get("grade") or data.get("grade"),
+        composite=row.get("composite") if row.get("composite") is not None else data.get("composite"),
+        composite_anchor=(
+            row.get("composite_anchor")
+            if row.get("composite_anchor") is not None
+            else data.get("composite_anchor")
+        ),
+        findings=row.get("findings") or data.get("findings", []),
+        dimensions=data.get("dimensions", {}),
+        page_title=data.get("page_title", ""),
+        page_h1=data.get("page_h1", ""),
+        historical_data=data.get("historical_data"),
+        score_trend=(
+            data.get("historical_insights", {}).get("score_trend")
+            if data.get("historical_insights")
+            else None
+        ),
+        recurring_issues=(
+            data.get("historical_data", {}).get("recurring_issues")
+            if data.get("historical_data")
+            else None
+        ),
+        effective_fixes=(
+            data.get("historical_data", {}).get("effective_fixes")
+            if data.get("historical_data")
+            else None
+        ),
+        historical_insights=data.get("historical_insights"),
+        guided_implementation=row.get("guided_implementation") or data.get("guided_implementation"),
+        strategic_finding=row.get("strategic_finding") or data.get("strategic_finding"),
+    )
+
+
+async def finalize_completed_audit(job: dict, data: dict) -> None:
+    """Post-success CRM/email/analytics. Worker-only; never un-completes the row."""
+    audit_id = job.get("id")
+    audit_email = job.get("email") or ""
+    request_url = job.get("url") or ""
+    attempt_id = job.get("analytics_attempt_id")
+    distinct_id = job.get("analytics_distinct_id") or str(audit_id)
+    consent = bool(job.get("analytics_consent") and job.get("analytics_distinct_id"))
+    ph = get_posthog()
+
+    asyncio.create_task(_crm_audit_completed(
+        email=audit_email,
+        score=data.get("score", 0) or 0,
+        utm_source=job.get("source"),
+    ))
+
+    async def _fire_content_pipeline():
+        try:
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                await client.post(
+                    "https://n8n.mikeholownych.com/webhook/content-extract",
+                    json={
+                        "audit_id": str(audit_id),
+                        "url": request_url,
+                        "findings": data.get("findings", []),
+                    },
+                )
+        except Exception:
+            pass
+
+    asyncio.create_task(_fire_content_pipeline())
+
+    await analytics.track_audit_completed(
+        email=distinct_id,
+        score=data.get("score", 0),
+        grade=data.get("grade", "N/A"),
+        audit_id=str(audit_id),
+        audit_attempt_id=attempt_id,
+        journey_id=job.get("analytics_journey_id"),
+        findings_count=len(data.get("findings", []) or []),
+    )
+
+    if consent and ph:
+        with new_context(client=ph):
+            identify_context(distinct_id)
+            ph.capture(
+                "audit_completed",
+                properties={
+                    "audit_id": str(audit_id),
+                    "audit_attempt_id": attempt_id,
+                    "score": data.get("score"),
+                    "grade": data.get("grade"),
+                    "findings_count": len(data.get("findings", []) or []),
+                },
+            )
+
+    real_email = (
+        audit_email
+        and "@invalid" not in audit_email
+        and audit_email.strip()
+        and audit_email.strip().lower() not in {
+            "mike.holownych@gmail.com",
+            "mcp-agent@nebula.internal",
+            "test@example.com",
+            "e2e-crawler-test@example.com",
+            "qa-workspace-20260803-001@example.invalid",
+        }
+    )
+    if real_email and data.get("findings"):
+        try:
+            trigger_track_assignment(
+                email=audit_email,
+                audit_id=str(audit_id),
+                findings=data.get("findings", []),
+                url=request_url,
+            )
+        except Exception as exc:
+            print(f"[audit_api] Track assignment failed: {exc}")
+
+    if real_email:
+        _send_email = str(audit_email)
+        _send_name = job.get("name")
+        _send_url = request_url
+        _send_score = data.get("score", 0)
+        _send_grade = data.get("grade", "N/A")
+        _send_findings = data.get("findings", [])
+
+        async def _auto_send_email():
+            try:
+                result_email = await email_service.send_audit_results(
+                    AuditEmailData(
+                        url=_send_url,
+                        email=_send_email,
+                        name=_send_name,
+                        score=_send_score,
+                        grade=_send_grade,
+                        findings=_send_findings,
+                        guided_implementation=data.get("guided_implementation"),
+                    )
+                )
+                if result_email.get("status") == "sent":
+                    await audit_db.mark_email_sent(audit_id)
+                    ph2 = get_posthog()
+                    if ph2:
+                        with new_context(client=ph2):
+                            identify_context(_send_email)
+                            ph2.capture(
+                                "audit_email_sent",
+                                properties={
+                                    "audit_id": str(audit_id),
+                                    "grade": data.get("grade"),
+                                    "score": data.get("score"),
+                                    "message_id": result_email.get("message_id"),
+                                    "source": "auto_completion",
+                                },
+                            )
+                else:
+                    print(f"[audit_api] email send failed for {audit_id}: {result_email.get('error')}")
+            except Exception as _email_exc:
+                print(f"[audit_api] email auto-send exception for {audit_id}: {_email_exc}")
+
+        asyncio.create_task(_auto_send_email())
 
 
 class AuditClaimRequest(BaseModel):
@@ -562,6 +488,27 @@ async def get_fix_history(email: str = Query(..., min_length=3, max_length=320),
         raise
     except Exception:
         raise HTTPException(status_code=503, detail="Fix history unavailable")
+
+
+@router.get("/quota")
+async def get_audit_quota(email: str = Query(..., min_length=3, max_length=320)):
+    """Completed-audit count this UTC month from nebula_audit.
+
+    Used by the portal quota gate. Must be defined before /{audit_id}.
+    """
+    import re
+    if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+        raise HTTPException(status_code=400, detail="Invalid email format")
+    try:
+        completed = await audit_db.count_completed_this_month(email)
+        return {
+            "email": email.strip().lower(),
+            "completed_this_month": completed,
+        }
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=503, detail="Quota lookup unavailable")
 
 
 @router.get("/by-email")

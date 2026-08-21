@@ -79,9 +79,9 @@ describe('audit funnel correlation', () => {
 
     beforeEach(async () => {
       jest.spyOn(global, 'fetch').mockImplementation(async (_url, init) => {
-        calls.push('fetch:/audit/run')
+        calls.push('fetch:/audit/accept')
         auditRunBody = JSON.parse(String((init as RequestInit).body))
-        return Response.json({ audit_id: 'audit-1', url: 'https://example.com', status: 'completed' })
+        return Response.json({ audit_id: 'audit-1', url: 'https://example.com', status: 'pending' })
       })
 
       await startAudit(
@@ -93,8 +93,8 @@ describe('audit funnel correlation', () => {
       expect(captured.filter((c) => c.event === 'audit_started')).toHaveLength(1)
     })
 
-    it('emits audit_started before the blocking /audit/run call, so it precedes audit_completed', () => {
-      expect(calls).toEqual(['capture:audit_started', 'fetch:/audit/run'])
+    it('emits audit_started after persist so the event carries audit_id and still precedes completion', () => {
+      expect(calls).toEqual(['fetch:/audit/accept', 'capture:audit_started'])
     })
 
     it('stamps the correlation key on audit_started', () => {

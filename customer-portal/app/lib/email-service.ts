@@ -3,15 +3,7 @@
  * Handles data-only email queueing. Delivery is owned by the Python release gate.
  */
 
-import { Pool } from 'pg';
-
-export const pool = new Pool({
-  host: '/var/run/postgresql',
-  port: 5433,
-  database: 'nebula_platform',
-  user: 'postgres',
-  max: 10,
-});
+import { pool } from '@/app/lib/db';
 
 
 /**
