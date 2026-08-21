@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'LinkedIn Skill Engine: Build Authority With Your Own Experience | Nebula Components',
+  title: 'LinkedIn Skill Engine: Authority Content Guide | Nebula',
   description: 'How to extract your real professional skills and frameworks into LinkedIn content that builds authority without manufactured noise.',
   alternates: { canonical: 'https://nebulacomponents.com/playbooks/linkedin-skill-engine' },
 }

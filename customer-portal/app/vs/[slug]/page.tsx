@@ -16,7 +16,7 @@ export function generateMetadata({
     const c = COMPARISONS[slug]
     if (!c) return {}
     return {
-      title: `${c.competitorName} Alternative: Nebula vs. ${c.competitorName} - Free Landing Page Audit`,
+      title: `Nebula vs ${c.competitorName}: Audit Comparison | Nebula`,
       description: c.bluf || c.intent,
       alternates: {
         canonical: `https://nebulacomponents.com/vs/${c.slug}`,

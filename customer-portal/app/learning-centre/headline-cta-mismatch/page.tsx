@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Your Headline Promises One Thing. Your CTA Asks for Something Else. Here\'s the Receipt.',
+  title: 'Fix Headline & CTA Mismatch on Landing Pages | Nebula',
   description: 'Most founders can\'t diagnose headline-CTA mismatch without an outside eye. Your headline creates an expectation; your CTA asks for something different. Visitors experience a bait-and-switch they can\'t articulate - so they just leave.',
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/headline-cta-mismatch',

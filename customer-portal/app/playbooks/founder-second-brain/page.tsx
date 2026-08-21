@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Founder Second Brain: Capture and Reuse Your Best Thinking | Nebula Components',
+  title: 'Founder Second Brain: AI Knowledge System | Nebula',
   description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
   alternates: { canonical: 'https://nebulacomponents.com/playbooks/founder-second-brain' },
 }

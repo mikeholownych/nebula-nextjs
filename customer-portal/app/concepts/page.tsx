@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit | Nebula',
+  title: 'Nebula Concepts: 9-Signal Audit Framework Guide | Nebula',
   description:
     'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness - signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
   alternates: { canonical: 'https://nebulacomponents.com/concepts' },
   openGraph: {
-    title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
+    title: 'Nebula Concepts: 9-Signal Audit Framework Guide | Nebula',
     description:
       'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness - signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
     url: 'https://nebulacomponents.com/concepts',

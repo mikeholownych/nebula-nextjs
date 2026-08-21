@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Why Is My Landing Page Not Converting? 12 Root Causes (Diagnostic Guide) | Nebula',
+  title: 'Why Is My Landing Page Not Converting? 12 Causes | Nebula',
   description:
     'The complete diagnostic guide to landing pages getting clicks but no conversions. 12 measurable root causes - message match, above-fold clarity, trust proximity, page speed, mobile UX, form friction - with fixes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
   },
   openGraph: {
-    title: 'Why Is My Landing Page Not Converting? 12 Root Causes (Diagnostic Guide) | Nebula',
+    title: 'Why Is My Landing Page Not Converting? 12 Causes | Nebula',
     description:
       'The complete diagnostic guide to landing pages getting clicks but no conversions. 12 measurable root causes with exact checks and fixes.',
     url: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',

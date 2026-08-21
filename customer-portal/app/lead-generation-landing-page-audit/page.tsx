@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Lead Generation Landing Page Audit: Form Field Count, CTA Labels & Post-Submit Clarity | Nebula',
+  title: 'Lead Gen Landing Page Audit: Fix Form & CTA Leaks | Nebula',
   description:
     'Lead gen pages fail when cold-traffic forms ask too many questions, the submit button says "Submit", there is no proof adjacent to the form, and the visitor has no idea what happens after they click. This guide covers each failure with observable evidence and a bounded fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/lead-generation-landing-page-audit',
   },
   openGraph: {
-    title: 'Lead Generation Landing Page Audit: Form Field Count, CTA Labels & Post-Submit Clarity | Nebula',
+    title: 'Lead Gen Landing Page Audit: Fix Form & CTA Leaks | Nebula',
     description:
       'Lead gen pages fail when cold-traffic forms ask too many questions, the submit button says "Submit", there is no proof adjacent to the form, and the visitor has no idea what happens after they click.',
     url: 'https://nebulacomponents.com/lead-generation-landing-page-audit',

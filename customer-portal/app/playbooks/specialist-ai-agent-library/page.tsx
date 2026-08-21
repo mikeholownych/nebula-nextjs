@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth | Nebula Components',
+  title: 'Specialist AI Agent Library: Growth Playbook | Nebula',
   description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
   alternates: { canonical: 'https://nebulacomponents.com/playbooks/specialist-ai-agent-library' },
 }

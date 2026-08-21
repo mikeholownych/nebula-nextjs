@@ -4,11 +4,11 @@ import Link from 'next/link'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
+  title: 'The ROAS Cliff: Why High-CTR Traffic Fails | Nebula',
   description: 'A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page in 10 minutes. Find the monthly leak.',
   alternates: { canonical: 'https://nebulacomponents.com/roas-cliff' },
   openGraph: {
-    title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
+    title: 'The ROAS Cliff: Why High-CTR Traffic Fails | Nebula',
     description: 'Score your landing page across 9 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
     type: 'article',
     url: 'https://nebulacomponents.com/roas-cliff',
