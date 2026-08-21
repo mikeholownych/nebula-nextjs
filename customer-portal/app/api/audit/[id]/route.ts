@@ -48,7 +48,8 @@ export async function GET(
     const data = await response.json()
     if (sessionEmail) {
       const owner = typeof data.email === 'string' ? data.email.trim().toLowerCase() : ''
-      if (!owner || owner !== sessionEmail) {
+      const isAnonymous = !owner || owner.startsWith('anonymous+') || owner.endsWith('@invalid.nebulacomponents.com')
+      if (owner && !isAnonymous && owner !== sessionEmail) {
         return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
       }
     }

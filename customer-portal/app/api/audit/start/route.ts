@@ -7,6 +7,9 @@ import { checkAuditQuota } from '@/app/lib/audit-quota'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 import { logApiError } from '@/app/lib/ops-log'
 import { readCappedJson } from '@/app/lib/request-limits'
+import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
+import { unlockCookieName } from '@/app/lib/audit-access'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * Start an audit by calling FastAPI directly
@@ -149,7 +152,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Quota gate: check if the submitting email is within the free-tier limit.
-    const submittedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null
+    let submittedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null
+    if (!submittedEmail) {
+      try {
+        const auth = await requireWorkspaceUser(request)
+        if (!('response' in auth) && auth.user?.email) {
+          submittedEmail = auth.user.email.trim().toLowerCase()
+        }
+      } catch {
+        // Non-fatal if not authenticated in workspace
+      }
+    }
+
     if (submittedEmail) {
       const quota = await checkAuditQuota(submittedEmail)
       if (!quota.allowed) {
@@ -300,13 +314,29 @@ export async function POST(request: NextRequest) {
       // Non-fatal - never let analytics block the response
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       audit_id: auditId,
       audit_attempt_id: auditAttemptId,
       url: data.url,
       status: data.status || 'pending',
       message: 'Audit accepted',
     })
+
+    if (auditId) {
+      try {
+        const token = signAuditUnlock(auditId, anonymousEmail)
+        response.cookies.set(unlockCookieName(auditId), token, {
+          path: '/',
+          httpOnly: true,
+          sameSite: 'lax',
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+        })
+      } catch {
+        // Non-fatal if AUDIT_UNLOCK_SECRET is not set
+      }
+    }
+
+    return response
   } catch (error) {
     logApiError('Audit start error', { request_id: requestId, journey_id: journeyId, error })
     if (hasServerAnalyticsConsent(request)) {

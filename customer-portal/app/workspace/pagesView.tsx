@@ -190,25 +190,31 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
       const auditId = data.audit_id
 
       if (auditId) {
-        // Poll for audit completion
-        for (let attempt = 0; attempt < 8; attempt++) {
+        // Poll for audit completion via status probe
+        for (let attempt = 0; attempt < 25; attempt++) {
           await new Promise((r) => setTimeout(r, 1200))
-          const check = await fetch(`/api/audit/${auditId}`)
-          if (check.ok) {
-            const detail = await check.json()
-            if (detail.status === 'completed' || detail.score !== undefined) {
-              const finalScore = typeof detail.score === 'number' ? detail.score : 8.2
-              setInPlaceAudits((prev) => ({
-                ...prev,
-                [pathKeyOf(url)]: {
-                  id: auditId,
-                  score: finalScore,
-                  grade: detail.grade || 'A',
-                  completed_at: new Date().toISOString(),
-                  composite_anchor: detail.composite_anchor ?? finalScore * 0.9,
-                },
-              }))
+          const checkStatus = await fetch(`/api/audit/${auditId}/status`)
+          if (checkStatus.ok) {
+            const statusData = await checkStatus.json()
+            if (statusData.status === 'completed') {
+              const check = await fetch(`/api/audit/${auditId}`)
+              if (check.ok) {
+                const detail = await check.json()
+                const finalScore = typeof detail.score === 'number' ? detail.score : 8.2
+                setInPlaceAudits((prev) => ({
+                  ...prev,
+                  [pathKeyOf(url)]: {
+                    id: auditId,
+                    score: finalScore,
+                    grade: detail.grade || 'A',
+                    completed_at: new Date().toISOString(),
+                    composite_anchor: detail.composite_anchor ?? finalScore * 0.9,
+                  },
+                }))
+              }
               break
+            } else if (statusData.status === 'failed' || statusData.status === 'error') {
+              throw new Error('Audit failed')
             }
           }
         }
