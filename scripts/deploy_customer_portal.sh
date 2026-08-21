@@ -70,6 +70,34 @@ log "Confirming $SITE_UNIT's cgroup before swap ..."
 pre_cgroup=$(systemctl show "$SITE_UNIT" -p ControlGroup --value)
 log "Current cgroup: ${pre_cgroup:-<not running>}"
 
+# ── Pre-swap rehearsal (added after 2026-08-21 corrupt-artifact incident) ────
+# A build that exits 0 can still be a broken artifact. Boot the incoming
+# build on a scratch port and smoke it BEFORE touching the live process.
+log "Rehearsing incoming build on scratch port 3100 ..."
+REHEARSAL_PORT=3100
+NEXT_DIST_DIR=.next-incoming PORT=$REHEARSAL_PORT \
+  npx next start >/tmp/opencode/deploy-rehearsal.log 2>&1 &
+REHEARSAL_PID=$!
+trap 'kill -9 "$REHEARSAL_PID" 2>/dev/null || true' EXIT
+REHEARSAL_OK=0
+for i in $(seq 1 20); do
+  sleep 1
+  h=$(curl -s -o /dev/null -w '%{http_code}' --max-time 2 \
+    "http://127.0.0.1:${REHEARSAL_PORT}/api/healthz" || echo 000)
+  p=$(curl -s -o /dev/null -w '%{http_code}' --max-time 3 \
+    "http://127.0.0.1:${REHEARSAL_PORT}/" || echo 000)
+  if [[ "$h" == "200" && "$p" == "200" ]]; then REHEARSAL_OK=1; break; fi
+done
+kill -9 "$REHEARSAL_PID" 2>/dev/null || true
+wait "$REHEARSAL_PID" 2>/dev/null || true
+trap - EXIT
+if [[ "$REHEARSAL_OK" != "1" ]]; then
+  log "FAIL: incoming build failed rehearsal (healthz/home not 200). Keeping live release untouched."
+  log "Rehearsal log tail:"; tail -5 /tmp/opencode/deploy-rehearsal.log || true
+  exit 1
+fi
+log "Rehearsal passed."
+
 log "Stopping $SITE_UNIT, swapping .next-incoming → .next, starting ..."
 sudo systemctl stop "$SITE_UNIT"
 rm -rf .next-previous
@@ -80,16 +108,37 @@ mv .next-incoming .next
 sudo systemctl start "$SITE_UNIT"
 
 # Give the new process a moment to bind and become ready before verifying.
+READY=0
 for i in $(seq 1 15); do
   if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:3000/api/readyz; then
+    READY=1
     break
   fi
   sleep 1
 done
 
 log "Verifying deployed state ..."
-if ! bash "$VERIFY_SCRIPT"; then
-  log "FAIL: post-deploy verification failed. $SITE_UNIT is running the new build but is not healthy - investigate before considering this deploy complete."
+VERIFY_FAILED=0
+if [[ "$READY" != "1" ]] || ! bash "$VERIFY_SCRIPT"; then
+  VERIFY_FAILED=1
+fi
+
+if [[ "$VERIFY_FAILED" == "1" ]]; then
+  log "FAIL: post-deploy verification failed - AUTO-ROLLING BACK to .next-previous."
+  sudo systemctl stop "$SITE_UNIT"
+  if [[ -d .next-previous ]]; then
+    rm -rf .next-broken
+    mv .next .next-broken
+    mv .next-previous .next
+    sudo systemctl start "$SITE_UNIT"
+    for i in $(seq 1 15); do
+      if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:3000/api/readyz; then break; fi
+      sleep 1
+    done
+    log "ROLLBACK COMPLETE: previous release restored. Broken build kept at .next-broken for triage."
+  else
+    log "CRITICAL: no .next-previous available; system left on failed release. Manual intervention required."
+  fi
   exit 1
 fi
 
