@@ -375,83 +375,83 @@
   "status": "OPEN"
  },
  "TD-1": {
-  "severity": "PP2",
-  "title": "technical debt item",
+  "severity": "P2",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-2": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-3": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-4": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-5": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-6": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-7": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-8": {
-  "severity": "PP2",
-  "title": "technical debt item",
+  "severity": "P2",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-9": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-10": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-11": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-12": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-13": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-14": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-15": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  },
  "TD-16": {
-  "severity": "PP3",
-  "title": "technical debt item",
+  "severity": "P3",
+  "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
  }
 }

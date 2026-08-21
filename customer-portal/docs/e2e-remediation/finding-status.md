@@ -76,20 +76,20 @@
 | SEC-P2-2 | P2 | OPEN | Chunked body-limit bypass FastAPI |
 | SEC-P2-3 | P2 | OPEN | SSRF gap signal_verifier; JWKS timeout |
 | SEC-P2-4 | P2 | OPEN | Unauth GA4 forwarder, no rate limit/timeout |
-| TD-1 | PP2 | OPEN | technical debt item |
-| TD-10 | PP3 | OPEN | technical debt item |
-| TD-11 | PP3 | OPEN | technical debt item |
-| TD-12 | PP3 | OPEN | technical debt item |
-| TD-13 | PP3 | OPEN | technical debt item |
-| TD-14 | PP3 | OPEN | technical debt item |
-| TD-15 | PP3 | OPEN | technical debt item |
-| TD-16 | PP3 | OPEN | technical debt item |
-| TD-2 | PP3 | OPEN | technical debt item |
-| TD-3 | PP3 | OPEN | technical debt item |
-| TD-4 | PP3 | OPEN | technical debt item |
-| TD-5 | PP3 | OPEN | technical debt item |
-| TD-6 | PP3 | OPEN | technical debt item |
-| TD-7 | PP3 | OPEN | technical debt item |
-| TD-8 | PP2 | OPEN | technical debt item |
-| TD-9 | PP3 | OPEN | technical debt item |
+| TD-1 | P2 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-10 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-11 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-12 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-13 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-14 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-15 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-16 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-2 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-3 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-4 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-5 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-6 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-7 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-8 | P2 | OPEN | Technical debt item (see technical-debt-register.md) |
+| TD-9 | P3 | OPEN | Technical debt item (see technical-debt-register.md) |
 | TEST-1 | P1 | OPEN | Queue/outbox/locking only mocked |
