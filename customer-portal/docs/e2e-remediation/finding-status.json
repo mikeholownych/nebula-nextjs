@@ -1,0 +1,457 @@
+{
+ "SEC-P0-1": {
+  "severity": "P0",
+  "title": "Public FastAPI surface lacks classification/authn/authz",
+  "status": "OPEN"
+ },
+ "SEC-P0-2": {
+  "severity": "P0",
+  "title": "Secret/host exposure (repo http.server, world-readable drop-ins)",
+  "status": "OPEN"
+ },
+ "DATA-1": {
+  "severity": "P1",
+  "title": "Dual-writer drift subscriptions; dead duplicate tables",
+  "status": "OPEN"
+ },
+ "DATA-2": {
+  "severity": "P1",
+  "title": "No migration tracking/runner (FM-11)",
+  "status": "OPEN"
+ },
+ "DATA-4": {
+  "severity": "P1",
+  "title": "Hardcoded fallback DSNs across modules",
+  "status": "OPEN"
+ },
+ "RES-1": {
+  "severity": "P1",
+  "title": "No timeout checkout->Stripe; webhook pre-ack chain",
+  "status": "OPEN"
+ },
+ "RES-2": {
+  "severity": "P1",
+  "title": "Outbox at-least-once w/o idempotency; sent-blocks-resend dedup",
+  "status": "OPEN"
+ },
+ "SEC-P1-1": {
+  "severity": "P1",
+  "title": "Rate-limit identity from client headers",
+  "status": "OPEN"
+ },
+ "SEC-P1-2": {
+  "severity": "P1",
+  "title": "JWT verify ignores session store; login re-TTL all sessions",
+  "status": "OPEN"
+ },
+ "SEC-P1-3": {
+  "severity": "P1",
+  "title": "GSC refresh tokens plaintext",
+  "status": "OPEN"
+ },
+ "SEC-P1-4": {
+  "severity": "P1",
+  "title": "Secrets hardcoded / sourced outside env contract",
+  "status": "OPEN"
+ },
+ "CI-4": {
+  "severity": "P1",
+  "title": "Root pytest suite + browser suites not in CI",
+  "status": "OPEN"
+ },
+ "TEST-1": {
+  "severity": "P1",
+  "title": "Queue/outbox/locking only mocked",
+  "status": "OPEN"
+ },
+ "DATA-3": {
+  "severity": "P2",
+  "title": "Schema integrity gaps (naive ts, unconstrained enums)",
+  "status": "OPEN"
+ },
+ "DATA-5": {
+  "severity": "P2",
+  "title": "Side-effect coupling in update_audit; outbox dedup scope",
+  "status": "OPEN"
+ },
+ "DATA-6": {
+  "severity": "P2",
+  "title": "Admission control unwired; pending ages to failed",
+  "status": "OPEN"
+ },
+ "DATA-7": {
+  "severity": "P2",
+  "title": "Unbounded ledger queries growth curve",
+  "status": "OPEN"
+ },
+ "DATA-8": {
+  "severity": "P2",
+  "title": "Naive datetime usage",
+  "status": "OPEN"
+ },
+ "RES-3": {
+  "severity": "P2",
+  "title": "Connection budget > max_connections; per-request pools",
+  "status": "OPEN"
+ },
+ "RES-4": {
+  "severity": "P2",
+  "title": "Heartbeat/sweeper event-loop contention with pollers",
+  "status": "OPEN"
+ },
+ "RES-5": {
+  "severity": "P2",
+  "title": "Fire-and-forget result email lost on crash",
+  "status": "OPEN"
+ },
+ "RES-6": {
+  "severity": "P2",
+  "title": "Prod readiness gate inert; no startup validation",
+  "status": "OPEN"
+ },
+ "SEC-P2-1": {
+  "severity": "P2",
+  "title": "PG trust auth + LAN listener + superuser app role",
+  "status": "OPEN"
+ },
+ "SEC-P2-2": {
+  "severity": "P2",
+  "title": "Chunked body-limit bypass FastAPI",
+  "status": "OPEN"
+ },
+ "SEC-P2-3": {
+  "severity": "P2",
+  "title": "SSRF gap signal_verifier; JWKS timeout",
+  "status": "OPEN"
+ },
+ "SEC-P2-4": {
+  "severity": "P2",
+  "title": "Unauth GA4 forwarder, no rate limit/timeout",
+  "status": "OPEN"
+ },
+ "CODE-1": {
+  "severity": "P2",
+  "title": "falsy-zero amount fallbacks",
+  "status": "OPEN"
+ },
+ "CODE-2": {
+  "severity": "P2",
+  "title": "Subscription dropped when email unresolvable",
+  "status": "OPEN"
+ },
+ "CODE-3": {
+  "severity": "P2",
+  "title": "CRM interested->cold downgrade contradiction",
+  "status": "OPEN"
+ },
+ "CODE-8": {
+  "severity": "P2",
+  "title": "Offer copy hardcoded vs 2027 rollover",
+  "status": "OPEN"
+ },
+ "FE-5": {
+  "severity": "P2",
+  "title": "449 unreachable HTML files shipped",
+  "status": "OPEN"
+ },
+ "API-1": {
+  "severity": "P2",
+  "title": "Four audit intake paths divergent guards",
+  "status": "OPEN"
+ },
+ "PERF-1": {
+  "severity": "P2",
+  "title": "HTML payload weight investigation",
+  "status": "OPEN"
+ },
+ "PERF-3": {
+  "severity": "P2",
+  "title": "Ledger query time bounds",
+  "status": "OPEN"
+ },
+ "PERF-4": {
+  "severity": "P2",
+  "title": "0.25s poll amplification vs heartbeat",
+  "status": "OPEN"
+ },
+ "INF-1": {
+  "severity": "P2",
+  "title": "PG posture: LAN listen, pool budget, slow-log off",
+  "status": "OPEN"
+ },
+ "INF-2": {
+  "severity": "P2",
+  "title": "Redis unbounded, TTL-less state keys",
+  "status": "OPEN"
+ },
+ "INF-3": {
+  "severity": "P2",
+  "title": "systemd asymmetries nextjs uncapped/repo-wide rw",
+  "status": "OPEN"
+ },
+ "INF-4": {
+  "severity": "P2",
+  "title": "Orphan processes on prod host",
+  "status": "OPEN"
+ },
+ "INF-5": {
+  "severity": "P2",
+  "title": "Tunnel blast radius/root user/catch-all",
+  "status": "OPEN"
+ },
+ "INF-6": {
+  "severity": "P2",
+  "title": "Backup restore drill unevidenced",
+  "status": "OPEN"
+ },
+ "INF-8": {
+  "severity": "P2",
+  "title": "Logging consolidation + slow-query visibility",
+  "status": "OPEN"
+ },
+ "API-2": {
+  "severity": "P2",
+  "title": "Analytics report surface auth verification",
+  "status": "OPEN"
+ },
+ "CI-1": {
+  "severity": "P2",
+  "title": "npm audit advisory-only; 2 high open",
+  "status": "OPEN"
+ },
+ "CI-2": {
+  "severity": "P2",
+  "title": "Dead duplicate workflow files",
+  "status": "OPEN"
+ },
+ "CI-3": {
+  "severity": "P2",
+  "title": "Coverage thresholds zero",
+  "status": "OPEN"
+ },
+ "CI-5": {
+  "severity": "P2",
+  "title": "Deploy: migration step absent; no auto rollback path",
+  "status": "OPEN"
+ },
+ "CI-7": {
+  "severity": "P2",
+  "title": "No deploy integration rehearsal",
+  "status": "OPEN"
+ },
+ "DOC-1": {
+  "severity": "P2",
+  "title": "CLAUDE.md :8765 claim normalizes stray server",
+  "status": "OPEN"
+ },
+ "DOC-2": {
+  "severity": "P2",
+  "title": "CONTEXT.md hides public api.* ingress",
+  "status": "OPEN"
+ },
+ "DOC-3": {
+  "severity": "P2",
+  "title": "platform-api unit docs URL .shop stale",
+  "status": "OPEN"
+ },
+ "DOC-4": {
+  "severity": "P2",
+  "title": "CONTEXT.md workspace localStorage gate stale",
+  "status": "OPEN"
+ },
+ "DOC-5": {
+  "severity": "P2",
+  "title": "CONTEXT.md change log stale by omission",
+  "status": "OPEN"
+ },
+ "DOC-6": {
+  "severity": "P2",
+  "title": "deploy README superseded partially",
+  "status": "OPEN"
+ },
+ "DOC-7": {
+  "severity": "P2",
+  "title": "CLAUDE.md understates secret spread",
+  "status": "OPEN"
+ },
+ "DOC-8": {
+  "severity": "P2",
+  "title": "architecture doc missing public ingress/LAN PG",
+  "status": "OPEN"
+ },
+ "DOC-9": {
+  "severity": "P2",
+  "title": "No rate-limit fail-mode operator doc",
+  "status": "OPEN"
+ },
+ "FE-2": {
+  "severity": "P3",
+  "title": "Hydration risk review (no defect found -> verify)",
+  "status": "OPEN"
+ },
+ "FE-4": {
+  "severity": "P3",
+  "title": "A11y specs not in CI (overlaps TEST-2)",
+  "status": "OPEN"
+ },
+ "PERF-2": {
+  "severity": "P3",
+  "title": "Cache semantics verified positive (close as NOT_A_FINDING if holds)",
+  "status": "OPEN"
+ },
+ "CODE-4": {
+  "severity": "P2",
+  "title": "Session hash re-EXPIRE extends all sessions",
+  "status": "OPEN"
+ },
+ "CODE-5": {
+  "severity": "P3",
+  "title": "Newsletter resubscribe resets suppression verify",
+  "status": "OPEN"
+ },
+ "CODE-6": {
+  "severity": "P3",
+  "title": "Follow-up aging selector unbounded",
+  "status": "OPEN"
+ },
+ "CODE-7": {
+  "severity": "P3",
+  "title": "Dead/duplicated code paths",
+  "status": "OPEN"
+ },
+ "CODE-9": {
+  "severity": "P3",
+  "title": "Proxy coarse guard (verify adequate)",
+  "status": "OPEN"
+ },
+ "CODE-10": {
+  "severity": "P3",
+  "title": "Positive finding unlock tokens (verify/close)",
+  "status": "OPEN"
+ },
+ "CODE-11": {
+  "severity": "P3",
+  "title": "Swallowed exceptions hygiene",
+  "status": "OPEN"
+ },
+ "API-3": {
+  "severity": "P3",
+  "title": "Error-shape inconsistency",
+  "status": "OPEN"
+ },
+ "API-4": {
+  "severity": "P2",
+  "title": "Timeout matrix gaps (JWKS etc.)",
+  "status": "OPEN"
+ },
+ "API-5": {
+  "severity": "P3",
+  "title": "Discovery surface alignment",
+  "status": "OPEN"
+ },
+ "FE-1": {
+  "severity": "P3",
+  "title": "Boundary hygiene verify",
+  "status": "OPEN"
+ },
+ "FE-3": {
+  "severity": "P3",
+  "title": "Workspace chunking verify",
+  "status": "OPEN"
+ },
+ "FE-6": {
+  "severity": "P3",
+  "title": "Third-party consent verify",
+  "status": "OPEN"
+ },
+ "DEP-1": {
+  "severity": "P2",
+  "title": "ajv/fast-uri high vulns (fixable)",
+  "status": "OPEN"
+ },
+ "DEP-2": {
+  "severity": "P2",
+  "title": "postcss moderate via next",
+  "status": "OPEN"
+ },
+ "TD-1": {
+  "severity": "PP2",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-2": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-3": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-4": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-5": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-6": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-7": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-8": {
+  "severity": "PP2",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-9": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-10": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-11": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-12": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-13": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-14": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-15": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ },
+ "TD-16": {
+  "severity": "PP3",
+  "title": "technical debt item",
+  "status": "OPEN"
+ }
+}
