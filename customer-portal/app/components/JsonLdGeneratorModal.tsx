@@ -155,7 +155,7 @@ export default function JsonLdGeneratorModal({
           </button>
         </div>
 
-        <pre className="max-h-72 overflow-y-auto rounded-xl border border-border bg-bg p-4 font-mono text-xs text-fg-muted leading-relaxed whitespace-pre-wrap">
+        <pre className="max-h-72 overflow-auto rounded-xl border border-border bg-bg p-4 font-mono text-xs text-fg-muted leading-relaxed whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
           {scriptTagString}
         </pre>
       </div>
