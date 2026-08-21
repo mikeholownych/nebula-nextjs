@@ -71,7 +71,7 @@ export async function checkAuditQuota(email: string): Promise<QuotaResult> {
   }
 
   // Count completed audits this calendar month from nebula_audit via FastAPI.
-  // Do not query nebula_platform.audits — that table is not the audit store.
+  // Do not query nebula_platform.audits - that table is not the audit store.
   let usedThisMonth = 0
   try {
     const quotaResponse = await fetch(

@@ -7,7 +7,7 @@ function platformApiUrl(): string {
 }
 
 /**
- * Public status probe for the processing page. Returns only status — never findings.
+ * Public status probe for the processing page. Returns only status - never findings.
  */
 export async function GET(
   _request: NextRequest,

@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import type { PoolClient } from 'pg'
 import { pool } from '@/app/lib/db'
 
 export const dynamic = 'force-dynamic'
@@ -22,8 +23,8 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   })
 }
 
-export async function GET() {
-  let client: Awaited<ReturnType<typeof pool.connect>> | undefined
+export async function GET(_request?: NextRequest) {
+  let client: PoolClient | undefined
   let probeError: unknown
   const connectPromise = pool.connect()
   try {
