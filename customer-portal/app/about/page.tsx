@@ -104,7 +104,7 @@ export default function AboutPage() {
             {[
               'You have no paid traffic or ad spend yet - the audit is calibrated for visitors arriving with ad-driven expectations',
               'You want a full agency redesign, brand repositioning, or subjective design feedback',
-              'You are looking for guaranteed conversion lift without a controlled traffic experiment',
+              'You want a promised lift in sales without a controlled traffic experiment',
               'You need unmonitored post-checkout funnel or backend CRM optimization',
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3">

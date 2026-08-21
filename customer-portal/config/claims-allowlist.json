@@ -15,13 +15,9 @@
   "guaranteed-conversions": [
     { "file": "app/terms/page.tsx", "line": 50, "reason": "Terms disclaiming: 'does not guarantee conversion lift'" },
     { "file": "app/checkout/page.tsx", "line": 121, "reason": "Checkout disclaimer: 'does not guarantee conversion lift'" },
-    { "file": "app/ai-sdr-vs-audit/page.tsx", "line": 0, "reason": "Disclaimer context: audit cannot guarantee conversion" },
-    { "file": "app/about/page.tsx", "line": 0, "reason": "Exclusion list: not a fit if seeking guaranteed conversion lift" },
     { "file": "app/roas-cliff/page.tsx", "line": 262, "reason": "Educational disclaimer" },
-    { "file": "app/audit/page.tsx", "line": 0, "reason": "FAQ disclaimer: 'Does not guarantee conversion lift'" },
     { "file": "app/repair-sprint/page.tsx", "line": 0, "reason": "Exclusions list: 'Guaranteed conversion lift'" },
     { "file": "app/lib/self-implementation-kit-offer.ts", "line": 51, "reason": "Offer disclaiming: 'A guarantee of conversion lift'" },
-    { "file": "app/lib/faq-schemas.ts", "line": 70, "reason": "FAQ schema disclaimer" },
     { "file": "app/components/MechanismProof.tsx", "line": 0, "reason": "Evidence boundary disclaimer: warns that others cannot guarantee conversion lift" },
     { "file": "app/concepts/page.tsx", "line": 0, "reason": "Disclaimer: 'does not guarantee conversion lift'" }
   ],
@@ -42,8 +38,6 @@
   "revenue-leak": [
     { "file": "app/roi-calculator/page.tsx", "line": 10, "reason": "ROI calculator page title - 'revenue leak' used as search-targeted keyword" },
     { "file": "app/workspace/settingsView.tsx", "line": 396, "reason": "Internal workspace label" },
-    { "file": "app/workspace/pagesView.tsx", "line": 310, "reason": "Internal workspace label" },
-    { "file": "app/workspace/views.tsx", "line": 0, "reason": "Internal workspace label" },
     { "file": "app/funnel-audit/FunnelAuditClient.tsx", "line": 358, "reason": "Funnel audit UI label" }
   ],
   "highest-impact": [],

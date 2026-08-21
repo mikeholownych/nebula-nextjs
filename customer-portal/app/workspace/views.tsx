@@ -106,7 +106,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
   const latestUrl = latest ? displayUrl(latest.url) : '-'
   const auditedPages = new Set(audits.map((audit) => pathKey(audit.url))).size
 
-  // Revenue leak: sum of revenue_impact across findings
+  // Sum of revenue_impact across findings
   const totalLeak = useMemo(() => {
     const findings = latestDetail?.findings || []
     let sum = 0

@@ -179,7 +179,7 @@ export default function AiSdrVsAuditPage() {
             {fixPackPrice && ` The ${fixPackPrice} One-Leak Repair Sprint delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.`}
           </li>
           <li><strong>Measure the result.</strong> Re-audit the page and compare evidence before deciding whether to add more traffic.</li>
-          <li><strong>Then consider an AI SDR.</strong> Use the measured baseline to decide whether additional outbound traffic is justified; an audit cannot guarantee conversion.</li>
+          <li><strong>Then consider an AI SDR.</strong> Use the measured baseline to decide whether additional outbound traffic is justified; an audit cannot promise a conversion outcome.</li>
         </ol>
 
         {/* Warning Callout */}

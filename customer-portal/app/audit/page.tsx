@@ -440,7 +440,7 @@ export default async function AuditPage() {
                 },
                 {
                   q: 'What does the $97 One-Leak Repair Sprint include?',
-                  a: 'One scoped repair package for the highest-priority failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+                  a: 'One scoped repair package for the highest-priority failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not promise a conversion-rate outcome.',
                 },
                 {
                   q: 'Which platforms does the audit work with?',
