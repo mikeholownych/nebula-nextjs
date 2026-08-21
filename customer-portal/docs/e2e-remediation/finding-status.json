@@ -27,12 +27,12 @@
  "RES-1": {
   "severity": "P1",
   "title": "No timeout checkout->Stripe; webhook pre-ack chain",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-2": {
   "severity": "P1",
   "title": "Outbox at-least-once w/o idempotency; sent-blocks-resend dedup",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P1-1": {
   "severity": "P1",
@@ -92,22 +92,22 @@
  "RES-3": {
   "severity": "P2",
   "title": "Connection budget > max_connections; per-request pools",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-4": {
   "severity": "P2",
   "title": "Heartbeat/sweeper event-loop contention with pollers",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-5": {
   "severity": "P2",
   "title": "Fire-and-forget result email lost on crash",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-6": {
   "severity": "P2",
   "title": "Prod readiness gate inert; no startup validation",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P2-1": {
   "severity": "P2",
@@ -117,7 +117,7 @@
  "SEC-P2-2": {
   "severity": "P2",
   "title": "Chunked body-limit bypass FastAPI",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P2-3": {
   "severity": "P2",
@@ -182,12 +182,12 @@
  "INF-2": {
   "severity": "P2",
   "title": "Redis unbounded, TTL-less state keys",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "INF-3": {
   "severity": "P2",
   "title": "systemd asymmetries nextjs uncapped/repo-wide rw",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "INF-4": {
   "severity": "P2",

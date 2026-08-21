@@ -13,12 +13,12 @@
 | CI-4 | P1 | OPEN | Root pytest suite + browser suites not in CI |
 | CI-5 | P2 | OPEN | Deploy: migration step absent; no auto rollback path |
 | CI-7 | P2 | OPEN | No deploy integration rehearsal |
-| CODE-1 | P2 | OPEN | falsy-zero amount fallbacks |
+| CODE-1 | P2 | RESOLVED | falsy-zero amount fallbacks |
 | CODE-10 | P3 | OPEN | Positive finding unlock tokens (verify/close) |
 | CODE-11 | P3 | OPEN | Swallowed exceptions hygiene |
-| CODE-2 | P2 | OPEN | Subscription dropped when email unresolvable |
-| CODE-3 | P2 | OPEN | CRM interested->cold downgrade contradiction |
-| CODE-4 | P2 | OPEN | Session hash re-EXPIRE extends all sessions |
+| CODE-2 | P2 | RESOLVED | Subscription dropped when email unresolvable |
+| CODE-3 | P2 | RESOLVED | CRM interested->cold downgrade contradiction |
+| CODE-4 | P2 | RESOLVED | Session hash re-EXPIRE extends all sessions |
 | CODE-5 | P3 | OPEN | Newsletter resubscribe resets suppression verify |
 | CODE-6 | P3 | OPEN | Follow-up aging selector unbounded |
 | CODE-7 | P3 | OPEN | Dead/duplicated code paths |
@@ -27,7 +27,7 @@
 | DATA-1 | P1 | OPEN | Dual-writer drift subscriptions; dead duplicate tables |
 | DATA-2 | P1 | OPEN | No migration tracking/runner (FM-11) |
 | DATA-3 | P2 | OPEN | Schema integrity gaps (naive ts, unconstrained enums) |
-| DATA-4 | P1 | OPEN | Hardcoded fallback DSNs across modules |
+| DATA-4 | P1 | RESOLVED | Hardcoded fallback DSNs across modules |
 | DATA-5 | P2 | OPEN | Side-effect coupling in update_audit; outbox dedup scope |
 | DATA-6 | P2 | OPEN | Admission control unwired; pending ages to failed |
 | DATA-7 | P2 | OPEN | Unbounded ledger queries growth curve |
@@ -50,8 +50,8 @@
 | FE-5 | P2 | OPEN | 449 unreachable HTML files shipped |
 | FE-6 | P3 | OPEN | Third-party consent verify |
 | INF-1 | P2 | OPEN | PG posture: LAN listen, pool budget, slow-log off |
-| INF-2 | P2 | OPEN | Redis unbounded, TTL-less state keys |
-| INF-3 | P2 | OPEN | systemd asymmetries nextjs uncapped/repo-wide rw |
+| INF-2 | P2 | RESOLVED | Redis unbounded, TTL-less state keys |
+| INF-3 | P2 | RESOLVED | systemd asymmetries nextjs uncapped/repo-wide rw |
 | INF-4 | P2 | OPEN | Orphan processes on prod host |
 | INF-5 | P2 | OPEN | Tunnel blast radius/root user/catch-all |
 | INF-6 | P2 | OPEN | Backup restore drill unevidenced |
@@ -61,20 +61,20 @@
 | PERF-2 | P3 | OPEN | Cache semantics verified positive (close as NOT_A_FINDING if holds) |
 | PERF-3 | P2 | OPEN | Ledger query time bounds |
 | PERF-4 | P2 | OPEN | 0.25s poll amplification vs heartbeat |
-| RES-1 | P1 | OPEN | No timeout checkout->Stripe; webhook pre-ack chain |
-| RES-2 | P1 | OPEN | Outbox at-least-once w/o idempotency; sent-blocks-resend dedup |
-| RES-3 | P2 | OPEN | Connection budget > max_connections; per-request pools |
-| RES-4 | P2 | OPEN | Heartbeat/sweeper event-loop contention with pollers |
-| RES-5 | P2 | OPEN | Fire-and-forget result email lost on crash |
-| RES-6 | P2 | OPEN | Prod readiness gate inert; no startup validation |
+| RES-1 | P1 | RESOLVED | No timeout checkout->Stripe; webhook pre-ack chain |
+| RES-2 | P1 | RESOLVED | Outbox at-least-once w/o idempotency; sent-blocks-resend dedup |
+| RES-3 | P2 | RESOLVED | Connection budget > max_connections; per-request pools |
+| RES-4 | P2 | RESOLVED | Heartbeat/sweeper event-loop contention with pollers |
+| RES-5 | P2 | RESOLVED | Fire-and-forget result email lost on crash |
+| RES-6 | P2 | RESOLVED | Prod readiness gate inert; no startup validation |
 | SEC-P0-1 | P0 | RESOLVED | Public FastAPI surface lacks classification/authn/authz |
 | SEC-P0-2 | P0 | RESOLVED | Secret/host exposure (repo http.server, world-readable drop-ins) |
 | SEC-P1-1 | P1 | RESOLVED | Rate-limit identity from client headers |
-| SEC-P1-2 | P1 | OPEN | JWT verify ignores session store; login re-TTL all sessions |
-| SEC-P1-3 | P1 | OPEN | GSC refresh tokens plaintext |
-| SEC-P1-4 | P1 | OPEN | Secrets hardcoded / sourced outside env contract |
+| SEC-P1-2 | P1 | RESOLVED | JWT verify ignores session store; login re-TTL all sessions |
+| SEC-P1-3 | P1 | RESOLVED | GSC refresh tokens plaintext |
+| SEC-P1-4 | P1 | RESOLVED | Secrets hardcoded / sourced outside env contract |
 | SEC-P2-1 | P2 | OPEN | PG trust auth + LAN listener + superuser app role |
-| SEC-P2-2 | P2 | OPEN | Chunked body-limit bypass FastAPI |
+| SEC-P2-2 | P2 | RESOLVED | Chunked body-limit bypass FastAPI |
 | SEC-P2-3 | P2 | OPEN | SSRF gap signal_verifier; JWKS timeout |
 | SEC-P2-4 | P2 | OPEN | Unauth GA4 forwarder, no rate limit/timeout |
 | TD-1 | P2 | OPEN | Technical debt item (see technical-debt-register.md) |
