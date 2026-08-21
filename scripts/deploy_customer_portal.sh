@@ -53,6 +53,17 @@ npm ci --include=dev
 npm run ci
 unset NEXT_DIST_DIR
 
+# ── Tracked migrations (DATA-2/FM-11) ────────────────────────────────────────
+# Applied AFTER a good build exists and BEFORE anything is restarted, so a
+# failed migration aborts the deploy with the live release untouched.
+if [[ -f /home/mike/nebula/.env ]]; then set -a; source /home/mike/nebula/.env; set +a; fi
+log "Applying tracked migrations (audit + platform) ..."
+if ! ENVIRONMENT=production PYTHONPATH=/home/mike/nebula \
+    /home/mike/nebula/venv/bin/python3 platform_api/scripts/migrate.py apply; then
+  log "FAIL: migration apply failed - live release untouched."
+  exit 1
+fi
+
 SHA=$(git -C "$PORTAL_DIR" rev-parse HEAD)
 log "Stamping $API_UNIT NEBULA_BUILD_REVISION=$SHA ..."
 printf '[Service]\nEnvironment=NEBULA_BUILD_REVISION=%s\n' "$SHA" \
