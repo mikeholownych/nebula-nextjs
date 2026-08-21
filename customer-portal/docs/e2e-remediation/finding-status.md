@@ -56,6 +56,7 @@
 | INF-5 | P2 | OPEN | Tunnel blast radius/root user/catch-all |
 | INF-6 | P2 | OPEN | Backup restore drill unevidenced |
 | INF-8 | P2 | OPEN | Logging consolidation + slow-query visibility |
+| NEW-P0-A | P0 | RESOLVED | INTERNAL_API_SECRET never provisioned: paid fulfillment enqueue would fail on first live purchase |
 | PERF-1 | P2 | OPEN | HTML payload weight investigation |
 | PERF-2 | P3 | OPEN | Cache semantics verified positive (close as NOT_A_FINDING if holds) |
 | PERF-3 | P2 | OPEN | Ledger query time bounds |
@@ -66,9 +67,9 @@
 | RES-4 | P2 | OPEN | Heartbeat/sweeper event-loop contention with pollers |
 | RES-5 | P2 | OPEN | Fire-and-forget result email lost on crash |
 | RES-6 | P2 | OPEN | Prod readiness gate inert; no startup validation |
-| SEC-P0-1 | P0 | OPEN | Public FastAPI surface lacks classification/authn/authz |
-| SEC-P0-2 | P0 | OPEN | Secret/host exposure (repo http.server, world-readable drop-ins) |
-| SEC-P1-1 | P1 | OPEN | Rate-limit identity from client headers |
+| SEC-P0-1 | P0 | RESOLVED | Public FastAPI surface lacks classification/authn/authz |
+| SEC-P0-2 | P0 | RESOLVED | Secret/host exposure (repo http.server, world-readable drop-ins) |
+| SEC-P1-1 | P1 | RESOLVED | Rate-limit identity from client headers |
 | SEC-P1-2 | P1 | OPEN | JWT verify ignores session store; login re-TTL all sessions |
 | SEC-P1-3 | P1 | OPEN | GSC refresh tokens plaintext |
 | SEC-P1-4 | P1 | OPEN | Secrets hardcoded / sourced outside env contract |

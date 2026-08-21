@@ -2,12 +2,12 @@
  "SEC-P0-1": {
   "severity": "P0",
   "title": "Public FastAPI surface lacks classification/authn/authz",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P0-2": {
   "severity": "P0",
   "title": "Secret/host exposure (repo http.server, world-readable drop-ins)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-1": {
   "severity": "P1",
@@ -37,7 +37,7 @@
  "SEC-P1-1": {
   "severity": "P1",
   "title": "Rate-limit identity from client headers",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P1-2": {
   "severity": "P1",
@@ -453,5 +453,10 @@
   "severity": "P3",
   "title": "Technical debt item (see technical-debt-register.md)",
   "status": "OPEN"
+ },
+ "NEW-P0-A": {
+  "severity": "P0",
+  "title": "INTERNAL_API_SECRET never provisioned: paid fulfillment enqueue would fail on first live purchase",
+  "status": "RESOLVED"
  }
 }
