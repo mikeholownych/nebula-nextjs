@@ -53,7 +53,9 @@ class CircuitBreaker:
         return CircuitState(state)
 
     async def _set_state(self, state: CircuitState) -> None:
-        await redis_client.set(self._key_state, state.value)
+        # INF-2: operational state must be bounded, never permanent.
+        await redis_client.set(self._key_state, state.value,
+                               ttl=max(self.recovery_timeout_seconds * 4, 3600))
 
     async def _should_attempt(self) -> bool:
         state = await self.get_state()
@@ -70,7 +72,7 @@ class CircuitBreaker:
 
     async def record_success(self, result: Any) -> None:
         await self._ensure_connected()
-        await redis_client.set(self._key_failures, 0)
+        await redis_client.set(self._key_failures, 0, ttl=86400)
         await self._set_state(CircuitState.CLOSED)
         try:
             serialized = json.dumps(result)
@@ -83,7 +85,8 @@ class CircuitBreaker:
         failures = await redis_client.incr(self._key_failures)
         if failures >= self.failure_threshold:
             await self._set_state(CircuitState.OPEN)
-            await redis_client.set(self._key_opened_at, str(time.time()))
+            await redis_client.set(self._key_opened_at, str(time.time()),
+                                   ttl=max(self.recovery_timeout_seconds * 4, 3600))
 
     async def get_cached_response(self) -> Optional[Any]:
         await self._ensure_connected()

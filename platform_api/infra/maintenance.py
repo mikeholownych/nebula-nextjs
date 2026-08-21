@@ -29,9 +29,12 @@ class MaintenanceMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
+MAINTENANCE_TTL_SECONDS = 6 * 3600  # INF-2: a stuck flag must self-expire
+
+
 async def enable_maintenance(reason: str) -> None:
     await redis_client.connect()
-    await redis_client.set(MAINTENANCE_KEY, reason)
+    await redis_client.set(MAINTENANCE_KEY, reason, ttl=MAINTENANCE_TTL_SECONDS)
 
 
 async def disable_maintenance() -> None:

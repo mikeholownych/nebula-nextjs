@@ -187,6 +187,10 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: stripeParams,
+      // RES-1: bounded caller budget on the money path - a hung provider
+      // connection must fail fast into CHECKOUT_PROVIDER_ERROR, not pin the
+      // request (and trigger Stripe-side retry pressure).
+      signal: AbortSignal.timeout(15_000),
     })
 
     if (!response.ok) {

@@ -37,6 +37,17 @@ async def lifespan(_app: FastAPI):
     else:
         print("⚠️  DATABASE_URL not set - DB routes will fail")
 
+    # RES-6: production configuration gate at STARTUP, not just /readyz.
+    # A misconfigured prod boot must not serve traffic until probed.
+    if settings.ENVIRONMENT == "production":
+        missing = settings.missing_required_settings()
+        if missing:
+            raise RuntimeError(
+                "Refusing to start in production with missing required settings: "
+                + ", ".join(missing)
+            )
+        print("✅ Production settings validated")
+
     await redis_client.connect()
     print("✅ Redis connected")
     if settings.POSTHOG_PROJECT_TOKEN:

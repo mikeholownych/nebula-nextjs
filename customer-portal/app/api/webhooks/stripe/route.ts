@@ -325,6 +325,7 @@ export async function POST(request: NextRequest) {
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            signal: AbortSignal.timeout(10_000),
             body: JSON.stringify({
               client_id: clientId,
               events: [

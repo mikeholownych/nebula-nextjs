@@ -11,6 +11,9 @@ from platform_api.services.audit_db import audit_db
 
 logger = logging.getLogger(__name__)
 
+# RES-2: historical sent messages only suppress re-enqueue for this window.
+SENT_DEDUP_WINDOW_DAYS = 7
+
 RETRY_DELAYS_MINUTES = [1, 5, 30]
 MAX_ATTEMPTS = 3
 
@@ -56,18 +59,30 @@ class Outbox:
         return msg_id
 
     async def find_open(self, channel: str, recipient: str) -> Optional[str]:
+        """Dedup key = (channel, recipient).
+
+        RES-2 semantics: an OPEN message (pending/sending) always suppresses a
+        duplicate enqueue. A historical `sent` message suppresses re-sends only
+        within SENT_DEDUP_WINDOW_DAYS so legitimate later deliveries (e.g. a
+        new recovery sequence next month) are not permanently blocked, while
+        crash-window duplicates inside the window stay suppressed.
+        """
         await self._ensure_connected()
         async with audit_db.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
                 SELECT id FROM outbox_messages
                 WHERE channel = $1 AND recipient = $2
-                  AND status IN ('pending', 'sending', 'sent')
+                  AND (
+                        status IN ('pending', 'sending')
+                     OR (status = 'sent' AND created_at > NOW() - ($3 || ' days')::interval)
+                  )
                 ORDER BY created_at ASC
                 LIMIT 1
                 """,
                 channel,
                 recipient,
+                str(SENT_DEDUP_WINDOW_DAYS),
             )
         return str(row["id"]) if row else None
 

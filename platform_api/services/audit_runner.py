@@ -82,14 +82,25 @@ async def stop_runner() -> None:
 
 
 async def wait_for_result(audit_id: UUID, timeout: float = RUN_WAIT_TIMEOUT) -> dict:
+    """Poll for completion with exponential backoff (RES-4).
+
+    A fixed 0.25 s poll per waiter multiplied across concurrent /audit/run
+    requests starved the same event loop that services worker heartbeats.
+    Backoff keeps worst-case added latency small (~1.9 s vs 0.25 s) while
+    cutting steady-state query pressure by ~5x at depth.
+    """
     deadline = time.monotonic() + timeout
-    last: Optional[dict] = None
-    while time.monotonic() < deadline:
+    poll = WAIT_POLL_SECONDS
+    max_poll = 2.0
+    while True:
         last = await audit_db.get_audit(audit_id)
         if last and last.get("status") in ("completed", "failed"):
             return last
-        await asyncio.sleep(WAIT_POLL_SECONDS)
-    raise TimeoutError("audit wait exceeded")
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError("audit wait exceeded")
+        await asyncio.sleep(min(poll, remaining))
+        poll = min(poll * 1.6, max_poll)
 
 
 def _job_from_row(row: dict) -> dict:

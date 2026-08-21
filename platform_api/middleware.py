@@ -78,10 +78,49 @@ class RequestSizeMiddleware(BaseHTTPMiddleware):
                 # Invalid Content-Length, continue but we'll check actual bytes
                 pass
         
-        # Process request and check actual bytes as they're read
-        # FastAPI will handle this in the request body validation
-        response = await call_next(request)
-        return response
+        # SEC-P2-2: Content-Length is client-asserted; chunked bodies omit it.
+        # Enforce the cap against ACTUAL received bytes for methods with bodies.
+        if request.method in ("POST", "PUT", "PATCH"):
+            total = 0
+            async def _bounded_receive() -> dict:
+                nonlocal total
+                message = await request.receive()
+                if message["type"] == "http.request":
+                    body = message.get("body", b"")
+                    total += len(body)
+                    if total > self.max_body_size:
+                        from fastapi import status
+                        from fastapi.responses import JSONResponse
+                        request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+                        request.state.request_id = request_id
+                        # Drain nothing further; respond 413 immediately.
+                        response = JSONResponse(
+                            status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                            content={
+                                "code": "payload_too_large",
+                                "message": f"Request body exceeds {self.max_body_size} bytes limit",
+                                "request_id": request_id,
+                            },
+                            headers={"X-Request-ID": request_id},
+                        )
+                        # Mark the response so call_next short-circuits is not
+                        # possible from receive(); raise a sentinel the outer
+                        # layer converts. Simplest correct behavior: raise.
+                        raise _BodyTooLarge(response)
+                return message
+
+            try:
+                request._receive = _bounded_receive  # type: ignore[attr-defined]
+                response = await call_next(request)
+                return response
+            except _BodyTooLarge as exc:
+                return exc.response
+        return await call_next(request)
+
+
+class _BodyTooLarge(Exception):
+    def __init__(self, response):
+        self.response = response
 
 
 def setup_cors(app: FastAPI, allowed_origins: list[str]) -> None:
