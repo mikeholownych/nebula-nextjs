@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Traffic But No Form Fills: The Form Is Usually Not The First Leak',
+  headline: 'Fix Pre-Form Drop-Offs to Boost Inbound Lead Generation',
   description: 'Getting traffic but no form fills? The form is almost never the first problem. Here\'s how to diagnose where trust broke down before visitors ever reached the form.',
   url: 'https://nebulacomponents.com/learning-centre/traffic-but-no-form-fills',
   publishedDate: '2026-07-21',
@@ -26,8 +26,24 @@ export default function TrafficButNoFormFillsPage() {
         </Link>
         <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Form Leaks · Conversion Diagnosis</p>
-          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Traffic But No Form Fills: The Form Is Usually Not The First Leak</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
+            Fix Pre-Form Drop-Offs to Boost Inbound Lead Generation
+          </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">When visitors land but don't fill out the form, the reflex is to redesign the form - more fields, fewer fields, a different layout. That's solving the wrong problem. The form is the last thing a visitor reaches. By the time they get there, they've already decided whether they trust you enough to hand over their details. That decision happens well before the form.</p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-traffic-but-no-form-fills&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

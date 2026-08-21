@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit',
+  headline: 'Fix Google Ads Landing Page Disconnects to Boost Conversions',
   description: 'A high CTR with a low conversion rate points to a page-level disconnect. Diagnose which conversion signals fail when click volume is strong but actions are not.',
   url: 'https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion',
   publishedDate: '2026-07-25',
@@ -34,11 +34,25 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             Google Ads Leaks
           </span>
           <h1 className="heading-1 tracking-tight text-fg mb-6 leading-tight">
-            Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit
+            Fix Google Ads Landing Page Disconnects to Boost Conversions
           </h1>
           <p className="text-xl leading-relaxed text-fg-muted">
             An 8% click-through rate indicates the ad is generating interest. A 0.1% conversion rate on the other side of that click means something may be breaking the moment a high-intent visitor lands on your page. The landing page is one of the variables worth investigating - and it is the one you can check without changing your ad account.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-google-ads-high-ctr-low-conversion&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

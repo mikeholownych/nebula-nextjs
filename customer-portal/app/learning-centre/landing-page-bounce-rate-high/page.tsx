@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Landing Page Bounce Rate High? It Is Usually 3 Diagnosable Causes',
+  headline: 'Reduce Landing Page Bounce Rate to Save Wasted Ad Spend',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high',
@@ -109,8 +109,8 @@ export default function LandingPageBounceRateHigh() {
               Landing Page Leaks · Bounce Rate
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Landing Page Bounce Rate High? It Is Usually 3 Diagnosable Causes
-            </h1>
+            Reduce Landing Page Bounce Rate to Save Wasted Ad Spend
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               A bounce rate above 70% on paid traffic means the first screen is
               not delivering on the promise that brought visitors there. Bounce
@@ -119,6 +119,20 @@ export default function LandingPageBounceRateHigh() {
               page - before diagnosing the cause doubles your spend on the wrong
               problem.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-landing-page-bounce-rate-high&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* Bounce vs Exit */}

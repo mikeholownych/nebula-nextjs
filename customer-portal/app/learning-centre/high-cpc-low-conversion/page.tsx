@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'High CPC, Low Conversion: Which Layer Is Broken',
+  headline: 'Fix High CPC Landing Pages to Unlock Profitable Ad ROAS',
   description:
     'High CPC and low conversion rate together usually indicate a Quality Score problem rooted in landing page message-match. Here is how to diagnose which layer to fix first.',
   url: 'https://nebulacomponents.com/learning-centre/high-cpc-low-conversion',
@@ -93,8 +93,8 @@ export default function HighCpcLowConversion() {
               Paid Traffic Economics · CPC and Conversion
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              High CPC, Low Conversion: Which Layer Is Broken
-            </h1>
+            Fix High CPC Landing Pages to Unlock Profitable Ad ROAS
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               High CPC combined with low conversion is a two-layer problem, and
               the layers compound each other. You pay a premium per click to
@@ -102,6 +102,20 @@ export default function HighCpcLowConversion() {
               bids, find out which layer is actually broken - because fixing
               the page often reduces the CPC too.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-high-cpc-low-conversion&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* Quality Score mechanics */}

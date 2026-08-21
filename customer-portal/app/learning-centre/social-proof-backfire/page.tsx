@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline:
-    'Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion More Than No Testimonials At All',
+    'Fix Social Proof Layouts to Boost Landing Page Credibility',
   description:
     'Four specific testimonial configurations that actively reduce trust below baseline - stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
   url: 'https://nebulacomponents.com/learning-centre/social-proof-backfire',
@@ -43,8 +43,7 @@ export default function SocialProofBackfirePage() {
             Trust Leaks
           </span>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-fg md:text-4xl">
-            Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion More Than
-            No Testimonials At All
+            Fix Social Proof Layouts to Boost Landing Page Credibility
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             If your page has testimonials and still doesn't convert, the problem probably isn't
@@ -53,6 +52,20 @@ export default function SocialProofBackfirePage() {
             testimonials at all. Here are the four patterns, what your visitor's brain does when it
             sees each one, and the exact fix.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-social-proof-backfire&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}
@@ -165,8 +178,8 @@ export default function SocialProofBackfirePage() {
             Removing Broken Testimonials Outperforms Keeping Them
           </h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            If any of the four configurations above appear on your page, removing them will
-            outperform keeping them. This is the counterintuitive result that founders resist: "But
+            If any of the four configurations above appear on your page, removing them tends to
+            beat keeping them in observed audits. This is the counterintuitive result that founders resist: "But
             at least I have something." Something that triggers the uncanny valley, signals
             abandonment, excludes the visitor, or reads as fabricated is worse than nothing.
             Nothing is neutral. Broken social proof is negative.

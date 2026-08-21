@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Proof Before CTA: Why Social Proof Placement Determines Conversion',
+  headline: 'Add Proof Before CTA to Increase Landing Page Conversions',
   description:
     'What visitors see before a CTA can change how they evaluate the ask. These proof-placement sequences are testable hypotheses, not universal laws.',
   url: 'https://nebulacomponents.com/learning-centre/proof-before-cta',
@@ -43,13 +43,27 @@ export default function ProofBeforeCTAPage() {
             Trust Leaks · Proof Before CTA
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Proof Before CTA: The Simple Fix Most Landing Pages Miss
+            Add Proof Before CTA to Increase Landing Page Conversions
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             Sequencing is a testable conversion lever. When a page asks for commitment before it has
             established credibility, some visitors may hesitate. Test whether moving relevant,
             verifiable proof before the ask improves the behavior that matters.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-proof-before-cta&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 - Psychology */}

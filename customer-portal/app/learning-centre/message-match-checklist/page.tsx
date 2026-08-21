@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Message Match Checklist: Align Your Ad to Your Landing Page | Nebula',
+  title: 'Message Match Checklist: Improve Ad-to-Page Conversion | Nebula',
   description:
     'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this audit checklist before your next paid traffic campaign.',
   alternates: {
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Message Match Checklist for Paid Traffic Landing Pages',
+  headline: 'Improve Message Match to Boost Paid Traffic Conversions',
   description:
     'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this audit checklist before your next paid traffic campaign.',
   url: 'https://nebulacomponents.com/learning-centre/message-match-checklist',
   publishedDate: '2025-07-15',
-  modifiedDate: '2026-08-03',
+  modifiedDate: '2026-08-21',
 })
 
 export default function MessageMatchChecklistPage() {
@@ -47,7 +47,7 @@ export default function MessageMatchChecklistPage() {
               Conversion Diagnostics · Message Match
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Message Match Checklist for Paid Traffic Landing Pages
+              Improve Message Match to Boost Paid Traffic Conversions
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Every paid click carries a contract: the ad made a promise, and the landing page must honour it
@@ -55,6 +55,20 @@ export default function MessageMatchChecklistPage() {
               and conversion data becomes meaningless noise. This checklist lets you audit the chain in
               under 2 minutes.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-message-match&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free message match audit →
+              </Link>
+              <a
+                href="#pre-launch-checklist"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                View checklist ↓
+              </a>
+            </div>
           </div>
 
           {/* Section 1: What message match is */}
@@ -171,7 +185,7 @@ export default function MessageMatchChecklistPage() {
           </section>
 
           {/* Section 4: Checklist */}
-          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <section id="pre-launch-checklist" className="mt-6 rounded-md border border-border bg-bg-panel p-8 scroll-mt-24">
             <h2 className="mb-4 text-2xl font-bold text-fg">Pre-Launch Checklist</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run this before activating any paid campaign. Each item is a binary pass/fail.

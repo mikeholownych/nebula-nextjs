@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline:
-    'Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance',
+    'Fix Agency Handoff Debt to Stop Landing Page Conversion Leaks',
   description:
     'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
   url: 'https://nebulacomponents.com/learning-centre/agency-handoff-debt',
@@ -43,7 +43,7 @@ export default function AgencyHandoffDebtPage() {
             Landing Page Leaks
           </span>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-fg md:text-4xl">
-            Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance
+            Fix Agency Handoff Debt to Stop Landing Page Conversion Leaks
           </h1>
           <p className="mt-5 text-lg text-fg-muted leading-relaxed">
             The agency delivered. You reviewed it, approved it, and it was converting. Then you
@@ -54,6 +54,20 @@ export default function AgencyHandoffDebtPage() {
             seven specific changes that almost always happen, each individually defensible, together
             devastating.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-agency-handoff-debt&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

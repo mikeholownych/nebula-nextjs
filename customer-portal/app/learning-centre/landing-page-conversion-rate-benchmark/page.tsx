@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Landing Page Conversion Rate Benchmark: What the Numbers Actually Mean',
+  headline: 'Improve Landing Page Conversion Rates Above Industry Benchmarks',
   description:
     'What is a good landing page conversion rate? The benchmarks vary by traffic source, offer type, and vertical. Here is how to read them without drawing wrong conclusions.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark',
@@ -118,15 +118,28 @@ export default function LandingPageConversionRateBenchmark() {
               Landing Page Leaks · Conversion Rate Benchmarks
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Landing Page Conversion Rate Benchmark: What the Numbers Actually
-              Mean
-            </h1>
+            Improve Landing Page Conversion Rates Above Industry Benchmarks
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Conversion rate benchmarks are frequently cited and frequently
               misread. The right benchmark depends on traffic source, offer
               type, and vertical. Using the wrong one makes a good page look
               broken, and a broken page look fine.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-landing-page-conversion-rate-benchmark&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* The benchmark that matters */}

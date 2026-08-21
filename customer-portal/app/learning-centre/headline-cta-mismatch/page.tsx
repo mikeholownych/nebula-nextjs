@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Your Headline Promises One Thing. Your CTA Asks for Something Else. Here\'s the Receipt.',
+  headline: 'Align Headline and CTA Copy to Boost Landing Page Conversions',
   description: 'Most founders can\'t diagnose headline-CTA mismatch without an outside eye. Your headline creates an expectation; your CTA asks for something different. Visitors experience a bait-and-switch they can\'t articulate - so they just leave.',
   url: 'https://nebulacomponents.com/learning-centre/headline-cta-mismatch',
   publishedDate: '2026-07-25',
@@ -39,11 +39,25 @@ export default function HeadlineCtaMismatchPage() {
             Conversion Copy
           </span>
           <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-fg md:text-4xl">
-            Your Headline Promises One Thing. Your CTA Asks for Something Else. Here&apos;s the Receipt.
+            Align Headline and CTA Copy to Boost Landing Page Conversions
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             This is a named copy failure that most founders have but can&apos;t diagnose without an outside eye. Your headline creates an implied contract about what happens next. Your CTA asks the visitor to fulfil a completely different one. The visitor experiences a bait-and-switch they can&apos;t articulate - so they just leave, and you never know why.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-headline-cta-mismatch&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

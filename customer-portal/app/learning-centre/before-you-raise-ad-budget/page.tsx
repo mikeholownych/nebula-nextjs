@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Before You Raise Ad Budget: Fix The Leaks First',
+  headline: 'Fix Landing Page Leaks to Scale Paid Ad Budgets Efficiently',
   description:
     'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 9-signal checklist to run before touching your daily spend.',
   url: 'https://nebulacomponents.com/learning-centre/before-you-raise-ad-budget',
@@ -93,14 +93,28 @@ export default function BeforeYouRaiseAdBudget() {
               Budget Leaks · Before You Scale
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Before You Raise Ad Budget, Fix The Leaks First
-            </h1>
+            Fix Landing Page Leaks to Scale Paid Ad Budgets Efficiently
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Raising budget on a page with conversion leaks does not fix the
               leaks - it scales them. If your current spend is producing a 1%
               conversion rate, doubling the budget produces twice the traffic at
               the same 1% rate. The math does not improve until the page does.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-before-you-raise-ad-budget&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* The budget multiplier problem */}

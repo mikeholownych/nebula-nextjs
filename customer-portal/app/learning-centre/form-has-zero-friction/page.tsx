@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: "Your Form Has Zero Friction - and That May Be Why Nobody Fills It Out",
+  headline: "Optimize Lead Forms to Increase Qualified Conversion Rates",
   description:
     'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction block conversions and which build confidence.',
   url: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
@@ -41,7 +41,7 @@ export default function FormHasZeroFrictionPage() {
             Form Leaks
           </span>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-fg md:text-4xl">
-            Your Form Has Zero Friction and That&rsquo;s Exactly Why Nobody Fills It Out
+            Optimize Lead Forms to Increase Qualified Conversion Rates
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             You&rsquo;ve already done everything right: minimal fields, a single step, no email
@@ -50,6 +50,20 @@ export default function FormHasZeroFrictionPage() {
             a form takes four seconds to fill out, visitors assume the response on the other end will
             take about as much effort.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-form-has-zero-friction&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}
@@ -253,7 +267,7 @@ export default function FormHasZeroFrictionPage() {
                   Put Your Proof Before the CTA
                 </span>
                 <span className="text-sm text-fg-muted">
-                  Why the order of trust signals on a page determines whether visitors reach the
+                  Why the order of trust signals on a page shapes whether visitors reach the
                   form at all
                 </span>
               </Link>

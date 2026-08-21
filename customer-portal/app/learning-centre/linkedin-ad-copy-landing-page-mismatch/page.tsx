@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Why Your LinkedIn Ad Does the Job and Your Landing Page Undoes It',
+  headline: 'Align LinkedIn Ad Copy with Landing Pages to Stop Buyer Bounce',
   description: 'LinkedIn ads build professional credibility in seconds. Most landing pages destroy it just as fast. Here is exactly what causes the mismatch and how to fix it without a full redesign.',
   url: 'https://nebulacomponents.com/learning-centre/linkedin-ad-copy-landing-page-mismatch',
   publishedDate: '2026-07-25',
@@ -31,13 +31,27 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
         <div className="mb-8">
           <span className="text-sm font-medium text-accent">LinkedIn Ads Leaks</span>
           <h1 className="mt-3 heading-1 leading-tight text-fg">
-            Why Your LinkedIn Ad Does the Job and Your Landing Page Undoes It
+            Align LinkedIn Ad Copy with Landing Pages to Stop Buyer Bounce
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-fg-muted">
             Your LinkedIn ad earns the click. The landing page loses the conversion. The culprit is
             almost never the offer - it is the gap between the professional register of the ad and
             the generic marketing language waiting on the other side of it.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-linkedin-ad-copy-landing-page-mismatch&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           <p className="mt-2 text-sm text-fg-muted">Published 25 July 2026</p>
         </div>
 

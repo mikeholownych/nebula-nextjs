@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Your CTA May Be Below the Fold on Smaller Phones',
+  headline: 'Fix Mobile CTA Position to Boost Mobile Ad Conversions',
   description:
     'Your CTA looks fine on your flagship phone - but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
   url: 'https://nebulacomponents.com/learning-centre/cta-below-fold-mobile',
@@ -36,7 +36,7 @@ export default function CtaBelowFoldMobilePage() {
             Mobile Leaks
           </p>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-fg leading-tight mb-6">
-            Your CTA May Be Below the Fold on Smaller Phones
+            Fix Mobile CTA Position to Boost Mobile Ad Conversions
           </h1>
           <p className="text-lg leading-relaxed text-fg-muted">
             You tested it on your phone. It looked fine. You shipped it. But your phone is a
@@ -46,6 +46,20 @@ export default function CtaBelowFoldMobilePage() {
             do. This is the mobile blind spot that quietly hurts conversion rates that have
             already been &quot;optimised.&quot;
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-cta-below-fold-mobile&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}
@@ -189,7 +203,7 @@ export default function CtaBelowFoldMobilePage() {
             Also test at <strong className="text-fg">Galaxy S8+</strong> (360×740px) and
             manually enter <strong className="text-fg">375×667</strong> as a custom size if the
             preset is not available. If your CTA is not fully visible without scrolling at any
-            of these sizes, you have a problem that is costing you conversions right now.
+            of these sizes, you have a problem that is suppressing conversions right now.
           </p>
         </section>
 

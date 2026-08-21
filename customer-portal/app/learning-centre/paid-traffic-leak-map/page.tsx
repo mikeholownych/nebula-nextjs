@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Paid Traffic Leak Map: Where Your Ad Budget Disappears',
+  headline: 'Discover 9 Paid Traffic Conversion Leaks on Your Landing Page',
   description:
     'A diagnostic map of every stage where paid traffic leaks before converting. Identify which leak is bleeding your ad budget, then get the fix.',
   url: 'https://nebulacomponents.com/learning-centre/paid-traffic-leak-map',
@@ -165,14 +165,28 @@ export default function PaidTrafficLeakMapPage() {
               Diagnostic Framework · Paid Traffic
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Paid Traffic Leak Map
-            </h1>
+            Discover 9 Paid Traffic Conversion Leaks on Your Landing Page
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Every dollar spent on ads passes through a fixed sequence of stages before
               it either converts or leaks. This map identifies the stage, the signal that
               confirms it is broken, and the specific fix - in order of where traffic
               typically leaks first.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-paid-traffic-leak-map&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* How to use the map */}

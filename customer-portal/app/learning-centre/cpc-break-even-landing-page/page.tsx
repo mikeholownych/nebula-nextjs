@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline:
-    'What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even',
+    'Improve Landing Pages to Break Even and Scale High CPC Traffic',
   description:
     'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even - an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
   url: 'https://nebulacomponents.com/learning-centre/cpc-break-even-landing-page',
@@ -36,7 +36,7 @@ export default function CpcBreakEvenLandingPagePage() {
             Paid Traffic Economics
           </span>
           <h1 className="mb-6 heading-1 leading-tight tracking-tight text-fg lg:text-5xl">
-            What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even
+            Improve Landing Pages to Break Even and Scale High CPC Traffic
           </h1>
           <p className="text-xl leading-relaxed text-fg-muted">
             Most founders set their bids, launch campaigns, and then wonder why
@@ -46,6 +46,20 @@ export default function CpcBreakEvenLandingPagePage() {
             to stop losing money - and whether that number is even achievable
             given your price point.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-cpc-break-even-landing-page&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

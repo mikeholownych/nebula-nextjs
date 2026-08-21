@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Founder Confessions: The Moment We Found Out Our Page Was Broken',
+  headline: 'Discover 7 Proven Conversion Lessons from Real Landing Page Audits',
   description:
     "Anonymous stories from founders whose landing pages were silently broken for months. What they spent, and what they blamed instead.",
   url: 'https://nebulacomponents.com/learning-centre/confessions',
@@ -90,11 +90,25 @@ export default function ConfessionsPage() {
             Landing Page Leaks · Founder Stories
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Founder Confessions
+            Discover 7 Proven Conversion Lessons from Real Landing Page Audits
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             The moment we found out our landing page had been silently broken. How long it had been broken. How much we spent. What we were blaming instead.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-confessions&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           <p className="mt-3 text-sm text-fg-muted">
             All stories are anonymous. Industry and spend range are approximate.
           </p>

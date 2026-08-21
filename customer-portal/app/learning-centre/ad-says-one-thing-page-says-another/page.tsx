@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer',
+  headline: 'Fix Ad and Landing Page Mismatch to Stop Wasting Paid Traffic',
   description: "Message match failure can make paid clicks feel disconnected from the landing page. Inspect the handoff and test a focused H1 correction before redesigning.",
   url: 'https://nebulacomponents.com/learning-centre/ad-says-one-thing-page-says-another',
   publishedDate: '2026-07-25',
@@ -40,11 +40,25 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
             Message Match
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-fg sm:text-4xl">
-            Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer
+            Fix Ad and Landing Page Mismatch to Stop Wasting Paid Traffic
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-fg-muted">
             Your ad clicks are coming in. Your page looks polished. But conversions are flat. In most cases the culprit is not your offer, your design, or your targeting - it is a silent break in the thread between what your ad promises and what your page delivers.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-ad-says-one-thing-page-says-another&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'The Ghost Variant: When Your A/B Test Winner Is a False Positive',
+  headline: 'Stop False A/B Test Wins to Build Truly Scalable Landing Pages',
   description:
     'A ghost variant is when your control quietly breaks mid-test - a missing pixel, a truncated H1, a 404ing social proof block - and the "winning" variant wins by default. Here is how to detect it before you ship.',
   url: 'https://nebulacomponents.com/learning-centre/ghost-variant-ab-test',
@@ -42,7 +42,7 @@ export default function GhostVariantAbTestPage() {
             Landing Page Leaks
           </span>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-fg md:text-4xl">
-            The Ghost Variant: When Your A/B Test Winner Is a False Positive
+            Stop False A/B Test Wins to Build Truly Scalable Landing Pages
           </h1>
           <p className="mt-4 text-lg text-fg-muted leading-relaxed">
             Your test platform declared a winner. Variant B beat the control by 14%. You ship it.
@@ -52,6 +52,20 @@ export default function GhostVariantAbTestPage() {
             now variant B is your new control, and you have no idea what you're actually
             measuring.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-ghost-variant-ab-test&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1: What a ghost variant is */}
@@ -115,7 +129,7 @@ export default function GhostVariantAbTestPage() {
             logos from a third-party CDN over HTTP. Modern browsers block mixed content.
             Desktop Chrome blocked it quietly at migration time; nobody noticed because the
             widget has a CSS fallback. But on the control variant, that blank space where five
-            customer logos used to appear is costing you conversions - and has been since you
+            customer logos used to appear is suppressing conversions - and has been since you
             started the test.
           </p>
         </section>

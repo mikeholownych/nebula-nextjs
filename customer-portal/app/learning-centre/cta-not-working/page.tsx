@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'CTA Not Working? Fix Commitment, Clarity, And Timing',
+  headline: 'Fix Broken CTAs to Increase Landing Page Conversion Rates',
   description: 'Your CTA fails when it asks for more than the page has earned. Learn the 4 CTA failure modes, the commitment ladder, and the copy formula that converts.',
   url: 'https://nebulacomponents.com/learning-centre/cta-not-working',
   publishedDate: '2026-07-21',
@@ -28,11 +28,25 @@ export default function CtaNotWorkingPage() {
         <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Conversion Copy · CTA Optimisation</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            CTA Not Working? Fix Commitment, Clarity, And Timing
+            Fix Broken CTAs to Increase Landing Page Conversion Rates
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             A broken CTA is almost never a button-colour problem. It's a commitment mismatch - your page asked for more trust than it had built. Here's how to diagnose the exact failure mode and fix it.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-cta-not-working&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

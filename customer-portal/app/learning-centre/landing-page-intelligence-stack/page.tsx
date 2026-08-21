@@ -102,12 +102,26 @@ export default function LandingPageIntelligenceStackPage() {
             Evidence-grade workflow bundle
           </p>
           <h1 className="max-w-4xl heading-1 leading-tight text-fg sm:text-5xl lg:text-6xl">
-            Six landing-page checks. Every conclusion tied to evidence.
+            Launch the 6-Signal Landing Page Audit to Fix Conversion Leaks
           </h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-fg-muted sm:text-xl">
             This free stack turns a landing page into six inspectable records: what was observed,
             where it appeared, what it may mean, and what still cannot be proven.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-landing-page-intelligence-stack&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <LinkButton
               href={downloadHref}

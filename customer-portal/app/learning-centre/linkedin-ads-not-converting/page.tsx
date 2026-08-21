@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'LinkedIn Ads Getting Clicks But No Conversions: Isolate the Post-Click Leak',
+  headline: 'Fix LinkedIn Ads Landing Pages to Scale High-Value Conversions',
   description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
   url: 'https://nebulacomponents.com/learning-centre/linkedin-ads-not-converting',
   publishedDate: '2026-07-21',
@@ -31,7 +31,7 @@ export default function LinkedinAdsNotConvertingPage() {
             LinkedIn Ads Leaks · linkedin ad to landing page conversion
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            LinkedIn Ads Getting Clicks But No Conversions: Isolate the Post-Click Leak
+            Fix LinkedIn Ads Landing Pages to Scale High-Value Conversions
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             LinkedIn clicks can be expensive, which makes diagnosis before
@@ -39,6 +39,20 @@ export default function LinkedinAdsNotConvertingPage() {
             tracking and inspect how each campaign&apos;s visitors behave on
             the page they actually receive.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-linkedin-ads-not-converting&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Direct answer */}

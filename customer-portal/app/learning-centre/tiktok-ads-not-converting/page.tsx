@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'TikTok Ads Getting Views But No Sales: The Landing Page Disconnect',
+  headline: 'Fix TikTok Landing Page Disconnects to Transform Views Into Sales',
   description: "TikTok ads driving views but zero sales? The creative isn't the problem - your landing page may be blocking the conversion. Here's the structural disconnect to fix.",
   url: 'https://nebulacomponents.com/learning-centre/tiktok-ads-not-converting',
   publishedDate: '2026-07-21',
@@ -31,11 +31,25 @@ export default function TiktokAdsNotConvertingPage() {
             TikTok Ads Leaks · tiktok ad to landing page mismatch
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            TikTok Ads Getting Views But No Sales: The Landing Page Disconnect
+            Fix TikTok Landing Page Disconnects to Transform Views Into Sales
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             Your TikTok ad stopped the scroll. The hook worked. The click happened. Then the page loaded - and the sale didn't. That gap between ad click and conversion isn't a targeting problem or a creative problem. It's a landing page problem, and it has a specific anatomy you can diagnose and fix.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-tiktok-ads-not-converting&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1 */}

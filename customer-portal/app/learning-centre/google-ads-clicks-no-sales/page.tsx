@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Google Ads Clicks But No Sales: Check The Page Before Budget',
+  headline: 'Fix Google Ads Landing Pages to Transform Clicks Into Sales',
   description:
     'If Google Ads produces clicks but no sales, separate ad delivery from post-click behaviour before changing bids, creative, or the landing page.',
   url: 'https://nebulacomponents.com/learning-centre/google-ads-clicks-no-sales',
@@ -93,8 +93,8 @@ export default function GoogleAdsClicksNoSales() {
               Google Ads Leaks · Clicks Without Conversions
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Google Ads Clicks But No Sales: Check The Page Before Budget
-            </h1>
+            Fix Google Ads Landing Pages to Transform Clicks Into Sales
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               If Google Ads is producing clicks but no sales, the campaign may
               be doing exactly what it should: creating arrival. The chain
@@ -102,6 +102,20 @@ export default function GoogleAdsClicksNoSales() {
               the ad started. Raising budget or adjusting bidding strategy does
               not fix what happens after the click.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-google-ads-clicks-no-sales&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* Direct answer */}

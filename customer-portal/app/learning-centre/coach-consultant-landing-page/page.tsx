@@ -48,7 +48,7 @@ const faqSchema = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Coach Or Consultant Landing Page Not Converting? The Discovery Call Ask Is The Leak',
+  headline: 'Improve Consultant Landing Pages to Boost High-Ticket Leads',
   description: 'Coaches and consultants lose clients on the landing page before the sales call. Here\'s why the discovery call ask is the leak - and what to fix first.',
   url: 'https://nebulacomponents.com/learning-centre/coach-consultant-landing-page',
   publishedDate: '2026-07-21',
@@ -66,8 +66,24 @@ export default function CoachConsultantLandingPagePage() {
         </Link>
         <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Industry Specific · Service Businesses</p>
-          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Coach Or Consultant Landing Page Not Converting? The Discovery Call Ask Is The Leak</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
+            Improve Consultant Landing Pages to Boost High-Ticket Leads
+          </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">You're running ads or posting content. Traffic is coming in. But almost nobody books the call. The instinct is to tweak the ad creative or try a different platform. The actual problem is on the page - and it almost always starts with asking too much, too soon.</p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-coach-consultant-landing-page&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

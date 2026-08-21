@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'The 11pm Founder Spiral',
+  headline: 'Stop the 11pm Founder Spiral: Diagnose Landing Page Leaks Fast',
   description: 'It\'s 11:47pm and you\'ve refreshed Ads Manager three times. You\'re not looking for data. You\'re looking for reassurance. Here\'s what\'s actually happening - and what your page is silently doing while you spiral.',
   url: 'https://nebulacomponents.com/learning-centre/the-11pm-founder-spiral',
   publishedDate: '2026-07-25',
@@ -39,11 +39,25 @@ export default function The11pmFounderSpiralPage() {
             Landing Page Leaks
           </span>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-fg md:text-4xl">
-            The 11pm Founder Spiral
+            Stop the 11pm Founder Spiral: Diagnose Landing Page Leaks Fast
           </h1>
           <p className="mt-4 text-lg text-fg-muted leading-relaxed">
             It's 11:47pm. You've refreshed Ads Manager three times in the last twenty minutes. The numbers haven't changed. You know they haven't changed. You're not looking for data - you're looking for something that tells you it's going to be okay. That's the spiral. And it's lying to you about where the problem actually is.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-the-11pm-founder-spiral&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Section 1: Name the spiral */}

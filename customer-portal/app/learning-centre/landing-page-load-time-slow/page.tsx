@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Landing Page Load Time Slow: Signal 4 Diagnosis and Fix',
+  headline: 'Boost Landing Page Speed to Increase Paid Ad Conversions',
   description:
     'Slow landing page load time bleeds conversions before the page is seen. Here is how to diagnose it, what the data says about the speed-conversion relationship, and where to start fixing.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-load-time-slow',
@@ -93,8 +93,8 @@ export default function LandingPageLoadTimeSlow() {
               Landing Page Leaks · Load Time (Signal 4)
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Landing Page Load Time Slow: Signal 4 Diagnosis and Fix
-            </h1>
+            Boost Landing Page Speed to Increase Paid Ad Conversions
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Slow load time is the only conversion leak that costs you before
               the visitor has seen anything. A visitor who abandons during load
@@ -102,6 +102,20 @@ export default function LandingPageLoadTimeSlow() {
               CTA ever had a chance to work. Fix this before optimising anything
               else.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-landing-page-load-time-slow&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* What the data says */}

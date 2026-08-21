@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain',
+  headline: 'Fix Landing Page Friction to Boost Facebook Ad Leads',
   description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
   url: 'https://nebulacomponents.com/learning-centre/facebook-ads-no-leads',
   publishedDate: '2026-07-21',
@@ -28,7 +28,7 @@ export default function FacebookAdsNoLeadsPage() {
         <div className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Meta Ads Leaks · Facebook Ads</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain
+            Fix Landing Page Friction to Boost Facebook Ad Leads
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             If your Meta ads generate clicks but leads do not materialise, trace
@@ -36,6 +36,20 @@ export default function FacebookAdsNoLeadsPage() {
             mismatch, tracking gaps, offer fit, load time, and form friction can
             produce similar symptoms.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-facebook-ads-no-leads&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         {/* Direct answer */}

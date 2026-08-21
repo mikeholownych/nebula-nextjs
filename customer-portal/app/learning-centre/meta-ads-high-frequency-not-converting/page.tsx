@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Meta Ads High Frequency Not Converting: Check the Landing Page',
+  headline: 'Fix Landing Page Fatigue to Scale High-Frequency Meta Ads',
   description: 'High-frequency Meta ads with stable CTR but flat conversions? The landing page is worth investigating before assuming ad fatigue.',
   url: 'https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting',
   publishedDate: '2026-01-01',
@@ -33,11 +33,25 @@ export default function LearningCentrePage() {
             Meta Ads Leaks · High Frequency, No Conversions
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Meta Ads High Frequency? The Page May Be Burning Budget
+            Fix Landing Page Fatigue to Scale High-Frequency Meta Ads
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             When ad frequency climbs, most advertisers assume the audience is exhausted. But if clicks are still coming and conversions have stalled, the leak isn&apos;t the ad - it&apos;s the landing page failing to close.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-meta-ads-high-frequency-not-converting&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

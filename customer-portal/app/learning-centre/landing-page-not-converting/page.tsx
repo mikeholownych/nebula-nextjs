@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Landing Page Not Converting? Diagnose These 5 Leaks First',
+  headline: 'Fix 5 Hidden Conversion Leaks to Scale Your Landing Page',
   description:
     'A landing page that does not convert paid traffic frequently exhibits observable friction across standard page signals. Diagnose structural friction before making redesign assumptions.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-not-converting',
@@ -67,14 +67,28 @@ export default function LandingPageNotConvertingPage() {
               Landing Page Leaks · 9 Conversion Signals
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Landing Page Not Converting? Diagnose These 5 Leaks First
-            </h1>
+            Fix 5 Hidden Conversion Leaks to Scale Your Landing Page
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               A non-converting landing page frequently exhibits observable
               friction across standard page signals. Changing button colour will not fix a broken
               promise. This article shows you how to identify candidate friction points
               before making redesign assumptions.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-landing-page-not-converting&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* Direct answer - AEO extraction target */}
@@ -204,7 +218,7 @@ export default function LandingPageNotConvertingPage() {
               arrived because of a specific promise; the headline either
               confirms they are in the right place or it does not.
               Message-match is signal 1 of the 9 conversion signals the Nebula
-              audit measures, because it determines whether any of the other
+              audit measures, because it shapes whether any of the other
               signals get a chance to work.
             </p>
           </section>

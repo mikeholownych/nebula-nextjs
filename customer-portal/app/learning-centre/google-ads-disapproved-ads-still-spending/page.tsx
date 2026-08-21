@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Google Ads Disapproved? Your Page May Be The Hidden Reason',
+  headline: 'Fix Landing Page Policy Issues to Stop Google Ads Disapproval',
   description: 'Google Ads can disapprove ads while still charging for impressions. Here is how to identify and stop this from happening.',
   url: 'https://nebulacomponents.com/learning-centre/google-ads-disapproved-ads-still-spending',
   publishedDate: '2026-01-01',
@@ -33,11 +33,25 @@ export default function LearningCentrePage() {
             Google Ads Leaks · Disapproved But Still Spending
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Google Ads Disapproved? Your Page May Be The Hidden Reason
+            Fix Landing Page Policy Issues to Stop Google Ads Disapproval
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             When Google Ads disapproves your ad, most advertisers check the ad copy. But the landing page itself can trigger policy violations that not only block the ad-but continue costing you money while the ad runs in a disabled state.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-google-ads-disapproved-ads-still-spending&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </div>
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

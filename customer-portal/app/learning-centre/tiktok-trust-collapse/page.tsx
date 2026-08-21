@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: "The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019",
+  headline: "Prevent TikTok Trust Collapse to Boost Modern Mobile Conversions",
   description: "TikTok trains buyers to detect inauthenticity instantly. If your landing page looks like 2019, Gen Z bounces before they read a word. Here is what to fix.",
   url: "https://nebulacomponents.com/learning-centre/tiktok-trust-collapse",
   publishedDate: "2026-07-25",
@@ -32,11 +32,25 @@ export default function TiktokTrustCollapsePage() {
           TikTok Ads Leaks
         </div>
         <h1 className="mb-4 heading-1 leading-tight text-fg">
-          The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019
-        </h1>
+            Prevent TikTok Trust Collapse to Boost Modern Mobile Conversions
+          </h1>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
           TikTok has trained an entire generation to detect inauthenticity in under two seconds. If your landing page looks like it was built in 2019, Gen Z buyers will bounce before they finish reading your headline - and your ad spend disappears with them.
         </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-tiktok-trust-collapse&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
 
         {/* Section 1 */}
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

@@ -72,7 +72,7 @@ const faqSchema = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'B2B SaaS Landing Page Not Converting: Fix Message-Match First',
+  headline: 'Fix B2B SaaS Landing Pages to Boost Paid Traffic Conversions',
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
   url: 'https://nebulacomponents.com/learning-centre/b2b-saas-landing-page-not-converting',
   publishedDate: '2025-07-15',
@@ -99,11 +99,25 @@ export default function B2BSaaSLandingPageNotConverting() {
         <article className="mx-auto max-w-4xl px-6 py-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent">Industry Specific</p>
           <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-            B2B SaaS Landing Page Not Converting? The Demo Ask Is Too Soon
+            Fix B2B SaaS Landing Pages to Boost Paid Traffic Conversions
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted">
             B2B SaaS pages ask for demos before proving value. Enterprise buyers are 57% through the purchase process before they engage with sales. Lead with the demo ask and you lose them before the page loads.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-b2b-saas-landing-page-not-converting&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
 
           {/* Problem / solution */}
           <div className="mt-10 grid gap-6 rounded-md border border-border bg-bg-muted/30 p-6 md:grid-cols-2">

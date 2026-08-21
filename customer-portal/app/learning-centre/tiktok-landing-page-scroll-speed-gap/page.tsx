@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
+  headline: 'Bridge the TikTok Scroll-Speed Gap to Boost Mobile Conversions',
   description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap that blocks conversions - and how to fix it before you scale spend.",
   url: 'https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap',
   publishedDate: '2026-07-25',
@@ -44,11 +44,25 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
             </span>
           </div>
           <h1 className="mb-4 text-3xl font-bold leading-tight text-fg sm:text-4xl">
-            TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget
+            Bridge the TikTok Scroll-Speed Gap to Boost Mobile Conversions
           </h1>
           <p className="text-lg leading-relaxed text-fg-muted">
             TikTok has conditioned your audience to make pass/fail decisions in under a second. Most landing pages were never designed for that pace - and the mismatch silently drains your ad budget long before you notice the pattern.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-tiktok-landing-page-scroll-speed-gap&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           <p className="mt-3 text-sm text-fg-muted">
             Published <time dateTime="2026-07-25">25 July 2026</time>
           </p>

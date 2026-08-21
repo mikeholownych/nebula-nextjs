@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Above The Fold: What Paid Traffic Decides Before Scrolling',
+  headline: 'Improve Above-The-Fold Layout to Boost Paid Traffic Conversions',
   description:
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   url: 'https://nebulacomponents.com/learning-centre/above-fold-landing-page',
@@ -117,8 +117,8 @@ export default function AboveFoldLandingPagePage() {
               Landing Page Leaks · Above The Fold
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Above The Fold: What Paid Traffic Decides Before Scrolling
-            </h1>
+            Improve Above-The-Fold Layout to Boost Paid Traffic Conversions
+          </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               The fold is not a design concept - it is the boundary between the
               ad spend that worked and the ad spend that was wasted. Most paid
@@ -126,6 +126,20 @@ export default function AboveFoldLandingPagePage() {
               traffic, the above-fold section is the entire page. If it does not
               close the case before they scroll, it never gets closed.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-above-fold-landing-page&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
           </div>
 
           {/* Section 1 - 5 required elements */}
@@ -264,7 +278,7 @@ export default function AboveFoldLandingPagePage() {
             <p className="leading-relaxed text-fg-muted">
               The eye does not read a landing page - it scans it. Size,
               contrast, and position determine reading order. That reading order
-              determines whether the above-fold section makes its argument in
+              shapes whether the above-fold section makes its argument in
               the right sequence.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">

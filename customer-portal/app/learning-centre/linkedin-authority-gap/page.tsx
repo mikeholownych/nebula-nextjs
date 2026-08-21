@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const articleSchema = createArticleSchema({
   headline:
-    'The LinkedIn-to-Page Authority Gap: Why High-Credential Audiences Bounce From Pages That Convert Facebook Traffic',
+    'Bridge the LinkedIn Authority Gap to Boost B2B Landing Pages',
   description:
     'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic - and the specific checks you need before scaling LinkedIn spend.',
   url: 'https://nebulacomponents.com/learning-centre/linkedin-authority-gap',
@@ -47,14 +47,27 @@ export default function LinkedInAuthorityGapPage() {
             LinkedIn Ads Leaks
           </p>
           <h1 className="mb-4 text-3xl font-bold leading-tight text-fg md:text-4xl">
-            The LinkedIn-to-Page Authority Gap: Why High-Credential Audiences Bounce From Pages That
-            Convert Facebook Traffic
+            Bridge the LinkedIn Authority Gap to Boost B2B Landing Pages
           </h1>
           <p className="text-lg leading-relaxed text-fg-muted">
             LinkedIn CPCs are 3–5× Facebook. If your landing page was built for impulse-driven
             audiences, you are burning budget on visitors who are actively evaluating you - and
             finding nothing convincing enough to stay.
           </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                href="/audit?utm_source=learning-centre-linkedin-authority-gap&utm_medium=hero-cta"
+                className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Get your free audit →
+              </Link>
+              <Link
+                href="/repair-sprint"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+              >
+                Explore $97 Repair Sprint
+              </Link>
+            </div>
         </header>
 
         {/* Section 1 */}
