@@ -4,11 +4,16 @@ Mount these in platform_api/main.py:
   from lead_gen.webhook_endpoints import setup_lead_gen_routes
   setup_lead_gen_routes(app)  # FastAPI app
 """
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 import json
 
 
-router = APIRouter(prefix="/api/lead-gen", tags=["lead-gen"])
+from platform_api.auth.principal import internal_service_dependency
+
+# INTERNAL_SERVICE: these are n8n automation intake endpoints, not public
+# customer capabilities. Callers must present the shared service secret.
+router = APIRouter(prefix="/api/lead-gen", tags=["lead-gen"],
+                   dependencies=[Depends(internal_service_dependency)])
 
 
 @router.post("/rb2b-event")

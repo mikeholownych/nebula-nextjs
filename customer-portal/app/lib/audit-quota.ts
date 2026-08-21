@@ -74,9 +74,13 @@ export async function checkAuditQuota(email: string): Promise<QuotaResult> {
   // Do not query nebula_platform.audits - that table is not the audit store.
   let usedThisMonth = 0
   try {
+    const internalSecret = (process.env.INTERNAL_API_SECRET || '').trim()
     const quotaResponse = await fetch(
       `${PLATFORM_API_URL}/audit/quota?email=${encodeURIComponent(normalizedEmail)}`,
-      { signal: AbortSignal.timeout(5_000) },
+      {
+        signal: AbortSignal.timeout(5_000),
+        headers: internalSecret ? { Authorization: `Bearer ${internalSecret}` } : undefined,
+      },
     )
     if (!quotaResponse.ok) {
       return { allowed: true, plan, quota }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -23,7 +24,7 @@ export async function PATCH(
 
     const response = await fetch(`${API_BASE}/audit/lab-experiments/${encodeURIComponent(id)}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
       body: JSON.stringify({ status: body.status, email: auth.user.email }),
       signal: AbortSignal.timeout(10000),
     })

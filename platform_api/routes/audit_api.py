@@ -3,7 +3,7 @@ Nebula Audit API
 FastAPI routes for audit processing (called by n8n workflows)
 """
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -27,6 +27,20 @@ import sys
 from pathlib import Path
 sys.path.insert(0, "/home/mike/nebula")
 from audit_track_trigger import trigger_track_assignment
+
+from platform_api.auth.principal import (
+    Principal,
+    bind_email,
+    require_internal_service,
+    internal_service_dependency,
+    require_principal,
+    SCOPE_AGENT_EXECUTE,
+    SCOPE_AUDIT_CREATE,
+    SCOPE_AUDIT_READ,
+    SCOPE_FIXES_READ,
+    SCOPE_WORKSPACE_READ,
+    SCOPE_WORKSPACE_WRITE,
+)
 
 router = APIRouter(prefix="/audit", tags=["audit"])
 
@@ -350,16 +364,19 @@ class AuditClaimRequest(BaseModel):
     email: str
 
 
-@router.post("/claim")
-async def claim_audit(body: AuditClaimRequest):
-    """Link an anonymous/unclaimed audit to a real email address.
+@router.post("/claim", dependencies=[Depends(internal_service_dependency)])
+async def claim_audit(body: AuditClaimRequest, request: Request):
+    """Link an anonymous/unclaimed audit to an email - INTERNAL_SERVICE.
 
-    No auth required - email is the identity for now.
+    Only the Next.js BFF may call this, and only after proving the caller
+    controls the email via the HMAC-signed audit-unlock cookie. Anonymous
+    public access would let anyone seize or re-bind audit records.
 
     Returns 200 {"claimed": true, ...} on success.
     Returns 400 if the audit is already owned by a *different* email.
     Returns 404 if audit_id is not found.
     """
+    require_internal_service(request)
     email = body.email.strip().lower()
     if not email or "@" not in email:
         raise HTTPException(status_code=400, detail="Valid email required")
@@ -472,10 +489,12 @@ async def get_fix_effectiveness(finding_key: str = Query(..., min_length=1, max_
 
 
 @router.get("/fix-history")
-async def get_fix_history(email: str = Query(..., min_length=3, max_length=320), 
-                         limit: int = Query(10, ge=1, le=100)):
+async def get_fix_history(email: str = Query(..., min_length=3, max_length=320),
+                         limit: int = Query(10, ge=1, le=100),
+                         principal: Principal = Depends(require_principal(SCOPE_FIXES_READ))):
     """Get fix implementation history for a specific user.
     Shows what fixes the user has attempted and their outcomes."""
+    email = bind_email(principal, email)
     try:
         # Validate email format
         import re
@@ -491,11 +510,14 @@ async def get_fix_history(email: str = Query(..., min_length=3, max_length=320),
 
 
 @router.get("/quota")
-async def get_audit_quota(email: str = Query(..., min_length=3, max_length=320)):
+async def get_audit_quota(email: str = Query(..., min_length=3, max_length=320),
+                          request: Request = None):
     """Completed-audit count this UTC month from nebula_audit.
 
-    Used by the portal quota gate. Must be defined before /{audit_id}.
+    INTERNAL_SERVICE: consumed by the portal's server-side quota gate.
+    Must be defined before /{audit_id}.
     """
+    require_internal_service(request)
     import re
     if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         raise HTTPException(status_code=400, detail="Invalid email format")
@@ -512,10 +534,12 @@ async def get_audit_quota(email: str = Query(..., min_length=3, max_length=320))
 
 
 @router.get("/by-email")
-async def get_audits_by_email(email: str = Query(..., min_length=3, max_length=320)):
+async def get_audits_by_email(email: str = Query(..., min_length=3, max_length=320),
+    principal: Principal = Depends(require_principal(SCOPE_AUDIT_READ)),):
     """List all audits for a workspace email - powers the Customer Workspace
     (dashboard, projects, immutable audit history). Each row is a version of
     that URL at a point in time. Must be defined before /{audit_id}."""
+    email = bind_email(principal, email)
     import re
     # Reject malformed emails early - must contain @ with a dot after it
     if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
@@ -537,11 +561,13 @@ class RecommendationUpdate(BaseModel):
 
 
 @router.get("/recommendations")
-async def list_recommendations(email: str = Query(..., min_length=3, max_length=320)):
+async def list_recommendations(email: str = Query(..., min_length=3, max_length=320),
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
     """Sync + return the recommendation kanban for a workspace email.
     Derives cards from completed audits (upsert preserving statuses) and
     auto-verifies items a newer audit no longer flags. Must be defined
     before /{audit_id}."""
+    email = bind_email(principal, email)
     try:
         recs = await audit_db.sync_recommendations(email)
         return {"email": email, "recommendations": recs}
@@ -550,8 +576,10 @@ async def list_recommendations(email: str = Query(..., min_length=3, max_length=
 
 
 @router.patch("/recommendations/{rec_id}")
-async def update_recommendation(rec_id: str, body: RecommendationUpdate):
-    """Move a recommendation between kanban columns (to_fix / doing / done)."""
+async def update_recommendation(rec_id: str, body: RecommendationUpdate,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Move a recommendation between kanban columns (to_fix / doing / done).
+    Ownership: the recommendation must belong to an audit owned by the principal."""
     if body.status not in ("to_fix", "doing", "done"):
         raise HTTPException(status_code=400, detail="Invalid status")
     try:
@@ -563,6 +591,10 @@ async def update_recommendation(rec_id: str, body: RecommendationUpdate):
     try:
         rec = await audit_db.update_recommendation_status(rec_id, body.status)
         if not rec:
+            raise HTTPException(status_code=404, detail="Recommendation not found")
+        owner = (rec.get("email") or "").strip().lower() if isinstance(rec, dict) else ""
+        own = (principal.workspace_email or principal.email or "").strip().lower()
+        if not owner or owner != own:
             raise HTTPException(status_code=404, detail="Recommendation not found")
         return rec
     except HTTPException:
@@ -586,8 +618,10 @@ class LabExperimentUpdate(BaseModel):
 
 
 @router.get("/lab-experiments")
-async def list_lab_experiments(email: str = Query(..., min_length=3, max_length=320)):
+async def list_lab_experiments(email: str = Query(..., min_length=3, max_length=320),
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
     """List saved Component Lab experiments for a workspace email (newest first)."""
+    email = bind_email(principal, email)
     try:
         exps = await audit_db.list_lab_experiments(email)
         return {"email": email, "experiments": exps}
@@ -596,8 +630,10 @@ async def list_lab_experiments(email: str = Query(..., min_length=3, max_length=
 
 
 @router.post("/lab-experiments")
-async def create_lab_experiment(body: LabExperimentCreate):
-    """Save a lab run as an experiment in the workspace."""
+async def create_lab_experiment(body: LabExperimentCreate,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Save a lab run as an experiment in the workspace (tenant-bound)."""
+    body.email = bind_email(principal, body.email)
     email = body.email.strip().lower()
     if len(email) < 3 or "@" not in email:
         raise HTTPException(status_code=400, detail="Valid email required")
@@ -620,8 +656,9 @@ async def create_lab_experiment(body: LabExperimentCreate):
 
 
 @router.patch("/lab-experiments/{exp_id}")
-async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate):
-    """Mark an experiment as production (or back to saved)."""
+async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Mark an experiment as production (or back to saved). Tenant-owned only."""
     if body.status not in ("saved", "production"):
         raise HTTPException(status_code=400, detail="Invalid status")
     try:
@@ -634,6 +671,10 @@ async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate):
         exp = await audit_db.update_lab_experiment_status(exp_id, body.status)
         if not exp:
             raise HTTPException(status_code=404, detail="Experiment not found")
+        owner = (exp.get("email") or "").strip().lower() if isinstance(exp, dict) else ""
+        own = (principal.workspace_email or principal.email or "").strip().lower()
+        if not owner or owner != own:
+            raise HTTPException(status_code=404, detail="Experiment not found")
         return exp
     except HTTPException:
         raise
@@ -642,10 +683,12 @@ async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate):
 
 
 @router.get("/timeline")
-async def get_activity_timeline(email: str = Query(..., min_length=3, max_length=320)):
+async def get_activity_timeline(email: str = Query(..., min_length=3, max_length=320),
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
     """Aggregate activity timeline for a workspace email.
     Combines audit completions, recommendation status changes, and monitor run events,
     sorted by created_at DESC, limited to 100 events."""
+    email = bind_email(principal, email)
     try:
         events: list[dict] = []
 
@@ -727,8 +770,15 @@ async def get_activity_timeline(email: str = Query(..., min_length=3, max_length
 
 
 @router.delete("/lab-experiments/{exp_id}")
-async def delete_lab_experiment(exp_id: str):
-    """Delete a saved experiment."""
+async def delete_lab_experiment(exp_id: str,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Delete a saved experiment. Tenant-owned only."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    await audit_db.connect()
+    async with audit_db.pool.acquire() as conn:
+        row = await conn.fetchrow("SELECT email FROM lab_experiments WHERE id=$1", __import__('uuid').UUID(exp_id))
+    if not row or (row["email"] or "").strip().lower() != own:
+        raise HTTPException(status_code=404, detail="Experiment not found")
     try:
         from uuid import UUID
 
@@ -760,8 +810,10 @@ class MonitorUpdate(BaseModel):
 
 
 @router.get("/monitors")
-async def list_monitors(email: str = Query(..., min_length=3, max_length=320)):
+async def list_monitors(email: str = Query(..., min_length=3, max_length=320),
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
     """List monitoring watches for a workspace email."""
+    email = bind_email(principal, email)
     try:
         monitors = await audit_db.list_monitors(email)
         # Attach recent events per monitor
@@ -773,8 +825,10 @@ async def list_monitors(email: str = Query(..., min_length=3, max_length=320)):
 
 
 @router.post("/monitors")
-async def create_monitor(body: MonitorCreate):
+async def create_monitor(body: MonitorCreate,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
     """Create a monitoring watch (weekly by default). Idempotent per (email, url)."""
+    body.email = bind_email(principal, body.email)
     email = body.email.strip().lower()
     if not email or "@" not in email:
         raise HTTPException(status_code=400, detail="Valid email required")
@@ -796,13 +850,23 @@ async def create_monitor(body: MonitorCreate):
 
 
 @router.patch("/monitors/{monitor_id}")
-async def update_monitor(monitor_id: str, body: MonitorUpdate):
-    """Update cadence or pause/resume a monitor."""
+async def update_monitor(monitor_id: str, body: MonitorUpdate,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Update cadence or pause/resume a monitor. Tenant-owned only."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    existing = await audit_db.get_monitor(monitor_id) if hasattr(audit_db, "get_monitor") else None
+    if existing is not None:
+        mown = (existing.get("email") or "").strip().lower() if isinstance(existing, dict) else ""
+        if not mown or mown != own:
+            raise HTTPException(status_code=404, detail="Monitor not found")
     if body.cadence is not None and body.cadence not in ("weekly", "monthly"):
         raise HTTPException(status_code=400, detail="Cadence must be weekly or monthly")
     try:
         monitor = await audit_db.update_monitor(monitor_id, body.cadence, body.active)
         if not monitor:
+            raise HTTPException(status_code=404, detail="Monitor not found")
+        mown = (monitor.get("email") or "").strip().lower() if isinstance(monitor, dict) else ""
+        if not mown or mown != own:
             raise HTTPException(status_code=404, detail="Monitor not found")
         return monitor
     except HTTPException:
@@ -812,8 +876,15 @@ async def update_monitor(monitor_id: str, body: MonitorUpdate):
 
 
 @router.delete("/monitors/{monitor_id}")
-async def delete_monitor(monitor_id: str):
-    """Remove a monitoring watch."""
+async def delete_monitor(monitor_id: str,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Remove a monitoring watch. Tenant-owned only."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    await audit_db.connect()
+    async with audit_db.pool.acquire() as conn:
+        row = await conn.fetchrow("SELECT email FROM monitors WHERE id=$1", __import__('uuid').UUID(monitor_id))
+    if not row or (row["email"] or "").strip().lower() != own:
+        raise HTTPException(status_code=404, detail="Monitor not found")
     try:
         deleted = await audit_db.delete_monitor(monitor_id)
         if not deleted:
@@ -825,14 +896,15 @@ async def delete_monitor(monitor_id: str):
         raise HTTPException(status_code=503, detail="Monitor delete failed")
 
 
-@router.post("/monitors/run-due")
-async def run_due_monitors():
+@router.post("/monitors/run-due", dependencies=[Depends(internal_service_dependency)])
+async def run_due_monitors(request: Request):
     """Internal runner: audit every due monitor, record events, return alerts.
 
     Called by the Hermes cron watchdog. Alerts are produced only for
     meaningful movement (>= 4 points /100) or new critical findings; the
     cron prints them only when non-empty (silent otherwise).
     """
+    require_internal_service(request)
     try:
         due = await audit_db.get_due_monitors()
     except Exception:
@@ -977,8 +1049,10 @@ async def get_audit_by_share_token_endpoint(token: str):
 
 
 @router.get("/badges")
-async def get_badges_by_email(email: str):
-    """Return all earned badges for a given email address."""
+async def get_badges_by_email(email: str,
+                              principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Return all earned badges for a given email address (tenant-bound)."""
+    email = bind_email(principal, email)
     try:
         await audit_db.connect()
         async with audit_db.pool.acquire() as conn:
@@ -1019,9 +1093,12 @@ class AssistantRequest(BaseModel):
 
 
 @router.post("/assistant")
-async def workspace_assistant(body: AssistantRequest):
+async def workspace_assistant(body: AssistantRequest,
+        principal: Principal = Depends(require_principal(SCOPE_AGENT_EXECUTE))):
     """Answer workspace questions grounded in the user's audit data.
     Uses OpenRouter (Claude Sonnet) for cost-effective, fast responses."""
+    if getattr(body, "email", None):
+        body.email = bind_email(principal, body.email)
     openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
     if not openrouter_key:
         # Fallback: read from ~/.hermes/.env
@@ -1095,9 +1172,11 @@ async def workspace_assistant(body: AssistantRequest):
 
 
 @router.get("/team")
-async def get_team(email: str = Query(..., description="User email")):
+async def get_team(email: str = Query(..., description="User email"),
+                   principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
     """Return team members for a given workspace email.
     Must be defined before /{audit_id} so the router does not parse 'team' as a UUID."""
+    email = bind_email(principal, email)
     if not email:
         raise HTTPException(status_code=400, detail="email is required")
 
@@ -1145,8 +1224,9 @@ class CreatePartnerRequest(BaseModel):
     status: str = "active"
 
 
-@router.post("/partners")
-async def create_partner_route(req: CreatePartnerRequest):
+@router.post("/partners", dependencies=[Depends(internal_service_dependency)])
+async def create_partner_route(req: CreatePartnerRequest, request: Request):
+    require_internal_service(request)
     """Create a widget partner (called by Stripe webhook on $497 purchase).
 
     Internal only - not exposed to the public internet (Next.js calls this
@@ -1324,9 +1404,14 @@ class EmailResponse(BaseModel):
     error: Optional[str] = None
 
 
-@router.post("/email", response_model=EmailResponse)
-async def send_audit_email(request: EmailRequest):
-    """Send audit results via email and mark as sent in DB"""
+@router.post("/email", response_model=EmailResponse, dependencies=[Depends(internal_service_dependency)])
+async def send_audit_email(request: EmailRequest, raw_request: Request):
+    """Send audit results via email and mark as sent in DB.
+
+    INTERNAL_SERVICE: message content is server-constructed from caller
+    input, so this must never be anonymously reachable (email spoofing).
+    Only the Next.js BFF calls this after proving unlock ownership."""
+    require_internal_service(raw_request)
     try:
         result = await email_service.send_audit_results(
             AuditEmailData(

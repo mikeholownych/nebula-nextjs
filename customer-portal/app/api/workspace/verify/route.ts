@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { requireWorkspaceUser, authHeaders } from '@/app/lib/workspace-auth'
 
 const PLATFORM_API = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       `${PLATFORM_API}/verify/recommendation/${encodeURIComponent(recId)}?email=${encodeURIComponent(auth.user.email)}`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
         signal: AbortSignal.timeout(15000),
       }
     )

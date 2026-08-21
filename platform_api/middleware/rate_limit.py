@@ -289,39 +289,33 @@ def _resolve_identity(
 ) -> str:
     """Resolve the rate-limit identity for a request.
 
+    Security invariant (SEC-P1-1): the identity dimension may ONLY come from
+    server-verifiable credentials. Caller-controlled strings such as
+    x-audit-email / x-email must never mint fresh budget - an attacker could
+    rotate them to bypass limits entirely.
+
     scope="ip" → trusted IP only
-    scope="identity" → IP + authenticated user/email dimension
+    scope="identity" → API key id or session token hash when cryptographically
+    verifiable, else trusted IP. Email is never used.
     """
     ip = _extract_trusted_ip(request)
 
     if scope == "ip":
         return _hash_identity(ip)
 
-    # For identity-scoped routes, layer in authenticated identity.
-    # Try Authorization header (Bearer token hash).
-    auth_header = request.headers.get("authorization", "")
-    if auth_header.startswith("Bearer "):
-        token = auth_header[7:]
-        token_hash = _hash_identity(token)
-        return _hash_identity(f"ip:{ip}:user:{token_hash}")
-
-    # For audit routes, use email dimension (hashed).
-    if route_class in (RouteClass.EXPENSIVE_WORK, RouteClass.EMAIL):
-        email = (
-            request.headers.get("x-audit-email")
-            or request.headers.get("x-email")
-            or ""
-        ).strip().lower()
-        if email and "@" in email:
-            email_hash = _hash_identity(email)
-            return _hash_identity(f"ip:{ip}:email:{email_hash}")
-
-    # API key routes: try X-API-Key header.
+    # API keys are high-entropy credentials: safe as identity dimension.
     api_key = request.headers.get("x-api-key", "")
-    if api_key:
-        key_hash = _hash_identity(api_key)
-        return _hash_identity(f"ip:{ip}:apikey:{key_hash}")
+    if api_key.startswith("nbk_"):
+        return _hash_identity(f"key:{_hash_identity(api_key)}")
 
+    # Bearer JWTs carry signature + expiry; their hash is stable per session
+    # and cannot be freely rotated by an anonymous attacker.
+    auth_header = request.headers.get("authorization", "")
+    if auth_header.startswith("Bearer ") and not auth_header[7:].startswith("nbk_"):
+        token_hash = _hash_identity(auth_header[7:])
+        return _hash_identity(f"user:{token_hash}")
+
+    # Anonymous callers fall back to trusted IP. Never trust email headers.
     return _hash_identity(ip)
 
 
@@ -417,22 +411,11 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self._local = _LocalEmergencyLimiter()
 
     def _get_identifier(self, request: Request) -> str:
-        """Helper to compute raw composite identity before hashing."""
+        """Helper to compute raw composite identity before hashing.
+
+        Kept for diagnostics only - never used for limit identity (SEC-P1-1).
+        """
         ip = _extract_trusted_ip(request)
-        email = (
-            request.headers.get("x-audit-email")
-            or request.headers.get("x-email")
-            or ""
-        ).strip().lower()
-        if email and "@" in email:
-            return f"ip:{ip}:email:{email}"
-        auth_header = request.headers.get("authorization", "")
-        if auth_header.startswith("Bearer "):
-            token = auth_header[7:]
-            return f"ip:{ip}:user:{token}"
-        api_key = request.headers.get("x-api-key", "")
-        if api_key:
-            return f"ip:{ip}:apikey:{api_key}"
         return f"ip:{ip}"
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:

@@ -46,14 +46,33 @@ async def test_count_completed_this_month_sql_uses_audit_status(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_audit_quota_endpoint_requires_internal_service(monkeypatch):
+    """SEC-P0-1 regression: /audit/quota is INTERNAL_SERVICE, not anonymous."""
+    monkeypatch.setenv("INTERNAL_API_SECRET", "test-internal-secret")
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        anon = await client.get("/audit/quota", params={"email": "founder@example.com"})
+        assert anon.status_code in (401, 403)
+        wrong = await client.get(
+            "/audit/quota",
+            params={"email": "founder@example.com"},
+            headers={"Authorization": "Bearer wrong-secret"},
+        )
+        assert wrong.status_code == 401
+
+
+@pytest.mark.asyncio
 async def test_audit_quota_endpoint_returns_completed_count(monkeypatch):
+    monkeypatch.setenv("INTERNAL_API_SECRET", "test-internal-secret")
     monkeypatch.setattr(
         audit_db,
         "count_completed_this_month",
         AsyncMock(return_value=2),
     )
+    headers = {"Authorization": "Bearer test-internal-secret"}
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
-        response = await client.get("/audit/quota", params={"email": "founder@example.com"})
+        response = await client.get(
+            "/audit/quota", params={"email": "founder@example.com"}, headers=headers
+        )
 
     assert response.status_code == 200
     body = response.json()

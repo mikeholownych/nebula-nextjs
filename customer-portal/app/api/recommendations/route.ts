@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 /**
  * Recommendation kanban for a workspace email
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
       `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/recommendations?email=${encodeURIComponent(email)}`,
       {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
         signal: AbortSignal.timeout(10000),
       }
     )

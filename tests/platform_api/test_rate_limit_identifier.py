@@ -1,6 +1,6 @@
 from starlette.requests import Request
 
-from platform_api.middleware.rate_limit import RateLimitMiddleware
+from platform_api.middleware.rate_limit import RateLimitMiddleware, _resolve_identity, RouteClass
 
 
 def _request(path="/audit/run", headers=None, client_host="127.0.0.1"):
@@ -27,20 +27,39 @@ def _middleware():
     return RateLimitMiddleware(app=lambda _scope, _receive, _send: None, redis=None)
 
 
-def test_audit_run_identifier_uses_forwarded_ip_and_email_not_loopback():
-    ident = _middleware()._get_identifier(_request(headers={
-        "X-Forwarded-For": "203.0.113.10",
-        "X-Audit-Email": "founder@example.com",
-    }, client_host="127.0.0.1"))
-    assert "127.0.0.1" not in ident
-    assert "203.0.113.10" in ident
-    assert "founder@example.com" in ident
+def test_identifier_never_includes_client_supplied_email():
+    """SEC-P1-1 regression: rotating x-audit-email must not mint fresh budget.
 
-
-def test_loopback_portal_traffic_is_not_collapsed_to_one_key():
+    The identity for a given trusted IP is invariant regardless of what
+    caller-controlled email headers are supplied.
+    """
     mw = _middleware()
-    first = mw._get_identifier(_request(headers={"X-Audit-Email": "a@example.com"}))
-    second = mw._get_identifier(_request(headers={"X-Audit-Email": "b@example.com"}))
+    base = _resolve_identity(_request(headers={"X-Forwarded-For": "203.0.113.10"}), RouteClass.EXPENSIVE_WORK, "identity")
+    variants = [
+        _resolve_identity(_request(headers={
+            "X-Forwarded-For": "203.0.113.10",
+            "X-Audit-Email": f"attacker{i}@example.com",
+        }), RouteClass.EXPENSIVE_WORK, "identity")
+        for i in (1, 2, 3)
+    ]
+    assert all(v == base for v in variants)
+    assert "attacker" not in base
+
+
+def test_identifier_uses_api_key_credential_when_present():
+    """Authenticated API-key callers get per-key budget, not shared IP budget."""
+    mw = _middleware()
+    a = _resolve_identity(_request(headers={"X-Api-Key": "nbk_aaaa"}), RouteClass.EXPENSIVE_WORK, "identity")
+    b = _resolve_identity(_request(headers={"X-Api-Key": "nbk_bbbb"}), RouteClass.EXPENSIVE_WORK, "identity")
+    anon = _resolve_identity(_request(), RouteClass.EXPENSIVE_WORK, "identity")
+    assert a != b
+    assert a != anon
+    assert "nbk_" not in a  # raw credential never appears unhashed
+
+
+def test_loopback_direct_peer_still_resolves_distinct_forwarded_ips():
+    """Trusted-proxy parsing: distinct forwarded IPs must not collapse."""
+    mw = _middleware()
+    first = _resolve_identity(_request(headers={"X-Forwarded-For": "203.0.113.10"}, client_host="127.0.0.1"), RouteClass.EXPENSIVE_WORK, "identity")
+    second = _resolve_identity(_request(headers={"X-Forwarded-For": "203.0.113.11"}, client_host="127.0.0.1"), RouteClass.EXPENSIVE_WORK, "identity")
     assert first != second
-    assert "a@example.com" in first
-    assert "b@example.com" in second

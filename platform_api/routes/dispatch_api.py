@@ -2,19 +2,22 @@
 Dispatch API - weekly workspace activity digest endpoints.
 """
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 
 from platform_api.services.audit_db import audit_db
 from platform_api.services.dispatch import build_manifest, send_dispatch
+from platform_api.auth.principal import internal_service_dependency, require_internal_service
 
 router = APIRouter(prefix="/dispatch", tags=["dispatch"])
 
 
-@router.get("/preview")
+@router.get("/preview", dependencies=[Depends(internal_service_dependency)])
 async def preview_dispatch(
     email: str = Query(..., min_length=3, max_length=320),
     period: int = Query(default=7, ge=1, le=30),
+    request: Request = None,
 ):
+    require_internal_service(request)
     """Preview the dispatch manifest for a workspace email (no send)."""
     manifest = await build_manifest(email, period_days=period)
     if manifest is None:
@@ -22,11 +25,13 @@ async def preview_dispatch(
     return {"email": email, "dispatch": manifest}
 
 
-@router.post("/send")
+@router.post("/send", dependencies=[Depends(internal_service_dependency)])
 async def trigger_dispatch(
     email: str = Query(..., min_length=3, max_length=320),
     period: int = Query(default=7, ge=1, le=30),
+    request: Request = None,
 ):
+    require_internal_service(request)
     """Build and send a dispatch email immediately for the given workspace."""
     manifest = await build_manifest(email, period_days=period)
     if manifest is None:
@@ -39,8 +44,9 @@ async def trigger_dispatch(
     return {"sent": True, "email": email, "summary": manifest["overall_summary"]}
 
 
-@router.post("/run-all")
-async def run_all_dispatches():
+@router.post("/run-all", dependencies=[Depends(internal_service_dependency)])
+async def run_all_dispatches(request: Request):
+    require_internal_service(request)
     """Cron endpoint: iterate all workspaces with active monitors and send
     dispatches to those that meet the significance threshold."""
     await audit_db.connect()

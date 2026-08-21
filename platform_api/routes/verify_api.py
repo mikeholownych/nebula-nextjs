@@ -1,16 +1,30 @@
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 
 from platform_api.services.audit_db import audit_db
 from platform_api.services.signal_verifier import verify_signal
+from platform_api.auth.principal import (
+    Principal, bind_email, require_internal_service,
+    require_principal, SCOPE_WORKSPACE_READ,
+    internal_service_dependency,
+)
 
 router = APIRouter(prefix="/verify", tags=["verify"])
 
 
 @router.post("/recommendation/{rec_id}")
-async def verify_recommendation(rec_id: str, email: Optional[str] = Query(default=None)):
+async def verify_recommendation(
+    rec_id: str,
+    email: Optional[str] = Query(default=None),
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),
+):
+    """Verify a single recommendation's signal against the live page.
+    Tenant-bound: the recommendation must belong to the principal."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    if not own:
+        raise HTTPException(status_code=403, detail="Principal has no tenant binding")
     """Verify a single recommendation's signal against the live page."""
     await audit_db.connect()
 
@@ -27,10 +41,9 @@ async def verify_recommendation(rec_id: str, email: Optional[str] = Query(defaul
     if not rec:
         raise HTTPException(status_code=404, detail="Recommendation not found")
 
-    if email:
-        owner = (rec["email"] or "").strip().lower()
-        if not owner or owner != email.strip().lower():
-            raise HTTPException(status_code=404, detail="Recommendation not found")
+    owner = (rec["email"] or "").strip().lower()
+    if not owner or owner != own:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
 
     url = rec["url"]
     if not url:
@@ -73,9 +86,13 @@ async def verify_recommendation(rec_id: str, email: Optional[str] = Query(defaul
     }
 
 
-@router.post("/deploy-hook")
-async def verify_deploy_hook(domain: str = Query(..., min_length=3)):
-    """Verify all open recommendations for URLs matching a domain."""
+@router.post("/deploy-hook", dependencies=[Depends(internal_service_dependency)])
+async def verify_deploy_hook(domain: str = Query(..., min_length=3), request: Request = None):
+    """Verify all open recommendations for URLs matching a domain.
+
+    INTERNAL_SERVICE: deploy hooks are CI/CD integrations, not customer
+    capabilities. Requires the shared internal service secret."""
+    require_internal_service(request)
     await audit_db.connect()
 
     async with audit_db.pool.acquire() as conn:

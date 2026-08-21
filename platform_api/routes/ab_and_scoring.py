@@ -1,7 +1,9 @@
 """A/B testing and lead scoring API routes."""
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+
+from platform_api.auth.principal import require_internal_service
 from pydantic import BaseModel
 
 from platform_api.services.ab_test import (
@@ -33,7 +35,8 @@ async def get_variant(experiment_id: str, user_id: str, audit_id: str | None = N
 
 
 @router.get("/ab/stats")
-async def ab_stats(experiment_id: str):
+async def ab_stats(experiment_id: str, request: Request = None):
+    require_internal_service(request)
     """Return variant stats and winner recommendation."""
     if experiment_id not in EXPERIMENTS:
         raise HTTPException(404, f"Unknown experiment: {experiment_id}")
@@ -48,14 +51,16 @@ class ConversionIn(BaseModel):
 
 
 @router.post("/ab/conversion")
-async def record_ab_conversion(body: ConversionIn):
+async def record_ab_conversion(body: ConversionIn, request: Request = None):
+    require_internal_service(request)
     """Record a conversion event for an A/B test participant."""
     await record_conversion(body.experiment_id, body.user_id, body.event_name, body.value_cents)
     return {"success": True}
 
 
 @router.get("/ab/experiments")
-async def list_experiments():
+async def list_experiments(request: Request = None):
+    require_internal_service(request)
     """List all active experiments."""
     return {"experiments": list(EXPERIMENTS.keys())}
 
@@ -63,7 +68,8 @@ async def list_experiments():
 # ── Lead Scoring ──────────────────────────────────────────────────────────────
 
 @router.get("/leads/score")
-async def score_lead(email: str):
+async def score_lead(email: str, request: Request = None):
+    require_internal_service(request)
     """Compute live lead score for an email address."""
     pool = await get_pool()
     try:
@@ -74,7 +80,8 @@ async def score_lead(email: str):
 
 
 @router.post("/leads/score/{email}/update")
-async def update_score(email: str):
+async def update_score(email: str, request: Request = None):
+    require_internal_service(request)
     """Recompute and persist lead score to customers table."""
     pool = await get_pool()
     try:
@@ -85,7 +92,8 @@ async def update_score(email: str):
 
 
 @router.post("/leads/decay-all")
-async def run_decay():
+async def run_decay(request: Request = None):
+    require_internal_service(request)
     """Decay scores for all inactive prospects (run daily via cron)."""
     pool = await get_pool()
     try:

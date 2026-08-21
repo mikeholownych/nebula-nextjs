@@ -42,8 +42,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
     }
 
-    const response = await fetch(`${API_BASE}/audit/email`, {
+    
+function internalHeaders(): Record<string, string> {
+  const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+  return secret ? { Authorization: `Bearer ${secret}` } : {}
+}
+const response = await fetch(`${API_BASE}/audit/email`, {
       method: 'POST',
+      ...internalHeaders(),
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         url: audit.url,

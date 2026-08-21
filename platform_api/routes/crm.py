@@ -17,7 +17,7 @@ from datetime import date
 from typing import Optional
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from platform_api.services.crm_hooks import purchase_completed
@@ -32,7 +32,8 @@ from platform_api.services.crm import (
     get_pool,
 )
 
-router = APIRouter(prefix="/crm")
+from platform_api.auth.principal import internal_service_dependency
+router = APIRouter(dependencies=[Depends(internal_service_dependency)], prefix="/crm")
 
 
 def _require_internal_secret(request: Request) -> None:

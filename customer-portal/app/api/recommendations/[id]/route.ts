@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 /**
  * Move a recommendation between kanban columns
@@ -29,7 +30,7 @@ export async function PATCH(
       `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/recommendations/${encodeURIComponent(id)}`,
       {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
         body: JSON.stringify({ status }),
         signal: AbortSignal.timeout(10000),
       }

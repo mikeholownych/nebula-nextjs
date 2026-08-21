@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://127.0.0.1:8001'
 
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
   try {
     const res = await fetch(
       `${PLATFORM_API}/audit/team?email=${encodeURIComponent(email)}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 0 }, headers: authHeaders(req) }
     )
     if (!res.ok) {
       return NextResponse.json({ error: 'Failed to fetch team data' }, { status: res.status })

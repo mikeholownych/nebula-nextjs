@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -20,7 +21,7 @@ export async function GET(request: NextRequest) {
       `${API_BASE}/audit/by-email?email=${encodeURIComponent(email)}`,
       {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
         signal: AbortSignal.timeout(10000),
       }
     )

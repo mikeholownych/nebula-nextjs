@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { authHeaders } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -52,7 +53,7 @@ export async function POST(request: NextRequest) {
 
     const response = await fetch(`${API_BASE}/audit/lab-experiments`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
       body: JSON.stringify({ email, url, label, score, grade, components, adCopy }),
       signal: AbortSignal.timeout(10000),
     })
