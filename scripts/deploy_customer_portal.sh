@@ -159,6 +159,16 @@ if [[ "$VERIFY_FAILED" == "1" ]]; then
   exit 1
 fi
 
+# ── Orphan hygiene (INF-4/TD-15) ─────────────────────────────────────────────
+# Any next-server parented to init (PPID 1) is an unreaped leftover from an
+# interrupted start/e2e webServer. It must never keep serving a dead build.
+for opid in $(pgrep -f "next-server" || true); do
+  if [[ "$(ps -o ppid= -p "$opid" 2>/dev/null | tr -d ' ')" == "1" ]]; then
+    log "Reaping orphaned next-server PID $opid"
+    kill -9 "$opid" 2>/dev/null || true
+  fi
+done
+
 # ── Cloudflare cache purge ────────────────────────────────────────────────────
 # Must run AFTER verify so we only purge when the new build is confirmed healthy.
 # Reads CLOUDFLARE_API_TOKEN from ~/.hermes/.env (not committed to repo).
