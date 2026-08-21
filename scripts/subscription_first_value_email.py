@@ -73,7 +73,7 @@ Nebula Components
 
 def main() -> None:
     conn = psycopg2.connect(
-        host='/var/run/postgresql', port=5433, dbname='nebula_audit', user='postgres',
+        host='/var/run/postgresql', port=5433, dbname='nebula_platform', user='postgres',
         cursor_factory=psycopg2.extras.RealDictCursor,
     )
     cur = conn.cursor()

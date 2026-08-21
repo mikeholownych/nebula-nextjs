@@ -15,10 +15,9 @@ from typing import Optional
 
 import psycopg
 
-AUDIT_CONNINFO = os.getenv(
-    "AUDIT_CONNINFO",
-    "host=/var/run/postgresql port=5433 dbname=nebula_audit user=postgres",
-)
+from platform_api.config import audit_db_dsn
+
+AUDIT_CONNINFO = os.getenv("AUDIT_CONNINFO", "") or audit_db_dsn()
 
 WORKSPACE_URL = "https://nebulacomponents.com/workspace"
 CRITICAL_IMPACT = 8

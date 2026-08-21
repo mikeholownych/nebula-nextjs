@@ -6,7 +6,7 @@ import { readCappedJson } from "@/app/lib/request-limits";
  * Server-side GA4 event tracking (for sensitive events like purchases)
  */
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-KJ9S3450LH";
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 const GA_API_SECRET = process.env.GA_API_SECRET; // Set in Vercel/env
 
 interface GAEvent {

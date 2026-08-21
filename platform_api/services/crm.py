@@ -21,10 +21,9 @@ import asyncpg
 
 # ── Connection ───────────────────────────────────────────────────────────────
 
-_AUDIT_DB_URL = os.getenv(
-    "AUDIT_DATABASE_URL",
-    "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433",
-)
+from platform_api.config import audit_db_dsn
+
+_AUDIT_DB_URL = audit_db_dsn()
 
 _pool: Optional[asyncpg.Pool] = None
 

@@ -24,6 +24,7 @@ from platform_api.config import settings
 from platform_api.db.models import GscConnection
 from platform_api.db.session import get_session
 from platform_api.redis_client import get_redis
+from platform_api.infra.secret_box import decrypt as sb_decrypt, encrypt as sb_encrypt
 
 from .oauth import (
     GSCOAuthError,
@@ -113,16 +114,18 @@ def _get_or_refresh_token(conn: GscConnection, db: Session) -> str:
                 detail="GSC token expired and no refresh token available - please reconnect",
             )
         try:
-            refreshed = refresh_gsc_token(conn.refresh_token)
+            refreshed = refresh_gsc_token(sb_decrypt(conn.refresh_token))
         except GSCOAuthError as exc:
             raise HTTPException(status_code=401, detail=str(exc)) from exc
 
-        conn.access_token = refreshed["access_token"]
+        conn.access_token = sb_encrypt(refreshed["access_token"])
+        if refreshed.get("refresh_token"):
+            conn.refresh_token = sb_encrypt(refreshed["refresh_token"])
         if refreshed.get("expiry"):
             conn.token_expiry = refreshed["expiry"]
         db.commit()
 
-    return conn.access_token  # type: ignore[return-value]
+    return sb_decrypt(conn.access_token)  # type: ignore[return-value]
 
 
 # ---------------------------------------------------------------------------
@@ -208,8 +211,8 @@ async def gsc_callback(
     # Upsert the connection row
     conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
     if conn:
-        conn.access_token = tokens["access_token"]
-        conn.refresh_token = tokens.get("refresh_token") or conn.refresh_token
+        conn.access_token = sb_encrypt(tokens["access_token"])
+        conn.refresh_token = sb_encrypt(tokens.get("refresh_token")) if tokens.get("refresh_token") else conn.refresh_token
         conn.token_expiry = tokens.get("expiry")
         conn.connected_at = datetime.now(timezone.utc)
         if auto_site_url and not conn.gsc_site_url:
@@ -218,8 +221,8 @@ async def gsc_callback(
         conn = GscConnection(
             id=uuid4(),
             user_id=user_uuid,
-            access_token=tokens["access_token"],
-            refresh_token=tokens.get("refresh_token"),
+            access_token=sb_encrypt(tokens["access_token"]),
+            refresh_token=sb_encrypt(tokens.get("refresh_token")) if tokens.get("refresh_token") else None,
             token_expiry=tokens.get("expiry"),
             gsc_site_url=auto_site_url,
             connected_at=datetime.now(timezone.utc),

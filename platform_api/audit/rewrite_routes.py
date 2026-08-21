@@ -160,15 +160,10 @@ def _store(db: Session, audit_id: str, finding_key: str,
 
 
 def _openrouter_key() -> str:
-    key = os.environ.get("OPENROUTER_API_KEY", "")
-    if key:
-        return key
-    env_path = Path.home() / ".hermes" / ".env"
-    if env_path.exists():
-        for line in env_path.read_text().splitlines():
-            if line.startswith("OPENROUTER_API_KEY=") and not line.startswith("#"):
-                return line.split("=", 1)[1].strip().strip('"').strip("'")
-    return ""
+    # SEC-P1-4: configuration comes only from the environment contract.
+    # The previous ~/.hermes/.env scraping fallback silently coupled prod
+    # behavior to a file outside deployment control.
+    return os.environ.get("OPENROUTER_API_KEY", "")
 
 
 def _bedrock_call(prompt: str) -> Optional[str]:

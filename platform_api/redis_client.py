@@ -134,6 +134,10 @@ class RedisClient:
         else:
             return await self.client.set(key, value)
 
+    async def scan(self, cursor: int = 0, match: str = "*", count: int = 100):
+        """Scan keyspace: returns (next_cursor, keys). Bounded per call."""
+        return await self.client.scan(cursor=cursor, match=match, count=count)
+
     async def delete(self, *keys: str) -> int:
         """Delete one or more keys.
 

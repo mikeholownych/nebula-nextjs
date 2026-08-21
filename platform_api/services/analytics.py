@@ -14,13 +14,14 @@ class AnalyticsService:
     """GA4 Measurement Protocol tracking & Internal Event Ledger persistence"""
 
     def __init__(self):
-        self.measurement_id = os.getenv("GA4_MEASUREMENT_ID", "G-KJ9S3450LH")
+        self.measurement_id = os.getenv("GA4_MEASUREMENT_ID", "")
+        if not self.measurement_id:
+            import logging
+            logging.getLogger(__name__).warning("GA4_MEASUREMENT_ID not set; GA4 forwarding disabled")
         self.api_secret = os.getenv("GA4_API_SECRET", "")
         self.endpoint = "https://www.google-analytics.com/mp/collect"
-        self.db_url = os.getenv(
-            "DATABASE_URL",
-            "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433"
-        )
+        from platform_api.config import platform_db_dsn
+        self.db_url = platform_db_dsn()
         self.pool: Optional[asyncpg.Pool] = None
 
     async def _get_pool(self) -> asyncpg.Pool:

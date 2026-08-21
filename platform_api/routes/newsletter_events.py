@@ -16,6 +16,7 @@ from typing import Any
 import asyncpg
 from fastapi import APIRouter, HTTPException, Request, Response
 from svix.webhooks import Webhook, WebhookVerificationError
+from platform_api.config import audit_db_dsn
 
 router = APIRouter()
 
@@ -113,7 +114,7 @@ async def provider_event(request: Request) -> Response:
         raise HTTPException(status_code=400, detail="provider event missing stable message identity")
 
     pool = await asyncpg.create_pool(
-        os.getenv("AUDIT_DATABASE_URL", "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"),
+        audit_db_dsn(),
         min_size=1,
         max_size=2,
     )

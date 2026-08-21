@@ -1,5 +1,6 @@
 """Configuration settings using Pydantic Settings."""
 
+import os
 import re
 from typing import List, Optional
 from urllib.parse import urlparse
@@ -157,3 +158,27 @@ class Settings(BaseSettings):
 
 # Global settings instance
 settings = Settings()
+
+def _dsn(env_var: str, default_dev_dsn: str) -> str:
+    """Resolve a database DSN from the environment contract.
+
+    DATA-4 invariant: production must never silently fall back to a hardcoded
+    local-socket DSN. In production a missing variable is a hard error; in
+    development the documented socket default keeps local runs working.
+    """
+    value = os.getenv(env_var)
+    if value:
+        return value
+    if os.getenv("ENVIRONMENT") == "production":
+        raise RuntimeError(f"{env_var} is required when ENVIRONMENT=production")
+    return default_dev_dsn
+
+
+def audit_db_dsn() -> str:
+    return _dsn("AUDIT_DATABASE_URL",
+                "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433")
+
+
+def platform_db_dsn() -> str:
+    return _dsn("DATABASE_URL",
+                "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433")

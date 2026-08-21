@@ -25,10 +25,9 @@ import asyncpg
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-_DB_URL = os.getenv(
-    "AUDIT_DATABASE_URL",
-    "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433",
-)
+from platform_api.config import audit_db_dsn
+
+_DB_URL = audit_db_dsn()
 
 ALERT_THRESHOLDS = {
     "cvr_drop_pct": 20,       # alert if CVR drops more than 20% below 7-day avg

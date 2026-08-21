@@ -14,6 +14,7 @@ Security:
 - HTTP-only, Secure, SameSite cookies
 """
 
+import json
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional
@@ -117,6 +118,10 @@ def decode_jwt(token: str) -> Dict[str, Any]:
         raise JWTError(f"Invalid token: {e}")
 
 
+def _session_key(user_id: str, session_id: str) -> str:
+    return f"user:{user_id}:session:{session_id}"
+
+
 async def create_session(
     redis: RedisClient,
     user_id: str,
@@ -146,21 +151,21 @@ async def create_session(
     # Create JWT
     token = create_jwt(payload)
     
-    # Store session in Redis
-    redis_key = f"user:{user_id}:sessions"
+    # Store session in Redis as a per-session key with its own TTL.
+    # SEC-P1-2/CODE-4: the previous shared hash was re-EXPIRED on every login,
+    # extending unrelated historical sessions; and verify_session never checked
+    # membership, so a Redis flush resurrected logged-out tokens.
+    redis_key = _session_key(user_id, session_id)
     session_info = {
         "session_id": session_id,
         "org_id": org_id,
         "created_at": datetime.now(timezone.utc).isoformat(),
         **(session_data or {})
     }
-    
-    await redis.hset(redis_key, session_id, session_info)
-    
-    # Set TTL
-    ttl = settings.JWT_EXPIRATION_DAYS * 24 * 3600
-    await redis.expire(redis_key, ttl)
-    
+
+    await redis.set(redis_key, json.dumps(session_info),
+                    ttl=settings.JWT_EXPIRATION_DAYS * 24 * 3600)
+
     return token
 
 
@@ -191,7 +196,13 @@ async def verify_session(
     blacklisted = await redis.exists(f"blacklist:jwt:{session_id}")
     if blacklisted:
         raise JWTError("Session revoked")
-    
+
+    # Session must still exist server-side (logout / logout-all / expiry all
+    # deny immediately even before blacklist TTL runs out).
+    user_id = claims.get("user_id")
+    if not user_id or not await redis.exists(_session_key(user_id, session_id)):
+        raise JWTError("Session no longer active")
+
     return claims
 
 
@@ -209,8 +220,8 @@ async def revoke_session(
         user_id: User UUID
         session_id: Session ID (jti claim)
     """
-    # Remove from active sessions
-    await redis.hdel(f"user:{user_id}:sessions", session_id)
+    # Remove the per-session record
+    await redis.delete(_session_key(user_id, session_id))
     
     # Add to blacklist (expire at JWT expiration)
     ttl = settings.JWT_EXPIRATION_DAYS * 24 * 3600
@@ -230,8 +241,24 @@ async def get_active_sessions(
     Returns:
         Dictionary of session_id → session_info
     """
-    sessions = await redis.hgetall(f"user:{user_id}:sessions")
-    return sessions or {}
+    pattern = f"user:{user_id}:session:*"
+    sessions: Dict[str, Dict] = {}
+    cursor = 0
+    while True:
+        cursor, keys = await redis.scan(cursor=cursor, match=pattern, count=100)
+        for key in keys or []:
+            raw = await redis.get(key)
+            if not raw:
+                continue
+            try:
+                info = json.loads(raw) if isinstance(raw, str) else raw
+            except Exception:
+                continue
+            sid = key.rsplit(":", 1)[-1]
+            sessions[sid] = info if isinstance(info, dict) else {"raw": info}
+        if cursor == 0:
+            break
+    return sessions
 
 
 async def revoke_all_sessions(

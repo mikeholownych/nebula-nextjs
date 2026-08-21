@@ -158,18 +158,22 @@ async def reply_received(
         return
     from platform_api.services.crm import update_crm_status, log_feedback
 
-    # Map classification → CRM status
+    # Map classification → CRM status.
+    # CODE-3 invariant: lifecycle transitions are upgrade-only. A negative
+    # reply is recorded as feedback/objection but must never silently regress
+    # a prospect who already showed intent (interested) back to cold.
     if classification == "interested":
         new_status = "interested"
         interaction_type = "win"
     elif classification == "not_interested":
-        new_status = "cold"
+        new_status = None  # status unchanged; objection logged below
         interaction_type = "objection"
     else:
         new_status = "interested"  # any human reply = interested until proven otherwise
         interaction_type = "question"
 
-    await _safe(update_crm_status(email, new_status, notes=f"Reply via {source}"))
+    if new_status:
+        await _safe(update_crm_status(email, new_status, notes=f"Reply via {source}"))
     await _safe(log_feedback(
         customer_email=email,
         interaction_type=interaction_type,

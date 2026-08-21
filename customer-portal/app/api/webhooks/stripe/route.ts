@@ -304,7 +304,7 @@ export async function POST(request: NextRequest) {
           stripe_session_id: session.id,
           transaction_id: transactionId,
           offer_key: session.metadata?.offer_key || 'fix_pack',
-          amount_cents: session.amount_total || 9700,
+          amount_cents: session.amount_total ?? 0,
           currency: session.currency || 'usd',
           livemode: event.livemode,
           provider: 'stripe',
@@ -316,7 +316,7 @@ export async function POST(request: NextRequest) {
 
     // GA4 Measurement Protocol Forwarding (Server-Side Commercial Truth)
     const gaSecret = process.env.GA4_API_SECRET || process.env.GA_API_SECRET
-    const gaMeasurementId = process.env.GA4_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-KJ9S3450LH'
+    const gaMeasurementId = process.env.GA4_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''
     if (gaSecret) {
       try {
         const clientId = session.metadata?.analytics_person_id || `client_${session.id.slice(-16)}`
@@ -332,12 +332,12 @@ export async function POST(request: NextRequest) {
                   name: 'purchase',
                   params: {
                     transaction_id: transactionId,
-                    value: (session.amount_total || 9700) / 100,
+                    value: (session.amount_total ?? 0) / 100,
                     currency: (session.currency || 'USD').toUpperCase(),
                     items: [
                       {
                         item_name: session.metadata?.offer_key || 'One-Leak Repair Sprint',
-                        price: (session.amount_total || 9700) / 100,
+                        price: (session.amount_total ?? 0) / 100,
                         quantity: 1,
                       },
                     ],
@@ -388,7 +388,7 @@ export async function POST(request: NextRequest) {
           'purchase_completed',
           {
             offer_key: offerKey,
-            amount_cents: session.amount_total || 9700,
+            amount_cents: session.amount_total ?? 0,
             currency: session.currency || 'usd',
             transaction_id: transactionId,
           },
@@ -440,9 +440,40 @@ export async function POST(request: NextRequest) {
 
       if (!email) {
         // Without an email we cannot bind the subscription to a workspace.
-        // Record nothing but acknowledge so Stripe does not retry forever;
-        // the subscription remains authoritative in Stripe.
+        // Acknowledge so Stripe does not retry forever; the subscription
+        // remains authoritative in Stripe. CODE-2: this is no longer silent -
+        // a durable ops alert is enqueued so unbound subscriptions surface
+        // for manual binding instead of vanishing.
         console.error('Subscription event without resolvable email:', sub.id)
+        try {
+          const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+          if (secret) {
+            await fetch(
+              `${(process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')}/api/outbox/enqueue`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
+                signal: AbortSignal.timeout(10_000),
+                body: JSON.stringify({
+                  channel: 'email',
+                  recipient: process.env.OPS_ALERT_EMAIL || 'mike.holownych@gmail.com',
+                  payload: {
+                    subject: `UNBOUND subscription event ${sub.id} (${resolved.plan})`,
+                    body:
+                      `<p>Stripe delivered <code>${event.type}</code> for subscription <code>${sub.id}</code> ` +
+                      `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
+                      `but no resolvable email was present.</p>` +
+                      `<p>Bind it manually in Stripe + subscriptions table.</p>`,
+                    from_email: 'audits@nebulacomponents.shop',
+                    content_type: 'text/html',
+                  },
+                }),
+              },
+            )
+          }
+        } catch (alertErr) {
+          console.error('Failed to enqueue unbound-subscription alert:', alertErr)
+        }
         return NextResponse.json({ received: true, unbound: true })
       }
 

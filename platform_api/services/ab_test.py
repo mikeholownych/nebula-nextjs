@@ -27,10 +27,9 @@ from typing import Literal
 
 import asyncpg
 
-_DB_URL = os.getenv(
-    "AUDIT_DATABASE_URL",
-    "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433",
-)
+from platform_api.config import audit_db_dsn
+
+_DB_URL = audit_db_dsn()
 
 # Experiment definitions
 EXPERIMENTS = {

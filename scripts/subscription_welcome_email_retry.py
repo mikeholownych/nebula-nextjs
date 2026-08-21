@@ -19,7 +19,7 @@ def send(row):
     except Exception as e: return False, str(e)[:500]
 
 def main():
-    conn = psycopg2.connect(host='/var/run/postgresql', port=5433, dbname='nebula_audit', user='postgres', cursor_factory=psycopg2.extras.RealDictCursor)
+    conn = psycopg2.connect(host='/var/run/postgresql', port=5433, dbname='nebula_platform', user='postgres', cursor_factory=psycopg2.extras.RealDictCursor)
     cur = conn.cursor()
     cur.execute("""SELECT id, stripe_subscription_id, email, plan
                    FROM subscriptions
