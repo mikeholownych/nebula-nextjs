@@ -72,7 +72,7 @@
 
 ## Frontend
 
-**Workspace** - the authenticated area at `/workspace`. Gated by email (localStorage MVP). Shows audit history, monitors, billing.
+**Workspace** - the authenticated area at `/workspace`. JWT session (magic link / Google / GitHub OAuth) enforced server-side by requireWorkspaceUser; localStorage EmailGate is legacy UI only. Shows audit history, monitors, billing.
 
 **Audit Page** - `/audit`. Public URL-input form. Submits to Platform API `/audit/run`. No email required. Anonymous audits receive a synthetic `anonymous+<uuid>@invalid.nebulacomponents.com` identity so unrelated visitors never collapse into a shared customer record. Analytics events fire only when `analytics_consent` is true; `audit_started` is emitted by the portal's `/api/audit/start` route (not the API service) to avoid double-counting the funnel's first step. Feature bullets include: "Results in under 2 minutes", "No signup, no account", "Works with Webflow, Framer, Shopify, WordPress & Next.js", and "$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included". Includes `HonestyGrid` component.
 
@@ -92,7 +92,7 @@
 
 **nebula-platform-api** - systemd unit running FastAPI on :8001.
 
-**Cloudflare Tunnel** - exposes :3000 publicly as `nebulacomponents.com`. Changes go live only after `sudo systemctl restart nebula-nextjs`.
+**Cloudflare Tunnel** - explicit hostnames only: nebulacomponents.com/.shop → :3000, api.nebulacomponents.shop + workers-dev path → :8001 (public FastAPI with per-route exposure classes — see docs/architecture/public-api-model.md), mcp.*.com/.shop → :8002. Unknown hostnames get 404 (catch-all is http_status:404 since the Wave-4 remediation). Changes go live only after `sudo systemctl restart nebula-nextjs`.
 
 **n8n** - workflow automation at `n8n.mikeholownych.com` (10.0.8.220:5678). Hosts the Trigger Engine workflow (`9HGVFfIPDHRYMtuE`). Webhooks use `/webhook/<path>` (no UUID prefix).
 
@@ -134,4 +134,5 @@ Brand identity is versioned product state. Canonical source: `app/lib/brand.ts` 
 ## Change Log
 
 - 2026-08-10: Updated by context_watcher - Platform API split into nebula_platform (auth) + nebula_audit (pipeline) DBs; AuditDB reads AUDIT_DATABASE_URL, audits table gained source/partner_id/engine_version columns, INTERNAL_EMAILS exclusion added; GitHub OAuth added; CRM hooks wired on audit completion; Audit Page updated with anonymous-identity pattern and analytics_consent gate; brand color renamed signal-emerald → signal-teal (#00c2a0)
+- 2026-08-21: E2E remediation waves 0–4 — public API exposure classes enforced, INTERNAL_API_SECRET provisioned, sessions/GSC-token hardening, tracked migrations (platform_api/scripts/migrate.py), bounded audit admission, deploy script gains migration step + rehearsal + auto-rollback.
 - 2026-08-17: Updated by context_watcher - Audit Page: added HonestyGrid component + Webflow/Framer/Shopify/WordPress/Next.js platform support bullet; next.config.ts: 12 GSC-404 permanent redirects added (documented in Ops/Infra section)
