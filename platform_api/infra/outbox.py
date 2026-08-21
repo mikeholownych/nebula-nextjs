@@ -172,8 +172,43 @@ class Outbox:
             return await self._send_email(recipient, payload)
         if channel == "kit_send":
             return await self._send_kit(payload)
+        if channel == "audit_result":
+            return await self._send_audit_result(recipient, payload)
         logger.warning(f"Unknown outbox channel: {channel}")
         return False
+
+    async def _send_audit_result(self, recipient: str, payload: dict) -> bool:
+        """RES-5: durable audit result delivery (replaces fire-and-forget task)."""
+        try:
+            from platform_api.routes.audit_api import AuditEmailData
+            from platform_api.services import email_service
+            from platform_api.services.audit_db import audit_db as _adb
+
+            result = await email_service.send_audit_results(
+                AuditEmailData(
+                    url=payload.get("url", ""),
+                    email=recipient,
+                    name=payload.get("name"),
+                    score=payload.get("score", 0),
+                    grade=payload.get("grade", "N/A"),
+                    findings=payload.get("findings") or [],
+                    guided_implementation=payload.get("guided_implementation"),
+                )
+            )
+            sent = result.get("status") == "sent"
+            if sent and payload.get("audit_id"):
+                try:
+                    await _adb.mark_email_sent(payload["audit_id"])
+                except Exception as exc:
+                    logger.warning("mark_email_sent failed for %s: %s",
+                                   payload.get("audit_id"), exc)
+            else:
+                logger.warning("audit_result send failed for %s: %s",
+                               recipient, result.get("error"))
+            return bool(sent)
+        except Exception as exc:
+            logger.error("audit_result dispatch error for %s: %s", recipient, exc)
+            return False
 
     async def _send_kit(self, payload: dict) -> bool:
         import asyncio

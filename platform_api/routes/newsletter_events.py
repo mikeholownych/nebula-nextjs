@@ -18,6 +18,18 @@ from fastapi import APIRouter, HTTPException, Request, Response
 from svix.webhooks import Webhook, WebhookVerificationError
 from platform_api.config import audit_db_dsn
 
+_shared_pool_instance = None
+
+
+async def _shared_pool():
+    """RES-3: one bounded process-wide pool instead of per-webhook churn."""
+    global _shared_pool_instance
+    if _shared_pool_instance is None:
+        _shared_pool_instance = await asyncpg.create_pool(
+            audit_db_dsn(), min_size=1, max_size=2, command_timeout=10,
+        )
+    return _shared_pool_instance
+
 router = APIRouter()
 
 
@@ -113,11 +125,7 @@ async def provider_event(request: Request) -> Response:
     if not message_id:
         raise HTTPException(status_code=400, detail="provider event missing stable message identity")
 
-    pool = await asyncpg.create_pool(
-        audit_db_dsn(),
-        min_size=1,
-        max_size=2,
-    )
+    pool = await _shared_pool()
     try:
         async with pool.acquire() as conn:
             submission = await conn.fetchrow(
@@ -170,5 +178,5 @@ async def provider_event(request: Request) -> Response:
                     message_id,
                 )
     finally:
-        await pool.close()
+        pass  # shared pool is process-lifetime (RES-3)
     return Response(status_code=204)

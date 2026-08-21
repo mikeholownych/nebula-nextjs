@@ -87,8 +87,21 @@ def tier_to_action(tier: str) -> str:
 
 # ── Database operations ────────────────────────────────────────────────────────
 
+_pool: asyncpg.Pool | None = None
+
+
 async def get_pool() -> asyncpg.Pool:
-    return await asyncpg.create_pool(_DB_URL, min_size=1, max_size=3)
+    """Shared process-wide pool (RES-3).
+
+    The previous implementation created and destroyed a fresh pool per
+    request, churning connections exactly when load was highest. A single
+    bounded pool is shared instead; callers must NOT close it.
+    """
+    global _pool
+    if _pool is None:
+        _pool = await asyncpg.create_pool(_DB_URL, min_size=1, max_size=3,
+                                          command_timeout=10)
+    return _pool
 
 
 async def compute_score_from_events(pool: asyncpg.Pool, email: str) -> dict:

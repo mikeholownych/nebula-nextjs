@@ -315,48 +315,29 @@ async def finalize_completed_audit(job: dict, data: dict) -> None:
             print(f"[audit_api] Track assignment failed: {exc}")
 
     if real_email:
-        _send_email = str(audit_email)
-        _send_name = job.get("name")
-        _send_url = request_url
-        _send_score = data.get("score", 0)
-        _send_grade = data.get("grade", "N/A")
-        _send_findings = data.get("findings", [])
+        # RES-5: the result email is a durable side effect, not fire-and-forget.
+        # It rides the transactional outbox (channel 'audit_result') so a crash
+        # between audit completion and send is retried with backoff instead of
+        # silently lost. Delivery marks email_sent_at (drain handler).
+        from platform_api.infra.outbox import outbox
 
-        async def _auto_send_email():
-            try:
-                result_email = await email_service.send_audit_results(
-                    AuditEmailData(
-                        url=_send_url,
-                        email=_send_email,
-                        name=_send_name,
-                        score=_send_score,
-                        grade=_send_grade,
-                        findings=_send_findings,
-                        guided_implementation=data.get("guided_implementation"),
-                    )
-                )
-                if result_email.get("status") == "sent":
-                    await audit_db.mark_email_sent(audit_id)
-                    ph2 = get_posthog()
-                    if ph2:
-                        with new_context(client=ph2):
-                            identify_context(_send_email)
-                            ph2.capture(
-                                "audit_email_sent",
-                                properties={
-                                    "audit_id": str(audit_id),
-                                    "grade": data.get("grade"),
-                                    "score": data.get("score"),
-                                    "message_id": result_email.get("message_id"),
-                                    "source": "auto_completion",
-                                },
-                            )
-                else:
-                    print(f"[audit_api] email send failed for {audit_id}: {result_email.get('error')}")
-            except Exception as _email_exc:
-                print(f"[audit_api] email auto-send exception for {audit_id}: {_email_exc}")
-
-        asyncio.create_task(_auto_send_email())
+        try:
+            await outbox.enqueue(
+                channel="audit_result",
+                recipient=str(audit_email),
+                payload={
+                    "audit_id": str(audit_id),
+                    "url": request_url,
+                    "name": job.get("name"),
+                    "score": data.get("score", 0),
+                    "grade": data.get("grade", "N/A"),
+                    "findings": data.get("findings", []),
+                    "guided_implementation": data.get("guided_implementation"),
+                },
+            )
+            asyncio.create_task(outbox.drain())
+        except Exception as exc:
+            print(f"[audit_api] result-email enqueue failed for {audit_id}: {exc}")
 
 
 class AuditClaimRequest(BaseModel):

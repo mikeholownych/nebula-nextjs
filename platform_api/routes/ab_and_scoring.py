@@ -72,11 +72,8 @@ async def score_lead(email: str, request: Request = None):
     require_internal_service(request)
     """Compute live lead score for an email address."""
     pool = await get_pool()
-    try:
-        result = await compute_score_from_events(pool, email)
-        return result
-    finally:
-        await pool.close()
+    result = await compute_score_from_events(pool, email)
+    return result
 
 
 @router.post("/leads/score/{email}/update")
@@ -84,11 +81,8 @@ async def update_score(email: str, request: Request = None):
     require_internal_service(request)
     """Recompute and persist lead score to customers table."""
     pool = await get_pool()
-    try:
-        result = await update_crm_score(pool, email)
-        return {"success": True, **result}
-    finally:
-        await pool.close()
+    result = await update_crm_score(pool, email)
+    return {"success": True, **result}
 
 
 @router.post("/leads/decay-all")
@@ -96,8 +90,5 @@ async def run_decay(request: Request = None):
     require_internal_service(request)
     """Decay scores for all inactive prospects (run daily via cron)."""
     pool = await get_pool()
-    try:
-        updated = await decay_all_scores(pool)
-        return {"success": True, "prospects_updated": updated}
-    finally:
-        await pool.close()
+    updated = await decay_all_scores(pool)
+    return {"success": True, "prospects_updated": updated}
