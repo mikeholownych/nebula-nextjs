@@ -60,6 +60,23 @@ printf '[Service]\nEnvironment=NEBULA_BUILD_REVISION=%s\n' "$SHA" \
 sudo chmod 0400 "$REVISION_DROPIN"
 sudo systemctl daemon-reload
 sudo systemctl restart "$API_UNIT"
+
+# Wait for FastAPI to finish booting (uv dependency resolution can take 10s+)
+# before probing - a connection-refused here previously caused a false-positive
+# post-swap verification failure and an unnecessary rollback.
+api_ready=0
+for i in $(seq 1 30); do
+  if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:8001/healthz; then
+    api_ready=1
+    break
+  fi
+  sleep 1
+done
+if [[ "$api_ready" != "1" ]]; then
+  log "FAIL: $API_UNIT did not become healthy within 30s of restart."
+  exit 1
+fi
+
 accept_code=$(probe_accept)
 if [[ "$accept_code" == "404" || "$accept_code" == "000" || -z "$accept_code" ]]; then
   log "FAIL: FastAPI /audit/accept unreachable after revision stamp (HTTP ${accept_code}). Not swapping Next."
