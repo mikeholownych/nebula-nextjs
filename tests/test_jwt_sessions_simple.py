@@ -49,5 +49,8 @@ async def test_create_session_with_mock_redis(jwt_settings):
 
     assert isinstance(token, str)
     assert len(token) > 0
-    redis.hset.assert_awaited_once()
-    redis.expire.assert_awaited_once()
+    # SEC-P1-2: per-session key written via set() with a TTL
+    redis.set.assert_awaited_once()
+    args, kwargs = redis.set.await_args
+    assert args[0].startswith("user:test-user-123:session:")
+    assert kwargs.get("ttl", 0) > 0

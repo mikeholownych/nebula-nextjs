@@ -25,18 +25,42 @@ def secret_key():
     return "test-secret-key-for-unit-tests"
 
 
+class _FakeRedis:
+    """SEC-P1-2 model: per-session keys with TTLs, scan-based listing."""
+
+    def __init__(self):
+        self.store = {}
+        self.ttls = {}
+
+    async def set(self, key, value, ttl=None):
+        self.store[key] = value
+        if ttl:
+            self.ttls[key] = ttl
+
+    async def get(self, key):
+        return self.store.get(key)
+
+    async def exists(self, key):
+        return 1 if key in self.store else 0
+
+    async def delete(self, *keys):
+        n = 0
+        for k in keys:
+            if k in self.store:
+                del self.store[k]
+                self.ttls.pop(k, None)
+                n += 1
+        return n
+
+    async def scan(self, cursor=0, match="*", count=100):
+        import fnmatch
+        return 0, [k for k in self.store if fnmatch.fnmatch(k, match)]
+
+
 @pytest.fixture
 def mock_redis():
     """Mock Redis client."""
-    redis = AsyncMock()
-    redis.hset = AsyncMock()
-    redis.hgetall = AsyncMock(return_value={})
-    redis.hdel = AsyncMock()
-    redis.set = AsyncMock()
-    redis.get = AsyncMock()
-    redis.exists = AsyncMock(return_value=False)
-    redis.expire = AsyncMock()
-    redis.ttl = AsyncMock(return_value=3600)
+    redis = _FakeRedis()
     return redis
 
 
@@ -155,13 +179,11 @@ async def test_create_session_success(mock_redis):
         # Should return JWT
         assert isinstance(token, str)
 
-        # Should call Redis hset
-        mock_redis.hset.assert_called_once()
-        mock_redis.expire.assert_called_once()
-
-        # Check Redis key format
-        call_args = mock_redis.hset.call_args
-        assert "user:user-123:sessions" in str(call_args)
+        # SEC-P1-2 model: one key per session with its own TTL
+        assert len(mock_redis.store) == 1
+        key = next(iter(mock_redis.store))
+        assert key.startswith("user:user-123:session:")
+        assert mock_redis.ttls[key] == 7 * 24 * 3600
 
 
 @pytest.mark.asyncio
@@ -184,10 +206,10 @@ async def test_create_session_with_metadata(mock_redis):
             session_data=session_data
         )
 
-        # Should include metadata in Redis
-        call_args = mock_redis.hset.call_args
-        session_info = call_args[0][2]  # Third argument is the dict
-
+        # Should include metadata in Redis (JSON-encoded per-session record)
+        import json as _json
+        key = next(iter(mock_redis.store))
+        session_info = _json.loads(mock_redis.store[key])
         assert session_info["ip"] == "192.168.1.1"
         assert session_info["user_agent"] == "Mozilla/5.0"
 
@@ -205,12 +227,16 @@ async def test_verify_session_success(mock_redis, secret_key):
         token = create_jwt(payload)
 
         # Verify session (not blacklisted)
-        mock_redis.exists.return_value = False
+        import json as _json
+        claims0 = decode_jwt(token)
+        await mock_redis.set(
+            f"user:user-123:session:{claims0['jti']}",
+            _json.dumps({"session_id": claims0["jti"]}),
+        )
 
         claims = await verify_session(mock_redis, token)
 
         assert claims["user_id"] == "user-123"
-        mock_redis.exists.assert_called_once()
 
 
 @pytest.mark.asyncio
@@ -225,8 +251,10 @@ async def test_verify_session_blacklisted(mock_redis, secret_key):
         payload = {"user_id": "user-123", "org_id": "org-456"}
         token = create_jwt(payload)
 
-        # Token is blacklisted
-        mock_redis.exists.return_value = True
+        # Token is blacklisted (blacklist checked before membership)
+        async def _always_yes(key):
+            return 1
+        mock_redis.exists = _always_yes
 
         with pytest.raises(JWTError) as exc_info:
             await verify_session(mock_redis, token)
@@ -242,18 +270,13 @@ async def test_revoke_session_success(mock_redis):
 
         await revoke_session(mock_redis, "user-123", "session-456")
 
-        # Should remove from active sessions
-        mock_redis.hdel.assert_called_once()
-
-        # Should add to blacklist
-        mock_redis.set.assert_called_once()
+        # SEC-P1-2: per-session record deleted + blacklist written
+        assert mock_redis.store.get("user:user-123:session:session-456") is None
 
 
 @pytest.mark.asyncio
 async def test_get_active_sessions_empty(mock_redis):
     """Get active sessions when none exist."""
-    mock_redis.hgetall.return_value = {}
-
     sessions = await get_active_sessions(mock_redis, "user-123")
 
     assert sessions == {}
@@ -262,40 +285,37 @@ async def test_get_active_sessions_empty(mock_redis):
 @pytest.mark.asyncio
 async def test_get_active_sessions_multiple(mock_redis):
     """Get active sessions with multiple sessions."""
-    mock_redis.hgetall.return_value = {
-        "session-1": {"ip": "192.168.1.1"},
-        "session-2": {"ip": "192.168.1.2"},
-    }
+    import json as _json
+    for sid, ip in (("s1", "192.168.1.1"), ("s2", "192.168.1.2")):
+        await mock_redis.set(f"user:user-123:session:{sid}",
+                             _json.dumps({"ip": ip}))
 
     sessions = await get_active_sessions(mock_redis, "user-123")
 
+
     assert len(sessions) == 2
-    assert "session-1" in sessions
-    assert "session-2" in sessions
+    assert "s1" in sessions
+    assert "s2" in sessions
 
 
 @pytest.mark.asyncio
 async def test_revoke_all_sessions_success(mock_redis):
     """Revoke all sessions for user."""
-    # Mock active sessions
-    mock_redis.hgetall.return_value = {
-        "session-1": {"ip": "192.168.1.1"},
-        "session-2": {"ip": "192.168.1.2"},
-    }
+    import json as _json
+    for sid in ("session-1", "session-2"):
+        await mock_redis.set(f"user:user-123:session:{sid}", _json.dumps({}))
 
     count = await revoke_all_sessions(mock_redis, "user-123")
 
     assert count == 2
-
-    # Should call revoke_session for each
-    assert mock_redis.hdel.call_count == 2
-    assert mock_redis.set.call_count == 2
+    # per-session records gone; only blacklist entries remain
+    assert not [k for k in mock_redis.store if ":session:" in k]
+    assert len([k for k in mock_redis.store if k.startswith("blacklist:")]) == 2
 
 
 @pytest.mark.asyncio
 async def test_revoke_all_sessions_no_sessions(mock_redis):
     """Revoke all sessions when none exist."""
-    mock_redis.hgetall.return_value = {}
 
     count = await revoke_all_sessions(mock_redis, "user-123")
 

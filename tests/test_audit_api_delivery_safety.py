@@ -6,6 +6,16 @@ import pytest
 from fastapi import HTTPException
 
 from platform_api.routes import audit_api
+
+
+@pytest.fixture(autouse=True)
+def hermetic_admission(monkeypatch):
+    """DATA-6: queue admission must never touch a real DB from unit tests."""
+    from unittest.mock import AsyncMock
+    monkeypatch.setattr(
+        "platform_api.routes.audit_api.audit_db.check_admission",
+        AsyncMock(return_value=(True, "test-open")),
+    )
 from platform_api.services import audit_engine, audit_runner
 
 
@@ -63,19 +73,18 @@ async def test_blocked_email_is_not_marked_sent(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_successful_email_is_marked_sent(monkeypatch):
+async def test_result_email_is_enqueued_to_durable_outbox(monkeypatch):
+    """RES-5: completion enqueues channel 'audit_result' (durable) instead of
+    spawning an unguarded asyncio task. Delivery + mark_email_sent now happen
+    in the outbox drain handler."""
+    import importlib
+    outbox_module = importlib.import_module("platform_api.infra.outbox")
     audit_id = uuid4()
-    mark_sent = AsyncMock(return_value=True)
+    enqueue = AsyncMock(return_value="outbox-id")
+    monkeypatch.setattr(outbox_module.outbox, "enqueue", enqueue)
     monkeypatch.setattr(
-        audit_api.email_service,
-        "send_audit_results",
-        AsyncMock(return_value={"status": "sent", "message_id": "msg-1"}),
-    )
-    monkeypatch.setattr(audit_api.audit_db, "mark_email_sent", mark_sent)
-    monkeypatch.setattr(audit_api.analytics, "track_audit_completed", AsyncMock())
-    monkeypatch.setattr(audit_api, "get_posthog", lambda: None)
-    monkeypatch.setattr(audit_api, "_crm_audit_completed", AsyncMock())
-    monkeypatch.setattr(audit_api, "trigger_track_assignment", lambda **kw: None)
+        outbox_module.outbox, "drain", AsyncMock(return_value=0)
+    )  # keep the scheduled drain hermetic
 
     job = {
         "id": audit_id,
@@ -87,10 +96,10 @@ async def test_successful_email_is_marked_sent(monkeypatch):
 
     await audit_api.finalize_completed_audit(job, data)
 
-    # Let fire-and-forget task execute
-    import asyncio
-    await asyncio.sleep(0.01)
-    mark_sent.assert_awaited_once_with(audit_id)
+    enqueue.assert_awaited_once()
+    call = enqueue.await_args
+    channel = call.kwargs.get("channel") or (call.args[0] if call.args else None)
+    assert channel == "audit_result", f"unexpected enqueue call: {call}"
 
 
 def test_script_failure_does_not_expose_stderr(monkeypatch):

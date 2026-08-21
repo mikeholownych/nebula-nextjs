@@ -43,12 +43,8 @@ def mock_db():
 @pytest.fixture
 def mock_redis():
     """Mock Redis client."""
-    redis = AsyncMock()
-    redis.hset = AsyncMock()
-    redis.hgetall = AsyncMock(return_value={})
-    redis.exists = AsyncMock(return_value=False)
-    redis.expire = AsyncMock()
-    return redis
+    from tests.test_jwt_sessions import _FakeRedis
+    return _FakeRedis()
 
 
 @pytest.fixture
@@ -190,9 +186,9 @@ async def test_logout_success(app, client, mock_redis):
             assert response.status_code == 200
             assert "message" in response.json()
 
-            # Should revoke session
-            mock_redis.hset.assert_not_called()  # Not creating
-            mock_redis.hdel.assert_called_once()  # Deleting
+            # Should revoke session: record deleted, blacklist written
+            assert "user:%s:session:session-123" % mock_current_user["user_id"] not in mock_redis.store
+            assert "blacklist:jwt:session-123" in mock_redis.store
 
 
 @pytest.mark.asyncio
@@ -208,13 +204,15 @@ async def test_list_sessions_success(app, client, mock_redis):
         "session_id": "session-123",
     }
 
-    mock_redis.hgetall.return_value = {
-        "session-1": {
+    import json as _json
+    await mock_redis.set(
+        f"user:{mock_current_user['user_id']}:session:session-1",
+        _json.dumps({
             "ip": "192.168.1.1",
             "user_agent": "Mozilla/5.0",
             "created_at": "2026-07-14T06:00:00Z",
-        }
-    }
+        }),
+    )
 
     with patch("platform_api.auth.routes.get_redis", return_value=mock_redis):
         with patch("platform_api.auth.routes.get_current_user", return_value=mock_current_user):
