@@ -22,7 +22,7 @@
  "DATA-4": {
   "severity": "P1",
   "title": "Hardcoded fallback DSNs across modules",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-1": {
   "severity": "P1",
@@ -42,17 +42,17 @@
  "SEC-P1-2": {
   "severity": "P1",
   "title": "JWT verify ignores session store; login re-TTL all sessions",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P1-3": {
   "severity": "P1",
   "title": "GSC refresh tokens plaintext",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P1-4": {
   "severity": "P1",
   "title": "Secrets hardcoded / sourced outside env contract",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-4": {
   "severity": "P1",
@@ -132,17 +132,17 @@
  "CODE-1": {
   "severity": "P2",
   "title": "falsy-zero amount fallbacks",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CODE-2": {
   "severity": "P2",
   "title": "Subscription dropped when email unresolvable",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CODE-3": {
   "severity": "P2",
   "title": "CRM interested->cold downgrade contradiction",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CODE-8": {
   "severity": "P2",
@@ -302,7 +302,7 @@
  "CODE-4": {
   "severity": "P2",
   "title": "Session hash re-EXPIRE extends all sessions",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CODE-5": {
   "severity": "P3",
