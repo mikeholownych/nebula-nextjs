@@ -33,6 +33,9 @@ function citableProjectionHash(): string | null {
 }
 
 const nextConfig: NextConfig = {
+  // Alternate distDir lets deploy build into .next-incoming while the live
+  // process keeps serving .next. See scripts/deploy_customer_portal.sh.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   // Fail `next build` on type errors. `npm run typecheck` remains a separate CI gate.
   typescript: { ignoreBuildErrors: false },
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
@@ -421,6 +424,24 @@ const nextConfig: NextConfig = {
           { key: 'CDN-Cache-Control', value: 'no-store' },
           { key: 'Cloudflare-CDN-Cache-Control', value: 'no-store' },
           { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
+      // Liveness/readiness must never be CDN-cached. The HTML catch-all
+      // s-maxage=300 would otherwise win for these JSON probes.
+      {
+        source: '/api/healthz',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, max-age=0' },
+          { key: 'CDN-Cache-Control', value: 'no-store' },
+          { key: 'Cloudflare-CDN-Cache-Control', value: 'no-store' },
+        ],
+      },
+      {
+        source: '/api/readyz',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, max-age=0' },
+          { key: 'CDN-Cache-Control', value: 'no-store' },
+          { key: 'Cloudflare-CDN-Cache-Control', value: 'no-store' },
         ],
       },
       // /.well-known/openid-configuration

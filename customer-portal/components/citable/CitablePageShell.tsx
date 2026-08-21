@@ -40,7 +40,7 @@ export function CitablePageShell({
   )
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24 text-fg">
+    <main id="main-content" className="min-h-screen min-w-0 overflow-x-clip bg-bg pt-24 text-fg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

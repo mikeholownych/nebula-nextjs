@@ -22,51 +22,62 @@ set -euo pipefail
 
 PORTAL_DIR="/home/mike/nebula/customer-portal"
 SITE_UNIT="nebula-nextjs.service"
+API_UNIT="nebula-platform-api.service"
 VERIFY_SCRIPT="/home/mike/nebula/scripts/verify_production_services.sh"
 CF_ZONE="nebulacomponents.com"
+REVISION_DROPIN="/etc/systemd/system/nebula-platform-api.service.d/revision.conf"
 
 log() { printf '[deploy] %s\n' "$*"; }
 
-log "Building in $PORTAL_DIR ..."
-cd "$PORTAL_DIR"
-npm ci --include=dev
-npm run ci
+probe_accept() {
+  curl -sS -o /dev/null -w '%{http_code}' --max-time 5 \
+    "http://127.0.0.1:8001/audit/accept" || echo 000
+}
 
-# Revision alignment (do not stamp from this script by default).
-# After a full rebuild+restart, these four values must match:
-#   1. git rev-parse HEAD
-#   2. customer-portal/app/lib/build-info.json `revision` (written by npm run build)
-#   3. HTML `X-Nebula-Revision` (baked from build-info.json at next build)
-#   4. FastAPI GET /healthz `revision` via systemd drop-in NEBULA_BUILD_REVISION
-# This script restarts nebula-nextjs only. It does NOT write a SHA into systemd
-# and does NOT restart nebula-platform-api. To stamp the API revision after a
-# coordinated deploy, write a 0400 drop-in then restart the API unit separately:
-#   printf '[Service]\nEnvironment=NEBULA_BUILD_REVISION=%s\n' "$(git rev-parse HEAD)" \
-#     | sudo tee /etc/systemd/system/nebula-platform-api.service.d/revision.conf
-#   sudo chmod 0400 /etc/systemd/system/nebula-platform-api.service.d/revision.conf
-#   sudo systemctl daemon-reload
-#   sudo systemctl restart nebula-platform-api.service
-# Gate that sequence behind an explicit operator action — never as a side effect
-# of a portal-only deploy. See customer-portal/docs/architecture/deployment-revision.md.
-
-log "Build succeeded. Confirming FastAPI already serves POST /audit/accept ..."
-# Production FastAPI sets openapi_url=None. GET on a POST-only route is 405 when
+log "Confirming FastAPI already serves POST /audit/accept ..."
+# Production FastAPI sets openapi_url=None. GET on a POST-only route is 405/400 when
 # the path exists; 404 means the accept handler is not mounted.
-accept_code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 5 \
-  "http://127.0.0.1:8001/audit/accept" || echo 000)
+accept_code=$(probe_accept)
 if [[ "$accept_code" == "404" || "$accept_code" == "000" || -z "$accept_code" ]]; then
-  log "FAIL: refuse to restart Next until FastAPI serves POST /audit/accept (GET probe HTTP ${accept_code})."
-  log "Operator order: apply platform_api/migrations/20260820_audit_runner_queue.sql on nebula_audit → restart nebula-platform-api → then retry this script → stamp SHA."
+  log "FAIL: refuse to rebuild until FastAPI serves POST /audit/accept (GET probe HTTP ${accept_code})."
+  log "Operator order: apply platform_api/migrations/20260820_audit_runner_queue.sql on nebula_audit → restart nebula-platform-api → then retry this script."
   exit 1
 fi
 log "FastAPI /audit/accept reachable (GET HTTP ${accept_code})"
 
-log "Confirming $SITE_UNIT's cgroup before restart ..."
+log "Building in $PORTAL_DIR into .next-incoming (live process keeps serving .next) ..."
+cd "$PORTAL_DIR"
+rm -rf .next-incoming
+export NEXT_DIST_DIR=.next-incoming
+npm ci --include=dev
+npm run ci
+unset NEXT_DIST_DIR
+
+SHA=$(git -C "$PORTAL_DIR" rev-parse HEAD)
+log "Stamping $API_UNIT NEBULA_BUILD_REVISION=$SHA ..."
+printf '[Service]\nEnvironment=NEBULA_BUILD_REVISION=%s\n' "$SHA" \
+  | sudo tee "$REVISION_DROPIN" >/dev/null
+sudo chmod 0400 "$REVISION_DROPIN"
+sudo systemctl daemon-reload
+sudo systemctl restart "$API_UNIT"
+accept_code=$(probe_accept)
+if [[ "$accept_code" == "404" || "$accept_code" == "000" || -z "$accept_code" ]]; then
+  log "FAIL: FastAPI /audit/accept unreachable after revision stamp (HTTP ${accept_code}). Not swapping Next."
+  exit 1
+fi
+
+log "Confirming $SITE_UNIT's cgroup before swap ..."
 pre_cgroup=$(systemctl show "$SITE_UNIT" -p ControlGroup --value)
 log "Current cgroup: ${pre_cgroup:-<not running>}"
 
-log "Restarting $SITE_UNIT to load the new build ..."
-sudo systemctl restart "$SITE_UNIT"
+log "Stopping $SITE_UNIT, swapping .next-incoming → .next, starting ..."
+sudo systemctl stop "$SITE_UNIT"
+rm -rf .next-previous
+if [[ -d .next ]]; then
+  mv .next .next-previous
+fi
+mv .next-incoming .next
+sudo systemctl start "$SITE_UNIT"
 
 # Give the new process a moment to bind and become ready before verifying.
 for i in $(seq 1 15); do

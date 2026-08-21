@@ -92,7 +92,7 @@ const webPageSchema = {
 
 export default function PressPage() {
   return (
-    <main className="min-h-screen bg-bg text-fg">
+    <main id="main-content" className="min-h-screen bg-bg text-fg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
