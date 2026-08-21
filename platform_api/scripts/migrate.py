@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import re
 import sys
 from pathlib import Path
 
@@ -159,10 +160,31 @@ async def cmd_apply(args: argparse.Namespace) -> int:
                     continue
                 sql = (MIGRATIONS_DIR / name).read_text()
                 # The runner owns transaction boundaries; legacy files that
-                # carried their own BEGIN/COMMIT are normalized here.
-                lines = [l for l in sql.splitlines()
-                         if l.strip().upper() not in ("BEGIN;", "COMMIT;", "BEGIN", "COMMIT")]
-                sql = "\n".join(lines)
+                # carried their own BEGIN/COMMIT at top level are normalized
+                # here. Dollar-quoted bodies ($$plpgsql$$) are left intact.
+                def _strip_top_level_txn(text: str) -> str:
+                    out_lines: list[str] = []
+                    in_dollar = False
+                    for line in text.splitlines():
+                        if not in_dollar:
+                            if "$$" in line:
+                                # count occurrences: entering/leaving bodies
+                                in_dollar = line.count("$$") % 2 == 1
+                            stripped = line.strip().upper().rstrip(";")
+                            if stripped == "BEGIN":
+                                continue
+                        else:
+                            if "$$" in line:
+                                in_dollar = line.count("$$") % 2 == 0
+                        out_lines.append(line)
+                    return "\n".join(out_lines)
+
+                def _strip_commit(text: str) -> str:
+                    return re.sub(r"^\s*COMMIT\s*;?\s*$", "", text, flags=re.M | re.I)
+
+                sql = _strip_top_level_txn(sql)
+                sql = _strip_commit(sql)
+                print(f"[{target}] applying {name}")
                 async with conn.transaction():
                     await conn.execute(sql)
                     await conn.execute(
