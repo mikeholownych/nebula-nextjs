@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 interface AskAiCitabilityProps {
   defaultQuery?: string
   pageUrl?: string
@@ -15,26 +13,26 @@ export default function AskAiCitability({
   className = '',
   compact = false,
 }: AskAiCitabilityProps) {
-  const [url, setUrl] = useState(pageUrl || '')
+  const url = pageUrl || ''
 
-  const buildQuery = (aiName: string) => {
+  const buildQuery = () => {
     if (defaultQuery) return defaultQuery
     const target = url ? `for ${url}` : 'for my landing page'
     return `Analyze the conversion leaks, ad message match, and AI search visibility (AEO/GEO) ${target}. What are the observable HTML conditions that cause paid traffic to bounce?`
   }
 
   const getChatGptUrl = () => {
-    const q = encodeURIComponent(buildQuery('ChatGPT'))
+    const q = encodeURIComponent(buildQuery())
     return `https://chat.openai.com/?q=${q}`
   }
 
   const getClaudeUrl = () => {
-    const q = encodeURIComponent(buildQuery('Claude'))
+    const q = encodeURIComponent(buildQuery())
     return `https://claude.ai/new?q=${q}`
   }
 
   const getPerplexityUrl = () => {
-    const q = encodeURIComponent(buildQuery('Perplexity'))
+    const q = encodeURIComponent(buildQuery())
     return `https://www.perplexity.ai/search/new?q=${q}`
   }
 

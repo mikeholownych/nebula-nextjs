@@ -11,7 +11,7 @@ interface AiSearchViewProps {
   email?: string
 }
 
-export default function AiSearchView({ audits, email }: AiSearchViewProps) {
+export default function AiSearchView({ audits }: AiSearchViewProps) {
   const [selectedAuditId, setSelectedAuditId] = useState<string>(audits[0]?.id || '')
   const [testQuery, setTestQuery] = useState('')
   const [targetEngine, setTargetEngine] = useState<'chatgpt' | 'claude' | 'perplexity' | 'gemini'>('chatgpt')

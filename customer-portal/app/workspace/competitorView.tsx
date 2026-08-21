@@ -27,7 +27,7 @@ interface CompetitorViewProps {
   email?: string
 }
 
-export default function CompetitorView({ audits, email }: CompetitorViewProps) {
+export default function CompetitorView({ audits }: CompetitorViewProps) {
   const initialUrlA = audits[0]?.url || 'https://example.com'
   const [urlA, setUrlA] = useState(initialUrlA)
   const [urlB, setUrlB] = useState('')

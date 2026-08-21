@@ -22,15 +22,12 @@ export default function JsonLdGeneratorModal({
   const [schemaType, setSchemaType] = useState<SchemaType>(initialType)
   const [copied, setCopied] = useState(false)
 
-  // Dynamic state for FAQ builder
-  const [faqs, setFaqs] = useState([
+  const faqs = [
     { q: 'What is this service?', a: 'We provide evidence-based conversion optimization for landing pages.' },
     { q: 'How long does it take?', a: 'Results are delivered within 48 hours.' },
-  ])
-
-  // Dynamic state for SoftwareApp
-  const [appName, setAppName] = useState(pageTitle)
-  const [appPrice, setAppPrice] = useState('0')
+  ]
+  const appName = pageTitle
+  const appPrice = '0'
 
   const generateJsonLd = () => {
     switch (schemaType) {

@@ -11,7 +11,7 @@ import AnalyticsRuntime from './components/AnalyticsRuntime'
 import FunnelChrome from './components/FunnelChrome'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
-import { brand, brandAbsolute } from './lib/brand'
+import { brand } from './lib/brand'
 
 export const viewport: Viewport = {
   width: 'device-width',

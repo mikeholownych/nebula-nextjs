@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
+import type { WorkspaceAudit } from './WorkspaceClient'
 
 interface SitemapPage { url: string; lastmod?: string | null }
 
@@ -11,16 +11,6 @@ function pathKeyOf(url: string): string {
   try {
     const u = new URL(url)
     return `${u.hostname}${u.pathname.replace(/\/$/, '') || '/'}`
-  } catch {
-    return url
-  }
-}
-
-function basenameOf(url: string): string {
-  try {
-    const u = new URL(url)
-    const parts = u.pathname.replace(/\/$/, '').split('/').filter(Boolean)
-    return parts.length === 0 ? '/' : parts[parts.length - 1]
   } catch {
     return url
   }
@@ -155,14 +145,10 @@ function MiniRadial({ score, color = '#eab308' }: { score: number | null; color?
   )
 }
 
-export default function PagesView({ audits, latestDetail }: { audits: WorkspaceAudit[]; latestDetail?: AuditDetail | null }) {
+export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latestDetail?: unknown }) {
   const [search, setSearch] = useState('')
-  const [keywords, setKeywords] = useState<Record<string, string>>({})
   const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
   const [indexedStatus, setIndexedStatus] = useState<Record<string, { indexed: boolean; state?: string }>>({})
-  const [submitting, setSubmitting] = useState<Set<string>>(new Set())
-  const [schedules, setSchedules] = useState<Record<string, { id: string; enabled: boolean }>>({})
-  const [schedulingUrl, setSchedulingUrl] = useState<Set<string>>(new Set())
 
   // Selection & In-place Batch Auditing State
   const [selectedUrls, setSelectedUrls] = useState<Set<string>>(new Set())
@@ -232,25 +218,6 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
     }
   }
 
-  // Fetch audit schedules on mount
-  useEffect(() => {
-    let cancelled = false
-    fetch('/api/audit/schedules')
-      .then(async (res) => {
-        if (!res.ok || cancelled) return
-        const data = await res.json()
-        if (data.schedules) {
-          const map: Record<string, { id: string; enabled: boolean }> = {}
-          for (const s of data.schedules) {
-            map[s.url] = { id: s.id, enabled: s.enabled }
-          }
-          if (!cancelled) setSchedules(map)
-        }
-      })
-      .catch(() => {})
-    return () => { cancelled = true }
-  }, [])
-
   // Fetch sitemap URLs to discover all pages (not just audited ones)
   useEffect(() => {
     let cancelled = false
@@ -296,52 +263,6 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
       .catch(() => {})
     return () => { cancelled = true }
   }, [sitemapPages])
-
-  const handleSubmitIndex = async (url: string) => {
-    setSubmitting((prev) => new Set(prev).add(url))
-    try {
-      const res = await fetch('/api/gsc/submit-index', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ urls: [url] }),
-      })
-      if (res.ok) {
-        setIndexedStatus((prev) => ({ ...prev, [url]: { indexed: false, state: 'Submitted via IndexNow' } }))
-      }
-    } catch { /* silent */ }
-    setSubmitting((prev) => { const s = new Set(prev); s.delete(url); return s })
-  }
-
-  const handleScheduleToggle = async (url: string) => {
-    setSchedulingUrl((prev) => new Set(prev).add(url))
-    const existing = schedules[url]
-    try {
-      if (existing && existing.enabled) {
-        // Disable schedule
-        const res = await fetch('/api/audit/schedules', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, interval_days: 7, enabled: false }),
-        })
-        if (res.ok) {
-          const data = await res.json()
-          setSchedules((prev) => ({ ...prev, [url]: { id: data.id, enabled: false } }))
-        }
-      } else {
-        // Enable/create schedule
-        const res = await fetch('/api/audit/schedules', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, interval_days: 7, enabled: true }),
-        })
-        if (res.ok) {
-          const data = await res.json()
-          setSchedules((prev) => ({ ...prev, [url]: { id: data.id, enabled: true } }))
-        }
-      }
-    } catch { /* silent */ }
-    setSchedulingUrl((prev) => { const s = new Set(prev); s.delete(url); return s })
-  }
 
   // Deduplicate by pathKey, keep most recent audit per unique page
   // THEN merge sitemap URLs that haven't been audited as unaudited rows
@@ -419,20 +340,6 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
     if (!q) return uniquePages
     return uniquePages.filter((a) => a.url.toLowerCase().includes(q))
   }, [uniquePages, search])
-
-  // Compute revenue leak per page from latestDetail findings
-  const pageLeak = useMemo(() => {
-    const map: Record<string, number> = {}
-    if (!latestDetail?.findings) return map
-    const pageUrl = latestDetail.url
-    const key = pathKeyOf(pageUrl)
-    let total = 0
-    for (const f of latestDetail.findings) {
-      if (f.revenue_impact) total += f.revenue_impact
-    }
-    if (total > 0) map[key] = total
-    return map
-  }, [latestDetail])
 
   // Selection calculation
   const allSelected = filteredPages.length > 0 && filteredPages.every((p) => selectedUrls.has(p.url))

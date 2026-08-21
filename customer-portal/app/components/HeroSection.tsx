@@ -11,7 +11,6 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { SignalHorizon } from './SignalHorizon'
-import { NebulaMark } from '@/components/NebulaMark'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
