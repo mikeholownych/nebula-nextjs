@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { authHeaders } from '@/app/lib/workspace-auth'
 
-const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://localhost:8001'
+const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://127.0.0.1:8001'
 
 /**
  * GET /api/audit/rewrites?audit_id=<id>[&share=<token>]

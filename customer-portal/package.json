@@ -6,7 +6,7 @@
     "prebuild": "npm test -- --runInBand __tests__/teardown-screenshot-integrity.test.ts",
     "dev": "next dev --port 3000",
     "build": "node scripts/generate-build-info.mjs && node scripts/generate-learning-centre-md.mjs && next build",
-    "start": "next start --port 3000",
+    "start": "NODE_OPTIONS='--max-http-header-size=65536' next start --port 3000",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest",

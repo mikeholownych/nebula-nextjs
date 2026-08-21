@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
   // Store in PostgreSQL via platform API
   try {
-    const apiBase = process.env.PLATFORM_API_URL || 'http://localhost:8001'
+    const apiBase = process.env.PLATFORM_API_URL || 'http://127.0.0.1:8001'
     const res = await fetch(`${apiBase}/visitor-profile`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

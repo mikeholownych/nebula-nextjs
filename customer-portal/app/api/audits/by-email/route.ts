@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+
 /**
  * List audits for a workspace email
  * GET /api/audits/by-email?email=...
@@ -15,7 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     const response = await fetch(
-      `http://127.0.0.1:8001/audit/by-email?email=${encodeURIComponent(email)}`,
+      `${API_BASE}/audit/by-email?email=${encodeURIComponent(email)}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

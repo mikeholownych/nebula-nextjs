@@ -149,6 +149,11 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
   const [search, setSearch] = useState('')
   const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
   const [indexedStatus, setIndexedStatus] = useState<Record<string, { indexed: boolean; state?: string }>>({})
+  const [gscMetrics, setGscMetrics] = useState<{
+    clicks: number
+    impressions: number
+    pages: Record<string, { clicks: number; impressions: number; position: number }>
+  } | null>(null)
 
   // Selection & In-place Batch Auditing State
   const [selectedUrls, setSelectedUrls] = useState<Set<string>>(new Set())
@@ -158,6 +163,38 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
   const [inPlaceAudits, setInPlaceAudits] = useState<
     Record<string, { id: string; score: number; grade: string; completed_at: string; composite_anchor?: number }>
   >({})
+
+  // Fetch GSC status & metrics for real organic traffic overlay
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/gsc/status')
+      .then(async (res) => {
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled || !data.connected || !data.site_url) return
+        const mRes = await fetch(`/api/gsc/metrics?days=28&site_url=${encodeURIComponent(data.site_url)}`)
+        if (cancelled || !mRes.ok) return
+        const m = await mRes.json()
+        const pageMap: Record<string, { clicks: number; impressions: number; position: number }> = {}
+        if (Array.isArray(m.top_pages)) {
+          for (const tp of m.top_pages) {
+            if (tp.url) {
+              pageMap[tp.url] = { clicks: tp.clicks, impressions: tp.impressions, position: tp.position }
+              pageMap[pathKeyOf(tp.url)] = { clicks: tp.clicks, impressions: tp.impressions, position: tp.position }
+            }
+          }
+        }
+        if (!cancelled) {
+          setGscMetrics({
+            clicks: m.totals?.clicks ?? m.clicks ?? 0,
+            impressions: m.totals?.impressions ?? m.impressions ?? 0,
+            pages: pageMap,
+          })
+        }
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
 
   // In-place audit runner for a single URL
   const runAuditInPlace = async (url: string): Promise<boolean> => {
@@ -176,8 +213,8 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
       const auditId = data.audit_id
 
       if (auditId) {
-        // Poll for audit completion via status probe
-        for (let attempt = 0; attempt < 25; attempt++) {
+        // Poll for audit completion via status probe (up to 60s)
+        for (let attempt = 0; attempt < 50; attempt++) {
           await new Promise((r) => setTimeout(r, 1200))
           const checkStatus = await fetch(`/api/audit/${auditId}/status`)
           if (checkStatus.ok) {
@@ -410,11 +447,11 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
       {/* KPI cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <DonutCard
-          label="Pages Audited"
+          label="Pages Monitored"
           value={uniquePages.length}
           max={Math.max(uniquePages.length, 1)}
           color="#c7ff2f"
-          sub="unique pages"
+          sub="inventory"
         />
         <DonutCard
           label="Avg Score"
@@ -424,18 +461,18 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
           sub="/100"
         />
         <DonutCard
-          label="Avg AI Score"
-          value={avgAiScore}
-          max={100}
-          color="#f59e0b"
-          sub="/100"
+          label={gscMetrics ? "GSC Impressions" : "Avg AI Score"}
+          value={gscMetrics ? gscMetrics.impressions : avgAiScore}
+          max={gscMetrics ? Math.max(gscMetrics.impressions, 1000) : 100}
+          color="#38bdf8"
+          sub={gscMetrics ? "last 28 days" : "/100"}
         />
         <DonutCard
-          label="Avg SEO Score"
-          value={avgSeoScore}
-          max={100}
-          color="#3b82f6"
-          sub="/100"
+          label={gscMetrics ? "GSC Clicks" : "Avg SEO Score"}
+          value={gscMetrics ? gscMetrics.clicks : avgSeoScore}
+          max={gscMetrics ? Math.max(gscMetrics.clicks, 50) : 100}
+          color="#c7ff2f"
+          sub={gscMetrics ? "last 28 days" : "/100"}
         />
       </div>
 
@@ -457,15 +494,17 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
             </div>
           </div>
 
+          {/* Action Toolbar */}
           <div className="flex flex-wrap items-center gap-2">
+            {/* Search Filter */}
             <div className="relative">
               <input
-                type="search"
-                placeholder={`Search ${uniquePages.length} pages…`}
+                type="text"
+                placeholder="Filter pages…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full sm:w-72 rounded-lg border border-border bg-bg px-3.5 py-1.5 pl-8 font-mono text-xs text-fg placeholder:text-fg-muted/50 focus:outline-none focus:ring-1 focus:ring-accent"
-                aria-label="Filter pages"
+                className="w-48 rounded-lg border border-border bg-bg-panel px-3 py-1.5 pl-8 font-mono text-xs text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+                aria-label="Filter monitored pages"
               />
               <span className="pointer-events-none absolute left-2.5 top-2 text-fg-muted/50">
                 🔍
@@ -561,6 +600,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
                   
                   const isHome = isHomepage(a.url)
                   const pageTitle = titleOf(a.url)
+                  const isIndexed = indexedStatus[a.url]?.indexed
 
                   return (
                     <tr key={key} className={`hover:bg-bg-panel/40 transition-colors group ${isSelected ? 'bg-accent/5' : ''}`}>
@@ -579,6 +619,11 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
                           {isHome && (
                             <span className="rounded bg-accent/15 border border-accent/30 px-1.5 py-0.2 font-mono text-[9px] uppercase font-bold text-accent">
                               Homepage
+                            </span>
+                          )}
+                          {isIndexed && (
+                            <span className="rounded bg-[#10b981]/15 border border-[#10b981]/30 px-1.5 py-0.2 font-mono text-[9px] uppercase font-bold text-[#10b981]">
+                              Indexed
                             </span>
                           )}
                         </div>
@@ -612,7 +657,13 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[]; latest
 
                       {/* Visitors */}
                       <td className="py-3.5 pr-4 text-right font-mono text-fg-muted tabular-nums">
-                        {estimatedTraffic(idx)}
+                        {gscMetrics?.pages[key] ? (
+                          <span title={`${gscMetrics.pages[key].clicks} clicks, ${gscMetrics.pages[key].impressions} impressions (28d)`}>
+                            {gscMetrics.pages[key].impressions.toLocaleString('en-US')} imp
+                          </span>
+                        ) : (
+                          estimatedTraffic(idx)
+                        )}
                       </td>
 
                       {/* Technical Score Ring */}

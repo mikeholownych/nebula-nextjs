@@ -14,7 +14,7 @@ from typing import List, Optional
 from uuid import UUID, uuid4
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Body, Depends, HTTPException, Query, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -64,12 +64,30 @@ class TopPage(BaseModel):
     position: float
 
 
+class DailyRow(BaseModel):
+    date: str
+    clicks: int
+    impressions: int
+    ctr: float
+    position: float
+
+
+class GscTotals(BaseModel):
+    clicks: int
+    impressions: int
+    ctr: float
+    position: float
+
+
 class GscMetricsResponse(BaseModel):
     clicks: int
     impressions: int
     avg_ctr: float
     avg_position: float
-    top_pages: List[TopPage]
+    totals: Optional[GscTotals] = None
+    rows: List[DailyRow] = []
+    top_pages: List[TopPage] = []
+    site_url: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------
@@ -319,6 +337,16 @@ async def gsc_metrics(
                 total_clicks = total_impressions = 0
                 avg_ctr = avg_position = 0.0
 
+            # Daily breakdown query (sparkline)
+            daily_payload = {
+                "startDate": start_date.isoformat(),
+                "endDate": end_date.isoformat(),
+                "dimensions": ["date"],
+                "rowLimit": 90,
+            }
+            daily_resp = await client.post(api_base, json=daily_payload, headers=headers)
+            daily_data = daily_resp.json() if daily_resp.status_code == 200 else {}
+
             # Top pages query
             pages_payload = {
                 "startDate": start_date.isoformat(),
@@ -332,6 +360,19 @@ async def gsc_metrics(
 
     except httpx.HTTPError as exc:
         raise HTTPException(status_code=502, detail=f"Network error reaching GSC API: {exc}") from exc
+
+    daily_rows: List[DailyRow] = []
+    for row in daily_data.get("rows", []):
+        keys = row.get("keys", [])
+        daily_rows.append(
+            DailyRow(
+                date=keys[0] if keys else "",
+                clicks=int(row.get("clicks", 0)),
+                impressions=int(row.get("impressions", 0)),
+                ctr=float(row.get("ctr", 0.0)),
+                position=float(row.get("position", 0.0)),
+            )
+        )
 
     top_pages: List[TopPage] = []
     for row in pages_data.get("rows", []):
@@ -350,7 +391,15 @@ async def gsc_metrics(
         impressions=total_impressions,
         avg_ctr=avg_ctr,
         avg_position=avg_position,
+        totals=GscTotals(
+            clicks=total_clicks,
+            impressions=total_impressions,
+            ctr=avg_ctr,
+            position=avg_position,
+        ),
+        rows=daily_rows,
         top_pages=top_pages,
+        site_url=site_url,
     )
 
 
@@ -455,7 +504,7 @@ class InspectionResponse(BaseModel):
 
 @router.post("/inspect", response_model=InspectionResponse)
 async def gsc_inspect(
-    urls: List[str],
+    urls: List[str] = Body(..., embed=False),
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
     redis=Depends(get_redis),
@@ -467,16 +516,17 @@ async def gsc_inspect(
     """
     user_id = UUID(auth["user_id"])
     conn = db.query(GscConnection).filter_by(user_id=user_id).first()
-    if not conn:
-        raise HTTPException(status_code=404, detail="No GSC connection")
+    check_urls = urls[:20]
+    if not conn or not conn.gsc_site_url:
+        return InspectionResponse(
+            results=[
+                InspectionResult(url=u, indexed=False, coverage_state="not_connected")
+                for u in check_urls
+            ]
+        )
 
     access_token = _get_or_refresh_token(conn, db)
     site_url = conn.gsc_site_url
-    if not site_url:
-        raise HTTPException(status_code=400, detail="No GSC site URL configured")
-
-    # Cap at 20 URLs per request
-    check_urls = urls[:20]
     results_map: dict[str, InspectionResult] = {}
     uncached_urls: List[str] = []
 

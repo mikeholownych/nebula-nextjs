@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'See which fixes work best for landing pages based on real implementation data from thousands of audits.',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function FixLibraryPage() {
   // Auth gate removed, page shows public content only
   let fixes: FixEffectiveness[] = []
@@ -13,16 +15,13 @@ export default async function FixLibraryPage() {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/fix-library?limit=20`,
+      `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/fix-library?limit=20`,
       {
         method: 'GET',
         headers: { 
           'Content-Type': 'application/json',
-          // Include cookies for authentication
-          credentials: 'include'
         },
-        // Add timeout
-        // Note: In Next.js App Router, we'd use AbortController or similar for timeout
+        cache: 'no-store',
       }
     )
 
@@ -47,12 +46,12 @@ export default async function FixLibraryPage() {
         <p className="mb-6 text-destructive">
           Failed to load fix library: {error}
         </p>
-        <button 
-          onClick={() => window.location.reload()}
+        <a 
+          href="/fix-library"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
         >
           Try Again
-        </button>
+        </a>
       </div>
     )
   }
@@ -96,14 +95,6 @@ export default async function FixLibraryPage() {
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-indigo-50"
           >
             Back to Workspace
-          </a>
-          <a 
-            href="/api/fix-library/history?email=${encodeURIComponent(email)}" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-indigo-50"
-          >
-            View Your Fix History
           </a>
         </div>
       </div>

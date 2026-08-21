@@ -211,6 +211,17 @@ export async function POST(request: NextRequest) {
     })
 
     if (!apiResponse.ok) {
+      if (apiResponse.status === 429) {
+        return NextResponse.json(
+          { error: 'Rate limit exceeded. Please wait a moment before starting another audit.' },
+          {
+            status: 429,
+            headers: {
+              'Retry-After': apiResponse.headers.get('Retry-After') ?? '5',
+            },
+          }
+        )
+      }
       const failureReason = apiResponse.status === 504 ? 'fetch_timeout' : 'internal_error'
       await recordFunnelEvent({
         eventName: 'audit_failed',

@@ -105,11 +105,11 @@ ROUTE_POLICIES: dict[RouteClass, RateLimitPolicy] = {
         scope="ip",
     ),
     # Audit accept, audit run, screenshot, compute-heavy tasks.
-    # Both rate limit + admission control (admission handled in audit_api.py).
+    # Queue-level admission control is enforced by AuditRunner (max_in_flight=2).
     RouteClass.EXPENSIVE_WORK: RateLimitPolicy(
-        sustained_rps=0.167,     # 10 req / 10 min
-        burst_capacity=3,
-        window_seconds=660,      # key TTL > 10 min
+        sustained_rps=2.0,       # 120 req/min
+        burst_capacity=60,       # allow full project page batch scans
+        window_seconds=120,      # key TTL
         fail_behavior=FailBehavior.FAIL_CLOSED,
         scope="identity",
     ),
@@ -197,7 +197,9 @@ def _normalize_path(path: str) -> str:
 
 # Route prefix → RouteClass mapping (most-specific first)
 _ROUTE_PREFIX_MAP: list[tuple[str, RouteClass]] = [
-    # Auth
+    # Auth - session verification reads have standard read limits
+    ("/api/auth/me", RouteClass.PUBLIC_READ),
+    ("/auth/me", RouteClass.PUBLIC_READ),
     ("/api/auth/", RouteClass.AUTH),
     ("/api/auth", RouteClass.AUTH),
     # Email / dispatch
@@ -413,6 +415,25 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self.redis = redis
         self._local = _LocalEmergencyLimiter()
+
+    def _get_identifier(self, request: Request) -> str:
+        """Helper to compute raw composite identity before hashing."""
+        ip = _extract_trusted_ip(request)
+        email = (
+            request.headers.get("x-audit-email")
+            or request.headers.get("x-email")
+            or ""
+        ).strip().lower()
+        if email and "@" in email:
+            return f"ip:{ip}:email:{email}"
+        auth_header = request.headers.get("authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:]
+            return f"ip:{ip}:user:{token}"
+        api_key = request.headers.get("x-api-key", "")
+        if api_key:
+            return f"ip:{ip}:apikey:{api_key}"
+        return f"ip:{ip}"
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         path = request.url.path

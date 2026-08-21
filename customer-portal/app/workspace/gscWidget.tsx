@@ -16,6 +16,10 @@ interface DailyRow {
 }
 
 interface GscMetrics {
+  clicks?: number
+  impressions?: number
+  avg_ctr?: number
+  avg_position?: number
   totals?: {
     clicks: number
     impressions: number
@@ -185,7 +189,11 @@ export default function GscWidget({ email }: { email: string }) {
   }
 
   // CONNECTED
-  const t = metrics?.totals
+  const totalClicks = metrics?.totals?.clicks ?? metrics?.clicks
+  const totalImpressions = metrics?.totals?.impressions ?? metrics?.impressions
+  const avgCtr = metrics?.totals?.ctr ?? metrics?.avg_ctr
+  const avgPosition = metrics?.totals?.position ?? metrics?.avg_position
+  const hasData = totalClicks !== undefined && totalImpressions !== undefined
   const siteUrl = metrics?.site_url || status.site_url || '-'
   const rows = metrics?.rows || []
 
@@ -211,10 +219,10 @@ export default function GscWidget({ email }: { email: string }) {
       {error && <p className="mb-4 text-sm text-danger">{error}</p>}
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="Clicks" value={t ? t.clicks.toLocaleString() : '-'} />
-        <StatCard label="Impressions" value={t ? t.impressions.toLocaleString() : '-'} />
-        <StatCard label="Avg CTR" value={t ? `${(t.ctr * 100).toFixed(1)}%` : '-'} />
-        <StatCard label="Avg Position" value={t ? t.position.toFixed(1) : '-'} />
+        <StatCard label="Clicks" value={hasData && totalClicks !== undefined ? totalClicks.toLocaleString() : '-'} />
+        <StatCard label="Impressions" value={hasData && totalImpressions !== undefined ? totalImpressions.toLocaleString() : '-'} />
+        <StatCard label="Avg CTR" value={hasData && avgCtr !== undefined ? `${(avgCtr * 100).toFixed(1)}%` : '-'} />
+        <StatCard label="Avg Position" value={hasData && avgPosition !== undefined ? avgPosition.toFixed(1) : '-'} />
       </div>
 
       {rows.length >= 2 && (
