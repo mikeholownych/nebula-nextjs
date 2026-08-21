@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       return redirectTo('/login?error=github_no_token')
     }
 
-    // Redirect to workspace and set cookie
+    // Redirect to workspace and set persistent HTTP-only cookie
     const redirectResponse = NextResponse.redirect(new URL('/workspace', SITE_URL))
 
     redirectResponse.cookies.set('access_token', accessToken, {
@@ -57,12 +57,6 @@ export async function GET(request: NextRequest) {
       maxAge: 7 * 24 * 60 * 60, // 7 days
       path: '/',
     })
-
-    // Also forward any cookies the platform API set directly
-    const setCookie = upstream.headers.get('set-cookie')
-    if (setCookie) {
-      redirectResponse.headers.set('set-cookie', setCookie)
-    }
 
     return redirectResponse
   } catch (err) {

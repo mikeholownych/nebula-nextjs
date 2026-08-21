@@ -55,8 +55,22 @@ export async function POST(request: NextRequest) {
       headers: { 'Content-Type': upstream.headers.get('Content-Type') ?? 'application/json' },
     })
 
-    const setCookie = upstream.headers.get('set-cookie')
-    if (setCookie) response.headers.set('set-cookie', setCookie)
+    if (upstream.ok) {
+      try {
+        const parsed = JSON.parse(data) as { access_token?: string }
+        if (parsed.access_token) {
+          response.cookies.set('access_token', parsed.access_token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 7 * 24 * 60 * 60,
+            path: '/',
+          })
+        }
+      } catch {
+        // Non-fatal if body is not JSON
+      }
+    }
 
     return response
   } catch (err) {

@@ -12,18 +12,25 @@ export interface WorkspaceUser {
 export async function requireWorkspaceUser(
   request: NextRequest,
 ): Promise<{ user: WorkspaceUser } | { response: NextResponse }> {
+  const token = request.cookies.get('access_token')?.value
   const cookie = request.headers.get('cookie')
   const authorization = request.headers.get('authorization')
-  if (!cookie && !authorization) {
+  if (!cookie && !authorization && !token) {
     return { response: NextResponse.json({ error: 'Authentication required' }, { status: 401 }) }
   }
 
+  const forwardHeaders: Record<string, string> = {
+    'Content-Type': 'application/json',
+  }
+  if (cookie) forwardHeaders.cookie = cookie
+  else if (token) forwardHeaders.cookie = `access_token=${token}`
+
+  if (authorization) forwardHeaders.authorization = authorization
+  else if (token) forwardHeaders.authorization = `Bearer ${token}`
+
   try {
     const upstream = await fetch(`${API_BASE}/api/auth/me`, {
-      headers: {
-        ...(cookie ? { cookie } : {}),
-        ...(authorization ? { authorization } : {}),
-      },
+      headers: forwardHeaders,
       cache: 'no-store',
       signal: AbortSignal.timeout(5_000),
     })

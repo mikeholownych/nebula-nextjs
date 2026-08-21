@@ -48,20 +48,16 @@ export async function GET(request: NextRequest) {
       return redirectTo('/login?error=google_no_token')
     }
 
+    // Redirect to workspace and set persistent HTTP-only cookie
     const redirectResponse = NextResponse.redirect(new URL('/workspace', SITE_URL))
 
     redirectResponse.cookies.set('access_token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60,
+      maxAge: 7 * 24 * 60 * 60, // 7 days
       path: '/',
     })
-
-    const setCookie = upstream.headers.get('set-cookie')
-    if (setCookie) {
-      redirectResponse.headers.set('set-cookie', setCookie)
-    }
 
     return redirectResponse
   } catch (err) {

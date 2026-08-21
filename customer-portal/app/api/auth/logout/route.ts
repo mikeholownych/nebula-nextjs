@@ -40,5 +40,13 @@ async function proxy(request: NextRequest, path: string, method: string): Promis
 }
 
 export async function POST(request: NextRequest) {
-  return proxy(request, '/api/auth/logout', 'POST')
+  const response = await proxy(request, '/api/auth/logout', 'POST')
+  response.cookies.set('access_token', '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 0,
+    path: '/',
+  })
+  return response
 }
