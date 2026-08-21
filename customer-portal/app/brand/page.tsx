@@ -347,7 +347,7 @@ function ConstructionDiagram() {
 
 export default function BrandPage() {
   return (
-    <main className="min-h-screen bg-bg text-fg">
+    <main id="main-content" className="min-h-screen bg-bg text-fg">
 
       {/* ══════════════════════════════════════════════════════════════════════
           HERO

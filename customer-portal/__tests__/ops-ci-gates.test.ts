@@ -34,3 +34,24 @@ describe('GET /api/build-info', () => {
     expect(source).toMatch(/Cache-Control['"]:\s*['"]no-store/)
   })
 })
+
+describe('deploy_customer_portal.sh', () => {
+  const source = readRepoRootFile('scripts/deploy_customer_portal.sh')
+  const uncommented = source
+    .split('\n')
+    .filter((line) => !line.trim().startsWith('#'))
+    .join('\n')
+
+  it('builds into an alternate distDir so a live next-server never reads a half-written .next', () => {
+    expect(uncommented).toMatch(/NEXT_DIST_DIR=/)
+    expect(uncommented).toMatch(/\.next-incoming/)
+    const nextConfig = readCustomerPortalFile('next.config.ts')
+    expect(nextConfig).toMatch(/distDir:\s*process\.env\.NEXT_DIST_DIR/)
+  })
+
+  it('stamps FastAPI NEBULA_BUILD_REVISION to the same SHA that Next just built', () => {
+    expect(uncommented).toMatch(/NEBULA_BUILD_REVISION=/)
+    expect(uncommented).toMatch(/nebula-platform-api\.service/)
+    expect(uncommented).toMatch(/revision\.conf/)
+  })
+})

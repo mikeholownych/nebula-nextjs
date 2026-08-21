@@ -42,6 +42,11 @@ describe('GET /api/healthz', () => {
     expect(fetchSpy).not.toHaveBeenCalled()
     fetchSpy.mockRestore()
   })
+
+  it('sets Cache-Control no-store on the response', async () => {
+    const response = await healthzGet()
+    expect(response.headers.get('Cache-Control')).toMatch(/no-store/)
+  })
 })
 
 describe('GET /api/readyz', () => {
@@ -136,5 +141,25 @@ describe('GET /api/readyz', () => {
     expect(source).toMatch(/finally/)
     expect(source).toMatch(/\.release\(/)
     expect(source).not.toMatch(/\/audit\/run/)
+  })
+
+  it('sets Cache-Control no-store on the ready response', async () => {
+    const response = await readyzGet()
+    expect(response.headers.get('Cache-Control')).toMatch(/no-store/)
+  })
+})
+
+describe('next.config.ts probe cache headers', () => {
+  const source = readFileSync(path.join(process.cwd(), 'next.config.ts'), 'utf8')
+
+  it('declares no-store for /api/healthz and /api/readyz so the HTML s-maxage catch-all cannot CDN-cache probes', () => {
+    expect(source).toMatch(/source:\s*'\/api\/healthz'/)
+    expect(source).toMatch(/source:\s*'\/api\/readyz'/)
+    const healthzBlock = source.slice(source.indexOf("source: '/api/healthz'"))
+    const readyzBlock = source.slice(source.indexOf("source: '/api/readyz'"))
+    expect(healthzBlock.slice(0, 500)).toMatch(/no-store/)
+    expect(readyzBlock.slice(0, 500)).toMatch(/no-store/)
+    expect(healthzBlock.slice(0, 500)).toMatch(/CDN-Cache-Control/)
+    expect(readyzBlock.slice(0, 500)).toMatch(/CDN-Cache-Control/)
   })
 })
