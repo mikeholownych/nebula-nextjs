@@ -630,16 +630,19 @@ class AuditDB:
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':
-                # Best-effort: badge check
+                # DATA-5: side effects stay non-fatal but are no longer silent —
+                # every failure is logged with the audit id so integrity gaps
+                # between audits/badges/cohort aggregates are observable.
+                import logging
+                _log = logging.getLogger("nebula.audit_db")
                 try:
                     await self.check_and_award_badge(conn, audit_id)
-                except Exception:
-                    pass
-                # Best-effort cohort aggregate
+                except Exception as exc:
+                    _log.error("badge award failed audit=%s: %s", audit_id, exc)
                 try:
                     await self.record_cohort_aggregate(conn, score, grade, findings)
-                except Exception:
-                    pass
+                except Exception as exc:
+                    _log.error("cohort aggregate failed audit=%s: %s", audit_id, exc)
                 # Fire-and-forget screenshot
                 try:
                     url_row = await conn.fetchrow("SELECT url FROM audits WHERE id = $1", audit_id)
