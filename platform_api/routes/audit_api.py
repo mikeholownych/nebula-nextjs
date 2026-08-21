@@ -4,6 +4,7 @@ FastAPI routes for audit processing (called by n8n workflows)
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -114,6 +115,18 @@ async def accept_audit(request: AuditRequest):
 
     if not runner_started():
         raise HTTPException(status_code=503, detail="Audit runner unavailable")
+
+    # DATA-6: queue admission control. Rate limiting bounds request rate;
+    # admission bounds QUEUED WORK so accepted audits cannot age into silent
+    # failure behind a saturated pipeline.
+    allowed, reason = await audit_db.check_admission()
+    if not allowed:
+        retry_after = 60 if reason.startswith("queue_full") else 30
+        return JSONResponse(
+            status_code=429,
+            content={"detail": f"Audit queue {reason} - please retry shortly"},
+            headers={"Retry-After": str(retry_after)},
+        )
 
     audit_email = request.email or f"anonymous+{uuid4()}@invalid.nebulacomponents.com"
     attempt_id = (request.analytics_attempt_id or "").strip() or None

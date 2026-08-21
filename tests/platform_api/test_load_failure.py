@@ -241,18 +241,24 @@ async def test_sweep_stale_running_marks_failed_and_skips_completed():
     db = AuditDB()
     db.pool = MagicMock()
     conn = AsyncMock()
-    conn.execute.side_effect = ["UPDATE 1", "UPDATE 0"]
+    # DATA-6 semantics: stale running rows are REQUEUED once (requeue_attempts<1),
+    # terminal on a second offense; abandoned pending still age to failure.
+    conn.execute.side_effect = ["UPDATE 1", "UPDATE 0", "UPDATE 2"]
     db.pool.acquire.return_value.__aenter__.return_value = conn
     db.connect = AsyncMock()
 
     count = await db.sweep_stale_audits()
 
-    assert count == 1
-    running_sql, pending_sql = [call.args[0] for call in conn.execute.call_args_list]
-    assert "status = 'failed'" in running_sql
-    assert "status = 'running'" in running_sql
-    assert "heartbeat" in running_sql
-    assert "status = 'completed'" not in running_sql
+    assert count == 3
+    requeue_sql, terminal_sql, pending_sql = [
+        call.args[0] for call in conn.execute.call_args_list
+    ]
+    assert "status = 'pending'" in requeue_sql
+    assert "requeue_attempts < 1" in requeue_sql
+    assert "requeue_attempts + 1" in requeue_sql
+    assert "status = 'failed'" in terminal_sql
+    assert "requeue_attempts >= 1" in terminal_sql
+    assert "status = 'completed'" not in requeue_sql
     assert "status = 'completed'" not in pending_sql
     assert "status = 'pending'" in pending_sql
     assert "status = 'failed'" in pending_sql
@@ -444,3 +450,20 @@ def test_find_open_treats_sent_kit_as_duplicate():
     assert "'sent'" in source or '"sent"' in source
     assert "pending" in source
     assert "sending" in source
+
+
+@pytest.mark.asyncio
+async def test_accept_returns_429_when_queue_full(monkeypatch):
+    """DATA-6 regression: bounded admission returns 429 + Retry-After."""
+    from unittest.mock import AsyncMock
+    from platform_api.routes import audit_api
+
+    monkeypatch.setattr(
+        audit_api.audit_db, "check_admission",
+        AsyncMock(return_value=(False, "queue_full: 8/8 pending")),
+    )
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        r = await client.post("/audit/accept",
+                              json={"url": "https://example.com", "email": "q@example.com"})
+    assert r.status_code == 429
+    assert r.headers.get("Retry-After") == "60"

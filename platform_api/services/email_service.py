@@ -7,6 +7,8 @@ import asyncio
 from typing import Optional, List
 from pydantic import BaseModel
 
+from platform_api.services.offer import offer_price_display, TIMING_CLAIM_EMAIL
+
 
 class AuditEmailData(BaseModel):
     url: str
@@ -232,8 +234,12 @@ class EmailService:
             """
             guided_implementation_text = _render_guided_implementation_text(data.guided_implementation)
 
+        # CODE-8: offer copy derives from the canonical pricing authority.
+        price = offer_price_display()
+        timing = TIMING_CLAIM_EMAIL
+
         # Story bridge - Mike's story, applied to them
-        story_bridge_html = """
+        story_bridge_html = f"""
         <div style="border-top: 1px solid #eee; margin: 2rem 0; padding-top: 1.5rem;">
             <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
                 I built a tool that reads landing pages and tells founders exactly where their ad spend is disappearing.
@@ -245,7 +251,7 @@ class EmailService:
                 I had the exact problem I was solving. That took me longer to say out loud than it should have.
             </p>
             <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0;">
-                The findings above are exactly what I found on mine. They are fixable. I fix them for $97.
+                The findings above are exactly what I found on mine. They are fixable. I fix them for {price}.
             </p>
         </div>
         """
@@ -257,14 +263,14 @@ class EmailService:
             "I had the exact problem I was solving. That took me longer to say "
             "out loud than it should have.\n\n"
             "The findings above are exactly what I found on mine. They are fixable. "
-            "I fix them for $97."
+            f"I fix them for {offer_price_display()}."
         )
 
         # CTA
-        cta_html = """
+        cta_html = f"""
         <div style="background: #1a1a1a; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center;">
             <p style="color: #fff; font-size: 1rem; margin: 0 0 0.75rem 0; font-weight: 600;">
-                $97 One-Leak Repair Sprint. Done in 48 hours. Reply YES and I'll send the link.
+                {price} One-Leak Repair Sprint. {timing}. Reply YES and I'll send the link.
             </p>
             <p style="color: #999; font-size: 0.8rem; margin: 0;">
                 Or open your audit: <a href="https://nebulacomponents.com/audit" style="color: #a78bfa;">nebulacomponents.com/audit</a>
@@ -331,7 +337,7 @@ What your visitors are experiencing:
 
 {story_bridge_text}
 
-$97 One-Leak Repair Sprint. Done in 48 hours. Reply YES and I'll send the link.
+{price} One-Leak Repair Sprint. {timing}. Reply YES and I'll send the link.
 Or open your audit: https://nebulacomponents.com/audit
 
 --

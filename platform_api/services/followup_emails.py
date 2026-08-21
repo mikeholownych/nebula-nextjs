@@ -10,6 +10,7 @@ import httpx
 
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
+from platform_api.services.offer import offer_price_display
 
 
 class FollowUpSequence:
@@ -130,7 +131,7 @@ Your score: {audit['score']/10}/10 (Grade: {audit['grade']})
 
 Ready to fix it?
 
-→ $97 One-Leak Repair Sprint — we handle one selected finding in 48h, no call, no retainer:
+→ {offer_price_display()} One-Leak Repair Sprint — we handle one selected finding in 48h, no call, no retainer:
 {checkout_url}
 
 Or review your audit: https://nebulacomponents.com/audit
@@ -151,7 +152,7 @@ Quick question: Did you implement any fixes from your landing page audit?
 
 The audit records the observed condition; it does not predict conversion lift.
 
-The $97 repair sprint covers one selected finding with no call or site access required.
+The {offer_price_display()} repair sprint covers one selected finding with no call or site access required.
 
 → {checkout_url}
 Or open your audit: https://nebulacomponents.com/audit
@@ -168,7 +169,7 @@ Still thinking about your landing page conversion rate?
 
 Your audit score was {audit['score']/10}/10. That score is a diagnostic baseline, not a revenue forecast.
 
-The $97 One-Leak Repair Sprint turns one selected finding into a tailored change you or your developer applies. No call, site access, or conversion-lift guarantee:
+The {offer_price_display()} One-Leak Repair Sprint turns one selected finding into a tailored change you or your developer applies. No call, site access, or conversion-lift guarantee:
 → {checkout_url}
 Or view your audit results: https://nebulacomponents.com/audit
 

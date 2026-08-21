@@ -1,3 +1,4 @@
+-- target: platform
 -- Workspace preferences, team members, and account deletion support
 -- Run: psql -h /var/run/postgresql -p 5433 -d nebula_platform -f this_file.sql
 

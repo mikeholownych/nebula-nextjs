@@ -238,15 +238,33 @@ class AuditDB:
             )
 
     async def sweep_stale_audits(self) -> int:
-        """Fail stale running (missed heartbeat) and abandoned pending rows."""
+        """Recover stale queue rows (DATA-6).
+
+        Stale RUNNING rows are requeued once (status -> pending, heartbeat
+        cleared, requeue_attempts incremented); a second offense is terminal.
+        Abandoned PENDING rows age to failure as before. Accepted work no
+        longer dies silently just because a worker hiccupped.
+        """
         await self.connect()
         async with self.pool.acquire() as conn:
-            running = await conn.execute(
+            requeued = await conn.execute(
+                """
+                UPDATE audits SET status = 'pending', heartbeat_at = NULL,
+                    requeue_attempts = requeue_attempts + 1,
+                    engine_input = COALESCE(engine_input, '{}'::jsonb)
+                        || jsonb_build_object('failure_reason', 'requeued_stale_heartbeat')
+                WHERE status = 'running'
+                  AND requeue_attempts < 1
+                  AND COALESCE(heartbeat_at, created_at) < NOW() - INTERVAL '3 minutes'
+                """
+            )
+            failed_running = await conn.execute(
                 """
                 UPDATE audits SET status = 'failed', completed_at = NOW(),
                     engine_input = COALESCE(engine_input, '{}'::jsonb)
-                        || jsonb_build_object('failure_reason', 'stale_heartbeat')
+                        || jsonb_build_object('failure_reason', 'stale_heartbeat_retried')
                 WHERE status = 'running'
+                  AND requeue_attempts >= 1
                   AND COALESCE(heartbeat_at, created_at) < NOW() - INTERVAL '3 minutes'
                 """
             )
@@ -264,7 +282,12 @@ class AuditDB:
                     return int(tag.split()[-1])
                 except (IndexError, ValueError):
                     return 0
-            return _count(running) + _count(pending)
+            def _n(tag: str) -> int:
+                try:
+                    return int(tag.split()[-1])
+                except (IndexError, ValueError):
+                    return 0
+            return _n(requeued) + _n(failed_running) + _n(pending)
 
     async def get_audit(self, audit_id: UUID) -> Optional[dict]:
         """Fetch a single audit by ID."""
