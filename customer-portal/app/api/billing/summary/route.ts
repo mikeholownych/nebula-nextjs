@@ -155,7 +155,7 @@ export async function GET(request: NextRequest) {
   if (stripeSecretKey) {
     try {
       const stripe = new Stripe(stripeSecretKey, {
-        apiVersion: '2026-06-24.dahlia',
+        apiVersion: '2026-07-29.dahlia',
       })
       const customers = await stripe.customers.list({ email, limit: 1 })
       const customer = customers.data[0]

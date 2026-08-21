@@ -32,8 +32,8 @@ const config: Config = {
         // ── Foreground ───────────────────────────────────────────────
         fg: {
           DEFAULT: '#e8ebe7',    // warm off-white, not pure #fff - reduces eye strain
-          muted: '#7a8078',      // ~5.2:1 on panel - WCAG AA
-          dim: '#8b9489',        // ~5.6:1 on bg - WCAG AA compliant
+          muted: '#a0aaa2',      // >=7.17:1 on surface - WCAG AAA (D11)
+          dim: '#9fa99f',        // >=7.08:1 on surface - WCAG AAA (D11)
         },
         // ── Accent - Nebula Chartreuse ────────────────────────────────
         // Single chromatic accent. Use only on: CTAs, active states,
@@ -46,11 +46,11 @@ const config: Config = {
         },
         // ── Semantic ─────────────────────────────────────────────────
         danger: {
-          DEFAULT: '#f06b6b',   // softened red - still passes AA on panel
+          DEFAULT: '#f58a8a',   // softened red - >=7.27:1 on surface, WCAG AAA (D11)
           dim: 'rgba(240, 107, 107, 0.12)',
         },
         // info: blue - used for neutral/informational UI states
-        info: '#3b82f6',
+        info: '#7babff',      // >=7.45:1 on surface - WCAG AAA (D11)
         // signal.fail: RESERVED. Amber only for "conversion signal failed".
         // Do not use for warning states, grades, or any other UI meaning.
         signal: {

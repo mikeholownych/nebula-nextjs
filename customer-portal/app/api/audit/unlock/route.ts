@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { appendFile } from 'fs/promises'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
+import { setAuditUnlockCookie } from '@/app/lib/audit-access'
 import { analyticsPersonId, clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
 
 /**
@@ -153,13 +154,7 @@ export async function POST(request: NextRequest) {
       analytics_person_id: personId,
     })
 
-    response.cookies.set(`audit_unlock_${audit_id}`, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-    })
+    setAuditUnlockCookie(request, response, audit_id, token)
 
     return response
   } catch (error) {

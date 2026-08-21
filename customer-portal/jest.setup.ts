@@ -11,12 +11,15 @@ import {
 
 // React 19 removed react-dom/test-utils.act - shim it so @testing-library/react works.
 // https://github.com/testing-library/react-testing-library/issues/1375
+// NOTE: this must UNCONDITIONALLY install React's real act. The previous
+// `if (!reactDomTestUtils['act'])` guard never fired because the moduleNameMapper
+// shim below always pre-defines act, so RTL kept a no-flush shim: state updates
+// made outside fireEvent/waitFor were left unflushed (multi-update batches were
+// partially applied - e.g. progress committed but status dropped on the floor).
 import { act } from 'react'
 ;(globalThis as Record<string, unknown>).IS_REACT_ACT_ENVIRONMENT = true
 const reactDomTestUtils = require('react-dom/test-utils') as Record<string, unknown>
-if (!reactDomTestUtils['act']) {
-  reactDomTestUtils['act'] = act
-}
+reactDomTestUtils['act'] = act
 
 if (!globalThis.TextEncoder) globalThis.TextEncoder = TextEncoder
 if (!globalThis.TextDecoder) globalThis.TextDecoder = TextDecoder as typeof globalThis.TextDecoder

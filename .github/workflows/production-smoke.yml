@@ -25,18 +25,55 @@ jobs:
         working-directory: customer-portal
         run: npm ci --omit=dev --ignore-scripts
 
+      # D3 fix: this suite previously probed nebulacomponents.shop (the
+      # retired domain). curl -sSf treats a 301 as success, so every check
+      # passed vacuously against the redirect while .com rotted.
       - name: Check site availability
         run: |
-          curl -sSf https://nebulacomponents.shop -o /dev/null || exit 1
+          curl -sSf https://nebulacomponents.com -o /dev/null || exit 1
 
       - name: Verify OG image
         run: |
-          curl -sSf https://nebulacomponents.shop/opengraph-image -o /dev/null || exit 1
+          curl -sSf https://nebulacomponents.com/opengraph-image -o /dev/null || exit 1
+
+      - name: Verify key routes return 200
+        run: |
+          ROUTES=(
+            "/"
+            "/audit"
+            "/pricing"
+            "/checkout"
+            "/primer"
+            "/7-systems"
+          )
+          for route in "${ROUTES[@]}"; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://nebulacomponents.com${route}")
+            if [ "$CODE" != "200" ]; then
+              echo "ERROR: ${route} returned ${CODE}, expected 200"
+              exit 1
+            fi
+            echo "PASS: ${route} -> 200"
+          done
+
+      # D13 regression probe: the Node origin must accept request headers at
+      # least this large (cookie-bloated browsers were hard-failing 431 at the
+      # default 16KB limit before any app code could prune their cookies).
+      - name: Verify origin tolerates large cookie headers (no 431)
+        run: |
+          BIG=$(head -c 20480 /dev/zero | tr '\0' 'a')
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 \
+            -H "Cookie: nebula_smoke_probe=${BIG}" \
+            "https://nebulacomponents.com/api/healthz")
+          if [ "$CODE" == "431" ] || [ "$CODE" == "000" ]; then
+            echo "ERROR: origin returned ${CODE} for a 20KB cookie header - max-http-header-size regressed or origin unreachable"
+            exit 1
+          fi
+          echo "PASS: 20KB cookie header accepted (HTTP ${CODE})"
 
       - name: Check no localhost in metadata
         run: |
-          curl -s https://nebulacomponents.shop | grep -o 'og:image"[^"]*' | grep -v localhost || echo "OG image OK"
-          curl -s https://nebulacomponents.shop | grep -o 'twitter:image"[^"]*' | grep -v localhost || echo "Twitter image OK"
+          curl -s https://nebulacomponents.com | grep -o 'og:image"[^"]*' | grep -v localhost || echo "OG image OK"
+          curl -s https://nebulacomponents.com | grep -o 'twitter:image"[^"]*' | grep -v localhost || echo "Twitter image OK"
 
       - name: Verify blocked routes return 404
         run: |
@@ -47,7 +84,7 @@ jobs:
             "/ad-burn-leaderboard"
           )
           for route in "${ROUTES[@]}"; do
-            CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://nebulacomponents.shop${route}")
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://nebulacomponents.com${route}")
             if [ "$CODE" != "404" ]; then
               echo "ERROR: ${route} returned ${CODE}, expected 404"
               exit 1
@@ -57,16 +94,41 @@ jobs:
 
       - name: Verify API maintenance mode
         run: |
-          CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://nebulacomponents.shop/api/audit/start)
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://nebulacomponents.com/api/audit/start)
           if [ "$CODE" != "503" ] && [ "$CODE" != "404" ]; then
             echo "WARNING: /api/audit/start returned ${CODE}, expected 503 or 404"
           fi
 
+      # D1/D5: catches stale HTML referencing chunks that no longer exist at
+      # the edge (dead checkout button, ChunkLoadError 500s), and a running
+      # process serving an older revision than build-info advertises.
+      - name: Verify deployed asset integrity
+        working-directory: customer-portal
+        run: node scripts/check-deployed-assets.mjs --base-url https://nebulacomponents.com
+
       - name: Verify sitemap routes are healthy
         if: github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         working-directory: customer-portal
-        run: npm run check:sitemap-routes -- --base-url https://nebulacomponents.shop
+        run: npm run check:sitemap-routes -- --base-url https://nebulacomponents.com
 
       - name: Create health badge
         if: success()
         run: echo "::notice::Production smoke tests passed"
+
+  alert:
+    name: Alert on smoke failure
+    needs: [smoke]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send alert
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+        run: |
+          if [ -z "$ALERT_WEBHOOK_URL" ]; then
+            echo "ALERT_WEBHOOK_URL not configured - skipping notification (configure in repo secrets to enable)"
+            exit 0
+          fi
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            -d '{"text":"🚨 Nebula production smoke FAILED - https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"}' \
+            "$ALERT_WEBHOOK_URL" || echo "WARN: webhook delivery failed"

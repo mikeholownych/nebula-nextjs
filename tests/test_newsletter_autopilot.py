@@ -52,12 +52,14 @@ def test_stale_content_queue_does_not_publish(tmp_path, monkeypatch):
 
 
 def test_research_inbox_is_source_fallback(tmp_path, monkeypatch):
+    from datetime import datetime, timezone, timedelta
     queue = tmp_path / "content_queue"
     queue.mkdir()
     inbox = tmp_path / "ops" / "research" / "inbox.jsonl"
     inbox.parent.mkdir(parents=True)
+    fresh_time = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
     inbox.write_text(json.dumps({
-        "created_at": "2026-08-12T08:00:00+00:00",
+        "created_at": fresh_time,
         "source_url": "https://example.com/source",
         "source_type": "prospect_evidence",
         "observed_problem": "Paid traffic reaches the page but does not convert.",

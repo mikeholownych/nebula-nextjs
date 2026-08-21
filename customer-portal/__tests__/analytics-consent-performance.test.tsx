@@ -113,6 +113,52 @@ describe('consent-gated analytics loading', () => {
     expect(document.documentElement.getAttribute('data-analytics-default')).toBe('declined')
   })
 
+  it('tears down GA when a default-accepted visitor declines (D6 honor-decline)', () => {
+    render(<CookieConsent country="CA" />)
+    window.eval(getConsentRuntime('CA'))
+
+    // Geo default loaded GA; the loader node must exist before declining.
+    expect(document.head.querySelector('#gtag-src')).not.toBeNull()
+
+    const consentUpdate = jest.fn()
+    ;(window as Window & { gtag?: unknown }).gtag = consentUpdate
+    const optOut = jest.fn()
+    ;(window as Window & { posthog?: unknown }).posthog = { opt_out_capturing: optOut }
+
+    fireEvent.click(screen.getByRole('button', { name: /essential only/i }))
+
+    // Google's official kill switch must be armed...
+    expect(
+      (window as unknown as Record<string, unknown>)['ga-disable-G-KJ9S3450LH'],
+    ).toBe(true)
+    // ...the loader script node removed,
+    expect(document.head.querySelector('#gtag-src')).toBeNull()
+    // ...consent mode updated to denied,
+    expect(consentUpdate).toHaveBeenCalledWith(
+      'consent',
+      'update',
+      expect.objectContaining({ analytics_storage: 'denied' }),
+    )
+    // ...and PostHog opted out.
+    expect(optOut).toHaveBeenCalled()
+  })
+
+  it('keeps GA torn down on reload after a stored decline', () => {
+    localStorage.setItem(
+      'nebula-cookie-consent',
+      JSON.stringify({ level: 'necessary', version: 1, timestamp: new Date().toISOString() }),
+    )
+    render(<CookieConsent country="CA" />)
+    window.eval(getConsentRuntime('CA'))
+
+    expect(
+      (window as unknown as Record<string, unknown>)['ga-disable-G-KJ9S3450LH'],
+    ).toBe(true)
+    expect(
+      document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+    ).toBeNull()
+  })
+
   it('loads PostHog from the consent runtime instead of a global client entrypoint', () => {
     expect(
       existsSync(path.join(process.cwd(), 'instrumentation-client.ts')),

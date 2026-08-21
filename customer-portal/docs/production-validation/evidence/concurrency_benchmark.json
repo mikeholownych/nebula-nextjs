@@ -1,0 +1,172 @@
+{
+  "c_1": {
+    "concurrency": 1,
+    "total_time_ms": 168.94,
+    "success_count": 1,
+    "fail_count": 0,
+    "min_latency_ms": 165.21,
+    "max_latency_ms": 165.21,
+    "avg_latency_ms": 165.21,
+    "requests": [
+      {
+        "idx": 0,
+        "status": 200,
+        "elapsed_ms": 165.21,
+        "audit_id": "83630c0c-bcd8-4b8b-8e28-a1a38b148da1",
+        "state": "pending"
+      }
+    ]
+  },
+  "c_2": {
+    "concurrency": 2,
+    "total_time_ms": 105.42,
+    "success_count": 2,
+    "fail_count": 0,
+    "min_latency_ms": 96.73,
+    "max_latency_ms": 103.55,
+    "avg_latency_ms": 100.14,
+    "requests": [
+      {
+        "idx": 0,
+        "status": 200,
+        "elapsed_ms": 96.73,
+        "audit_id": "6ecba431-7448-4d88-a827-12d3143e18f6",
+        "state": "pending"
+      },
+      {
+        "idx": 1,
+        "status": 200,
+        "elapsed_ms": 103.55,
+        "audit_id": "7bc6771a-2948-499e-a763-41c09d7c53cb",
+        "state": "pending"
+      }
+    ]
+  },
+  "c_5": {
+    "concurrency": 5,
+    "total_time_ms": 177.0,
+    "success_count": 5,
+    "fail_count": 0,
+    "min_latency_ms": 125.58,
+    "max_latency_ms": 174.93,
+    "avg_latency_ms": 150.47,
+    "requests": [
+      {
+        "idx": 2,
+        "status": 200,
+        "elapsed_ms": 125.58,
+        "audit_id": "9063dd82-a7a8-4224-8557-7d18082b8eeb",
+        "state": "pending"
+      },
+      {
+        "idx": 3,
+        "status": 200,
+        "elapsed_ms": 132.77,
+        "audit_id": "86b179f9-a169-4d49-9817-46be95c10a56",
+        "state": "pending"
+      },
+      {
+        "idx": 4,
+        "status": 200,
+        "elapsed_ms": 144.36,
+        "audit_id": "d8705b6c-ebeb-4236-a65a-e473ba7e35a8",
+        "state": "pending"
+      },
+      {
+        "idx": 0,
+        "status": 200,
+        "elapsed_ms": 174.72,
+        "audit_id": "274f6c32-25d4-45fe-b659-ce2a68e398d6",
+        "state": "pending"
+      },
+      {
+        "idx": 1,
+        "status": 200,
+        "elapsed_ms": 174.93,
+        "audit_id": "b8c1934d-83a9-4f59-8bda-6540cdf07fff",
+        "state": "pending"
+      }
+    ]
+  },
+  "c_10": {
+    "concurrency": 10,
+    "total_time_ms": 313.88,
+    "success_count": 10,
+    "fail_count": 0,
+    "min_latency_ms": 133.93,
+    "max_latency_ms": 304.17,
+    "avg_latency_ms": 254.28,
+    "requests": [
+      {
+        "idx": 7,
+        "status": 200,
+        "elapsed_ms": 133.93,
+        "audit_id": "52580da8-15fa-48bc-a226-54918150407c",
+        "state": "pending"
+      },
+      {
+        "idx": 1,
+        "status": 200,
+        "elapsed_ms": 141.45,
+        "audit_id": "e711a1b5-dcd4-4d9d-a98c-dc751d52c0d8",
+        "state": "pending"
+      },
+      {
+        "idx": 5,
+        "status": 200,
+        "elapsed_ms": 259.11,
+        "audit_id": "cbd7c6b5-9efd-4128-b146-e760265472ea",
+        "state": "pending"
+      },
+      {
+        "idx": 2,
+        "status": 200,
+        "elapsed_ms": 263.29,
+        "audit_id": "5cfe1aba-5f40-48ed-89f8-339077500ef8",
+        "state": "pending"
+      },
+      {
+        "idx": 0,
+        "status": 200,
+        "elapsed_ms": 268.54,
+        "audit_id": "29191a92-99b6-4a00-ad26-6a98cd385bd3",
+        "state": "pending"
+      },
+      {
+        "idx": 3,
+        "status": 200,
+        "elapsed_ms": 265.61,
+        "audit_id": "26c3615e-e127-4f70-8c41-7e88a3d84e8a",
+        "state": "pending"
+      },
+      {
+        "idx": 4,
+        "status": 200,
+        "elapsed_ms": 304.17,
+        "audit_id": "3ef59aeb-5c4c-48ae-a31b-afead47d4fca",
+        "state": "pending"
+      },
+      {
+        "idx": 8,
+        "status": 200,
+        "elapsed_ms": 300.19,
+        "audit_id": "57ecc731-5522-4d27-b287-f032fc0d840c",
+        "state": "pending"
+      },
+      {
+        "idx": 6,
+        "status": 200,
+        "elapsed_ms": 303.36,
+        "audit_id": "b163db13-2685-447d-9f5b-2e1254b43e5b",
+        "state": "pending"
+      },
+      {
+        "idx": 9,
+        "status": 200,
+        "elapsed_ms": 303.15,
+        "audit_id": "cea941a6-d93c-4be7-ab95-72376738277b",
+        "state": "pending"
+      }
+    ]
+  }
+}

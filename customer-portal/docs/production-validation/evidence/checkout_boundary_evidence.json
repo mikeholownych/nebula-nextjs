@@ -1,0 +1,101 @@
+[
+  {
+    "test": "empty_body",
+    "status": 400,
+    "elapsed_ms": 113.64,
+    "headers": {
+      "Date": "Fri, 21 Aug 2026 06:48:31 GMT",
+      "Content-Type": "application/json",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a2e7b14a6dfd38e2-YYZ",
+      "CF-Cache-Status": "DYNAMIC",
+      "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=60, must-revalidate",
+      "Link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-nebula-country": "CA",
+      "x-nebula-revision": "f1046bde91b924bdcccfcf3e1a2436bb631d3f4a",
+      "x-request-id": "checkout-qa-b07e9e",
+      "Server-Timing": "cfCacheStatus;desc=\"DYNAMIC\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=3NMLn75i6kI3JroaeVGixUbXWor%2BS5N%2FtCyQg7qcc0%2F0E2Lmn7uvaPvQPHRIs0YBHGOrUdNNiwEyJj3TqSQGI%2BJfNHpEyt5KnaBdOjf9w%2BRjclKspxx6gduQ96eurb7BVyGXgwhNCw%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "response": {
+      "code": "UNSUPPORTED_CHECKOUT_OFFER"
+    }
+  },
+  {
+    "test": "invalid_plan",
+    "status": 400,
+    "elapsed_ms": 47.25,
+    "headers": {
+      "Date": "Fri, 21 Aug 2026 06:48:31 GMT",
+      "Content-Type": "application/json",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a2e7b14abdd7ec72-YYZ",
+      "CF-Cache-Status": "DYNAMIC",
+      "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=60, must-revalidate",
+      "Link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-nebula-country": "CA",
+      "x-nebula-revision": "f1046bde91b924bdcccfcf3e1a2436bb631d3f4a",
+      "x-request-id": "checkout-qa-91843f",
+      "Server-Timing": "cfCacheStatus;desc=\"DYNAMIC\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=vhwj3ORyd6tuLT9KR3rya2jqUIf1XFperqlfGaWWrNZCrRA2VZz%2FmRYyLLzdQxmXkcVbuyeIqyBgCLCSbXE0YZsNA0t8tGQk%2BUs8qgSlExKk%2BJ4UyYHkhe1AQ1VgCdlM3fHkNmkTzw%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "response": {
+      "code": "UNSUPPORTED_CHECKOUT_OFFER"
+    }
+  },
+  {
+    "test": "valid_fix_pack_structure",
+    "status": 400,
+    "elapsed_ms": 50.62,
+    "headers": {
+      "Date": "Fri, 21 Aug 2026 06:48:31 GMT",
+      "Content-Type": "application/json",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a2e7b14b0d9ba641-YYZ",
+      "CF-Cache-Status": "DYNAMIC",
+      "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=60, must-revalidate",
+      "Link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-nebula-country": "CA",
+      "x-nebula-revision": "f1046bde91b924bdcccfcf3e1a2436bb631d3f4a",
+      "x-request-id": "checkout-qa-383a39",
+      "Server-Timing": "cfCacheStatus;desc=\"DYNAMIC\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=JkkQs1VUT0PCfvpzvVEsbGFklwablZlr0ahbPw8dbfUMGI476NE8L3fMOsifKZqxKmbKUR2anDKz2LpxDegetHLPOf1XaGQFBrtx6q%2FLS5%2FkhgR4iKJniBPtoLwW7aYh19Yxj36hiA%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "response": {
+      "code": "UNSUPPORTED_CHECKOUT_OFFER"
+    }
+  }
+]

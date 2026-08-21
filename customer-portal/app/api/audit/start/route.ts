@@ -8,7 +8,7 @@ import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 import { logApiError } from '@/app/lib/ops-log'
 import { readCappedJson } from '@/app/lib/request-limits'
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
-import { unlockCookieName } from '@/app/lib/audit-access'
+import { setAuditUnlockCookie } from '@/app/lib/audit-access'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
@@ -330,12 +330,7 @@ export async function POST(request: NextRequest) {
     if (auditId) {
       try {
         const token = signAuditUnlock(auditId, anonymousEmail)
-        response.cookies.set(unlockCookieName(auditId), token, {
-          path: '/',
-          httpOnly: true,
-          sameSite: 'lax',
-          maxAge: 60 * 60 * 24 * 30, // 30 days
-        })
+        setAuditUnlockCookie(request, response, auditId, token)
       } catch {
         // Non-fatal if AUDIT_UNLOCK_SECRET is not set
       }

@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import deliver_audit
 import followup_sequence
+import lead_manager
 import webhook_server
 
 
@@ -55,6 +56,8 @@ class AuditHandoffFlowTests(unittest.TestCase):
                  patch.object(deliver_audit, "fetch_page", return_value="<html></html>"), \
                  patch.object(deliver_audit, "scrape_page", return_value=page), \
                  patch.object(deliver_audit, "score_audit", return_value=audit), \
+                 patch.object(lead_manager, "LEADS_DB", str(base / "leads.json")), \
+                 patch.object(lead_manager, "LEADS_JOURNAL", str(base / "leads-journal.jsonl")), \
                  patch.object(deliver_audit, "send_via_agentmail", return_value={"ok": True, "status": "sent", "message_id": "sent_1"}):
                 deliver_audit.main()
 

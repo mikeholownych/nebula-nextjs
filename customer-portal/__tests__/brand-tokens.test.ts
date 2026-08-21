@@ -16,6 +16,7 @@ describe('brand token regression guard', () => {
   })
 
   it('keeps the approved information semantic', () => {
-    expect(tailwind).toContain("info: '#3b82f6'")
+    // D11: lightened from #3b82f6 to reach WCAG AAA on every surface.
+    expect(tailwind).toContain("info: '#7babff'")
   })
 })

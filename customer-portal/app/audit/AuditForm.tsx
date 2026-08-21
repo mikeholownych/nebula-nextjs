@@ -267,31 +267,31 @@ function AuditFormSkeleton() {
       <div className="space-y-4">
         {/* URL Field (~84px) */}
         <div>
-          <div className="mb-2 h-5 w-64 rounded bg-border/60" />
+          <div className="mb-2 h-5 w-64 rounded bg-border/60 max-w-full" />
           <div className="h-[50px] w-full rounded-lg bg-bg border border-fg-muted/20" />
         </div>
         {/* Reason Field (~240px) */}
         <div>
-          <div className="mb-2 h-5 w-48 rounded bg-border/60" />
+          <div className="mb-2 h-5 w-48 rounded bg-border/60 max-w-full" />
           <div className="mb-3 flex flex-wrap gap-2">
-            <div className="h-[30px] w-64 rounded-full bg-border/30" />
-            <div className="h-[30px] w-48 rounded-full bg-border/30" />
-            <div className="h-[30px] w-56 rounded-full bg-border/30" />
+            <div className="h-[30px] w-64 rounded-full bg-border/30 max-w-full" />
+            <div className="h-[30px] w-48 rounded-full bg-border/30 max-w-full" />
+            <div className="h-[30px] w-56 rounded-full bg-border/30 max-w-full" />
           </div>
           <div className="h-[74px] w-full rounded-lg bg-bg border border-fg-muted/20" />
-          <div className="mt-2 h-4 w-72 rounded bg-border/30" />
+          <div className="mt-2 h-4 w-72 rounded bg-border/30 max-w-full" />
         </div>
         {/* Spend Field (~106px) */}
         <div>
-          <div className="mb-2 h-5 w-44 rounded bg-border/60" />
+          <div className="mb-2 h-5 w-44 rounded bg-border/60 max-w-full" />
           <div className="h-[46px] w-full rounded-lg bg-bg border border-fg-muted/20" />
-          <div className="mt-2 h-4 w-80 rounded bg-border/30" />
+          <div className="mt-2 h-4 w-80 rounded bg-border/30 max-w-full" />
         </div>
         {/* Submit Button (~52px) */}
         <div className="h-[52px] w-full rounded bg-accent/20" />
         {/* Score Link (~22px) */}
         <div className="pt-1 flex justify-center">
-          <div className="h-4 w-52 rounded bg-border/30" />
+          <div className="h-4 w-52 rounded bg-border/30 max-w-full" />
         </div>
       </div>
     </Card>

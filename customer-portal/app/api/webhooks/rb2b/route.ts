@@ -12,7 +12,10 @@ const hasValidTemporarySignature = (request: NextRequest) => {
  */
 export async function POST(request: NextRequest) {
   if (!hasValidTemporarySignature(request)) {
-    return NextResponse.json({ code: 'INVALID_RB2B_SIGNATURE' }, { status: 401 })
+    return NextResponse.json(
+      { error: 'Invalid RB2B signature', code: 'INVALID_RB2B_SIGNATURE' },
+      { status: 401 },
+    )
   }
 
   return NextResponse.json({ code: 'RB2B_REBUILD_IN_PROGRESS' }, { status: 503 })

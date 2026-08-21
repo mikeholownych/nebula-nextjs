@@ -24,7 +24,11 @@ class AuditAttributionLoggingTests(unittest.TestCase):
                 "offer_variant": "audit_first_checkout",
             }
 
-            with patch.object(deliver_audit, "LEDGER_FILE", str(ledger)), patch.object(deliver_audit, "AUDIT_LEADS_FILE", str(audit_leads)):
+            import lead_manager
+            with patch.object(deliver_audit, "LEDGER_FILE", str(ledger)), \
+                 patch.object(deliver_audit, "AUDIT_LEADS_FILE", str(audit_leads)), \
+                 patch.object(lead_manager, "LEADS_DB", str(Path(td) / "leads.json")), \
+                 patch.object(lead_manager, "LEADS_JOURNAL", str(Path(td) / "leads-journal.jsonl")):
                 deliver_audit.log_delivery("https://example.com", "lead@example.com", "thr_123", audit, send_result, attribution=attribution)
 
             entry = json.loads(ledger.read_text().splitlines()[0])

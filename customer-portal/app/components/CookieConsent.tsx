@@ -56,6 +56,7 @@ export function getConsentRuntime(country: string | null = null) {
           api_host: '/ingest',
           ui_host: 'https://us.posthog.com',
           defaults: '2026-08-05',
+          persistence: 'localStorage',
           autocapture: true,
           capture_exceptions: false,
           capture_pageleave: true,
@@ -73,6 +74,22 @@ export function getConsentRuntime(country: string | null = null) {
     function loadAnalytics() {
       loadGoogleAnalytics();
       loadPostHog();
+    }
+
+    // Honor-decline teardown (D6): a visitor who declines analytics must not
+    // keep being tracked by loaders that already fired under the geo default.
+    // - ga-disable-{id} is Google's official kill switch: gtag drops every
+    //   queued and subsequent hit.
+    // - Removing the gtag script node stops new fetches of the loader.
+    // - PostHog opt-out happens below where the instance exists.
+    function disableAnalytics() {
+      try {
+        window['ga-disable-' + measurementId] = true;
+      } catch (error) {}
+      var gtagScript = document.getElementById('gtag-src');
+      if (gtagScript && gtagScript.parentNode) {
+        gtagScript.parentNode.removeChild(gtagScript);
+      }
     }
 
     function save(level) {
@@ -106,17 +123,20 @@ export function getConsentRuntime(country: string | null = null) {
         }
         if (window.posthog && window.posthog.opt_in_capturing) window.posthog.opt_in_capturing();
       }
-      if (window.gtag && level === 'necessary') {
-        window.gtag('consent', 'update', {
-          analytics_storage: 'denied',
-          ad_storage: 'denied',
-          functionality_storage: 'granted',
-          personalization_storage: 'denied',
-          security_storage: 'granted'
-        });
-      }
-      if (level === 'necessary' && window.posthog && window.posthog.opt_out_capturing) {
-        window.posthog.opt_out_capturing();
+      if (level === 'necessary') {
+        if (window.gtag) {
+          window.gtag('consent', 'update', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            functionality_storage: 'granted',
+            personalization_storage: 'denied',
+            security_storage: 'granted'
+          });
+        }
+        disableAnalytics();
+        if (window.posthog && window.posthog.opt_out_capturing) {
+          window.posthog.opt_out_capturing();
+        }
       }
       window.dispatchEvent(new CustomEvent('cookie-consent-update', { detail: state }));
     }
@@ -158,6 +178,7 @@ export function getConsentRuntime(country: string | null = null) {
         document.documentElement.setAttribute('data-cookie-consent', 'given');
         banner.hidden = true;
         if (next.level === 'all') loadAnalytics();
+        else disableAnalytics();
       } catch (error) {}
     });
 
@@ -167,6 +188,7 @@ export function getConsentRuntime(country: string | null = null) {
         document.documentElement.setAttribute('data-analytics-default', stored.level === 'all' ? 'accepted' : 'declined');
         banner.hidden = true;
         if (stored.level === 'all') loadAnalytics();
+        else disableAnalytics();
       } else {
         document.documentElement.setAttribute('data-analytics-default', euVisitor ? 'required' : 'accepted');
         if (!euVisitor) loadAnalytics();

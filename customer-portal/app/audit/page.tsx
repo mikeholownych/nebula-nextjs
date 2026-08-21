@@ -130,7 +130,7 @@ export default async function AuditPage() {
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
             {/* Form first on mobile (order-1 on mobile, order-2 on md+) */}
-            <div id="run-audit" className="order-1 rounded-md border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
+            <div id="run-audit" className="order-1 min-w-0 overflow-hidden rounded-md border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
               <p className="mb-4 text-sm font-semibold text-fg">
                 Paste your landing page URL
               </p>
@@ -155,7 +155,7 @@ export default async function AuditPage() {
               </div>
 
               {/* Static benchmark stat, always visible, not API-gated */}
-              <p className="mt-4 text-xs text-fg-dim border-l-2 border-accent/40 pl-3">
+              <p className="mt-4 break-words text-xs text-fg-dim border-l-2 border-accent/40 pl-3">
                 From our live dataset: avg 2.8 conversion leaks per page.{' '}
                 <Link href="/benchmarks" className="text-accent/80 hover:text-accent transition-colors">
                   See the Leak Index →
@@ -164,7 +164,7 @@ export default async function AuditPage() {
             </div>
 
             {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
-            <div className="order-2 flex flex-col justify-center md:order-1">
+            <div className="order-2 flex min-w-0 flex-col justify-center md:order-1">
               <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
                 Check your page before you change the ad.
               </h1>

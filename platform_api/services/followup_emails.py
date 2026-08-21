@@ -113,6 +113,9 @@ class FollowUpSequence:
     
     def _build_followup_body(self, audit: dict, quick_win: Optional[dict], template: str) -> str:
         """Build follow-up email body"""
+        audit_id = audit.get('id', '')
+        checkout_url = f"https://nebulacomponents.com/checkout?audit_id={audit_id}" if audit_id else "https://nebulacomponents.com/audit"
+
         if template == "audit_followup_24h":
             return f"""
 Hi {audit.get('name', 'there')},
@@ -128,7 +131,9 @@ Your score: {audit['score']/10}/10 (Grade: {audit['grade']})
 Ready to fix it?
 
 → $97 One-Leak Repair Sprint — we handle one selected finding in 48h, no call, no retainer:
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+{checkout_url}
+
+Or review your audit: https://nebulacomponents.com/audit
 
 Best,
 Mike from Nebula Components
@@ -148,7 +153,8 @@ The audit records the observed condition; it does not predict conversion lift.
 
 The $97 repair sprint covers one selected finding with no call or site access required.
 
-→ https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+→ {checkout_url}
+Or open your audit: https://nebulacomponents.com/audit
 
 Best,
 Mike
@@ -163,7 +169,8 @@ Still thinking about your landing page conversion rate?
 Your audit score was {audit['score']/10}/10. That score is a diagnostic baseline, not a revenue forecast.
 
 The $97 One-Leak Repair Sprint turns one selected finding into a tailored change you or your developer applies. No call, site access, or conversion-lift guarantee:
-→ https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+→ {checkout_url}
+Or view your audit results: https://nebulacomponents.com/audit
 
 Best,
 Mike from Nebula Components

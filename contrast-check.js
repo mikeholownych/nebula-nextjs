@@ -86,23 +86,20 @@ function checkContrast(fgColor, bgColor, isLargeText = false) {
 
 // Nebula color palette
 const colors = {
-  // Backgrounds
-  bgCanvas: '#08090a',
-  bgPanel: '#0f1011',
-  bgSurface: '#191a1b',
-  bgElevated: '#28282c',
+  // Current production tokens - tailwind.config.ts (customer-portal).
+  bgCanvas: '#080909',
+  bgPanel: '#131615',
+  bgSurface: '#191c1a',
+  bgElevated: '#0d0f0e',
 
-  // Text
-  textPrimary: '#f7f8f8',
-  textSecondary: '#c8ced8',
-  textMuted: '#9ca3af',
-  textDisabled: '#787f87',
+  textPrimary: '#e8ebe7',
+  textSecondary: '#a0aaa2',   // fg.muted
+  textMuted: '#9fa99f',       // fg.dim
+  textDisabled: '#9fa99f',
 
-  // Accent (WCAG AA for white text)
-  accent: '#007a52',
-  accentHover: '#006644',
+  accent: '#c7ff2f',
+  accentHover: '#c7ff2f',
 
-  // White
   white: '#ffffff'
 };
 
@@ -117,8 +114,8 @@ const tests = [
   { name: 'Secondary text on Canvas', fg: colors.textSecondary, bg: colors.bgCanvas, isLarge: false },
   { name: 'Muted text on Canvas', fg: colors.textMuted, bg: colors.bgCanvas, isLarge: false },
   { name: 'Muted text on Panel', fg: colors.textMuted, bg: colors.bgPanel, isLarge: false },
-  { name: 'White text on Accent', fg: colors.white, bg: colors.accent, isLarge: false },
-  { name: 'White text on Accent Hover', fg: colors.white, bg: colors.accentHover, isLarge: false },
+  { name: 'Canvas text on Accent (button style)', fg: colors.bgCanvas, bg: colors.accent, isLarge: false },
+  { name: 'Canvas text on Accent Hover', fg: colors.bgCanvas, bg: colors.accentHover, isLarge: false },
   { name: 'Accent on Canvas', fg: colors.accent, bg: colors.bgCanvas, isLarge: false },
   { name: 'Disabled text on Canvas', fg: colors.textDisabled, bg: colors.bgCanvas, isLarge: false },
   { name: 'Primary text on Surface', fg: colors.textPrimary, bg: colors.bgSurface, isLarge: false },
@@ -149,8 +146,7 @@ console.log(`SUMMARY: ${passCount} PASS, ${failCount} FAIL`);
 console.log('════════════════════════════════════════════════════════════');
 
 if (failCount > 0) {
-  console.log('\n⚠️  FIXES NEEDED:');
-  console.log('- Increase text-muted contrast (currently #8a8f98)');
-  console.log('- Increase text-secondary contrast (currently #d0d6e0)');
-  console.log('- Check all transparent backgrounds');
+    console.log('\n⚠️  FIXES NEEDED:');
+  console.log('- All token pairs must hold >= 7:1 (AAA) on every surface.');
+  console.log('- Gate: customer-portal/__tests__/wcag-contrast-tokens.test.ts');
 }

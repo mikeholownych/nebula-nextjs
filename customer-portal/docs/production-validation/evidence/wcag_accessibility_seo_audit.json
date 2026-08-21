@@ -1,0 +1,182 @@
+[
+  {
+    "url": "https://nebulacomponents.com/",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Landing Page Audit for Paid Traffic Not Converting | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Find page-side leaks.Before blaming the traffic."
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/audit",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Free Landing Page Audit: Find Conversion Friction | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Check your page before you change the ad."
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/audit",
+    "has_og_title": true,
+    "has_og_image": false
+  },
+  {
+    "url": "https://nebulacomponents.com/pricing",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Pricing - Memberships &amp; One-Leak Repair Sprint | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Pricing"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/pricing",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/repair-sprint",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Repair Sprint - One Page, One Condition, One Fix | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "One page. One verified condition. One concrete repair."
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/repair-sprint",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/learning-centre",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Learning Centre - Landing Page Conversion Leaks | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Fix the page, not the ad"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/learning-centre",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/teardowns",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Public Audit Teardowns | Nebula",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Real audits on well-known pages"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/teardowns",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/terms",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Terms of Service - Nebula Components",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Terms of Service"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/terms",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/privacy-policy",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Privacy Policy - Nebula Components",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Privacy Policy"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/privacy-policy",
+    "has_og_title": true,
+    "has_og_image": true
+  },
+  {
+    "url": "https://nebulacomponents.com/checkout",
+    "status": 200,
+    "has_html_lang": true,
+    "title": "Checkout - One-Leak Repair Sprint | Nebula Components",
+    "has_viewport": true,
+    "has_main": true,
+    "has_main_id": true,
+    "has_skip_link": true,
+    "h1_count": 1,
+    "h1_sample": [
+      "Secure Checkout"
+    ],
+    "total_images": 0,
+    "images_missing_alt": 0,
+    "inputs_missing_label_id": 0,
+    "canonical": "https://nebulacomponents.com/checkout",
+    "has_og_title": true,
+    "has_og_image": true
+  }
+]

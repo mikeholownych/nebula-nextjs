@@ -1,193 +1,566 @@
-"""Rate-limiting middleware using Redis token bucket algorithm.
+"""Durable rate-limiting middleware using Redis GCRA (Generic Cell Rate Algorithm).
 
-Enforces configurable limits per endpoint and identifier (IP or user_id).
+GCRA allows short bursts while enforcing a sustainable average rate. Each route
+class gets its own policy (burst capacity, sustained rate, fail behavior).
 
-Usage:
-    @app.get("/api/endpoint")
-    @rate_limit(max_requests=100, window_seconds=60)
-    async def endpoint():
-        return {"message": "ok"}
+Fail behavior per class:
+  fail-open     → PUBLIC_READ: let Cloudflare handle coarse protection
+  fail-closed   → AUTH, EMAIL, EXPENSIVE_WORK, CHECKOUT: reject if limiter unavailable
+  fail-degraded → INTERACTIVE_WRITE, WEBHOOK, AGENT_API: bounded local emergency fallback
+
+Redis keys are bounded:
+  key = rl:{route_class}:{identity_hash}
+  All identities are SHA-256 hashed and truncated to 16 hex chars.
+  Paths are normalized (dynamic segments stripped) to bound cardinality.
+
+Observability:
+  Structured log entries for allowed/rejected/backend_error events.
 """
 
+from __future__ import annotations
+
+import hashlib
+import json
+import logging
+import re
 import time
+from enum import Enum
 from typing import Callable, Optional
 
-from fastapi import HTTPException, Request, Response
+from fastapi import Request, Response
 from fastapi.responses import JSONResponse
-from fastapi.routing import APIRoute
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from ..redis_client import RedisClient
 
+logger = logging.getLogger("platform_api.rate_limit")
 
-# Rate limit tiers (requests per window)
-RATE_LIMITS = {
-    "/api/auth/google": (10, 60),       # 10 req/min
-    "/api/auth/magic-link": (5, 900),   # 5 req/15min
-    "/api/auth/logout": (10, 60),       # 10 req/min
-    "/api/webhook/stripe": (1000, 60),  # 1000 req/min (webhooks)
-    "/audit/run": (5, 60),              # 5 req/min - core audit engine
-    "/audit/accept": (5, 60),           # 5 req/min - fast persist path
-    "/audit/lab": (10, 60),             # 10 req/min - component lab
-    "/audit/by-email": (20, 60),        # 20 req/min - prevents bulk email enumeration
-    "default_authenticated": (100, 60), # 100 req/min
-    "default_anonymous": (20, 60),      # 20 req/min
+# ─── Route classes ────────────────────────────────────────────────────────────
+
+class RouteClass(str, Enum):
+    PUBLIC_READ = "public_read"
+    INTERACTIVE_WRITE = "interactive_write"
+    EXPENSIVE_WORK = "expensive_work"
+    AUTH = "auth"
+    EMAIL = "email"
+    CHECKOUT = "checkout"
+    WEBHOOK = "webhook"
+    AGENT_API = "agent_api"
+    INTERNAL = "internal"
+
+
+class FailBehavior(str, Enum):
+    FAIL_OPEN = "fail_open"
+    FAIL_CLOSED = "fail_closed"
+    FAIL_DEGRADED = "fail_degraded"
+
+
+class RateLimitPolicy:
+    """Configuration for a single rate-limit policy."""
+
+    def __init__(
+        self,
+        sustained_rps: float,
+        burst_capacity: int,
+        window_seconds: int = 60,
+        fail_behavior: FailBehavior = FailBehavior.FAIL_CLOSED,
+        scope: str = "ip",
+    ):
+        """
+        Args:
+            sustained_rps: Sustained requests per second allowed.
+            burst_capacity: Maximum burst size (token bucket capacity).
+            window_seconds: TTL for the Redis key (auto-expires).
+            fail_behavior: What to do when Redis is unavailable.
+            scope: Primary identity dimension for key composition.
+        """
+        self.sustained_rps = sustained_rps
+        self.burst_capacity = burst_capacity
+        self.window_seconds = window_seconds
+        self.fail_behavior = fail_behavior
+        self.scope = scope
+
+
+# ─── Policy definitions ──────────────────────────────────────────────────────
+# Burst = how many requests can arrive in a single instant before throttling.
+# Sustained rate = long-term average.
+# TTL = how long the Redis key lives (must exceed burst_capacity / sustained_rps).
+
+ROUTE_POLICIES: dict[RouteClass, RateLimitPolicy] = {
+    # Marketing pages, pricing, learning centre — Cloudflare handles most of this.
+    # Application limit protects origin from direct hits.
+    RouteClass.PUBLIC_READ: RateLimitPolicy(
+        sustained_rps=2.0,       # 120 req/min
+        burst_capacity=30,       # burst of 30
+        window_seconds=120,      # key TTL
+        fail_behavior=FailBehavior.FAIL_OPEN,
+        scope="ip",
+    ),
+    # Form submissions, newsletter, share creation, claim actions.
+    RouteClass.INTERACTIVE_WRITE: RateLimitPolicy(
+        sustained_rps=0.5,       # 30 req/min
+        burst_capacity=10,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_DEGRADED,
+        scope="ip",
+    ),
+    # Audit accept, audit run, screenshot, compute-heavy tasks.
+    # Both rate limit + admission control (admission handled in audit_api.py).
+    RouteClass.EXPENSIVE_WORK: RateLimitPolicy(
+        sustained_rps=0.167,     # 10 req / 10 min
+        burst_capacity=3,
+        window_seconds=660,      # key TTL > 10 min
+        fail_behavior=FailBehavior.FAIL_CLOSED,
+        scope="identity",
+    ),
+    # Magic link, OAuth initiation, login attempts.
+    RouteClass.AUTH: RateLimitPolicy(
+        sustained_rps=0.167,     # 10 req/min
+        burst_capacity=3,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_CLOSED,
+        scope="ip",
+    ),
+    # Outbound email (audit email, magic link, report send).
+    RouteClass.EMAIL: RateLimitPolicy(
+        sustained_rps=0.083,     # 5 req/min
+        burst_capacity=2,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_CLOSED,
+        scope="identity",
+    ),
+    # Checkout creation — allow legitimate retries, prevent session storms.
+    RouteClass.CHECKOUT: RateLimitPolicy(
+        sustained_rps=0.333,     # 20 req/min
+        burst_capacity=5,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_CLOSED,
+        scope="ip",
+    ),
+    # Stripe webhooks — NOT rate-limited like user traffic.
+    # Signature verification + event-id idempotency is the real guard.
+    # This is a permissive cap on malformed/unverified traffic only.
+    RouteClass.WEBHOOK: RateLimitPolicy(
+        sustained_rps=16.67,     # 1000 req/min — generous
+        burst_capacity=100,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_OPEN,
+        scope="ip",
+    ),
+    # API-key routes — workspace + key identity + IP secondary.
+    RouteClass.AGENT_API: RateLimitPolicy(
+        sustained_rps=1.67,      # 100 req/min
+        burst_capacity=20,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_CLOSED,
+        scope="identity",
+    ),
+    # Internal service-to-service — very permissive.
+    RouteClass.INTERNAL: RateLimitPolicy(
+        sustained_rps=100.0,
+        burst_capacity=200,
+        window_seconds=120,
+        fail_behavior=FailBehavior.FAIL_OPEN,
+        scope="ip",
+    ),
 }
 
 
-class RateLimitMiddleware(BaseHTTPMiddleware):
-    """Rate-limit middleware for all requests.
+# ─── Route classification ────────────────────────────────────────────────────
 
-    Uses Redis token bucket algorithm for distributed rate-limiting.
+# Dynamic path segments to normalize for key cardinality
+_DYNAMIC_SEGMENT_RE = re.compile(
+    r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",  # UUIDs
+)
+_NUMERIC_SEGMENT_RE = re.compile(r"^\d+$")
+_SLUG_SEGMENT_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)+$")  # slugs with hyphens
+
+
+def _normalize_path(path: str) -> str:
+    """Normalize path to bound Redis key cardinality.
+
+    Strips UUIDs, numeric IDs, and long slugs to prevent unbounded cardinality.
+    """
+    parts = path.strip("/").split("/")
+    normalized = []
+    for part in parts:
+        if _DYNAMIC_SEGMENT_RE.match(part):
+            normalized.append("{id}")
+        elif _NUMERIC_SEGMENT_RE.match(part) and len(part) > 3:
+            normalized.append("{id}")
+        elif len(part) > 40:
+            normalized.append("{slug}")
+        else:
+            normalized.append(part)
+    return "/" + "/".join(normalized)
+
+
+# Route prefix → RouteClass mapping (most-specific first)
+_ROUTE_PREFIX_MAP: list[tuple[str, RouteClass]] = [
+    # Auth
+    ("/api/auth/", RouteClass.AUTH),
+    ("/api/auth", RouteClass.AUTH),
+    # Email / dispatch
+    ("/api/dispatch/", RouteClass.EMAIL),
+    ("/api/dispatch", RouteClass.EMAIL),
+    # Checkout
+    ("/api/checkout", RouteClass.CHECKOUT),
+    # Webhook
+    ("/api/webhook/", RouteClass.WEBHOOK),
+    ("/api/stripe/webhook", RouteClass.WEBHOOK),
+    # Audit expensive work
+    ("/audit/accept", RouteClass.EXPENSIVE_WORK),
+    ("/audit/run", RouteClass.EXPENSIVE_WORK),
+    ("/audit/lab", RouteClass.EXPENSIVE_WORK),
+    # Agent API routes
+    ("/api/workspace/", RouteClass.AGENT_API),
+    # Report generation (expensive)
+    ("/api/reports/", RouteClass.EXPENSIVE_WORK),
+    # Internal health / infra — internal
+    ("/health/ping", RouteClass.INTERNAL),
+    ("/health/deep", RouteClass.INTERNAL),
+    # API key management
+    ("/api/api-keys", RouteClass.AUTH),
+    # Default interactive write for /api/* POST/PUT/PATCH/DELETE
+    # Default public read for everything else
+]
+
+
+def classify_route(path: str, method: str) -> RouteClass:
+    """Classify a request path into a route class."""
+    for prefix, route_class in _ROUTE_PREFIX_MAP:
+        if path.startswith(prefix):
+            return route_class
+
+    # API methods that write are interactive_write
+    if path.startswith("/api/") and method in ("POST", "PUT", "PATCH", "DELETE"):
+        return RouteClass.INTERACTIVE_WRITE
+
+    # Default: public read
+    return RouteClass.PUBLIC_READ
+
+
+# ─── Identity resolution ─────────────────────────────────────────────────────
+
+# Trusted proxy headers — only the rightmost non-private IP is considered.
+_PRIVATE_IP_RE = re.compile(
+    r"^(127\.\d+\.\d+\.\d+|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|"
+    r"172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|::1|fc00:|fe80:|unknown)$"
+)
+
+
+def _extract_trusted_ip(request: Request) -> str:
+    """Extract the real client IP from trusted proxy headers.
+
+    Only trusts X-Forwarded-For when the immediate connection is a known
+    private-range proxy (Cloudflare tunnel, localhost, LAN). This prevents
+    trivial bypass via spoofed headers.
+    """
+    client_host = request.client.host if request.client else "unknown"
+
+    # If the direct connection is NOT from a private IP, it's not behind
+    # a trusted proxy — use the direct client IP.
+    if not _PRIVATE_IP_RE.match(client_host):
+        return client_host
+
+    # Behind a trusted proxy: walk X-Forwarded-For right-to-left, skip
+    # private/loopback IPs, take the first public IP.
+    xff = request.headers.get("x-forwarded-for", "")
+    if xff:
+        for part in reversed(xff.split(",")):
+            candidate = part.strip()
+            if candidate and not _PRIVATE_IP_RE.match(candidate):
+                return candidate
+
+    return client_host
+
+
+def _hash_identity(raw: str) -> str:
+    """SHA-256 hash an identity to prevent raw values in Redis keys."""
+    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
+def _resolve_identity(
+    request: Request,
+    route_class: RouteClass,
+    scope: str,
+) -> str:
+    """Resolve the rate-limit identity for a request.
+
+    scope="ip" → trusted IP only
+    scope="identity" → IP + authenticated user/email dimension
+    """
+    ip = _extract_trusted_ip(request)
+
+    if scope == "ip":
+        return _hash_identity(ip)
+
+    # For identity-scoped routes, layer in authenticated identity.
+    # Try Authorization header (Bearer token hash).
+    auth_header = request.headers.get("authorization", "")
+    if auth_header.startswith("Bearer "):
+        token = auth_header[7:]
+        token_hash = _hash_identity(token)
+        return _hash_identity(f"ip:{ip}:user:{token_hash}")
+
+    # For audit routes, use email dimension (hashed).
+    if route_class in (RouteClass.EXPENSIVE_WORK, RouteClass.EMAIL):
+        email = (
+            request.headers.get("x-audit-email")
+            or request.headers.get("x-email")
+            or ""
+        ).strip().lower()
+        if email and "@" in email:
+            email_hash = _hash_identity(email)
+            return _hash_identity(f"ip:{ip}:email:{email_hash}")
+
+    # API key routes: try X-API-Key header.
+    api_key = request.headers.get("x-api-key", "")
+    if api_key:
+        key_hash = _hash_identity(api_key)
+        return _hash_identity(f"ip:{ip}:apikey:{key_hash}")
+
+    return _hash_identity(ip)
+
+
+# ─── GCRA Lua script ──────────────────────────────────────────────────────────
+# Generic Cell Rate Algorithm: allows burst, enforces sustainable rate.
+# Keys auto-expire via EXPIRE.
+
+_GCRA_LUA = """
+local key = KEYS[1]
+local burst = tonumber(ARGV[1])
+local rate = tonumber(ARGV[2])       -- tokens per second
+local now = tonumber(ARGV[3])        -- current time in ms
+local ttl = tonumber(ARGV[4])        -- key TTL in seconds
+
+-- Theoretical arrival time (TAT) for the next cell.
+-- burst = capacity; rate = emission rate.
+-- A request is allowed if now >= tat - burst/rate.
+local tat = tonumber(redis.call('GET', key) or '0')
+local delta = 1000 / rate            -- ms per token
+
+if tat == 0 then
+    -- First request: set TAT to now + delta
+    tat = now + delta
+elseif now >= tat then
+    -- Within budget: advance TAT
+    tat = now + delta
+else
+    -- Over budget: check if we have burst capacity remaining
+    local new_tat = tat + delta
+    if new_tat - now <= burst * delta then
+        -- Burst allows it
+        tat = new_tat
+    else
+        -- Rejected
+        local retry_after_ms = tat - now
+        return {0, retry_after_ms}
+    end
+end
+
+redis.call('SET', key, tostring(tat), 'EX', ttl)
+local remaining = math.max(0, math.floor((tat - now) / delta))
+return {1, remaining}
+"""
+
+
+# ─── Local emergency fallback ─────────────────────────────────────────────────
+
+class _LocalEmergencyLimiter:
+    """Bounded process-local fallback for FAIL_DEGRADED routes when Redis is down.
+
+    Hard-capped at 100 entries. Strictly a temporary measure — never the
+    normal source of truth.
+    """
+
+    def __init__(self, max_entries: int = 100):
+        self._max = max_entries
+        self._counters: dict[str, tuple[float, int]] = {}  # key → (window_start, count)
+
+    def check(self, key: str, limit: int, window: float) -> bool:
+        now = time.time()
+        window_start = int(now // window) * window
+        entry = self._counters.get(key)
+        if entry is None or entry[0] != window_start:
+            if len(self._counters) >= self._max:
+                # Evict oldest 25%
+                to_evict = self._max // 4
+                sorted_keys = sorted(
+                    self._counters, key=lambda k: self._counters[k][0]
+                )
+                for k in sorted_keys[:to_evict]:
+                    del self._counters[k]
+            self._counters[key] = (window_start, 1)
+            return True
+        _, count = entry
+        if count >= limit:
+            return False
+        self._counters[key] = (window_start, count + 1)
+        return True
+
+
+# ─── Middleware ────────────────────────────────────────────────────────────────
+
+class RateLimitMiddleware(BaseHTTPMiddleware):
+    """Durable rate-limiting middleware using Redis GCRA.
+
+    Route-class aware, identity-aware, fail-behavior-per-class, and
+    observable. Every Redis key has a TTL. Every identity is hashed.
     """
 
     def __init__(self, app, redis: RedisClient):
         super().__init__(app)
         self.redis = redis
-        self._lua_script = """
-        local key = KEYS[1]
-        local limit = tonumber(ARGV[1])
-        local window = tonumber(ARGV[2])
-        local now = tonumber(ARGV[3])
-
-        -- Clear expired entries
-        redis.call('ZREMRANGEBYSCORE', key, 0, now - window * 1000)
-
-        -- Count requests in window
-        local count = redis.call('ZCARD', key)
-
-        if count < limit then
-            -- Add request
-            redis.call('ZADD', key, now, now .. '-' .. math.random())
-            redis.call('EXPIRE', key, window)
-            return count + 1
-        else
-            -- Rate limit exceeded
-            return nil
-        end
-        """
+        self._local = _LocalEmergencyLimiter()
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
-        # Skip rate-limiting for health checks
-        if request.url.path in ["/healthz", "/readyz"]:
+        path = request.url.path
+        method = request.method
+
+        # Skip health checks (both liveness and readiness)
+        if path in ("/healthz", "/readyz", "/health/ping"):
             return await call_next(request)
 
-        # Get rate limit config
-        max_requests, window_seconds = self._get_rate_limit(request)
+        route_class = classify_route(path, method)
+        policy = ROUTE_POLICIES[route_class]
+        identity = _resolve_identity(request, route_class, policy.scope)
+        normalized = _normalize_path(path)
+        redis_key = f"rl:{route_class.value}:{identity}:{normalized}"
 
-        # Get identifier (user_id or IP)
-        identifier = self._get_identifier(request)
-
-        # Build Redis key
-        key = f"ratelimit:{identifier}:{request.url.path}"
-
-        # Check rate limit
-        allowed = await self._check_rate_limit(
-            key, max_requests, window_seconds
+        # GCRA check
+        allowed, retry_after_ms, remaining = await self._gcra_check(
+            redis_key, policy
         )
 
         if not allowed:
-            # Get TTL for retry-after header
-            ttl = await self.redis.ttl(key)
-            # Return a response directly - HTTPException raised inside
-            # BaseHTTPMiddleware.dispatch is not converted by FastAPI's
-            # exception handlers and surfaces as a 500.
+            retry_after_s = max(1, int(retry_after_ms / 1000))
+            self._log_rejected(route_class, identity, path, retry_after_s)
+
             return JSONResponse(
                 status_code=429,
-                content={"detail": f"Rate limit exceeded. Retry in {ttl} seconds."},
-                headers={"Retry-After": str(ttl)},
+                content={
+                    "error": "rate_limited",
+                    "scope": route_class.value,
+                    "retry_after_seconds": retry_after_s,
+                    "request_id": getattr(
+                        request.state, "request_id", None
+                    ),
+                },
+                headers={
+                    "Retry-After": str(retry_after_s),
+                    "X-RateLimit-Limit": str(policy.burst_capacity),
+                    "X-RateLimit-Remaining": "0",
+                },
             )
 
-        # Process request
+        # Allowed — proceed
         response = await call_next(request)
-
-        # Add rate limit headers
-        response.headers["X-RateLimit-Limit"] = str(max_requests)
-        response.headers["X-RateLimit-Window"] = str(window_seconds)
-
+        response.headers["X-RateLimit-Limit"] = str(policy.burst_capacity)
+        response.headers["X-RateLimit-Remaining"] = str(remaining)
         return response
 
-    def _get_rate_limit(self, request: Request) -> tuple[int, int]:
-        """Get rate limit for endpoint."""
-        path = request.url.path
+    async def _gcra_check(
+        self, key: str, policy: RateLimitPolicy
+    ) -> tuple[bool, int, int]:
+        """Run the GCRA algorithm via Redis Lua script.
 
-        # Check specific endpoint limits
-        if path in RATE_LIMITS:
-            return RATE_LIMITS[path]
-
-        # Check if authenticated
-        # (Will be updated when auth middleware is added)
-        auth_header = request.headers.get("Authorization")
-        if auth_header and auth_header.startswith("Bearer "):
-            return RATE_LIMITS["default_authenticated"]
-
-        return RATE_LIMITS["default_anonymous"]
-
-    def _client_ip(self, request: Request) -> str:
-        """Visitor IP. Prefer X-Forwarded-For and skip loopback hops."""
-        forwarded = request.headers.get("X-Forwarded-For")
-        if forwarded:
-            for part in forwarded.split(","):
-                candidate = part.strip()
-                if candidate and candidate not in ("127.0.0.1", "::1", "unknown"):
-                    return candidate
-        return request.client.host if request.client else "unknown"
-
-    def _get_identifier(self, request: Request) -> str:
-        """Get identifier for rate-limiting (user_id or IP)."""
-        # Try user_id from JWT (if authenticated)
-        auth_header = request.headers.get("Authorization")
-        if auth_header and auth_header.startswith("Bearer "):
-            # Decode JWT to get user_id
-            # (Simplified - production should use proper JWT verification)
-            try:
-                token = auth_header[7:]
-                # For now, use token hash as identifier
-                # TODO: Decode JWT and extract user_id
-                import hashlib
-                return hashlib.sha256(token.encode()).hexdigest()[:16]
-            except Exception:
-                pass
-
-        ip = self._client_ip(request)
-        # Portal traffic arrives from 127.0.0.1. Key /audit/run by visitor IP
-        # plus email so concurrent founders are not collapsed onto loopback.
-        if request.url.path in ("/audit/run", "/audit/accept"):
-            email = (request.headers.get("X-Audit-Email") or "").strip().lower()
-            if email:
-                return f"{ip}:{email}"
-        return ip
-
-    async def _check_rate_limit(
-        self,
-        key: str,
-        max_requests: int,
-        window_seconds: int
-    ) -> bool:
-        """Check if request is allowed using token bucket.
-
-        Returns:
-            True if allowed, False if rate limit exceeded
+        Returns (allowed, retry_after_ms, remaining_tokens).
         """
-        now = int(time.time() * 1000)  # Current time in milliseconds
+        now_ms = int(time.time() * 1000)
 
         try:
-            # Execute Lua script atomically
+            await self.redis.connect()
             result = await self.redis.client.eval(
-                self._lua_script,
-                1,
+                _GCRA_LUA,
+                1,          # number of keys
                 key,
-                max_requests,
-                window_seconds,
-                now
+                policy.burst_capacity,
+                policy.sustained_rps,
+                now_ms,
+                policy.window_seconds,
             )
 
-            return result is not None
+            if result is None:
+                # Shouldn't happen with well-formed Lua
+                return True, 0, policy.burst_capacity
 
-        except Exception as e:
-            # On Redis error, allow request (fail open)
-            print(f"Rate limit error: {e}")
-            return True
+            allowed = bool(result[0])
+            retry_or_remaining = int(result[1])
+
+            if allowed:
+                self._log_allowed(policy, key)
+                return True, 0, retry_or_remaining
+            else:
+                return False, retry_or_remaining, 0
+
+        except Exception as exc:
+            logger.warning("rate_limit_backend_error: %s", exc)
+
+            # Fail behavior per route class
+            if policy.fail_behavior == FailBehavior.FAIL_OPEN:
+                self._log_backend_error(policy, key, "fail_open")
+                return True, 0, policy.burst_capacity
+
+            if policy.fail_behavior == FailBehavior.FAIL_DEGRADED:
+                # Use bounded local fallback
+                allowed = self._local.check(
+                    key, policy.burst_capacity, policy.window_seconds
+                )
+                if not allowed:
+                    logger.info(
+                        "rate_limit_rejected_local_fallback",
+                        extra={
+                            "event": "rate_limit_rejected",
+                            "scope": policy.scope,
+                            "behavior": "local_fallback",
+                            "retry_after": policy.window_seconds,
+                        },
+                    )
+                    return False, policy.window_seconds * 1000, 0
+                self._log_backend_error(policy, key, "fail_degraded_local")
+                return True, 0, policy.burst_capacity
+
+            # FAIL_CLOSED
+            self._log_backend_error(policy, key, "fail_closed")
+            return False, policy.window_seconds * 1000, 0
+
+    def _log_allowed(self, policy: RateLimitPolicy, key: str) -> None:
+        logger.debug(
+            "rate_limit_allowed",
+            extra={
+                "event": "rate_limit_allowed",
+                "scope": policy.scope,
+                "key_prefix": key[:40],
+            },
+        )
+
+    def _log_rejected(
+        self, route_class: RouteClass, identity: str, path: str, retry_after: int
+    ) -> None:
+        logger.info(
+            "rate_limit_rejected",
+            extra={
+                "event": "rate_limit_rejected",
+                "route_class": route_class.value,
+                "path": path[:80],
+                "identity_prefix": identity[:16],
+                "retry_after": retry_after,
+            },
+        )
+
+    def _log_backend_error(
+        self, policy: RateLimitPolicy, key: str, behavior: str
+    ) -> None:
+        logger.warning(
+            "rate_limit_backend_error",
+            extra={
+                "event": "rate_limit_backend_error",
+                "scope": policy.scope,
+                "behavior": behavior,
+                "key_prefix": key[:40],
+            },
+        )
 
 
 def setup_rate_limiting(app, redis: RedisClient):

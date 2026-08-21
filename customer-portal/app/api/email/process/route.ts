@@ -16,7 +16,10 @@ export async function GET() {
 
 export async function POST(request: Request) {
   if (!isAuthorized(request)) {
-    return NextResponse.json({ code: 'UNAUTHORIZED' }, { status: 401 })
+    return NextResponse.json(
+      { error: 'Authentication required', code: 'AUTH_REQUIRED' },
+      { status: 401 },
+    )
   }
 
   try {

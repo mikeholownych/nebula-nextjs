@@ -22,18 +22,22 @@ BANNED = {
 
 
 def test_outbound_delivery_has_one_authority():
+    import os
     offenders = []
     source_suffixes = {".py", ".ts", ".tsx", ".js", ".mjs", ".cjs", ".sh"}
-    for path in ROOT.rglob("*"):
-        if not path.is_file() or path.suffix not in source_suffixes:
-            continue
-        if path in ALLOWED_RAW_CLIENTS or path == Path(__file__).resolve():
-            continue
-        if any(part in SKIP_PARTS for part in path.relative_to(ROOT).parts):
-            continue
-        text = path.read_text(errors="replace")
-        for label, pattern in BANNED.items():
-            if pattern.search(text):
-                offenders.append(f"{path.relative_to(ROOT)}: {label}")
+    ignored_dirs = {".git", ".legacy", ".worktrees", "tests", "venv", ".venv", "himalaya-venv", "node_modules", ".next", ".next-previous", "storybook-static", ".swc"}
+    for root, dirs, files in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in ignored_dirs and not d.startswith(".")]
+        for file in files:
+            path = Path(root) / file
+            if path.suffix not in source_suffixes:
+                continue
+            if path in ALLOWED_RAW_CLIENTS or path == Path(__file__).resolve():
+                continue
+            text = path.read_text(errors="replace")
+            for label, pattern in BANNED.items():
+                if pattern.search(text):
+                    offenders.append(f"{path.relative_to(ROOT)}: {label}")
 
     assert offenders == [], "Outbound bypasses found:\n" + "\n".join(offenders)
+

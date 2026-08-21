@@ -78,6 +78,9 @@ export default function FunnelChrome() {
                 };
 
                 const sendVisitorProfile = async () => {
+                  // Honor-decline guard (D6): if consent was revoked after
+                  // mount, never transmit the collected profile.
+                  if (document.documentElement.getAttribute('data-analytics-default') !== 'accepted') return;
                   if (!window.rb2bPageVisits || window.rb2bPageVisits.length === 0) return;
                   const totalDwell = Math.round((Date.now() - (window.rb2bSessionStart || Date.now())) / 1000);
                   const pages = [...new Set(window.rb2bPageVisits)];

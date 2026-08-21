@@ -1,5 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+import { pruneExcessUnlockCookies } from '@/app/lib/audit-access'
+import { findLegacyHtmlRedirect } from '@/app/lib/legacy-routes'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
 
@@ -10,6 +12,7 @@ function resolveRequestId(request: NextRequest): string {
 
 function withRequestId(request: NextRequest, response: NextResponse): NextResponse {
   response.headers.set('X-Request-ID', resolveRequestId(request))
+  pruneExcessUnlockCookies(request, response)
   return response
 }
 
@@ -19,6 +22,7 @@ function nextWithRequestId(request: NextRequest): NextResponse {
   headers.set('X-Request-ID', requestId)
   const res = NextResponse.next({ request: { headers } })
   res.headers.set('X-Request-ID', requestId)
+  pruneExcessUnlockCookies(request, res)
   return res
 }
 
@@ -69,7 +73,7 @@ export function proxy(request: NextRequest) {
     if (!token && !authHeader) {
       return withRequestId(
         request,
-        new NextResponse(JSON.stringify({ error: 'Authentication required' }), {
+        new NextResponse(JSON.stringify({ error: 'Authentication required', code: 'AUTH_REQUIRED' }), {
           status: 401,
           headers: { 'Content-Type': 'application/json' },
         }),
@@ -107,8 +111,20 @@ export function proxy(request: NextRequest) {
     return withRequestId(request, NextResponse.redirect(url, 301))
   }
 
-  // ── 2. Legacy HTML/static aliases - definitive 410 ─────────────────────────
-  // Block legacy .html routes
+  // ── 2. Legacy HTML/static aliases ──────────────────────────────────────────
+  // Equity-bearing .html URLs indexed by Google must 301 to their live
+  // equivalents BEFORE the generic blocker - a blanket .html 404 here used to
+  // shadow next.config's redirects entirely (D9). Single source of truth:
+  // app/lib/legacy-routes.ts.
+  const legacyDestination = findLegacyHtmlRedirect(pathname)
+  if (legacyDestination) {
+    const url = request.nextUrl.clone()
+    url.pathname = legacyDestination
+    url.search = '' // legacy URLs carry no equity-bearing params
+    return withRequestId(request, NextResponse.redirect(url, 301))
+  }
+
+  // Unrecognized .html paths are definitive orphans: 404, noindex.
   if (pathname.toLowerCase().endsWith('.html')) {
     return withRequestId(
       request,

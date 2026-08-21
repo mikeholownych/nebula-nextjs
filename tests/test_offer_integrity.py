@@ -36,14 +36,17 @@ def test_public_html_has_no_legacy_147_fix_pack_copy():
 
 
 def test_active_runtime_has_no_retired_fix_pack_payment_link():
+    import os
     retired = "aFa7sL5E03Iwgyt2Nk43S02"
     failures = []
-    for suffix in ("*.py", "*.html"):
-        for path in BASE.rglob(suffix):
-            if any(part in {".legacy", "node_modules", ".git", "tests"} for part in path.parts):
-                continue
-            if retired.lower() in path.read_text(errors="ignore").lower():
-                failures.append(str(path.relative_to(BASE)))
+    ignored_dirs = {".legacy", "node_modules", ".git", "tests", ".venv", "venv", ".next", ".next-previous", "__pycache__", "storybook-static", ".swc"}
+    for root, dirs, files in os.walk(BASE):
+        dirs[:] = [d for d in dirs if d not in ignored_dirs and not d.startswith(".")]
+        for file in files:
+            if file.endswith((".py", ".html")):
+                path = Path(root) / file
+                if retired.lower() in path.read_text(errors="ignore").lower():
+                    failures.append(str(path.relative_to(BASE)))
     assert not failures, f"Retired Stripe link remains in: {failures}"
 
 

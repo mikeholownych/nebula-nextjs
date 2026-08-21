@@ -77,7 +77,7 @@ export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props
         {submitting ? 'Opening Secure Checkout…' : 'Continue to Secure Stripe Checkout'}
       </button>
       {error && (
-        <p role="alert" className="mt-3 text-center text-sm text-red-700">
+        <p role="alert" className="mt-3 text-center text-sm text-danger">
           {error}
         </p>
       )}

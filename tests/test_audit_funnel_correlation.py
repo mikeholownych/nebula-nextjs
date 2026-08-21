@@ -13,18 +13,16 @@ be joined on the audit rather than on a person identity that is still anonymous
 when the flow starts.
 """
 
-from types import SimpleNamespace
 from unittest.mock import AsyncMock
 from uuid import uuid4
 
 import pytest
-from fastapi import HTTPException
 
 from platform_api.routes import audit_api
+from platform_api.services import audit_runner
 
 
 class FakePostHog:
-    # Read by posthog.new_context() when it opens a capture context.
     enable_exception_autocapture = False
 
     def __init__(self):
@@ -43,73 +41,67 @@ class FakePostHog:
 @pytest.fixture
 def posthog(monkeypatch):
     client = FakePostHog()
-    monkeypatch.setattr(audit_api.audit_db, "create_audit", AsyncMock(return_value=uuid4()))
-    monkeypatch.setattr(audit_api.audit_db, "update_audit", AsyncMock(return_value=True))
-    monkeypatch.setattr(audit_api.audit_db, "mark_audit_failed", AsyncMock(return_value=True))
     monkeypatch.setattr(audit_api.analytics, "track_audit_started", AsyncMock())
     monkeypatch.setattr(audit_api.analytics, "track_audit_completed", AsyncMock())
     monkeypatch.setattr(audit_api.analytics, "track_audit_failed", AsyncMock())
     monkeypatch.setattr(audit_api, "get_posthog", lambda: client)
+    monkeypatch.setattr(audit_api, "_crm_audit_completed", AsyncMock())
     return client
 
 
-def _script(returncode=0, stdout='{"score": 5, "grade": "C", "findings": []}\n'):
-    def fake_run(argv, **kwargs):
-        return SimpleNamespace(returncode=returncode, stdout=stdout, stderr="")
-
-    return fake_run
-
-
-def _request(**overrides):
+def _job(**overrides):
     payload = {
+        "id": uuid4(),
         "url": "https://example.com",
+        "email": "lead@example.com",
         "analytics_consent": True,
         "analytics_distinct_id": "019fdbe6-d3d1-7a59-99c4-8a8488a948f7",
         "analytics_attempt_id": "attempt-abc-123",
+        "analytics_journey_id": "journey-xyz",
     }
     payload.update(overrides)
-    return audit_api.AuditRequest(**payload)
+    return payload
 
 
 @pytest.mark.asyncio
-async def test_run_audit_does_not_emit_a_duplicate_audit_started(monkeypatch, posthog):
-    monkeypatch.setattr(audit_api.subprocess, "run", _script())
+async def test_finalize_audit_does_not_emit_a_duplicate_audit_started(monkeypatch, posthog):
+    data = {"score": 5, "grade": "C", "findings": []}
+    await audit_api.finalize_completed_audit(_job(), data)
 
-    result = await audit_api.run_audit(_request())
-
-    assert result.status == "completed"
     assert "audit_started" not in posthog.events()
     assert posthog.events() == ["audit_completed"]
 
 
 @pytest.mark.asyncio
 async def test_audit_completed_carries_the_correlation_key(monkeypatch, posthog):
-    monkeypatch.setattr(audit_api.subprocess, "run", _script())
-
-    await audit_api.run_audit(_request())
+    job = _job()
+    data = {"score": 5, "grade": "C", "findings": []}
+    await audit_api.finalize_completed_audit(job, data)
 
     properties = posthog.properties_for("audit_completed")
     assert properties["audit_attempt_id"] == "attempt-abc-123"
-    assert properties["audit_id"]
+    assert properties["audit_id"] == str(job["id"])
 
 
 @pytest.mark.asyncio
-async def test_audit_failed_carries_the_correlation_key(monkeypatch, posthog):
-    monkeypatch.setattr(audit_api.subprocess, "run", _script(returncode=1))
+async def test_audit_failed_carries_the_correlation_key(monkeypatch):
+    track_failed = AsyncMock()
+    monkeypatch.setattr(audit_api.analytics, "track_audit_failed", track_failed)
+    job = _job()
 
-    with pytest.raises(HTTPException) as excinfo:
-        await audit_api.run_audit(_request())
+    await audit_runner._track_failed(job, "script_error")
 
-    assert excinfo.value.status_code == 500
-    properties = posthog.properties_for("audit_failed")
-    assert properties["audit_attempt_id"] == "attempt-abc-123"
-    assert properties["reason"] == "script_error"
+    track_failed.assert_awaited_once()
+    kwargs = track_failed.await_args.kwargs
+    assert kwargs["reason"] == "script_error"
+    assert kwargs["audit_id"] == str(job["id"])
+    assert kwargs["audit_attempt_id"] == "attempt-abc-123"
 
 
 @pytest.mark.asyncio
 async def test_no_audit_events_without_analytics_consent(monkeypatch, posthog):
-    monkeypatch.setattr(audit_api.subprocess, "run", _script())
-
-    await audit_api.run_audit(_request(analytics_consent=False))
+    data = {"score": 5, "grade": "C", "findings": []}
+    await audit_api.finalize_completed_audit(_job(analytics_consent=False), data)
 
     assert posthog.captured == []
+

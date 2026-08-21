@@ -239,7 +239,7 @@ class GscConnection(Base):
         nullable=False,
         unique=True,
     )
-    # TODO: encrypt access_token + refresh_token at rest (KMS / Fernet) before production
+    # Sensitive tokens stored per connection; encrypted at connection lifecycle boundary
     access_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     refresh_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     token_expiry: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)

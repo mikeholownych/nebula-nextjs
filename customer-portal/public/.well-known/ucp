@@ -5,10 +5,10 @@
       "shop.nebulacomponents.commerce": [
         {
           "version": "2026-04-08",
-          "spec": "https://nebulacomponents.shop/ucp.md",
+          "spec": "https://nebulacomponents.com/ucp.md",
           "transport": "rest",
-          "endpoint": "https://nebulacomponents.shop/api",
-          "schema": "https://nebulacomponents.shop/openapi.json"
+          "endpoint": "https://nebulacomponents.com/api",
+          "schema": "https://nebulacomponents.com/openapi.json"
         }
       ]
     },
@@ -16,8 +16,8 @@
       "shop.nebulacomponents.commerce.checkout": [
         {
           "version": "2026-04-08",
-          "spec": "https://nebulacomponents.shop/ucp.md",
-          "schema": "https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json"
+          "spec": "https://nebulacomponents.com/ucp.md",
+          "schema": "https://nebulacomponents.com/.well-known/ucp-checkout.schema.json"
         }
       ]
     },

@@ -470,3 +470,17 @@ Which raises the honest question about what you're offering. The four emails pro
 Go on the sends, with one condition: confirm the 9Sail contact before it goes out. Joe Riviello vs Joe Giovannoli is the third instance of a compacted summary carrying a name the live source contradicts. Trust the live Discover result, verify against 9sail.com, and treat any name from a summary as unverified by default. Register the four, schedule Oneupweb Monday.
 One flag on 9Sail's finding specifically: the consent gate may be jurisdictional or session-dependent - a US visitor might see the form immediately. Check it from a normal session before claiming it universally, or phrase it as what you observed rather than what always happens.
 And while the batch runs, the higher-value work isn't more prospects. It's re-specifying the signals against pages you've inspected - you now have seven, with ground truth. That's the first externally-anchored dataset the engine has ever had.
+
+## 2026-08-21 — Production defect resolution session (customer-portal)
+
+USER INPUT (verbatim): resolve ALL identified defects
+
+Context: Follow-up to black-box production QA (docs/production-validation/production-regression-gaps.md, D1–D12). Prior session verified each test-gap hypothesis against the repo. This session implements fixes for all 12 defects in customer-portal/. No commit, no production restart without explicit approval.
+
+## 2026-08-21 — Defect resolution complete (code level)
+
+All 12 QA defects + new D13 addressed in customer-portal/. Full `npm run ci` green: 89 suites / 729 unit tests, 54 e2e. Production remediation (stale-build redeploy via scripts/deploy_customer_portal.sh + D13 systemd drop-in) awaits operator approval. No commits made; no production services touched.
+
+## 2026-08-21 — Production remediation deployed (operator-approved)
+
+deploy_customer_portal.sh: new build f1046bde live, verify script all-PASS, CF purge OK. D13 drop-in applied (NODE_OPTIONS quoted — unquoted spaces were silently split into a junk var). Post-deploy probes: 20 broken chunks → 0; /7-systems 500→200; results page 200/404 correct; CSP carries www.google.com; discovery docs .shop-clean; 64KB cookie headers 200 (was 431 @16KB). Follow-up noted: deploy script's post-API-restart probe should retry (~5s startup race observed).

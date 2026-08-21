@@ -8,6 +8,8 @@ import typescriptParser from '@typescript-eslint/parser';
 export default [{
   ignores: [
     '.next/**',
+    '.next-previous/**',
+    '.swc/**',
     'node_modules/**',
     '.legacy/**',
     'coverage/**',
@@ -17,8 +19,17 @@ export default [{
     'tailwind.config.ts',
     'scripts/**',
     '__tests__/**',
+    '__mocks__/**',
     'storybook-static/**',
     '.agents/**',
+    '.claude/**',
+    '.impeccable/**',
+    'fixroast/**',
+    'test-results/**',
+    'ux-audit-evidence/**',
+    'plans/**',
+    'docs/**',
+    'e2e/**',
   ],
 }, js.configs.recommended, {
   files: ['**/*.{ts,tsx}'],

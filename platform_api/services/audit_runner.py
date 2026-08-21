@@ -1,4 +1,10 @@
-"""In-process audit queue: SKIP LOCKED workers, cap=2, heartbeat, sweeper."""
+"""In-process audit queue: SKIP LOCKED workers, cap=2, heartbeat, sweeper.
+
+Hardening:
+  - Admission control: bounded pending queue depth before accepting new audits
+  - Graceful shutdown: stop claiming new jobs, wait for active work bounded
+  - Outbox drain bounded
+"""
 
 from __future__ import annotations
 
@@ -18,11 +24,14 @@ HEARTBEAT_SECONDS = 15
 WAIT_POLL_SECONDS = 0.25
 RUN_WAIT_TIMEOUT = 120.0
 SCORE_TIMEOUT = 120.0
+# Graceful shutdown: max time to wait for active work to complete
+SHUTDOWN_GRACE_PERIOD = 30.0
 
 _semaphore = asyncio.Semaphore(MAX_IN_FLIGHT)
 _wakeup = asyncio.Event()
 _tasks: list[asyncio.Task] = []
 _started = False
+_shutdown_event = asyncio.Event()
 
 
 async def kick() -> None:
@@ -38,6 +47,7 @@ async def start_runner() -> None:
     if _tasks:
         _started = True
         return
+    _shutdown_event.clear()
     for _ in range(MAX_IN_FLIGHT):
         _tasks.append(asyncio.create_task(_worker_loop(), name="audit-worker"))
     _tasks.append(asyncio.create_task(_sweeper_loop(), name="audit-sweeper"))
@@ -46,14 +56,29 @@ async def start_runner() -> None:
 
 
 async def stop_runner() -> None:
+    """Graceful shutdown: signal workers to stop claiming, wait bounded grace."""
     global _started
+    _started = False
+    _shutdown_event.set()
+
+    # Cancel all tasks
     tasks = list(_tasks)
     _tasks.clear()
-    _started = False
-    for task in tasks:
-        task.cancel()
+
+    # Wake any sleeping workers
+    _wakeup.set()
+
+    # Wait for tasks to finish with bounded grace period
     if tasks:
-        await asyncio.gather(*tasks, return_exceptions=True)
+        done, pending = await asyncio.wait(tasks, timeout=SHUTDOWN_GRACE_PERIOD)
+        for task in pending:
+            task.cancel()
+            try:
+                await task
+            except (asyncio.CancelledError, Exception):
+                pass
+
+    logger.info("audit_runner_stopped: %d tasks terminated", len(tasks))
 
 
 async def wait_for_result(audit_id: UUID, timeout: float = RUN_WAIT_TIMEOUT) -> dict:
@@ -186,6 +211,8 @@ async def _heartbeat_loop(audit_id) -> None:
 
 async def _worker_loop() -> None:
     while True:
+        if _shutdown_event.is_set():
+            break
         try:
             claimed = await process_one()
             if claimed is None:
@@ -203,6 +230,8 @@ async def _worker_loop() -> None:
 
 async def _sweeper_loop() -> None:
     while True:
+        if _shutdown_event.is_set():
+            break
         try:
             await audit_db.sweep_stale_audits()
         except asyncio.CancelledError:
@@ -215,6 +244,8 @@ async def _sweeper_loop() -> None:
 async def _outbox_loop() -> None:
     from platform_api.infra.outbox import outbox
     while True:
+        if _shutdown_event.is_set():
+            break
         try:
             processed = await outbox.drain()
         except asyncio.CancelledError:

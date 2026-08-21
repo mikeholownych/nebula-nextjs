@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Book to Skill - mechanical extractor (from The Next New Thing, HQqX4rF1nDM).
+r"""Book to Skill - mechanical extractor (from The Next New Thing, HQqX4rF1nDM).
 
 Turns a public-domain book text into structured "raw material" that an agent
 then curates into a real SKILL.md. This script does the deterministic part

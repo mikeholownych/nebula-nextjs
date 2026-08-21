@@ -16,7 +16,7 @@ export async function requireWorkspaceUser(
   const cookie = request.headers.get('cookie')
   const authorization = request.headers.get('authorization')
   if (!cookie && !authorization && !token) {
-    return { response: NextResponse.json({ error: 'Authentication required' }, { status: 401 }) }
+    return { response: NextResponse.json({ error: 'Authentication required', code: 'AUTH_REQUIRED' }, { status: 401 }) }
   }
 
   const forwardHeaders: Record<string, string> = {
@@ -35,11 +35,11 @@ export async function requireWorkspaceUser(
       signal: AbortSignal.timeout(5_000),
     })
     if (!upstream.ok) {
-      return { response: NextResponse.json({ error: 'Authentication required' }, { status: 401 }) }
+      return { response: NextResponse.json({ error: 'Authentication required', code: 'AUTH_REQUIRED' }, { status: 401 }) }
     }
     const user = await upstream.json() as WorkspaceUser
     if (!user.email) {
-      return { response: NextResponse.json({ error: 'Authenticated email required' }, { status: 401 }) }
+      return { response: NextResponse.json({ error: 'Authenticated email required', code: 'AUTH_REQUIRED' }, { status: 401 }) }
     }
     return { user: { ...user, email: user.email.trim().toLowerCase() } }
   } catch (error) {

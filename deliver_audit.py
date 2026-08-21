@@ -6,7 +6,7 @@ import base64, hmac, hashlib
 from typing import Optional
 import asyncio
 from datetime import datetime, timezone
-from urllib.parse import urlencode, urljoin, urlparse
+from urllib.parse import quote_plus, urlencode, urljoin, urlparse
 from pathlib import Path
 
 # Fix Map - visual execution roadmap (Nico's FORGE adaptation)
@@ -1743,14 +1743,13 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "url": page.get("url", ""),
         "source": "audit_email",
     })
-    # Direct Stripe payment link — pre-fills recipient email so they land on
-    # a ready-to-pay Stripe checkout with zero additional friction.
-    # Stripe's prefilled_email param populates the email field automatically.
-    STRIPE_97_LINK = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
-    stripe_buy_url = STRIPE_97_LINK + "?" + urlencode({
-        "prefilled_email": email,
-        "client_reference_id": urlencode({"url": page.get("url", ""), "source": "audit_email"}),
-    })
+    if website_audit_id:
+        checkout_url = f"https://nebulacomponents.com/checkout?audit_id={website_audit_id}&email={quote_plus(email)}"
+    else:
+        checkout_url = "https://nebulacomponents.com/audit?" + urlencode({
+            "url": page.get("url", ""),
+            "source": "audit_email",
+        })
 
     # Signed results URL — bypasses the email gate when the recipient clicks
     # back to their specific results page. Only available when the audit was
@@ -1764,6 +1763,11 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
                 f"?unlock={unlock_token}"
             )
 
+    ready_prompt = (
+        "Ready to fix it? Start your repair sprint here:"
+        if website_audit_id
+        else "Ready to fix it? Run or reopen the audit to unlock eligible checkout:"
+    )
     lines.extend([
         "",
         "━" * 40,
@@ -1771,8 +1775,8 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         f"$97 One-Leak Repair Sprint - {pitch_line}",
         "Details + FAQ: https://nebulacomponents.com/primer",
         "",
-        f"Ready to fix it? Pay here (your email is pre-filled):",
-        stripe_buy_url,
+        ready_prompt,
+        checkout_url,
     ])
     if results_url:
         lines.extend([
@@ -1818,7 +1822,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;">
   <p style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px;">{pitch_line}</p>
-  <a href="{stripe_buy_url}" style="display:inline-block;background:#059669;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:8px;margin-bottom:8px;">Fix it now - $97 →</a>
+  <a href="{checkout_url}" style="display:inline-block;background:#059669;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:8px;margin-bottom:8px;">Fix it now - $97 →</a>
   <p style="font-size:12px;color:#6b7280;margin:4px 0 0;">Your email is pre-filled. Kit sent within 48 hours after payment. <a href="https://nebulacomponents.com/primer" style="color:#059669;">Details + FAQ</a></p>
   {results_link_html}
   <div style="font-size:11px;color:#9ca3af;margin-top:10px;">Audit engine v{ENGINE_VERSION}</div>

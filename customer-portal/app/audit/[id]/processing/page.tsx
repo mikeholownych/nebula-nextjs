@@ -6,6 +6,7 @@ import { Card } from '@/components/ui'
 import { pushWithViewTransition } from '../../_lib/view-transition'
 import posthog from '@/app/lib/posthog-browser'
 import { analyticsHeaders, auditAttemptIdFor } from '@/app/lib/client-analytics'
+import { createAuditStatusPoller } from '@/app/lib/audit-status-poller'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },
@@ -22,7 +23,7 @@ export default function ProcessingPage() {
 
   const [progress, setProgress] = useState(0)
   const [messageIndex, setMessageIndex] = useState(0)
-  const [status, setStatus] = useState<'processing' | 'ready' | 'error'>('processing')
+  const [status, setStatus] = useState<'processing' | 'ready' | 'error' | 'not_found'>('processing')
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
 
@@ -44,32 +45,35 @@ export default function ProcessingPage() {
       }
     })
 
-    const poll = async () => {
-      try {
-        const res = await fetch(`/api/audit/${auditId}/status`, { cache: 'no-store' })
-        if (!res.ok || cancelled) return
-        const body = await res.json() as { status?: string }
-        if (body.status === 'completed') {
+    // Terminal-state machine (invalid/expired IDs, sustained outages, stop at
+    // terminal) lives in the injectable poller so it stays unit-testable.
+    const poller = createAuditStatusPoller(fetch, auditId, (event) => {
+      if (cancelled) return
+      switch (event.kind) {
+        case 'completed':
           clearInterval(progressInterval)
-          setProgress(100)
           posthog.capture('audit_ready', { audit_id: auditId })
           setStatus('ready')
-        } else if (body.status === 'failed') {
+          break
+        case 'failed':
           clearInterval(progressInterval)
           setStatus('error')
-        }
-      } catch {
-        // keep polling
+          break
+        case 'not_found':
+          setStatus('not_found')
+          break
+        case 'unreachable':
+          clearInterval(progressInterval)
+          setStatus('error')
+          break
       }
-    }
-
-    void poll()
-    const pollInterval = setInterval(() => { void poll() }, 1500)
+    })
+    poller.start()
 
     return () => {
       cancelled = true
+      poller.stop()
       clearInterval(progressInterval)
-      clearInterval(pollInterval)
       messageTimeouts.forEach(clearTimeout)
     }
   }, [auditId])
@@ -132,6 +136,10 @@ export default function ProcessingPage() {
     await doUnlock(email, name)
   }
 
+  // Terminal completion renders the bar full even though the interval stopped
+  // below 100 - derived, so no second setState is needed on the ready path.
+  const effectiveProgress = status === 'ready' ? 100 : progress
+
   // Logged-in workspace user: skip the email capture step entirely. The audit
   // was already started with their workspace email, so unlock with it and
   // route straight to the full report. If unlock fails, fall back to the form.
@@ -175,10 +183,10 @@ export default function ProcessingPage() {
               <div className="h-3 w-full overflow-hidden rounded-full bg-border">
                 <div
                   className="h-full w-full origin-left rounded-full bg-accent transition-transform duration-1000 ease-linear"
-                  style={{ transform: `scaleX(${progress / 100})` }}
+                  style={{ transform: `scaleX(${effectiveProgress / 100})` }}
                 />
               </div>
-              <p className="mt-2 text-sm text-fg-muted">{Math.round(progress)}% complete</p>
+              <p className="mt-2 text-sm text-fg-muted">{Math.round(effectiveProgress)}% complete</p>
             </div>
 
             {/* Status Message */}
@@ -283,6 +291,25 @@ export default function ProcessingPage() {
               className="rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Try Again
+            </button>
+          </Card>
+        )}
+
+        {status === 'not_found' && (
+          <Card variant="elevated" className="text-center">
+            <div className="mb-4 text-5xl">🔍</div>
+            <h1 className="mb-2 text-2xl font-bold text-fg">
+              Audit Not Found
+            </h1>
+            <p className="mb-6 text-fg-muted">
+              This audit link is invalid or has expired. Run a fresh audit to
+              get results in under two minutes.
+            </p>
+            <button
+              onClick={() => router.push('/audit')}
+              className="rounded bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+            >
+              Run a New Audit
             </button>
           </Card>
         )}

@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next'
 import { createHash } from 'node:crypto'
+import { LEGACY_HTML_ROUTES } from './app/lib/legacy-routes'
 import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -77,30 +78,10 @@ const nextConfig: NextConfig = {
       // the PostHog /ingest proxy, so this one page needs its own explicit rule)
       { source: '/pricing/', destination: '/pricing', permanent: true },
       { source: '/billing', destination: '/workspace?tab=billing', permanent: false },
-      // Legacy .html → current app routes (301)
-      { source: '/blog-trigger-aware-outreach.html',    destination: '/learning-centre', permanent: true },
-      { source: '/why-landing-pages-dont-convert.html', destination: '/learning-centre/landing-page-not-converting', permanent: true },
-      { source: '/why-landing-pages-dont-convert',      destination: '/learning-centre/landing-page-not-converting', permanent: true },
-      { source: '/cta-optimization.html',               destination: '/cta-optimization',   permanent: true },
-      { source: '/roas-cliff.html',                     destination: '/roas-cliff',          permanent: true },
-      { source: '/ai-sdr-vs-audit.html',                destination: '/ai-sdr-vs-audit',     permanent: true },
-      // NOT a legacy orphan - this is the live "Details + FAQ" link embedded
-      // in every free audit email (deliver_audit.py), served from
-      // public/primer.html. A previous pass in this same redirect map
-      // mistook it for a dead pre-migration URL and 301'd it to
-      // /learning-centre for ~3 days, sending every real lead who clicked
-      // "Details + FAQ" mid-purchase-decision somewhere unrelated. Canonical
-      // URL is now the clean /primer (see the matching rewrite below).
-      { source: '/primer.html',                         destination: '/primer',              permanent: true },
-      { source: '/7-systems.html',                      destination: '/learning-centre',      permanent: true },
-      { source: '/audit.html',                          destination: '/audit',               permanent: true },
-      { source: '/checkout.html',                       destination: '/checkout',            permanent: true },
-      { source: '/self-audit.html',                     destination: '/audit',               permanent: true },
-      { source: '/case-studies/self-audit.html',         destination: '/case-studies',         permanent: true },
-      { source: '/audit_dashboard.html',                destination: '/audit',               permanent: true },
-      { source: '/agency-partner.html',                 destination: '/pricing',             permanent: true },
-      { source: '/ai-ops-retainer.html',                destination: '/pricing',             permanent: true },
-      { source: '/beta-tester.html',                    destination: '/pricing',             permanent: true },
+      // Legacy .html -> live equivalents (301). Single source of truth in
+      // app/lib/legacy-routes.ts - proxy.ts must match these BEFORE its
+      // generic .html blocker or the 301s never fire (D9 incident).
+      ...LEGACY_HTML_ROUTES.map((r) => ({ source: r.source, destination: r.destination, permanent: true })),
       // Relocated out of /learning-centre (2026-07-27): founder-productivity/
       // AI-ops content, not landing-page conversion diagnosis - topically
       // off-hub per the Cluster audit, given its own /playbooks section
@@ -113,24 +94,9 @@ const nextConfig: NextConfig = {
       // the Content audit's cannibalization finding.
       { source: '/learning-centre/no-testimonials-on-landing-page', destination: '/learning-centre/proof-before-cta', permanent: true },
       // True orphans → 410 Gone (no equity to preserve, no equivalent page)
-      { source: '/ad-burn-leaderboard.html',            destination: '/gone',                permanent: true },
-      { source: '/og-card-source.html',                 destination: '/gone',                permanent: true },
-      { source: '/component-showcase.html',             destination: '/gone',                permanent: true },
-      // Additional .html → clean URL (GSC 2026-07-30 audit)
-      { source: '/headline-optimization.html',          destination: '/headline-optimization',           permanent: true },
-      { source: '/mobile-landing-page-optimization.html', destination: '/mobile-landing-page-optimization', permanent: true },
-      { source: '/page-speed-conversion.html',          destination: '/page-speed-conversion',           permanent: true },
-      { source: '/social-proof-landing-page.html',      destination: '/social-proof-landing-page',       permanent: true },
-      { source: '/privacy-policy.html',                 destination: '/privacy-policy',                  permanent: true },
-      // Dead pages → closest equivalent or /gone
-      { source: '/pricing-generator.html',              destination: '/pricing',                permanent: true },
-      { source: '/demo.html',                           destination: '/audit',                   permanent: true },
-      { source: '/dashboard.html',                      destination: '/gone',                    permanent: true },
-      { source: '/lead-dashboard.html',                 destination: '/gone',                    permanent: true },
-      { source: '/generator.html',                      destination: '/gone',                    permanent: true },
-      { source: '/growth-launch.html',                  destination: '/gone',                    permanent: true },
-      { source: '/growth-launch-confirmation.html',     destination: '/gone',                    permanent: true },
-      { source: '/marketing-ops.html',                  destination: '/gone',                    permanent: true },
+      // True-orphan and dead .html URLs are intentionally NOT listed here:
+      // proxy.ts 404s (noindex) any .html path not in LEGACY_HTML_ROUTES, so
+      // listing them as redirects would be dead code (D9 lesson).
       // GSC 404 remediation (2026-08-17) - bare-route versions of pages
       // whose .html counterparts were already redirected above, plus orphaned
       // external links and missing compare slugs.
@@ -261,8 +227,9 @@ const nextConfig: NextConfig = {
           // through /ingest (see CookieConsent.tsx) so it needs no separate
           // script-src entry, only connect-src for its API/asset hosts.
           // GA4 also fires an image beacon to googletagmanager.com/td and
-          // google-analytics.com collect endpoints. Those must be allowlisted
-          // or Chrome blocks them (visible on /teardowns and every page).
+          // google-analytics.com collect endpoints, plus regional beacons to
+          // www.google.com (ccm/g collect). Those must be allowlisted or
+          // Chrome blocks them (visible on /teardowns and every page).
           // Stripe checkout is a plain-link navigation to buy.stripe.com, not
           // an embedded script/iframe, so it needs no CSP entry either.
           // Cloudflare Web Analytics beacon is allowlisted - it defaults on
@@ -273,9 +240,9 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com",
+              "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai",
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",

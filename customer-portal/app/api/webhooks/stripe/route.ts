@@ -22,7 +22,7 @@ heycatch.init({ projectKey: 'hck_pk_UDEJlnGqF84u4i2q08NwcTvTYGrXLns_' })
 
 function getStripeClient(): Stripe {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2026-06-24.dahlia',
+    apiVersion: '2026-07-29.dahlia',
   })
 }
 

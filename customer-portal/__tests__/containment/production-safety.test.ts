@@ -408,11 +408,22 @@ describe('production safety containment', () => {
     const htmlFiles = listPublicHtml()
     expect(htmlFiles.length).toBeGreaterThan(0)
 
+    const { findLegacyHtmlRedirect } = require('@/app/lib/legacy-routes') as {
+      findLegacyHtmlRedirect: (p: string) => string | null
+    }
     for (const relative of htmlFiles) {
       const urlPath = `/${relative.replace(/^public[\\/]/, '').split(path.sep).join('/')}`
       const response = proxy(new NextRequest(`https://nebula.example${urlPath}`))
-      expect(response.status).toBe(404)
-      expect(response.headers.get('x-robots-tag')).toBe('noindex, nofollow')
+      const legacyDestination = findLegacyHtmlRedirect(urlPath)
+      if (legacyDestination) {
+        // D9: equity-bearing indexed .html URLs 301 to their live equivalent -
+        // the stale file is still never served, which is this suite's contract.
+        expect(response.status).toBe(301)
+        expect(new URL(response.headers.get('location')!).pathname).toBe(legacyDestination)
+      } else {
+        expect(response.status).toBe(404)
+        expect(response.headers.get('x-robots-tag')).toBe('noindex, nofollow')
+      }
     }
   })
 
