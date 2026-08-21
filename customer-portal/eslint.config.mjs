@@ -9,6 +9,9 @@ export default [{
   ignores: [
     '.next/**',
     '.next-previous/**',
+    '.next-incoming/**',
+    '.next-broken/**',
+    '.next-repro/**',
     '.swc/**',
     'node_modules/**',
     '.legacy/**',
