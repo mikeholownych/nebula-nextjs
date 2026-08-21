@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
       method: 'POST',
       headers: { ...authHeaders(req), 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(25_000),
     })
     if (!res.ok) {
       return NextResponse.json({ error: 'Inspection failed' }, { status: res.status })

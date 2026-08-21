@@ -8,6 +8,7 @@ Endpoints:
 - GET  /api/gsc/metrics    - {clicks, impressions, avg_ctr, avg_position, top_pages}
 """
 
+import asyncio
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -457,10 +458,12 @@ async def gsc_inspect(
     urls: List[str],
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
+    redis=Depends(get_redis),
 ):
     """Check indexed status of URLs via the GSC URL Inspection API.
 
-    Accepts up to 20 URLs per call (Google's batch limit).
+    Inspects URLs concurrently with bounded concurrency (semaphore=5)
+    and caches responses in Redis (24h TTL) to avoid timeouts and rate limits.
     """
     user_id = UUID(auth["user_id"])
     conn = db.query(GscConnection).filter_by(user_id=user_id).first()
@@ -474,42 +477,69 @@ async def gsc_inspect(
 
     # Cap at 20 URLs per request
     check_urls = urls[:20]
-    results: List[InspectionResult] = []
+    results_map: dict[str, InspectionResult] = {}
+    uncached_urls: List[str] = []
 
-    async with httpx.AsyncClient(timeout=30) as client:
-        for url in check_urls:
-            try:
-                resp = await client.post(
-                    "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-                    json={
-                        "inspectionUrl": url,
-                        "siteUrl": site_url,
-                    },
-                    headers={"Authorization": f"Bearer {access_token}"},
-                )
-                if resp.status_code == 200:
-                    data = resp.json()
-                    result = data.get("inspectionResult", {})
-                    index_status = result.get("indexStatusResult", {})
-                    coverage = index_status.get("coverageState", "")
-                    last_crawl = index_status.get("lastCrawlTime")
-                    indexed = coverage in (
-                        "Submitted and indexed",
-                        "Indexed, not submitted in sitemap",
+    # Check cache first
+    for url in check_urls:
+        cache_key = f"gsc:inspect:{str(user_id)}:{url}"
+        cached = await redis.get(cache_key)
+        if isinstance(cached, dict) and "indexed" in cached:
+            results_map[url] = InspectionResult(
+                url=url,
+                indexed=cached["indexed"],
+                coverage_state=cached.get("coverage_state"),
+                last_crawl=cached.get("last_crawl"),
+            )
+        else:
+            uncached_urls.append(url)
+
+    if uncached_urls:
+        sem = asyncio.Semaphore(5)
+
+        async def inspect_single(client: httpx.AsyncClient, target_url: str) -> InspectionResult:
+            async with sem:
+                try:
+                    resp = await client.post(
+                        "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+                        json={
+                            "inspectionUrl": target_url,
+                            "siteUrl": site_url,
+                        },
+                        headers={"Authorization": f"Bearer {access_token}"},
                     )
-                    results.append(InspectionResult(
-                        url=url,
-                        indexed=indexed,
-                        coverage_state=coverage or None,
-                        last_crawl=last_crawl,
-                    ))
-                else:
-                    # Rate limited or error - mark as unknown
-                    results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))
-            except Exception:
-                results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        result = data.get("inspectionResult", {})
+                        index_status = result.get("indexStatusResult", {})
+                        coverage = index_status.get("coverageState", "")
+                        last_crawl = index_status.get("lastCrawlTime")
+                        indexed = coverage in (
+                            "Submitted and indexed",
+                            "Indexed, not submitted in sitemap",
+                        )
+                        res = InspectionResult(
+                            url=target_url,
+                            indexed=indexed,
+                            coverage_state=coverage or None,
+                            last_crawl=last_crawl,
+                        )
+                        cache_key = f"gsc:inspect:{str(user_id)}:{target_url}"
+                        await redis.set(cache_key, res.model_dump(), ttl=86400)
+                        return res
+                    else:
+                        return InspectionResult(url=target_url, indexed=False, coverage_state="error")
+                except Exception:
+                    return InspectionResult(url=target_url, indexed=False, coverage_state="error")
 
-    return InspectionResponse(results=results)
+        async with httpx.AsyncClient(timeout=10) as client:
+            tasks = [inspect_single(client, u) for u in uncached_urls]
+            inspected_results = await asyncio.gather(*tasks)
+            for res in inspected_results:
+                results_map[res.url] = res
+
+    ordered_results = [results_map.get(u, InspectionResult(url=u, indexed=False, coverage_state="error")) for u in check_urls]
+    return InspectionResponse(results=ordered_results)
 
 
 # ---------------------------------------------------------------------------

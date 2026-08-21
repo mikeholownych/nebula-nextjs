@@ -154,13 +154,18 @@ export async function POST(request: NextRequest) {
     // Quota gate: check if the submitting email is within the free-tier limit.
     let submittedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null
     if (!submittedEmail) {
-      try {
-        const auth = await requireWorkspaceUser(request)
-        if (!('response' in auth) && auth.user?.email) {
-          submittedEmail = auth.user.email.trim().toLowerCase()
+      const authHeader = request.headers.get('authorization')
+      const cookieHeader = request.headers.get('cookie')
+      const tokenCookie = request.cookies.get('access_token')?.value
+      if (tokenCookie || authHeader || (cookieHeader && cookieHeader.includes('access_token'))) {
+        try {
+          const auth = await requireWorkspaceUser(request)
+          if (!('response' in auth) && auth.user?.email) {
+            submittedEmail = auth.user.email.trim().toLowerCase()
+          }
+        } catch {
+          // Non-fatal if not authenticated in workspace
         }
-      } catch {
-        // Non-fatal if not authenticated in workspace
       }
     }
 
