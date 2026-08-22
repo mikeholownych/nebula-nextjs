@@ -15,18 +15,7 @@ from datetime import datetime, timezone
 from typing import Optional
 from uuid import uuid4
 
-from sqlalchemy import (
-    Boolean,
-    CheckConstraint,
-    DateTime,
-    ForeignKey,
-    Index,
-    Integer,
-    String,
-    Text,
-    UniqueConstraint,
-    text,
-)
+from sqlalchemy import (Boolean, CheckConstraint, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, text, func)
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -221,6 +210,32 @@ class Audit(Base):
         return f"<Audit {self.id} ({self.status})>"
 
 
+
+class Ga4Connection(Base):
+    """Google Analytics 4 read-only connection (one per user).
+
+    Tokens are stored encrypted (platform_api.infra.secret_box).
+    """
+
+    __tablename__ = "ga4_connections"
+    __table_args__ = (
+        Index("ix_ga4_connections_user_id", "user_id", unique=True),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"),
+        unique=True,
+        nullable=False,
+    )
+    property_id: Mapped[Optional[str]] = mapped_column(Text)
+    property_display_name: Mapped[Optional[str]] = mapped_column(Text)
+    access_token: Mapped[Optional[str]] = mapped_column(Text)
+    refresh_token: Mapped[Optional[str]] = mapped_column(Text)
+    token_expiry: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    connected_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
 class GscConnection(Base):
     """Google Search Console OAuth connection for a user.
 
