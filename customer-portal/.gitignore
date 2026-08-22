@@ -89,3 +89,4 @@ public/audit-screenshots/
 
 *storybook.log
 storybook-static
+.legacy/

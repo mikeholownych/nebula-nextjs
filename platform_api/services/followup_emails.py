@@ -39,7 +39,7 @@ class FollowUpSequence:
         pending = []
         
         for seq in self.SEQUENCE:
-            threshold = datetime.utcnow() - timedelta(hours=seq["delay_hours"])
+            threshold = datetime.now(timezone.utc) - timedelta(hours=seq["delay_hours"])
             
             await audit_db.connect()
             async with audit_db.pool.acquire() as conn:
@@ -48,6 +48,7 @@ class FollowUpSequence:
                     SELECT id, email, name, url, score, grade, findings, email_sent_at
                     FROM audits
                     WHERE email_sent_at < $1
+                      AND email_sent_at >= NOW() - INTERVAL '30 days'
                       AND email_sent_at IS NOT NULL
                       AND paid_at IS NULL
                       AND (
