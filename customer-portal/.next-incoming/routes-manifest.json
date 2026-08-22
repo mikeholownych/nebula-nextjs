@@ -320,7 +320,7 @@
         },
         {
           "key": "X-Nebula-Revision",
-          "value": "d567b4be4cae74c76b27445fe3d8da0c460a3919"
+          "value": "2e35b51ee6650392232140f85a3dc110f0e45d45"
         }
       ],
       "regex": "^(?:/((?!_next).*))(?:/)?$"
