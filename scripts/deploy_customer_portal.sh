@@ -59,7 +59,7 @@ unset NEXT_DIST_DIR
 if [[ -f /home/mike/nebula/.env ]]; then set -a; source /home/mike/nebula/.env; set +a; fi
 log "Applying tracked migrations (audit + platform) ..."
 if ! ENVIRONMENT=production PYTHONPATH=/home/mike/nebula \
-    /home/mike/nebula/venv/bin/python3 platform_api/scripts/migrate.py apply; then
+    /home/mike/nebula/venv/bin/python3 /home/mike/nebula/platform_api/scripts/migrate.py apply; then
   log "FAIL: migration apply failed - live release untouched."
   exit 1
 fi
