@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
 import GscWidget from './gscWidget'
+import Ga4Widget from './ga4Widget'
 import SiteHealthHero from './SiteHealthHero'
 
 // ── Helpers ───────────────────────────────────────────────────────────
@@ -192,6 +193,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         </section>
       </div>
 
+      {email && <Ga4Widget email={email} latestCompletedAuditId={audits.find((a) => a.status === 'completed')?.id ?? null} />}
       {email && <GscWidget email={email} />}
     </div>
   )
