@@ -1,0 +1,21 @@
+1:"$Sreact.fragment"
+2:I[99250,["/_next/static/chunks/1lxyjgsxf-i2j.js","/_next/static/chunks/0d0cxk0o3mww6.js","/_next/static/chunks/369461lfi6ato.js"],"default"]
+3:I[97367,["/_next/static/chunks/280abr9-vs5lr.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/_next/static/chunks/280abr9-vs5lr.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/280abr9-vs5lr.js"],"MetadataBoundary"]
+a:I[27201,["/_next/static/chunks/280abr9-vs5lr.js"],"IconMark"]
+c:I[39756,["/_next/static/chunks/280abr9-vs5lr.js"],"default"]
+d:I[37457,["/_next/static/chunks/280abr9-vs5lr.js"],"default"]
+7:X
+f:X
+f:C
+0:{"buildId":"iNWCfX8KG4iu7ETtWBmLh","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/_next/static/chunks/369461lfi6ato.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#080909"}],["$","meta","3",{"name":"color-scheme","content":"dark"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Ad Spend ROI Calculator: Measure Conversion Loss | Nebula"}],["$","meta","1",{"name":"description","content":"Enter your monthly ad spend, current conversion rate, and vertical. See exactly how much revenue your landing page is leaking every month, and what fixing it is worth."}],["$","link","2",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","link","3",{"rel":"canonical","href":"https://nebulacomponents.com/roi-calculator"}],["$","meta","4",{"property":"og:title","content":"Ad Spend ROI Calculator: Measure Conversion Loss | Nebula"}],["$","meta","5",{"property":"og:description","content":"See your monthly revenue leak in dollars. Based on your actual spend, CVR, and vertical benchmark."}],["$","meta","6",{"property":"og:url","content":"https://nebulacomponents.com/roi-calculator"}],["$","meta","7",{"property":"og:site_name","content":"Nebula Components"}],["$","meta","8",{"property":"og:type","content":"website"}],["$","meta","9",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","10",{"name":"twitter:creator","content":"@NebulaCRO"}],["$","meta","11",{"name":"twitter:title","content":"Find Failed Page Conditions on Your Landing Page | Nebula Components"}],["$","meta","12",{"name":"twitter:description","content":"Free landing page audit that finds failed page conditions on public HTML. Evidence-backed, no signup, results in under 2 minutes."}],["$","meta","13",{"name":"twitter:image","content":"https://nebulacomponents.com/brand/v2/og-default.png"}],["$","link","14",{"rel":"shortcut icon","href":"/favicon.svg"}],["$","link","15",{"rel":"icon","href":"/favicon.svg","type":"image/svg+xml"}],["$","link","16",{"rel":"icon","href":"/brand/v2/favicon-32.png","sizes":"32x32","type":"image/png"}],["$","link","17",{"rel":"icon","href":"/brand/v2/favicon-16.png","sizes":"16x16","type":"image/png"}],["$","link","18",{"rel":"apple-touch-icon","href":"/brand/v2/apple-touch-icon.png"}],["$","$La","19",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"}],"isUpgradeableISRFallback":false,"a":"$@10","rootVaryParams":null,"needsRuntimeRequest":"$@11"}
+5:null
+11:true
+7:300
+7:C
+10:0
+b:"$undefined"
+e:"$undefined"
+6:"$undefined"
