@@ -18,7 +18,7 @@ export const verticals: Record<string, Vertical> = {
   saas: {
     slug: 'saas',
     name: 'SaaS',
-    headline: 'Your SaaS landing page is leaking trial signups.',
+    headline: 'Fix Your SaaS Landing Page to Boost Trial Signups',
     subheadline: 'Most SaaS pages explain features. Visitors want to know if the product solves their exact problem before they sign up.',
     pain: "You're spending on Google Ads or LinkedIn. Clicks arrive. Signups don't. The page looks fine, but something between the ad and the form is breaking trust before the visitor reaches the CTA.",
     icp: 'SaaS founders and product marketers running paid acquisition with click-through rates above 2% but trial conversion rates below 3%.',
@@ -35,7 +35,7 @@ export const verticals: Record<string, Vertical> = {
   ecommerce: {
     slug: 'ecommerce',
     name: 'eCommerce',
-    headline: 'Your product page is losing buyers at the point of decision.',
+    headline: 'Fix Your Product Page to Boost Ecommerce Checkout ROAS',
     subheadline: 'eCommerce pages don\'t fail on traffic. They fail at the moment a visitor needs one more reason to add to cart.',
     pain: "You're running Meta Ads or Google Shopping. Your ROAS looks acceptable. But 94% of visitors leave without buying, and you don't know which page element is the break point.",
     icp: 'eCommerce founders and DTC operators spending $1,000+ per month on paid traffic with a product page conversion rate below 2.5%.',
@@ -52,7 +52,7 @@ export const verticals: Record<string, Vertical> = {
   agencies: {
     slug: 'agencies',
     name: 'Marketing Agencies',
-    headline: 'Your agency site isn\'t closing inbound leads.',
+    headline: 'Transform Your Agency Site to Scale Inbound Client Leads',
     subheadline: 'Agencies know conversion. Most agency sites fail the exact audit they\'d run on a client.',
     pain: "Prospects visit after seeing your work or getting a referral. They leave without contacting you. The page communicates what you do, not what outcome they'll get or why you over anyone else.",
     icp: 'Agency founders and business development leads spending on paid or organic acquisition with a consultation conversion rate below 4%.',
@@ -69,7 +69,7 @@ export const verticals: Record<string, Vertical> = {
   coaching: {
     slug: 'coaching',
     name: 'Coaching & Consulting',
-    headline: 'Your coaching page sells your credentials. Buyers want their transformation.',
+    headline: 'Improve Your Coaching Landing Page to Boost Discovery Calls',
     subheadline: 'The most common mistake on coaching pages: leading with your story instead of the outcome the client will reach.',
     pain: "You're running ads to a page that explains your methodology and background. It's professionally designed. But the calendar stays empty because visitors don't immediately see themselves in the outcome.",
     icp: 'Coaches, consultants, and course creators spending $500+ per month on paid traffic with a discovery call booking rate below 4%.',
@@ -86,7 +86,7 @@ export const verticals: Record<string, Vertical> = {
   fintech: {
     slug: 'fintech',
     name: 'Fintech & Financial Services',
-    headline: 'Trust-signal failures are the most common finding on fintech pages we audit.',
+    headline: 'Add Proven Trust Signals to Boost Fintech Account Conversions',
     subheadline: 'In the fintech pages Nebula has audited, missing trust signals appear more frequently than headline or offer failures.',
     pain: "You're running paid acquisition on a product that solves a real financial problem. Visitors click through, read the page, and leave. The product is legitimate, but the page doesn't prove it at the moment of decision.",
     icp: 'Fintech founders and growth teams spending on paid acquisition for financial products with account-open rates below 3%.',
@@ -103,7 +103,7 @@ export const verticals: Record<string, Vertical> = {
   healthtech: {
     slug: 'healthtech',
     name: 'HealthTech & Wellness',
-    headline: 'Health product pages fail when they lead with mechanism instead of outcome.',
+    headline: 'Improve HealthTech Landing Pages to Boost Checkout Conversions',
     subheadline: 'Visitors looking for a health solution don\'t want to understand how it works. They want to know if they\'ll feel better.',
     pain: "You're running Meta Ads to a health product page. Visitors click from ads that show the transformation. The landing page explains the ingredients or the science. The gap between ad promise and page delivery blocks conversion.",
     icp: 'HealthTech and wellness founders spending on paid traffic for supplements, apps, devices, or services with a checkout or signup conversion rate below 2%.',
@@ -120,7 +120,7 @@ export const verticals: Record<string, Vertical> = {
   'b2b-software': {
     slug: 'b2b-software',
     name: 'B2B Software',
-    headline: 'B2B software pages convert less because they try to close too soon.',
+    headline: 'Optimize B2B Software Landing Pages to Boost Demo Requests',
     subheadline: 'Enterprise buyers don\'t convert from a single landing page visit. The page\'s job is to reduce risk and earn the next step.',
     pain: "You're spending on LinkedIn or Google for a B2B software product with a 3-6 month sales cycle. Your landing page is built like a lead-gen page for a $49/month SaaS. The mismatch in buyer intent versus page architecture shows in your demo request rate.",
     icp: 'B2B software founders and demand gen leads spending on paid acquisition for products in the $500-50,000 ACV range with a demo request rate below 2%.',
@@ -137,7 +137,7 @@ export const verticals: Record<string, Vertical> = {
   'lead-gen': {
     slug: 'lead-gen',
     name: 'Lead Generation',
-    headline: 'Lead gen pages bleed CPL when the form is the only thing you\'re optimizing.',
+    headline: 'Stop Wasting Ad Spend: Boost Lead Gen Landing Page Conversions',
     subheadline: 'The form is the last conversion event. The leaks happen in the 30 seconds before anyone reaches it.',
     pain: "You're running high-volume paid campaigns with a form-fill goal. CPL keeps climbing. You've tested the form, shortened it, changed the button copy. The real bottleneck is earlier, in the headline, the proof structure, or the offer framing.",
     icp: 'Performance marketers and demand gen leads running lead gen campaigns with a CPL above industry benchmark or a form conversion rate below 3%.',

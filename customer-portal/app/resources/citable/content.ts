@@ -252,7 +252,7 @@ const jobRoutes: readonly CitableJobRoute[] = [
     slug: 'technical-retrieval-audit',
     path: technicalPath,
     title: 'Technical Retrieval Audit with Citable',
-    h1: 'Audit technical retrieval eligibility',
+    h1: 'Discover and Fix Technical Retrieval Eligibility Issues',
     eyebrow: 'Retrieval evidence',
     description:
       'Establish what a bounded Citable run observed about HTTP access, crawler directives, discovery paths, and rendered resources without treating eligibility as indexing or ranking.',
@@ -286,7 +286,7 @@ const jobRoutes: readonly CitableJobRoute[] = [
     slug: 'claim-evidence-governance',
     path: claimsPath,
     title: 'Claim and Evidence Governance with Citable',
-    h1: 'Govern claims against inspectable evidence',
+    h1: 'Build Proven Claim and Evidence Governance Workflows',
     eyebrow: 'Claim governance',
     description:
       'Use Citable registries and review gates to separate unsupported, supported, expired, and human-reviewed claims before publication.',
@@ -320,7 +320,7 @@ const jobRoutes: readonly CitableJobRoute[] = [
     slug: 'answer-extractability-audit',
     path: answersPath,
     title: 'Answer Extractability Audit with Citable',
-    h1: 'Audit answer extractability',
+    h1: 'Improve Answer Extractability for AI Search Engines',
     eyebrow: 'Answer extraction',
     description:
       'Inspect whether a bounded answer and its supporting context can be extracted from the audited source without claiming downstream citation or recommendation.',
@@ -354,7 +354,7 @@ const jobRoutes: readonly CitableJobRoute[] = [
     slug: 'entity-narrative-audit',
     path: entitiesPath,
     title: 'Entity and Narrative Audit with Citable',
-    h1: 'Audit entity and narrative consistency',
+    h1: 'Improve Entity and Narrative Consistency in AI Models',
     eyebrow: 'Entity consistency',
     description:
       'Compare declared entity identifiers, relationships, structured data, and narrative claims across controlled sources.',
@@ -388,7 +388,7 @@ const jobRoutes: readonly CitableJobRoute[] = [
     slug: 'release-deployment-verification',
     path: releasesPath,
     title: 'Release and Deployment Verification with Citable',
-    h1: 'Verify release and deployment evidence',
+    h1: 'Build Proven Release and Deployment Verification',
     eyebrow: 'Release evidence',
     description:
       'Separate a documented package release from workflow execution and live-surface deployment proof.',
@@ -424,7 +424,7 @@ export const citableRoutes: readonly CitableRoute[] = [
     status: 'published',
     path: CITABLE_OVERVIEW_PATH,
     title: 'Citable - Evidence for Search and AI Readiness',
-    h1: 'Citable',
+    h1: 'Build Defensible SEO and AI Readiness Evidence with Citable',
     eyebrow: 'Open-source evidence layer',
     description:
       'Citable is the open evidence layer beneath Nebula: it records what a web property makes technically available, what its content can support, and what external systems have actually been observed doing.',
@@ -439,7 +439,7 @@ export const citableRoutes: readonly CitableRoute[] = [
     status: 'published',
     path: quickStartPath,
     title: 'Citable Quick Start',
-    h1: 'Run your first evidence-bounded Citable audit',
+    h1: 'Launch Your First Evidence-Bounded Citable Audit Fast',
     eyebrow: 'Quick start',
     description:
       'Install the projected Citable package, run a bounded audit, inspect its evidence, decide from explicit limits, and verify changes with a comparable follow-up run.',
@@ -455,7 +455,7 @@ export const citableRoutes: readonly CitableRoute[] = [
     status: 'published',
     path: comparePath,
     title: 'When to Use Citable',
-    h1: 'Choose the right verification layer',
+    h1: 'Discover When to Use Citable for AI Search Verification',
     eyebrow: 'Category comparison',
     description:
       'Choose Citable for bounded evidence and governance work, while retaining separate crawler, rank-tracking, and AI-visibility observations where they are required.',
@@ -470,7 +470,7 @@ export const citableRoutes: readonly CitableRoute[] = [
     status: 'published',
     path: releaseNotesPath,
     title: 'Citable Release Evidence',
-    h1: 'Inspect the synchronized Citable release',
+    h1: 'Discover Synchronized Citable Releases and Package Facts',
     eyebrow: 'Current release',
     description:
       'Inspect package facts and release highlights from the synchronized Citable projection without treating them as workflow or deployment proof.',

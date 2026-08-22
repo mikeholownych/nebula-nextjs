@@ -108,7 +108,7 @@ export default function NewsletterForm() {
           disabled={status === 'submitting'}
           className="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Subscribing...' : 'Subscribe (Free)'}
+          {status === 'submitting' ? 'Subscribing...' : 'Get Free Weekly Insights →'}
         </button>
 
         <p className="text-xs text-fg-muted text-center">

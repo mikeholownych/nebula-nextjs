@@ -24,12 +24,24 @@ export default function RepairSprintExamplePage() {
           </p>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight text-fg mb-2">
-          Example Repair Sprint Artifact
-        </h1>
+        <h1 className="heading-1 text-fg md:text-5xl">Discover an Example Repair Sprint: Verified Landing Page Fixes</h1>
         <p className="text-fg-muted mb-12">
           Target: <span className="font-mono text-fg">basecamp.com</span> - SEO Foundations finding
         </p>
+        <div className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=repair-example-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         {/* Original observation */}
         <section className="mb-10">

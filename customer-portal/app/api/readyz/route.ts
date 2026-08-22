@@ -41,7 +41,7 @@ export async function GET(_request?: NextRequest) {
     probeError = err
     if (!client) {
       void connectPromise
-        .then((late) => {
+        .then((late: any) => {
           try {
             late.release()
           } catch {

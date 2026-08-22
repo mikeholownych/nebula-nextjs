@@ -145,12 +145,24 @@ export default function PageSpeedConversionPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Page Speed &amp; Conversion
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Page Speed and Conversion
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Improve Page Speed to Boost Paid Traffic Conversion Rates</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               Speed failures eliminate conversion before the visitor reaches the CTA. LCP over 2.5s. HTML payloads that should be API calls. Render-blocking scripts that hold the page blank while executing. Desktop-resolution images on mobile viewports. Each failure has a measurable, observable cause - and a bounded fix.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=page-speed-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           {/* Six failure patterns */}

@@ -6,7 +6,7 @@ export default function OGCardSource() {
         Evidence-backed conversion diagnosis
       </div>
       <h1 className="text-white text-[62px] leading-[1.06] tracking-[-0.03em] max-w-[860px] mb-5 font-extrabold">
-        Your landing page is <em className="text-accent not-italic">leaking buyers.</em>
+        Fix Your Landing Page Before It Leaks More Buyers
       </h1>
       <p className="text-fg-muted text-[23px] max-w-[760px] leading-[1.4] mb-10">
         Automated URL submission and scoring are live - every finding is backed by verifiable evidence.

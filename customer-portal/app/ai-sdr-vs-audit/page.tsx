@@ -35,7 +35,7 @@ export default function AiSdrVsAuditPage() {
   const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
 
   return (
-    <div className="min-h-screen bg-bg text-fg font-sans">
+    <main id="main-content" className="min-h-screen bg-bg text-fg font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -47,10 +47,15 @@ export default function AiSdrVsAuditPage() {
       {/* Hero */}
       <section className="bg-bg border-b border-border py-20 px-6">
         <div className="max-w-[720px] mx-auto text-center">
-          <h1 className="text-[clamp(2rem,5vw,3.2rem)] font-black leading-tight text-fg mb-5">
-            You Don't Need an AI SDR.<br />
-            You Need a <span className="text-accent/80">Measured Landing-Page Baseline.</span>
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Why Fixing Landing Pages Outperforms Cold AI SDR Outreach</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=aisdr-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </a>
+        </div>
           <p className="text-lg text-fg-muted max-w-[600px] mx-auto mb-8">
             More outbound volume cannot establish whether the landing page receiving that traffic
             is ready to convert it. Verify the page before adding another acquisition system.
@@ -71,7 +76,7 @@ export default function AiSdrVsAuditPage() {
       </section>
 
       {/* Main Content */}
-      <main id="main-content" className="max-w-[780px] mx-auto px-6 py-12 pb-20">
+      <div className="max-w-[720px] mx-auto px-6 py-16">
         <p className="mb-4">Let's be direct.</p>
         <p className="mb-4">You have traffic. You have ad spend. You're getting zero conversions - or close to it. And now someone told you that you need an "AI SDR" or "AI BDR" to fix it.</p>
         <p className="mb-8">
@@ -252,7 +257,7 @@ export default function AiSdrVsAuditPage() {
           { href: '/audit', label: 'Get your free audit', type: 'cta' }
           ]} />
 
-      </main>
-    </div>
+      </div>
+    </main>
   )
 }

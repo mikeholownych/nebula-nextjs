@@ -129,8 +129,38 @@ export default async function AuditPage() {
         <section className="mx-auto max-w-6xl px-6 py-12 md:py-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
-            {/* Form first on mobile (order-1 on mobile, order-2 on md+) */}
-            <div id="run-audit" className="order-1 min-w-0 overflow-hidden rounded-md border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
+            {/* Copy first on mobile (order-1 on mobile, order-1 on md+) */}
+            <div className="order-1 flex min-w-0 flex-col justify-center">
+              <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Run a Free Landing Page Audit to Fix Conversion Leaks Fast</h1>
+              <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
+                Paste your URL. Nebula checks 9 conversion signals against your actual page HTML.
+                See findings ranked by priority before sharing an email.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  href="#run-audit"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+                >
+                  Start your free audit ↓
+                </a>
+              </div>
+              <ul className="mt-6 space-y-2">
+                {[
+                  'Results in under 2 minutes',
+                  'No signup, no account',
+                  'Works with Webflow, Framer, Shopify, WordPress & Next.js',
+                  '$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-fg-muted">
+                    <span className="mt-0.5 shrink-0 text-accent">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Form second on mobile (order-2 on mobile, order-2 on md+) */}
+            <div id="run-audit" className="order-2 min-w-0 overflow-hidden rounded-md border border-border bg-bg-muted/30 p-6 md:p-8">
               <p className="mb-4 text-sm font-semibold text-fg">
                 Paste your landing page URL
               </p>
@@ -163,30 +193,7 @@ export default async function AuditPage() {
               </p>
             </div>
 
-            {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
-            <div className="order-2 flex min-w-0 flex-col justify-center md:order-1">
-              <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-                Check your page before you change the ad.
-              </h1>
-              <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula checks 9 conversion signals against your actual page HTML.
-                See findings ranked by priority before sharing an email.
-              </p>
-              <ul className="mt-6 space-y-2">
-                {[
-                  'Results in under 2 minutes',
-                  'No signup, no account',
-                  'Works with Webflow, Framer, Shopify, WordPress & Next.js',
-                  '$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
-                    <span className="text-accent">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Quantity Proof & 12-Avatar Live Activity Grid (D3.1) */}
+            {/* Quantity Proof & 12-Avatar Live Activity Grid (D3.1) */}
               <div className="mt-6 flex flex-col gap-3 rounded-lg border border-border bg-bg-panel/60 p-4">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center -space-x-1.5 overflow-hidden">
@@ -229,7 +236,6 @@ export default async function AuditPage() {
               </div>
             </div>
 
-          </div>
         </section>
 
 

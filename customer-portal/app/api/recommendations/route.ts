@@ -20,13 +20,14 @@ export async function GET(request: NextRequest) {
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
-        signal: AbortSignal.timeout(10000),
+        signal: AbortSignal.timeout(15000),
       }
     )
 
     if (!response.ok) {
+      const errData = await response.json().catch(() => null)
       return NextResponse.json(
-        { error: 'Failed to load recommendations' },
+        { error: errData?.detail || errData?.message || errData?.error || 'Failed to load recommendations' },
         { status: response.status }
       )
     }
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Workspace recommendations error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: error instanceof Error ? error.message : 'Internal server error' },
       { status: 500 }
     )
   }

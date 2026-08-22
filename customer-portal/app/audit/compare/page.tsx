@@ -61,9 +61,7 @@ export default function CompareAuditPage() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Head-to-Head Teardown
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Compare Your Landing Page Against Any Competitor
-            </h1>
+            <h1 className="heading-1 text-fg">Compare Landing Page Audits to Discover Conversion Improvements</h1>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-fg-muted">
               Scan two public URLs side-by-side across 9 conversion signals. See exactly where your page has the advantage, where you are leaking paid clicks, and how both pages score for AI search citability.
             </p>

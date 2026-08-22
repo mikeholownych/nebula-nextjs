@@ -16,9 +16,7 @@ export default function LabPage() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Component Lab
           </p>
-          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Check the components that decide the click.
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Experimental Conversion Lab Tools to Test Ideas Fast</h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted md:text-lg">
             All 9 conversion components, on demand. Paste your ad copy and page URL - Nebula
             runs the same engine as the free audit and shows you the status, the evidence, and the

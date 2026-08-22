@@ -83,9 +83,7 @@ export default function SocialProofLandingPage() {
       {/* Container */}
       <main id="main-content" className="max-w-[720px] mx-auto px-6 py-12 pb-20">
         {/* Main Content */}
-        <h1 className="text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-tight text-fg mt-8 mb-4">
-          Social Proof on Landing Pages
-        </h1>
+        <h1 className="heading-1 text-fg md:text-5xl">Add Proven Social Proof to Boost Landing Page Conversions</h1>
 
         <p className="text-fg-muted text-lg mb-8">
           Every cold visitor has one unspoken question: 'Why should I trust you?'
@@ -93,6 +91,20 @@ export default function SocialProofLandingPage() {
           drops. Social proof - testimonials, numbers, logos, guarantees -
           answers that question before it becomes an objection.
         </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=social-proof-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
 
         {/* Quick Answer Blockquote */}
         <blockquote className="border border-border bg-bg-panel p-5 rounded-xl my-6">

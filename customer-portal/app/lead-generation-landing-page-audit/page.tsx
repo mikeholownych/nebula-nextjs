@@ -145,12 +145,24 @@ export default function LeadGenAuditPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Lead Generation Diagnostics
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Lead Generation Landing Page Audit
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Run a Free Lead Gen Landing Page Audit to Boost Inbound CVR</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               Lead gen pages with paid traffic fail in specific, repeatable ways. Forms that ask too many questions. Submit buttons that say &ldquo;Submit.&rdquo; No trust signal at the moment of commitment. No statement of what happens after the visitor clicks. This guide covers each failure pattern with the signal it trips and a bounded fix.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=lead-gen-audit-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           {/* Six failure patterns */}

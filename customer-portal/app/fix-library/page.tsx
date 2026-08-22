@@ -40,9 +40,7 @@ export default async function FixLibraryPage() {
   if (error) {
     return (
       <div className="min-h-[600px] flex flex-col items-center justify-center px-6 py-12">
-        <h1 className="mb-4 text-2xl font-bold">
-          Fix Implementation Library
-        </h1>
+        <h1 className="heading-1 text-fg">Discover the Complete Fix Library to Boost Page Conversions</h1>
         <p className="mb-6 text-destructive">
           Failed to load fix library: {error}
         </p>
@@ -60,9 +58,7 @@ export default async function FixLibraryPage() {
   if (fixes.length === 0) {
     return (
       <div className="min-h-[600px] flex flex-col items-center justify-center px-6 py-12">
-        <h1 className="mb-4 text-2xl font-bold">
-          Fix Implementation Library
-        </h1>
+        <h1 className="heading-1 text-fg">Discover the Complete Fix Library to Boost Page Conversions</h1>
         <p className="mb-6 text-muted-foreground">
           No fix implementation data available yet. As more users verify their
           One-Leak Repair Sprint implementations, this library will grow to show
@@ -82,9 +78,7 @@ export default async function FixLibraryPage() {
   return (
     <div className="space-y-8">
       <div className="px-6 py-8">
-        <h1 className="mb-4 text-3xl font-bold">
-          Fix Implementation Library
-        </h1>
+        <h1 className="heading-1 text-fg">Discover the Complete Fix Library to Boost Page Conversions</h1>
         <p className="text-muted-foreground">
           See which fixes work best for landing pages based on real implementation
           data from thousands of verified One-Leak Repair Sprint projects.

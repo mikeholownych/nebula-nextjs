@@ -84,14 +84,23 @@ export default function LandingPagePerformanceQ3Page() {
 
           {/* H1 */}
           <h1 className="font-extrabold text-3xl md:text-5xl leading-tight text-white mb-6">
-            State of Landing Page Performance - Q3 2026
+            Discover the State of Landing Page Performance - Q3 2026
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-[#9e9e9e] leading-relaxed mb-8">
+          <p className="text-lg text-[#9e9e9e] leading-relaxed mb-6">
             Aggregate findings from 131 completed landing page audits conducted through the Nebula audit
             engine. August 2026.
           </p>
+
+          <div className="mb-8 flex flex-wrap gap-3">
+            <Link
+              href="/audit?utm_source=research-hero&utm_medium=hero-cta"
+              className="inline-flex items-center justify-center rounded bg-[#c7ff2f] px-6 py-3 text-sm font-semibold text-[#050505] transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+          </div>
 
           {/* Meta row */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#9e9e9e] border-t border-border pt-6">

@@ -15,8 +15,16 @@ export default function TermsPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
       <div className="mx-auto max-w-2xl px-6">
-        <h1 className="text-3xl font-bold tracking-tight text-fg">Terms of Service</h1>
-        <p className="mt-2 mb-12 text-sm text-fg-muted">Last updated: August 1, 2026</p>
+        <h1 className="text-3xl font-bold tracking-tight text-fg">Discover Our Terms of Service: Clear Rules to Build Trust</h1>
+        <p className="mt-2 mb-6 text-sm text-fg-muted">Last updated: August 1, 2026</p>
+        <div className="mb-8 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=terms-hero&utm_medium=hero-cta"
+            className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get free audit →
+          </a>
+        </div>
 
         <div className="space-y-10">
           <section>

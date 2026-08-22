@@ -141,12 +141,24 @@ export default function HeadlineOptimizationPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Headline Conversion
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Landing Page Headline Optimization
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Improve Landing Page Headlines to Boost Visitor Retention</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               Your headline has 3 seconds to tell a cold visitor they&apos;re in the right place. If it describes your product instead of their outcome - or doesn&apos;t match the ad that brought them - 40–60% of visitors leave before scrolling. This is the highest-leverage fix on any landing page, and it fails in six specific, repeatable ways.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=head-opt-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           {/* Six failure patterns */}

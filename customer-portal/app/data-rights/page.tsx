@@ -11,9 +11,15 @@ export const metadata: Metadata = {
 export default function DataRightsPage() {
   return (
     <main id="main-content" className="max-w-3xl mx-auto px-5 pt-32 pb-24">
-      <h1 className="heading-1 text-fg mb-3 tracking-tight">
-        Your Data Rights
-      </h1>
+      <h1 className="heading-1 text-fg">Manage Your Data Rights and Protect Privacy Easily</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=data-rights-hero&utm_medium=hero-cta"
+            className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get free audit →
+          </a>
+        </div>
       <p className="text-sm text-fg-muted mb-10">
         GDPR (EU) & CCPA (California) Compliance
       </p>

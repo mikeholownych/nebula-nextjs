@@ -25,13 +25,26 @@ export default function VsIndexPage() {
         </nav>
 
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Tool Comparisons</p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          Nebula vs. Other Audit Tools
-        </h1>
+        <h1 className="heading-1 text-fg">Compare Landing Page Audit Tools to Discover the Best Solution</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Every audit tool below checks something different. These pages show exactly what each one checks, what it costs,
           and where Nebula fits - so you can pick the right tool for your problem.
         </p>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=vs-index-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         <Link
           href="/best-landing-page-audit-tools"

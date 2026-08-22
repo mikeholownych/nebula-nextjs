@@ -17,7 +17,7 @@ const TEARDOWNS = [
     url: 'carrd.co',
     score: 4.2,
     grade: 'D',
-    topFinding: 'H1 is <h1>Carrd</h1> - the brand name only. Zero value prop. Missing og:title, og:description, and all JSON-LD schema.',
+    topFinding: 'H1 is <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover Conversion Leaks from Real SaaS Landing Page Audits</h1> - the brand name only. Zero value prop. Missing og:title, og:description, and all JSON-LD schema.',
     findingCount: 5,
     auditedAt: 'July 30, 2026',
   },
@@ -390,14 +390,26 @@ export default function TeardownsPage() {
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardowns
         </p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          Real audits on well-known pages
-        </h1>
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover Conversion Leaks from Real SaaS Landing Page Audits</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           These companies are not Nebula customers. We run the same 9-signal engine on public pages
           and publish the raw findings - not to criticize anyone, but to show exactly what the audit
           produces on pages you can verify yourself.
         </p>
+        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=teardowns-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free landing page audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
       </section>
 
       <section className="border-t border-border px-6 py-12">

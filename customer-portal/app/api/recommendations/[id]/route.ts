@@ -32,14 +32,14 @@ export async function PATCH(
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
         body: JSON.stringify({ status }),
-        signal: AbortSignal.timeout(10000),
+        signal: AbortSignal.timeout(15000),
       }
     )
 
     if (!response.ok) {
       const data = await response.json().catch(() => null)
       return NextResponse.json(
-        { error: data?.message || 'Failed to update recommendation' },
+        { error: data?.detail || data?.message || data?.error || 'Failed to update recommendation' },
         { status: response.status }
       )
     }
@@ -49,7 +49,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Recommendation update error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: error instanceof Error ? error.message : 'Internal server error' },
       { status: 500 }
     )
   }

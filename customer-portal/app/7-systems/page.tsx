@@ -107,14 +107,19 @@ const systems = [
 
 export default function SevenSystemsPage() {
   return (
-    <div className="min-h-screen bg-bg text-fg">
+    <main id="main-content" className="min-h-screen bg-bg text-fg">
       {/* Header */}
       <header className="bg-bg-elevated border-b border-border py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-            7 Systems Every Ecom Brand Needs<br />
-            <span className="text-accent">(That Most Skip)</span>
-          </h1>
+          <h1 className="heading-1 text-fg">Discover 7 Proven Systems to Scale Your Business Growth</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=7systems-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </a>
+        </div>
           <p className="text-lg md:text-xl text-fg-muted max-w-xl mx-auto">
             You&apos;re running ads. You&apos;re getting traffic. But your landing page isn&apos;t converting.
           </p>
@@ -128,7 +133,7 @@ export default function SevenSystemsPage() {
       </header>
 
       {/* Main Content */}
-      <main id="main-content" className="py-12 md:py-16">
+      <div className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-lg text-fg-muted mb-6">
             It&apos;s not one thing. It&apos;s almost always a missing system - not a missing button color or a better font.
@@ -257,7 +262,7 @@ export default function SevenSystemsPage() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Footer */}
       <footer className="border-t border-border py-8">
@@ -267,6 +272,6 @@ export default function SevenSystemsPage() {
           </p>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }

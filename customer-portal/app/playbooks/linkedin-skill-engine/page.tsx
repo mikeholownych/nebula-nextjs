@@ -34,12 +34,24 @@ export default function LinkedInSkillEnginePage() {
 
       <article className="mx-auto max-w-4xl px-6 py-12">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Founder Systems</p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          LinkedIn Skill Engine: Post From What You Actually Know
-        </h1>
+        <h1 className="heading-1 text-fg">Launch the LinkedIn Skill Engine to Scale Your Authority</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Most B2B LinkedIn content fails because it is manufactured: rephrased advice, hollow hooks, ideas borrowed from other creators. The LinkedIn Skill Engine inverts this - it starts from what you have actually done and converts it into posts that read as authority because they are authority.
         </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=playbooks-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
 
         <section className="mt-12">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why Generic LinkedIn Content Fails</h2>

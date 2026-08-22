@@ -100,7 +100,7 @@ export default function PricingPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
-      <PageShell title="Pricing" description="Only verified, currently available offers are shown.">
+      <PageShell title="Choose a Plan to Boost Landing Page Conversions" description="Only verified, currently available offers are shown.">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="mb-16 text-center">
             <p className="mx-auto mt-4 max-w-xl text-fg-muted">

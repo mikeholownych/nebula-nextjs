@@ -1234,40 +1234,64 @@ class AuditDB:
                 """,
                 email,
             )
-            for a in latest_per_url:
-                findings = a["findings"]
-                if isinstance(findings, str):
-                    findings = json.loads(findings)
-                for f in findings:
-                    await conn.execute(
-                        """
-                        INSERT INTO recommendations
-                            (email, audit_id, url, finding_key, label, impact, effort, quadrant, status)
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'to_fix')
-                        ON CONFLICT (email, url, finding_key)
-                        DO UPDATE SET
-                            audit_id = EXCLUDED.audit_id,
-                            label = EXCLUDED.label,
-                            impact = EXCLUDED.impact,
-                            effort = EXCLUDED.effort,
-                            quadrant = EXCLUDED.quadrant,
-                            updated_at = now()
-                        """,
-                        email, a["id"], a["url"], f.get("key"), f.get("label"),
-                        f.get("impact", 0), f.get("effort", 0), f.get("quadrant"),
-                    )
-
+            insert_records = []
             latest_keys = {}
             for a in latest_per_url:
                 findings = a["findings"]
                 if isinstance(findings, str):
-                    findings = json.loads(findings)
-                latest_keys[a["url"]] = {f.get("key") for f in findings}
+                    try:
+                        findings = json.loads(findings)
+                    except Exception:
+                        findings = []
+                if not isinstance(findings, list):
+                    continue
+
+                keys = set()
+                for f in findings:
+                    if not isinstance(f, dict):
+                        continue
+                    k = f.get("key")
+                    if not k:
+                        continue
+                    keys.add(k)
+                    label = f.get("label") or k
+                    try:
+                        impact = float(f.get("impact") or 0)
+                    except (ValueError, TypeError):
+                        impact = 0.0
+                    try:
+                        effort = float(f.get("effort") or 0)
+                    except (ValueError, TypeError):
+                        effort = 0.0
+                    quadrant = f.get("quadrant")
+                    insert_records.append((
+                        email, a["id"], a["url"], k, label, impact, effort, quadrant
+                    ))
+                latest_keys[a["url"]] = keys
+
+            if insert_records:
+                await conn.executemany(
+                    """
+                    INSERT INTO recommendations
+                        (email, audit_id, url, finding_key, label, impact, effort, quadrant, status)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'to_fix')
+                    ON CONFLICT (email, url, finding_key)
+                    DO UPDATE SET
+                        audit_id = EXCLUDED.audit_id,
+                        label = EXCLUDED.label,
+                        impact = EXCLUDED.impact,
+                        effort = EXCLUDED.effort,
+                        quadrant = EXCLUDED.quadrant,
+                        updated_at = now()
+                    """,
+                    insert_records,
+                )
 
             recs = await conn.fetch(
                 "SELECT id, url, finding_key, status FROM recommendations WHERE email = $1",
                 email,
             )
+            done_ids = []
             for r in recs:
                 keys = latest_keys.get(r["url"])
                 if (
@@ -1275,14 +1299,17 @@ class AuditDB:
                     and r["finding_key"] not in keys
                     and r["status"] != "done"
                 ):
-                    await conn.execute(
-                        """
-                        UPDATE recommendations
-                        SET status = 'done', verified_at = now(), updated_at = now()
-                        WHERE id = $1
-                        """,
-                        r["id"],
-                    )
+                    done_ids.append(r["id"])
+
+            if done_ids:
+                await conn.execute(
+                    """
+                    UPDATE recommendations
+                    SET status = 'done', verified_at = now(), updated_at = now()
+                    WHERE id = ANY($1::uuid[])
+                    """,
+                    done_ids,
+                )
 
             rows = await conn.fetch(
                 """
@@ -1299,34 +1326,58 @@ class AuditDB:
             out = []
             for r in rows:
                 d = dict(r)
-                d["id"] = str(d["id"])
-                d["audit_id"] = str(d["audit_id"])
-                d["impact"] = float(d["impact"])
-                d["effort"] = float(d["effort"])
+                d["id"] = str(d["id"]) if d.get("id") is not None else ""
+                d["audit_id"] = str(d["audit_id"]) if d.get("audit_id") is not None else ""
+                try:
+                    d["impact"] = float(d["impact"]) if d.get("impact") is not None else 0.0
+                except (ValueError, TypeError):
+                    d["impact"] = 0.0
+                try:
+                    d["effort"] = float(d["effort"]) if d.get("effort") is not None else 0.0
+                except (ValueError, TypeError):
+                    d["effort"] = 0.0
                 out.append(d)
             return out
 
-    async def update_recommendation_status(self, rec_id: str, status: str) -> Optional[dict]:
+    async def update_recommendation_status(self, rec_id: str, status: str, email: Optional[str] = None) -> Optional[dict]:
         """Move a recommendation between kanban columns."""
         await self.connect()
         async with self.pool.acquire() as conn:
-            row = await conn.fetchrow(
-                """
-                UPDATE recommendations
-                SET status = $1, updated_at = now()
-                WHERE id = $2
-                RETURNING id, email, audit_id, url, finding_key, label, impact,
-                          effort, quadrant, status, verified_at, created_at, updated_at
-                """,
-                status, rec_id,
-            )
+            if email:
+                row = await conn.fetchrow(
+                    """
+                    UPDATE recommendations
+                    SET status = $1, updated_at = now()
+                    WHERE id = $2 AND email = $3
+                    RETURNING id, email, audit_id, url, finding_key, label, impact,
+                              effort, quadrant, status, verified_at, created_at, updated_at
+                    """,
+                    status, rec_id, email,
+                )
+            else:
+                row = await conn.fetchrow(
+                    """
+                    UPDATE recommendations
+                    SET status = $1, updated_at = now()
+                    WHERE id = $2
+                    RETURNING id, email, audit_id, url, finding_key, label, impact,
+                              effort, quadrant, status, verified_at, created_at, updated_at
+                    """,
+                    status, rec_id,
+                )
             if not row:
                 return None
             d = dict(row)
-            d["id"] = str(d["id"])
-            d["audit_id"] = str(d["audit_id"])
-            d["impact"] = float(d["impact"])
-            d["effort"] = float(d["effort"])
+            d["id"] = str(d["id"]) if d.get("id") is not None else ""
+            d["audit_id"] = str(d["audit_id"]) if d.get("audit_id") is not None else ""
+            try:
+                d["impact"] = float(d["impact"]) if d.get("impact") is not None else 0.0
+            except (ValueError, TypeError):
+                d["impact"] = 0.0
+            try:
+                d["effort"] = float(d["effort"]) if d.get("effort") is not None else 0.0
+            except (ValueError, TypeError):
+                d["effort"] = 0.0
             return d
 
     # ── Lab experiments (Component Lab History) ──────────────────────────

@@ -77,9 +77,7 @@ export default async function TeardownPage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardown
         </p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          {t.domain} - What the Audit Engine Found
-        </h1>
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover What the Audit Engine Found on {t.domain}</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Nebula ran its evidence-backed audit on{' '}
           <a
@@ -93,6 +91,20 @@ export default async function TeardownPage({
           on {t.auditedAt}. {t.name} is not a Nebula customer. This page shows the raw output of
           the same engine every free scan uses - {t.findings.length} findings, evidence included.
         </p>
+        <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=teardown-detail-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         {/* Score card */}
         <div className="mt-8 flex flex-wrap items-center gap-6 rounded-md border border-border bg-bg-panel p-6">

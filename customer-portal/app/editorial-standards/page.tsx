@@ -12,7 +12,15 @@ export default function EditorialStandardsPage() {
       <div className="max-w-3xl mx-auto px-6 py-16">
         <header className="mb-12">
           <p className="text-accent text-sm font-bold tracking-widest uppercase mb-4">Trust &amp; Accuracy</p>
-          <h1 className="text-4xl font-black text-fg mb-4">Editorial Standards</h1>
+          <h1 className="heading-1 text-fg">Discover Our Proven Editorial Standards and Evidence Rules</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=editorial-hero&utm_medium=hero-cta"
+            className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get free audit →
+          </a>
+        </div>
           <p className="text-lg text-fg-muted">How we ensure every audit, article, and recommendation is accurate, verifiable, and correctable.</p>
         </header>
 

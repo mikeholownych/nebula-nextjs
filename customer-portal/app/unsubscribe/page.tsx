@@ -107,9 +107,7 @@ export default function UnsubscribePage() {
     <div className="min-h-screen flex items-center justify-center bg-bg">
       <div className="bg-bg-panel border border-border rounded-2xl p-12 max-w-xl w-[90%] text-center">
         <div className="text-5xl mb-4">{icon}</div>
-        <h1 className="text-2xl font-bold text-fg mb-3">
-          Unsubscribe from Nebula Components
-        </h1>
+        <h1 className="text-2xl font-bold text-fg mb-3">Manage Email Preferences to Stop Unwanted Updates Easily</h1>
         <p className="text-fg-muted mb-6">{description}</p>
 
         {buttonVisible && (

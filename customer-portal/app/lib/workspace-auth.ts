@@ -50,10 +50,13 @@ export async function requireWorkspaceUser(
 
 export function authHeaders(request: NextRequest): Record<string, string> {
   const headers: Record<string, string> = {}
+  const token = request.cookies.get('access_token')?.value
   const cookie = request.headers.get('cookie')
   const authorization = request.headers.get('authorization')
   if (cookie) headers.cookie = cookie
+  else if (token) headers.cookie = `access_token=${token}`
   if (authorization) headers.authorization = authorization
+  else if (token) headers.authorization = `Bearer ${token}`
   return headers
 }
 

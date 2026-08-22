@@ -34,12 +34,24 @@ export default function FounderSecondBrainPage() {
 
       <article className="mx-auto max-w-4xl px-6 py-12">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Founder Systems</p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          Founder Second Brain: Turn Your Expertise Into Compounding Output
-        </h1>
+        <h1 className="heading-1 text-fg">Build a Founder Second Brain to Scale Your Expertise Fast</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Most founders hold a decade of hard-won insight in their head that never gets used outside a Zoom call. The Founder Second Brain is a system for extracting that expertise and converting it into content, offers, and decision frameworks that work for you continuously.
         </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=playbooks-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
 
         <section className="mt-12">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Problem: Expertise That Does Not Compound</h2>

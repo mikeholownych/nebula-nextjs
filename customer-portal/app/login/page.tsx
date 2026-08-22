@@ -64,7 +64,7 @@ function LoginForm() {
   return (
     <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
       <div className="mx-auto max-w-md px-6 py-16">
-        <h1 className="text-3xl font-bold">Sign in to your workspace</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-fg">Sign In to Your Workspace to Access Your Free Audits</h1>
         <p className="mt-2 text-fg-muted">
           Access your audits, recommendations, and optimization history.
         </p>
@@ -166,7 +166,11 @@ export default function LoginPage() {
   return (
     <Suspense fallback={
       <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
-        <div className="mx-auto max-w-md px-6 py-16 text-fg-muted">Loading…</div>
+        <div className="mx-auto max-w-md px-6 py-16">
+          <h1 className="text-2xl font-bold tracking-tight text-fg">Sign In to Your Workspace to Access Your Free Audits</h1>
+          <p className="mt-2 text-fg-muted">Access your audits, recommendations, and optimization history.</p>
+          <div className="mt-8 text-center text-fg-muted">Loading sign-in options…</div>
+        </div>
       </main>
     }>
       <LoginForm />

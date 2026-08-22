@@ -11,12 +11,18 @@ export const metadata: Metadata = {
 export default function PrivacyPolicy() {
   return (
     <main id="main-content" className="max-w-3xl mx-auto px-5 pt-32 pb-24">
-      <h1 className="heading-1 text-fg mb-3 tracking-tight">
-        Privacy Policy
-      </h1>
-      <p className="text-sm text-fg-muted mb-10">
+      <h1 className="heading-1 text-fg mb-3 tracking-tight">Discover How We Protect and Secure Your Free Audit Data</h1>
+      <p className="text-sm text-fg-muted mb-6">
         Last updated: July 12, 2026
       </p>
+      <div className="mb-8 flex flex-wrap gap-3">
+        <a
+          href="/audit?utm_source=privacy-hero&utm_medium=hero-cta"
+          className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+        >
+          Get free audit →
+        </a>
+      </div>
 
       <p className="text-fg-muted mb-6">
         Nebula Components (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the website nebulacomponents.com and provides landing page audit services. This privacy policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.

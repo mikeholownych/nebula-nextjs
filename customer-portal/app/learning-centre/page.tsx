@@ -55,9 +55,7 @@ export default function LearningCentreIndex() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Learning Centre
           </p>
-          <h1 className="heading-1 tracking-tight text-fg md:text-6xl">
-            Fix the page, not the ad
-          </h1>
+          <h1 className="heading-1 tracking-tight text-fg md:text-6xl">Fix the Landing Page to Boost Conversion Rates</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">
             Free conversion guides for founders getting clicks but no sales. Start with the leak map. Implement only when the leak is obvious.
           </p>

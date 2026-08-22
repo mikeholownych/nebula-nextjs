@@ -33,12 +33,24 @@ export default function MistakesChecklistPage() {
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">
             Free Resource
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-fg mb-4">
-            Top 10 Landing Page Mistakes
-          </h1>
+          <h1 className="heading-1 text-fg md:text-5xl">Fix Common Landing Page Mistakes to Boost Ad Conversion Rates</h1>
           <p className="text-lg text-fg-muted max-w-[65ch] mx-auto mb-2 leading-relaxed">
             The exact mistakes costing founders thousands in wasted ad spend.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=lp-mistakes-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           <p className="text-base text-fg-muted max-w-[65ch] mx-auto leading-relaxed">
             One-page checklist. Specific fixes for each. No fluff.
           </p>

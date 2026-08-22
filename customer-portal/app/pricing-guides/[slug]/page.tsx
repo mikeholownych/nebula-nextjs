@@ -69,9 +69,22 @@ export default async function PricingGuidePage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           {guide.category} · Pricing verified August 2026
         </p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          {guide.toolName} Pricing (2026): What It Really Costs
-        </h1>
+        <h1 className="heading-1 text-fg">Discover {guide.toolName} Pricing (2026): What It Really Costs</h1>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=pricing-guide-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         {/* BLUF - answer up front for AI snippet pull */}
         <section aria-label="Bottom line" className="mt-8 rounded-2xl border border-accent/20 bg-accent/5 p-6">

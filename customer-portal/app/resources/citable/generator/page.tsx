@@ -25,6 +25,14 @@ export default function CitableGeneratorPage() {
           <h1 className="mt-2 text-3xl font-extrabold text-fg md:text-4xl">
             Make your brand AI-extractable in 60 seconds
           </h1>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/audit?utm_source=generator-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </a>
+          </div>
           <p className="mt-4 text-base leading-7 text-fg-muted">
             Large Language Models (ChatGPT, Claude, Perplexity) crawl structured metadata to discover, cite, and recommend software products. Fill out the fields below to generate copy-paste ready <code className="text-accent">llms.txt</code> markdown and <code className="text-accent">JSON-LD</code> schema.
           </p>

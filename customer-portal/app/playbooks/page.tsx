@@ -33,14 +33,26 @@ export default function PlaybooksIndex() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Playbooks
           </p>
-          <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-            Founder systems, not conversion diagnosis
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Proven Founder Systems and AI Playbooks</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">
             These playbooks cover founder productivity and AI-ops systems - a separate track from
             the <Link href="/learning-centre" className="text-accent hover:underline">Learning Centre</Link>,
             which diagnoses landing page conversion leaks.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=playbooks-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
         `https://www.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
         {
           method: "POST",
+          signal: AbortSignal.timeout(5_000),
           body: JSON.stringify(measurementPayload),
           headers: { "Content-Type": "application/json" },
         }

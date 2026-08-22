@@ -16,7 +16,15 @@ export default function AboutPage() {
     <main id="main-content" className="min-h-screen bg-bg text-fg pt-24">
       <BreadcrumbSchema />
       <div className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="mb-6 heading-1">About Nebula Components</h1>
+        <h1 className="heading-1 text-fg">Discover How Nebula Helps Founders Fix Conversion Leaks</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=about-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </a>
+        </div>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
           Nebula Components provides evidence-backed landing page conversion diagnosis and bounded implementation work for founders running paid traffic.
         </p>

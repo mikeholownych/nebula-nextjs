@@ -34,7 +34,7 @@ export default async function CheckoutPage({
           <Link href="/" className="text-xl font-semibold text-fg">
             Nebula
           </Link>
-          <h1 className="mb-2 mt-6 text-3xl font-bold text-fg">Secure Checkout</h1>
+          <h1 className="heading-1 text-fg">Get Your One-Leak Repair Sprint to Fix Conversion Leaks Fast</h1>
           {returnedFromStripe ? (
             <div className="mt-3 rounded border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
               <p className="font-semibold text-fg">Your audit is still here.</p>

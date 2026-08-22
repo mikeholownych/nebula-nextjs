@@ -79,6 +79,20 @@ export default async function VerticalPage({
           <p className="text-xl text-fg-muted leading-relaxed">
             {v.subheadline}
           </p>
+          <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href={`/audit?utm_source=for-${slug}-hero&utm_medium=hero-cta`}
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free {v.name} audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
         </div>
 
         {/* ICP callout */}

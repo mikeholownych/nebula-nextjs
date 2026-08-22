@@ -155,11 +155,23 @@ export default function FunnelAuditClient() {
         {/* Hero */}
         <div style={{ marginBottom: 36 }}>
           <h1 style={{ fontSize: 'clamp(24px,5vw,34px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>
-            Find where your funnel <span style={{ color: '#c7ff2f' }}>breaks.</span>
+            Discover Where Your Funnel Breaks to Save Wasted Ad Spend
           </h1>
           <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
             Enter up to 3 URLs. Nebula scores each step and shows exactly where conversion drops, so you fix the right leak first, not the last one.
           </p>
+          <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+            <a
+              href="/audit"
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                background: '#c7ff2f', color: '#0a0c0a', fontWeight: 700, fontSize: 14,
+                padding: '10px 18px', borderRadius: 8, textDecoration: 'none'
+              }}
+            >
+              Get free landing page audit →
+            </a>
+          </div>
         </div>
 
         {/* URL Inputs */}

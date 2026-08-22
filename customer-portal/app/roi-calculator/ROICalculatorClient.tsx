@@ -103,11 +103,11 @@ export default function ROICalculatorClient() {
   const lc = leakColor(calc.leakMonthly)
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0c0a', color: '#e4e8e0', fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif' }}>
-      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 80px' }}>
+    <div style={{ minHeight: '100vh', background: '#0a0c0a', color: '#e4e8e0', fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif', overflowX: 'hidden', width: '100%', boxSizing: 'border-box' }}>
+      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 16px 80px', boxSizing: 'border-box' }}>
 
         {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 48 }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 48 }}>
           <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
             <rect width="64" height="64" rx="14" fill="#121512"/>
             <rect x="5" y="5" width="54" height="54" rx="11" fill="none" stroke="#c7ff2f" strokeWidth="3"/>
@@ -118,13 +118,25 @@ export default function ROICalculatorClient() {
         </div>
 
         {/* Hero */}
-<div style={{ marginBottom: 36 }}>
+        <div style={{ marginBottom: 36 }}>
            <h1 style={{ fontSize: 'clamp(24px,5vw,34px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>
-             How does your page compare to industry benchmarks?
-           </h1>
+            Calculate Your Paid Traffic ROI to Save Wasted Ad Spend
+          </h1>
            <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
              Enter your numbers. See how your current performance compares to conservative industry benchmarks.
            </p>
+          <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+            <a
+              href="/audit"
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                background: '#c7ff2f', color: '#0a0c0a', fontWeight: 700, fontSize: 14,
+                padding: '10px 18px', borderRadius: 8, textDecoration: 'none'
+              }}
+            >
+              Get free landing page audit →
+            </a>
+          </div>
          </div>
 
         {/* Inputs */}
@@ -229,20 +241,21 @@ export default function ROICalculatorClient() {
         </div>
 
         {/* Result */}
-        <div style={{ background: '#111411', border: `1.5px solid ${calc.leakMonthly > 0 ? '#3a1414' : '#1e3a1e'}`, borderRadius: 12, padding: 32, marginBottom: 24 }}>
+        <div style={{ background: '#111411', border: `1.5px solid ${calc.leakMonthly > 0 ? '#3a1414' : '#1e3a1e'}`, borderRadius: 12, padding: '24px 16px', marginBottom: 24, boxSizing: 'border-box' }}>
 
           {/* Monthly leak, the hero number */}
-<div style={{ textAlign: 'center', marginBottom: 28 }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
              <div style={{ fontSize: 13, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 8 }}>
                Estimated revenue gap vs. benchmark
              </div>
              <div style={{
-               fontSize: 'clamp(48px,10vw,80px)',
+               fontSize: 'clamp(36px,8vw,72px)',
                fontWeight: 900,
                fontFamily: '"IBM Plex Mono","Courier New",monospace',
                color: lc,
                lineHeight: 1,
                marginBottom: 8,
+               wordBreak: 'break-word',
              }}>
                {fmt(calc.leakMonthly)}
              </div>
@@ -252,7 +265,7 @@ export default function ROICalculatorClient() {
            </div>
 
           {/* Breakdown */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(125px, 1fr))', gap: 10, marginBottom: 20 }}>
             {[
               { label: 'Monthly visitors', value: calc.monthlyVisitors.toLocaleString(), sub: `at ~$${AVG_CPC[vertical]} avg CPC` },
               { label: 'Current conversions', value: calc.currentConversions.toLocaleString(), sub: `at ${cvr.toFixed(1)}% CVR` },

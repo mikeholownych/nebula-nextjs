@@ -89,9 +89,7 @@ export default async function BenchmarksPage() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Evidence, not projections
           </p>
-          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            The Landing Page Leak Index
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Real Landing Page Benchmark Data and Conversion Statistics</h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted md:text-lg">
             Live failure-rate data from every completed Nebula audit. It reports only what was
             measured - never estimates or placeholder averages. When the verified dataset is empty,

@@ -187,9 +187,7 @@ export default function ScoreClient() {
 
         {/* Hero */}
         <div style={{ marginBottom: 36 }}>
-          <h1 style={{ fontSize: 'clamp(26px,5vw,36px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>
-            See your landing page conversion score <span style={{ color: '#c7ff2f' }}>now.</span>
-          </h1>
+          <h1 style={{ fontSize: 'clamp(26px,5vw,36px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>Get your landing page conversion score and top leaks <span style={{ color: '#c7ff2f' }}>fast.</span></h1>
           <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
             Enter your domain. Your score and top conversion leak appear instantly, no signup, no call, no agency pitch.
           </p>

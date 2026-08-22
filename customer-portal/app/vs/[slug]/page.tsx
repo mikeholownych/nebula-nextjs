@@ -60,10 +60,23 @@ export default async function ComparisonPage({
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Tool Comparison · {c.checkedAt}
         </p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          {c.competitorName} vs. Nebula
-        </h1>
+        <h1 className="heading-1 text-fg">Compare {c.competitorName} vs. Nebula to Get Verified Audit Results</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">{c.intent}</p>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=vs-detail-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         {/* Bottom Line Up Front - placed high so AI engines and skimming
             readers can pull the answer as a snippet (Breaking B2B playbook) */}

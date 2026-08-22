@@ -110,12 +110,15 @@ export default function PressPage() {
             <MetaTag label="Rev" value="2026.08" />
             <MetaTag label="Status" value="Active" />
           </div>
-          <h1
-            id="press-hero-title"
-            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-5"
-          >
-            Press &amp; Media
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Nebula Press Assets, Brand Facts, and Media Kit</h1>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/audit?utm_source=press-hero&utm_medium=hero-cta"
+              className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get free audit →
+            </a>
+          </div>
           <p className="text-base sm:text-lg text-fg-muted max-w-2xl mx-auto mb-8">
             Everything journalists, analysts, and partners need to write about Nebula Components.
             All facts, assets, and copy are pre-cleared for editorial use.

@@ -20,12 +20,26 @@ export default function ComparePage() {
   return (
     <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="heading-1 mb-3">Nebula Components vs the tools founders actually use</h1>
+        <h1 className="heading-1 text-fg">Compare Conversion Audit Platforms to Boost Landing Page ROAS</h1>
         <p className="text-fg-muted text-lg mb-10">
           Landing page builders create pages. Performance meters measure speed. Nebula audits
           conversion readiness against observable checks. These pages state the boundary
           honestly - and where the other tool wins, it says so.
         </p>
+        <div className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <a
+            href="/audit?utm_source=compare-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </a>
+          <a
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </a>
+        </div>
 
         <section className="space-y-6">
           {comparisons.map((comparison) => (

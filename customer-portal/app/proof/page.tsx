@@ -85,15 +85,26 @@ export default async function ProofPage() {
         {/* Header */}
         <div className="mb-12">
           <p className="text-xs font-semibold uppercase tracking-[.2em] text-accent mb-4">Evidence, not opinion</p>
-          <h1 className="text-4xl font-extrabold text-fg mb-4 leading-tight">
-            {auditCount} real landing pages.<br />
-            Here are the conditions worth fixing first.
-          </h1>
+          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Discover Real Conversion Evidence from 150+ Verified Audits</h1>
           <p className="text-fg-muted text-lg leading-relaxed max-w-2xl">
             Every Nebula audit scores a real page submitted by a real founder.
             This page shows what we&apos;ve found, the patterns, the leaks, the numbers.
             No invented benchmarks. No vendor surveys. Evidence from {auditCount} pages.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=proof-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
         </div>
 
         {/* Key stats */}

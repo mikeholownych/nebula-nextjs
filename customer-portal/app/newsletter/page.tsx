@@ -22,9 +22,7 @@ export default function NewsletterPage() {
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">
             Weekly Insights
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-fg mb-4">
-            Landing Page Diagnostics
-          </h1>
+          <h1 className="heading-1 text-fg">Get Weekly Landing Page Diagnostics and Conversion Insights</h1>
           <p className="text-lg text-fg-muted max-w-[65ch] mx-auto mb-2 leading-relaxed">
             Every week: one conversion signal pattern, one fix, one before/after - from real Nebula audits.
           </p>
@@ -32,6 +30,9 @@ export default function NewsletterPage() {
             No hype. No fluff. Just what&apos;s actually costing you money.
           </p>
         </section>
+          <div className="mt-8 max-w-md mx-auto text-left newsletter-hero-form">
+            <NewsletterForm />
+          </div>
 
         {/* Value Props (3-column) */}
         <section className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -113,10 +114,7 @@ export default function NewsletterPage() {
           </div>
         </section>
 
-        {/* Signup Form - client component handles UTM + fetch */}
-        <section className="mb-16">
-          <NewsletterForm />
-        </section>
+        
 
         {/* FAQ */}
         <section className="mb-16">

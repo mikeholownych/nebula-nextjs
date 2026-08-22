@@ -133,12 +133,24 @@ export default function AdsClicksNoSalesPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Paid Traffic Analysis
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Ads Getting Clicks But No Sales?
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Fix Landing Page Leaks When Ads Get Clicks but No Sales</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               When Google, Meta, or LinkedIn campaigns generate steady click volume without purchase completions, the ad network has fulfilled its job. The breakdown sits on the landing page - between the initial click and the final transaction. Six failure patterns account for the majority of post-click abandonment.
             </p>
+          <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a
+              href="/audit?utm_source=ads-clicks-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </a>
+            <a
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </a>
+          </div>
           </header>
 
           {/* Pre-Click vs Post-Click framing */}

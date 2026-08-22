@@ -23,9 +23,7 @@ export default function PaidTrafficLeakScorecardPage() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-10 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Nebula Components</p>
-          <h1 className="mt-3 heading-1 tracking-tight text-fg md:text-5xl">
-            Before you raise ad spend, find out whether the page is leaking the clicks.
-          </h1>
+          <h1 className="heading-1 text-fg">Discover Where Your Paid Traffic Is Leaking Before Scaling Spend</h1>
           <p className="mt-5 text-lg leading-8 text-fg-muted">
             Use this seven-question scorecard to identify conversion conditions worth inspecting. Then run the measured audit on your actual landing page.
           </p>
@@ -36,6 +34,20 @@ export default function PaidTrafficLeakScorecardPage() {
           >
             Download the printable worksheet (PDF) <span aria-hidden="true">-&gt;</span>
           </Link>
+          <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=scorecard-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
         </div>
 
         <ScorecardClient />

@@ -71,7 +71,7 @@ class GoogleOIDCVerifier:
             return self._jwks_cache
         
         # Fetch from Google
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.get(GOOGLE_JWKS_URL)
             response.raise_for_status()
             jwks = response.json()

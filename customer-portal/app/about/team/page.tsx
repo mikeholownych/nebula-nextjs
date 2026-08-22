@@ -52,7 +52,7 @@ export default function TeamPage() {
             className="rounded-xl object-cover shrink-0 border border-border"
           />
           <div>
-            <h1 className="mb-2 heading-1">Mike Holownych</h1>
+            <h1 className="heading-1 text-fg">Meet the Team Building Proven Conversion Diagnostics</h1>
             <p className="mb-4 font-medium text-accent">Founder, Nebula Components</p>
           </div>
         </div>

@@ -150,9 +150,15 @@ export default function ConceptsPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Nebula Frameworks
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              How Nebula diagnoses landing page conversion failures
-            </h1>
+            <h1 className="heading-1 text-fg">Discover Core Landing Page Concepts to Improve Conversions</h1>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/audit?utm_source=concepts-hero&utm_medium=hero-cta"
+            className="inline-flex items-center justify-center rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get free audit →
+          </a>
+        </div>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               These are the concepts behind the 9-signal audit. Each term has a precise definition, a measurable standard, and a specific role in Nebula&rsquo;s diagnostic output. Understanding them makes it easier to read an audit report, interpret a grade, and decide which finding to act on first.
             </p>

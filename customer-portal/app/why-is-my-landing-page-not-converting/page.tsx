@@ -190,15 +190,27 @@ export default function WhyNotConvertingPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Conversion Diagnostics
             </p>
-            <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-              Why Is My Landing Page Not Converting?
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Discover Why Your Landing Page Is Not Converting Paid Traffic</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed">
               When paid traffic brings visitors but no sales or leads, the instinct is to rewrite
               ads or increase campaign budget. Before spending more money on acquisition, diagnose
               the post-click page mechanics that cause visitors to bounce. This guide walks through
               12 measurable root causes - in the order we check them.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=why-not-conv-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           <section className="mb-12 rounded-md border border-border bg-bg-muted/20 p-6 md:p-8">

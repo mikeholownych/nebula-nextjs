@@ -145,12 +145,24 @@ export default function TrustSignalsPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Trust Signal Audit
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Landing Page Trust Signals
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Add Proven Trust Signals to Boost Landing Page Conversions</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               Trust signal failures cost conversions on pages that are otherwise well-structured. Proof below the fold that cold traffic never reaches. Generic testimonials structurally identical to fabricated ones. No proof at all on pages running paid traffic. Each failure has a specific, observable form - and a bounded fix.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=lp-trust-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           {/* Six failure patterns */}

@@ -24,13 +24,25 @@ export default function RoasCliffPage() {
           Nebula Components · Self-diagnostic guide · 15 min read
         </p>
 
-        <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-3">
-          The ROAS Cliff: Why your CTR looks fine and your page converts nobody
-        </h1>
+        <h1 className="heading-1 text-fg md:text-5xl">Stop the ROAS Cliff: Fix Landing Page Drop-Offs Fast</h1>
 
         <p className="text-fg-muted mb-12">
           A self-diagnostic guide for founders running paid traffic with zero or weak conversions.
         </p>
+        <div className="mb-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=roas-cliff-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
 
         <h2 className="text-xl font-semibold mt-12 mb-4 text-fg">
           The screenshot that started it

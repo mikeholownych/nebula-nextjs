@@ -19,13 +19,19 @@ export default function NewsletterConfirmedPage() {
           <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-3xl text-accent">
             ✓
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-fg mb-4">
-            You&apos;re on the list.
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-fg mb-4">Discover Proven Weekly Conversion Insights and Fixes</h1>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-fg-muted">
             Every Wednesday morning, you&apos;ll get one real landing-page finding, one practical fix, and one before-and-after worth studying.
           </p>
         </section>
+          <div className="mt-6 flex justify-center">
+            <Link
+              href="/audit"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+          </div>
 
         <Card variant="elevated" className="border-accent/20 p-8 md:p-10">
           <div className="grid gap-6 md:grid-cols-3">

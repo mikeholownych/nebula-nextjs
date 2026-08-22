@@ -14,11 +14,7 @@ export default function CaseStudiesContent({
     <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
-          {hasPublishedStudies
-            ? 'Published, evidence-backed case studies'
-            : <>No client case studies yet - here is what the engine does instead.</>}
-        </h1>
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover Verified Landing Page Case Studies and Audit Proof</h1>
         {hasPublishedStudies ? (
           <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
             Every entry below passed the public-fact evidence, measurement-window, permission,
@@ -32,6 +28,21 @@ export default function CaseStudiesContent({
             tool against pages you already know.
           </p>
         )}
+
+        <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/audit?utm_source=case-studies-hero&utm_medium=hero-cta"
+            className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+          >
+            Get your free audit →
+          </Link>
+          <Link
+            href="/repair-sprint"
+            className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+          >
+            Explore $97 Repair Sprint
+          </Link>
+        </div>
       </section>
 
       {hasPublishedStudies ? (

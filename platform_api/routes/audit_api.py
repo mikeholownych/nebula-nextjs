@@ -12,8 +12,11 @@ import json
 import sys
 import os
 import asyncio
+import logging
 import httpx
 from asyncpg.exceptions import UniqueViolationError
+
+logger = logging.getLogger(__name__)
 
 from posthog import identify_context, new_context  # type: ignore[import-untyped]
 
@@ -565,7 +568,8 @@ async def list_recommendations(email: str = Query(..., min_length=3, max_length=
     try:
         recs = await audit_db.sync_recommendations(email)
         return {"email": email, "recommendations": recs}
-    except Exception:
+    except Exception as e:
+        logger.error(f"Failed to sync recommendations for {email}: {e}", exc_info=True)
         raise HTTPException(status_code=503, detail="Recommendations unavailable")
 
 
@@ -583,17 +587,15 @@ async def update_recommendation(rec_id: str, body: RecommendationUpdate,
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid recommendation ID")
     try:
-        rec = await audit_db.update_recommendation_status(rec_id, body.status)
-        if not rec:
-            raise HTTPException(status_code=404, detail="Recommendation not found")
-        owner = (rec.get("email") or "").strip().lower() if isinstance(rec, dict) else ""
         own = (principal.workspace_email or principal.email or "").strip().lower()
-        if not owner or owner != own:
+        rec = await audit_db.update_recommendation_status(rec_id, body.status, email=own)
+        if not rec:
             raise HTTPException(status_code=404, detail="Recommendation not found")
         return rec
     except HTTPException:
         raise
-    except Exception:
+    except Exception as e:
+        logger.error(f"Failed to update recommendation {rec_id}: {e}", exc_info=True)
         raise HTTPException(status_code=503, detail="Recommendation update failed")
 
 

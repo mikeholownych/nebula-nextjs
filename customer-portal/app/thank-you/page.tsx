@@ -12,7 +12,7 @@ export default function ThankYouPage() {
         {/* Confirmation */}
         <Card variant="elevated" className="text-center">
           <div className="mb-4 text-4xl">✓</div>
-          <h1 className="mb-3 text-3xl font-bold text-fg">You&apos;re in.</h1>
+          <h1 className="mb-3 text-3xl font-bold text-fg">You&apos;re In: Start Your Verified Repair Sprint</h1>
           <p className="mb-2 text-fg-muted">
             Your payment is confirmed. The One-Leak Repair Sprint will be sent to the email used at checkout. You or your developer applies the tailored change; Nebula does not require site access.
           </p>

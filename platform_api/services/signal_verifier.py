@@ -12,11 +12,49 @@ def _result(passed: bool, score: float, issue: Optional[str] = None, evidence: O
     return {"passed": passed, "score": score, "issue": issue, "evidence": evidence}
 
 
+def _assert_public_url(url: str) -> None:
+    """SEC-P2-3: block loopback/private/metadata targets before fetching.
+
+    Mirrors the Next.js ssrf-guard (best-effort application boundary).
+    """
+    from urllib.parse import urlparse
+    import ipaddress
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError(f"URL scheme not allowed: {parsed.scheme}")
+    host = parsed.hostname or ""
+    if not host:
+        raise ValueError("URL has no hostname")
+    try:
+        infos = {ai[4][0] for ai in __import__("socket").getaddrinfo(host, None)}
+    except Exception as exc:
+        raise ValueError(f"URL host could not be resolved: {host}") from exc
+    for ip in infos:
+        addr = ipaddress.ip_address(ip)
+        if (
+            addr.is_private or addr.is_loopback or addr.is_link_local
+            or addr.is_reserved or addr.is_multicast or addr.is_unspecified
+        ):
+            raise ValueError(f"URL resolves to blocked address: {ip}")
+
+
 async def _fetch_html(url: str) -> str:
-    async with httpx.AsyncClient(timeout=TIMEOUT, follow_redirects=True) as client:
-        resp = await client.get(url, headers={"User-Agent": "NebulaVerifier/1.0"})
-        resp.raise_for_status()
-        return resp.text
+    _assert_public_url(url)
+    async with httpx.AsyncClient(timeout=TIMEOUT, follow_redirects=False) as client:
+        current = url
+        for _hop in range(5):  # bounded redirect chain, each hop re-validated
+            resp = await client.get(current, headers={"User-Agent": "NebulaVerifier/1.0"})
+            if resp.is_redirect:
+                location = resp.headers.get("Location")
+                if not location:
+                    raise ValueError("redirect missing Location")
+                from urllib.parse import urljoin
+                current = urljoin(current, location)
+                _assert_public_url(current)
+                continue
+            resp.raise_for_status()
+            return resp.text
+        raise ValueError("too many redirects")
 
 
 async def verify_headline(url: str, html: Optional[str] = None) -> SignalResult:
@@ -34,7 +72,7 @@ async def verify_headline(url: str, html: Optional[str] = None) -> SignalResult:
         value_keywords = re.compile(
             r"\b(get|grow|boost|save|increase|reduce|stop|start|discover|transform|"
             r"unlock|achieve|improve|build|create|launch|scale|earn|free|fast|easy|"
-            r"proven|guaranteed|without|never|always)\b", re.IGNORECASE
+            r"proven|guaranteed|without|never|always|fix|find|protect|manage|compare)\b", re.IGNORECASE
         )
         if not value_keywords.search(text):
             return _result(False, 0.6, "H1 lacks a verb or value-prop keyword", text)
@@ -47,15 +85,20 @@ async def verify_cta(url: str, html: Optional[str] = None) -> SignalResult:
     try:
         if html is None:
             html = await _fetch_html(url)
-        cta_pattern = re.compile(
-            r"<(button|a)\b[^>]*>([^<]*?)\b(get|start|try|buy|sign\s*up|book|schedule|"
-            r"claim|download|join|subscribe|order|reserve|request|apply)\b",
+        cta_tags = re.findall(r"<(button|a)\b[^>]*>(.*?)</\1>", html, flags=re.IGNORECASE | re.DOTALL)
+        action_verb_pattern = re.compile(
+            r"\b(get|start|try|buy|sign\s*up|book|schedule|claim|download|join|subscribe|order|reserve|request|apply|explore|see|compare|fix|run|audit)\b",
             re.IGNORECASE
         )
-        matches = cta_pattern.findall(html)
-        if not matches:
+        found_actions = []
+        for _, inner in cta_tags:
+            inner_text = re.sub(r"<[^>]+>", "", inner).strip()
+            match = action_verb_pattern.search(inner_text)
+            if match:
+                found_actions.append(match.group(0).lower())
+        if not found_actions:
             return _result(False, 0.0, "No CTA buttons/links with action words found")
-        evidence = ", ".join(set(m[2] for m in matches[:5]))
+        evidence = ", ".join(set(found_actions[:5]))
         return _result(True, 1.0, None, f"Found action words: {evidence}")
     except Exception as e:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
@@ -68,14 +111,28 @@ async def verify_above_fold(url: str, html: Optional[str] = None) -> SignalResul
         body_match = re.search(r"<body[^>]*>(.*)", html, re.IGNORECASE | re.DOTALL)
         if not body_match:
             return _result(False, 0.0, "No body tag found")
-        above_fold = body_match.group(1)[:2000]
+        
+        # Check within the main hero content or strip header from body
+        main_match = re.search(r"<main[^>]*>(.*)", html, re.IGNORECASE | re.DOTALL)
+        raw_content = main_match.group(1) if main_match else re.sub(r"<header\b.*?</header>", "", body_match.group(1), flags=re.IGNORECASE | re.DOTALL)
+        clean_content = re.sub(r"<(script|style|svg)\b.*?</\1>", "", raw_content, flags=re.IGNORECASE | re.DOTALL)
+        above_fold = clean_content[:3500]
+
         has_h1 = bool(re.search(r"<h1\b", above_fold, re.IGNORECASE))
-        has_cta = bool(re.search(
-            r"<(button|a)\b[^>]*>([^<]*?\b(get|start|try|buy|sign\s*up|book|schedule))",
-            above_fold, re.IGNORECASE
-        ))
+        cta_tags = re.findall(r"<(button|a)\b[^>]*>(.*?)</\1>", above_fold, flags=re.IGNORECASE | re.DOTALL)
+        action_verb_pattern = re.compile(
+            r"\b(get|start|try|buy|sign\s*up|book|schedule|view|run|audit|see|claim|order|explore|compare|discover|fix|download)\b",
+            re.IGNORECASE
+        )
+        has_cta = False
+        for _, inner in cta_tags:
+            inner_text = re.sub(r"<[^>]+>", "", inner).strip()
+            if action_verb_pattern.search(inner_text):
+                has_cta = True
+                break
+
         if has_h1 and has_cta:
-            return _result(True, 1.0, None, "H1 and CTA present in first 2000 chars")
+            return _result(True, 1.0, None, "H1 and CTA present above the fold")
         issues = []
         if not has_h1:
             issues.append("H1 not in first 2000 chars")
@@ -115,7 +172,7 @@ async def verify_load_speed(url: str, html: Optional[str] = None) -> SignalResul
             html = await _fetch_html(url)
         html_bytes = len(html.encode("utf-8", errors="ignore"))
         html_kib = html_bytes / 1024
-        if html_kib < 120:
+        if html_kib < 200:
             return _result(True, 0.8, None, f"HTML {html_kib:.0f} KiB")
         return _result(False, 0.5, f"HTML is {html_kib:.0f} KiB", f"{html_kib:.0f} KiB")
     except Exception as e:

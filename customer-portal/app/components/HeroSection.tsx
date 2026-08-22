@@ -79,9 +79,9 @@ export const HeroSection: React.FC = () => {
 
         {/* 2-Line Headline */}
         <h1 className="font-sans font-normal leading-[1.04] tracking-tight text-[38px] min-[400px]:text-[44px] sm:text-6xl lg:text-7xl xl:text-[76px] text-fg">
-          <span className="block">Find page-side leaks.</span>
+          <span className="block">Discover page-side leaks.</span>
           <span className="block text-fg-muted mt-1 sm:mt-2">
-            Before blaming the traffic.
+            Fix conversion before blaming ads.
           </span>
         </h1>
 

@@ -25,15 +25,27 @@ export default function RepairSprintPage() {
           properties={{ offer_key: 'fix_pack', placement: 'repair_sprint_page' }}
         >
         <section className="mb-16">
-          <h1 className="text-3xl font-bold tracking-tight text-fg md:text-4xl">
-            One page. One verified condition. One concrete repair.
-          </h1>
+          <h1 className="heading-1 text-fg md:text-5xl">Get One Verified Repair Sprint to Fix Your Highest-Priority Leak</h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-muted leading-relaxed">
             The free audit identifies observable failed conditions on your page. The Repair Sprint
             produces the exact change required for the highest-priority condition - copy, code, or
             configuration written for your specific URL. You implement the change. Nebula re-runs
             the same check afterward.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a
+              href="/checkout"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get $97 Repair Sprint →
+            </a>
+            <a
+              href="/audit"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Run free audit first
+            </a>
+          </div>
           <p className="mt-3 text-lg font-semibold text-fg">
             ${REPAIR_SPRINT_OFFER.priceUsd} - one-time, no subscription.
           </p>

@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
         invitationStatus: 'accepted',
         joinedAt: null,
       },
-      ...result.rows.map((row) => ({
+      ...result.rows.map((row: any) => ({
         email: row.member_email,
         role: row.role,
         invitationStatus: row.invitation_status,

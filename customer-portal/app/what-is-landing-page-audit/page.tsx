@@ -58,12 +58,24 @@ export default function WhatIsLandingPageAudit() {
           <p className="text-accent text-xs font-bold mb-4">
             Landing Page Guide
           </p>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight mb-4">
-            What Is a Landing Page Audit? The Complete Guide for Founders
-          </h1>
+          <h1 className="heading-1 text-fg md:text-5xl">Discover What a Landing Page Audit Is and How to Fix Leaks</h1>
           <p className="text-gray-400 text-lg">
             A systematic audit evaluates nine conversion signals and should show evidence for every recommended fix.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=what-is-audit-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           <p className="text-gray-500 text-sm mt-4">
             Updated July 5, 2026 · 8 min read
           </p>

@@ -145,12 +145,24 @@ export default function EcommerceAuditPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               DTC Ecommerce Conversion
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
-              Ecommerce Landing Page Audit
-            </h1>
+            <h1 className="heading-1 text-fg md:text-5xl">Run a Free Ecommerce Landing Page Audit to Boost Checkout ROAS</h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
               Product pages receiving paid Meta and Google traffic fail for specific, observable reasons. Product-name H1s where the benefit should be. Price and shipping hidden until checkout. A buy button that competes with three other actions at equal weight. This guide covers each failure pattern with the signal it trips and a bounded fix.
             </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=ecom-audit-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           </header>
 
           {/* Six failure patterns */}

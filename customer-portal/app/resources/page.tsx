@@ -48,10 +48,24 @@ export default function ResourcesPage() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Components
           </p>
-          <h1 className="heading-1 tracking-tight text-fg md:text-6xl">Resources</h1>
+          <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover Free Landing Page Resources, Tools, and Guides</h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
             Open-source tools built from real problems on real sites. Each one addresses a specific, reproducible failure mode we encountered while diagnosing and fixing landing pages.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=resources-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
             <Link

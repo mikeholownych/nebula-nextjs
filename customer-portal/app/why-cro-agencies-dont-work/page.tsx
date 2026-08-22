@@ -144,14 +144,26 @@ export default function WhyCROAgenciesDontWork() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             The optimization industry&apos;s structural problem
           </p>
-          <h1 className="text-4xl font-extrabold tracking-tight text-fg md:text-5xl">
-            Why CRO agencies don&apos;t work - and what the evidence standard looks like.
-          </h1>
+          <h1 className="heading-1 text-fg md:text-5xl">Discover Why Traditional CRO Agencies Fail and How to Fix It</h1>
           <p className="mt-6 max-w-2xl text-lg leading-7 text-fg-muted">
             The industry model sells retainers before diagnosis, A/B tests on pages without enough
             traffic to reach significance, and 90-day timelines for problems fixable in a week.
             This is not a critique of individual agencies. It is a structural analysis of the model.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="/audit?utm_source=why-cro-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/repair-sprint"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Explore $97 Repair Sprint
+            </Link>
+          </div>
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted">
             The alternative is not a different agency. It is a different sequence: diagnose first,
             with evidence you can verify, before paying anyone anything.
