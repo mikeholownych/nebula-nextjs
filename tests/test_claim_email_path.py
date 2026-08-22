@@ -30,17 +30,26 @@ class ClaimEmailPathTests(unittest.TestCase):
         self.assertEqual(cm.exception.status_code, 400)
 
     def test_verify_consumes_token_and_claims(self):
+        from fastapi import HTTPException
         r = self._routes()
         redis = AsyncMock()
-        redis.get.return_value = {"email": "rep@basecamp.com"}
+        redis.get.side_effect = [
+            {"email": "rep@basecamp.com", "created_at": "2026-08-22T00:00:00+00:00"},
+            None,
+        ]
         db = AsyncMock()
         db.create_claim.return_value = {
             "status": "active", "claimed_by_email": "rep@basecamp.com"}
-        with patch.object(r, "consume_claim_token", new=AsyncMock(return_value="rep@basecamp.com")), \
-                patch.object(r, "get_teardown_db", return_value=db):
+        with patch.object(r, "get_teardown_db", return_value=db):
             out = asyncio_run(r.claim_email_verify("basecamp", "tok", redis=redis))
-        self.assertEqual(out["claimed"], True)
-        db.create_claim.assert_awaited_with("basecamp", "rep@basecamp.com", "email_domain")
+            self.assertEqual(out["claimed"], True)
+            self.assertEqual(out["email"], "rep@basecamp.com")
+            db.create_claim.assert_awaited_with("basecamp", "rep@basecamp.com", "email_domain")
+            redis.delete.assert_awaited_once_with(r.token_key("basecamp", "tok"))
+            with self.assertRaises(HTTPException) as cm:
+                asyncio_run(r.claim_email_verify("basecamp", "tok", redis=redis))
+            self.assertEqual(cm.exception.status_code, 400)
+            db.create_claim.assert_awaited_once()
 
 
 def asyncio_run(coro):

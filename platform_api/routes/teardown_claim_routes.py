@@ -21,6 +21,10 @@ from platform_api.services.teardown_db import (
 router = APIRouter(prefix="/teardowns",
                    dependencies=[Depends(internal_service_dependency)])
 
+# Unguarded: emailed to humans as a clickable link; the token in the URL is
+# the capability (same pattern as GET /auth/verify).
+router_verify = APIRouter(prefix="/teardowns")
+
 
 class EmailRequest(BaseModel):
     email: str
@@ -73,7 +77,7 @@ async def claim_email_request(slug: str, body: EmailRequest,
     return {"sent": True}
 
 
-@router.get("/{slug}/claim/email-verify")
+@router_verify.get("/{slug}/claim/email-verify")
 async def claim_email_verify(slug: str, token: str, redis=Depends(get_redis)):
     email = await consume_claim_token(redis, slug, token)
     if not email:
