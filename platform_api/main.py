@@ -148,6 +148,8 @@ app.include_router(verify_router)
 app.include_router(dispatch_router)
 app.include_router(health_router)
 app.include_router(gsc_router)
+from platform_api.routes.teardown_routes import router as teardown_router
+app.include_router(teardown_router)
 app.include_router(audit_schedule_router)
 app.include_router(report_router)
 app.include_router(competitor_router)
