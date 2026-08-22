@@ -37,18 +37,31 @@ export default function IntegrationsSection({ email }: { email?: string }) {
 
   const load = useCallback(async () => {
     if (!email) return
-    const [g, s] = await Promise.all([
-      fetch('/api/ga4/status', { cache: 'no-store' }),
-      fetch('/api/gsc/status', { cache: 'no-store' }),
-    ])
-    if (g.ok) {
-      setGa4(await g.json())
-      if ((await g.clone().json()).connected) {
-        const pr = await fetch('/api/ga4/properties', { cache: 'no-store' })
-        if (pr.ok) setProperties((await pr.json()).properties ?? [])
+    // Each call isolated: one failing integration must never freeze the other
+    // into an eternal "Loading..." state.
+    try {
+      const g = await fetch('/api/ga4/status', { cache: 'no-store' })
+      if (g.ok) {
+        setGa4(await g.json())
+      } else {
+        setGa4({ connected: false })
       }
+    } catch {
+      setGa4({ connected: false })
     }
-    if (s.ok) setGsc(await s.json())
+    try {
+      const s = await fetch('/api/gsc/status', { cache: 'no-store' })
+      if (s.ok) setGsc(await s.json())
+      else setGsc({ connected: false })
+    } catch {
+      setGsc({ connected: false })
+    }
+    try {
+      const pr = await fetch('/api/ga4/properties', { cache: 'no-store' })
+      if (pr.ok) setProperties((await pr.json()).properties ?? [])
+    } catch {
+      setProperties([])
+    }
   }, [email])
 
   useEffect(() => {

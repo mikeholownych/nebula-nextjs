@@ -86,6 +86,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/brand',
       '/lab',
       '/press',
+      '/faq',
       '/teardowns',
       '/vs',
     ],
