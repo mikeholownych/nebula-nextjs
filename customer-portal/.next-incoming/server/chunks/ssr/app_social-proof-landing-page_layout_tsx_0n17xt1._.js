@@ -1,3 +1,0 @@
-module.exports=[29631,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Social Proof on Landing Pages: What Works and What Wastes Space | Nebula Components",description:"Most landing pages place social proof wrong or use the wrong type. Learn which social proof formats actually lift conversions and where to place them.",alternates:{canonical:"https://nebulacomponents.com/social-proof-landing-page"}}])},1647,function(a){a.n(a.i(29631))}];
-
-//# sourceMappingURL=app_social-proof-landing-page_layout_tsx_0n17xt1._.js.map

@@ -1,3 +1,0 @@
-module.exports=[95844,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Sample Audit Report | Nebula Components",description:"See what a Nebula landing page audit report looks like before you submit your own URL.",robots:{index:!0,follow:!0}}])},99574,function(a){a.n(a.i(95844))}];
-
-//# sourceMappingURL=app_audit_sample_layout_tsx_0u9de1n._.js.map

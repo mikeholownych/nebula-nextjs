@@ -1,3 +1,0 @@
-module.exports=[62720,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Free Landing Page Audit - Find Your Conversion Leaks | Nebula Components",description:"Submit your landing page URL for a free conversion audit. We check message-match, trust signals, mobile layout, form friction, load time, and compliance in...",alternates:{canonical:"https://nebulacomponents.com/audit"}}])},60015,function(a){a.n(a.i(62720))}];
-
-//# sourceMappingURL=app_audit_layout_tsx_0rpm33d._.js.map

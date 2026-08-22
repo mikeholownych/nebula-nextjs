@@ -1,3 +1,0 @@
-module.exports=[9530,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Your Landing Page Audit Results | Nebula Components",description:"Review your landing page audit findings - scored conversion leaks with prioritised fixes.",robots:{index:!1,follow:!1}}])},32962,function(a){a.n(a.i(9530))}];
-
-//# sourceMappingURL=app_audit_results_layout_tsx_1tyou60._.js.map

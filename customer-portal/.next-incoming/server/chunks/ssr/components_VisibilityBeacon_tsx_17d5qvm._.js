@@ -1,3 +1,0 @@
-module.exports=[55128,a=>{"use strict";var b=a.i(87924),c=a.i(72131);a.i(83399),a.s(["default",0,function({beaconId:a,eventName:d,properties:e={},children:f,className:g="",as:h="div"}){let i=(0,c.useRef)(null);return(0,c.useRef)(null),(0,c.useRef)(!1),(0,c.useEffect)(()=>{i.current},[a,d,e]),(0,b.jsx)(h,{ref:a=>{i.current=a},"data-visibility-beacon":a,className:g,children:f})}])}];
-
-//# sourceMappingURL=components_VisibilityBeacon_tsx_17d5qvm._.js.map
