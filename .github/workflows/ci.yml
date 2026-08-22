@@ -218,7 +218,8 @@ jobs:
           cache-dependency-path: customer-portal/package-lock.json
       - run: npm ci
       - name: npm audit (production deps only)
-        run: npm audit --omit=dev --audit-level=moderate || true
+        # CI-1: blocking since remediation drove prod vulnerabilities to 0.
+        run: npm audit --omit=dev --audit-level=high
 
   # Job 7: Playwright e2e (installs browsers in GH; do not skip with || true)
   e2e:
