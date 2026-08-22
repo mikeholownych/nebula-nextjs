@@ -81,6 +81,20 @@ export function CitablePageShell({
           <p className="mt-3 max-w-3xl text-lg leading-relaxed text-fg md:text-xl">
             {route.directAnswer}
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/audit?utm_source=citable-hero&utm_medium=hero-cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Get your free audit →
+            </Link>
+            <Link
+              href="/resources/citable/quick-start"
+              className="inline-flex min-h-[44px] items-center justify-center rounded border border-border px-5 py-3 text-sm font-medium text-fg-muted transition-colors hover:border-fg-muted hover:text-fg"
+            >
+              Citable quick start
+            </Link>
+          </div>
         </header>
 
         <div className="py-12">{children}</div>

@@ -36,9 +36,21 @@
     ".next/dev/types/**/*.ts",
     ".next/dev/dev/types/**/*.ts",
     ".next-incoming/types/**/*.ts",
-    ".next-incoming/dev/types/**/*.ts"
+    ".next-incoming/dev/types/**/*.ts",
+    ".next-repro/types/**/*.ts",
+    ".next-repro/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "e2e",
+    "stories",
+    "vitest.config.ts",
+    "jest.config.ts",
+    "playwright.config.ts",
+    "__tests__",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ]
 }

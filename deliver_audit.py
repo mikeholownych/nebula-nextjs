@@ -508,7 +508,7 @@ def score_audit(page):
         proof_issue = "A stranger landing here sees nothing that proves this worked for anyone else. No quotes, no names, no numbers. They're being asked to trust a page that hasn't earned it yet."
     # Load speed on the request path uses HTML size only. Live PageSpeed/Lighthouse
     # is off this path (up to 5s extra, plus a second network hop).
-    html_size_score = 8 if len(html_text) < 120000 else 5
+    html_size_score = 8 if len(html_text) < 200000 else 5
     html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB - large pages slow first paint."
     mobile_score = 8 if "viewport" in lower else 4
     load_speed_score = html_size_score

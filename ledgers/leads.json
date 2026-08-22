@@ -2526,6 +2526,33 @@
     "trigger_text": "",
     "url": "https://adsnord.com"
   },
+  "customer@company.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "customer@company.com",
+    "first_seen": "2026-08-21T22:42:43.849016Z",
+    "last_seen": "2026-08-22T00:34:14.453702Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "8f23b2c5-5d55-400f-9f46-6012b6d830f8",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-22T00:34:14.453702Z",
+    "trigger_text": "",
+    "url": "https://company.com"
+  },
   "dahlia_sutrisno@34strong.com": {
     "content_posts": [],
     "current_stage": "discovered",

@@ -47,9 +47,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Enable gzip/brotli compression at the Next.js origin layer.
   compress: true,
-  // Keep pdfkit external so its __dirname-based font paths resolve at runtime
-  // (bundling it rewrites __dirname to /ROOT which breaks font file lookups).
-  serverExternalPackages: ['pdfkit'],
+  // Keep native and DB drivers external so Node runtime loads them directly
+  // without Turbopack hashing/bundling issues.
+  serverExternalPackages: ['pdfkit', 'pg', 'pg-pool', 'pg-types', 'pgpass', 'posthog-node'],
   // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
   // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
