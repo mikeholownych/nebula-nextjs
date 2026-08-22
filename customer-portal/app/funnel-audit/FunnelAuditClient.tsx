@@ -367,7 +367,7 @@ export default function FunnelAuditClient() {
         <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid #1e231e', display: 'flex', gap: 24, flexWrap: 'wrap' }}>
           <a href="/score" style={{ fontSize: 13, color: '#5a6458' }}>Score a single page →</a>
           <a href="/audit" style={{ fontSize: 13, color: '#5a6458' }}>Full page audit →</a>
-          <a href="/roi-calculator" style={{ fontSize: 13, color: '#5a6458' }}>Calculate your revenue leak →</a>
+          <a href="/roi-calculator" style={{ fontSize: 13, color: '#5a6458' }}>Calculate your recovered-revenue opportunity →</a>
         </div>
 
       </div>

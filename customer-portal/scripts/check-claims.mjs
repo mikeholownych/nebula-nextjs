@@ -73,6 +73,12 @@ for (const file of files) {
     pattern.lastIndex = 0
     let m
     while ((m = pattern.exec(content)) !== null) {
+      // Negation guard: "does not guarantee conversion lift" is a disclaimer,
+      // not a claim. Skip matches preceded by a negator within 20 chars.
+      const prefix = content.slice(Math.max(0, m.index - 20), m.index).toLowerCase()
+      if (/\b(do(es)?|did)\s+not$/.test(prefix.trim()) || /\b(not|never|no)$/i.test(prefix.trim())) {
+        continue
+      }
       const line = content.slice(0, m.index).split('\n').length
 
       // Check allowlist (line 0 = any line in that file for this phrase)
