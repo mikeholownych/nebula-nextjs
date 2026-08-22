@@ -27,6 +27,20 @@ jobs:
         env:
           ENVIRONMENT: development
 
+  pytest-root-suite:
+    name: Root ops suite pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-dev.txt
+      - name: Pytest root suite
+        run: PYTHONPATH=. ENVIRONMENT=development pytest tests --ignore=tests/platform_api -q
+
   # Job 1: Governance validation
   real-postgres-locking:
     name: Real-PG locking semantics (TEST-1)
