@@ -3,39 +3,39 @@ import { expect, test } from '@playwright/test'
 const routes = [
   {
     path: '/resources/citable',
-    h1: 'Citable',
+    h1: 'Build Defensible SEO and AI Readiness Evidence with Citable',
   },
   {
     path: '/resources/citable/quick-start',
-    h1: 'Run your first evidence-bounded Citable audit',
+    h1: 'Launch Your First Evidence-Bounded Citable Audit Fast',
   },
   {
     path: '/resources/citable/jobs/technical-retrieval-audit',
-    h1: 'Audit technical retrieval eligibility',
+    h1: 'Discover and Fix Technical Retrieval Eligibility Issues',
   },
   {
     path: '/resources/citable/jobs/claim-evidence-governance',
-    h1: 'Govern claims against inspectable evidence',
+    h1: 'Build Proven Claim and Evidence Governance Workflows',
   },
   {
     path: '/resources/citable/jobs/answer-extractability-audit',
-    h1: 'Audit answer extractability',
+    h1: 'Improve Answer Extractability for AI Search Engines',
   },
   {
     path: '/resources/citable/jobs/entity-narrative-audit',
-    h1: 'Audit entity and narrative consistency',
+    h1: 'Improve Entity and Narrative Consistency in AI Models',
   },
   {
     path: '/resources/citable/jobs/release-deployment-verification',
-    h1: 'Verify release and deployment evidence',
+    h1: 'Build Proven Release and Deployment Verification',
   },
   {
     path: '/resources/citable/compare',
-    h1: 'Choose the right verification layer',
+    h1: 'Discover When to Use Citable for AI Search Verification',
   },
   {
     path: '/resources/citable/releases',
-    h1: 'Inspect the synchronized Citable release',
+    h1: 'Discover Synchronized Citable Releases and Package Facts',
   },
 ] as const
 

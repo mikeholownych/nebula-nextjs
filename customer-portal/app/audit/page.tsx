@@ -127,7 +127,7 @@ export default async function AuditPage() {
 
         {/* ── 1. Hero: form-forward split ── */}
         <section className="mx-auto max-w-6xl px-6 py-12 md:py-20">
-          <div className="grid gap-12 md:grid-cols-2 md:items-start">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-start">
 
             {/* Copy first on mobile (order-1 on mobile, order-1 on md+) */}
             <div className="order-1 flex min-w-0 flex-col justify-center">
