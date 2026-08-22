@@ -169,6 +169,11 @@
       "file": "app/spec/landing-page-diagnostic-v1/page.tsx",
       "line": 234,
       "reason": "Internal engineering spec page: describes the deterministic finding-priority ordering algorithm (severity model), not a customer-facing outcome claim."
+    },
+    {
+      "file": "app/spec/landing-page-diagnostic-v1/page.tsx",
+      "line": 118,
+      "reason": "Internal engineering spec page: literal finding field name / deterministic ordering algorithm, not an outcome claim."
     }
   ],
   "proves-your-ad": [
@@ -236,6 +241,11 @@
       "file": "app/spec/landing-page-diagnostic-v1/page.tsx",
       "line": 244,
       "reason": "Internal engineering spec page: documents the literal finding field name 'impact score' (0-10 integer in signals canon), not an outcome promise."
+    },
+    {
+      "file": "app/spec/landing-page-diagnostic-v1/page.tsx",
+      "line": 128,
+      "reason": "Internal engineering spec page: literal finding field name / deterministic ordering algorithm, not an outcome claim."
     }
   ]
 }

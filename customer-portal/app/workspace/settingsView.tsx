@@ -396,7 +396,7 @@ export default function SettingsView({ email }: { email: string }) {
             {savingRevenue ? 'Saving…' : 'Save'}
           </button>
           <p className="text-xs text-fg-dim">
-            Your CPC is used to estimate the monthly revenue leak for each audit finding. You can update it anytime.
+            Your CPC is used to estimate the monthly revenue opportunity for each audit finding. You can update it anytime.
           </p>
         </div>
       </section>
