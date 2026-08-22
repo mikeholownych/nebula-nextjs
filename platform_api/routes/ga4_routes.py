@@ -231,3 +231,126 @@ async def ga4_disconnect(
         db.delete(conn)
         db.commit()
     return {"disconnected": True}
+
+
+# ── Phase 2: fix-effectiveness correlation ───────────────────────────────────
+
+
+@router.get("/correlation/{audit_id}")
+async def ga4_correlation(
+    audit_id: str,
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+    redis=Depends(get_redis),
+):
+    """Pre/post GA4 conversion correlation for a delivered fix.
+
+    Tenant binding: the audit's email must equal the principal's email.
+    Window anchor: fix_implementations.implemented_at, else audit completion.
+    """
+    from uuid import UUID as _UUID
+
+    import asyncpg
+
+    from platform_api.config import platform_db_dsn
+    from platform_api.ga4.reporting import (
+        compute_deltas,
+        normalize_window,
+        run_landing_page_report,
+        window_dates,
+    )
+    from platform_api.routes.audit_api import audit_db
+    from urllib.parse import urlparse
+
+    user = getattr(auth.get("user"), "__dict__", {}) or {}
+    email_obj = auth["user"]
+    email = (
+        getattr(email_obj, "email", None) or user.get("email")
+        if not isinstance(email_obj, dict)
+        else email_obj.get("email")
+    )
+    if not email:
+        raise HTTPException(status_code=403, detail="Principal has no tenant binding")
+    own = str(email).strip().lower()
+
+    try:
+        audit_uuid = _UUID(audit_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid audit id")
+
+    await audit_db.connect()
+    async with audit_db.pool.acquire() as conn:
+        row = await conn.fetchrow(
+            "SELECT url, email FROM audits WHERE id=$1", audit_uuid
+        )
+        if not row or (row["email"] or "").strip().lower() != own:
+            # existence-hiding across tenants
+            raise HTTPException(status_code=404, detail="Audit not found")
+
+        impl = await conn.fetchrow(
+            """
+            SELECT implemented_at, score_before, score_after
+            FROM fix_implementations
+            WHERE audit_id=$1 AND implemented_at IS NOT NULL
+            ORDER BY implemented_at DESC LIMIT 1
+            """,
+            audit_uuid,
+        )
+        completed = await conn.fetchval(
+            "SELECT completed_at FROM audits WHERE id=$1", audit_uuid
+        )
+
+    anchor_dt = (impl["implemented_at"] if impl else None) or completed
+    if not anchor_dt:
+        raise HTTPException(status_code=409, detail="No fix timeline to correlate yet")
+
+    parsed = urlparse(row["url"])
+    path = parsed.path or "/"
+    if parsed.query:
+        path += "?" + parsed.query
+
+    ga4 = _current_connection(db, auth["user_id"])
+    if not ga4 or not ga4.property_id:
+        raise HTTPException(status_code=409, detail="Connect a GA4 property first")
+
+    anchor_date = anchor_dt.date()
+    (pre_s, pre_e), (post_s, post_e) = window_dates(anchor_date)
+
+    token = _valid_access_token(ga4, db)
+    today = datetime.now(timezone.utc).date()
+    post_end = min(post_e, today)
+
+    try:
+        baseline = normalize_window(
+            await run_landing_page_report(redis, token, ga4.property_id, path, pre_s, pre_e)
+        )
+        post = normalize_window(
+            await run_landing_page_report(redis, token, ga4.property_id, path, post_s, post_end)
+        )
+        control_b = normalize_window(
+            await run_landing_page_report(redis, token, ga4.property_id, "/", pre_s, pre_e)
+        )
+        control_p = normalize_window(
+            await run_landing_page_report(redis, token, ga4.property_id, "/", post_s, post_end)
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    return {
+        "audit_id": str(audit_uuid),
+        "url": row["url"],
+        "path": path,
+        "anchor": {"date": anchor_date.isoformat(), "source": "fix_implemented" if impl else "audit_completed"},
+        "signal_change": (
+            {"score_before": impl["score_before"], "score_after": impl["score_after"]}
+            if impl else None
+        ),
+        "baseline": {**baseline, "start": pre_s.isoformat(), "end": pre_e.isoformat()},
+        "post": {**post, "start": post_s.isoformat(), "end": post_end.isoformat()},
+        "deltas": compute_deltas(baseline, post),
+        "site_control": {
+            "baseline": control_b,
+            "post": control_p,
+            "note": "whole-site row - page delta is meaningful only when site was flat",
+        },
+    }
