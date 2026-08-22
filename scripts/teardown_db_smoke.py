@@ -23,6 +23,8 @@ async def main() -> int:
     await db.upsert_teardown(rec)
     got = await db.get_teardown("qa-smoke")
     assert got and got["domain"] == "example.com" and got["claim"] is None, got
+    assert isinstance(got["findings"], list), type(got["findings"])
+    assert got["findings"] == [{"key": "k"}], got["findings"]
     claim = await db.create_claim("qa-smoke", "owner@example.com", "email_domain")
     assert claim["status"] == "active"
     try:

@@ -1,5 +1,7 @@
 """Database service for teardown content and ownership claims."""
 
+import json
+
 import asyncpg
 
 from platform_api.config import audit_db_dsn
@@ -14,12 +16,18 @@ class TeardownDB:
         self.db_url = audit_db_dsn()
         self.pool = None
 
+    async def _init_conn(self, conn):
+        await conn.set_type_codec(
+            "jsonb", encoder=lambda v: json.dumps(v),
+            decoder=lambda s: json.loads(s), schema="pg_catalog")
+
     async def connect(self):
         if not self.pool:
             self.pool = await asyncpg.create_pool(
                 self.db_url, min_size=1, max_size=5,
                 command_timeout=10, statement_cache_size=0,
                 server_settings={"statement_timeout": "15s"},
+                init=self._init_conn,
             )
 
     async def close(self):
@@ -40,16 +48,14 @@ class TeardownDB:
           findings=EXCLUDED.findings, screenshot_path=EXCLUDED.screenshot_path,
           updated_at=now()
         """
-        import json as _json
         async with self.pool.acquire() as conn:
             await conn.execute(
                 q, record["slug"], record["name"], record["url"], record["domain"],
                 record.get("score"), record.get("grade"), record.get("audited_at"),
                 record.get("summary"), record.get("context"),
-                _json.dumps(record.get("findings", [])),
+                record.get("findings", []),
                 record.get("screenshot_path"),
             )
-
     @staticmethod
     def _with_claim(row, claim) -> dict:
         d = dict(row)
