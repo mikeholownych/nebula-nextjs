@@ -84,7 +84,7 @@ sudo systemctl restart "$API_UNIT"
 # before probing - a connection-refused here previously caused a false-positive
 # post-swap verification failure and an unnecessary rollback.
 api_ready=0
-for i in $(seq 1 30); do
+for i in $(seq 1 90); do
   if curl -fsS -o /dev/null --max-time 2 http://127.0.0.1:8001/healthz; then
     api_ready=1
     break
@@ -92,7 +92,7 @@ for i in $(seq 1 30); do
   sleep 1
 done
 if [[ "$api_ready" != "1" ]]; then
-  log "FAIL: $API_UNIT did not become healthy within 30s of restart."
+  log "FAIL: $API_UNIT did not become healthy within 90s of restart."
   exit 1
 fi
 
