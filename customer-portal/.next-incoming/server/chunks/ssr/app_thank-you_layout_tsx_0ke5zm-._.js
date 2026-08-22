@@ -1,0 +1,3 @@
+module.exports=[88624,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Thank You - Your Audit Is On Its Way | Nebula Components",description:"Your landing page audit request has been received. You will receive your conversion diagnosis by email within 24 hours.",robots:{index:!1,follow:!1}}])},66713,function(a){a.n(a.i(88624))}];
+
+//# sourceMappingURL=app_thank-you_layout_tsx_0ke5zm-._.js.map

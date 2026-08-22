@@ -1,0 +1,3 @@
+module.exports=[35757,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"About | Nebula Components",description:"About Nebula Components - evidence-backed landing page conversion optimization.",robots:{index:!0,follow:!0}}])},31806,function(a){a.n(a.i(35757))}];
+
+//# sourceMappingURL=app_company_about_layout_tsx_1l131ce._.js.map

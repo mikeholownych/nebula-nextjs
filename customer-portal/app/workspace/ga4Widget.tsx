@@ -138,25 +138,25 @@ export default function Ga4Widget({
               <div>
                 <dt className="text-xs text-fg-muted">Baseline conv.</dt>
                 <dd className="text-lg font-semibold">
-                  {correlation.baseline?.conversion_rate_pct ?? '—'}%
+                  {correlation.baseline?.conversion_rate_pct ?? '-'}%
                 </dd>
               </div>
               <div>
                 <dt className="text-xs text-fg-muted">Post-fix conv.</dt>
                 <dd className="text-lg font-semibold text-signal-teal">
-                  {correlation.post?.conversion_rate_pct ?? '—'}%
+                  {correlation.post?.conversion_rate_pct ?? '-'}%
                 </dd>
               </div>
               <div className="col-span-2 text-sm">
                 Conversions{' '}
                 <strong data-testid="ga4-delta">
                   {correlation.deltas.conversions_change_pct === null
-                    ? '—'
+                    ? '-'
                     : `${correlation.deltas.conversions_change_pct > 0 ? '+' : ''}${correlation.deltas.conversions_change_pct}%`}
                 </strong>{' '}
                 (sessions{' '}
                 {correlation.deltas.sessions_change_pct === null
-                  ? '—'
+                  ? '-'
                   : `${correlation.deltas.sessions_change_pct > 0 ? '+' : ''}${correlation.deltas.sessions_change_pct}%`}
                 )
               </div>
@@ -174,7 +174,7 @@ export default function Ga4Widget({
             </dl>
           ) : (
             <p className="text-sm text-fg-muted">
-              No fix timeline yet — correlation appears after a delivered fix.
+              No fix timeline yet - correlation appears after a delivered fix.
             </p>
           )}
         </div>
