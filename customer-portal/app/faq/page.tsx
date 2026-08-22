@@ -37,7 +37,7 @@ const FAQS: QA[] = [
     a: 'The One-Leak Repair Sprint is $97: one high-confidence finding from your audit, supplied as exact copy, a code snippet, or a configuration change within 48 hours. A same-scope re-audit within 30 days is included. The price is locked through December 31, 2026.',
   },
   {
-    q: 'Does Nebula guarantee conversions will improve?',
+    q: 'Will my conversions improve after a fix?',
     a: 'No. Audit findings identify repair candidates by connecting an observable page condition to the required threshold and the measured gap. They do not predict revenue or replace controlled experiments.',
   },
   {

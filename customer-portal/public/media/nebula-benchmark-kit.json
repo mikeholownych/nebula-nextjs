@@ -1,0 +1,45 @@
+{
+  "asset": "Nebula Components Benchmark Media Kit",
+  "generated": "2026-08-22",
+  "permission": "You may quote these figures with attribution to Nebula Components and a link to https://nebulacomponents.com/benchmarks or the canonical spec URL.",
+  "canonical_description": [
+    "Nebula Components is an evidence-based landing page diagnostic for founders spending on paid ads with low or zero conversions.",
+    "Every audit checks nine formally defined conversion signals and returns findings with measured evidence from the actual page. The diagnosis is free and ungated; the repair is a fixed-price $97 sprint on one finding.",
+    "The methodology is public: https://nebulacomponents.com/spec/landing-page-diagnostic-v1"
+  ],
+  "quotable_sentences": [
+    "In Nebula's July 2026 cross-industry study of 86 landing pages running paid traffic, the average score was 62.7/100 (Grade C).",
+    "Across 280 completed live audits, the most common failing component is the headline (59% of pages), followed by load speed (42%) and SEO foundations (41%).",
+    "Social proof carries the highest average impact when it fails (4.1/10), making it the highest-leverage single repair in the dataset."
+  ],
+  "key_stats": {
+    "cross_industry_study": {
+      "scope": "Cross-industry landing pages running paid traffic, July 2026",
+      "n": 86,
+      "average_score": "62.7/100",
+      "grade": "C",
+      "source": "brand-evidence.ts CROSS_INDUSTRY_PAID_TRAFFIC_STUDY"
+    },
+    "live_dataset": {
+      "scope": "All completed audits, live dataset as of 2026-08-22",
+      "n": 280,
+      "avg_failures_per_page": 2.7,
+      "top_failures": [
+        { "component": "Headline", "share_pct": 59, "avg_impact": 2.2 },
+        { "component": "Load Speed", "share_pct": 42, "avg_impact": 2.5 },
+        { "component": "Seo Foundations", "share_pct": 41, "avg_impact": 2.6 },
+        { "component": "Social Proof", "share_pct": 38, "avg_impact": 4.1 },
+        { "component": "Cta", "share_pct": 24, "avg_impact": 2.6 }
+      ],
+      "source": "/api/audit/stats/benchmarks generated_at 2026-08-22T15:23:40Z"
+    }
+  },
+  "methodology_summary": "Audits run against the public Landing Page Diagnostic Specification v1: fetch the URL, inspect raw HTML and rendered output at desktop and mobile widths, evaluate nine signals with published decision rules, emit findings carrying measured/required/delta/selector evidence. Aggregates are computed only from completed audits. No URLs or personal data are published.",
+  "boundaries": "Scores are snapshots of page condition under automated inspection. They do not predict revenue, guarantee outcomes, or replace controlled experiments.",
+  "citation": {
+    "spec_short": "(Nebula Diagnostic Spec v1.0)",
+    "spec_full": "Nebula Landing Page Diagnostic Specification v1.0.0 (2026-08-22). Nebula Components. https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+    "machine_readable_spec": "https://nebulacomponents.com/spec/landing-page-diagnostic-v1.json",
+    "ai_retrieval": "Permitted with attribution. GPTBot, ClaudeBot, and PerplexityBot allowed in robots.txt."
+  }
+}

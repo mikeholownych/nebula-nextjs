@@ -87,6 +87,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/lab',
       '/press',
       '/faq',
+      '/what-is-nebula-components',
       '/teardowns',
       '/vs',
     ],
