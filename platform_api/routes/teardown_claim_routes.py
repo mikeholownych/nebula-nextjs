@@ -1,7 +1,10 @@
 """Teardown claim verification endpoints. Phase 1: email-at-domain path."""
 
 import asyncio
+import hashlib
+import secrets
 
+import dns.asyncresolver as dns_async
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
@@ -88,3 +91,62 @@ async def claim_email_verify(slug: str, token: str, redis=Depends(get_redis)):
         raise HTTPException(status_code=409,
                             detail="This teardown already has an owner")
     return {"claimed": True, "email": claim["claimed_by_email"]}
+
+
+class DnsCheckRequest(BaseModel):
+    value: str
+
+
+DNS_CHECK_TTL_SECONDS = 48 * 3600
+# The DNS path has no mailbox to bind, so ownership binds to a placeholder
+# identity that must be replaced by a real session email in phase 4 team work.
+DNS_CHECK_EMAIL = "dns-claim@invalid.nebulacomponents.com"
+
+
+@router.post("/{slug}/claim/dns-start")
+async def claim_dns_start(slug: str, redis=Depends(get_redis)):
+    rec = await get_teardown_db().get_teardown(slug)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="Teardown not found")
+    try:
+        await get_teardown_db().create_claim(slug, DNS_CHECK_EMAIL, "email_domain")
+    except ClaimConflict:
+        pass
+    value = f"nebula={secrets.token_hex(16)}"
+    key = f"tdns:{slug}:{hashlib.sha256(value.encode()).hexdigest()[:16]}"
+    await redis.set(key, {"slug": slug}, ttl=DNS_CHECK_TTL_SECONDS)
+    return {"record_name": f"_nebula-verify.{rec['domain']}",
+            "value": value, "ttl_hours": 48}
+
+
+@router.post("/{slug}/claim/dns-check")
+async def claim_dns_check(slug: str, body: DnsCheckRequest,
+                          redis=Depends(get_redis)):
+    rec = await get_teardown_db().get_teardown(slug)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="Teardown not found")
+    key = f"tdns:{slug}:{hashlib.sha256(body.value.encode()).hexdigest()[:16]}"
+    pending = await redis.get(key)
+    if not pending:
+        raise HTTPException(status_code=400,
+                            detail="No pending DNS challenge")
+    resolver = dns_async.Resolver()
+    try:
+        answer = await asyncio.wait_for(
+            resolver.resolve(f"_nebula-verify.{rec['domain']}", "TXT"), timeout=8)
+        flat = []
+        for r in answer:
+            for part in getattr(r, "strings", []):
+                flat.append(part.decode(errors="replace"))
+        joined = "".join(flat)
+    except Exception:  # noqa: BLE001 - NXDOMAIN, timeout, no TXT
+        joined = ""
+    if body.value not in joined.replace('"', "").replace(" ", ""):
+        return {"verified": False}
+    try:
+        claim = await get_teardown_db().create_claim(slug, DNS_CHECK_EMAIL, "dns_txt")
+    except ClaimConflict:
+        raise HTTPException(status_code=409,
+                            detail="This teardown already has an owner")
+    await redis.delete(key)
+    return {"verified": True, "email": claim["claimed_by_email"]}
