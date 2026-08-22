@@ -19,6 +19,7 @@ from platform_api.services.claim_tokens import (
 )
 from platform_api.services.rate_limit import enforce_rate_limit
 from platform_api.services.domains import email_domain, is_freemail, registered_domain
+from platform_api.services.response_filter import evaluate_response
 from platform_api.services.teardown_db import (
     ClaimConflict,
     get_teardown_db,
@@ -203,3 +204,64 @@ async def claim_gsc_check(slug: str,
         raise HTTPException(status_code=409,
                             detail="This teardown already has an owner")
     return {"claimed": True, "email": claim["claimed_by_email"]}
+
+
+class ResponsePatch(BaseModel):
+    response_text: str | None = None
+    private_context: str | None = None
+
+
+FOUNDER_EMAILS = {"mike.holownych@gmail.com"}
+
+
+def _notify_founder(subject: str, body_text: str) -> None:
+    def _send() -> None:
+        try:
+            from agentmail_client import AgentMailClient
+            # send_internal auto-prefixes client_id "internal:" per its own
+            # scope conventions; notification must never break saves.
+            AgentMailClient().send_internal([next(iter(FOUNDER_EMAILS))],
+                                            subject, text=body_text)
+        except Exception:  # noqa: BLE001 - notification must never break saves
+            pass
+    asyncio.get_running_loop().run_in_executor(None, _send)
+
+
+@router_session.patch("/{slug}/response")
+async def update_response(slug: str, body: ResponsePatch,
+                          current_user: dict = Depends(get_current_user)):
+    tdb = get_teardown_db()
+    rec = await tdb.get_teardown(slug)
+    claim = (rec or {}).get("claim") or {}
+    if not claim or claim.get("claimed_by_email") != current_user["user"].email:
+        raise HTTPException(status_code=404,
+                            detail="No active claim for this teardown")
+    out: dict = {}
+    if body.response_text is not None:
+        verdict = evaluate_response(body.response_text)
+        await tdb.update_response(slug, current_user["user"].email,
+                                  response_text=body.response_text)
+        await tdb.set_response_status(
+            slug, "visible" if verdict.allowed else "auto_hidden")
+        if not verdict.allowed:
+            _notify_founder(
+                f"Teardown response auto-hidden: {slug}",
+                f"Reasons: {', '.join(verdict.reasons)}\n"
+                f"Review: https://nebulacomponents.com/teardowns/{slug}")
+        out["response_status"] = "visible" if verdict.allowed else "auto_hidden"
+        out["reasons"] = verdict.reasons
+    if body.private_context is not None:
+        await tdb.update_response(slug, current_user["user"].email,
+                                  private_context=body.private_context[:4000])
+        out["private_context"] = "saved"
+    return out
+
+
+@router_session.post("/{slug}/takedown")
+async def takedown(slug: str, current_user: dict = Depends(get_current_user)):
+    if current_user["user"].email not in FOUNDER_EMAILS:
+        raise HTTPException(status_code=403, detail="Founder only")
+    row = await get_teardown_db().set_response_status(slug, "removed")
+    if row is None:
+        raise HTTPException(status_code=404, detail="Nothing to take down")
+    return {"response_status": "removed"}
