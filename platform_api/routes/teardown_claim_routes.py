@@ -108,10 +108,6 @@ async def claim_dns_start(slug: str, redis=Depends(get_redis)):
     rec = await get_teardown_db().get_teardown(slug)
     if rec is None:
         raise HTTPException(status_code=404, detail="Teardown not found")
-    try:
-        await get_teardown_db().create_claim(slug, DNS_CHECK_EMAIL, "email_domain")
-    except ClaimConflict:
-        pass
     value = f"nebula={secrets.token_hex(16)}"
     key = f"tdns:{slug}:{hashlib.sha256(value.encode()).hexdigest()[:16]}"
     await redis.set(key, {"slug": slug}, ttl=DNS_CHECK_TTL_SECONDS)

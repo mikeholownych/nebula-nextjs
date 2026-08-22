@@ -30,8 +30,16 @@ class ClaimDnsPathTests(unittest.TestCase):
         self.assertEqual(args[0], sha_key("basecamp", out["value"]))
         self.assertEqual(kwargs.get("ttl"), 48 * 3600)
         self.assertEqual(args[1], {"slug": "basecamp"})
-        db.create_claim.assert_awaited_with(
-            "basecamp", r.DNS_CHECK_EMAIL, "email_domain")
+        db.create_claim.assert_not_awaited()
+
+    def test_start_performs_no_claim_creation(self):
+        r = self._routes()
+        redis = AsyncMock()
+        db = AsyncMock()
+        db.get_teardown.return_value = {"domain": "basecamp.com"}
+        with patch.object(r, "get_teardown_db", return_value=db):
+            asyncio_run(r.claim_dns_start("basecamp", redis=redis))
+        db.create_claim.assert_not_awaited()
 
     def test_start_returns_404_for_unknown_slug(self):
         from fastapi import HTTPException
