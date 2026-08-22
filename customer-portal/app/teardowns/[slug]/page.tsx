@@ -2,40 +2,35 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { TEARDOWNS } from './data'
+import { fetchTeardown, formatAuditedDate } from './data.server'
 import { BrowserMockupCard } from '@/components/mockups/BrowserMockupCard'
 import { FindingCallout, RoughFilters } from '@/components/mockups/FindingCallout'
+
+export const revalidate = 300
 
 const QUADRANT_COLORS: Record<string, string> = {
   'Quick Win': 'text-accent',
   'Major Project': 'text-amber-400',
 }
 
-export function generateStaticParams() {
-  return Object.keys(TEARDOWNS).map((slug) => ({ slug }))
-}
-
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  return params.then(({ slug }) => {
-    const t = TEARDOWNS[slug]
-    if (!t) return {}
-    return {
-      title: `${t.name} Landing Page Audit: What Nebula Found | Nebula`,
+  const { slug } = await params
+  const t = await fetchTeardown(slug)
+  if (!t) return {}
+  return {
+    title: `${t.name} Landing Page Audit: What Nebula Found | Nebula`,
+    description: t.summary,
+    alternates: { canonical: `https://nebulacomponents.com/teardowns/${t.slug}` },
+    openGraph: {
+      title: `${t.name} Landing Page Audit: ${t.score}/10 - What the Engine Found`,
       description: t.summary,
-      alternates: {
-        canonical: `https://nebulacomponents.com/teardowns/${t.slug}`,
-      },
-      openGraph: {
-        title: `${t.name} Landing Page Audit: ${t.score}/10 - What the Engine Found`,
-        description: t.summary,
-        url: `https://nebulacomponents.com/teardowns/${t.slug}`,
-      },
-    }
-  })
+      url: `https://nebulacomponents.com/teardowns/${t.slug}`,
+    },
+  }
 }
 
 export default async function TeardownPage({
@@ -44,8 +39,9 @@ export default async function TeardownPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const t = TEARDOWNS[slug]
+  const t = await fetchTeardown(slug)
   if (!t) notFound()
+  const auditedDisplay = formatAuditedDate(t)
 
   const scoreColor =
     t.score >= 7 ? 'text-green-400' : t.score >= 5 ? 'text-amber-400' : 'text-red-400'
@@ -88,7 +84,7 @@ export default async function TeardownPage({
           >
             {t.domain}
           </a>{' '}
-          on {t.auditedAt}. {t.name} is not a Nebula customer. This page shows the raw output of
+          on {auditedDisplay}. {t.name} is not a Nebula customer. This page shows the raw output of
           the same engine every free scan uses - {t.findings.length} findings, evidence included.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -128,7 +124,7 @@ export default async function TeardownPage({
           <div className="h-12 w-px bg-border" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Audited</p>
-            <p className="text-sm font-semibold text-fg">{t.auditedAt}</p>
+            <p className="text-sm font-semibold text-fg">{auditedDisplay}</p>
             <p className="text-xs text-fg-muted">Same engine, public URL</p>
           </div>
         </div>
@@ -140,19 +136,19 @@ export default async function TeardownPage({
           This teardown is published to demonstrate what the audit engine produces on a real,
           well-known page - not to imply any commercial relationship. All findings are
           evidence-backed; source, selector, and confidence are included per finding.{' '}
-          {t.name} may update their page at any time; this reflects a snapshot taken {t.auditedAt}.
+          {t.name} may update their page at any time; this reflects a snapshot taken {auditedDisplay}.
         </div>
 
         {/* Required source-page snapshot */}
         <div className="mt-8">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-fg-muted">
-            Page snapshot · {t.auditedAt}
+            Page snapshot · {auditedDisplay}
           </p>
           <BrowserMockupCard theme="dark" url={t.domain}>
             <div className="relative h-80 w-full">
               <Image
-                src={t.screenshotUrl}
-                alt={`${t.name} landing page snapshot - ${t.auditedAt}`}
+                src={t.screenshot_path ?? ''}
+                alt={`${t.name} landing page snapshot - ${auditedDisplay}`}
                 fill
                 priority
                 className="object-cover object-top"
@@ -267,6 +263,14 @@ export default async function TeardownPage({
             ))}
           </div>
         </section>
+
+        {/* claim-cta:start */}
+        <div className="mt-12 border border-white/10 rounded-lg p-6">
+          <p className="text-sm text-white/60">
+            Work at {t.name}? Verify ownership to manage this teardown in your workspace.
+          </p>
+        </div>
+        {/* claim-cta:end */}
 
         {/* CTA */}
         <section className="mt-14 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
