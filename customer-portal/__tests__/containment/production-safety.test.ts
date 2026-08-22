@@ -374,7 +374,8 @@ describe('production safety containment', () => {
 
   it('shows a real audit submission form now that scoring is live', () => {
     const source = readFileSync(path.join(process.cwd(), 'app/audit/page.tsx'), 'utf8')
-    expect(source).toContain("Check your page before you change the ad.")
+    // Copy refreshed by the landed homepage/audit redesign; structural
+    // contract (real AuditForm, no fabricated score) is what this gate owns.
     expect(source).toContain('<AuditForm />')
     expect(source).not.toContain('7.7/10')
   })

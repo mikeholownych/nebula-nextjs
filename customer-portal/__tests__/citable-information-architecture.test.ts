@@ -116,7 +116,7 @@ describe('Citable information architecture', () => {
   test('overview renders one H1 and links every published child', () => {
     render(React.createElement(CitableOverviewPage))
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Citable' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Build Defensible SEO and AI Readiness Evidence with Citable' })).toBeInTheDocument()
     for (const route of getPublishedCitableRoutes()) {
       expect(screen.getAllByRole('link', { name: new RegExp(route.h1, 'i') }).length)
         .toBeGreaterThan(0)
@@ -245,7 +245,7 @@ describe('Citable information architecture', () => {
   test('renders a category and workflow comparison with explicit bounded evidence states', () => {
     render(React.createElement(CitableComparisonPage))
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Choose the right verification layer' }))
+    expect(screen.getByRole('heading', { level: 1, name: 'Discover When to Use Citable for AI Search Verification' }))
       .toBeInTheDocument()
     for (const state of ['Documented', 'Not assessed', 'Requires external source']) {
       expect(screen.getAllByText(state, { exact: true }).length).toBeGreaterThan(0)
@@ -263,7 +263,7 @@ describe('Citable information architecture', () => {
   test('renders the current release from the projection with controlled-surface links and unavailable proof disclosure', () => {
     render(React.createElement(CitableReleasesPage))
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Inspect the synchronized Citable release' }))
+    expect(screen.getByRole('heading', { level: 1, name: 'Discover Synchronized Citable Releases and Package Facts' }))
       .toBeInTheDocument()
     expect(screen.getByText(`v${citableReleaseFacts.version}`)).toBeInTheDocument()
     expect(screen.getByText(citableReleaseFacts.source)).toBeInTheDocument()

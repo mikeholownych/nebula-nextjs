@@ -1,0 +1,3 @@
+{
+  "/api/readyz/route": "app/api/readyz/route.js"
+}

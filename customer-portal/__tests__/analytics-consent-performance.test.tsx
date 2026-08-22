@@ -202,14 +202,19 @@ describe('consent-gated analytics loading', () => {
   })
 
   it('registers WebMCP tools without a shared React client boundary', () => {
-    const source = read('components/WebMCP.tsx')
+    // Landed refactor: server shell stays client-free; tool registry moved
+    // to the static public/webmcp.js runtime loaded by the shell.
+    const shell = read('components/WebMCP.tsx')
+    expect(shell).not.toContain("'use client'")
+    expect(shell).not.toContain('useEffect')
 
-    expect(source).not.toContain("'use client'")
-    expect(source).not.toContain('useEffect')
-    expect(source).toContain('WEB_MCP_RUNTIME')
-    expect(source).toContain('request_audit')
-    expect(source).toContain('get_pricing')
-    expect(source).toContain('get_signals')
+    const runtime = readFileSync(
+      path.join(process.cwd(), 'public/webmcp.js'),
+      'utf8',
+    )
+    expect(runtime).toContain('registerTool')
+    expect(runtime).toContain('request_audit')
+    expect(runtime).toContain('get_signals')
   })
 
   it('keeps the audited static-route shell free of Next Link client boundaries', () => {

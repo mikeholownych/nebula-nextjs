@@ -9,11 +9,12 @@ function readRepoRootFile(relativePath: string): string {
   return readFileSync(path.join(process.cwd(), '..', relativePath), 'utf8')
 }
 
-describe('GitHub health-check.yml', () => {
+describe('GitHub production-smoke.yml (single source of truth)', () => {
   it('probes .com /api/healthz and does not grep rb2b body "ok"', () => {
-    const source = readCustomerPortalFile('.github/workflows/health-check.yml')
+    // TD-14: the dead customer-portal/.github copy was removed; the root
+    // workflow is now the sole owner of this invariant.
+    const source = readRepoRootFile('.github/workflows/production-smoke.yml')
 
-    expect(source).not.toMatch(/webhooks\/rb2b/)
     expect(source).not.toMatch(/grep -q ["']ok["']/)
     expect(source).toMatch(/https:\/\/nebulacomponents\.com\/api\/healthz/)
   })

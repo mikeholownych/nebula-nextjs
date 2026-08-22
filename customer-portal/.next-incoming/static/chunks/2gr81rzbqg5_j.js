@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,89491,t=>{"use strict";t.i(43491).analytics.init({projectKey:"hck_pk_UDEJlnGqF84u4i2q08NwcTvTYGrXLns_",install:{framework:"nextjs",frameworkVersion:"16",agent:"other"}}),t.s(["default",0,function(){return null}])},80418,function(t){t.n(t.i(89491))}]);

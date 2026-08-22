@@ -1,0 +1,3 @@
+{
+  "/[...path]/route": "app/[...path]/route.js"
+}

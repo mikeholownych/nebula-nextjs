@@ -17,20 +17,28 @@ describe('next.config TypeScript build gate', () => {
 
 describe('nested GitHub CI lint gate', () => {
   it('fails the job when lint fails', () => {
-    const source = readRepoFile('.github/workflows/ci.yml')
+    // TD-14: nested customer-portal workflow removed; assert against the
+    // repo-root CI (single source of truth) and its dedicated lint job.
+    const source = readRepoFile('../.github/workflows/ci.yml')
     const workflow = YAML.parse(source) as {
       jobs?: Record<
         string,
         {
+          name?: string
           steps?: Array<{ name?: string; run?: string }>
         }
       >
     }
-    const lintStep = workflow.jobs?.build?.steps?.find((step) => step.name === 'Lint')
 
-    expect(lintStep).toBeDefined()
-    expect(lintStep?.run).toBe('npm run lint')
-    expect(lintStep?.run).not.toContain('|| true')
+    const lintJob = Object.values(workflow.jobs ?? {}).find(
+      (job) => job.name === 'Lint & Typecheck'
+    )
+
+    expect(lintJob).toBeDefined()
+    const runs = (lintJob?.steps ?? []).map((step) => step.run).join('\n')
+    expect(runs).toContain('npm run lint')
+    expect(runs).not.toContain('|| true')
+    expect(runs).toContain('npm run typecheck')
     expect(source).not.toMatch(/npm run lint\s*\|\|\s*true/)
   })
 })

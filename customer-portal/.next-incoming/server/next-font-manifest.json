@@ -1,0 +1,611 @@
+{
+  "app": {
+    "[project]/app/7-systems/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/_not-found/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/about/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/about/team/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/accessible-nebula/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/ad-burn-leaderboard/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/ads-getting-clicks-but-no-sales/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/agency-partner/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/ai-ops-retainer/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/ai-sdr-vs-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit-dashboard/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit-lander/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/[id]/processing/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/[id]/results/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/compare/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/results/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audit/sample/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/audits/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/benchmarks/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/best-landing-page-audit-tools/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/beta-tester/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/brand/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/case-studies/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/case-studies/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/checkout-impulse/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/checkout-v2/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/checkout/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/company/about/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/company/team/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/compare/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/compare/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/component-showcase/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/concepts/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/create-97-checkout/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/cta-optimization/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/dashboard/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/data-rights/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/demo/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/ecommerce-landing-page-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/editorial-standards/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/fix-library/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/for/[vertical]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/funnel-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/generator/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/growth-launch-confirmation/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/growth-launch/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/headline-optimization/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/index-old/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/lab/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/landing-page-audit-tools-pricing/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/landing-page-cta-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/landing-page-message-match/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/landing-page-mistakes/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/landing-page-trust-signals/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/launch-page-97/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/lead-dashboard/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/lead-generation-landing-page-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/leak-index/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/above-fold-landing-page/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/ad-says-one-thing-page-says-another/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/agency-handoff-debt/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/b2b-saas-landing-page-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/before-you-raise-ad-budget/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/coach-consultant-landing-page/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/confessions/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/cpc-break-even-landing-page/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/cta-below-fold-mobile/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/cta-not-working/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/ecommerce-landing-page-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/facebook-ads-no-leads/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/form-has-zero-friction/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/ghost-variant-ab-test/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/google-ads-clicks-no-sales/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/google-ads-disapproved-ads-still-spending/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/google-ads-high-ctr-low-conversion/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/google-ads-quality-score-low/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/headline-cta-mismatch/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/high-cpc-low-conversion/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/landing-page-bounce-rate-high/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/landing-page-conversion-rate-benchmark/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/landing-page-intelligence-stack/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/landing-page-load-time-slow/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/landing-page-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/linkedin-ad-copy-landing-page-mismatch/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/linkedin-ads-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/linkedin-authority-gap/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/message-match-checklist/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/meta-ads-high-frequency-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/mobile-landing-page-leaks/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/paid-traffic-leak-map/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/pricing-page-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/proof-before-cta/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/retargeting-ads-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/social-proof-backfire/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/the-11pm-founder-spiral/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/tiktok-ads-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/tiktok-landing-page-scroll-speed-gap/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/tiktok-trust-collapse/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/learning-centre/traffic-but-no-form-fills/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/login/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/marketing-ops/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/mobile-landing-page-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/mobile-landing-page-optimization/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/newsletter/confirmed/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/newsletter/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/og-card-source/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/organization/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/page-speed-conversion/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/paid-traffic-leak-scorecard/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/part-after/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/part-before/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/playbooks/founder-second-brain/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/playbooks/linkedin-skill-engine/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/playbooks/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/playbooks/specialist-ai-agent-library/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/press/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/pricing-guides/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/pricing/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/privacy-policy/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/proof/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/repair-sprint/example/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/repair-sprint/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/research/landing-page-performance-q3-2026/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/compare/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/generator/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/jobs/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/quick-start/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/citable/releases/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/resources/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/roas-cliff/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/roi-calculator/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/saas-landing-page-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/score/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/shared/[token]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/social-proof-landing-page/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/subscription/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/teardowns/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/teardowns/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/terms/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/thank-you/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/unsubscribe/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/vs/[slug]/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/vs/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/what-is-landing-page-audit/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/why-cro-agencies-dont-work/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/why-is-my-landing-page-not-converting/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ],
+    "[project]/app/workspace/page": [
+      "static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}
