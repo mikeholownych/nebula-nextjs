@@ -8,7 +8,6 @@ import {
   SPEC_JSON_URL,
   SPEC_VERSION,
   getSignalBySlug,
-  SIGNALS_HUB_URL,
 } from '../data'
 
 export function generateStaticParams() {

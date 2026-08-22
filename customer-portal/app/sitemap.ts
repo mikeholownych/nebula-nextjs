@@ -28,6 +28,21 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
   },
   {
     paths: [
+      '/signals',
+      '/signals/message-match',
+      '/signals/trust-signals',
+      '/signals/mobile-cta',
+      '/signals/load-speed',
+      '/signals/cta-clarity',
+      '/signals/above-fold-clarity',
+      '/signals/ad-signal-continuity',
+      '/signals/seo-foundations',
+      '/signals/ai-readiness',
+    ],
+    priority: 0.8,
+  },
+  {
+    paths: [
       '/learning-centre',
       '/resources',
       '/case-studies',

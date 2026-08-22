@@ -28,8 +28,6 @@ interface Correlation {
 }
 
 const card = 'rounded-lg border border-border bg-bg-panel p-5'
-const btn =
-  'inline-flex min-h-[36px] items-center rounded px-3 py-1.5 text-sm font-medium transition-opacity hover:opacity-85'
 
 export default function Ga4Widget({
   email,
