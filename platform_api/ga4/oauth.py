@@ -122,19 +122,20 @@ async def list_account_summaries(access_token: str) -> list[dict]:
     import httpx
 
     async with httpx.AsyncClient(timeout=10.0) as client:
+        # pageSize max 200; no 'limit' param exists (400 otherwise).
         resp = await client.get(
             "https://analyticsadmin.googleapis.com/v1beta/accountSummaries"
-            "?pageSize=200&limit=200",
+            "?pageSize=200",
             headers={"Authorization": f"Bearer {access_token}"},
         )
         resp.raise_for_status()
         payload = resp.json()
 
+    # Documented shape: accountSummaries[].propertySummaries[]
+    #   { property: "properties/123", displayName: "..." }
     out: list[dict] = []
     for summary in payload.get("accountSummaries", []):
-        for prop in summary.get("propertySegments", []) or [
-            {"property": summary.get("name"), "displayName": summary.get("displayName")}
-        ]:
+        for prop in summary.get("propertySummaries", []):
             out.append({
                 "property_id": prop.get("property"),
                 "display_name": prop.get("displayName") or summary.get("displayName"),
