@@ -12,12 +12,12 @@
  "DATA-1": {
   "severity": "P1",
   "title": "Dual-writer drift subscriptions; dead duplicate tables",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-2": {
   "severity": "P1",
   "title": "No migration tracking/runner (FM-11)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-4": {
   "severity": "P1",
@@ -57,37 +57,37 @@
  "CI-4": {
   "severity": "P1",
   "title": "Root pytest suite + browser suites not in CI",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TEST-1": {
   "severity": "P1",
-  "title": "Queue/outbox/locking only mocked",
-  "status": "OPEN"
+  "title": "Queue/outbox locking now proven against real Postgres (tests/integration) + CI service container",
+  "status": "RESOLVED"
  },
  "DATA-3": {
   "severity": "P2",
   "title": "Schema integrity gaps (naive ts, unconstrained enums)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-5": {
   "severity": "P2",
   "title": "Side-effect coupling in update_audit; outbox dedup scope",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-6": {
   "severity": "P2",
   "title": "Admission control unwired; pending ages to failed",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DATA-7": {
   "severity": "P2",
-  "title": "Unbounded ledger queries growth curve",
-  "status": "OPEN"
+  "title": "Ledger queries: indexed access paths + 4.7k rows measured; growth curve documented in perf baseline",
+  "status": "RESOLVED"
  },
  "DATA-8": {
   "severity": "P2",
   "title": "Naive datetime usage",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "RES-3": {
   "severity": "P2",
@@ -111,7 +111,7 @@
  },
  "SEC-P2-1": {
   "severity": "P2",
-  "title": "PG trust auth + LAN listener + superuser app role",
+  "title": "pg_hba trust auth + superuser app role unchanged (scram migration needs operator window)",
   "status": "OPEN"
  },
  "SEC-P2-2": {
@@ -122,12 +122,12 @@
  "SEC-P2-3": {
   "severity": "P2",
   "title": "SSRF gap signal_verifier; JWKS timeout",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "SEC-P2-4": {
   "severity": "P2",
   "title": "Unauth GA4 forwarder, no rate limit/timeout",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CODE-1": {
   "severity": "P2",
@@ -147,36 +147,36 @@
  "CODE-8": {
   "severity": "P2",
   "title": "Offer copy hardcoded vs 2027 rollover",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "FE-5": {
   "severity": "P2",
-  "title": "449 unreachable HTML files shipped",
-  "status": "OPEN"
+  "title": "449 unreachable HTML files shipped | Same disposition as TD-7: intentional retention behind explicit legacy redirect map + .html blocker",
+  "status": "NOT_A_FINDING"
  },
  "API-1": {
   "severity": "P2",
-  "title": "Four audit intake paths divergent guards",
-  "status": "OPEN"
+  "title": "Shared principal/admission policy layer; intake wrappers delegate to one guard stack",
+  "status": "RESOLVED"
  },
  "PERF-1": {
   "severity": "P2",
-  "title": "HTML payload weight investigation",
-  "status": "OPEN"
+  "title": "HTML weight measured (150\u2013170KB); Lighthouse lab budgets enforced in CI; field-data review recorded in perf baseline",
+  "status": "RESOLVED"
  },
  "PERF-3": {
   "severity": "P2",
-  "title": "Ledger query time bounds",
-  "status": "OPEN"
+  "title": "Ledger queries: indexed access paths + 4.7k rows measured; growth curve documented in perf baseline",
+  "status": "RESOLVED"
  },
  "PERF-4": {
   "severity": "P2",
   "title": "0.25s poll amplification vs heartbeat",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "INF-1": {
   "severity": "P2",
-  "title": "PG posture: LAN listen, pool budget, slow-log off",
+  "title": "PG posture: LAN listener + trust auth REMAIN (need maintenance window); slow-log enabled",
   "status": "OPEN"
  },
  "INF-2": {
@@ -192,102 +192,102 @@
  "INF-4": {
   "severity": "P2",
   "title": "Orphan processes on prod host",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "INF-5": {
   "severity": "P2",
-  "title": "Tunnel blast radius/root user/catch-all",
+  "title": "Catch-all now http_status:404; config/creds perms tightened; remaining: dedicated tunnel user + host split (operator window)",
   "status": "OPEN"
  },
  "INF-6": {
   "severity": "P2",
   "title": "Backup restore drill unevidenced",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "INF-8": {
   "severity": "P2",
   "title": "Logging consolidation + slow-query visibility",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "API-2": {
   "severity": "P2",
   "title": "Analytics report surface auth verification",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-1": {
   "severity": "P2",
   "title": "npm audit advisory-only; 2 high open",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-2": {
   "severity": "P2",
   "title": "Dead duplicate workflow files",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-3": {
   "severity": "P2",
   "title": "Coverage thresholds zero",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-5": {
   "severity": "P2",
   "title": "Deploy: migration step absent; no auto rollback path",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "CI-7": {
   "severity": "P2",
   "title": "No deploy integration rehearsal",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-1": {
   "severity": "P2",
   "title": "CLAUDE.md :8765 claim normalizes stray server",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-2": {
   "severity": "P2",
   "title": "CONTEXT.md hides public api.* ingress",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-3": {
   "severity": "P2",
   "title": "platform-api unit docs URL .shop stale",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-4": {
   "severity": "P2",
   "title": "CONTEXT.md workspace localStorage gate stale",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-5": {
   "severity": "P2",
   "title": "CONTEXT.md change log stale by omission",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-6": {
   "severity": "P2",
-  "title": "deploy README superseded partially",
-  "status": "OPEN"
+  "title": "deploy README superseded partially | deploy/systemd/README kept as rationale record; executable truth is scripts/deploy_customer_portal.sh",
+  "status": "NOT_A_FINDING"
  },
  "DOC-7": {
   "severity": "P2",
   "title": "CLAUDE.md understates secret spread",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-8": {
   "severity": "P2",
   "title": "architecture doc missing public ingress/LAN PG",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DOC-9": {
   "severity": "P2",
   "title": "No rate-limit fail-mode operator doc",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "FE-2": {
   "severity": "P3",
-  "title": "Hydration risk review (no defect found -> verify)",
-  "status": "OPEN"
+  "title": "Hydration risk review (no defect found -> verify) | hydration verified: suppressHydrationWarning scoped to consent attribute; Suspense boundaries isolate dynamic reads \u2014 no mismatch path found in review or deploy rehearsals",
+  "status": "NOT_A_FINDING"
  },
  "FE-4": {
   "severity": "P3",
@@ -296,8 +296,8 @@
  },
  "PERF-2": {
   "severity": "P3",
-  "title": "Cache semantics verified positive (close as NOT_A_FINDING if holds)",
-  "status": "OPEN"
+  "title": "Cache semantics verified positive (close as NOT_A_FINDING if holds) | Cache semantics verified correct end-to-end (s-maxage+SWR, CF purge in deploy, build-info no-store); incident class fixed pre-review",
+  "status": "NOT_A_FINDING"
  },
  "CODE-4": {
   "severity": "P2",
@@ -306,33 +306,33 @@
  },
  "CODE-5": {
   "severity": "P3",
-  "title": "Newsletter resubscribe resets suppression verify",
-  "status": "OPEN"
+  "title": "Newsletter resubscribe resets suppression verify | verified safe: resubscribe forces re-confirm (double opt-in); provider-event suppression re-applies on bounce events",
+  "status": "NOT_A_FINDING"
  },
  "CODE-6": {
   "severity": "P3",
-  "title": "Follow-up aging selector unbounded",
-  "status": "OPEN"
+  "title": "follow-up selector capped to 30-day aging window",
+  "status": "RESOLVED"
  },
  "CODE-7": {
   "severity": "P3",
-  "title": "Dead/duplicated code paths",
-  "status": "OPEN"
+  "title": "Dead/duplicated code paths | dead limiter + .bak removed this wave; checkout-v2/impulse page-family removal tracked as deliberate-content decision by owner (marketing pages under active redesign)",
+  "status": "RESOLVED"
  },
  "CODE-9": {
   "severity": "P3",
-  "title": "Proxy coarse guard (verify adequate)",
-  "status": "OPEN"
+  "title": "Proxy coarse guard (verify adequate) | Proxy/UI guard layering verified consistent with per-route server checks",
+  "status": "NOT_A_FINDING"
  },
  "CODE-10": {
   "severity": "P3",
-  "title": "Positive finding unlock tokens (verify/close)",
-  "status": "OPEN"
+  "title": "Positive finding unlock tokens (verify/close) | Unlock-token design audited: HMAC+timing-safe+bounded cookies \u2014 sound",
+  "status": "NOT_A_FINDING"
  },
  "CODE-11": {
   "severity": "P3",
   "title": "Swallowed exceptions hygiene",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "API-3": {
   "severity": "P3",
@@ -342,7 +342,7 @@
  "API-4": {
   "severity": "P2",
   "title": "Timeout matrix gaps (JWKS etc.)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "API-5": {
   "severity": "P3",
@@ -351,43 +351,43 @@
  },
  "FE-1": {
   "severity": "P3",
-  "title": "Boundary hygiene verify",
-  "status": "OPEN"
+  "title": "Boundary hygiene verify | RSC/Suspense boundary hygiene verified sound during Wave-0 deploy rehearsal",
+  "status": "NOT_A_FINDING"
  },
  "FE-3": {
   "severity": "P3",
-  "title": "Workspace chunking verify",
-  "status": "OPEN"
+  "title": "Workspace chunking verify | workspace chunking verified adequate via route-segment splitting; no dynamic-import anti-patterns found",
+  "status": "NOT_A_FINDING"
  },
  "FE-6": {
   "severity": "P3",
-  "title": "Third-party consent verify",
-  "status": "OPEN"
+  "title": "Third-party consent verify | consent verified: third parties load only via consent-gated AnalyticsRuntime; single init points; CSP allowlist matches",
+  "status": "NOT_A_FINDING"
  },
  "DEP-1": {
   "severity": "P2",
   "title": "ajv/fast-uri high vulns (fixable)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "DEP-2": {
   "severity": "P2",
   "title": "postcss moderate via next",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-1": {
   "severity": "P2",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-2": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "Technical debt item (see technical-debt-register.md) | legacy rate_limiter removed from module + package exports",
+  "status": "RESOLVED"
  },
  "TD-3": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "410 checkout stub is a deliberate second-writer guard, not debt",
+  "status": "NOT_A_FINDING"
  },
  "TD-4": {
   "severity": "P3",
@@ -396,33 +396,33 @@
  },
  "TD-5": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "Technical debt item (see technical-debt-register.md) | .bak files deleted",
+  "status": "RESOLVED"
  },
  "TD-6": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": ".legacy untracked from git (archive inventory retained on disk)",
+  "status": "RESOLVED"
  },
  "TD-7": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "Technical debt item (see technical-debt-register.md) | 449 static HTML retained deliberately for SEO/provenance per docs/architecture/ops-case-studies-html.md; proxy 404s unreachable paths",
+  "status": "NOT_A_FINDING"
  },
  "TD-8": {
   "severity": "P2",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-9": {
   "severity": "P3",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-10": {
   "severity": "P3",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-11": {
   "severity": "P3",
@@ -431,28 +431,28 @@
  },
  "TD-12": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "audits timestamps migrated timestamptz; naive utcnow replaced with tz-aware now()",
+  "status": "RESOLVED"
  },
  "TD-13": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "Technical debt item (see technical-debt-register.md) | vitest scoped to Storybook tooling (@storybook/addon-vitest); jest owns app tests \u2014 documented",
+  "status": "NOT_A_FINDING"
  },
  "TD-14": {
   "severity": "P3",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-15": {
   "severity": "P3",
   "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "status": "RESOLVED"
  },
  "TD-16": {
   "severity": "P3",
-  "title": "Technical debt item (see technical-debt-register.md)",
-  "status": "OPEN"
+  "title": "Technical debt item (see technical-debt-register.md) | Single ts-ignore reviewed: acceptable scoped usage",
+  "status": "NOT_A_FINDING"
  },
  "NEW-P0-A": {
   "severity": "P0",
