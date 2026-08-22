@@ -154,6 +154,8 @@ from platform_api.routes.teardown_claim_routes import router as teardown_claim_r
 app.include_router(teardown_claim_router)
 from platform_api.routes.teardown_claim_routes import router_verify as teardown_claim_router_verify
 app.include_router(teardown_claim_router_verify)
+from platform_api.routes.teardown_claim_routes import router_session as teardown_claim_router_session
+app.include_router(teardown_claim_router_session)
 app.include_router(audit_schedule_router)
 app.include_router(report_router)
 app.include_router(competitor_router)

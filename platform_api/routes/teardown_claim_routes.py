@@ -9,6 +9,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from platform_api.auth.principal import internal_service_dependency
+from platform_api.auth.routes import get_current_user
+from platform_api.db import get_session
 from platform_api.redis_client import get_redis
 from platform_api.services.claim_tokens import (
     consume_claim_token,
@@ -27,6 +29,10 @@ router = APIRouter(prefix="/teardowns",
 # Unguarded: emailed to humans as a clickable link; the token in the URL is
 # the capability (same pattern as GET /auth/verify).
 router_verify = APIRouter(prefix="/teardowns")
+
+# Session-authenticated: uses the same cookie/JWT dependency as /auth/me,
+# with no internal-service guard.
+router_session = APIRouter(prefix="/teardowns")
 
 
 class EmailRequest(BaseModel):
@@ -146,3 +152,46 @@ async def claim_dns_check(slug: str, body: DnsCheckRequest,
                             detail="This teardown already has an owner")
     await redis.delete(key)
     return {"verified": True, "email": claim["claimed_by_email"]}
+
+
+def _gsc_site_for_user_model(user_id, db):
+    """Row for the user's single GSC connection via the SQLAlchemy session."""
+    from platform_api.db.models import GscConnection
+    uid = user_id if not hasattr(user_id, "id") else user_id.id
+    return (db.query(GscConnection)
+              .filter(GscConnection.user_id == uid)
+              .first())
+
+
+async def _gsc_site_for_user(user, db) -> str | None:
+    """The user's connected GSC site url, or None if no connection."""
+    row = _gsc_site_for_user_model(user, db)
+    return row.gsc_site_url if row else None
+
+
+@router_session.post("/{slug}/claim/gsc-check")
+async def claim_gsc_check(slug: str,
+                          current_user: dict = Depends(get_current_user),
+                          db=Depends(get_session)):
+    """Session-authenticated GSC ownership proof. Mounted WITHOUT internal
+    guard; the browser session cookie is the capability."""
+    rec = await get_teardown_db().get_teardown(slug)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="Teardown not found")
+    site = await _gsc_site_for_user(current_user["user"], db)
+    if not site:
+        raise HTTPException(status_code=400,
+                            detail="Connect Google Search Console first")
+    site_dom = registered_domain(site.removeprefix("sc-domain:"))
+    if site_dom != registered_domain(rec["domain"]):
+        raise HTTPException(
+            status_code=400,
+            detail="Connected Search Console property does not match "
+                   "this teardown")
+    try:
+        claim = await get_teardown_db().create_claim(
+            slug, current_user["user"].email, "gsc")
+    except ClaimConflict:
+        raise HTTPException(status_code=409,
+                            detail="This teardown already has an owner")
+    return {"claimed": True, "email": claim["claimed_by_email"]}
