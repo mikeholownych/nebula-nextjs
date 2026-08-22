@@ -57,6 +57,14 @@ unset NEXT_DIST_DIR
 # Applied AFTER a good build exists and BEFORE anything is restarted, so a
 # failed migration aborts the deploy with the live release untouched.
 if [[ -f /home/mike/nebula/.env ]]; then set -a; source /home/mike/nebula/.env; set +a; fi
+# Inherit the unit's EFFECTIVE environment (drop-ins included) so production
+# DSN requirements are satisfied exactly as the running service sees them.
+while IFS='=' read -r k v; do
+  [[ "$k" == "DATABASE_URL" || "$k" == "AUDIT_DATABASE_URL" ]] && export "$k=$v"
+done < <(systemctl show nebula-platform-api.service -p Environment --value | tr ' ' '\n' | grep -E '^(DATABASE_URL|AUDIT_DATABASE_URL)=')
+: "${DATABASE_URL:=postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433}"
+: "${AUDIT_DATABASE_URL:=postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433}"
+export DATABASE_URL AUDIT_DATABASE_URL
 log "Applying tracked migrations (audit + platform) ..."
 if ! ENVIRONMENT=production PYTHONPATH=/home/mike/nebula \
     /home/mike/nebula/venv/bin/python3 /home/mike/nebula/platform_api/scripts/migrate.py apply; then
