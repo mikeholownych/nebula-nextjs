@@ -5,7 +5,7 @@ import hashlib
 import secrets
 
 import dns.asyncresolver as dns_async
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from platform_api.auth.principal import internal_service_dependency
@@ -17,6 +17,7 @@ from platform_api.services.claim_tokens import (
     issue_claim_token,
     token_key,
 )
+from platform_api.services.rate_limit import enforce_rate_limit
 from platform_api.services.domains import email_domain, is_freemail, registered_domain
 from platform_api.services.teardown_db import (
     ClaimConflict,
@@ -41,6 +42,7 @@ class EmailRequest(BaseModel):
 
 @router.post("/{slug}/claim/email-request")
 async def claim_email_request(slug: str, body: EmailRequest,
+                              request: Request,
                               redis=Depends(get_redis)):
     email_norm = body.email.strip().lower()
     dom = email_domain(email_norm)
@@ -53,6 +55,9 @@ async def claim_email_request(slug: str, body: EmailRequest,
     if dom != registered_domain(rec["domain"]):
         raise HTTPException(status_code=400,
                             detail="Email domain does not match this teardown")
+    ip = request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+    await enforce_rate_limit(redis, f"tclaimreq:{ip}", 10, 3600)
+    await enforce_rate_limit(redis, f"tclaimdom:{dom}", 5, 3600)
     token = await issue_claim_token(redis, slug, email_norm)
     verify_url = f"https://nebulacomponents.com/api/teardowns/{slug}/claim/email-verify?token={token}"
     html_body = f"""
@@ -72,7 +77,7 @@ async def claim_email_request(slug: str, body: EmailRequest,
             return AgentMailClient().send_transactional(
                 [email_norm], f"Claim the {rec['name']} teardown",
                 text=text_body, html=html_body,
-                client_id=f"tclaim:{slug}:{email_norm}:{token[:8]}") or {}
+                client_id=f"txn:tclaim:{slug}:{email_norm}:{token[:8]}") or {}
         except Exception as exc:
             return {"_error": str(exc)}
 
@@ -110,10 +115,13 @@ DNS_CHECK_EMAIL = "dns-claim@invalid.nebulacomponents.com"
 
 
 @router.post("/{slug}/claim/dns-start")
-async def claim_dns_start(slug: str, redis=Depends(get_redis)):
+async def claim_dns_start(slug: str, request: Request,
+                          redis=Depends(get_redis)):
     rec = await get_teardown_db().get_teardown(slug)
     if rec is None:
         raise HTTPException(status_code=404, detail="Teardown not found")
+    ip = request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+    await enforce_rate_limit(redis, f"tclaimdns:{ip}", 5, 3600)
     value = f"nebula={secrets.token_hex(16)}"
     key = f"tdns:{slug}:{hashlib.sha256(value.encode()).hexdigest()[:16]}"
     await redis.set(key, {"slug": slug}, ttl=DNS_CHECK_TTL_SECONDS)

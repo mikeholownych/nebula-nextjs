@@ -18,10 +18,12 @@ class ClaimDnsPathTests(unittest.TestCase):
     def test_start_returns_record_instructions(self):
         r = self._routes()
         redis = AsyncMock()
+        redis.incr.return_value = 1
         db = AsyncMock()
         db.get_teardown.return_value = {"domain": "basecamp.com"}
         with patch.object(r, "get_teardown_db", return_value=db):
-            out = asyncio_run(r.claim_dns_start("basecamp", redis=redis))
+            out = asyncio_run(r.claim_dns_start(
+                "basecamp", MagicMock(headers={}), redis=redis))
         self.assertEqual(out["record_name"], "_nebula-verify.basecamp.com")
         self.assertIn("nebula=", out["value"])
         self.assertEqual(out["ttl_hours"], 48)
@@ -35,10 +37,12 @@ class ClaimDnsPathTests(unittest.TestCase):
     def test_start_performs_no_claim_creation(self):
         r = self._routes()
         redis = AsyncMock()
+        redis.incr.return_value = 1
         db = AsyncMock()
         db.get_teardown.return_value = {"domain": "basecamp.com"}
         with patch.object(r, "get_teardown_db", return_value=db):
-            asyncio_run(r.claim_dns_start("basecamp", redis=redis))
+            asyncio_run(r.claim_dns_start(
+                "basecamp", MagicMock(headers={}), redis=redis))
         db.create_claim.assert_not_awaited()
 
     def test_start_returns_404_for_unknown_slug(self):
@@ -48,7 +52,8 @@ class ClaimDnsPathTests(unittest.TestCase):
         db.get_teardown.return_value = None
         with patch.object(r, "get_teardown_db", return_value=db):
             with self.assertRaises(HTTPException) as cm:
-                asyncio_run(r.claim_dns_start("nope", redis=AsyncMock()))
+                asyncio_run(r.claim_dns_start(
+                    "nope", MagicMock(headers={}), redis=AsyncMock()))
         self.assertEqual(cm.exception.status_code, 404)
 
     def test_check_success_claims_and_consumes(self):

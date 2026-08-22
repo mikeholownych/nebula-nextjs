@@ -14,7 +14,7 @@ class ClaimEmailPathTests(unittest.TestCase):
         with self.assertRaises(HTTPException) as cm:
             asyncio_run(r.claim_email_request(
                 "basecamp", MagicMock(email="x@gmail.com"),
-                redis=AsyncMock()))
+                MagicMock(headers={}), redis=AsyncMock()))
         self.assertEqual(cm.exception.status_code, 400)
 
     def test_request_rejects_domain_mismatch(self):
@@ -26,7 +26,7 @@ class ClaimEmailPathTests(unittest.TestCase):
             with self.assertRaises(HTTPException) as cm:
                 asyncio_run(r.claim_email_request(
                     "some-slug", MagicMock(email="rep@basecamp.com"),
-                    redis=AsyncMock()))
+                    MagicMock(headers={}), redis=AsyncMock()))
         self.assertEqual(cm.exception.status_code, 400)
 
     def test_verify_consumes_token_and_claims(self):
