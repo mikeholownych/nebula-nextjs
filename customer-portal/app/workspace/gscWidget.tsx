@@ -165,10 +165,10 @@ export default function GscWidget({ email }: { email: string }) {
             <p className="mt-1 text-sm text-fg-muted">See your real traffic data alongside your audit scores.</p>
           </div>
           <a
-            href="/api/gsc/connect"
+            href="/workspace?tab=settings#integrations"
             className="inline-flex items-center gap-2 rounded-lg bg-[#c7ff2f] px-4 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
           >
-            Connect Search Console →
+            Manage in Settings →
           </a>
         </div>
 

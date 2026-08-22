@@ -1,0 +1,148 @@
+{
+  "name": "Nebula Landing Page Diagnostic Specification",
+  "version": "1.0.0",
+  "effective": "2026-08-22",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nebula Components",
+    "url": "https://nebulacomponents.com"
+  },
+  "canonical_url": "https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+  "machine_readable_url": "https://nebulacomponents.com/spec/landing-page-diagnostic-v1.json",
+  "per_signal_reference": "https://nebulacomponents.com/signals",
+  "scope": "This document defines exactly what the Nebula landing page diagnostic checks. The diagnostic inspects one landing page URL against nine conversion signals. For each failing condition it returns a finding containing the observed condition, the required condition, the measured gap, and a selector identifying where on the page the evidence comes from.",
+  "boundaries": [
+    "Findings are observations against these rules. They identify repair candidates.",
+    "Findings do not predict revenue, guarantee ranking or citations, or replace controlled experiments.",
+    "A signal without a returned finding means the run observed no failure for that category. It is not a certification."
+  ],
+  "procedure": [
+    "Fetch the submitted URL and confirm it resolves to a retrievable page.",
+    "Inspect raw HTML and rendered output across desktop and mobile widths.",
+    "Evaluate the nine signals defined below.",
+    "Emit findings for failing conditions, each carrying the evidence record described below.",
+    "Order findings by priority: highest impact first, lowest effort breaks ties, label alphabetical as final tiebreaker."
+  ],
+  "severity_bands": {
+    "critical": { "impact_range": [8, 10], "meaning": "Repair candidate with severe expected cost of inaction" },
+    "warning": { "impact_range": [5, 7.9], "meaning": "Material friction worth scheduling" },
+    "advisory": { "impact_range": [0, 4.9], "meaning": "Improvement opportunity, lower urgency" }
+  },
+  "evidence_record": {
+    "measured": "What was observed on the page",
+    "required": "What the signal rule demands instead",
+    "delta": "The gap between measured and required",
+    "selector": "Locator tying the observation to page markup",
+    "confidence": "One of definitive, high, contextual, unavailable",
+    "timestamp": "When the observation was captured",
+    "note": "When direct measurement is impossible, confidence drops to contextual or unavailable and the finding says so rather than asserting a number the engine did not observe."
+  },
+  "signals": [
+    {
+      "num": "01",
+      "id": "message_match",
+      "label": "Message Match",
+      "definition_url": "https://nebulacomponents.com/signals/message-match",
+      "definition": "Does the page promise match the expectation created by the ad or referring source?",
+      "decision_rule": "The primary headline and first supporting line must restate the same offer, audience, and outcome as the ad or referral context that produced the visit. A run flags this signal when the rendered headline contradicts, generalizes away from, or omits the promised offer.",
+      "inspected": ["H1 text", "first subheadline", "title tag", "referring campaign parameters when present"],
+      "pass_example": "Ad promises a free landing page audit. H1 reads \"Get a free audit of your landing page\" for the same audience. Match.",
+      "fail_example": "Ad promises a free audit. Page opens with generic agency branding and no mention of an audit anywhere above the fold. Flagged."
+    },
+    {
+      "num": "02",
+      "id": "trust",
+      "label": "Trust Signals",
+      "definition_url": "https://nebulacomponents.com/signals/trust-signals",
+      "definition": "Does the page support its claims before asking for commitment?",
+      "decision_rule": "At least one verifiable proof element must appear near the conversion ask: named results, sourced review counts, case studies, or identifiable company and author information. A run flags pages that make strong claims with no adjacent, checkable support.",
+      "inspected": ["testimonial and logo blocks", "review widgets", "case study links", "author and company identity markup"],
+      "pass_example": "A pricing claim sits next to a linked case study naming the customer and the measured result. Support is checkable. Clear.",
+      "fail_example": "\"Trusted by hundreds\" appears with no names, no sources, and no links. Flagged."
+    },
+    {
+      "num": "03",
+      "id": "mobile_cta",
+      "label": "Mobile CTA",
+      "definition_url": "https://nebulacomponents.com/signals/mobile-cta",
+      "definition": "Is the primary action visible and usable on a small viewport?",
+      "decision_rule": "The primary call-to-action must be fully visible inside the initial 390px-wide viewport without scrolling, and must meet minimum tap-target size. A run flags CTAs pushed below the fold, overlapped by other elements, or smaller than usable touch targets at mobile width.",
+      "inspected": ["CTA bounding box position and size at 390px", "overlap checks against header, banners, and sticky elements", "tap target dimensions"],
+      "pass_example": "Primary button renders entirely inside the first mobile viewport with a 48px tap height and nothing covering it. Clear.",
+      "fail_example": "At 390px the CTA sits underneath a fixed bottom banner, so the first tap hits the banner instead. Flagged."
+    },
+    {
+      "num": "04",
+      "id": "load_time",
+      "label": "Load Speed",
+      "definition_url": "https://nebulacomponents.com/signals/load-speed",
+      "definition": "Does the page become useful quickly enough to keep paid visitors from bouncing?",
+      "decision_rule": "Main content must reach usable state fast enough on a constrained connection. A run inspects render-blocking behavior, oversized hero media, and late-loading primary content, then reports measured values against the required threshold for the specific finding.",
+      "inspected": ["render-blocking resource count", "hero image weight and format", "when primary content becomes visible"],
+      "pass_example": "Primary content paints early; hero image is sized and compressed for mobile. Within threshold. Clear.",
+      "fail_example": "A multi-megabyte autoplay video delays first meaningful content well past the threshold recorded in the finding. Flagged."
+    },
+    {
+      "num": "05",
+      "id": "cta_clarity",
+      "label": "CTA Clarity",
+      "definition_url": "https://nebulacomponents.com/signals/cta-clarity",
+      "definition": "Is the next step obvious and proportionate to visitor intent?",
+      "decision_rule": "One primary action must dominate. A run flags pages offering several competing equal-weight actions, vague action labels, or asks disproportionate to intent (for example demanding account creation before delivering any value).",
+      "inspected": ["button label text", "count and relative weight of distinct actions", "ask placement relative to value shown"],
+      "pass_example": "Single high-contrast \"Run my free audit\" button; secondary links are visually subordinate. Clear.",
+      "fail_example": "Four equal-weight buttons (\"Book a call\", \"Sign up\", \"Learn more\", \"Follow us\") compete in the first viewport. Flagged."
+    },
+    {
+      "num": "06",
+      "id": "above_fold",
+      "label": "Above-Fold Clarity",
+      "definition_url": "https://nebulacomponents.com/signals/above-fold-clarity",
+      "definition": "Can a visitor understand the offer and next action in the first viewport?",
+      "decision_rule": "Within the initial viewport a first-time visitor must be able to answer three questions: what is offered, who it is for, and what to do next. A run flags pages where any of these answers requires scrolling or inference.",
+      "inspected": ["viewport-height slice of rendered DOM", "headline, subhead, CTA presence in that slice"],
+      "pass_example": "Offer, audience, and CTA all legible in the first desktop and mobile viewport. Clear.",
+      "fail_example": "First viewport contains only a full-screen illustration and a logo; offer and action require scrolling. Flagged."
+    },
+    {
+      "num": "07",
+      "id": "ad_signals",
+      "label": "Ad Signal Continuity",
+      "definition_url": "https://nebulacomponents.com/signals/ad-signal-continuity",
+      "definition": "Can paid clicks be connected to outcomes without guessing?",
+      "decision_rule": "Paid traffic infrastructure must preserve click identity through to conversion events. A run checks for broken or missing tracking continuity between entry and conversion surfaces and flags gaps that would force attribution guesses.",
+      "inspected": ["tracking parameter handling across navigation", "conversion event wiring", "attribution break points"],
+      "pass_example": "Click identifiers survive the redirect into checkout and fire the purchase event with source intact. Clear.",
+      "fail_example": "The main CTA links to a separate domain without carrying parameters, severing attribution for every paid click. Flagged."
+    },
+    {
+      "num": "08",
+      "id": "seo_foundations",
+      "label": "SEO Foundations",
+      "definition_url": "https://nebulacomponents.com/signals/seo-foundations",
+      "definition": "Can search systems retrieve and interpret the page foundations?",
+      "decision_rule": "Core retrieval elements must be present, unique, and consistent: crawlable status, canonical URL, title, meta description, heading hierarchy, and indexability directives. A run flags missing, duplicated, or contradictory foundations.",
+      "inspected": ["HTTP status and robots directives", "canonical tag", "title and meta description", "heading structure"],
+      "pass_example": "Self-referencing canonical, unique title and description, single H1, indexable. Clear.",
+      "fail_example": "Canonical points to a different URL while an internal link targets this one as the destination. Contradiction flagged."
+    },
+    {
+      "num": "09",
+      "id": "ai_readiness",
+      "label": "AI Readiness",
+      "definition_url": "https://nebulacomponents.com/signals/ai-readiness",
+      "definition": "Can answer engines identify, verify, and cite the page accurately?",
+      "decision_rule": "Machine-facing surfaces must let AI systems resolve who you are, what you offer, and what claims are supportable: structured data matching visible content, explicit factual statements, stable entity references, and crawler policy that permits answer engines you want citing you.",
+      "inspected": ["JSON-LD presence and accuracy", "entity consistency", "claim specificity", "crawler access rules for AI agents"],
+      "pass_example": "Product schema matches visible pricing; company identity is stated once, consistently, with same-as links. Clear.",
+      "fail_example": "Schema asserts guarantees the visible page never makes, and robots.txt blocks every AI crawler indiscriminately. Flagged."
+    }
+  ],
+  "versioning": "Signal definitions, severity bands, and the evidence record are contractual within a major version. Additions ship as minor versions; changes to a signal meaning ship as a new major version and never silently reinterpret prior audits.",
+  "citation": {
+    "short_form": "Nebula Components. Landing Page Diagnostic Specification v1.0.0 (2026-08-22). https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+    "inline_form": "(Nebula Diagnostic Spec v1.0)",
+    "reuse": "Quoting with attribution and a link to the canonical URL is welcome. Pin citations to a version; later versions never silently reinterpret audits run under v1.",
+    "ai_retrieval": "Summarization and retrieval by search and answer engines is permitted and encouraged with attribution. GPTBot, ClaudeBot, and PerplexityBot are allowed in https://nebulacomponents.com/robots.txt"
+  }
+}

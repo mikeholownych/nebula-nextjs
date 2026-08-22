@@ -23,6 +23,10 @@ const BUILD_DATE = new Date().toISOString().split('T')[0] // YYYY-MM-DD
 const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }> = [
   { paths: ['/pricing', '/audit'], priority: 0.9 },
   {
+    paths: ['/spec/landing-page-diagnostic-v1'],
+    priority: 0.9,
+  },
+  {
     paths: [
       '/learning-centre',
       '/resources',

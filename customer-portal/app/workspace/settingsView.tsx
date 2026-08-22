@@ -1,5 +1,6 @@
 'use client'
 
+import IntegrationsSection from './settingsIntegrations'
 import { useCallback, useEffect, useState } from 'react'
 
 const NOTIF_KEY = 'nebula_notification_prefs'
@@ -207,6 +208,8 @@ export default function SettingsView({ email }: { email: string }) {
 
   return (
     <div className="space-y-10 max-w-2xl">
+      <IntegrationsSection email={email} />
+
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 rounded-lg bg-bg-panel px-5 py-3 text-sm font-medium text-fg shadow-lg border border-border">
           {toast}

@@ -33,6 +33,16 @@ const resourceSchema = {
         `Citable is the open evidence layer beneath Nebula for defensible SEO, AEO, and GEO audits. ${citableReleaseFacts.detectorCount} detectors across ${citableReleaseFacts.namespaceCount} namespaces. Evidence packages on every run.`,
       author: { '@id': 'https://nebulacomponents.com/#organization' },
     },
+    {
+      '@type': 'TechArticle',
+      '@id': 'https://nebulacomponents.com/spec/landing-page-diagnostic-v1#article',
+      name: 'Landing Page Diagnostic Specification v1',
+      url: 'https://nebulacomponents.com/spec/landing-page-diagnostic-v1',
+      version: '1.0.0',
+      description:
+        'Canonical, versioned definition of the nine conversion signals checked by every Nebula audit: decision rules, severity bands, evidence record, and pass/fail examples.',
+      author: { '@id': 'https://nebulacomponents.com/#organization' },
+    },
   ],
 }
 
@@ -68,6 +78,27 @@ export default function ResourcesPage() {
           </div>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            <Link
+              href="/spec/landing-page-diagnostic-v1"
+              className="flex flex-col gap-2.5 rounded-md border border-border bg-bg-panel p-7 transition-colors hover:border-accent/30"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Specification</p>
+              <h2 className="text-xl font-semibold tracking-tight text-fg">Landing Page Diagnostic Spec v1</h2>
+              <p className="flex-1 text-sm leading-relaxed text-fg-muted">
+                The canonical, versioned definition of what a Nebula audit checks: all nine
+                conversion signals with decision rules, severity bands, the evidence record
+                attached to every finding, and pass/fail examples. The machine-readable contract
+                behind every audit result.
+              </p>
+              <div className="mt-1 flex items-center justify-between">
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full border border-accent/30 px-3 py-1 text-xs text-accent">v1.0.0</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">9 signals</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">JSON-LD</span>
+                </div>
+                <span className="text-lg text-accent">→</span>
+              </div>
+            </Link>
             <Link
               href="/resources/citable"
               className="flex flex-col gap-2.5 rounded-md border border-border bg-bg-panel p-7 transition-colors hover:border-accent/30"

@@ -11,6 +11,7 @@ Full expanded context: [llms-full.txt](https://nebulacomponents.com/llms-full.tx
 ## Docs
 
 - [Free audit](https://nebulacomponents.com/audit): 60-second automated diagnosis across 9 conversion signals - no signup required
+- [Diagnostic Specification v1](https://nebulacomponents.com/spec/landing-page-diagnostic-v1): Canonical, versioned definition of the 9 conversion signals - decision rules, severity bands, evidence record, and pass/fail examples. The machine-readable contract behind every audit.
 - [Pricing](https://nebulacomponents.com/pricing): One-Leak Repair Sprint $97 (locked through 2026-12-31)
 - [Learning Centre](https://nebulacomponents.com/learning-centre): 41 articles on landing page conversion issues, paid traffic leaks, and ad-to-page diagnosis (each also available as markdown at /learning-centre/<slug>.md)
 - [About](https://nebulacomponents.com/about): Founder and company background

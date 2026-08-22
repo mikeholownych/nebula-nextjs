@@ -28,6 +28,8 @@ Nebula diagnoses which signals fail on a given page and ranks the findings by li
 
 ## The 9-Signal Diagnosis
 
+Canonical specification: https://nebulacomponents.com/spec/landing-page-diagnostic-v1 (versioned decision rules, severity bands, and evidence record for every signal).
+
 Every Nebula audit checks nine signals:
 - Message-match: Does the ad headline match the page headline within three words?
 - Above-fold trust: Are there at least two trust signals (testimonials, logos, credentials) above the scroll line?

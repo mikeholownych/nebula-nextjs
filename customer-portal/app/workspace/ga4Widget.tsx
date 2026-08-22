@@ -15,12 +15,6 @@ interface Ga4Status {
   property_display_name?: string | null
 }
 
-interface Property {
-  property_id: string
-  display_name?: string | null
-  selected?: boolean
-}
-
 interface Correlation {
   path?: string
   baseline?: { conversion_rate_pct: number | null; sessions: number }
@@ -45,7 +39,6 @@ export default function Ga4Widget({
   latestCompletedAuditId?: string | null
 }) {
   const [status, setStatus] = useState<Ga4Status | null>(null)
-  const [properties, setProperties] = useState<Property[]>([])
   const [correlation, setCorrelation] = useState<Correlation | null>(null)
   const [busy, setBusy] = useState(false)
 
@@ -60,14 +53,6 @@ export default function Ga4Widget({
   }, [email, loadStatus])
 
   useEffect(() => {
-    if (!status?.connected || correlation) return
-    void (async () => {
-      const pr = await fetch('/api/ga4/properties', { cache: 'no-store' })
-      if (pr.ok) setProperties((await pr.json()).properties ?? [])
-    })()
-  }, [status?.connected, correlation])
-
-  useEffect(() => {
     if (!status?.connected || !status.property_id || !latestCompletedAuditId) return
     void (async () => {
       setBusy(true)
@@ -79,16 +64,6 @@ export default function Ga4Widget({
     })()
   }, [status?.connected, status?.property_id, latestCompletedAuditId])
 
-  async function selectProperty(property_id: string) {
-    setBusy(true)
-    await fetch('/api/ga4/select', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ property_id }),
-    })
-    await loadStatus()
-    setBusy(false)
-  }
 
   if (!email) return null
 
@@ -100,30 +75,14 @@ export default function Ga4Widget({
 
       {!status ? (
         <p className="text-sm text-fg-muted">Loading…</p>
-      ) : !status.connected ? (
-        <>
-          <p className="text-sm text-fg-muted">
-            Connect Google Analytics to prove your fixes moved real conversions.
-          </p>
-          <a href="/api/ga4/connect" className={`${btn} mt-3 bg-accent text-bg`}>
-            Connect GA4
-          </a>
-        </>
-      ) : properties.length > 0 && !status.property_id ? (
-        <div className="mt-2 space-y-2">
-          <p className="text-sm text-fg-muted">Choose a property:</p>
-          {properties.map((p) => (
-            <button
-              key={p.property_id}
-              onClick={() => void selectProperty(p.property_id)}
-              disabled={busy}
-              className={`${btn} w-full justify-between border border-border`}
-            >
-              <span>{p.display_name ?? p.property_id}</span>
-              <span aria-hidden>→</span>
-            </button>
-          ))}
-        </div>
+      ) : !status.connected || !status.property_id ? (
+        <p className="text-sm text-fg-muted">
+          Connect Google Analytics in{' '}
+          <a href="/workspace?tab=settings#integrations" className="underline">
+            Settings → Integrations
+          </a>{' '}
+          to prove your fixes moved real conversions.
+        </p>
       ) : (
         <div className="space-y-3">
           <p className="text-xs text-fg-muted">

@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/ga4", tags=["ga4"])
 
-_PORTAL_SETTINGS_URL = "https://nebulacomponents.com/workspace?tab=integrations"
+_PORTAL_SETTINGS_URL = "https://nebulacomponents.com/workspace?tab=settings"
 
 
 def _current_connection(db: Session, user_id) -> Optional[Ga4Connection]:
