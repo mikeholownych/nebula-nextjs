@@ -93,6 +93,11 @@ async def verify_deploy_hook(domain: str = Query(..., min_length=3), request: Re
     INTERNAL_SERVICE: deploy hooks are CI/CD integrations, not customer
     capabilities. Requires the shared internal service secret."""
     require_internal_service(request)
+    return await run_domain_verification(domain)
+
+
+async def run_domain_verification(domain: str) -> dict:
+    """Shared core (customer deploy webhooks + internal CI hook)."""
     await audit_db.connect()
 
     async with audit_db.pool.acquire() as conn:

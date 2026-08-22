@@ -1,5 +1,7 @@
 # Nebula Components - GEO Implementation Roadmap
 
+> **SUPERSEDED 2026-08-22:** Scheduling consolidated into [LLM_AUTHORITY_90DAY_PLAN.md](LLM_AUTHORITY_90DAY_PLAN.md). Retained as phase-level reference only. Claim tables below are stale - `public/claims.json` is the canonical registry.
+
 **Framework:** Generative Engine Optimization (21-layer model)
 **Current Maturity:** Level 1.5 (Retrievable)
 **Target:** Level 3 (Citable) in 90 days

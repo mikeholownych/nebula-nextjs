@@ -1,5 +1,7 @@
 # Nebula Components - AEO Implementation Roadmap
 
+> **SUPERSEDED 2026-08-22:** Scheduling consolidated into [LLM_AUTHORITY_90DAY_PLAN.md](LLM_AUTHORITY_90DAY_PLAN.md). Retained as phase-level reference only.
+
 **Framework:** Answer Engine Optimization (14-layer model)
 **Current Maturity:** Level 1.5 (Eligible)
 **Target:** Level 3 (Citable) in 90 days

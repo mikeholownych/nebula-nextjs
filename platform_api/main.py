@@ -129,6 +129,8 @@ from platform_api.experiment.routes import router as experiment_router
 from platform_api.routes.leads_api import router as leads_router
 from platform_api.routes.api_key_routes import router as api_key_router
 from platform_api.routes.ga4_routes import router as ga4_router
+from platform_api.routes.deploy_hook_routes import router as dh_router
+from platform_api.routes.deploy_hook_routes import public_router as dh_public_router
 
 # Lead Gen Pipeline (RB2B + n8n webhooks)
 try:
@@ -154,6 +156,8 @@ app.include_router(experiment_router)
 app.include_router(leads_router)
 app.include_router(api_key_router)
 app.include_router(ga4_router)
+app.include_router(dh_router)
+app.include_router(dh_public_router)
 
 # CRM + Newsletter (Phase 2 - Marketing Machine)
 from platform_api.routes.newsletter import router as newsletter_router

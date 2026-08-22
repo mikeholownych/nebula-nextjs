@@ -121,7 +121,7 @@ export default function LandingPagePerformanceQ3Page() {
               </Link>
             </span>
             <span className="hidden md:inline text-border">|</span>
-            <span>n = 131 completed audits</span>
+            <span>n = 131 audits (collected through Aug 2026; frozen edition)</span>
           </div>
 
           {/* Cite as */}

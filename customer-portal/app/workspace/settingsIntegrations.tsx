@@ -6,6 +6,7 @@
  * Dashboard widgets stay read-only and link here for management.
  */
 
+import DeployHooksSection from './settingsDeployHooks'
 import { useCallback, useEffect, useState } from 'react'
 
 interface Ga4Status {
@@ -200,6 +201,7 @@ export default function IntegrationsSection({ email }: { email?: string }) {
           </button>
         )}
       </div>
+      <DeployHooksSection email={email} />
     </section>
   )
 }

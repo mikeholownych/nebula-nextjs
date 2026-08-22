@@ -211,6 +211,25 @@ class Audit(Base):
 
 
 
+class DeployHook(Base):
+    """Customer deploy webhook (capability token, stored hashed)."""
+
+    __tablename__ = "deploy_hooks"
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    workspace_email: Mapped[str] = mapped_column(Text, nullable=False, index=True)
+    token_hash: Mapped[str] = mapped_column(Text, unique=True, nullable=False)
+    token_prefix: Mapped[str] = mapped_column(String(16), nullable=False)
+    domains: Mapped[list] = mapped_column(JSONB, default=list)
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    last_used_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    use_count: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+
 class Ga4Connection(Base):
     """Google Analytics 4 read-only connection (one per user).
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Benchmarks, { type BenchmarksData } from './Benchmarks'
+import { DATASET_REGISTRY } from '../lib/datasets'
 
 export const metadata: Metadata = {
   title: 'The Landing Page Leak Index - Real Audit Data | Nebula',
@@ -109,6 +110,35 @@ export default async function BenchmarksPage() {
         </div>
       </section>
       <Benchmarks initialData={data} />
+      <section aria-labelledby="data-sources-heading" className="border-t border-border px-6 py-12">
+        <div className="mx-auto max-w-6xl">
+          <h2 id="data-sources-heading" className="text-lg font-semibold text-fg">
+            Nebula dataset registry
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-fg-muted">
+            Nebula publishes more than one landing-page dataset. They cover different
+            collection windows and are never merged into a single population. This
+            registry reconciles them so any figure can be traced to its denominator.
+          </p>
+          <ul className="mt-6 grid gap-4 md:grid-cols-3">
+            {DATASET_REGISTRY.map((ds) => (
+              <li key={ds.id} className="rounded-md border border-border bg-[#0d1110] p-4">
+                <p className="text-sm font-semibold text-fg">{ds.name}</p>
+                <p className="mt-1 font-mono text-xs text-accent">
+                  {ds.kind === 'live-aggregate'
+                    ? 'Live aggregate - count served from the stats endpoint'
+                    : `n = ${ds.sampleSize} (frozen edition)`}
+                </p>
+                <p className="mt-2 text-xs leading-5 text-fg-muted">{ds.scope}</p>
+                <p className="mt-2 text-xs leading-5 text-fg-muted">{ds.relationship}</p>
+                <Link href={ds.sourcePath} className="mt-3 inline-block text-xs text-accent underline underline-offset-2">
+                  View source page
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </main>
   )
 }
