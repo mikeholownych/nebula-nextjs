@@ -99,8 +99,11 @@ async function postWebhook() {
 }
 
 // ── shared setup ─────────────────────────────────────────────────────────────
+let subscriptionUpserts: string[]
+
 beforeEach(() => {
   jest.resetModules()
+  subscriptionUpserts = []
   fetchMock.mockReset()
   poolQueryMock.mockReset().mockResolvedValue({ rowCount: 1, rows: [] })
   releaseMock.mockReset()
@@ -110,14 +113,17 @@ beforeEach(() => {
   })
   // Subscription persistence now provisions first (org-keyed). These tests
   // only assert email gating, so the client mock answers the find-or-create
-  // lookup with an existing user/org and accepts the upsert.
+  // lookup with an existing user/org and accepts the upsert. The upsert
+  // mirrors RETURNING (xmax = 0): first write inserts, repeats update.
   clientQueryMock.mockReset().mockImplementation(async (sql: unknown) => {
     const statement = String(sql)
     if (statement.includes('SELECT u.id AS user_id')) {
       return { rowCount: 1, rows: [{ user_id: 'u_test', org_id: 'o_test' }] }
     }
     if (statement.includes('INSERT INTO subscriptions')) {
-      return { rowCount: 1, rows: [] }
+      const inserted = subscriptionUpserts.length === 0
+      subscriptionUpserts.push(statement)
+      return { rowCount: 1, rows: [{ inserted, id: 1 }] }
     }
     throw new Error(`Unexpected query: ${statement}`)
   })
@@ -129,6 +135,7 @@ beforeEach(() => {
   process.env.STRIPE_SECRET_KEY = 'sk_test_placeholder'
   process.env.STRIPE_WEBHOOK_SECRET = 'whsec_placeholder'
   process.env.PLATFORM_API_URL = 'http://127.0.0.1:8001'
+  process.env.INTERNAL_API_SECRET = 'internal-secret'
 })
 
 // ── tests ─────────────────────────────────────────────────────────────────────
@@ -144,11 +151,17 @@ describe('Subscription onboarding email sequence', () => {
       expect(fetchMock).toHaveBeenCalledTimes(1)
 
       const [url, options] = fetchMock.mock.calls[0] as [string, RequestInit]
-      expect(url).toBe('http://127.0.0.1:8001/email/send')
+      // Delivery rides the platform API transactional outbox, not /email/send.
+      expect(url).toBe('http://127.0.0.1:8001/api/outbox/enqueue')
 
       const body = JSON.parse(options.body as string)
-      expect(body.to).toBe('user@example.com')
-      expect(body.subject).toBe('Your Nebula Pro plan is active')
+      expect(body.channel).toBe('email')
+      expect(body.recipient).toBe('user@example.com')
+      expect(body.payload.subject).toBe('Your Nebula Pro plan is active')
+      expect(options.headers).toEqual({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer internal-secret',
+      })
     })
 
     it('includes plan-specific features in the body for pro plan', async () => {
@@ -160,12 +173,14 @@ describe('Subscription onboarding email sequence', () => {
       const [, options] = fetchMock.mock.calls[0] as [string, RequestInit]
       const body = JSON.parse(options.body as string)
 
+      // Outbox email payloads carry one HTML body with content type.
+      expect(body.payload.content_type).toBe('text/html')
       // Should mention the pro plan features (case-insensitive match)
-      expect(body.text.toLowerCase()).toContain('unlimited audits')
+      expect(body.payload.body.toLowerCase()).toContain('unlimited audits')
       // Should direct to workspace setup
-      expect(body.text).toContain('nebulacomponents.com/workspace')
-      // HTML version should have the same plan name
-      expect(body.html).toContain('Pro')
+      expect(body.payload.body).toContain('nebulacomponents.com/workspace')
+      // Should have the same plan name
+      expect(body.payload.body).toContain('Pro')
     })
 
     it('sends correct subject for growth plan', async () => {
@@ -176,7 +191,7 @@ describe('Subscription onboarding email sequence', () => {
 
       const [, options] = fetchMock.mock.calls[0] as [string, RequestInit]
       const body = JSON.parse(options.body as string)
-      expect(body.subject).toBe('Your Nebula Growth plan is active')
+      expect(body.payload.subject).toBe('Your Nebula Growth plan is active')
     })
 
     it('sends correct subject for agency plan', async () => {
@@ -187,7 +202,7 @@ describe('Subscription onboarding email sequence', () => {
 
       const [, options] = fetchMock.mock.calls[0] as [string, RequestInit]
       const body = JSON.parse(options.body as string)
-      expect(body.subject).toBe('Your Nebula Agency plan is active')
+      expect(body.payload.subject).toBe('Your Nebula Agency plan is active')
     })
 
     it('returns false and does not throw when the platform API is unreachable', async () => {
@@ -209,17 +224,18 @@ describe('Subscription onboarding email sequence', () => {
 
       expect(response.status).toBe(200)
 
-      // fetchMock should have been called with /email/send
+      // fetchMock should have been called with the outbox enqueue endpoint
       const emailCalls = fetchMock.mock.calls.filter(([url]) =>
-        String(url).includes('/email/send'),
+        String(url).includes('/api/outbox/enqueue'),
       )
       expect(emailCalls.length).toBeGreaterThanOrEqual(1)
 
       const [, options] = emailCalls[0] as [string, RequestInit]
       const body = JSON.parse(options.body as string)
-      expect(body.subject).toContain('Your Nebula')
-      expect(body.subject).toContain('plan is active')
-      expect(body.to).toBe('sub@example.com')
+      expect(body.channel).toBe('email')
+      expect(body.payload.subject).toContain('Your Nebula')
+      expect(body.payload.subject).toContain('plan is active')
+      expect(body.recipient).toBe('sub@example.com')
     })
 
     it('does NOT send welcome email for customer.subscription.updated', async () => {
@@ -230,10 +246,10 @@ describe('Subscription onboarding email sequence', () => {
 
       expect(response.status).toBe(200)
 
-      const emailCalls = fetchMock.mock.calls.filter(([url]) =>
-        String(url).includes('/email/send'),
+      const enqueues = fetchMock.mock.calls.filter(([url]) =>
+        String(url).includes('/api/outbox/enqueue'),
       )
-      expect(emailCalls).toHaveLength(0)
+      expect(enqueues).toHaveLength(0)
     })
 
     it('does NOT send welcome email for customer.subscription.deleted', async () => {
@@ -244,10 +260,10 @@ describe('Subscription onboarding email sequence', () => {
 
       expect(response.status).toBe(200)
 
-      const emailCalls = fetchMock.mock.calls.filter(([url]) =>
-        String(url).includes('/email/send'),
+      const enqueues = fetchMock.mock.calls.filter(([url]) =>
+        String(url).includes('/api/outbox/enqueue'),
       )
-      expect(emailCalls).toHaveLength(0)
+      expect(enqueues).toHaveLength(0)
     })
 
     it('does NOT send welcome email in test mode (livemode=false)', async () => {
@@ -258,10 +274,10 @@ describe('Subscription onboarding email sequence', () => {
 
       expect(response.status).toBe(200)
 
-      const emailCalls = fetchMock.mock.calls.filter(([url]) =>
-        String(url).includes('/email/send'),
+      const enqueues = fetchMock.mock.calls.filter(([, options]) =>
+        JSON.parse(String((options as RequestInit).body)).channel === 'email',
       )
-      expect(emailCalls).toHaveLength(0)
+      expect(enqueues).toHaveLength(0)
     })
   })
 

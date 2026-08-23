@@ -144,8 +144,11 @@ describe('POST /api/webhooks/stripe subscription persistence', () => {
         return { rowCount: 1, rows: [] }
       }
       if (statement.includes('INSERT INTO subscriptions')) {
+        // Mirror Postgres semantics of RETURNING (xmax = 0): the first write
+        // takes the INSERT branch (new row), any repeat is the UPDATE branch.
+        const inserted = subWrites.length === 0
         subWrites.push({ sql: statement, params })
-        return { rowCount: 1, rows: [] }
+        return { rowCount: 1, rows: [{ inserted, id: 1 }] }
       }
       throw new Error(`Unexpected query: ${statement}`)
     })
@@ -183,6 +186,7 @@ describe('POST /api/webhooks/stripe subscription persistence', () => {
     expect(sql).toContain('(organization_id, stripe_subscription_id, stripe_customer_id')
     expect(sql).not.toMatch(/\bemail\b/)
     expect(sql).toContain('ON CONFLICT (stripe_subscription_id) DO UPDATE SET')
+    expect(sql).toContain('RETURNING (xmax = 0) AS inserted, id')
     expect(params?.[0]).toBe(ORG_ID)
     expect(params?.[1]).toBe(SUB_ID)
     expect(params?.[2]).toBe(CUSTOMER_ID)
@@ -193,6 +197,11 @@ describe('POST /api/webhooks/stripe subscription persistence', () => {
     expect(params?.[7]).toBe(new Date(1757592000 * 1000).toISOString())
     expect(params?.[8]).toBe(false)
     expect(params?.[9]).toBe(true)
+
+    // A created-first-time row (INSERT branch) fires the welcome enqueue and
+    // sale alert exactly once.
+    expect(welcomeMock).toHaveBeenCalledTimes(1)
+    expect(execFileMock).toHaveBeenCalledTimes(1)
   })
 
   it('persists test-mode events with livemode false and skips alerts and welcome sends', async () => {
@@ -224,6 +233,11 @@ describe('POST /api/webhooks/stripe subscription persistence', () => {
     expect(insertCount('INSERT INTO organizations')).toBe(1)
     expect(insertCount('INSERT INTO memberships')).toBe(1)
     expect(insertCount('BEGIN')).toBe(1)
+    // First-sale side effects are keyed to the INSERT branch: the created-
+    // first-time delivery fires the welcome enqueue and sale alert exactly
+    // once, and the redelivered upsert (inserted=false) fires zero.
+    expect(welcomeMock).toHaveBeenCalledTimes(1)
+    expect(execFileMock).toHaveBeenCalledTimes(1)
   })
 
   it('keeps the row on deletion: status deleted while preserving current_period_end via COALESCE', async () => {

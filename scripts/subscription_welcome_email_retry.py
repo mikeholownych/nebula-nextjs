@@ -10,10 +10,25 @@ NAMES = {'pro': 'Pro', 'growth': 'Growth', 'agency': 'Agency'}
 
 def send(row):
     name = NAMES.get(row['plan'], row['plan'].title())
-    text = f"Your Nebula {name} plan is active.\n\nRun your first audit: https://nebulacomponents.com/audit\n\n- Mike\nNebula Components"
+    subject = f'Your Nebula {name} plan is active'
     html = f'<p>Your Nebula {name} plan is active.</p><p><a href="https://nebulacomponents.com/audit">Run your first audit →</a></p><p>- Mike<br>Nebula Components</p>'
-    body = json.dumps({'to': row['email'], 'subject': f'Your Nebula {name} plan is active', 'text': text, 'html': html}).encode()
-    req = urllib.request.Request(f'{API}/email/send', data=body, method='POST', headers={'Content-Type': 'application/json'})
+    # Durable delivery: transactional outbox enqueue (channel 'email'), not
+    # the removed /email/send endpoint. The outbox worker owns retries.
+    body = json.dumps({
+        'channel': 'email',
+        'recipient': row['email'],
+        'payload': {
+            'subject': subject,
+            'body': html,
+            'from_email': 'audits@nebulacomponents.shop',
+            'content_type': 'text/html',
+        },
+    }).encode()
+    headers = {'Content-Type': 'application/json'}
+    secret = os.getenv('INTERNAL_API_SECRET', '').strip()
+    if secret:
+        headers['Authorization'] = f'Bearer {secret}'
+    req = urllib.request.Request(f'{API}/api/outbox/enqueue', data=body, method='POST', headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=15) as r: return r.status < 300, ''
     except Exception as e: return False, str(e)[:500]

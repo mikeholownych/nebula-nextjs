@@ -5,7 +5,7 @@
 
 import type { PlanKey } from '@/app/lib/subscription-plans'
 
-const PLATFORM_API = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+const PLATFORM_API = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')
 
 interface EmailPayload {
   to: string
@@ -14,17 +14,41 @@ interface EmailPayload {
   html: string
 }
 
+// Delivery rides the platform API transactional outbox (channel 'email',
+// drained by the same worker that delivers kit sends and audit results).
+// The previous direct /email/send endpoint does not exist; enqueueing is the
+// proven durable path, including retry/backoff after provider failures.
 async function sendEmail(payload: EmailPayload): Promise<boolean> {
   try {
-    const res = await fetch(`${PLATFORM_API}/email/send`, {
+    const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+    if (!secret) {
+      console.error('[subscription-emails] INTERNAL_API_SECRET not configured')
+      return false
+    }
+    const res = await fetch(`${PLATFORM_API}/api/outbox/enqueue`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secret}`,
+      },
       signal: AbortSignal.timeout(15_000),
+      body: JSON.stringify({
+        channel: 'email',
+        recipient: payload.to,
+        payload: {
+          subject: payload.subject,
+          body: payload.html,
+          from_email: 'audits@nebulacomponents.shop',
+          content_type: 'text/html',
+        },
+      }),
     })
+    if (!res.ok) {
+      console.error('[subscription-emails] Enqueue rejected:', res.status)
+    }
     return res.ok
   } catch (err) {
-    console.error('[subscription-emails] Send failed:', err)
+    console.error('[subscription-emails] Enqueue failed:', err)
     return false
   }
 }

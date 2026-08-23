@@ -540,10 +540,11 @@ export async function POST(request: NextRequest) {
     // Provisioning runs its own transaction; a dedicated client keeps
     // BEGIN/COMMIT on one connection instead of racing the pool.
     let client: PoolClient | undefined
+    let subscriptionInserted = false
     try {
       client = await pool.connect()
       const provisioned = await provisionOrgForEmail(client, email)
-      await client.query(
+      const upsertResult = await client.query(
         `INSERT INTO subscriptions
            (organization_id, stripe_subscription_id, stripe_customer_id, status, plan,
             billing_interval, current_period_start, current_period_end,
@@ -555,7 +556,8 @@ export async function POST(request: NextRequest) {
            current_period_start=COALESCE(EXCLUDED.current_period_start, subscriptions.current_period_start),
            current_period_end=COALESCE(EXCLUDED.current_period_end, subscriptions.current_period_end),
            cancel_at_period_end=EXCLUDED.cancel_at_period_end,
-           updated_at=now()`,
+           updated_at=now()
+         RETURNING (xmax = 0) AS inserted, id`,
         [
           provisioned.organizationId,
           sub.id,
@@ -569,6 +571,10 @@ export async function POST(request: NextRequest) {
           event.livemode === true,
         ],
       )
+      // xmax=0 on RETURNING means this upsert took the INSERT branch: the row
+      // is new. A redelivery or lifecycle update lands here as inserted=false
+      // and must skip every first-sale side effect below.
+      subscriptionInserted = (upsertResult.rows?.[0] as { inserted?: boolean } | undefined)?.inserted === true
     } catch (err) {
       console.error('Failed to persist subscription - will let Stripe retry:', err)
       return NextResponse.json({ error: 'Failed to record subscription' }, { status: 500 })
@@ -576,7 +582,7 @@ export async function POST(request: NextRequest) {
       client?.release()
     }
 
-    if (event.livemode && event.type === 'customer.subscription.created') {
+    if (subscriptionInserted && event.livemode && event.type === 'customer.subscription.created') {
       const amount = item?.price?.unit_amount != null
         ? `$${(item.price.unit_amount / 100).toFixed(2)}/${resolved.interval === 'annual' ? 'yr' : 'mo'}`
         : 'unknown amount'

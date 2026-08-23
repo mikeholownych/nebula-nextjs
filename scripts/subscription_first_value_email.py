@@ -22,9 +22,23 @@ PLAN_NAMES = {
 }
 
 def send_email(to: str, subject: str, text: str, html: str) -> bool:
-    payload = json.dumps({'to': to, 'subject': subject, 'text': text, 'html': html}).encode()
-    req = urllib.request.Request(f'{PLATFORM_API}/email/send', data=payload, method='POST')
+    # Durable delivery: transactional outbox enqueue (channel 'email'), not
+    # the removed /email/send endpoint. The outbox worker owns retries.
+    payload = json.dumps({
+        'channel': 'email',
+        'recipient': to,
+        'payload': {
+            'subject': subject,
+            'body': html,
+            'from_email': 'audits@nebulacomponents.shop',
+            'content_type': 'text/html',
+        },
+    }).encode()
+    req = urllib.request.Request(f'{PLATFORM_API}/api/outbox/enqueue', data=payload, method='POST')
     req.add_header('Content-Type', 'application/json')
+    secret = os.getenv('INTERNAL_API_SECRET', '').strip()
+    if secret:
+        req.add_header('Authorization', f'Bearer {secret}')
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
             return r.status < 300
