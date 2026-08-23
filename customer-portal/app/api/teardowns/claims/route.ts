@@ -6,7 +6,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 function internalHeaders(): Record<string, string> {
   const secret = (process.env.INTERNAL_API_SECRET || '').trim()
-  return secret ? { Authorization: `Bearer ${secret}` } : {}
+  return secret ? { authorization: `Bearer ${secret}` } : {}
 }
 
 /**
