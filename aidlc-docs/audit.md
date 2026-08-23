@@ -627,3 +627,39 @@ Postmaster Tools verification TXT (google-site-verification=c1lineaK0TmRCODX0jBv
 
 ### Task 16 verdict
 All DoD gates exercised on production with captured artifacts. Two production defects found and fixed during DoD (signed-in proxy auth collision; founder notify gate allowlist). One deviation recorded (DNS zone substitution). One uncommitted code change pending authorization (see report).
+
+## Phase 2 Task 11: Production DoD + Cutover (2026-08-23 20:14 UTC)
+
+### Step 0: whsec landmine fix (pre-restart)
+- Running nebula-nextjs MainPID=3655085 environ vs customer-portal/.env.local, STRIPE_* key sets compared (names only): both sides {STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET}. No STRIPE_PUBLISHABLE_KEY exists in the running process environ.
+- STRIPE_SECRET_KEY: already matched. sha256(.env.local)==sha256(/proc): 34aebcb226f9a67927a7936f810f8285a253f3b3850cc662d414b58bea4780d5
+- STRIPE_WEBHOOK_SECRET: REWRITTEN (was divergent in .env.local). sha256(.env.local)==sha256(/proc): edd4384137de9a4915eee10b0cfd9dd35f95d5b695917c4e9058a9f12004a4c7
+- FINAL_VERIFY: ALL_HASHES_EQUAL (values never printed; scripted comparison only).
+
+### Step 1: Final deploy
+- Build: `npx next build` clean (full route table emitted, no errors).
+- Restarted nebula-nextjs.service + nebula-platform-api.service; both active. New nextjs MainPID=3712375.
+- Statuses: / 200, /pricing 200, /workspace 307 (anon redirect, expected), /teardowns 200, /audit 200.
+- journalctl -p err both units last 5 min: no entries (clean).
+- CRITICAL POST-CHECK: sha256(STRIPE_WEBHOOK_SECRET) new MainPID /proc environ == pre-restart captured hash (edd43841...). IDENTITY_PRESERVED: webhook verification secret survives restart.
+
+### Step 2: Entitlement regression set
+- anon POST /api/monitors-engine/create -> 401 {"error":"Authentication required","code":"AUTH_REQUIRED"} PASS
+- unauth POST /api/subscribe -> 401 {"error":"Sign in required"} PASS
+- authed unknown plan -> 400 {"error":"Unknown plan"} PASS
+- founder session minted via platform_api.auth.jwt.create_session (uv one-off, same .env/codepath as service); jti VMgXiYfN-MuFDrWVbs7JQg; revoked after probes.
+- founder GET /api/auth/me -> 200 {plan:"agency", is_agency:true}; plan resolution flows through EntitlementService.resolve_sync (platform_api/auth/routes.py:946). PASS
+- founder POST /api/monitors-engine/create {url:https://nebulacomponents.com/pricing,cadence:monthly} -> 200 {"created":true} PASS; listed back (id 88aec58f..., active:true), then DELETE -> 200, remaining count: 0.
+- Free-user 403 path: substitute evidence = unit coverage tests/test_monitor_gates.py rerun this session: 6 passed (test_free_cannot_create asserts 403 + upgrade_url=/pricing; test_agency_unlimited_skips_cap covers unlimited quota).
+- Logged-out audit surface unchanged: /audit 200 (Step 1).
+
+### Step 3: Live-money validation (MIKE GATED - DECISION PENDING)
+- No self-purchase performed; no live Checkout Session constructed or opened.
+- Decision point handed to Mike:
+  (a) Self-purchase $29 Pro monthly on LIVE checkout, confirm gates open within ~60s of payment (webhook latency), then refund via Stripe dashboard; or
+  (b) Skip live-money validation this cycle.
+- Awaiting Mike's decision verbatim.
+
+### Commit scope
+- customer-portal/.env.local gitignored (customer-portal/.gitignore:15) and untracked: NOT committed.
+- Docs-only evidence commit: "docs: phase 2 cutover evidence" (no push).
