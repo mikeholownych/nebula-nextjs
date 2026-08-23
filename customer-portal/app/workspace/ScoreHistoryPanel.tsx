@@ -3,26 +3,61 @@
 import { useEffect, useState } from 'react'
 import ScoreHistoryChart, { type ScoreEvent } from './ScoreHistoryChart'
 
-interface MonitorSummary {
-  id: number
-  url: string
-  label: string | null
-  last_score: number | null
-  last_grade: string | null
-  last_delta: number | null
-  active: boolean
-  created_at: string
+interface EngineMonitorEvent {
+  id: string
+  auditId: string | null
+  status: string
+  prevScore: number | null
+  newScore: number | null
+  summary: string
+  createdAt: string | null
 }
 
-interface MonitorDetail {
-  monitor: MonitorSummary
-  events: ScoreEvent[]
+interface EngineMonitor {
+  id: string
+  url: string
+  cadence: 'weekly' | 'monthly'
+  active: boolean
+  nextRunAt: string | null
+  lastRunAt: string | null
+  lastScore: number | null
+  createdAt: string | null
+  events: EngineMonitorEvent[]
 }
 
 const COLOR_ACCENT = '#c7ff2f'
 const COLOR_DANGER = '#ef4444'
 const COLOR_WARN = '#f59e0b'
 const COLOR_MUTED = '#6b7280'
+
+function gradeFor(score: number): string {
+  if (score >= 90) return 'A'
+  if (score >= 75) return 'B'
+  if (score >= 60) return 'C'
+  if (score >= 45) return 'D'
+  return 'F'
+}
+
+function toScoreEvents(events: EngineMonitorEvent[]): ScoreEvent[] {
+  return events
+    .filter((e) => e.newScore != null)
+    .slice()
+    .sort((a, b) => (a.createdAt ?? '').localeCompare(b.createdAt ?? ''))
+    .map((e) => ({
+      score: e.newScore as number,
+      grade: gradeFor(e.newScore as number),
+      score_delta:
+        e.prevScore != null && e.newScore != null ? e.newScore - e.prevScore : null,
+      checked_at: e.createdAt ?? '',
+    }))
+}
+
+function latestDelta(events: EngineMonitorEvent[]): number | null {
+  const sorted = events.slice().sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+  const newest = sorted[0]
+  if (!newest || newest.prevScore == null || newest.newScore == null) return null
+  return newest.newScore - newest.prevScore
+}
 
 function trendArrow(delta: number | null): { arrow: string; color: string } {
   if (delta === null || delta === 0) return { arrow: '→', color: COLOR_MUTED }
@@ -37,27 +72,21 @@ function gradeColor(score: number | null): string {
   return COLOR_DANGER
 }
 
-interface ExpandedState {
-  loading: boolean
-  events: ScoreEvent[] | null
-  error: string | null
-}
-
 export default function ScoreHistoryPanel() {
-  const [monitors, setMonitors] = useState<MonitorSummary[] | null>(null)
+  const [monitors, setMonitors] = useState<EngineMonitor[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [expanded, setExpanded] = useState<Record<number, ExpandedState>>({})
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-    fetch('/api/monitors')
+    fetch('/api/monitors-engine')
       .then((r) => {
         if (!r.ok) throw new Error('Failed to load monitors')
         return r.json()
       })
-      .then((data: { monitors: MonitorSummary[] }) => {
+      .then((data: { monitors: EngineMonitor[] }) => {
         if (!cancelled) setMonitors(data.monitors || [])
       })
       .catch((e: Error) => {
@@ -69,43 +98,8 @@ export default function ScoreHistoryPanel() {
     return () => { cancelled = true }
   }, [])
 
-  async function toggleMonitor(id: number) {
-    const cur = expanded[id]
-
-    // Collapse if already open
-    if (cur && cur.events !== null) {
-      setExpanded((prev) => {
-        const next = { ...prev }
-        delete next[id]
-        return next
-      })
-      return
-    }
-
-    // Already loading - ignore
-    if (cur?.loading) return
-
-    // Start loading events
-    setExpanded((prev) => ({ ...prev, [id]: { loading: true, events: null, error: null } }))
-
-    try {
-      const res = await fetch(`/api/monitors/${id}`)
-      if (!res.ok) throw new Error('Failed to load monitor history')
-      const data: MonitorDetail = await res.json()
-      setExpanded((prev) => ({
-        ...prev,
-        [id]: { loading: false, events: data.events || [], error: null },
-      }))
-    } catch (e: unknown) {
-      setExpanded((prev) => ({
-        ...prev,
-        [id]: {
-          loading: false,
-          events: null,
-          error: e instanceof Error ? e.message : 'Unknown error',
-        },
-      }))
-    }
+  function toggleMonitor(id: string) {
+    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
   if (loading) {
@@ -135,10 +129,10 @@ export default function ScoreHistoryPanel() {
   return (
     <div data-testid="score-history-panel" className="flex flex-col gap-2">
       {monitors.map((m) => {
-        const { arrow, color: arrowColor } = trendArrow(m.last_delta)
-        const exp = expanded[m.id]
-        const isOpen = exp && exp.events !== null
-        const scoreCol = gradeColor(m.last_score)
+        const delta = latestDelta(m.events)
+        const { arrow, color: arrowColor } = trendArrow(delta)
+        const isOpen = !!expanded[m.id]
+        const scoreCol = gradeColor(m.lastScore)
 
         return (
           <div
@@ -154,32 +148,30 @@ export default function ScoreHistoryPanel() {
               aria-expanded={!!isOpen}
               data-testid={`monitor-row-${m.id}`}
             >
-              {/* URL / label */}
+              {/* URL */}
               <span className="flex-1 min-w-0">
                 <span className="block text-sm font-medium truncate" style={{ color: '#ffffff' }}>
-                  {m.label || m.url}
+                  {m.url}
                 </span>
-                {m.label && (
-                  <span className="block text-xs truncate" style={{ color: COLOR_MUTED }}>
-                    {m.url}
-                  </span>
-                )}
+                <span className="block text-xs truncate" style={{ color: COLOR_MUTED }}>
+                  {m.active ? `${m.cadence === 'weekly' ? 'Weekly' : 'Monthly'} watch` : 'Paused'}
+                </span>
               </span>
 
               {/* Grade */}
-              {m.last_grade && (
+              {m.lastScore != null && (
                 <span
                   className="text-xs font-bold px-2 py-0.5 rounded"
                   style={{ color: scoreCol, background: `${scoreCol}18` }}
                   data-testid={`grade-${m.id}`}
                 >
-                  {m.last_grade}
+                  {gradeFor(m.lastScore)}
                 </span>
               )}
 
               {/* Score */}
               <span className="text-sm font-semibold w-8 text-right" style={{ color: scoreCol }}>
-                {m.last_score ?? '-'}
+                {m.lastScore != null ? Math.round(m.lastScore) : '-'}
               </span>
 
               {/* Trend arrow */}
@@ -187,9 +179,9 @@ export default function ScoreHistoryPanel() {
                 className="text-base w-5 text-center"
                 style={{ color: arrowColor }}
                 aria-label={
-                  m.last_delta === null || m.last_delta === 0
+                  delta === null || delta === 0
                     ? 'neutral'
-                    : m.last_delta > 0
+                    : delta > 0
                       ? 'improved'
                       : 'declined'
                 }
@@ -212,20 +204,14 @@ export default function ScoreHistoryPanel() {
             </button>
 
             {/* Expanded: score history chart */}
-            {exp && (
+            {isOpen && (
               <div className="px-4 pb-4">
-                {exp.loading && (
+                {toScoreEvents(m.events).length === 0 ? (
                   <div className="text-xs py-4 text-center" style={{ color: COLOR_MUTED }}>
-                    Loading history…
+                    No scored runs yet
                   </div>
-                )}
-                {exp.error && (
-                  <div className="text-xs py-4 text-center" style={{ color: COLOR_DANGER }}>
-                    {exp.error}
-                  </div>
-                )}
-                {exp.events !== null && (
-                  <ScoreHistoryChart monitorId={m.id} events={exp.events} />
+                ) : (
+                  <ScoreHistoryChart monitorId={m.id} events={toScoreEvents(m.events)} />
                 )}
               </div>
             )}

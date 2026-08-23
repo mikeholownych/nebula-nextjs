@@ -1,30 +1,34 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export interface MonitorEvent {
   id: string
-  monitor_id: string
-  audit_id: string | null
+  auditId: string | null
   status: 'improved' | 'regressed' | 'no_change' | 'new_fail' | 'error'
-  prev_score: number | null
-  new_score: number | null
+  prevScore: number | null
+  newScore: number | null
   summary: string
-  created_at: string
+  createdAt: string | null
 }
 
 export interface Monitor {
   id: string
-  email: string
   url: string
   cadence: 'weekly' | 'monthly'
   active: boolean
-  next_run_at: string | null
-  last_run_at: string | null
-  last_score: number | null
-  created_at: string
-  updated_at: string
+  nextRunAt: string | null
+  lastRunAt: string | null
+  lastScore: number | null
+  createdAt: string | null
   events: MonitorEvent[]
+}
+
+interface EngineDenialDetail {
+  message?: string
+  upgrade_url?: string
+  limit?: number
 }
 
 const STATUS_META: Record<
@@ -67,13 +71,20 @@ export default function MonitoringView({ email }: { email: string }) {
   const [cadence, setCadence] = useState<'weekly' | 'monthly'>('weekly')
   const [busy, setBusy] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
+  const [upgradeUrl, setUpgradeUrl] = useState<string | null>(null)
   const [actionBusyId, setActionBusyId] = useState<string | null>(null)
 
   const load = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`/api/monitors?email=${encodeURIComponent(email)}`)
+      const res = await fetch('/api/monitors-engine')
+      if (res.status === 403) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        setUpgradeUrl(denial.detail?.upgrade_url ?? '/pricing')
+        setError(denial.detail?.message ?? 'Monitoring is a paid feature')
+        return
+      }
       if (!res.ok) throw new Error('Failed to load monitors')
       const data = await res.json()
       setMonitors(data.monitors || [])
@@ -82,7 +93,7 @@ export default function MonitoringView({ email }: { email: string }) {
     } finally {
       setLoading(false)
     }
-  }, [email])
+  }, [])
 
   useEffect(() => {
     load()
@@ -97,11 +108,32 @@ export default function MonitoringView({ email }: { email: string }) {
     setFormError(null)
     setBusy(true)
     try {
-      const res = await fetch('/api/monitors', {
+      const res = await fetch('/api/monitors-engine/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, url: trimmed, cadence }),
+        body: JSON.stringify({ url: trimmed, cadence }),
       })
+      if (res.status === 403) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        setUpgradeUrl(denial.detail?.upgrade_url ?? '/pricing')
+        setFormError(denial.detail?.message ?? 'Monitoring is a paid feature')
+        return
+      }
+      if (res.status === 429) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        const limit = denial.detail?.limit
+        setFormError(
+          limit != null
+            ? `Your plan includes ${limit} monitored page${limit === 1 ? '' : 's'}. Upgrade to watch more.`
+            : denial.detail?.message ?? 'Plan limit reached'
+        )
+        return
+      }
+      if (res.status === 400) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        setFormError(denial.detail?.message ?? 'Could not add monitor on your plan')
+        return
+      }
       if (!res.ok) throw new Error('Failed to add monitor')
       setUrl('')
       await load()
@@ -115,11 +147,16 @@ export default function MonitoringView({ email }: { email: string }) {
   const setActive = async (m: Monitor, active: boolean) => {
     setActionBusyId(m.id)
     try {
-      await fetch(`/api/monitors/${m.id}`, {
+      const res = await fetch(`/api/monitors-engine/${m.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ active }),
       })
+      if (res.status === 403 || res.status === 400) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        if (res.status === 403) setUpgradeUrl(denial.detail?.upgrade_url ?? '/pricing')
+        setFormError(denial.detail?.message ?? 'Monitoring is a paid feature')
+      }
       await load()
     } finally {
       setActionBusyId(null)
@@ -129,11 +166,16 @@ export default function MonitoringView({ email }: { email: string }) {
   const setCadenceOf = async (m: Monitor, cad: 'weekly' | 'monthly') => {
     setActionBusyId(m.id)
     try {
-      await fetch(`/api/monitors/${m.id}`, {
+      const res = await fetch(`/api/monitors-engine/${m.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cadence: cad }),
       })
+      if (res.status === 403 || res.status === 400) {
+        const denial = await res.json().catch(() => ({})) as { detail?: EngineDenialDetail }
+        if (res.status === 403) setUpgradeUrl(denial.detail?.upgrade_url ?? '/pricing')
+        setFormError(denial.detail?.message ?? 'Cadence not available on your plan')
+      }
       await load()
     } finally {
       setActionBusyId(null)
@@ -144,7 +186,7 @@ export default function MonitoringView({ email }: { email: string }) {
     if (!window.confirm(`Stop monitoring ${m.url}?`)) return
     setActionBusyId(m.id)
     try {
-      await fetch(`/api/monitors/${m.id}`, { method: 'DELETE' })
+      await fetch(`/api/monitors-engine/${m.id}`, { method: 'DELETE' })
       await load()
     } finally {
       setActionBusyId(null)
@@ -156,6 +198,31 @@ export default function MonitoringView({ email }: { email: string }) {
   }
 
   if (error && !monitors) {
+    if (upgradeUrl) {
+      return (
+        <div className="flex min-h-[40vh] flex-col items-center justify-center px-6 py-16 text-center">
+          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-md border border-border bg-bg-elevated">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-fg-muted"/>
+              <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-fg-muted"/>
+              <circle cx="12" cy="16" r="1.5" fill="currentColor" className="text-fg-muted"/>
+            </svg>
+          </div>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Paid feature</p>
+          <h2 className="mb-2 text-xl font-extrabold text-fg">{error}</h2>
+          <p className="mb-6 max-w-sm text-sm leading-relaxed text-fg-muted">
+            Monitoring keeps watch on your live pages and alerts you when the score
+            moves or a critical signal regresses.
+          </p>
+          <Link
+            href={upgradeUrl}
+            className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+          >
+            See plans →
+          </Link>
+        </div>
+      )
+    }
     return (
       <div className="py-12 text-center">
         <p className="text-danger mb-4">{error}</p>
@@ -201,6 +268,21 @@ export default function MonitoringView({ email }: { email: string }) {
           </button>
         </div>
         {formError && <p className="mt-2 text-sm text-danger">{formError}</p>}
+        {upgradeUrl && (
+          <div className="mt-4 rounded-xl border border-border bg-bg-panel p-5 text-center">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Upgrade</p>
+            <p className="mb-4 max-w-md mx-auto text-sm leading-relaxed text-fg-muted">
+              Page monitoring is available on paid plans. Upgrade to watch your live
+              pages and get alerted when the score moves.
+            </p>
+            <Link
+              href={upgradeUrl}
+              className="inline-block rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
+            >
+              See plans →
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* Monitors */}
@@ -225,17 +307,17 @@ export default function MonitoringView({ email }: { email: string }) {
                   {m.active ? (
                     <>
                       {m.cadence === 'weekly' ? 'Weekly' : 'Monthly'} · next run{' '}
-                      {fmtWhen(m.next_run_at)} · last run {fmtDate(m.last_run_at)}
+                      {fmtWhen(m.nextRunAt)} · last run {fmtDate(m.lastRunAt)}
                     </>
                   ) : (
-                    <>Paused · last run {fmtDate(m.last_run_at)}</>
+                    <>Paused · last run {fmtDate(m.lastRunAt)}</>
                   )}
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                {m.last_score != null && (
+                {m.lastScore != null && (
                   <span className="rounded-lg border border-border bg-bg-panel px-3 py-1 text-sm font-semibold">
-                    {Math.round(m.last_score)}/100
+                    {Math.round(m.lastScore)}/100
                   </span>
                 )}
                 <select
@@ -277,7 +359,7 @@ export default function MonitoringView({ email }: { email: string }) {
                         {meta.arrow} {meta.label}
                       </span>
                       <span className="flex-1 text-fg-muted">{e.summary}</span>
-                      <span className="text-xs text-fg-dim">{fmtDate(e.created_at)}</span>
+                      <span className="text-xs text-fg-dim">{fmtDate(e.createdAt)}</span>
                     </div>
                   )
                 })}

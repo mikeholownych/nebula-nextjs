@@ -10,7 +10,7 @@ export interface ScoreEvent {
 }
 
 export interface ScoreHistoryChartProps {
-  monitorId: number
+  monitorId: number | string
   events: ScoreEvent[]
 }
 
