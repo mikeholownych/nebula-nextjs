@@ -1202,6 +1202,15 @@ class AuditDB:
                 out.append(d)
             return out
 
+    async def count_monitors(self, email: str) -> int:
+        """Active monitor count for plan cap enforcement."""
+        await self.connect()
+        norm = (email or "").strip().lower()
+        async with self.pool.acquire() as conn:
+            n = await conn.fetchval(
+                "SELECT count(*) FROM monitors WHERE email=$1 AND active", norm)
+            return int(n)
+
     async def list_audits_by_domain(self, domain: str) -> list[dict]:
         """Audits whose URL host belongs to the registered domain.
 

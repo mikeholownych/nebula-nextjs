@@ -55,6 +55,50 @@ router = APIRouter(prefix="/audit", tags=["audit"])
 AUDIT_SCRIPT = "/home/mike/nebula/deliver_audit.py"
 
 
+# ── Plan entitlements (monitor gates) ────────────────────────────────────────
+
+async def resolve_for_email(email: str):
+    """Resolve plan entitlements for an email, thread-offloaded.
+
+    Module-level symbol so tests patch a single seam. Resolution failure
+    degrades to free with zero monitored urls: premium mutations fail closed.
+    """
+    import asyncio
+
+    from platform_api.db.session import session_scope
+    from platform_api.services.entitlements import Entitlements, resolve_sync
+
+    norm = (email or "").strip().lower()
+
+    def _query():
+        with session_scope() as session:
+            return resolve_sync(norm, session)
+
+    try:
+        return await asyncio.to_thread(_query)
+    except Exception:  # noqa: BLE001 - gated to free on resolution failure
+        logger.warning("entitlement resolution failed for %s; gating free", norm)
+        return Entitlements(plan="free", status="error", audits_per_month=None,
+                            monitored_urls=0, min_interval_hours=None)
+
+
+def _require_premium_monitor(ent) -> None:
+    """Free plans (or error-degraded resolution) get no monitors at all."""
+    if ent.status == "error" or ent.plan == "free" or (
+            ent.monitored_urls is not None and ent.monitored_urls <= 0):
+        raise HTTPException(status_code=403, detail={
+            "message": "Monitoring is a paid feature",
+            "upgrade_url": "/pricing"})
+
+
+def _reject_plan_cadence(ent, cadence: str) -> None:
+    """Explicit rejection beats silent clamping."""
+    cadence_hours = {"weekly": 168, "monthly": 720}[cadence]
+    if ent.min_interval_hours is not None and cadence_hours < ent.min_interval_hours:
+        raise HTTPException(status_code=400, detail={
+            "message": "Cadence not available on your plan"})
+
+
 class AuditRequest(BaseModel):
     url: str
     email: Optional[str] = None
@@ -902,6 +946,17 @@ async def create_monitor(body: MonitorCreate,
     if cadence not in ("weekly", "monthly"):
         raise HTTPException(status_code=400, detail="Cadence must be weekly or monthly")
     try:
+        ent = await resolve_for_email(email)
+        _require_premium_monitor(ent)
+        if ent.monitored_urls is not None:
+            current = await audit_db.count_monitors(email)
+            already = await audit_db.list_monitors(email)
+            has_this = any(m.get("url") == url for m in already)
+            if not has_this and current >= ent.monitored_urls:
+                raise HTTPException(status_code=429, detail={
+                    "message": "Plan limit reached",
+                    "limit": ent.monitored_urls})
+        _reject_plan_cadence(ent, cadence)
         monitor = await audit_db.create_monitor(email, url, cadence)
         if not monitor:
             raise HTTPException(status_code=500, detail="Monitor create failed")
@@ -924,6 +979,10 @@ async def update_monitor(monitor_id: str, body: MonitorUpdate,
             raise HTTPException(status_code=404, detail="Monitor not found")
     if body.cadence is not None and body.cadence not in ("weekly", "monthly"):
         raise HTTPException(status_code=400, detail="Cadence must be weekly or monthly")
+    ent = await resolve_for_email(own)
+    _require_premium_monitor(ent)
+    if body.cadence is not None:
+        _reject_plan_cadence(ent, body.cadence)
     try:
         monitor = await audit_db.update_monitor(monitor_id, body.cadence, body.active)
         if not monitor:
