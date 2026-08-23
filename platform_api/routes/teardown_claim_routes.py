@@ -87,10 +87,11 @@ async def claim_email_request(slug: str, body: EmailRequest,
     result = await asyncio.to_thread(_send)
     if result.get("_error"):
         await redis.delete(token_key(slug, token))
+        print(f"[claim] send failure {slug}: "
+              f"{result.get('_body', result.get('_error'))}")
         raise HTTPException(
             status_code=500,
-            detail=f"Failed to send verification email: "
-                   f"{result.get('_body', result.get('_error'))}")
+            detail="Verification email failed to send")
     return {"sent": True}
 
 
@@ -240,6 +241,10 @@ async def update_response(slug: str, body: ResponsePatch,
     if not claim or claim.get("claimed_by_email") != current_user["user"].email:
         raise HTTPException(status_code=404,
                             detail="No active claim for this teardown")
+    if claim.get("response_status") == "removed":
+        raise HTTPException(
+            status_code=409,
+            detail="Response removed by site operator; contact support")
     out: dict = {}
     if body.response_text is not None:
         verdict = evaluate_response(body.response_text)
