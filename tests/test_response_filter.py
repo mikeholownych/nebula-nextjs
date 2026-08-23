@@ -23,6 +23,27 @@ class ResponseFilterTests(unittest.TestCase):
         r = evaluate_response("a http://a.com b http://b.com c https://c.com d https://d.com")
         self.assertIn("too_many_links", r.reasons)
 
+    def test_four_full_urls_auto_hide(self):
+        from platform_api.services.response_filter import evaluate_response
+        r = evaluate_response(
+            "see https://a.com/x and https://b.io/y plus https://c.dev/z "
+            "and https://d.co/w for details")
+        self.assertFalse(r.allowed)
+        self.assertIn("too_many_links", r.reasons)
+
+    def test_three_full_urls_pass(self):
+        from platform_api.services.response_filter import evaluate_response
+        r = evaluate_response(
+            "see https://a.com/x and https://b.io/y plus https://c.dev/z for details")
+        self.assertTrue(r.allowed)
+        self.assertNotIn("too_many_links", r.reasons)
+
+    def test_two_full_urls_pass(self):
+        from platform_api.services.response_filter import evaluate_response
+        r = evaluate_response("mirrors at https://a.com/x and https://b.io/y if you hit issues")
+        self.assertTrue(r.allowed)
+        self.assertNotIn("too_many_links", r.reasons)
+
     def test_legal_threat_flagged(self):
         from platform_api.services.response_filter import evaluate_response
         r = evaluate_response("Remove this or we will sue immediately")
@@ -39,10 +60,12 @@ class ResponseFilterTests(unittest.TestCase):
         from platform_api.services.response_filter import evaluate_response
         r = evaluate_response("x" * 1000)
         self.assertTrue(r.allowed)
-        # NOTE: the brief's _LINK_RE counts a full "https://a.com" as two
-        # hits (scheme + bare domain), so the <=3 boundary uses bare domains.
+        # _LINK_RE counts each URL once, so 3 links sit at the <=3 boundary;
+        # bare domains count the same way (>3 bare domains hide).
         r2 = evaluate_response("mirrors at a.com b.io c.dev if you hit issues")
         self.assertTrue(r2.allowed)
+        r3 = evaluate_response("mirrors at a.com b.io c.dev d.net if you hit issues")
+        self.assertFalse(r3.allowed)
 
 
 class ResponseRoutesTests(unittest.TestCase):

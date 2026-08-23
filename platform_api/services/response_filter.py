@@ -6,7 +6,10 @@ from dataclasses import dataclass, field
 MAX_RESPONSE_CHARS = 1000
 MAX_LINKS = 3
 
-_LINK_RE = re.compile(r"https?://|\[.+?\]\(|\w+\.(?:com|net|io|org|dev|co)\b", re.I)
+_LINK_RE = re.compile(
+    r"https?://\S+|\[.+?\]\(\S+\)|\b[\w-]+(?:\.[\w-]+)*\.(?:com|net|io|org|dev|co)\b",
+    re.I,
+)
 
 _DENYLIST: list[tuple[str, re.Pattern]] = [
     ("legal_threat", re.compile(
