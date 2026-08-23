@@ -150,3 +150,18 @@ Cloudflare cache purge after static asset changes:
   Status lifecycle: null -> `visible` | `auto_hidden` | `removed`.
 - **Private context**: workspace-only notes from the claimant. Never rendered publicly.
 - **Founder account**: `mike.holownych@gmail.com` (hard-flagged in code).
+
+## Billing and Entitlements Glossary (2026-08-23)
+
+- **Entitlement**: what a workspace email may do, derived ONLY via
+  `platform_api/services/entitlements.py::resolve(email)`. Never derive plans elsewhere.
+- **Subscription spine**: the org-keyed `subscriptions` table in `nebula_platform`
+  plus the single-writer portal webhook. One writer, one truth.
+- **Workspace email**: the email key of the signed-in session; equals the Stripe
+  customer email used at checkout and the provisioning lookup.
+- **Price map**: `{stripePriceId -> (plan, interval)}` defined once in
+  `customer-portal/app/lib/subscription-plans.ts`; mirrored as plan LIMITS in
+  `tests/billing_fixtures/plan_limits.json` consumed by both suites.
+- **Monitoring engine**: the platform `/audit/monitors` CRUD + `run-due` runner +
+  regression alert emails in nebula_audit. The portal `monitored_pages` tables are dormant.
+- **Cadence clamp**: per-plan restriction of monitor cadence (Pro -> monthly only).
