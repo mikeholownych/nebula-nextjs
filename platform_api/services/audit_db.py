@@ -780,6 +780,89 @@ class AuditDB:
             )
             return result == 'UPDATE 1'
 
+    async def get_fix_effectiveness(
+        self, limit: int = 10, finding_key: str | None = None
+    ) -> list[dict]:
+        """Aggregate fix outcomes per finding key.
+
+        Both /audit/fix-library and /audit/fix-effectiveness call this. It was
+        referenced but never implemented - the sweep probe caught the 503."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            if finding_key:
+                rows = await conn.fetch(
+                    """
+                    SELECT finding_key,
+                           COUNT(*) AS total_attempts,
+                           COUNT(*) FILTER (
+                               WHERE implemented AND score_after IS NOT NULL
+                           ) AS successful_implementations,
+                           COALESCE(ROUND(AVG(score_after - score_before) FILTER (
+                               WHERE implemented AND score_after IS NOT NULL
+                               AND score_before IS NOT NULL
+                           ), 1), 0.0) AS avg_score_improvement,
+                           COUNT(*) FILTER (
+                               WHERE implemented AND score_after > score_before
+                           ) AS positive_outcomes,
+                           ROUND(COUNT(*) FILTER (WHERE implemented) * 100.0
+                                 / GREATEST(COUNT(*), 1), 1) AS success_rate_percentage
+                    FROM fix_implementations
+                    WHERE finding_key = $2
+                    GROUP BY finding_key
+                    LIMIT 1
+                    """,
+                    limit,
+                    finding_key,
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    SELECT finding_key,
+                           COUNT(*) AS total_attempts,
+                           COUNT(*) FILTER (
+                               WHERE implemented AND score_after IS NOT NULL
+                           ) AS successful_implementations,
+                           COALESCE(ROUND(AVG(score_after - score_before) FILTER (
+                               WHERE implemented AND score_after IS NOT NULL
+                               AND score_before IS NOT NULL
+                           ), 1), 0.0) AS avg_score_improvement,
+                           COUNT(*) FILTER (
+                               WHERE implemented AND score_after > score_before
+                           ) AS positive_outcomes,
+                           ROUND(COUNT(*) FILTER (WHERE implemented) * 100.0
+                                 / GREATEST(COUNT(*), 1), 1) AS success_rate_percentage
+                    FROM fix_implementations
+                    GROUP BY finding_key
+                    ORDER BY total_attempts DESC
+                    LIMIT $1
+                    """,
+                    limit,
+                )
+            return [dict(r) for r in rows]
+
+    async def get_user_fix_history(
+        self, email: str, limit: int = 10
+    ) -> list[dict]:
+        """Fix implementation attempts recorded against one email address.
+
+        Referenced by /audit/fix-history but never implemented (same defect
+        batch as get_fix_effectiveness)."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT f.finding_key, f.implemented, f.score_before, f.score_after,
+                       f.implemented_at, f.created_at, a.url AS audit_url
+                FROM fix_implementations f
+                LEFT JOIN audits a ON a.id = f.audit_id
+                WHERE lower(f.email) = $1
+                ORDER BY f.created_at DESC
+                LIMIT $2
+                """,
+                email.strip().lower(),
+                limit,
+            )
+            return [dict(r) for r in rows]
     async def get_or_create_share_token(self, audit_id: UUID) -> Optional[str]:
         """Return the audit's share token, generating and persisting one on
         first request. share_token has a UNIQUE constraint in the schema;
