@@ -214,3 +214,35 @@ Policy: full cutover, no hybrid. Archived, not deleted.
   (Mike ratified 2026-07-31). Nurture layer added: teardown-founder track (d2/d6/d12)
   + post-audit track (d1/d4/d9/d16) in nurture_engine.py; audit email intake wired in
   `/api/audit/unlock` → `audit_leads.jsonl`.
+
+## 2026-08-22 - Teardown claims phase 1
+
+37 canonical teardowns migrated to `nebula_audit.teardowns` via
+`customer-portal/scripts/export_teardowns.mjs` + `scripts/seed_teardowns.py`;
+teardowns pages + claims now read from the platform API.
+
+### Dual-source state (intentional)
+
+`app/teardowns/[slug]/data.ts` REMAINS in place for consumers outside /teardowns:
+
+- `customer-portal/app/page.tsx:5`
+- `customer-portal/app/sitemap.ts:5`
+- `customer-portal/app/lib/llms-markdown.ts:2` (brief said `lib/llms-markdown.ts`; actual path is under `app/lib/`)
+- `customer-portal/app/case-studies/CaseStudiesContent.tsx:3`
+
+Scripts/test transitive uses (verified by grep 2026-08-23):
+
+- `customer-portal/__tests__/teardown-screenshot-integrity.test.ts:3`
+- `customer-portal/scripts/export_teardowns.mjs:8` (the exporter itself)
+- `customer-portal/config/claims-allowlist.json:103` (config reference)
+
+### Drift rule
+
+Content edits must go to BOTH `data.ts` AND a reseed
+(`uv run --project /home/mike/nebula python scripts/seed_teardowns.py`) until
+single-source migration happens in a later phase. Seeding is idempotent upsert
+by slug.
+
+### Archived/deleted files
+
+None. No files were archived or deleted in phase 1.
