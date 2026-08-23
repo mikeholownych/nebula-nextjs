@@ -22,6 +22,7 @@ from posthog import identify_context, new_context  # type: ignore[import-untyped
 
 from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
+from platform_api.auth.routes import get_current_user
 from platform_api.services.audit_db import audit_db
 from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
@@ -582,6 +583,35 @@ async def audits_by_domain(domain: str, email: str):
         if a.get("score") is not None:
             a["score"] = a["score"] / 10.0
     return {"audits": rows}
+
+
+class MarkImplementedBody(BaseModel):
+    audit_id: UUID
+    finding_key: str
+
+
+@router.post("/fixes/mark-implemented")
+async def mark_implemented(body: MarkImplementedBody,
+                           current_user: dict = Depends(get_current_user)):
+    """Session-authenticated write path into fix_implementations.
+
+    Authorization: caller owns the audit's registered domain via an active
+    teardown claim, or owns the audit row itself (audits.email match)."""
+    from platform_api.services.domains import registered_domain
+    email = (current_user["user"].email or "").strip().lower()
+    rec = await get_audit_db().get_audit(body.audit_id)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="Audit not found")
+    aud_dom = registered_domain(rec["url"])
+    claim = await get_teardown_db().get_active_claim_by_domain(aud_dom) if aud_dom else None
+    audit_email = (rec.get("email") or "").strip().lower()
+    owns = (audit_email == email) or bool(
+        claim and claim["claimed_by_email"] == email)
+    if not owns:
+        raise HTTPException(status_code=403, detail="Not your audit or domain")
+    row = await get_audit_db().mark_finding_implemented(
+        body.audit_id, email, body.finding_key)
+    return row
 
 
 class RecommendationUpdate(BaseModel):

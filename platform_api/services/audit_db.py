@@ -643,6 +643,12 @@ class AuditDB:
                     await self.record_cohort_aggregate(conn, score, grade, findings)
                 except Exception as exc:
                     _log.error("cohort aggregate failed audit=%s: %s", audit_id, exc)
+                # Task 13: backfill fix_implementations.score_after now that
+                # this audit's final score exists. Non-fatal by design.
+                try:
+                    await self.backfill_fix_scores(audit_id)
+                except Exception as exc:
+                    _log.error("fix score backfill failed audit=%s: %s", audit_id, exc)
                 # Fire-and-forget screenshot
                 try:
                     url_row = await conn.fetchrow("SELECT url FROM audits WHERE id = $1", audit_id)
@@ -1568,6 +1574,44 @@ class AuditDB:
                 partner_id, _safe_json_dumps(domains),
             )
             return True
+
+    async def mark_finding_implemented(self, audit_id, email: str,
+                                       finding_key: str) -> dict:
+        """Insert or update an open fix_implementations row, capturing the
+        audit's current score as score_before (never overwritten once set)."""
+        await self.connect()
+        norm = email.strip().lower()
+        async with self.pool.acquire() as conn:
+            score = await conn.fetchval(
+                "SELECT score FROM audits WHERE id=$1", audit_id)
+            if score is None:
+                raise ValueError("audit not found")
+            row = await conn.fetchrow(
+                """
+                INSERT INTO fix_implementations
+                    (audit_id, email, finding_key, implemented, score_before, implemented_at)
+                VALUES ($1,$2,$3,true,$4,now())
+                ON CONFLICT (audit_id, finding_key)
+                DO UPDATE SET implemented=true, implemented_at=now(),
+                              score_before=COALESCE(fix_implementations.score_before, EXCLUDED.score_before),
+                              updated_at=now()
+                RETURNING *
+                """, audit_id, norm, finding_key, score)
+            return dict(row)
+
+    async def backfill_fix_scores(self, audit_id) -> int:
+        """Set score_after on un-scored rows for findings this completed audit
+        covers. Returns number of rows updated; 0 when audit not completed."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            score = await conn.fetchval(
+                "SELECT score FROM audits WHERE id=$1 AND status='completed'", audit_id)
+            if score is None:
+                return 0
+            n = await conn.execute(
+                """UPDATE fix_implementations SET score_after=$2, updated_at=now()
+                   WHERE audit_id=$1 AND score_after IS NULL""", audit_id, score)
+            return int(n.split()[-1])
 
 
 # Singleton
