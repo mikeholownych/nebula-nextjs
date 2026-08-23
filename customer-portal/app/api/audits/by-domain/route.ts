@@ -4,6 +4,11 @@ import { authHeaders } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
+function internalHeaders(): Record<string, string> {
+  const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+  return secret ? { Authorization: `Bearer ${secret}` } : {}
+}
+
 /**
  * Whole-domain audits for a claimed teardown (session email enforced server-side)
  * GET /api/audits/by-domain?domain=...
@@ -26,7 +31,7 @@ export async function GET(request: NextRequest) {
       `${API_BASE}/audit/by-domain?domain=${encodeURIComponent(domain)}&email=${encodeURIComponent(email)}`,
       {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', ...authHeaders(request) },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(request), ...internalHeaders() },
         signal: AbortSignal.timeout(10000),
       }
     )
