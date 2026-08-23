@@ -807,11 +807,10 @@ class AuditDB:
                            ROUND(COUNT(*) FILTER (WHERE implemented) * 100.0
                                  / GREATEST(COUNT(*), 1), 1) AS success_rate_percentage
                     FROM fix_implementations
-                    WHERE finding_key = $2
+                    WHERE finding_key = $1
                     GROUP BY finding_key
                     LIMIT 1
                     """,
-                    limit,
                     finding_key,
                 )
             else:
