@@ -1,145 +1,222 @@
-# Task 2 report — Phase 2 Architectural boundaries
+# Task 2 Report: Database tables and TeardownDB service
 
-**Status:** DONE
-**Branch:** `feat/enterprise-refactor`
-**Worktree:** `/home/mike/nebula/.worktrees/enterprise-refactor`
-**Commit:** `7b2e9e0e` — `fix(bff): stop dual writers and bound quota to audit DB`
-**Review-fix:** Phase 2 required findings — start_api `:8001`, checkout 410 stub, CRM non-2xx + retry recovery
+Branch: `feat/teardown-claims`
+Commit: `56daf322e` - "feat: teardowns + teardown_claims tables and TeardownDB service" (exactly 3 files staged)
+Status: **DONE_WITH_CONCERNS** (brief's code had 2 bugs in the smoke path; fixes were minimal and confined to non-production-critical paths)
 
-## What you implemented
+---
 
-1. **Quota.** `checkAuditQuota` still resolves plan from `nebula_platform` subscriptions, then counts **completed** audits this UTC month from **nebula_audit** via FastAPI `GET /audit/quota`. It no longer queries platform `audits`. FastAPI `audit_db.count_completed_this_month` filters `status = 'completed'`. Fail-open if FastAPI is down.
+## Files created
 
-2. **Money writer.** Next `POST /api/webhooks/stripe` remains the only writer to `nebula_platform.purchases`. `purchases.audit_url` is set from Stripe `metadata.url` or FastAPI `GET /audit/{id}`, not `SELECT url FROM audits` on the platform DB.
+1. `platform_api/migrations/20260822120000_teardown_claims.sql` - verbatim from brief
+2. `platform_api/services/teardown_db.py` - brief's code with the SECOND simplified `update_response` (single field per call) as instructed, plus one minimal robustness fix (see Concern 2)
+3. `scripts/teardown_db_smoke.py` - brief's code with one fix (see Concern 1)
 
-3. **Checkout metadata.** Portal `POST /api/checkout` now copies the audited URL into `metadata[url]` so the webhook can persist it without a platform-audits subquery.
+## Step 1-2: Migration applied to live nebula_audit
 
-4. **CRM path.** After portal persist, Next calls FastAPI `POST /api/crm/purchase-completed` with `Authorization: Bearer ${INTERNAL_API_SECRET}`. The hook updates CRM (`trigger_delivery=False`). FastAPI `/api/stripe/webhook` stays fail-closed from Phase 1 and no longer delivers kits.
-
-5. **FastAPI checkout.** `POST /api/checkout` is a **410 stub** (commented as unused; portal BFF owns checkout). Not deleted.
-
-6. **One pg Pool.** `app/lib/email-service.ts` imports `pool` from `app/lib/db.ts`; duplicate `Pool` constructor removed.
-
-7. **Rate limit / request identity.** Portal `POST /api/audit/start` (and `/api/audit/run`) forwards `X-Request-ID`, visitor `X-Forwarded-For`, and `X-Audit-Email`. FastAPI `/audit/run` keys by visitor IP + email; loopback hops in XFF are skipped.
-
-8. **`PLATFORM_API_URL` default.** `http://127.0.0.1:8001` in dispatch/verify, start/quota, FastAPI `PORT`, README, and `scripts/weekly_dispatch.sh`. `:8769` leftovers in those paths removed.
-
-Did **not** start Phase 3–8. Did **not** deploy or restart production.
-
-## What you tested and test results
-
-| Command | Result |
-|---|---|
-| Jest focused suite **before** implementation | **RED** — 12 failed, 30 passed |
-| `cd customer-portal && npm test -- --runInBand --watchAll=false --forceExit` quota, start headers, 8001 default, checkout binding, stripe webhook, start timeout/malformed **after** | **GREEN** — 7 suites, 48 passed |
-| `pytest` rate-limit identifier, checkout 410, CRM hook, audit quota, stripe fail-closed **after** | **GREEN** — 9 passed |
-| production-safety (email-service import surface) | **GREEN** — 38 passed |
-| Full `npm run ci` | Not run (not required) |
-
-## TDD Evidence (RED then GREEN)
-
-Tests written first. Representative RED:
+Command:
 
 ```
-FAIL __tests__/audit-quota.test.ts
-  ✕ blocks a free-tier email that has already used 1 audit this month (allowed true)
-  ✕ counts completed audits via FastAPI, not platform audits rows (FROM audits)
-
-FAIL __tests__/checkout-audit-binding.test.ts
-  ✕ metadata[url] expected https://example.com/landing, received null
-
-FAIL __tests__/audit-start-forward-headers.test.ts
-  ✕ X-Request-ID not forwarded (null)
-
-FAIL __tests__/platform-api-url-default.test.ts
-  ✕ dispatch/verify still default to :8769; email-service still constructs Pool
-
-FAIL __tests__/stripe-webhook-fulfillment-gate.test.ts
-  ✕ delivered UPDATE still subqueries FROM audits
-  ✕ no GET /audit/{id} fallback
-  ✕ no CRM HTTP call
-
-FAILED tests/platform_api/test_rate_limit_identifier.py (email not in key; 127.0.0.1 collapsed)
-FAILED tests/platform_api/test_checkout_gone.py (200 == 410)
-FAILED tests/platform_api/test_crm_purchase_hook.py (404; purchase_completed missing)
-FAILED tests/platform_api/test_audit_quota.py (count_completed_this_month missing)
+psql "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433" \
+  -f platform_api/migrations/20260822120000_teardown_claims.sql
 ```
 
-GREEN after implementation:
+Output (verbatim):
 
 ```
-Test Suites: 7 passed, 7 total
-Tests:       48 passed, 48 total
-
-pytest: 9 passed
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
 ```
 
-## Files changed
-
-Portal: `audit-quota.ts`, `email-service.ts`, `audit/start`, `audit/run`, `checkout`, `webhooks/stripe`, workspace dispatch/verify, README.
-
-FastAPI: `audit_db.count_completed_this_month`, `GET /audit/quota`, `POST /api/crm/purchase-completed`, checkout 410, stripe webhook no kit delivery, rate-limit identifier, `config.PORT=8001`.
-
-Tests as listed above.
-
-Not committed: `customer-portal/node_modules`, `.superpowers/sdd/progress.md`, this report.
-
-## Self-review findings
-
-- FastAPI `GET /audit/quota` is unauthenticated on loopback, same as `GET /audit/{id}` (Phase 1 leftover / Phase 3+).
-- CRM HTTP is fail-silent: missing `INTERNAL_API_SECRET` still returns Stripe 200 after persist. Production must have that secret for CRM to move.
-- FastAPI `/api/stripe/webhook` remains mounted and fail-closed. If Stripe still posts there, CRM can dual-upsert (idempotent); kit delivery will not dual-run.
-- Several portal routes still default `http://localhost:8001` (same port, not 8769). Not changed outside the listed leftovers.
-
-## Concerns
-
-1. Confirm Stripe dashboard has **one** webhook URL (`https://nebulacomponents.com/api/webhooks/stripe`). Not verified here (no production mutation).
-2. Set `INTERNAL_API_SECRET` on both Next and FastAPI or CRM projection will skip.
-3. Quota now counts **completed** audits only; a failed free-tier run does not consume the monthly slot (binding).
-4. Jest open-handle warning from start-route tests hitting the real pool (pre-existing pattern).
-
-## Review fixes (required)
-
-1. `scripts/start_api.sh` listens on `127.0.0.1:8001`. Leftover scan now fails if any `scripts/**/*.sh` contains `:8769` or `--port 8769`.
-2. `platform_api/routes/checkout.py` is a body-free 410 stub: no Stripe client, no `.shop` URLs, no `CheckoutRequest`.
-3. Portal CRM notify logs non-2xx bodies. Already-delivered Stripe retries call CRM again so a post-persist CRM miss can recover. Fire-and-forget-without-ok-check is no longer the only path.
-
-### Re-run covering tests
+### `\d teardowns` (verbatim)
 
 ```
-cd customer-portal && npm test -- --runInBand --watchAll=false --forceExit \
-  __tests__/audit-quota.test.ts \
-  __tests__/platform-api-url-default.test.ts \
-  __tests__/stripe-webhook-fulfillment-gate.test.ts
+                            Table "public.teardowns"
+     Column      |           Type           | Collation | Nullable |   Default   
+-----------------+--------------------------+-----------+----------+-------------
+ slug            | text                     |           | not null | 
+ name            | text                     |           | not null | 
+ url             | text                     |           | not null | 
+ domain          | text                     |           | not null | 
+ score           | numeric(3,1)             |           |          | 
+ grade           | text                     |           |          | 
+ audited_at      | timestamp with time zone |           |          | 
+ summary         | text                     |           |          | 
+ context         | text                     |           |          | 
+ findings        | jsonb                    |           | not null | '[]'::jsonb
+ screenshot_path | text                     |           |          | 
+ created_at      | timestamp with time zone |           | not null | now()
+ updated_at      | timestamp with time zone |           | not null | now()
+Indexes:
+    "teardowns_pkey" PRIMARY KEY, btree (slug)
+    "idx_teardown_claims_domain_lookup" btree (domain)
+Referenced by:
+    TABLE "teardown_claims" CONSTRAINT "teardown_claims_slug_fkey" FOREIGN KEY (slug) REFERENCES teardowns(slug)
 ```
 
-```
-PASS __tests__/stripe-webhook-fulfillment-gate.test.ts
-PASS __tests__/audit-quota.test.ts
-PASS __tests__/platform-api-url-default.test.ts
-
-Test Suites: 3 passed, 3 total
-Tests:       39 passed, 39 total
-```
+### `\d teardown_claims` (verbatim)
 
 ```
-PYTHONPATH=/home/mike/nebula/.worktrees/enterprise-refactor \
-  /home/mike/nebula/venv/bin/python3 -m pytest \
-  tests/platform_api/test_checkout_gone.py \
-  tests/platform_api/test_crm_purchase_hook.py \
-  tests/platform_api/test_audit_quota.py \
-  tests/platform_api/test_rate_limit_identifier.py \
-  tests/platform_api/test_stripe_webhook_fail_closed.py -q
+                              Table "public.teardown_claims"
+       Column        |           Type           | Collation | Nullable |      Default      
+---------------------+--------------------------+-----------+----------+-------------------
+ id                  | uuid                     |           | not null | gen_random_uuid()
+ slug                | text                     |           | not null | 
+ claimed_by_email    | text                     |           | not null | 
+ verification_method | text                     |           | not null | 
+ verified_at         | timestamp with time zone |           | not null | now()
+ status              | text                     |           | not null | 'active'::text
+ response_text       | text                     |           |          | 
+ response_status     | text                     |           |          | 
+ response_updated_at | timestamp with time zone |           |          | 
+ private_context     | text                     |           |          | 
+ created_at          | timestamp with time zone |           | not null | now()
+ updated_at          | timestamp with time zone |           | not null | now()
+Indexes:
+    "teardown_claims_pkey" PRIMARY KEY, btree (id)
+    "idx_teardown_claims_email" btree (claimed_by_email)
+    "uq_teardown_claims_active_slug" UNIQUE, btree (slug) WHERE status = 'active'::text
+Check constraints:
+    "teardown_claims_response_status_check" CHECK (response_status = ANY (ARRAY['visible'::text, 'auto_hidden'::text, 'removed'::text]))
+    "teardown_claims_status_check" CHECK (status = ANY (ARRAY['active'::text, 'revoked'::text, 'superseded'::text]))
+    "teardown_claims_verification_method_check" CHECK (verification_method = ANY (ARRAY['email_domain'::text, 'dns_txt'::text, 'gsc'::text]))
+Foreign-key constraints:
+    "teardown_claims_slug_fkey" FOREIGN KEY (slug) REFERENCES teardowns(slug)
 ```
 
-```
-tests/platform_api/test_checkout_gone.py ...                             [ 27%]
-tests/platform_api/test_crm_purchase_hook.py ...                         [ 54%]
-tests/platform_api/test_audit_quota.py ..                                [ 72%]
-tests/platform_api/test_rate_limit_identifier.py ..                      [ 90%]
-tests/platform_api/test_stripe_webhook_fail_closed.py .                  [100%]
+Expected result confirmed: tables created; unique partial index `uq_teardown_claims_active_slug ... WHERE status = 'active'` listed.
 
-============================== 11 passed in 0.43s ==============================
+## Step 4: Smoke test
+
+Command: `uv run --project /home/mike/nebula python scripts/teardown_db_smoke.py`
+
+Final run output (verbatim):
+
+```
+SMOKE OK
 ```
 
-Did **not** start Phase 3. Did **not** deploy.
+Covered: upsert seed, get_teardown with claim=None, create_claim active, ClaimConflict for second email, idempotent same-email re-claim (same id), list_teardowns shows `claimed is True`.
+
+### Intermediate failed runs (disclosed, per no-fabrication rule)
+
+- Run 1: `asyncpg.exceptions.DataError: invalid input for query argument $7: '2026-08-22' (expected a datetime.date or datetime.datetime instance, got 'str')` -> fixed smoke script to pass `datetime(2026, 8, 22, tzinfo=timezone.utc)` (Concern 1). No DB rows written by this run.
+- Run 2: crashed in `list_teardowns` (`KeyError: 'findings'`) AFTER writing teardown + claim rows -> left orphan qa-smoke rows; cleaned via the brief's DELETE statements before re-run (Concern 2 fix applied first).
+- Run 3 (clean): `SMOKE OK`.
+
+## Cleanup (brief-specified DELETEs only)
+
+```
+DELETE 1
+DELETE 1
+ claims_left 
+-------------
+           0
+(1 row)
+
+ teardowns_left 
+----------------
+           0
+(1 row)
+```
+
+No smoke data remains in production. Total production DDL/DML executed: the migration file exactly as written, plus the two brief-specified qa-smoke DELETE pairs.
+
+## Step 5: Commit
+
+Staged only the three task files (verified via `git status --porcelain` before commit); none of the unrelated modified runtime files (ledgers/, CLAUDE.md, aidlc-docs/, memory/, error_enricher_state.json, etc.) were touched or committed.
+
+```
+[feat/teardown-claims 56daf322e] feat: teardowns + teardown_claims tables and TeardownDB service
+ 3 files changed, 274 insertions(+)
+```
+
+---
+
+## Concerns for Task 3+ owners
+
+1. **Smoke script deviation**: brief's smoke passed `"2026-08-22"` (string) as `audited_at`; asyncpg requires real datetime objects for timestamptz. Fixed inside the smoke script only. **Implication for Task 3**: whatever seeds teardowns via `upsert_teardown` must pass `datetime` objects for `audited_at`, not ISO strings.
+2. **Service deviation (one line)**: `_with_claim` used `d["findings"]` but `list_teardowns` does not SELECT findings, so every list call raised KeyError. Changed to `d.get("findings")` (platform_api/services/teardown_db.py:57). Behavior identical wherever findings exists.
+3. **jsonb codec note (inherited from brief, unchanged)**: asyncpg returns jsonb as `str` unless a codec is registered, so `_with_claim` collapses findings to `[]` on read paths. If Task 3 needs findings content from `get_teardown`, register an asyncpg jsonb codec or parse there. Flagging so it is a decision, not a surprise.
+
+## Fix round 1
+
+Date: 2026-08-22
+Branch: feat/teardown-claims
+Files changed: platform_api/services/teardown_db.py, scripts/teardown_db_smoke.py
+
+### Changes
+
+1. platform_api/services/teardown_db.py:
+   - Moved `import json` from function-local to module top.
+   - Added `_init_conn(self, conn)` which registers a jsonb pg_catalog codec via `conn.set_type_codec("jsonb", encoder=lambda v: json.dumps(v), decoder=lambda s: json.loads(s), schema="pg_catalog")`.
+   - Passed `init=self._init_conn` to `asyncpg.create_pool`.
+   - `upsert_teardown` now passes the raw findings list (codec encoder serializes). Passing a pre-dumped JSON string with the codec active double-encoded it into a jsonb string scalar (`jsonb_typeof` = string), which the decoder returned as a str and `_with_claim` coerced to []. Caught on first smoke run and fixed.
+   - `_with_claim` list-coercion kept as defensive fallback.
+2. scripts/teardown_db_smoke.py: added post-get assertions `isinstance(got["findings"], list)` and `got["findings"] == [{"key": "k"}]`.
+
+### Verification
+
+First run (pre-fix of upsert path, documented failure):
+
+```
+$ uv run --project /home/mike/nebula python scripts/teardown_db_smoke.py
+Traceback (most recent call last):
+  File "/home/mike/nebula/scripts/teardown_db_smoke.py", line 45, in <module>
+    raise SystemExit(asyncio.run(main()))
+  ...
+  File "/home/mike/nebula/scripts/teardown_db_smoke.py", line 27, in main
+    assert got["findings"] == [{"key": "k"}], got["findings"]
+AssertionError: []
+exit=1
+
+DB state at that point:
+ slug   | ftype  | findings
+--------+--------+----------------------
+ qa-smoke | string | "[{\"key\": \"k\"}]"
+(1 row)
+```
+
+Final run after passing raw list to upsert:
+
+```
+$ uv run --project /home/mike/nebula python scripts/teardown_db_smoke.py
+SMOKE OK
+exit=0
+```
+
+Post-run DB check confirmed proper storage:
+
+```
+psql ... -c "SELECT slug, jsonb_typeof(findings) FROM teardowns WHERE slug='qa-smoke';"
+ slug   | jsonb_typeof
+--------+--------------
+ qa-smoke | array
+(1 row)
+```
+
+### Cleanup
+
+qa-smoke rows removed exactly per brief:
+
+```
+psql "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433" -c "DELETE FROM teardown_claims WHERE slug='qa-smoke'; DELETE FROM teardowns WHERE slug='qa-smoke';"
+DELETE 1
+DELETE 1
+```
+
+### Commit
+
+```
+$ git commit -m "fix: decode jsonb findings via pg_catalog codec"
+[feat/teardown-claims 10a2d127b] fix: decode jsonb findings via pg_catalog codec
+ 2 files changed, 11 insertions(+), 3 deletions(-)
+
+$ git log --oneline -1
+10a2d127b fix: decode jsonb findings via pg_catalog codec
+```
+
+Not pushed. No other files touched or staged.

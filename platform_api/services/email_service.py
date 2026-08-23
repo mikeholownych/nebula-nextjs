@@ -20,6 +20,7 @@ class AuditEmailData(BaseModel):
     custom_subject: Optional[str] = None
     custom_body: Optional[str] = None
     guided_implementation: Optional[dict] = None
+    audit_id: Optional[str] = None
 
 
 # ── Revenue math helper ─────────────────────────────────────────────────────
@@ -278,9 +279,30 @@ class EmailService:
         </div>
         """
 
+        open_pixel = ""
+        if data.audit_id:
+            # Self-hosted open tracking (D4). Provider offers none; the pixel
+            # is the only reliable signal. Token = HMAC of audit id under the
+            # internal secret - raw ids are crawler-probed, so unsigned pixels
+            # poison open counts.
+            import hashlib
+            import hmac as _hmac
+            import os as _os
+
+            secret = (_os.getenv("INTERNAL_API_SECRET") or "").encode()
+            token = _hmac.new(
+                secret, f"px:{data.audit_id}".encode(), hashlib.sha256
+            ).hexdigest()[:32]
+            open_pixel = (
+                '<img src="https://api.nebulacomponents.shop/audit/px/'
+                f'{data.audit_id}/{token}/o.gif" width="1" height="1" alt="" '
+                'style="display:block;border:0;">'
+            )
+
         html_body = f"""
         <html>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 580px; margin: 0 auto; color: #1a1a1a; line-height: 1.6;">
+            {open_pixel}
 
             <div style="padding: 2rem 0 1rem 0;">
                 <p style="font-size: 0.8rem; color: #999; margin: 0 0 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
@@ -364,12 +386,26 @@ Nebula Components
             or f"Your page scored {data.score:.1f}/10. Here's what's costing you every day it stays that way."
         )
 
+        # Gmail bulk-sender compliance: RFC 8058 one-click unsubscribe headers.
+        # Their absence is a spam-ranking signal even for transactional mail.
+        import urllib.parse as _uparse
+
+        _u = _uparse.quote(data.email)
+        unsub_headers = {
+            "List-Unsubscribe": (
+                f"<https://nebulacomponents.com/api/newsletter/unsubscribe-one-click?email={_u}>, "
+                f"<mailto:unsubscribe@nebulacomponents.com?subject=unsub:{_u}>"
+            ),
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        }
+
         result = await asyncio.to_thread(
             AgentMailClient(inbox=self.inbox_id).send_audit,
             to=[data.email],
             subject=subject,
             text=text_body,
             html=html_body,
+            headers=unsub_headers,
         )
 
         if not result.get("_error"):

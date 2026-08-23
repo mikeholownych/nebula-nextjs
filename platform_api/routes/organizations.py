@@ -222,6 +222,14 @@ async def invite_member(
     db: AsyncSession = Depends(get_db),
 ):
     """Invite a member to organization."""
+    # SHARE FREEZE (2026-08-23, Mike decision): new member invites are paused
+    # until the app.nebulacomponents.com workspace app ships and is vetted.
+    # Existing memberships keep access. Remove at workspace cutover.
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail="New member invites are temporarily paused during the workspace upgrade.",
+    )
+    # --- frozen implementation below (kept for cutover) ---
     # Check membership (must be owner or admin)
     user_id = UUID(current_user["user_id"])
     result = await db.execute(

@@ -134,6 +134,38 @@ class ResponseRoutesTests(unittest.TestCase):
         db.set_response_status.assert_not_awaited()
         notify.assert_not_called()
 
+    def test_takedown_is_sticky_owner_cannot_resurrect(self):
+        from fastapi import HTTPException
+        r = self._routes()
+        record = self._record()
+        record["claim"]["response_status"] = "removed"
+        db = self._db(record)
+        body = r.ResponsePatch(response_text="same text again")
+        with patch.object(r, "get_teardown_db", return_value=db):
+            with self.assertRaises(HTTPException) as cm:
+                asyncio_run(r.update_response(
+                    "qa-filter-demo", body,
+                    current_user={"user": MagicMock(email=self.OWNER)}))
+        self.assertEqual(cm.exception.status_code, 409)
+        self.assertIn("support", cm.exception.detail)
+        db.update_response.assert_not_awaited()
+        db.set_response_status.assert_not_awaited()
+
+    def test_private_context_also_blocked_after_removal(self):
+        from fastapi import HTTPException
+        r = self._routes()
+        record = self._record()
+        record["claim"]["response_status"] = "removed"
+        db = self._db(record)
+        body = r.ResponsePatch(private_context="notes")
+        with patch.object(r, "get_teardown_db", return_value=db):
+            with self.assertRaises(HTTPException) as cm:
+                asyncio_run(r.update_response(
+                    "qa-filter-demo", body,
+                    current_user={"user": MagicMock(email=self.OWNER)}))
+        self.assertEqual(cm.exception.status_code, 409)
+        db.update_response.assert_not_awaited()
+
     def test_non_owner_gets_404_and_no_writes(self):
         from fastapi import HTTPException
         r = self._routes()

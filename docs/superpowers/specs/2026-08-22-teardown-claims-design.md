@@ -82,7 +82,7 @@ Zero or one active claim per slug, enforced by a unique partial index on `slug W
 | private_context | text nullable | workspace-only notes |
 | created_at / updated_at | timestamptz | |
 
-The 9 index-only slugs that currently 404 (`loom`, `linear`, `miro`, `clickup`, `airtable`, `pipedrive`, `mixpanel`, `amplitude`, `drift`) are dropped from the index rather than migrated; removal fixes broken links. `data.ts` and `.bak` copies archive to `.legacy/` with an `ARCHIVE_INVENTORY.md` entry.
+All 37 canonical teardowns migrate (verified 2026-08-22: every entry in `data.ts` serves HTTP 200 on its detail URL; an earlier draft of this spec wrongly listed 9 of them as broken index-only links). Nothing is dropped from the index. `data.ts` and `.bak` copies archive to `.legacy/` with an `ARCHIVE_INVENTORY.md` entry.
 
 ## Rendering and API surface
 
@@ -140,7 +140,7 @@ Claim activation adds read paths only; nothing destructive happens to existing r
 
 ## Verification plan
 
-1. **HTML parity diff**: curl all teardown URLs from live before cutover; after cutover diff each page. Allowed delta: claim CTA block only. Index delta: exactly the 9 dead links removed.
+1. **HTML parity diff**: curl all teardown URLs from live before cutover; after cutover diff each page. Allowed delta: claim CTA block only. Index delta: none beyond the CTA-related additions; every currently-live link must remain.
 2. **Unit tests**: registered-domain normalization edge cases, free-mail rejection, HMAC tokens, every auto-filter rule.
 3. **Integration tests**: teardown endpoints plus all three verification paths against a test DB (mocked mailer and resolver, GSC fixture), including race behavior on double claim.
 4. **Production DoD artifacts**: HTTP 200 for `/`, `/audit`, `/workspace`, and all teardown URLs; zero new journalctl errors on `nebula-platform-api.service` and `nebula-nextjs.service`; live end-to-end claim executed on `gofaultline.dev` proving email-path activation, workspace attach, monitor alert delivery, and a filtered-response case.

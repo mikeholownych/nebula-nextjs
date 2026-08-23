@@ -76,9 +76,19 @@ async def lifespan(_app: FastAPI):
     except Exception as exc:
         print(f"⚠️  Audit runner startup failed: {exc}")
 
+    followup_task = None
+    try:
+        from platform_api.services.followup_emails import start_followup_scheduler
+        followup_task = await start_followup_scheduler()
+        print("✅ Follow-up scheduler started (every 30m)")
+    except Exception as exc:
+        print(f"⚠️  Follow-up scheduler startup failed: {exc}")
+
     try:
         yield
     finally:
+        if followup_task:
+            followup_task.cancel()
         try:
             from platform_api.services.audit_runner import stop_runner
             await stop_runner()

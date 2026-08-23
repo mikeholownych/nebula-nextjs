@@ -8,10 +8,12 @@ is persisted - a caller can never bind a property they do not own.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import datetime, timezone
 from typing import Optional
 
+import httpx
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, field_validator
@@ -38,6 +40,32 @@ router = APIRouter(prefix="/api/ga4", tags=["ga4"])
 _PORTAL_SETTINGS_URL = "https://nebulacomponents.com/workspace?tab=settings"
 
 
+async def _summaries_or_clean_error(token: str) -> list[dict]:
+    """Fetch accountSummaries, mapping upstream failures to clean envelopes.
+
+    Google-side errors must never surface as raw 500 stack traces (D2):
+    - 401/403 from Google means the grant is dead -> ask for reconnect.
+    - anything else upstream -> 502 with request id, no internals leaked."""
+    try:
+        return await list_account_summaries(token)
+    except httpx.HTTPStatusError as exc:
+        status = exc.response.status_code
+        if status in (401, 403):
+            raise HTTPException(
+                status_code=409,
+                detail="GA4 authorization expired - reconnect Google Analytics",
+            ) from exc
+        logger.warning("[ga4] accountSummaries upstream %s", status)
+        raise HTTPException(
+            status_code=502, detail="Google Analytics is temporarily unavailable"
+        ) from exc
+    except httpx.RequestError as exc:
+        logger.warning("[ga4] accountSummaries unreachable: %s", exc.__class__.__name__)
+        raise HTTPException(
+            status_code=502, detail="Google Analytics is temporarily unavailable"
+        ) from exc
+
+
 def _current_connection(db: Session, user_id) -> Optional[Ga4Connection]:
     return (
         db.query(Ga4Connection)
@@ -46,7 +74,7 @@ def _current_connection(db: Session, user_id) -> Optional[Ga4Connection]:
     )
 
 
-def _valid_access_token(conn: Ga4Connection, db: Session) -> str:
+async def _valid_access_token(conn: Ga4Connection, db: Session) -> str:
     """Decrypt + refresh-on-expiry. Returns plaintext access token."""
     now = datetime.now(timezone.utc)
     expiring = conn.token_expiry is None or conn.token_expiry.replace(
@@ -59,7 +87,11 @@ def _valid_access_token(conn: Ga4Connection, db: Session) -> str:
                 detail="GA4 token expired - please reconnect",
             )
         try:
-            refreshed = refresh_ga4_token(sb_decrypt(conn.refresh_token))
+            # google-auth does blocking HTTP on refresh - keep it off the
+            # event loop or every concurrent request stalls behind it.
+            refreshed = await asyncio.to_thread(
+                refresh_ga4_token, sb_decrypt(conn.refresh_token)
+            )
         except Exception as exc:
             raise HTTPException(status_code=401, detail=str(exc)[:120]) from exc
         conn.access_token = sb_encrypt(refreshed["access_token"])
@@ -112,9 +144,11 @@ async def ga4_callback(
     db: Session = Depends(get_session),
 ):
     if error:
-        return RedirectResponse(url=_PORTAL_SETTINGS_URL, status_code=302)
+        return RedirectResponse(url=f"{_PORTAL_SETTINGS_URL}&ga4=error", status_code=302)
     if not code or not state:
-        raise HTTPException(status_code=400, detail="Missing code or state")
+        # Browser-facing route: a cancelled/failed consent round-trip must
+        # land somewhere actionable, never on a raw 400 (D2).
+        return RedirectResponse(url=f"{_PORTAL_SETTINGS_URL}&ga4=error", status_code=302)
 
     try:
         state_data = await validate_ga4_state(redis, state)
@@ -122,7 +156,10 @@ async def ga4_callback(
         raise HTTPException(status_code=401, detail=str(exc)) from exc
 
     try:
-        tokens = exchange_ga4_code(code, state_data["code_verifier"])
+        # Blocking token exchange off the event loop (same rationale as refresh).
+        tokens = await asyncio.to_thread(
+            exchange_ga4_code, code, state_data["code_verifier"]
+        )
     except GA4OAuthError as exc:
         raise HTTPException(status_code=401, detail=str(exc)) from exc
 
@@ -162,8 +199,8 @@ async def ga4_properties(
     if not conn or not conn.refresh_token:
         raise HTTPException(status_code=404, detail="No GA4 connection - connect first")
 
-    token = _valid_access_token(conn, db)
-    summaries = await list_account_summaries(token)
+    token = await _valid_access_token(conn, db)
+    summaries = await _summaries_or_clean_error(token)
 
     # Filter to the stored selection when one exists.
     selected = conn.property_id
@@ -190,8 +227,8 @@ async def ga4_select_property(
     if not conn:
         raise HTTPException(status_code=404, detail="No GA4 connection - connect first")
 
-    token = _valid_access_token(conn, db)
-    summaries = await list_account_summaries(token)
+    token = await _valid_access_token(conn, db)
+    summaries = await _summaries_or_clean_error(token)
     match = next((p for p in summaries if p["property_id"] == body.property_id), None)
     if not match:
         # Existence-hiding: do not reveal whether the property exists elsewhere.
@@ -316,7 +353,7 @@ async def ga4_correlation(
     anchor_date = anchor_dt.date()
     (pre_s, pre_e), (post_s, post_e) = window_dates(anchor_date)
 
-    token = _valid_access_token(ga4, db)
+    token = await _valid_access_token(ga4, db)
     today = datetime.now(timezone.utc).date()
     post_end = min(post_e, today)
 

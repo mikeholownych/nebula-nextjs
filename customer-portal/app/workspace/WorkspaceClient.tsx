@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import {
@@ -96,6 +96,13 @@ type TabId =
   | 'team'
   | 'settings'
 
+const VALID_TAB_IDS = new Set<string>([
+  'dashboard', 'audits', 'projects', 'pages', 'diff', 'compare',
+  'recommendations', 'experiments', 'tracker', 'aiSearch',
+  'roiCalculator', 'billing', 'monitoring', 'timeline', 'reports',
+  'achievements', 'assistant', 'team', 'settings',
+])
+
 function getDomain(url?: string): string {
   if (!url) return ''
   try {
@@ -115,7 +122,9 @@ export default function WorkspaceClient() {
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
   const [selectedProject, setSelectedProject] = useState<string>('all')
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
-  // Read searchParams only after mount to avoid SSR/client mismatch
+  // Read searchParams only after mount to avoid SSR/client mismatch.
+  // Initial state below is corrected by the mount effect; changes are written
+  // back to the URL so tab + project survive page refreshes.
   const [tab, setTab] = useState<TabId>('dashboard')
   const [planLevel, setPlanLevel] = useState<AccessLevel>('free')
 
@@ -189,6 +198,46 @@ export default function WorkspaceClient() {
       setLoading(false)
     }
   }, [mergeAudits])
+
+  // --- URL state sync: tab + project survive refreshes and back/forward ---
+  // Read once on mount (client-only to avoid SSR mismatch), then keep the URL
+  // in step with state via replaceState so refresh restores the exact view.
+  const urlHydrated = useRef(false)
+  useEffect(() => {
+    if (urlHydrated.current) return
+    urlHydrated.current = true
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const t = params.get('tab') as TabId | null
+      if (t && VALID_TAB_IDS.has(t)) setTab(t)
+      const p = params.get('project')
+      if (p) setSelectedProject(p)
+    } catch {
+      // malformed URL: fall back to defaults silently
+    }
+  }, [])
+
+  const syncUrl = useCallback((next: { tab?: TabId; project?: string }) => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      if (next.tab) {
+        params.set('tab', next.tab)
+        setTab(next.tab)
+      }
+      if (next.project !== undefined) {
+        if (next.project === 'all') params.delete('project')
+        else params.set('project', next.project)
+        setSelectedProject(next.project)
+      }
+      const qs = params.toString()
+      window.history.replaceState(null, '', qs ? `/workspace?${qs}` : '/workspace')
+    } catch {
+      // never let URL bookkeeping break the UI
+    }
+  }, [])
+
+  const goTab = useCallback((t: TabId) => syncUrl({ tab: t }), [syncUrl])
+  const goProject = useCallback((d: string) => syncUrl({ project: d }), [syncUrl])
 
   // Unique projects/domains
   const projectsList = useMemo(() => {
@@ -481,7 +530,7 @@ export default function WorkspaceClient() {
             {/* Segmented Mode Switcher: Dashboard vs Autonomous Agent */}
             <div className="mb-5 flex rounded-lg border border-border bg-bg p-0.5">
               <button
-                onClick={() => setTab('dashboard')}
+                onClick={() => goTab('dashboard')}
                 className={`flex-1 rounded-md py-1.5 font-mono text-xs font-semibold transition-all ${
                   !isAgentMode
                     ? 'bg-bg-panel text-fg shadow-sm border border-border/50'
@@ -491,7 +540,7 @@ export default function WorkspaceClient() {
                 Dashboard
               </button>
               <button
-                onClick={() => setTab('assistant')}
+                onClick={() => goTab('assistant')}
                 className={`flex-1 rounded-md py-1.5 font-mono text-xs font-semibold transition-all ${
                   isAgentMode
                     ? 'bg-accent text-bg shadow-sm font-bold'
@@ -514,7 +563,7 @@ export default function WorkspaceClient() {
                         return (
                           <button
                             key={item.id}
-                            onClick={() => setTab(item.id)}
+                            onClick={() => goTab(item.id)}
                             aria-current={tab === item.id ? 'page' : undefined}
                             className={`flex w-full items-center justify-between rounded-lg px-3 py-1.5 text-left text-[13px] font-medium transition-colors ${
                               tab === item.id ? 'bg-bg-panel text-fg border border-border/50' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
@@ -602,7 +651,7 @@ export default function WorkspaceClient() {
             <div className="space-y-2 block sm:hidden">
               <select
                 value={selectedProject}
-                onChange={(e) => setSelectedProject(e.target.value)}
+                onChange={(e) => goProject(e.target.value)}
                 className="w-full rounded-lg border border-border bg-bg-panel py-2 px-3 text-fg text-sm focus:outline-none"
                 aria-label="Select active project"
               >
@@ -614,7 +663,7 @@ export default function WorkspaceClient() {
 
               <select
                 value={tab}
-                onChange={(e) => setTab(e.target.value as TabId)}
+                onChange={(e) => goTab(e.target.value as TabId)}
                 className="w-full rounded-lg border border-border bg-bg-panel py-2 px-3 text-fg text-sm focus:outline-none"
                 aria-label="Navigate workspace"
               >
@@ -626,7 +675,7 @@ export default function WorkspaceClient() {
             {/* Tablet (640–1023px): horizontal scrollable tab row */}
             <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-border pb-px">
               {navGroups.flatMap((group) => group.items).map((item) => (
-                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`flex items-center gap-1 whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-fg text-fg' : 'text-fg-dim'}`}>{item.label}{!canAccess(planLevel, (TAB_ACCESS_REQUIREMENTS[item.id] ?? 'free') as AccessLevel) && <LockBadge />}</button>
+                <button key={item.id} onClick={() => goTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`flex items-center gap-1 whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-fg text-fg' : 'text-fg-dim'}`}>{item.label}{!canAccess(planLevel, (TAB_ACCESS_REQUIREMENTS[item.id] ?? 'free') as AccessLevel) && <LockBadge />}</button>
               ))}
             </div>
           </nav>
@@ -655,7 +704,7 @@ export default function WorkspaceClient() {
           )}
           {tab === 'dashboard' && <DashboardView audits={displayedAudits} latestDetail={projectDetail} email={email} />}
           {tab === 'audits' && <AuditsView audits={displayedAudits} />}
-          {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { setSelectedProject(d); setTab('dashboard'); }} />}
+          {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { goProject(d); goTab('dashboard'); }} />}
           {tab === 'pages' && <PagesView audits={displayedAudits} latestDetail={projectDetail} />}
           {tab === 'diff' && <DiffView audits={displayedAudits} />}
           {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} />}

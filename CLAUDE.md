@@ -1,5 +1,8 @@
 # CLAUDE.md - Nebula Components (AI-DLC Workflow)
 
+## PRIORITY 0: Read AGENTS.md first
+`AGENTS.md` in this directory holds the Production Doctrine and Definition of Done. It overrides everything below, applies to every agent regardless of harness, and its failure rules are non-negotiable: this is a live production service; work that is not 100% production-ready is not done; every failure permanently damages credibility.
+
 ## PRIORITY: This workflow OVERRIDES workspace defaults
 When responding to software or pipeline requests, follow the AI-DLC phase-gated workflow.
 

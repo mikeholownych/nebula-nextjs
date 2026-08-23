@@ -37,7 +37,7 @@
 **Interfaces:**
 - Produces: glossary entries used verbatim by Tasks 1 through 16.
 
-- [ ] **Step 1: Create CONTEXT.md**
+- [x] **Step 1: Create CONTEXT.md**
 
 ```markdown
 # CONTEXT.md - Nebula Components domain language
@@ -648,7 +648,7 @@ Run:
 mkdir -p /tmp/opencode && node customer-portal/scripts/export_teardowns.mjs
 ```
 
-Expected: `exported 28 teardowns`.
+Expected: `exported 37 teardowns` (controller ruling 2026-08-22: data.ts holds 37 canonical entries, all live; nothing is dropped).
 
 - [ ] **Step 2: Seeder**
 
@@ -719,7 +719,7 @@ psql "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433" -c
   "SELECT count(*) FROM teardowns WHERE updated_at::date < now() AT TIME ZONE 'UTC'::date OR true LIMIT 1;"
 ```
 
-Expected: both runs print `seeded 28 teardowns`; count stays `28 | 28`. Spot-check one finding survived as JSONB:
+Expected: both runs print `seeded 37 teardowns`; count stays `37 | 37`. Spot-check one finding survived as JSONB:
 
 ```bash
 psql "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433" -c \
@@ -882,7 +882,7 @@ git add platform_api/routes/teardown_routes.py platform_api/main.py tests/test_t
 ### Task 5: Portal read switch (SSG to ISR) with parity gate
 
 **Blocked by:** Task 4
-**Demoable:** All `/teardowns/*` URLs render from the API with HTML identical to baseline except the claim CTA block; index no longer links the 9 dead slugs.
+**Demoable:** All `/teardowns/*` URLs render from the API with HTML identical to baseline except the claim CTA block; index keeps all 37 links.
 
 **Files:**
 - Create: `customer-portal/app/api/teardowns/route.ts` (GET list proxy)
@@ -908,7 +908,7 @@ curl -s -o /tmp/opencode/parity/before/_index.html https://nebulacomponents.com/
 ls /tmp/opencode/parity/before | wc -l
 ```
 
-Expected: 29 files, every status `200`.
+Expected: 38 files (37 slugs + _index), every status `200`.
 
 - [ ] **Step 2: BFF proxies**
 
@@ -1122,7 +1122,7 @@ done
 diff -rq /tmp/opencode/parity/before /tmp/opencode/parity/after | head -20
 ```
 
-Expected: `_index.html` differs ONLY by the absence of the 9 dead-slug links (verify: `grep -c 'href="/teardowns/' before/_index.html` minus `after` equals 9); every per-slug file shows no differences or whitespace-only noise. Any other delta is a regression: fix before proceeding.
+Expected: `_index.html` shows ZERO content delta after CTA-strip (all 37 links must remain; controller ruling 2026-08-22); every per-slug file shows no differences or whitespace-only noise. Any other delta is a regression: fix before proceeding.
 
 - [ ] **Step 6: Journal check and commit**
 

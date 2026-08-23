@@ -4,11 +4,12 @@ FastAPI routes for audit processing (called by n8n workflows)
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 from uuid import UUID, uuid4
 import json
+import hmac
 import sys
 import os
 import asyncio
@@ -609,8 +610,13 @@ async def mark_implemented(body: MarkImplementedBody,
         claim and claim["claimed_by_email"] == email)
     if not owns:
         raise HTTPException(status_code=403, detail="Not your audit or domain")
-    row = await get_audit_db().mark_finding_implemented(
-        body.audit_id, email, body.finding_key)
+    try:
+        row = await get_audit_db().mark_finding_implemented(
+            body.audit_id, email, body.finding_key)
+    except ValueError:
+        # Service raises this only when the audit exists but has no score
+        # (pending/failed run). The 404 branch above already handled missing.
+        raise HTTPException(status_code=409, detail="Audit not scored yet")
     return row
 
 
@@ -1453,6 +1459,7 @@ class EmailRequest(BaseModel):
     score: float
     grade: str
     findings: list
+    audit_id: Optional[str] = None
 
 
 class EmailResponse(BaseModel):
@@ -1470,6 +1477,19 @@ async def send_audit_email(request: EmailRequest, raw_request: Request):
     Only the Next.js BFF calls this after proving unlock ownership."""
     require_internal_service(raw_request)
     try:
+        # Resolve the exact audit being delivered. Prefer the caller-supplied
+        # id (BFF knows it); fall back to the newest audit for this email.
+        target_id: Optional[str] = None
+        if request.audit_id:
+            try:
+                row = await audit_db.get_audit(UUID(request.audit_id))
+                target_id = str(row["id"]) if row else None
+            except ValueError:
+                target_id = None
+        if not target_id:
+            audits = await audit_db.get_audits_by_email(request.email, limit=1)
+            target_id = audits[0]["id"] if audits else None
+
         result = await email_service.send_audit_results(
             AuditEmailData(
                 url=request.url,
@@ -1478,17 +1498,17 @@ async def send_audit_email(request: EmailRequest, raw_request: Request):
                 score=request.score,
                 grade=request.grade,
                 findings=request.findings,
+                audit_id=target_id,
             )
         )
 
         # Advance delivery state only after confirmed provider success.
-        audits = await audit_db.get_audits_by_email(request.email, limit=1)
-        if result.get("status") == "sent" and audits:
-            await audit_db.mark_email_sent(audits[0]['id'])
+        if result.get("status") == "sent" and target_id:
+            await audit_db.mark_email_sent(UUID(target_id), result.get("message_id"))
             # Track email sent
             await analytics.track_email_sent(
                 email=request.email,
-                audit_id=str(audits[0]['id'])
+                audit_id=target_id
             )
             ph = get_posthog()
             if ph:
@@ -1497,7 +1517,7 @@ async def send_audit_email(request: EmailRequest, raw_request: Request):
                     ph.capture(
                         "audit_email_sent",
                         properties={
-                            "audit_id": str(audits[0]['id']),
+                            "audit_id": target_id,
                             "grade": request.grade,
                             "score": request.score,
                         },
@@ -1513,5 +1533,38 @@ async def send_audit_email(request: EmailRequest, raw_request: Request):
             status="error",
             error="Email delivery unavailable",
         )
+
+
+_PIXEL_GIF = bytes.fromhex(
+    "474946383961010001008000000000000021f90401000000002c00000000"
+    "010001000002024401007b"
+)
+
+
+def _pixel_token(audit_id: str) -> str:
+    """Unforgeable pixel token: HMAC of the audit id under the internal
+    secret. Audit ids leak on public result permalinks and get probed by
+    crawlers - a raw id in the URL let bots inflate email_opens within
+    seconds of the endpoint existing."""
+    import hashlib
+    import hmac as _hmac
+
+    secret = (os.getenv("INTERNAL_API_SECRET") or "").encode()
+    return _hmac.new(secret, f"px:{audit_id}".encode(), hashlib.sha256).hexdigest()[:32]
+
+
+@router.get("/px/{audit_id}/{token}/o.gif")
+async def audit_open_pixel(audit_id: UUID, token: str):
+    """Open-tracking pixel embedded in delivered audit report emails.
+
+    Public by design: mail clients fetch it without cookies. Token must match
+    or the gif is served without recording anything - probes learn nothing."""
+    try:
+        expected = _pixel_token(str(audit_id))
+        if hmac.compare_digest(token, expected):
+            await audit_db.track_email_open(audit_id)
+    except Exception:
+        logging.getLogger("uvicorn.error").exception("open pixel tracking failed")
+    return Response(content=_PIXEL_GIF, media_type="image/gif")
 
 

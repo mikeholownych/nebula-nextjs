@@ -3,8 +3,10 @@ Follow-up email sequences
 Sends 24h, 3d, 7d follow-ups after audit
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, List
+import asyncio
+import logging
 import os
 import httpx
 
@@ -72,16 +74,26 @@ class FollowUpSequence:
     async def send_followup(self, audit: dict, sequence: dict) -> bool:
         """Send follow-up email"""
         try:
-            # Get first quick win finding
-            findings = audit.get("findings", [])
+            # Get first quick win finding. `findings` arrives from the audits
+            # table as a JSON string - parse before touching structure.
+            raw_findings = audit.get("findings", [])
+            if isinstance(raw_findings, str):
+                try:
+                    import json as _json
+                    raw_findings = _json.loads(raw_findings)
+                except Exception:
+                    raw_findings = []
+            if not isinstance(raw_findings, list):
+                raw_findings = []
             quick_win = next(
-                (f for f in findings if f.get("priority") == "Quick Win"),
-                findings[0] if findings else None
+                (f for f in raw_findings
+                 if isinstance(f, dict) and f.get("priority") == "Quick Win"),
+                raw_findings[0] if raw_findings else None
             )
-            
+
             subject = sequence["subject"]
             body = self._build_followup_body(audit, quick_win, sequence["template"])
-            
+
             # Send email
             result = await email_service.send_audit_results(
                 AuditEmailData(
@@ -92,12 +104,16 @@ class FollowUpSequence:
                     grade=audit["grade"],
                     findings=[quick_win] if quick_win else [],
                     custom_subject=subject,
-                    custom_body=body
+                    custom_body=body,
+                    audit_id=str(audit.get("id")) if audit.get("id") else None,
                 )
             )
-            
-            # Log follow-up sent
-            if audit_db.pool:
+
+            sent = result.get("status") == "sent"
+
+            # Log follow-up sent ONLY on confirmed delivery - otherwise the
+            # <3 cap permanently suppresses retries after transient failures.
+            if sent and audit_db.pool:
                 async with audit_db.pool.acquire() as conn:
                     await conn.execute(
                         """
@@ -106,8 +122,8 @@ class FollowUpSequence:
                         """,
                         audit["id"]
                     )
-            
-            return result.get("status") == "sent"
+
+            return sent
             
         except Exception as e:
             print(f"Follow-up send error: {e}")
@@ -195,3 +211,59 @@ Fix: {finding.get('fix', 'Review and update')}
 
 # Singleton
 followup_sequence = FollowUpSequence()
+
+
+async def run_followups_once() -> int:
+    """Process one batch of due follow-ups. Returns count actually sent.
+
+    Never raises: a failed batch must not kill the scheduler loop (the drip
+    was previously dead code - no caller, plus a NameError on `timezone`).
+    Daily cap: the sending domain has near-zero reputation; blasting dozens
+    of cold emails per day guarantees spam-folder placement regardless of
+    SPF/DKIM/DMARC (verified via real .eml headers 2026-08-22). Ramp slowly.
+    """
+    log = logging.getLogger("uvicorn.error")
+    sent = 0
+    try:
+        cap = int(os.getenv("FOLLOWUP_DAILY_CAP", "15"))
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            already = await conn.fetchval(
+                """
+                SELECT COUNT(*) FROM email_events
+                WHERE event_type = 'followup'
+                  AND created_at >= date_trunc('day', LOCALTIMESTAMP)
+                """
+            )
+        if already >= cap:
+            log.info("[followup] daily cap reached (%s/%s) - skipping batch", already, cap)
+            return 0
+        pending = await followup_sequence.get_pending_followups()
+        for item in pending:
+            if sent + already >= cap:
+                log.info("[followup] daily cap hit mid-batch (%s/%s)", sent + already, cap)
+                break
+            ok = await followup_sequence.send_followup(item, item["sequence"])
+            if ok:
+                sent += 1
+        if pending:
+            log.info("[followup] batch done: %s/%s sent", sent, len(pending))
+    except Exception:
+        log.exception("[followup] batch failed")
+    return sent
+
+
+async def start_followup_scheduler(interval_minutes: int = 30) -> asyncio.Task:
+    """Background loop that drains due follow-ups forever."""
+
+    async def _loop():
+        log = logging.getLogger("uvicorn.error")
+        log.info("[followup] scheduler started (every %sm)", interval_minutes)
+        while True:
+            try:
+                await run_followups_once()
+            except asyncio.CancelledError:
+                raise
+            await asyncio.sleep(interval_minutes * 60)
+
+    return asyncio.create_task(_loop(), name="followup-scheduler")

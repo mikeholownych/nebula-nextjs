@@ -46,6 +46,14 @@ INTERNAL_EMAILS: frozenset[str] = frozenset({
     "test@example.com",
 })
 
+# Self-owned domains: audits of Nebula's own properties are founder QA, not
+# customer evidence. Excluded from every public aggregate alongside
+# INTERNAL_EMAILS (D5 - self-audits were inflating the Leak Index cohort).
+SELF_DOMAINS: frozenset[str] = frozenset({
+    "nebulacomponents.com",
+    "internal.nebulacomponents.com",
+})
+
 # ─── Admission control constants ─────────────────────────────────────────────
 # Derived from: p95 audit duration ~90s, 2 workers = max concurrent throughput.
 # Max acceptable queue wait = 10 minutes → 10*60/90 ≈ 6.6, capped at 8.
@@ -369,7 +377,11 @@ class AuditDB:
 
             if _is_anonymous(current_email):
                 await conn.execute(
-                    "UPDATE audits SET email = $2 WHERE id = $1",
+                    """
+                    UPDATE audits
+                    SET email = $2, unlocked_at = COALESCE(unlocked_at, NOW())
+                    WHERE id = $1
+                    """,
                     audit_id, new_norm,
                 )
                 await conn.execute(
@@ -383,6 +395,15 @@ class AuditDB:
                 return {"claimed": True, "audit_id": str(audit_id), "email": new_norm}
 
             if current_norm == new_norm:
+                await conn.execute(
+                    """
+                    UPDATE audits
+                    SET unlocked_at = COALESCE(unlocked_at, NOW())
+                    WHERE id = $1 AND email IS NOT NULL
+                      AND email NOT LIKE 'anonymous+%@invalid.nebulacomponents.com'
+                    """,
+                    audit_id,
+                )
                 return {"claimed": True, "audit_id": str(audit_id), "email": current_norm}
 
             return {"claimed": False, "audit_id": str(audit_id), "email": current_norm}
@@ -770,15 +791,50 @@ class AuditDB:
         )
         return dict(badge) if badge else None
 
-    async def mark_email_sent(self, audit_id: UUID) -> bool:
-        """Mark audit email as sent"""
+    async def mark_email_sent(self, audit_id: UUID, message_id: str | None = None) -> bool:
+        """Mark audit email as sent, recording the provider message id when
+        available so delivery/open webhooks can be reconciled per message."""
         await self.connect()
         async with self.pool.acquire() as conn:
             result = await conn.execute(
-                "UPDATE audits SET email_sent_at = NOW() WHERE id = $1",
-                audit_id
+                """
+                UPDATE audits
+                SET email_sent_at = NOW(),
+                    email_message_id = COALESCE($2, email_message_id)
+                WHERE id = $1
+                """,
+                audit_id,
+                message_id,
             )
             return result == 'UPDATE 1'
+
+    async def track_email_open(self, audit_id: UUID) -> bool:
+        """Record an open event for an emailed audit report.
+
+        Idempotent-ish per minute window: repeated pixel fetches from the same
+        mail-client prefetch within a short window collapse into one event."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            recent = await conn.fetchval(
+                """
+                SELECT 1 FROM email_events
+                WHERE audit_id = $1 AND event_type = 'open'
+                  AND created_at >= LOCALTIMESTAMP - INTERVAL '60 seconds'
+                LIMIT 1
+                """,
+                audit_id,
+            )
+            if recent:
+                return False
+            await conn.execute(
+                "INSERT INTO email_events (audit_id, event_type) VALUES ($1, 'open')",
+                audit_id,
+            )
+            await conn.execute(
+                "UPDATE audits SET email_opens = COALESCE(email_opens, 0) + 1 WHERE id = $1",
+                audit_id,
+            )
+            return True
 
     async def get_fix_effectiveness(
         self, limit: int = 10, finding_key: str | None = None
@@ -862,6 +918,7 @@ class AuditDB:
                 limit,
             )
             return [dict(r) for r in rows]
+
     async def get_or_create_share_token(self, audit_id: UUID) -> Optional[str]:
         """Return the audit's share token, generating and persisting one on
         first request. share_token has a UNIQUE constraint in the schema;
@@ -944,8 +1001,10 @@ class AuditDB:
                     avg(score) FILTER (WHERE status = 'completed' AND score IS NOT NULL) AS avg_score_raw
                 FROM audits
                 WHERE email != ALL($1::text[])
+                  AND split_part(email, '@', 2) != ALL($2::text[])
                 """,
                 list(INTERNAL_EMAILS),
+                list(SELF_DOMAINS),
             )
             completed = row['completed_audits'] or 0 if row else 0
             return {"completed_audits": completed, "avg_score": None}
@@ -964,11 +1023,13 @@ class AuditDB:
                 WHERE status = 'completed'
                   AND score IS NOT NULL
                   AND email != ALL($1::text[])
+                  AND split_part(email, '@', 2) != ALL($2::text[])
                   AND created_at >= NOW() - INTERVAL '90 days'
                 ORDER BY created_at DESC
                 LIMIT 500
                 """,
                 list(INTERNAL_EMAILS),
+                list(SELF_DOMAINS),
             )
 
         if not rows:
