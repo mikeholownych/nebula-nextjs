@@ -149,6 +149,11 @@ class Subscription(Base):
     plan: Mapped[str] = mapped_column(String(100), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow, onupdate=utcnow)
+    billing_interval: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    current_period_start: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    current_period_end: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    cancel_at_period_end: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    livemode: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
     # Relationships
     organization: Mapped["Organization"] = relationship(back_populates="subscriptions")
