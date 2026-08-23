@@ -46,7 +46,8 @@ export async function checkAuditQuota(email: string): Promise<QuotaResult> {
        JOIN organizations o ON o.id = m.organization_id
        JOIN subscriptions s ON s.organization_id = o.id
        WHERE LOWER(u.email) = $1
-         AND (s.status IN ('active', 'trialing') OR s.current_period_end > NOW())
+         AND (s.status IN ('active', 'trialing')
+              OR (s.status IN ('canceled', 'deleted') AND s.current_period_end > NOW()))
        ORDER BY CASE s.plan WHEN 'agency' THEN 0 WHEN 'growth' THEN 1 WHEN 'pro' THEN 2 ELSE 3 END
        LIMIT 1`,
       [normalizedEmail],

@@ -29,10 +29,15 @@ def _limits_for(plan: str) -> tuple[int | None, int | None, int | None]:
 
 
 def _grants(row) -> bool:
-    if getattr(row, "status", None) in ("active", "trialing"):
+    status = getattr(row, "status", None)
+    if status in ("active", "trialing"):
         return True
-    end = getattr(row, "current_period_end", None)
-    return end is not None and end > datetime.now(timezone.utc)
+    # Paid grace applies only to canceled/deleted subs. past_due/unpaid with a
+    # future period_end must degrade to free, not ride the paid window.
+    if status in ("canceled", "deleted"):
+        end = getattr(row, "current_period_end", None)
+        return end is not None and end > datetime.now(timezone.utc)
+    return False
 
 
 def _rank(plan: str) -> int:

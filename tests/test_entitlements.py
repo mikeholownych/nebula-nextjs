@@ -48,6 +48,15 @@ class EntitlementMatrixTests(unittest.TestCase):
         ent = e._entitlements_from_rows([self._row(status="past_due")])
         self.assertEqual(ent.plan, "free")
 
+    def test_past_due_with_future_period_grants_free(self):
+        import datetime as dt
+        e = self._svc()
+        future = dt.datetime.now(dt.timezone.utc) + dt.timedelta(days=10)
+        ent = e._entitlements_from_rows(
+            [self._row(status="past_due", period_end=future)])
+        self.assertEqual(ent.plan, "free")
+        self.assertEqual(ent.monitored_urls, 0)
+
     def test_unknown_plan_falls_back_to_free(self):
         e = self._svc()
         ent = e._entitlements_from_rows([self._row(plan="mystery")])
