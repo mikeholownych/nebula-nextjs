@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import {
   TAB_ACCESS_REQUIREMENTS,
@@ -67,6 +68,13 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
+export interface ClaimedTeardown {
+  slug: string
+  name: string
+  domain: string
+  score: number | null
+}
+
 type TabId =
   | 'dashboard'
   | 'audits'
@@ -103,12 +111,32 @@ export default function WorkspaceClient() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [audits, setAudits] = useState<WorkspaceAudit[] | null>(null)
+  const [claims, setClaims] = useState<ClaimedTeardown[]>([])
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
   const [selectedProject, setSelectedProject] = useState<string>('all')
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
   // Read searchParams only after mount to avoid SSR/client mismatch
   const [tab, setTab] = useState<TabId>('dashboard')
   const [planLevel, setPlanLevel] = useState<AccessLevel>('free')
+
+  // Merge whole-domain attach results into the by-email list: dedupe by
+  // audit id, sort newest first.
+  const mergeAudits = useCallback(
+    (base: WorkspaceAudit[], extra: WorkspaceAudit[]): WorkspaceAudit[] => {
+      const seen = new Set(base.map((a) => a.id))
+      const merged = [...base]
+      for (const a of extra) {
+        if (!seen.has(a.id)) {
+          seen.add(a.id)
+          merged.push(a)
+        }
+      }
+      return merged.sort((x, y) =>
+        (y.created_at ?? '').localeCompare(x.created_at ?? '')
+      )
+    },
+    []
+  )
 
   const load = useCallback(async (targetEmail: string) => {
     setLoading(true)
@@ -119,7 +147,31 @@ export default function WorkspaceClient() {
       )
       if (!res.ok) throw new Error('Failed to load audits')
       const data = await res.json()
-      const list: WorkspaceAudit[] = data.audits || []
+      let list: WorkspaceAudit[] = data.audits || []
+
+      // Claimed teardowns: attach every audit across the claimed domain
+      // (server-side auth via session email; best-effort, never blocks load).
+      try {
+        const claimsRes = await fetch('/api/teardowns/claims')
+        if (claimsRes.ok) {
+          const claimsData = await claimsRes.json()
+          const owned: ClaimedTeardown[] = claimsData.claims || []
+          setClaims(owned)
+          for (const c of owned) {
+            if (!c.domain) continue
+            const dRes = await fetch(
+              `/api/audits/by-domain?domain=${encodeURIComponent(c.domain)}`
+            )
+            if (dRes.ok) {
+              const dData = await dRes.json()
+              list = mergeAudits(list, dData.audits || [])
+            }
+          }
+        }
+      } catch {
+        // claim attach is additive only
+      }
+
       setAudits(list)
 
       if (list.length > 0) {
@@ -136,7 +188,7 @@ export default function WorkspaceClient() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [mergeAudits])
 
   // Unique projects/domains
   const projectsList = useMemo(() => {
@@ -579,6 +631,26 @@ export default function WorkspaceClient() {
             </div>
           </nav>
 
+          {tab === 'dashboard' && claims.length > 0 && (
+            <div className="mb-6 rounded-lg border border-accent/30 bg-white/[0.03] p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-accent">Claimed teardown</p>
+                  {claims.map((claim) => (
+                    <p key={claim.slug} className="text-sm text-white/80">
+                      {claim.name} &middot; {claim.score}/10
+                    </p>
+                  ))}
+                </div>
+                <Link
+                  className="text-xs underline text-white/60"
+                  href={`/teardowns/${claims[0].slug}`}
+                >
+                  View public page
+                </Link>
+              </div>
+            </div>
+          )}
           {tab === 'dashboard' && <DashboardView audits={displayedAudits} latestDetail={projectDetail} email={email} />}
           {tab === 'audits' && <AuditsView audits={displayedAudits} />}
           {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { setSelectedProject(d); setTab('dashboard'); }} />}

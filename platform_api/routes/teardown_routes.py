@@ -19,6 +19,13 @@ async def list_teardowns():
     return {"teardowns": slim}
 
 
+@router.get("/claims-by-email", include_in_schema=False)
+async def claims_by_email(email: str):
+    rows = await get_teardown_db().list_claims_by_email(email)
+    slim = [{k: r[k] for k in ("slug", "name", "domain", "score")} for r in rows]
+    return {"claims": slim}
+
+
 @router.get("/{slug}")
 async def get_teardown(slug: str):
     rec = await get_teardown_db().get_teardown(slug)

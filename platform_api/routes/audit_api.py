@@ -23,6 +23,7 @@ from posthog import identify_context, new_context  # type: ignore[import-untyped
 from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
+from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
 from platform_api.infra.circuit_breaker import CircuitBreaker, CircuitOpenError
 
@@ -551,6 +552,36 @@ async def get_audits_by_email(email: str = Query(..., min_length=3, max_length=3
         return {"email": email, "audits": audits}
     except Exception:
         raise HTTPException(status_code=503, detail="Workspace audit list unavailable")
+
+
+def get_audit_db():
+    """Accessor indirection for the AuditDB singleton (patchable in tests)."""
+    return audit_db
+
+
+@router.get("/by-domain", dependencies=[Depends(internal_service_dependency)])
+async def audits_by_domain(domain: str, email: str):
+    """Whole-domain audit attach for claimed teardowns.
+
+    Returns audits across every URL of the registered domain, but only for
+    the active claimant of that domain's teardown (or a founder). Row shape
+    matches /audit/by-email (score normalized to 0-10)."""
+    from platform_api.services.domains import registered_domain
+    from platform_api.routes.teardown_claim_routes import FOUNDER_EMAILS
+    dom = registered_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+    claim = await get_teardown_db().get_active_claim_by_domain(dom)
+    allowed = claim and (
+        claim["claimed_by_email"] == email.strip().lower()
+        or email.strip().lower() in FOUNDER_EMAILS)
+    if not allowed:
+        raise HTTPException(status_code=403, detail="Not the verified owner")
+    rows = await get_audit_db().list_audits_by_domain(dom)
+    for a in rows:
+        if a.get("score") is not None:
+            a["score"] = a["score"] / 10.0
+    return {"audits": rows}
 
 
 class RecommendationUpdate(BaseModel):

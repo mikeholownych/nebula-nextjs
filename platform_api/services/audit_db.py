@@ -1053,6 +1053,22 @@ class AuditDB:
                 out.append(d)
             return out
 
+    async def list_audits_by_domain(self, domain: str) -> list[dict]:
+        """Audits whose URL host belongs to the registered domain.
+
+        Prefilter in SQL with ILIKE on the distinctive label, exact-match in Python.
+        """
+        await self.connect()
+        label = domain.split(".")[0]
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                "SELECT id, url, email, status, score, grade, created_at "
+                "FROM audits WHERE url ILIKE $1 ORDER BY created_at DESC LIMIT 500",
+                f"%{label}%")
+            from platform_api.services.domains import registered_domain
+            return [dict(r) for r in rows
+                    if registered_domain(r["url"]) == domain]
+
     async def create_monitor(self, email: str, url: str, cadence: str = "weekly") -> Optional[dict]:
         """Create a monitor. Idempotent per (email, url): re-activates and resets cadence."""
         await self.connect()

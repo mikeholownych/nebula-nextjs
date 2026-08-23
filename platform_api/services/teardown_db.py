@@ -183,6 +183,19 @@ class TeardownDB:
                    LIMIT 1""", domain)
             return dict(row) if row else None
 
+    async def list_claims_by_email(self, email: str) -> list[dict]:
+        """Active teardown claims owned by an email, with public teardown fields."""
+        await self.connect()
+        norm = email.strip().lower()
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """SELECT t.slug, t.name, t.domain, t.score
+                   FROM teardown_claims tc
+                   JOIN teardowns t ON t.slug = tc.slug
+                   WHERE tc.claimed_by_email = $1 AND tc.status = 'active'
+                   ORDER BY t.name""", norm)
+            return [dict(r) for r in rows]
+
 
 _db: TeardownDB | None = None
 
