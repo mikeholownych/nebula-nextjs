@@ -17,8 +17,14 @@ global.fetch = fetchMock
 
 // ── DB pool mock (required by route.ts) ──────────────────────────────────────
 const poolQueryMock = jest.fn()
+const clientQueryMock = jest.fn()
+const releaseMock = jest.fn()
+const connectMock = jest.fn()
 jest.mock('@/app/lib/db', () => ({
-  pool: { query: (...args: unknown[]) => poolQueryMock(...args) },
+  pool: {
+    query: (...args: unknown[]) => poolQueryMock(...args),
+    connect: (...args: unknown[]) => connectMock(...args),
+  },
 }))
 
 // ── child_process mock (hermes send, deliver_prompt_pack) ──────────────────
@@ -97,6 +103,24 @@ beforeEach(() => {
   jest.resetModules()
   fetchMock.mockReset()
   poolQueryMock.mockReset().mockResolvedValue({ rowCount: 1, rows: [] })
+  releaseMock.mockReset()
+  connectMock.mockReset().mockResolvedValue({
+    query: (...args: unknown[]) => clientQueryMock(...args),
+    release: releaseMock,
+  })
+  // Subscription persistence now provisions first (org-keyed). These tests
+  // only assert email gating, so the client mock answers the find-or-create
+  // lookup with an existing user/org and accepts the upsert.
+  clientQueryMock.mockReset().mockImplementation(async (sql: unknown) => {
+    const statement = String(sql)
+    if (statement.includes('SELECT u.id AS user_id')) {
+      return { rowCount: 1, rows: [{ user_id: 'u_test', org_id: 'o_test' }] }
+    }
+    if (statement.includes('INSERT INTO subscriptions')) {
+      return { rowCount: 1, rows: [] }
+    }
+    throw new Error(`Unexpected query: ${statement}`)
+  })
   execFileMock.mockReset().mockImplementation((...args: unknown[]) => {
     // fire-and-forget execFile callbacks (hermes send)
     const cb = args[args.length - 1]

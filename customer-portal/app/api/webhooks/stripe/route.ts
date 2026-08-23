@@ -6,6 +6,7 @@ import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 import { planFromStripePrice } from '@/app/lib/subscription-plans'
 import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
+import { provisionOrgForEmail } from '@/app/lib/provision-org'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 import { analytics as heycatch } from '@heycatch/sdk'
 import {
@@ -425,149 +426,188 @@ export async function POST(request: NextRequest) {
     const priceId = item?.price?.id
     const resolved = priceId ? planFromStripePrice(priceId) : null
 
-    // Ignore subscriptions that are not Nebula membership plans.
-    if (resolved) {
-      let email: string | null = null
+    // Unknown price: never guess a plan and never write a subscription row.
+    // Acknowledge the delivery so Stripe does not retry forever, and page ops
+    // through the durable outbox so the mapping gets fixed and the event can
+    // be replayed safely.
+    if (!resolved) {
+      console.error('Subscription event with unrecognized price:', sub.id, priceId)
       try {
-        const customer = await getStripeClient().customers.retrieve(
-          typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
-        )
-        if (!('deleted' in customer) || !customer.deleted) {
-          email = (customer as Stripe.Customer).email ?? null
+        const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+        if (secret) {
+          await fetch(
+            `${(process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')}/api/outbox/enqueue`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
+              signal: AbortSignal.timeout(10_000),
+              body: JSON.stringify({
+                channel: 'email',
+                recipient: process.env.OPS_ALERT_EMAIL || 'mike.holownych@gmail.com',
+                payload: {
+                  subject: `[billing] unknown price ${sub.id} (${priceId ?? 'no price on subscription'})`,
+                  body:
+                    `<p>Stripe delivered <code>${event.type}</code> for subscription <code>${sub.id}</code> ` +
+                    `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
+                    `with price <code>${priceId ?? 'none'}</code>, which maps to no Nebula plan.</p>` +
+                    `<p>No subscription row was written. Map the price in app/lib/subscription-plans.ts, then replay the event.</p>`,
+                  from_email: 'audits@nebulacomponents.shop',
+                  content_type: 'text/html',
+                },
+              }),
+            },
+          )
         }
-      } catch (err) {
-        console.error('Failed to resolve subscription customer email:', err)
+      } catch (alertErr) {
+        console.error('Failed to enqueue unknown-price alert:', alertErr)
       }
+      return NextResponse.json({ received: true, unknown_price: true })
+    }
 
-      if (!email) {
-        // Without an email we cannot bind the subscription to a workspace.
-        // Acknowledge so Stripe does not retry forever; the subscription
-        // remains authoritative in Stripe. CODE-2: this is no longer silent -
-        // a durable ops alert is enqueued so unbound subscriptions surface
-        // for manual binding instead of vanishing.
-        console.error('Subscription event without resolvable email:', sub.id)
-        try {
-          const secret = (process.env.INTERNAL_API_SECRET || '').trim()
-          if (secret) {
-            await fetch(
-              `${(process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')}/api/outbox/enqueue`,
-              {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
-                signal: AbortSignal.timeout(10_000),
-                body: JSON.stringify({
-                  channel: 'email',
-                  recipient: process.env.OPS_ALERT_EMAIL || 'mike.holownych@gmail.com',
-                  payload: {
-                    subject: `UNBOUND subscription event ${sub.id} (${resolved.plan})`,
-                    body:
-                      `<p>Stripe delivered <code>${event.type}</code> for subscription <code>${sub.id}</code> ` +
-                      `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
-                      `but no resolvable email was present.</p>` +
-                      `<p>Bind it manually in Stripe + subscriptions table.</p>`,
-                    from_email: 'audits@nebulacomponents.shop',
-                    content_type: 'text/html',
-                  },
-                }),
-              },
-            )
-          }
-        } catch (alertErr) {
-          console.error('Failed to enqueue unbound-subscription alert:', alertErr)
+    let email: string | null = null
+    try {
+      const customer = await getStripeClient().customers.retrieve(
+        typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
+      )
+      if (!('deleted' in customer) || !customer.deleted) {
+        email = (customer as Stripe.Customer).email ?? null
+      }
+    } catch (err) {
+      console.error('Failed to resolve subscription customer email:', err)
+    }
+
+    if (!email) {
+      // Without an email we cannot bind the subscription to a workspace.
+      // Acknowledge so Stripe does not retry forever; the subscription
+      // remains authoritative in Stripe. CODE-2: this is no longer silent -
+      // a durable ops alert is enqueued so unbound subscriptions surface
+      // for manual binding instead of vanishing.
+      console.error('Subscription event without resolvable email:', sub.id)
+      try {
+        const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+        if (secret) {
+          await fetch(
+            `${(process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001').replace(/\/$/, '')}/api/outbox/enqueue`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
+              signal: AbortSignal.timeout(10_000),
+              body: JSON.stringify({
+                channel: 'email',
+                recipient: process.env.OPS_ALERT_EMAIL || 'mike.holownych@gmail.com',
+                payload: {
+                  subject: `UNBOUND subscription event ${sub.id} (${resolved.plan})`,
+                  body:
+                    `<p>Stripe delivered <code>${event.type}</code> for subscription <code>${sub.id}</code> ` +
+                    `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
+                    `but no resolvable email was present.</p>` +
+                    `<p>Bind it manually in Stripe + subscriptions table.</p>`,
+                  from_email: 'audits@nebulacomponents.shop',
+                  content_type: 'text/html',
+                },
+              }),
+            },
+          )
         }
-        return NextResponse.json({ received: true, unbound: true })
+      } catch (alertErr) {
+        console.error('Failed to enqueue unbound-subscription alert:', alertErr)
       }
+      return NextResponse.json({ received: true, unbound: true })
+    }
 
-      const status = event.type === 'customer.subscription.deleted'
-        ? 'canceled'
-        : sub.status
-      const periodStart = item?.current_period_start ?? null
-      const periodEnd = item?.current_period_end ?? null
+    const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id
+    const isDeleted = event.type === 'customer.subscription.deleted'
+    // Deletion keeps the row and flips status only: entitlements honor the
+    // already-paid window via current_period_end instead of hard-cutting.
+    const mappedStatus = isDeleted ? 'deleted' : sub.status
+    // NULL periods on deletion make the upsert's COALESCE preserve the prior
+    // paid-through window rather than overwriting or nulling it out.
+    const toIsoTimestamp = (v: number | null | undefined) =>
+      typeof v === 'number' ? new Date(v * 1000).toISOString() : null
+    const periodStart = isDeleted ? null : toIsoTimestamp(item?.current_period_start)
+    const periodEnd = isDeleted ? null : toIsoTimestamp(item?.current_period_end)
+
+    // Provisioning runs its own transaction; a dedicated client keeps
+    // BEGIN/COMMIT on one connection instead of racing the pool.
+    let client: PoolClient | undefined
+    try {
+      client = await pool.connect()
+      const provisioned = await provisionOrgForEmail(client, email)
+      await client.query(
+        `INSERT INTO subscriptions
+           (organization_id, stripe_subscription_id, stripe_customer_id, status, plan,
+            billing_interval, current_period_start, current_period_end,
+            cancel_at_period_end, livemode)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+         ON CONFLICT (stripe_subscription_id) DO UPDATE SET
+           status=EXCLUDED.status, plan=EXCLUDED.plan,
+           billing_interval=EXCLUDED.billing_interval,
+           current_period_start=COALESCE(EXCLUDED.current_period_start, subscriptions.current_period_start),
+           current_period_end=COALESCE(EXCLUDED.current_period_end, subscriptions.current_period_end),
+           cancel_at_period_end=EXCLUDED.cancel_at_period_end,
+           updated_at=now()`,
+        [
+          provisioned.organizationId,
+          sub.id,
+          customerId,
+          mappedStatus,
+          resolved.plan,
+          resolved.interval,
+          periodStart,
+          periodEnd,
+          sub.cancel_at_period_end ?? false,
+          event.livemode === true,
+        ],
+      )
+    } catch (err) {
+      console.error('Failed to persist subscription - will let Stripe retry:', err)
+      return NextResponse.json({ error: 'Failed to record subscription' }, { status: 500 })
+    } finally {
+      client?.release()
+    }
+
+    if (event.livemode && event.type === 'customer.subscription.created') {
+      const amount = item?.price?.unit_amount != null
+        ? `$${(item.price.unit_amount / 100).toFixed(2)}/${resolved.interval === 'annual' ? 'yr' : 'mo'}`
+        : 'unknown amount'
+      void sendSaleAlert(
+        `🔁 *NEW SUBSCRIPTION* - ${resolved.plan.toUpperCase()} - ${amount} - ${email}\nsubscription: ${sub.id}`,
+      )
+      // Welcome delivery is best-effort; provider failures are logged inside
+      // the sender and must never fail an already-persisted webhook.
+      await sendSubscriptionWelcome(email, resolved.plan)
 
       try {
-        await pool.query(
-          `INSERT INTO subscriptions
-            (email, stripe_customer_id, stripe_subscription_id, plan, billing_interval,
-             status, livemode, current_period_start, current_period_end, cancel_at_period_end, updated_at)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, to_timestamp($8), to_timestamp($9), $10, NOW())
-           ON CONFLICT (stripe_subscription_id) DO UPDATE SET
-             plan = EXCLUDED.plan,
-             billing_interval = EXCLUDED.billing_interval,
-             status = EXCLUDED.status,
-             current_period_start = EXCLUDED.current_period_start,
-             current_period_end = EXCLUDED.current_period_end,
-             cancel_at_period_end = EXCLUDED.cancel_at_period_end,
-             updated_at = NOW()`,
-          [
-            email.toLowerCase(),
-            typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
-            sub.id,
-            resolved.plan,
-            resolved.interval,
-            status,
-            event.livemode,
-            periodStart,
-            periodEnd,
-            sub.cancel_at_period_end ?? false,
-          ],
+        await heycatch.setIdentity(email, {
+          email,
+          plan: resolved.plan,
+        })
+        await heycatch.trackEvent(
+          'subscription_started',
+          { plan: resolved.plan, interval: resolved.interval },
+          { userId: email },
         )
-      } catch (err) {
-        console.error('Failed to persist subscription - will let Stripe retry:', err)
-        return NextResponse.json({ error: 'Failed to record subscription' }, { status: 500 })
+      } catch {
+        // Analytics failure must not block webhook response
       }
+    }
+    if (event.livemode && event.type === 'customer.subscription.deleted') {
+      void sendSaleAlert(
+        `🔻 *SUBSCRIPTION CANCELED* - ${resolved.plan.toUpperCase()} - ${email}\nsubscription: ${sub.id}`,
+      )
 
-      if (event.livemode && event.type === 'customer.subscription.created') {
-        const amount = item?.price?.unit_amount != null
-          ? `$${(item.price.unit_amount / 100).toFixed(2)}/${resolved.interval === 'annual' ? 'yr' : 'mo'}`
-          : 'unknown amount'
-        void sendSaleAlert(
-          `🔁 *NEW SUBSCRIPTION* - ${resolved.plan.toUpperCase()} - ${amount} - ${email}\nsubscription: ${sub.id}`,
+      try {
+        await heycatch.setIdentity(email, {
+          email,
+          plan: 'canceled',
+        })
+        await heycatch.trackEvent(
+          'subscription_canceled',
+          { plan: resolved.plan },
+          { userId: email },
         )
-        // Welcome delivery is persisted as retryable state. The webhook remains
-        // idempotent, while the retry worker can recover provider failures.
-        const welcomeSent = await sendSubscriptionWelcome(email, resolved.plan)
-        await pool.query(
-          `UPDATE subscriptions
-           SET welcome_email_attempts = welcome_email_attempts + 1,
-               welcome_email_sent_at = CASE WHEN $2 THEN NOW() ELSE welcome_email_sent_at END,
-               welcome_email_last_error = CASE WHEN $2 THEN NULL ELSE 'email provider rejected or timed out' END,
-               updated_at = NOW()
-           WHERE stripe_subscription_id = $1`,
-          [sub.id, welcomeSent],
-        )
-
-        try {
-          await heycatch.setIdentity(email, {
-            email,
-            plan: resolved.plan,
-          })
-          await heycatch.trackEvent(
-            'subscription_started',
-            { plan: resolved.plan, interval: resolved.interval },
-            { userId: email },
-          )
-        } catch {
-          // Analytics failure must not block webhook response
-        }
-      }
-      if (event.livemode && event.type === 'customer.subscription.deleted') {
-        void sendSaleAlert(
-          `🔻 *SUBSCRIPTION CANCELED* - ${resolved.plan.toUpperCase()} - ${email}\nsubscription: ${sub.id}`,
-        )
-
-        try {
-          await heycatch.setIdentity(email, {
-            email,
-            plan: 'canceled',
-          })
-          await heycatch.trackEvent(
-            'subscription_canceled',
-            { plan: resolved.plan },
-            { userId: email },
-          )
-        } catch {
-          // Analytics failure must not block webhook response
-        }
+      } catch {
+        // Analytics failure must not block webhook response
       }
     }
   }
