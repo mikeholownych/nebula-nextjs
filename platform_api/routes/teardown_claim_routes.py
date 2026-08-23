@@ -56,7 +56,9 @@ async def claim_email_request(slug: str, body: EmailRequest,
     if dom != registered_domain(rec["domain"]):
         raise HTTPException(status_code=400,
                             detail="Email domain does not match this teardown")
-    ip = request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+    ip = (request.headers.get("cf-connecting-ip")
+          or request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+          or "local")
     await enforce_rate_limit(redis, f"tclaimreq:{ip}", 10, 3600)
     await enforce_rate_limit(redis, f"tclaimdom:{dom}", 5, 3600)
     token = await issue_claim_token(redis, slug, email_norm)
@@ -121,7 +123,9 @@ async def claim_dns_start(slug: str, request: Request,
     rec = await get_teardown_db().get_teardown(slug)
     if rec is None:
         raise HTTPException(status_code=404, detail="Teardown not found")
-    ip = request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+    ip = (request.headers.get("cf-connecting-ip")
+          or request.headers.get("x-forwarded-for", "local").split(",")[0].strip()
+          or "local")
     await enforce_rate_limit(redis, f"tclaimdns:{ip}", 5, 3600)
     value = f"nebula={secrets.token_hex(16)}"
     key = f"tdns:{slug}:{hashlib.sha256(value.encode()).hexdigest()[:16]}"

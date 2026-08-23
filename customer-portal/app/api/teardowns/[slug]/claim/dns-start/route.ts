@@ -8,16 +8,24 @@ function internalHeaders(): Record<string, string> {
 }
 
 export async function POST(
-  _req: NextRequest,
+  req: NextRequest,
   ctx: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await ctx.params
   try {
+    const clientIp =
+      req.headers.get('cf-connecting-ip') ||
+      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      ''
     const upstream = await fetch(
       `${PLATFORM_API}/teardowns/${encodeURIComponent(slug)}/claim/dns-start`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...internalHeaders() },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(clientIp ? { 'cf-connecting-ip': clientIp } : {}),
+          ...internalHeaders(),
+        },
       },
     )
     const data = await upstream.json().catch(() => ({}))

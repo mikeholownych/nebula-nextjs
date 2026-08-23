@@ -14,11 +14,19 @@ export async function POST(
   const { slug } = await ctx.params
   try {
     const body = await req.json().catch(() => ({}))
+    const clientIp =
+      req.headers.get('cf-connecting-ip') ||
+      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      ''
     const upstream = await fetch(
       `${PLATFORM_API}/teardowns/${encodeURIComponent(slug)}/claim/email-request`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...internalHeaders() },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(clientIp ? { 'cf-connecting-ip': clientIp } : {}),
+          ...internalHeaders(),
+        },
         body: JSON.stringify(body),
       },
     )
