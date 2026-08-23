@@ -273,10 +273,16 @@ export default async function TeardownPage({
             <p className="mt-3 text-white/80 whitespace-pre-line">{t.claim.response_text}</p>
           </section>
         )}
-        <div className="mt-12 border border-white/10 rounded-lg p-6">
+        <div className="mt-12 border border-white/10 rounded-lg p-6 flex items-center justify-between gap-4">
           <p className="text-sm text-white/60">
             Work at {t.name}? Verify ownership to manage this teardown in your workspace.
           </p>
+          {!t.claim?.status && (
+            <a href={`/teardowns/${t.slug}/claim`}
+               className="shrink-0 bg-accent text-black font-semibold text-sm px-4 py-2 rounded">
+              Claim this teardown
+            </a>
+          )}
         </div>
         {/* claim-cta:end */}
 
