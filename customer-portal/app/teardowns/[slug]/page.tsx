@@ -265,6 +265,14 @@ export default async function TeardownPage({
         </section>
 
         {/* claim-cta:start */}
+        {t.claim?.status === 'active' && t.claim.response_status === 'visible' && (
+          <section className="mt-12 border-l-2 border-accent pl-6 py-2">
+            <p className="text-xs uppercase tracking-widest text-white/50">
+              Verified response from the {t.name} team
+            </p>
+            <p className="mt-3 text-white/80 whitespace-pre-line">{t.claim.response_text}</p>
+          </section>
+        )}
         <div className="mt-12 border border-white/10 rounded-lg p-6">
           <p className="text-sm text-white/60">
             Work at {t.name}? Verify ownership to manage this teardown in your workspace.
