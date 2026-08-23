@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   SUBSCRIPTION_PLANS,
   PAID_PLAN_KEYS,
@@ -97,6 +98,7 @@ function PlanCard({
 }
 
 export default function MembershipGrid() {
+  const router = useRouter()
   const [interval, setInterval] = useState<BillingInterval>('monthly')
   const [busy, setBusy] = useState<PlanKey | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -110,6 +112,10 @@ export default function MembershipGrid() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, interval }),
       })
+      if (res.status === 401) {
+        router.push('/workspace')
+        return
+      }
       const data = await res.json()
       if (!res.ok || !data.url) {
         throw new Error(data.error || 'Could not start checkout')

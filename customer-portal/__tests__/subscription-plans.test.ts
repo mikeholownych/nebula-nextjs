@@ -1,7 +1,8 @@
 /**
  * Membership subscription contract tests:
  * - plan definitions are consistent with the approved pricing
- * - /api/subscribe validates plan/interval and never accepts 'free'
+ * - /api/subscribe requires a workspace session, validates plan/interval,
+ *   never accepts 'free', and rejects annual on monthly-only plans
  * - Stripe price resolution round-trips for webhook processing
  */
 import {
@@ -10,6 +11,28 @@ import {
   planFromStripePrice,
   auditQuotaFor,
 } from '@/app/lib/subscription-plans'
+import { NextResponse } from 'next/server'
+
+jest.mock('@/app/lib/workspace-auth', () => ({
+  requireWorkspaceUser: jest.fn(),
+}))
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const requireWorkspaceUser = jest.requireMock('@/app/lib/workspace-auth').requireWorkspaceUser as jest.Mock
+
+function signedIn(email = 'founder@nebulacomponents.com') {
+  requireWorkspaceUser.mockResolvedValue({ user: { id: 'u_1', email } })
+  return email
+}
+
+function signedOut() {
+  requireWorkspaceUser.mockResolvedValue({
+    response: NextResponse.json(
+      { error: 'Authentication required', code: 'AUTH_REQUIRED' },
+      { status: 401 },
+    ),
+  })
+}
 
 describe('subscription plan contract', () => {
   it('matches the approved pricing ($29/$79/$497; agency is flat monthly with no annual tier)', () => {
@@ -74,11 +97,13 @@ describe('POST /api/subscribe', () => {
   const originalFetch = global.fetch
   beforeEach(() => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_dummy'
+    signedIn()
   })
   afterEach(() => {
     process.env.STRIPE_SECRET_KEY = originalEnv
     global.fetch = originalFetch
     jest.restoreAllMocks()
+    requireWorkspaceUser.mockReset()
   })
 
   function makeRequest(body: unknown) {
@@ -89,27 +114,54 @@ describe('POST /api/subscribe', () => {
     })
   }
 
+  it('returns 401 JSON when there is no workspace session', async () => {
+    signedOut()
+    const { POST } = await import('@/app/api/subscribe/route')
+    const res = await POST(makeRequest({ plan: 'pro' }) as never)
+    expect(res.status).toBe(401)
+    const data = await res.json()
+    expect(data.error).toBe('Sign in required')
+  })
+
   it('rejects the free plan', async () => {
     const { POST } = await import('@/app/api/subscribe/route')
     const res = await POST(makeRequest({ plan: 'free' }) as never)
     expect(res.status).toBe(400)
     const data = await res.json()
-    expect(data.code).toBe('UNSUPPORTED_PLAN')
+    expect(data.error).toBe('Unknown plan')
   })
 
-  it('rejects unknown plans and intervals', async () => {
+  it('rejects unknown plans', async () => {
     const { POST } = await import('@/app/api/subscribe/route')
     const bad = await POST(makeRequest({ plan: 'enterprise' }) as never)
     expect(bad.status).toBe(400)
-    const badInterval = await POST(
-      makeRequest({ plan: 'pro', interval: 'weekly' }) as never,
-    )
-    expect(badInterval.status).toBe(400)
-    const data = await badInterval.json()
-    expect(data.code).toBe('UNSUPPORTED_INTERVAL')
+    const data = await bad.json()
+    expect(data.error).toBe('Unknown plan')
   })
 
-  it('creates a subscription-mode checkout session for a valid plan', async () => {
+  it('rejects annual billing on the monthly-only Agency plan', async () => {
+    const { POST } = await import('@/app/api/subscribe/route')
+    const res = await POST(makeRequest({ plan: 'agency', interval: 'annual' }) as never)
+    expect(res.status).toBe(400)
+    const data = await res.json()
+    expect(data.error).toBe('Agency is monthly-only')
+  })
+
+  it('coerces unrecognized intervals to monthly', async () => {
+    const fetchMock = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ url: 'https://checkout.stripe.com/c/pay/cs_test_m', id: 'cs_test_m' }),
+    })
+    global.fetch = fetchMock as never
+    const { POST } = await import('@/app/api/subscribe/route')
+    const res = await POST(makeRequest({ plan: 'pro', interval: 'weekly' }) as never)
+    expect(res.status).toBe(200)
+    const body = String((fetchMock.mock.calls[0][1] as RequestInit).body)
+    expect(body).toContain(encodeURIComponent(SUBSCRIPTION_PLANS.pro.stripe.monthlyPrice!))
+  })
+
+  it('creates a workspace-bound subscription checkout session for a valid plan', async () => {
+    const email = signedIn('dev@nebulacomponents.com')
     const fetchMock = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ url: 'https://checkout.stripe.com/c/pay/cs_test_123', id: 'cs_test_123' }),
@@ -129,18 +181,85 @@ describe('POST /api/subscribe', () => {
     expect(body).toContain(
       encodeURIComponent(SUBSCRIPTION_PLANS.pro.stripe.annualPrice!),
     )
-    expect(body).toContain('metadata%5Bnebula_plan%5D=pro')
+    expect(body).toContain(
+      `${encodeURIComponent('subscription_data[metadata][workspace_email]')}=${encodeURIComponent(email)}`,
+    )
+    expect(body).toContain(`customer_email=${encodeURIComponent(email)}`)
+    expect(body).toContain('allow_promotion_codes=true')
+    expect(body).toContain(
+      `success_url=${encodeURIComponent('https://nebulacomponents.com/workspace?upgraded=pro')}`,
+    )
   })
 
   it('surfaces Stripe failures as 502 without leaking details', async () => {
     global.fetch = jest.fn().mockResolvedValue({
       ok: false,
-      json: async () => ({ error: { message: 'internal stripe detail' } }),
+      json: async () => ({ error: { message: 'internal stripe detail', code: 'card_invalid' } }),
     }) as never
     const { POST } = await import('@/app/api/subscribe/route')
     const res = await POST(makeRequest({ plan: 'growth' }) as never)
     expect(res.status).toBe(502)
     const data = await res.json()
     expect(JSON.stringify(data)).not.toContain('internal stripe detail')
+  })
+})
+
+describe('POST /api/billing-portal', () => {
+  const originalFetch = global.fetch
+  afterEach(() => {
+    global.fetch = originalFetch
+    requireWorkspaceUser.mockReset()
+  })
+
+  function makeRequest() {
+    return new Request('https://nebulacomponents.com/api/billing-portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  it('returns 401 JSON when signed out', async () => {
+    signedOut()
+    const { POST } = await import('@/app/api/billing-portal/route')
+    const res = await POST(makeRequest() as never)
+    expect(res.status).toBe(401)
+    const data = await res.json()
+    expect(data.error).toBe('Sign in required')
+  })
+
+  it('returns 404 when no Stripe customer matches the workspace email', async () => {
+    signedIn('ghost@nebulacomponents.com')
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ data: [] }),
+    }) as never
+    const { POST } = await import('@/app/api/billing-portal/route')
+    const res = await POST(makeRequest() as never)
+    expect(res.status).toBe(404)
+    const data = await res.json()
+    expect(data.error).toContain('No billing account yet')
+  })
+
+  it('creates a portal session for the matched customer', async () => {
+    const email = signedIn('payer@nebulacomponents.com')
+    const fetchMock = jest
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ data: [{ id: 'cus_123', email }] }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ url: 'https://billing.stripe.com/p/session_abc' }),
+      })
+    global.fetch = fetchMock as never
+    const { POST } = await import('@/app/api/billing-portal/route')
+    const res = await POST(makeRequest() as never)
+    expect(res.status).toBe(200)
+    const data = await res.json()
+    expect(data.url).toContain('billing.stripe.com')
+    const [portalUrl, portalInit] = fetchMock.mock.calls[1]
+    expect(portalUrl).toBe('https://api.stripe.com/v1/billing_portal/sessions')
+    expect(String((portalInit as RequestInit).body)).toContain('customer=cus_123')
   })
 })
