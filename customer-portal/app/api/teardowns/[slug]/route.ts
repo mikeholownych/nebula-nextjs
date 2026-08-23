@@ -22,6 +22,10 @@ export async function GET(
     )
     if (!upstream.ok) return NextResponse.json({}, { status: upstream.status })
     const data = await upstream.json()
+    if (data.claim) {
+      delete data.claim.claimed_by_email
+      delete data.claim.verification_method
+    }
     return NextResponse.json(data)
   } catch {
     return NextResponse.json({ error: 'Teardown unavailable' }, { status: 502 })
