@@ -33,30 +33,26 @@ function nextMonthReset(): string {
 export async function checkAuditQuota(email: string): Promise<QuotaResult> {
   const normalizedEmail = email.trim().toLowerCase()
 
-  if (normalizedEmail === 'mike.holownych@gmail.com') {
-    return { allowed: true, plan: 'agency', quota: 'unlimited' }
-  }
-
-  // 1. Resolve active subscription (if any)
+  // 1. Resolve granted plan via the same lifecycle rules as
+  //    platform_api/services/entitlements.py::_grants: active membership +
+  //    subscription status IN ('active','trialing') OR current_period_end > now().
+  //    Best plan wins across orgs. No email hardcodes.
   let plan: string = 'free'
   try {
     const subResult = await pool.query(
-      `SELECT s.plan, o.is_agency
+      `SELECT s.plan
        FROM users u
-       LEFT JOIN memberships m ON m.user_id = u.id
-       LEFT JOIN organizations o ON o.id = m.organization_id
-       LEFT JOIN subscriptions s ON s.organization_id = o.id AND s.status = 'active'
+       JOIN memberships m ON m.user_id = u.id AND m.status = 'active'
+       JOIN organizations o ON o.id = m.organization_id
+       JOIN subscriptions s ON s.organization_id = o.id
        WHERE LOWER(u.email) = $1
+         AND (s.status IN ('active', 'trialing') OR s.current_period_end > NOW())
+       ORDER BY CASE s.plan WHEN 'agency' THEN 0 WHEN 'growth' THEN 1 WHEN 'pro' THEN 2 ELSE 3 END
        LIMIT 1`,
       [normalizedEmail],
     )
-    if (subResult.rows.length > 0) {
-      const row = subResult.rows[0]
-      if (row.is_agency || row.plan === 'agency') {
-        plan = 'agency'
-      } else if (row.plan) {
-        plan = row.plan
-      }
+    if (subResult.rows.length > 0 && subResult.rows[0].plan) {
+      plan = subResult.rows[0].plan
     }
   } catch {
     // DB unavailable - fail open (don't block audits on quota DB issues)

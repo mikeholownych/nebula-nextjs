@@ -864,29 +864,13 @@ async def get_me(
     is_agency = False
 
     email_lower = (user.email or "").strip().lower()
-    if email_lower in {"mike.holownych@gmail.com"}:
-        plan = "agency"
-        is_agency = True
-    else:
-        try:
-            from platform_api.db.models import Membership, Organization, Subscription
-            mem = db.query(Membership).filter(Membership.user_id == user.id).first()
-            if mem:
-                org = db.query(Organization).filter(Organization.id == mem.organization_id).first()
-                if org and org.is_agency:
-                    is_agency = True
-                    plan = "agency"
-                else:
-                    sub = db.query(Subscription).filter(
-                        Subscription.organization_id == mem.organization_id,
-                        Subscription.status == "active",
-                    ).first()
-                    if sub and sub.plan:
-                        plan = sub.plan
-                        if plan == "agency":
-                            is_agency = True
-        except Exception:
-            pass
+    try:
+        from platform_api.services.entitlements import resolve_sync
+        ent = resolve_sync(email_lower, db)
+        plan = ent.plan
+        is_agency = ent.plan == "agency"
+    except Exception:
+        pass
 
     return {
         "id": str(user.id),

@@ -18,13 +18,11 @@ router = APIRouter(prefix="/workspace/api-keys", tags=["api-keys"])
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 async def _resolve_plan(workspace_email: str) -> str:
-    """Look up the workspace's active plan from the platform DB via session_scope."""
+    """Look up the workspace's active plan via EntitlementService."""
     import asyncio
 
-    from sqlalchemy import func
-
-    from platform_api.db.models import Membership, Organization, Subscription, User
     from platform_api.db.session import session_scope
+    from platform_api.services.entitlements import resolve_sync
 
     email = (workspace_email or "").strip().lower()
     if not email:
@@ -33,29 +31,9 @@ async def _resolve_plan(workspace_email: str) -> str:
     def _query() -> str:
         try:
             with session_scope() as session:
-                row = (
-                    session.query(Subscription.plan, Organization.is_agency)
-                    .select_from(User)
-                    .join(Membership, Membership.user_id == User.id)
-                    .join(Organization, Organization.id == Membership.organization_id)
-                    .outerjoin(
-                        Subscription,
-                        (Subscription.organization_id == Organization.id)
-                        & (Subscription.status == "active"),
-                    )
-                    .filter(func.lower(User.email) == email)
-                    .filter(Membership.status == "active")
-                    .order_by(Subscription.created_at.desc())
-                    .first()
-                )
+                return resolve_sync(email, session).plan
         except Exception:
             return "free"
-        if not row:
-            return "free"
-        plan, is_agency = row
-        if is_agency or plan == "agency":
-            return "agency"
-        return plan or "free"
 
     return await asyncio.to_thread(_query)
 
