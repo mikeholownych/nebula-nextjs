@@ -268,6 +268,38 @@ describe('POST /api/webhooks/stripe subscription persistence', () => {
     expect(welcomeMock).not.toHaveBeenCalled()
   })
 
+  it('short-circuits subscription-mode checkout sessions without any purchases write', async () => {
+    provisioned = true
+    mockConstructEvent({
+      id: 'evt_co_sub_1',
+      type: 'checkout.session.completed',
+      livemode: true,
+      data: {
+        object: {
+          id: 'cs_subscription_mode_1',
+          mode: 'subscription',
+          payment_status: 'paid',
+          amount_total: 2900,
+          currency: 'usd',
+          customer_email: 'buyer@example.com',
+          metadata: { offer_key: 'pro_monthly' },
+        },
+      },
+    })
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    expect(await response.json()).toEqual({ received: true })
+    // No review-purchase branch side effects: no purchases row, no sale alert.
+    expect(insertCount('INSERT INTO purchases')).toBe(0)
+    expect(poolQueryMock).not.toHaveBeenCalled()
+    expect(execFileMock).not.toHaveBeenCalled()
+    expect(welcomeMock).not.toHaveBeenCalled()
+    // No subscription lifecycle writes either - those belong to
+    // customer.subscription.* events, not checkout.session.completed.
+    expect(subWrites).toHaveLength(0)
+  })
+
   it('writes nothing for an unknown price and pages ops exactly once through the outbox', async () => {
     mockConstructEvent(makeSubscriptionEvent({
       data: {

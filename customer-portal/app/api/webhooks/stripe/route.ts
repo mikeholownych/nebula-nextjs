@@ -54,6 +54,16 @@ export async function POST(request: NextRequest) {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
+
+    // Subscription-mode checkouts are persisted exclusively by the
+    // customer.subscription.* lifecycle handlers below. Falling through here
+    // would record a bogus review purchase, fire a CRM purchase_completed,
+    // and page ops for what is a normal plan sale.
+    if (session.mode === 'subscription') {
+      console.log('Subscription-mode checkout completed; lifecycle events own persistence:', session.id)
+      return NextResponse.json({ received: true })
+    }
+
     const customerEmail =
       session.customer_email ?? session.customer_details?.email ?? null
     const canonicalReceipt = isCanonicalFixPackReceipt({
