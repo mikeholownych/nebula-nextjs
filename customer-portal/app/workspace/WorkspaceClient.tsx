@@ -637,17 +637,19 @@ export default function WorkspaceClient() {
                 <div>
                   <p className="text-xs uppercase tracking-widest text-accent">Claimed teardown</p>
                   {claims.map((claim) => (
-                    <p key={claim.slug} className="text-sm text-white/80">
-                      {claim.name} &middot; {claim.score}/10
-                    </p>
+                    <div key={claim.slug} className="flex items-center justify-between gap-4">
+                      <p className="text-sm text-white/80">
+                        {claim.name} &middot; {claim.score}/10
+                      </p>
+                      <Link
+                        className="text-xs underline text-white/60"
+                        href={`/teardowns/${claim.slug}`}
+                      >
+                        View public page
+                      </Link>
+                    </div>
                   ))}
                 </div>
-                <Link
-                  className="text-xs underline text-white/60"
-                  href={`/teardowns/${claims[0].slug}`}
-                >
-                  View public page
-                </Link>
               </div>
             </div>
           )}
