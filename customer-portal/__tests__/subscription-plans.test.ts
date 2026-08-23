@@ -12,13 +12,13 @@ import {
 } from '@/app/lib/subscription-plans'
 
 describe('subscription plan contract', () => {
-  it('matches the approved pricing ($29/$79/$199, 17% annual discount)', () => {
+  it('matches the approved pricing ($29/$79/$497; agency is flat monthly with no annual tier)', () => {
     expect(SUBSCRIPTION_PLANS.pro.monthlyUsd).toBe(29)
     expect(SUBSCRIPTION_PLANS.pro.annualUsd).toBe(290)
     expect(SUBSCRIPTION_PLANS.growth.monthlyUsd).toBe(79)
     expect(SUBSCRIPTION_PLANS.growth.annualUsd).toBe(790)
-    expect(SUBSCRIPTION_PLANS.agency.monthlyUsd).toBe(199)
-    expect(SUBSCRIPTION_PLANS.agency.annualUsd).toBe(1990)
+    expect(SUBSCRIPTION_PLANS.agency.monthlyUsd).toBe(497)
+    expect(SUBSCRIPTION_PLANS.agency.annualUsd).toBeNull()
   })
 
   it('keeps the free tier at 1 audit per month', () => {
@@ -33,7 +33,11 @@ describe('subscription plan contract', () => {
       const plan = SUBSCRIPTION_PLANS[key]
       expect(plan.stripe.product).toMatch(/^prod_/)
       expect(plan.stripe.monthlyPrice).toMatch(/^price_/)
-      expect(plan.stripe.annualPrice).toMatch(/^price_/)
+      if (plan.annualUsd === null) {
+        expect(plan.stripe.annualPrice).toBeNull()
+      } else {
+        expect(plan.stripe.annualPrice).toMatch(/^price_/)
+      }
     }
   })
 
@@ -44,11 +48,18 @@ describe('subscription plan contract', () => {
         plan: key,
         interval: 'monthly',
       })
-      expect(planFromStripePrice(plan.stripe.annualPrice!)).toEqual({
-        plan: key,
-        interval: 'annual',
-      })
+      if (plan.stripe.annualPrice) {
+        expect(planFromStripePrice(plan.stripe.annualPrice)).toEqual({
+          plan: key,
+          interval: 'annual',
+        })
+      }
     }
+    // Agency is monthly-only after reconciliation (scripts/stripe_reconcile_agency.py
+    // deactivated the legacy $199/$1990 agency prices): retired price IDs must
+    // no longer resolve to any plan or interval.
+    expect(planFromStripePrice('price_1U0l9CEINR1kU9chITjlRF0H')).toBeNull()
+    expect(planFromStripePrice('price_1U0l9CEINR1kU9chAZGBoJHS')).toBeNull()
     expect(planFromStripePrice('price_unknown')).toBeNull()
   })
 
