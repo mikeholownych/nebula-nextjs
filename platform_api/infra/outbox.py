@@ -2,10 +2,9 @@ import os
 import uuid
 import json
 import logging
+import asyncio
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-
-import httpx
 
 from platform_api.services.audit_db import audit_db
 
@@ -295,40 +294,30 @@ class Outbox:
 
 
     async def _send_email(self, recipient: str, payload: dict) -> bool:
-        api_key = os.environ.get("SENDGRID_API_KEY")
-        if not api_key:
-            logger.error("SENDGRID_API_KEY not set")
-            return False
+        def _send() -> dict:
+            from agentmail_client import AgentMailClient
 
-        from_email = payload.get("from_email", "audits@nebulacomponents.shop")
-        from_name = payload.get("from_name", "Nebula Components")
+            try:
+                return AgentMailClient().send_transactional(
+                    [recipient],
+                    payload.get("subject", ""),
+                    text=payload.get("body", ""),
+                    html=(
+                        payload.get("body")
+                        if str(payload.get("content_type", "")).startswith("text/html")
+                        else None
+                    ),
+                    client_id=f"txn:outbox:{payload.get('subject', 'msg')[:40]}:{recipient}",
+                ) or {}
+            except Exception as exc:  # noqa: BLE001
+                logger.error(f"AgentMail send failed: {exc}")
+                return {"_error": str(exc)}
 
-        body = {
-            "personalizations": [{"to": [{"email": recipient}]}],
-            "from": {"email": from_email, "name": from_name},
-            "subject": payload.get("subject", ""),
-            "content": [
-                {
-                    "type": payload.get("content_type", "text/html"),
-                    "value": payload.get("body", ""),
-                }
-            ],
-        }
-
-        try:
-            async with httpx.AsyncClient(timeout=10) as client:
-                resp = await client.post(
-                    "https://api.sendgrid.com/v3/mail/send",
-                    json=body,
-                    headers={
-                        "Authorization": f"Bearer {api_key}",
-                        "Content-Type": "application/json",
-                    },
-                )
-            return resp.status_code in (200, 201, 202)
-        except httpx.HTTPError as exc:
-            logger.error(f"SendGrid request failed: {exc}")
-            return False
+        result = await asyncio.to_thread(_send)
+        ok = not result.get("_error")
+        if not ok:
+            logger.error(f"outbox email dispatch failed: {result.get('_error')}")
+        return ok
 
 
 outbox = Outbox()
