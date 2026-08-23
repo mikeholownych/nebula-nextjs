@@ -1,0 +1,6 @@
+{
+  "free":   {"auditsPerMonth": 1,        "monitoredUrls": 0,        "minIntervalHours": null, "paidOnlyMonitors": true},
+  "pro":    {"auditsPerMonth": 20,       "monitoredUrls": 3,        "minIntervalHours": 720,  "paidOnlyMonitors": true},
+  "growth": {"auditsPerMonth": null,     "monitoredUrls": 10,       "minIntervalHours": 168,  "paidOnlyMonitors": true},
+  "agency": {"auditsPerMonth": null,     "monitoredUrls": null,     "minIntervalHours": 168,  "paidOnlyMonitors": true}
+}
