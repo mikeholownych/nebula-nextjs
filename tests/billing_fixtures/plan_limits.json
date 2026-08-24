@@ -1,6 +1,10 @@
 {
-  "free":   {"auditsPerMonth": 1,        "monitoredUrls": 0,        "minIntervalHours": null, "paidOnlyMonitors": true},
-  "pro":    {"auditsPerMonth": 20,       "monitoredUrls": 3,        "minIntervalHours": 720,  "paidOnlyMonitors": true},
-  "growth": {"auditsPerMonth": null,     "monitoredUrls": 10,       "minIntervalHours": 168,  "paidOnlyMonitors": true},
-  "agency": {"auditsPerMonth": null,     "monitoredUrls": null,     "minIntervalHours": 168,  "paidOnlyMonitors": true}
+  "free":   {"auditsPerMonth": 1,        "monitoredUrls": 0,        "minIntervalHours": null, "paidOnlyMonitors": true,
+             "competitorSlots": 0, "funnelRunsPerMonth": 0, "funnelUrlsPerRun": 0, "analyticsDepth": "none"},
+  "pro":    {"auditsPerMonth": 20,       "monitoredUrls": 3,        "minIntervalHours": 720,  "paidOnlyMonitors": true,
+             "competitorSlots": 2, "funnelRunsPerMonth": 3, "funnelUrlsPerRun": 10, "analyticsDepth": "percentile"},
+  "growth": {"auditsPerMonth": null,     "monitoredUrls": 10,       "minIntervalHours": 168,  "paidOnlyMonitors": true,
+             "competitorSlots": 5, "funnelRunsPerMonth": 10, "funnelUrlsPerRun": 25, "analyticsDepth": "segment"},
+  "agency": {"auditsPerMonth": null,     "monitoredUrls": null,     "minIntervalHours": 168,  "paidOnlyMonitors": true,
+             "competitorSlots": 10, "funnelRunsPerMonth": null, "funnelUrlsPerRun": 100, "analyticsDepth": "segment"}
 }
