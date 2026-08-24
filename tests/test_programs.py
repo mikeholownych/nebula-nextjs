@@ -93,6 +93,101 @@ def test_derive_stage_two_impact_desc_then_effort_asc():
     assert top["quadrant"] == "major_project"
 
 
+# ─── derivation caps: a program is a SHORT roadmap ────────────────────────────
+
+
+def _backlog(qw_count=30, mp_count=30):
+    recs = [
+        _rec(f"qw_{i:02d}", f"https://example.com/qw{i}", float(30 - i),
+             1.0, "quick_win")
+        for i in range(qw_count)
+    ]
+    recs += [
+        _rec(f"mp_{i:02d}", f"https://example.com/mp{i}", float(30 - i),
+             float(i % 5))
+        for i in range(mp_count)
+    ]
+    return recs
+
+
+def test_derivation_caps_at_ten_steps_per_stage():
+    steps = programs.derive_steps(_backlog(30, 30))
+    assert len(steps) == programs.MAX_STEPS_STAGE1 + programs.MAX_STEPS_STAGE2
+    stage1 = [s for s in steps if s["stage"] == 1]
+    stage2 = [s for s in steps if s["stage"] == 2]
+    assert len(stage1) == programs.MAX_STEPS_STAGE1 == 10
+    assert len(stage2) == programs.MAX_STEPS_STAGE2 == 10
+    assert [s["finding_key"] for s in stage1] == [
+        f"qw_{i:02d}" for i in range(10)]
+    assert [s["finding_key"] for s in stage2] == [
+        f"mp_{i:02d}" for i in range(10)]
+    keys = {s["finding_key"] for s in steps}
+    # ranks 11..30 of both stages stay in the recommendations kanban
+    assert all(f"qw_{i:02d}" not in keys for i in range(10, 30))
+    assert all(f"mp_{i:02d}" not in keys for i in range(10, 30))
+
+
+def test_stage_two_cap_breaks_impact_ties_by_lowest_effort():
+    recs = [
+        _rec(f"tie_{i:02d}", f"https://example.com/t{i}", 6.0,
+             float(15 - i))
+        for i in range(15)
+    ]
+    stage2 = [s for s in programs.derive_steps(recs) if s["stage"] == 2]
+    assert [s["finding_key"] for s in stage2] == [
+        f"tie_{i:02d}" for i in range(14, 4, -1)]
+
+
+def test_regeneration_does_not_resurrect_capped_out_steps():
+    desired = programs.derive_steps(_backlog(30, 30))
+    first = programs.reconcile_steps([], desired)
+    assert len(first["insert"]) == 20
+
+    stored = [dict(entry) for entry in first["insert"]]
+    stable = programs.reconcile_steps(stored, desired)
+    assert stable["insert"] == [] and stable["delete_ids"] == []
+
+    # legacy bloated programs hold pending rows ranked below the caps:
+    # regeneration trims them and a follow-up pass never re-adds them
+    overflow = [
+        _step("ov-qw10", "qw_10", "https://example.com/qw10", "pending"),
+        _step("ov-qw11", "qw_11", "https://example.com/qw11", "pending"),
+        _step("ov-mp10", "mp_10", "https://example.com/mp10", "pending",
+              stage=2),
+    ]
+    trimmed = programs.reconcile_steps(stored + overflow, desired)
+    assert sorted(trimmed["delete_ids"]) == ["ov-mp10", "ov-qw10",
+                                             "ov-qw11"]
+    assert trimmed["insert"] == []
+    again = programs.reconcile_steps(trimmed["steps"], desired)
+    assert again["insert"] == [] and again["delete_ids"] == []
+
+
+def test_get_or_create_trims_legacy_overflow_to_caps(monkeypatch):
+    monkeypatch.setattr(
+        programs.domains, "registered_domain",
+        lambda value: DOMAIN if "example.com" in value else None)
+    legacy = [
+        _step(f"s-legacy-{i:02d}", f"stale_{i:02d}",
+              f"https://example.com/stale{i}", "pending",
+              stage=1 if i < 20 else 2, seq=i + 1)
+        for i in range(40)
+    ]
+    conn = ProgramFakeConn(
+        rec_rows=_backlog(30, 30),
+        active_program={"id": "p-old", "generated_at": None},
+        existing_steps=legacy)
+    payload = asyncio.run(programs.get_or_create_program(
+        OWNER_EMAIL, DOMAIN, FakePool(conn)))
+
+    open_steps = [s for s in payload["steps"] if s["status"] != "done"]
+    assert len(open_steps) == 20
+    deletes = [args for sql, args in conn.executed
+               if sql.startswith("DELETE FROM program_steps")]
+    assert len(deletes) == 40
+    assert len(conn.inserted_steps) == 20
+
+
 # ─── regeneration preserves history by (finding_key, url) ─────────────────────
 
 

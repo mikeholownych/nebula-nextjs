@@ -3,8 +3,14 @@
 Turns the recommendation backlog for one workspace email + domain into a
 two-stage sequenced roadmap persisted in programs / program_steps:
 
-    stage 1 = quadrant 'quick_win', impact DESC
-    stage 2 = everything else,      impact DESC then effort ASC
+    stage 1 = quadrant 'quick_win', impact DESC                 (max MAX_STEPS_STAGE1)
+    stage 2 = everything else,      impact DESC then effort ASC (max MAX_STEPS_STAGE2)
+
+A program is a prioritized SHORT roadmap, not a mirror of the backlog:
+each stage keeps only its top candidates and overflow stays in the
+recommendations kanban instead of becoming a step. Regeneration re-ranks
+the live backlog, so freed slots promote the next candidate while steps
+that fall below a cap are trimmed and never resurrected.
 
 Completion is derived live on every read: a step flips to done/verified when
 its matching recommendations row is done or verified, or when an implemented
@@ -12,6 +18,9 @@ fix_implementations row exists for the same finding on the same URL. Open
 steps are regenerated from the current backlog while done / verified /
 dismissed history is preserved by (finding_key, url).
 """
+
+MAX_STEPS_STAGE1 = 10
+MAX_STEPS_STAGE2 = 10
 
 from platform_api.services import domains
 from platform_api.services.domains import registered_domain
@@ -29,7 +38,11 @@ def derive_steps(open_recs) -> list[dict]:
 
     Input rows need url, finding_key, label, impact, effort, quadrant.
     Output preserves every field a roadmap UI renders plus its stage; the
-    list order IS the execution sequence.
+    list order IS the execution sequence. Capped: stage 1 keeps the top
+    MAX_STEPS_STAGE1 quick wins by impact DESC, stage 2 the top
+    MAX_STEPS_STAGE2 others by impact DESC then effort ASC. Overflow stays
+    in the recommendations kanban; it is intentionally absent from this
+    output so regeneration cannot resurrect capped-out steps.
     """
     quick = []
     rest = []
@@ -47,7 +60,7 @@ def derive_steps(open_recs) -> list[dict]:
         (quick if entry["stage"] == 1 else rest).append(entry)
     quick.sort(key=lambda s: -s["impact"])
     rest.sort(key=lambda s: (-s["impact"], s["effort"]))
-    return quick + rest
+    return quick[:MAX_STEPS_STAGE1] + rest[:MAX_STEPS_STAGE2]
 
 
 def reconcile_steps(existing_steps, desired) -> dict:
