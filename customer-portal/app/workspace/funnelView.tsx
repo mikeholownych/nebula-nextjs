@@ -293,7 +293,7 @@ export default function FunnelView({ domains, initialDomain, planLevel }: Funnel
             </div>
             <div className="rounded-xl border border-border bg-bg-panel p-5">
               <p className="text-xs font-semibold uppercase tracking-wider text-fg-dim">Run status</p>
-              <p className={`mt-2 font-mono text-lg font-black ${run.status === 'failed' ? 'text-signal-fail' : 'text-fg'}`}>
+              <p className={`mt-2 font-mono text-lg font-black ${run.status === 'failed' ? 'text-red-400' : 'text-fg'}`}>
                 {run.status.replace('_', ' ')}
               </p>
               {!TERMINAL_STATUSES.has(run.status) && (
@@ -328,7 +328,7 @@ export default function FunnelView({ domains, initialDomain, planLevel }: Funnel
                       <span className="font-mono text-fg-muted">{Math.round(rate * 100)}%</span>
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
-                      <div className={`h-full rounded-full ${rate >= 0.5 ? 'bg-accent' : 'bg-signal-fail'}`} style={{ width: `${Math.max(2, Math.round(rate * 100))}%` }} />
+                      <div className={`h-full rounded-full ${rate >= 0.5 ? 'bg-accent' : 'bg-red-400'}`} style={{ width: `${Math.max(2, Math.round(rate * 100))}%` }} />
                     </div>
                   </li>
                 ))}
@@ -345,7 +345,7 @@ export default function FunnelView({ domains, initialDomain, planLevel }: Funnel
                   {scorecard.worst_pages.map((p) => (
                     <li key={p.url} className="flex items-center justify-between rounded-lg bg-bg px-3.5 py-2.5">
                       <span className="truncate text-xs text-fg" title={p.url}>{p.url.replace(/^https?:\/\/(www\.)?/, '')}</span>
-                      <span className="ml-3 shrink-0 font-mono text-sm font-bold text-signal-fail">{fmtScore(p.score)}</span>
+                      <span className="ml-3 shrink-0 font-mono text-sm font-bold text-red-400">{fmtScore(p.score)}</span>
                     </li>
                   ))}
                 </ol>
