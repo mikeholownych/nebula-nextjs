@@ -34,10 +34,32 @@ def _competitor_email(user_id: str) -> str:
     return f"competitor+{user_id}@internal.nebulacomponents.com"
 
 
+def _owner_email(session, user_id: str) -> Optional[str]:
+    """Workspace owner email for a user_id (users table, platform db)."""
+    from sqlalchemy import text
+    row = session.execute(
+        text("SELECT email FROM users WHERE id = :uid"),
+        {"uid": user_id},
+    ).fetchone()
+    return row.email if row and row.email else None
+
+
+async def _linked_competitor_urls(owner_email: str) -> set:
+    """Distinct rival URLs with at least one persisted audit for the owner."""
+    await audit_db.connect()
+    async with audit_db.pool.acquire() as conn:
+        rows = await conn.fetch(
+            "SELECT DISTINCT competitor_url FROM competitor_audits WHERE owner_email = $1",
+            owner_email,
+        )
+    return {r["competitor_url"] for r in rows}
+
+
 async def _run_competitor_audit(tracking_id: str, user_id: str, url: str) -> None:
     """Background: run the audit synchronously via /audit/run (the endpoint
     itself blocks until the audit completes, up to 120s), then persist the
-    resulting score to competitor_tracking."""
+    resulting score to competitor_tracking and link the full audit to the
+    workspace owner in competitor_audits."""
     try:
         async with httpx.AsyncClient(timeout=150.0) as client:
             res = await client.post(
@@ -55,13 +77,16 @@ async def _run_competitor_audit(tracking_id: str, user_id: str, url: str) -> Non
             return
         # /audit/run returns the 0-10 score; store on the 0-100 display scale
         score = round(float(data["score"]) * 10, 1)
+        audit_id = data.get("audit_id")
 
         from platform_api.db.session import SessionLocal
         if SessionLocal is None:
             return
         from sqlalchemy import text
         session = SessionLocal()
+        owner_email = None
         try:
+            owner_email = _owner_email(session, user_id)
             session.execute(
                 text("""
                     UPDATE competitor_tracking
@@ -73,6 +98,22 @@ async def _run_competitor_audit(tracking_id: str, user_id: str, url: str) -> Non
             session.commit()
         finally:
             session.close()
+
+        # Persist the rival link so diagnostics/history survive the score.
+        # owner_email is the workspace owner resolved from user_id - never the
+        # synthetic competitor email.
+        if audit_id and owner_email:
+            await audit_db.connect()
+            async with audit_db.pool.acquire() as conn:
+                await conn.execute(
+                    """
+                    INSERT INTO competitor_audits (owner_email, competitor_url, audit_id)
+                    VALUES ($1, $2, $3)
+                    """,
+                    owner_email,
+                    url,
+                    audit_id,
+                )
     except Exception:
         pass  # Best-effort - cron will retry stale competitors
 
@@ -129,15 +170,38 @@ async def add_competitor(
         raise HTTPException(status_code=503, detail="Database not available")
     session = SessionLocal()
     try:
-        from sqlalchemy import text
-        count = session.execute(
-            text("SELECT COUNT(*) FROM competitor_tracking WHERE user_id = :user_id"),
-            {"user_id": user_id},
-        ).scalar()
-        if count >= MAX_COMPETITORS:
+        owner_email = _owner_email(session, user_id)
+        # Plan-driven slot enforcement (Phase 3): free has 0 slots, pro 2,
+        # growth 5, agency 10. resolve_sync fails open to free internally.
+        if not owner_email:
             raise HTTPException(
-                status_code=400,
-                detail=f"Maximum {MAX_COMPETITORS} competitors allowed",
+                status_code=403,
+                detail={"message": "Competitor slots reached", "upgrade_url": "/pricing"},
+            )
+        from platform_api.services.entitlements import resolve_sync
+        ent = resolve_sync(owner_email, session)
+        # Usage = distinct rival URLs with persisted audits for this owner,
+        # UNION legacy competitor_tracking rows that have NO linked audits yet.
+        # A refreshed legacy rival is already counted via its competitor_audits
+        # link, so union semantics avoid double-charging the same slot; only
+        # never-audited legacy rows consume an extra slot.
+        from sqlalchemy import text
+        legacy_rows = session.execute(
+            text("""
+                SELECT competitor_url FROM competitor_tracking
+                WHERE user_id = :user_id
+            """),
+            {"user_id": user_id},
+        ).fetchall()
+        linked_urls = await _linked_competitor_urls(owner_email)
+        usage = len(linked_urls | {r.competitor_url for r in legacy_rows})
+        if usage >= ent.competitor_slots:
+            raise HTTPException(
+                status_code=403,
+                detail={
+                    "message": "Competitor slots reached",
+                    "upgrade_url": "/pricing",
+                },
             )
         try:
             result = session.execute(
@@ -254,3 +318,69 @@ async def get_comparison(current_user=Depends(get_current_user)):
         return {"your_score": your_score, "competitors": competitors}
     finally:
         session.close()
+
+
+@router.get("/comparison/{tracking_id}")
+async def get_comparison_v2(tracking_id: str, current_user=Depends(get_current_user)):
+    """Side-by-side signal diagnostics for one tracked rival (v2).
+
+    Returns you/rival audit payloads with per-signal pass maps, edge/threat
+    key lists, and a paired score history series. Falls back to legacy
+    score-only rival data when either side lacks a linked completed audit.
+    """
+    try:
+        UUID(tracking_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid competitor ID")
+
+    user_id = current_user["user_id"]
+    from platform_api.db.session import SessionLocal
+    if SessionLocal is None:
+        raise HTTPException(status_code=503, detail="Database not available")
+    from sqlalchemy import text
+
+    session = SessionLocal()
+    try:
+        row = session.execute(
+            text("""
+                SELECT competitor_url, label, last_score, last_audited_at
+                FROM competitor_tracking
+                WHERE id = :id AND user_id = :user_id
+            """),
+            {"id": tracking_id, "user_id": user_id},
+        ).fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail="Competitor not found")
+        owner_email = _owner_email(session, user_id)
+        if not owner_email:
+            # Cannot attribute workspace audits - degrade to score-only view.
+            return {
+                "you": {},
+                "rival": {
+                    "url": row.competitor_url,
+                    "label": row.label,
+                    "last_score": (
+                        float(row.last_score) if row.last_score is not None else None
+                    ),
+                    "last_audited_at": (
+                        row.last_audited_at.isoformat() if row.last_audited_at else None
+                    ),
+                },
+                "your_edge": [],
+                "threats": [],
+                "history": [],
+            }
+    finally:
+        session.close()
+
+    from platform_api.services import competitor_analytics
+
+    return await competitor_analytics.competitor_comparison(
+        owner_email,
+        row.competitor_url,
+        label=row.label,
+        last_score=(
+            float(row.last_score) if row.last_score is not None else None
+        ),
+        last_audited_at=row.last_audited_at,
+    )
