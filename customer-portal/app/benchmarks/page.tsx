@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Benchmarks, { type BenchmarksData } from './Benchmarks'
+import PersonalPositioning from './PersonalPositioning'
 import { DATASET_REGISTRY } from '../lib/datasets'
 
 export const metadata: Metadata = {
@@ -110,6 +111,7 @@ export default async function BenchmarksPage() {
         </div>
       </section>
       <Benchmarks initialData={data} />
+      <PersonalPositioning />
       <section aria-labelledby="data-sources-heading" className="border-t border-border px-6 py-12">
         <div className="mx-auto max-w-6xl">
           <h2 id="data-sources-heading" className="text-lg font-semibold text-fg">

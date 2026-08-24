@@ -17,6 +17,8 @@ const DashboardView = dynamic(() => import('./views').then((mod) => mod.Dashboar
 const AuditsView = dynamic(() => import('./views').then((mod) => mod.AuditsView))
 const ProjectsView = dynamic(() => import('./views').then((mod) => mod.ProjectsView))
 const CompetitorView = dynamic(() => import('./competitorView'))
+const ProgramView = dynamic(() => import('./programView'))
+const FunnelView = dynamic(() => import('./funnelView'))
 const AiSearchView = dynamic(() => import('./aiSearchView'))
 const RoiCalculatorView = dynamic(() => import('./roiCalculatorView'))
 const RecsView = dynamic(() => import('./recsView'))
@@ -82,6 +84,8 @@ type TabId =
   | 'pages'
   | 'diff'
   | 'compare'
+  | 'program'
+  | 'funnel'
   | 'recommendations'
   | 'experiments'
   | 'tracker'
@@ -98,6 +102,7 @@ type TabId =
 
 const VALID_TAB_IDS = new Set<string>([
   'dashboard', 'audits', 'projects', 'pages', 'diff', 'compare',
+  'program', 'funnel',
   'recommendations', 'experiments', 'tracker', 'aiSearch',
   'roiCalculator', 'billing', 'monitoring', 'timeline', 'reports',
   'achievements', 'assistant', 'team', 'settings',
@@ -376,6 +381,8 @@ export default function WorkspaceClient() {
         { id: 'audits', label: 'All Audits', icon: 'scan' },
         { id: 'pages', label: 'Monitored Pages', icon: 'map' },
         { id: 'projects', label: 'Projects', icon: 'folder' },
+        { id: 'program', label: 'Fix Roadmap', icon: 'check' },
+        { id: 'funnel', label: 'Funnel Scan', icon: 'funnel' },
       ],
     },
     {
@@ -707,7 +714,19 @@ export default function WorkspaceClient() {
           {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { goProject(d); goTab('dashboard'); }} />}
           {tab === 'pages' && <PagesView audits={displayedAudits} latestDetail={projectDetail} />}
           {tab === 'diff' && <DiffView audits={displayedAudits} />}
-          {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} />}
+  {tab === 'program' && (
+    canAccess(planLevel, 'pro')
+      ? <ProgramView domains={projectsList.map((p) => p.domain)} initialDomain={selectedProject !== 'all' ? selectedProject : undefined} />
+      : <LockedTab tabLabel="Fix Roadmap" requiredPlan="pro" currentPlan={planLevel} />
+  )}
+  {tab === 'funnel' && (
+    <FunnelView
+      domains={projectsList.map((p) => p.domain)}
+      initialDomain={selectedProject !== 'all' ? selectedProject : undefined}
+      planLevel={planLevel}
+    />
+  )}
+          {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} planLevel={planLevel} />}
           {tab === 'aiSearch' && <AiSearchView audits={displayedAudits} email={email} />}
           {tab === 'roiCalculator' && <RoiCalculatorView />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={projectDetail} />}
