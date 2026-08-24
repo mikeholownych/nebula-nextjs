@@ -26,6 +26,7 @@ from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.auth.routes import get_current_user
 from platform_api.services.audit_db import audit_db
 from platform_api.services import benchmark_rollups
+from platform_api.services import programs
 from platform_api.services.signal_extract import extract_signal_map
 from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
@@ -568,6 +569,79 @@ async def my_benchmark_position(
         "signals": signals,
         "depth": depth,
     }
+
+
+# ── Paid analytics: sequenced remediation programs (Phase 3 Task 5) ─────────
+
+
+def _require_paid_plan(ent) -> None:
+    """Programs are a paid surface: free plans (or error-degraded
+    resolution, which counts as free) get nothing."""
+    if ent.status == "error" or ent.plan == "free":
+        raise HTTPException(status_code=403, detail={
+            "message": "Remediation programs are a paid feature",
+            "upgrade_url": "/pricing"})
+
+
+@router.get("/analytics/program")
+async def get_remediation_program(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Two-stage remediation roadmap for one of my domains.
+
+    Returns-or-creates the active program; completion is derived live from
+    recommendation states and implemented fixes, and the open steps are
+    regenerated from the current backlog while done/verified/dismissed
+    history is preserved."""
+    email = bind_email(principal, None)
+    ent = await resolve_for_email(email)
+    _require_paid_plan(ent)
+
+    from platform_api.services.domains import registered_domain
+    dom = registered_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+
+    try:
+        await audit_db.connect()
+        return await programs.get_or_create_program(email, dom,
+                                                    audit_db.pool)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("program fetch failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Program unavailable")
+
+
+@router.post("/analytics/program/steps/{step_id}/dismiss")
+async def dismiss_program_step(step_id: str,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Dismiss a program step. Owner-gated: the step's program must belong
+    to the principal's workspace email."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    try:
+        UUID(step_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid step ID")
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """SELECT ps.id AS step_id, p.email AS owner_email
+                   FROM program_steps ps JOIN programs p ON p.id = ps.program_id
+                   WHERE ps.id=$1""", UUID(step_id))
+            if not row or (row["owner_email"] or "").strip().lower() != own:
+                raise HTTPException(status_code=404, detail="Step not found")
+            await conn.execute(
+                "UPDATE program_steps SET status='dismissed',"
+                " updated_at=now() WHERE id=$1", UUID(step_id))
+        return {"id": step_id, "status": "dismissed"}
+    except HTTPException:
+        raise
+    except Exception:
+        logger.error("step dismiss failed for %s", step_id, exc_info=True)
+        raise HTTPException(status_code=503, detail="Dismiss failed")
 
 
 @router.get("/stats/recent-finding")
