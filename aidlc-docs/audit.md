@@ -663,3 +663,7 @@ All DoD gates exercised on production with captured artifacts. Two production de
 ### Commit scope
 - customer-portal/.env.local gitignored (customer-portal/.gitignore:15) and untracked: NOT committed.
 - Docs-only evidence commit: "docs: phase 2 cutover evidence" (no push).
+
+## 2026-08-23 - phase 2 cutover decisions (verbatim)
+- Mike: 'skip' live-money validation this cycle. First real subscription becomes the first true end-to-end validation of Stripe->webhook->entitlement delivery. Sandbox E2E (10/10) + unit/integration coverage stand as the evidence base.
+- Mike: 'proceed' on merge to main + push to nebula-origin.

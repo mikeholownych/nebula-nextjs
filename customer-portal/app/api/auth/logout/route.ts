@@ -42,6 +42,7 @@ async function proxy(request: NextRequest, path: string, method: string): Promis
 export async function POST(request: NextRequest) {
   const response = await proxy(request, '/api/auth/logout', 'POST')
   response.cookies.set('access_token', '', {
+    domain: '.nebulacomponents.com',
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

@@ -257,7 +257,7 @@ const nextConfig: NextConfig = {
       // After static generation lands, bump s-maxage to 300+ for content pages.
       // Dynamic pages (force-dynamic) override this with no-store via Next.js.
       {
-        source: '/((?!_next).*)',
+        source: '/((?!_next|workspace).*)',
         headers: [
           {
             key: 'Cache-Control',

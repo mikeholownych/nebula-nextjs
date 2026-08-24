@@ -60,6 +60,7 @@ export async function POST(request: NextRequest) {
         const parsed = JSON.parse(data) as { access_token?: string }
         if (parsed.access_token) {
           response.cookies.set('access_token', parsed.access_token, {
+            domain: '.nebulacomponents.com',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',

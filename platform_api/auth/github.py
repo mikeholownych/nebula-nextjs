@@ -35,12 +35,16 @@ class GitHubOAuthError(Exception):
     pass
 
 
-async def generate_authorize_url(redis: RedisClient, redirect_uri: str) -> str:
+async def generate_authorize_url(redis: RedisClient, redirect_uri: str, state: Optional[str] = None) -> str:
     """Generate GitHub OAuth authorization URL with CSRF state.
 
     Args:
         redis: Redis client for state storage
         redirect_uri: The callback URL GitHub will redirect to
+        state: Pre-minted CSRF state. When omitted, a fresh one is created
+            and stored (legacy behavior). Callers that already bound a
+            redirect_uri into a state must pass it here so the callback's
+            stored URI matches the authorize request exactly.
 
     Returns:
         Full authorization URL to redirect the user to
@@ -48,7 +52,8 @@ async def generate_authorize_url(redis: RedisClient, redirect_uri: str) -> str:
     if not settings.GITHUB_CLIENT_ID:
         raise GitHubOAuthError("GITHUB_CLIENT_ID not configured")
 
-    state = secrets.token_urlsafe(32)
+    if not state:
+        state = secrets.token_urlsafe(32)
 
     # Store state in Redis with TTL for CSRF validation
     await redis.set(f"github_oauth_state:{state}", {"redirect_uri": redirect_uri}, ttl=STATE_TTL)

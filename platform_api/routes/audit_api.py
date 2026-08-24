@@ -330,6 +330,22 @@ async def finalize_completed_audit(job: dict, data: dict) -> None:
 
     asyncio.create_task(_fire_content_pipeline())
 
+    # Durable findings sync (workspace overhaul). Additive side effect: a sync
+    # failure must never break audit completion, so it is fully guarded.
+    try:
+        from platform_api.services.findings_sync import sync_findings_for_audit
+
+        sync_dsn = (
+            f"host=/var/run/postgresql port=5433 dbname=nebula_audit "
+            f"user=postgres"
+        )
+        sync_result = await asyncio.to_thread(
+            sync_findings_for_audit, str(audit_id), sync_dsn
+        )
+        print(f"[audit_api] findings sync {audit_id}: {sync_result}")
+    except Exception as exc:
+        print(f"[audit_api] findings sync failed for {audit_id}: {exc}")
+
     await analytics.track_audit_completed(
         email=distinct_id,
         score=data.get("score", 0),

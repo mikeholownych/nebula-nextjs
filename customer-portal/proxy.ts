@@ -57,7 +57,9 @@ export function proxy(request: NextRequest) {
   // Redirects unauthenticated browsers away from /workspace to /login.
   // This is NOT the security boundary - every API route, server action, and
   // data-access function independently verifies auth via requireWorkspaceUser().
-  if (pathname === '/workspace' || pathname.startsWith('/workspace/')) {
+  const isWorkspaceRoute = pathname === '/workspace' || pathname.startsWith('/workspace/')
+  let workspaceResponse: NextResponse | null = null
+  if (isWorkspaceRoute) {
     const token = request.cookies.get('access_token')?.value
     if (!token) {
       const loginUrl = new URL('/login', SITE_URL)
@@ -173,6 +175,10 @@ export function proxy(request: NextRequest) {
   // server component that may read it, but skip the Vary/pathname overhead.
   const res = nextWithRequestId(request)
   if (country) res.headers.set('x-nebula-country', country)
+  if (isWorkspaceRoute) {
+    // Session-scoped surface: never let shared caches (CF edge) store a render.
+    res.headers.set('Cache-Control', 'private, no-store')
+  }
   return res
 }
 

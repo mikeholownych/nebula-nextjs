@@ -1,5 +1,9 @@
 import { Metadata } from 'next'
 
+// Session-scoped surface: renders per-user data client-side. Must never be
+// treated as static or cached by any shared cache (CDN or otherwise).
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Workspace - Nebula Components',
   description:

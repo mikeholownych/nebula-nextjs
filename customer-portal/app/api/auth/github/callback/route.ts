@@ -51,6 +51,7 @@ export async function GET(request: NextRequest) {
     const redirectResponse = NextResponse.redirect(new URL('/workspace', SITE_URL))
 
     redirectResponse.cookies.set('access_token', accessToken, {
+      domain: '.nebulacomponents.com',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',

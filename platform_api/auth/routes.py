@@ -22,7 +22,7 @@ from posthog import identify_context, new_context
 from platform_api.config import settings
 from platform_api.db import Organization, User, UserIdentity, get_session
 from platform_api.posthog_client import get_posthog
-from platform_api.redis_client import get_redis
+from platform_api.redis_client import RedisClient, get_redis
 from .google import GoogleOAuthError, verify_google_token
 from .github import GitHubOAuthError, exchange_code_for_token, fetch_github_user, generate_authorize_url, validate_state
 from .jwt import (
@@ -46,6 +46,9 @@ class GoogleAuthRequest(BaseModel):
 
 class MagicLinkRequest(BaseModel):
     email: EmailStr
+    # Which surface the sign-in was requested from; decides which host the
+    # email's verify link points at ("app" = workspace app, default = apex).
+    surface: Optional[str] = None
 
 
 class TokenResponse(BaseModel):
@@ -229,6 +232,49 @@ async def google_auth(
         raise HTTPException(status_code=401, detail=str(e))
 
 
+# --- OAuth redirect-uri policy -------------------------------------------
+# Multiple public surfaces (apex site + workspace app) share one OAuth client.
+# Each surface registers its own callback URI; the caller tells us which one
+# it wants at authorize time, we bind it into the CSRF state, and reuse the
+# identical URI at callback time (Google/GitHub require an exact match).
+
+APP_PUBLIC_BASE_URL = "https://app.nebulacomponents.com"
+
+
+def _allowed_redirect_uris(callback_path: str) -> set:
+    base = settings.PUBLIC_BASE_URL.rstrip("/")
+    return {
+        f"{base}{callback_path}",
+        f"{APP_PUBLIC_BASE_URL}{callback_path}",
+    }
+
+
+async def _resolve_authorize_redirect_uri(
+    redis: RedisClient,
+    requested: str | None,
+    callback_path: str,
+    state_prefix: str,
+    ttl: int = 600,
+) -> tuple[str, str]:
+    """Validate the requested callback URI and mint a bound CSRF state.
+
+    Returns (state, redirect_uri). Falls back to the apex default when the
+    caller omits the parameter (legacy portal behavior).
+    """
+    import secrets
+
+    allowed = _allowed_redirect_uris(callback_path)
+    redirect_uri = settings.PUBLIC_BASE_URL.rstrip("/") + callback_path
+    if requested:
+        if requested not in allowed:
+            raise HTTPException(status_code=400, detail="Unsupported redirect_uri")
+        redirect_uri = requested
+
+    state = secrets.token_urlsafe(32)
+    await redis.set(f"{state_prefix}:{state}", {"redirect_uri": redirect_uri}, ttl=ttl)
+    return state, redirect_uri
+
+
 # --- Magic Link ---
 
 MAGIC_LINK_TTL = 15 * 60  # 15 minutes in seconds
@@ -237,12 +283,16 @@ MAGIC_LINK_TTL = 15 * 60  # 15 minutes in seconds
 @router.post("/magic-link")
 async def request_magic_link(
     body: MagicLinkRequest,
+    request: Request,
     redis = Depends(get_redis)
 ):
     """Request a magic link for passwordless email authentication.
 
     Generates a secure token, stores it in Redis with a 15-minute TTL,
     and sends the login link to the provided email address via AgentMail.
+    The verify URL in the email points back at the surface the user signed
+    in from (apex site or workspace app), so the session cookie lands on
+    the right host. Unknown referers fall back to the apex default.
     """
     import asyncio
     import json as _json
@@ -260,7 +310,15 @@ async def request_magic_link(
         ttl=MAGIC_LINK_TTL,
     )
 
-    magic_url = f"https://nebulacomponents.com/api/auth/verify?token={token}"
+    allowed_bases = {settings.PUBLIC_BASE_URL.rstrip("/"), APP_PUBLIC_BASE_URL}
+    # Surface hint from the calling BFF ("app" = workspace app). Anything
+    # unrecognized falls back to the apex default. Never derived from raw
+    # client input beyond this allowlist.
+    surface_base = APP_PUBLIC_BASE_URL if getattr(body, "surface", None) == "app" else settings.PUBLIC_BASE_URL.rstrip("/")
+    if surface_base not in allowed_bases:
+        surface_base = settings.PUBLIC_BASE_URL.rstrip("/")
+
+    magic_url = f"{surface_base}/api/auth/verify?token={token}"
 
     html_body = f"""
     <html>
@@ -414,6 +472,7 @@ async def verify_magic_link(
     # Set JWT as HTTP-only cookie
     response.set_cookie(
         key="access_token",
+        domain=".nebulacomponents.com",
         value=jwt_token,
         httponly=True,
         secure=True,
@@ -446,22 +505,22 @@ GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 @router.get("/google/authorize")
 async def google_authorize(
     request: Request,
+    redirect_uri: Optional[str] = None,
     redis=Depends(get_redis),
 ):
     """Generate Google OAuth authorization URL (server-side flow).
 
     Returns {url} that the frontend should redirect the browser to.
+    The callback URI is chosen by the calling surface (apex default,
+    workspace app when requested) and bound into the CSRF state so the
+    callback exchanges the code with an exactly matching URI.
     """
-    import secrets
-
     if not settings.GOOGLE_CLIENT_ID:
         raise HTTPException(status_code=500, detail="GOOGLE_CLIENT_ID not configured")
 
-    state = secrets.token_urlsafe(32)
-    await redis.set(f"google_oauth_state:{state}", {"ts": "1"}, ttl=600)
-
-    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
-    redirect_uri = f"{base_url}{GOOGLE_CALLBACK_PATH}"
+    state, redirect_uri = await _resolve_authorize_redirect_uri(
+        redis, redirect_uri, GOOGLE_CALLBACK_PATH, "google_oauth_state"
+    )
 
     params = (
         f"client_id={settings.GOOGLE_CLIENT_ID}"
@@ -499,8 +558,17 @@ async def google_callback(
         raise HTTPException(status_code=401, detail="Invalid or expired OAuth state")
     await redis.delete(state_key)
 
-    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
-    redirect_uri = f"{base_url}{GOOGLE_CALLBACK_PATH}"
+    # The redirect_uri is bound into the CSRF state at authorize time and
+    # must be reused verbatim for the token exchange (Google requires an
+    # exact match). Falls back to the legacy apex default.
+    state_redirect = ""
+    if isinstance(state_data, dict):
+        state_redirect = state_data.get("redirect_uri") or ""
+    if state_redirect:
+        redirect_uri = state_redirect
+    else:
+        base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+        redirect_uri = f"{base_url}{GOOGLE_CALLBACK_PATH}"
 
     # Exchange code for tokens
     async with httpx.AsyncClient() as client:
@@ -598,6 +666,7 @@ async def google_callback(
     # Set cookie
     response.set_cookie(
         key="access_token",
+        domain=".nebulacomponents.com",
         value=token,
         httponly=True,
         secure=True,
@@ -628,19 +697,23 @@ GITHUB_CALLBACK_PATH = "/api/auth/github/callback"
 @router.get("/github/authorize")
 async def github_authorize(
     request: Request,
+    redirect_uri: Optional[str] = None,
     redis=Depends(get_redis),
 ):
     """Generate GitHub OAuth authorization URL.
 
     Returns {url} that the frontend should redirect the browser to.
+    The callback URI is chosen by the calling surface (apex default,
+    workspace app when requested) and validated against an allowlist.
     """
     # Use the public-facing base URL for the redirect URI
     # (GitHub redirects to the Next.js frontend, not the internal API)
-    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
-    redirect_uri = f"{base_url}{GITHUB_CALLBACK_PATH}"
+    state, resolved_redirect_uri = await _resolve_authorize_redirect_uri(
+        redis, redirect_uri, GITHUB_CALLBACK_PATH, "github_oauth_state"
+    )
 
     try:
-        url = await generate_authorize_url(redis, redirect_uri)
+        url = await generate_authorize_url(redis, resolved_redirect_uri, state)
         return {"url": url}
     except GitHubOAuthError as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -661,12 +734,17 @@ async def github_callback(
     creates JWT session, and returns TokenResponse.
     """
     try:
-        # Validate CSRF state
-        await validate_state(redis, state)
+        # Validate CSRF state and recover the redirect_uri bound at authorize
+        state_data = await validate_state(redis, state)
 
-        # Build redirect_uri (must match what was used in authorize)
-        base_url = settings.PUBLIC_BASE_URL.rstrip("/")
-        redirect_uri = f"{base_url}{GITHUB_CALLBACK_PATH}"
+        # The exchange must reuse the identical redirect_uri that was used in
+        # the authorize request (GitHub requires an exact match).
+        bound = (state_data or {}).get("redirect_uri") if isinstance(state_data, dict) else None
+        if bound:
+            redirect_uri = bound
+        else:
+            base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+            redirect_uri = f"{base_url}{GITHUB_CALLBACK_PATH}"
 
         # Exchange code for access token
         access_token = await exchange_code_for_token(code, redirect_uri)
