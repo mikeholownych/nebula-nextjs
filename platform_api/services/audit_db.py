@@ -603,7 +603,10 @@ class AuditDB:
             return result[:limit]
 
     async def count_completed_this_month(self, email: str) -> int:
-        """Count completed audits for an email within current calendar month (UTC)."""
+        """Count completed audits for an email within current calendar month (UTC).
+
+        Funnel page audits (source='funnel') are covered by their run
+        entitlement and never consume audits_per_month."""
         await self.connect()
         email_clean = (email or "").strip().lower()
         async with self.pool.acquire() as conn:
@@ -614,6 +617,7 @@ class AuditDB:
                 WHERE LOWER(email) = $1
                   AND status = 'completed'
                   AND created_at >= date_trunc('month', NOW() AT TIME ZONE 'UTC')
+                  AND (source IS NULL OR source <> 'funnel')
                 """,
                 email_clean,
             )

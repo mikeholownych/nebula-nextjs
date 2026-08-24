@@ -644,6 +644,137 @@ async def dismiss_program_step(step_id: str,
         raise HTTPException(status_code=503, detail="Dismiss failed")
 
 
+# ── Paid analytics: funnel orchestrator (Phase 3 Task 6) ────────────────────
+
+
+class FunnelRunRequest(BaseModel):
+    domain: str
+
+
+def _iso(value) -> Optional[str]:
+    """Serialize datetime-or-string timestamps without assuming a type."""
+    if value is None:
+        return None
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return str(value)
+
+
+@router.post("/funnel/runs")
+async def create_funnel_run(body: FunnelRunRequest,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Start a funnel run for one of my domains (session-gated).
+
+    Free plans get exactly one lifetime teaser run capped at
+    TEASER_FUNNEL_URLS; paid plans are bounded per calendar month by
+    funnel_runs_per_month with fan-out capped at funnel_urls_per_run.
+    Discovery failure persists a failed run with the reason in
+    scorecard.error and still answers 200."""
+    email = bind_email(principal, None)
+    from platform_api.services import funnel
+    dom = funnel.normalize_domain(body.domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+    ent = await resolve_for_email(email)
+    try:
+        await audit_db.connect()
+        return await funnel.create_run(email, dom, ent, audit_db.pool)
+    except HTTPException:
+        raise
+    except UniqueViolationError:
+        raise HTTPException(status_code=409, detail={
+            "message": "A run is already active for this domain"})
+    except Exception as e:
+        logger.error("funnel run create failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel unavailable")
+
+
+@router.get("/funnel/runs")
+async def get_latest_funnel_run(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Latest funnel run for my domain with scorecard + pages summary."""
+    email = bind_email(principal, None)
+    from platform_api.services import funnel
+    dom = funnel.normalize_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            run = await conn.fetchrow(
+                """SELECT id, domain, status, requested_count,
+                          discovered_count, plan_snapshot, scorecard,
+                          coverage_pct, created_at, completed_at
+                   FROM funnel_runs WHERE email=$1 AND domain=$2
+                   ORDER BY created_at DESC LIMIT 1""", email, dom)
+            if run is None:
+                raise HTTPException(status_code=404,
+                                    detail="No funnel run for this domain")
+            pages = await conn.fetch(
+                """SELECT fp.url AS url,
+                          CASE WHEN fp.status IN ('done','failed')
+                               THEN fp.status
+                               WHEN a.status='completed' THEN 'done'
+                               WHEN a.status='failed' THEN 'failed'
+                               ELSE fp.status END AS status,
+                          COALESCE(a.score, fp.score) AS score
+                   FROM funnel_pages fp
+                   LEFT JOIN audits a ON a.id = fp.audit_id
+                   WHERE fp.run_id=$1 ORDER BY fp.created_at""", run["id"])
+        scorecard = run["scorecard"]
+        if isinstance(scorecard, str):
+            try:
+                scorecard = json.loads(scorecard)
+            except json.JSONDecodeError:
+                scorecard = None
+        return {
+            "run": {
+                "id": str(run["id"]),
+                "domain": run["domain"],
+                "status": run["status"],
+                "requested_count": run["requested_count"],
+                "discovered_count": run["discovered_count"],
+                "plan": run["plan_snapshot"],
+                "scorecard": scorecard,
+                "coverage_pct": (
+                    float(run["coverage_pct"])
+                    if run["coverage_pct"] is not None else None),
+                "created_at": _iso(run["created_at"]),
+                "completed_at": _iso(run["completed_at"]),
+            },
+            "pages": [
+                {"url": p["url"], "status": p["status"],
+                 "score": float(p["score"]) if p["score"] is not None else None}
+                for p in pages
+            ],
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("funnel run lookup failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel unavailable")
+
+
+@router.post("/funnel/sweep",
+             dependencies=[Depends(internal_service_dependency)])
+async def funnel_sweep(request: Request):
+    """Internal: reconcile funnel page states from their audits and finalize
+    every fully-terminal running run. Called hourly by analytics_cron.sh
+    after the rollups refresh."""
+    require_internal_service(request)
+    try:
+        from platform_api.services import funnel
+        await audit_db.connect()
+        processed = await funnel.sweep_completed(audit_db.pool)
+    except Exception as e:
+        logger.error("funnel sweep failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel sweep failed")
+    return {"status": "ok", "processed": processed}
+
+
 @router.get("/stats/recent-finding")
 async def get_recent_finding():
     """Return the highest-impact finding from the most recent completed audit.

@@ -25,4 +25,9 @@ echo "$(date -u +%FT%TZ) rollups-refresh -> $RCODE $(head -c 200 /tmp/opencode/r
   >> /home/mike/nebula/logs/analytics_cron.log
 [ "$RCODE" = "200" ] || [ "$RCODE" = "000" ] || exit 1
 
-# Task 6 will append the funnel sweep call here.
+FCODE=$(curl -s -o /tmp/opencode/funnel_sweep.json -w "%{http_code}" \
+  -X POST http://127.0.0.1:8001/audit/funnel/sweep \
+  -H "Authorization: Bearer $SECRET" || echo 000)
+echo "$(date -u +%FT%TZ) funnel-sweep -> $FCODE $(head -c 200 /tmp/opencode/funnel_sweep.json 2>/dev/null)" \
+  >> /home/mike/nebula/logs/analytics_cron.log
+[ "$FCODE" = "200" ] || [ "$FCODE" = "000" ] || exit 1
