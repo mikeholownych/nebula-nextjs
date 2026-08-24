@@ -25,6 +25,8 @@ from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.auth.routes import get_current_user
 from platform_api.services.audit_db import audit_db
+from platform_api.services import benchmark_rollups
+from platform_api.services.signal_extract import extract_signal_map
 from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
 from platform_api.infra.circuit_breaker import CircuitBreaker, CircuitOpenError
@@ -489,6 +491,83 @@ async def get_benchmarks():
         return await audit_db.get_benchmarks()
     except Exception:
         raise HTTPException(status_code=503, detail="Benchmarks unavailable")
+
+
+# ── Paid analytics: rollups + personal positioning (Phase 3 Task 4) ─────────
+
+
+def _require_analytics_depth(ent) -> str:
+    """analytics_depth 'none' (or error-degraded resolution) gets nothing."""
+    depth = getattr(ent, "analytics_depth", None)
+    if ent.status == "error" or not depth or depth == "none":
+        raise HTTPException(status_code=403, detail={
+            "message": "Analytics benchmarks are a paid feature",
+            "upgrade_url": "/pricing"})
+    return depth
+
+
+@router.post("/analytics/rollups/refresh",
+             dependencies=[Depends(internal_service_dependency)])
+async def refresh_benchmark_rollups(request: Request,
+                                    days: int = Query(90, ge=1, le=365)):
+    """Internal: compute and persist one global benchmark rollup.
+
+    Called hourly by scripts/analytics_cron.sh after the monitors runner."""
+    require_internal_service(request)
+    try:
+        summary = await benchmark_rollups.refresh_rollups(days=days)
+    except Exception as e:
+        logger.error("benchmark rollup refresh failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=503, detail="Rollup refresh failed")
+    return {"status": "ok", **summary}
+
+
+@router.get("/analytics/benchmarks/me")
+async def my_benchmark_position(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Personal percentile position against the corpus for one of my domains.
+
+    Composite percentile interpolates my latest completed audit's score
+    against the stored p25/p50/p75/p90; each signal is a pass/fail marker
+    against the corpus pass rate. Gated by plan analytics_depth."""
+    email = bind_email(principal, None)
+    ent = await resolve_for_email(email)
+    depth = _require_analytics_depth(ent)
+
+    from platform_api.services.domains import registered_domain
+    dom = registered_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+
+    mine = await benchmark_rollups.latest_completed_audit_for_domain(email, dom)
+    if mine is None:
+        raise HTTPException(status_code=404,
+                            detail="No completed audit for this domain")
+
+    rollup = await benchmark_rollups.latest_rollup()
+    if rollup is None:
+        raise HTTPException(status_code=503,
+                            detail="No benchmark rollup available yet")
+
+    overall = benchmark_rollups.interpolate_percentile(
+        rollup["composite"], mine.get("score"))
+    corpus_signals = rollup["signals"]
+    yours = extract_signal_map(mine.get("engine_output"))
+    signals = {
+        key: {
+            "you_pass": bool(passed),
+            "corpus_ok_rate": (corpus_signals.get(key) or {}).get("ok_rate"),
+        }
+        for key, passed in sorted(yours.items())
+    }
+    computed_at = rollup.get("computed_at")
+    return {
+        "overall_percentile": overall,
+        "computed_at": computed_at.isoformat() if computed_at else None,
+        "signals": signals,
+        "depth": depth,
+    }
 
 
 @router.get("/stats/recent-finding")
