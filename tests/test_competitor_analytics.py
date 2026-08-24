@@ -61,6 +61,13 @@ class FakeSession:
         self.executed.append((text, params))
         if "FROM users" in text:
             return FakeResult(row=SimpleNamespace(email=OWNER_EMAIL))
+        if "INSERT INTO competitor_tracking" in text:
+            return FakeResult(row=SimpleNamespace(
+                id=str(uuid4()),
+                competitor_url=params["url"],
+                label=params["label"],
+                created_at=None,
+            ))
         if "FROM competitor_tracking" in text:
             return FakeResult(rows=self.legacy_rows)
         return FakeResult()
@@ -163,11 +170,35 @@ ENGINE_OUTPUT = {
 }
 
 
-# ─── scenario 1: slot denial ──────────────────────────────────────────────────
+# ─── scenario 1: slot enforcement (free legacy parity vs paid entitlements) ──
 
 
-def test_add_competitor_denied_when_slots_exhausted(monkeypatch):
-    ent = SimpleNamespace(competitor_slots=2)
+UPGRADE_403 = {
+    "message": "Competitor slots reached",
+    "upgrade_url": "/pricing",
+}
+
+
+def _linked(monkeypatch, pool, urls):
+    async def fetch(self, sql, *params):
+        self._log.append((sql, params))
+        return [{"competitor_url": u} for u in urls]
+
+    monkeypatch.setattr(FakeConn, "fetch", fetch)
+    monkeypatch.setattr(competitor_routes.audit_db, "pool", pool)
+
+
+def _add(url):
+    body = competitor_routes.CompetitorCreateRequest(url=url)
+    return asyncio.run(
+        competitor_routes.add_competitor(body, BackgroundTasks(), current_user())
+    )
+
+
+def test_add_competitor_free_third_rival_allowed(monkeypatch):
+    """Free keeps grandfathered parity: 2 rivals used, third is allowed
+    even though the entitlement fixture grants free 0 slots."""
+    ent = SimpleNamespace(plan="free", competitor_slots=0)
     monkeypatch.setattr(
         "platform_api.services.entitlements.resolve_sync",
         lambda email, db: ent,
@@ -176,28 +207,62 @@ def test_add_competitor_denied_when_slots_exhausted(monkeypatch):
     monkeypatch.setattr(
         "platform_api.db.session.SessionLocal", lambda: fake_session
     )
-    pool = FakePool()
+    _linked(monkeypatch, FakePool(), [
+        "https://rival-a.com", "https://rival-b.com",
+    ])
 
-    async def two_rivals(self, sql, *params):
-        self._log.append((sql, params))
-        return [
-            {"competitor_url": "https://rival-a.com"},
-            {"competitor_url": "https://rival-b.com"},
-        ]
+    result = _add("https://rival-c.com")
+    assert result["url"] == "https://rival-c.com"
+    assert result["audit_triggered"] is True
+    inserts = [
+        e for e in fake_session.executed
+        if "INSERT INTO competitor_tracking" in e[0]
+    ]
+    assert inserts and inserts[0][1]["url"] == "https://rival-c.com"
 
-    monkeypatch.setattr(FakeConn, "fetch", two_rivals)
-    monkeypatch.setattr(competitor_routes.audit_db, "pool", pool)
 
-    body = competitor_routes.CompetitorCreateRequest(url="https://rival-c.com")
+def test_add_competitor_free_fourth_rival_denied(monkeypatch):
+    """Free's fourth rival exceeds the legacy three-slot parity: 403 with
+    the standard upgrade shape."""
+    ent = SimpleNamespace(plan="free", competitor_slots=0)
+    monkeypatch.setattr(
+        "platform_api.services.entitlements.resolve_sync",
+        lambda email, db: ent,
+    )
+    fake_session = FakeSession()
+    monkeypatch.setattr(
+        "platform_api.db.session.SessionLocal", lambda: fake_session
+    )
+    _linked(monkeypatch, FakePool(), [
+        "https://rival-a.com", "https://rival-b.com", "https://rival-c.com",
+    ])
+
     with pytest.raises(HTTPException) as exc:
-        asyncio.run(
-            competitor_routes.add_competitor(body, BackgroundTasks(), current_user())
-        )
+        _add("https://rival-d.com")
     assert exc.value.status_code == 403
-    assert exc.value.detail == {
-        "message": "Competitor slots reached",
-        "upgrade_url": "/pricing",
-    }
+    assert exc.value.detail == UPGRADE_403
+
+
+def test_add_competitor_pro_limited_by_entitlement_slots(monkeypatch):
+    """Pro gets full diagnostics but only its entitlement slots (2): a
+    third rival is denied even though legacy parity allows 3."""
+    ent = SimpleNamespace(plan="pro", competitor_slots=2)
+    monkeypatch.setattr(
+        "platform_api.services.entitlements.resolve_sync",
+        lambda email, db: ent,
+    )
+    fake_session = FakeSession()
+    monkeypatch.setattr(
+        "platform_api.db.session.SessionLocal", lambda: fake_session
+    )
+    _linked(monkeypatch, FakePool(), [
+        "https://rival-a.com", "https://rival-b.com",
+    ])
+
+    with pytest.raises(HTTPException) as exc:
+        _add("https://rival-c.com")
+    assert exc.value.status_code == 403
+    assert exc.value.detail == UPGRADE_403
 
 
 # ─── scenario 2: persistence of rival audit link ─────────────────────────────

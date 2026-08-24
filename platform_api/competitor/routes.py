@@ -1,8 +1,11 @@
 """Competitor benchmark tracking routes.
 
-Users track up to 3 competitor URLs. Competitors are audited with the same
-engine (score only - findings are never exposed). Scores are stored on the
-0-100 display scale to match the workspace dashboard.
+Free workspaces keep legacy parity: up to 3 tracked rivals, score-only
+comparison (paid diagnostics are never exposed to them - frontend gating
+handles the surface). Paid tiers use their entitlement slots (pro 2 /
+growth 5 / agency 10) with full diagnostics. Rival audits run on the same
+engine and persist full findings for later upgrade value. Scores are
+stored on the 0-100 display scale to match the workspace dashboard.
 """
 
 import asyncio
@@ -20,6 +23,7 @@ from platform_api.services.audit_db import audit_db
 router = APIRouter(prefix="/api/competitors", tags=["competitors"])
 
 MAX_COMPETITORS = 3
+FREE_LEGACY_COMPETITOR_SLOTS = 3
 AUDIT_API_URL = "http://localhost:8001/audit/run"
 
 
@@ -42,6 +46,18 @@ def _owner_email(session, user_id: str) -> Optional[str]:
         {"uid": user_id},
     ).fetchone()
     return row.email if row and row.email else None
+
+
+def effective_slots(email: Optional[str], ent) -> int:
+    """Slots this workspace may occupy.
+
+    Free keeps grandfathered parity with the legacy three-rival cap
+    (entitlement fixture says 0, spec 2026-08-24 restores 3). Paid tiers
+    use their plan's entitlement slots.
+    """
+    if getattr(ent, "plan", None) == "free":
+        return FREE_LEGACY_COMPETITOR_SLOTS
+    return ent.competitor_slots
 
 
 async def _linked_competitor_urls(owner_email: str) -> set:
@@ -171,8 +187,9 @@ async def add_competitor(
     session = SessionLocal()
     try:
         owner_email = _owner_email(session, user_id)
-        # Plan-driven slot enforcement (Phase 3): free has 0 slots, pro 2,
-        # growth 5, agency 10. resolve_sync fails open to free internally.
+        # Plan-driven slot enforcement (Phase 3): free is grandfathered at
+        # legacy parity (3 rivals); paid tiers use entitlement slots
+        # (pro 2, growth 5, agency 10). resolve_sync fails open to free.
         if not owner_email:
             raise HTTPException(
                 status_code=403,
@@ -180,11 +197,10 @@ async def add_competitor(
             )
         from platform_api.services.entitlements import resolve_sync
         ent = resolve_sync(owner_email, session)
-        # Usage = distinct rival URLs with persisted audits for this owner,
-        # UNION legacy competitor_tracking rows that have NO linked audits yet.
-        # A refreshed legacy rival is already counted via its competitor_audits
-        # link, so union semantics avoid double-charging the same slot; only
-        # never-audited legacy rows consume an extra slot.
+        # Usage = DISTINCT rival URLs across BOTH sources:
+        # competitor_audits links (post-persistence era) UNION this user's
+        # competitor_tracking rows (legacy era). Set union avoids double
+        # charging a rival that exists in both.
         from sqlalchemy import text
         legacy_rows = session.execute(
             text("""
@@ -195,7 +211,7 @@ async def add_competitor(
         ).fetchall()
         linked_urls = await _linked_competitor_urls(owner_email)
         usage = len(linked_urls | {r.competitor_url for r in legacy_rows})
-        if usage >= ent.competitor_slots:
+        if usage >= effective_slots(owner_email, ent):
             raise HTTPException(
                 status_code=403,
                 detail={
