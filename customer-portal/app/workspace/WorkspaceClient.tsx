@@ -46,6 +46,8 @@ export interface WorkspaceAudit {
   created_at?: string
   completed_at?: string | null
   screenshot_url?: string | null
+  page_intent?: string | null
+  intent_confidence?: number | null
 }
 
 export interface AuditFinding {
