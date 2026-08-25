@@ -154,6 +154,13 @@ class Subscription(Base):
     current_period_end: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     cancel_at_period_end: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     livemode: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    welcome_email_enqueued_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    welcome_email_attempts: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0
+    )
+    welcome_email_last_error: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # Relationships
     organization: Mapped["Organization"] = relationship(back_populates="subscriptions")
