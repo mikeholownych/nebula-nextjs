@@ -34,6 +34,11 @@ export const TAB_ACCESS_REQUIREMENTS: Record<string, AccessLevel> = {
   dashboard: 'free',
   billing: 'free',
   settings: 'free',
+  // Paid analytics (Phase 3): roadmap requires Pro; the funnel tab stays
+  // visible to free so their single teaser run has a home - depth gating
+  // happens inside funnelView after the teaser is consumed.
+  program: 'pro',
+  funnel: 'free',
 }
 
 const PLAN_RANK: Record<AccessLevel, number> = {
@@ -119,6 +124,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
         {tabLabel === 'Experiments' && 'A/B test tracker linked to your audit findings.'}
         {tabLabel === 'Experiment Tracker' && 'Track experiment outcomes and mark winners as production.'}
         {tabLabel === 'Team' && 'Invite team members and share workspace access.'}
+        {tabLabel === 'Fix Roadmap' && 'A sequenced two-stage roadmap of quick wins and major projects, rebuilt from your live findings.'}
       </p>
     </div>
   )

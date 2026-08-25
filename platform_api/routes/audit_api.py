@@ -25,6 +25,9 @@ from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.auth.routes import get_current_user
 from platform_api.services.audit_db import audit_db
+from platform_api.services import benchmark_rollups
+from platform_api.services import programs
+from platform_api.services.signal_extract import extract_signal_map
 from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
 from platform_api.infra.circuit_breaker import CircuitBreaker, CircuitOpenError
@@ -489,6 +492,287 @@ async def get_benchmarks():
         return await audit_db.get_benchmarks()
     except Exception:
         raise HTTPException(status_code=503, detail="Benchmarks unavailable")
+
+
+# ── Paid analytics: rollups + personal positioning (Phase 3 Task 4) ─────────
+
+
+def _require_analytics_depth(ent) -> str:
+    """analytics_depth 'none' (or error-degraded resolution) gets nothing."""
+    depth = getattr(ent, "analytics_depth", None)
+    if ent.status == "error" or not depth or depth == "none":
+        raise HTTPException(status_code=403, detail={
+            "message": "Analytics benchmarks are a paid feature",
+            "upgrade_url": "/pricing"})
+    return depth
+
+
+@router.post("/analytics/rollups/refresh",
+             dependencies=[Depends(internal_service_dependency)])
+async def refresh_benchmark_rollups(request: Request,
+                                    days: int = Query(90, ge=1, le=365)):
+    """Internal: compute and persist one global benchmark rollup.
+
+    Called hourly by scripts/analytics_cron.sh after the monitors runner."""
+    require_internal_service(request)
+    try:
+        summary = await benchmark_rollups.refresh_rollups(days=days)
+    except Exception as e:
+        logger.error("benchmark rollup refresh failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=503, detail="Rollup refresh failed")
+    return {"status": "ok", **summary}
+
+
+@router.get("/analytics/benchmarks/me")
+async def my_benchmark_position(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Personal percentile position against the corpus for one of my domains.
+
+    Composite percentile interpolates my latest completed audit's score
+    against the stored p25/p50/p75/p90; each signal is a pass/fail marker
+    against the corpus pass rate. Gated by plan analytics_depth."""
+    email = bind_email(principal, None)
+    ent = await resolve_for_email(email)
+    depth = _require_analytics_depth(ent)
+
+    from platform_api.services.domains import registered_domain
+    dom = registered_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+
+    mine = await benchmark_rollups.latest_completed_audit_for_domain(email, dom)
+    if mine is None:
+        raise HTTPException(status_code=404,
+                            detail="No completed audit for this domain")
+
+    rollup = await benchmark_rollups.latest_rollup()
+    if rollup is None:
+        raise HTTPException(status_code=503,
+                            detail="No benchmark rollup available yet")
+
+    overall = benchmark_rollups.interpolate_percentile(
+        rollup["composite"], mine.get("score"))
+    corpus_signals = rollup["signals"]
+    yours = extract_signal_map(mine.get("engine_output"))
+    signals = {
+        key: {
+            "you_pass": bool(passed),
+            "corpus_ok_rate": (corpus_signals.get(key) or {}).get("ok_rate"),
+        }
+        for key, passed in sorted(yours.items())
+    }
+    computed_at = rollup.get("computed_at")
+    return {
+        "overall_percentile": overall,
+        "computed_at": computed_at.isoformat() if computed_at else None,
+        "signals": signals,
+        "depth": depth,
+    }
+
+
+# ── Paid analytics: sequenced remediation programs (Phase 3 Task 5) ─────────
+
+
+def _require_paid_plan(ent) -> None:
+    """Programs are a paid surface: free plans (or error-degraded
+    resolution, which counts as free) get nothing."""
+    if ent.status == "error" or ent.plan == "free":
+        raise HTTPException(status_code=403, detail={
+            "message": "Remediation programs are a paid feature",
+            "upgrade_url": "/pricing"})
+
+
+@router.get("/analytics/program")
+async def get_remediation_program(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Two-stage remediation roadmap for one of my domains.
+
+    Returns-or-creates the active program; completion is derived live from
+    recommendation states and implemented fixes, and the open steps are
+    regenerated from the current backlog while done/verified/dismissed
+    history is preserved."""
+    email = bind_email(principal, None)
+    ent = await resolve_for_email(email)
+    _require_paid_plan(ent)
+
+    from platform_api.services.domains import registered_domain
+    dom = registered_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+
+    try:
+        await audit_db.connect()
+        return await programs.get_or_create_program(email, dom,
+                                                    audit_db.pool)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("program fetch failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Program unavailable")
+
+
+@router.post("/analytics/program/steps/{step_id}/dismiss")
+async def dismiss_program_step(step_id: str,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Dismiss a program step. Owner-gated: the step's program must belong
+    to the principal's workspace email."""
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    try:
+        UUID(step_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid step ID")
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """SELECT ps.id AS step_id, p.email AS owner_email
+                   FROM program_steps ps JOIN programs p ON p.id = ps.program_id
+                   WHERE ps.id=$1""", UUID(step_id))
+            if not row or (row["owner_email"] or "").strip().lower() != own:
+                raise HTTPException(status_code=404, detail="Step not found")
+            await conn.execute(
+                "UPDATE program_steps SET status='dismissed',"
+                " updated_at=now() WHERE id=$1", UUID(step_id))
+        return {"id": step_id, "status": "dismissed"}
+    except HTTPException:
+        raise
+    except Exception:
+        logger.error("step dismiss failed for %s", step_id, exc_info=True)
+        raise HTTPException(status_code=503, detail="Dismiss failed")
+
+
+# ── Paid analytics: funnel orchestrator (Phase 3 Task 6) ────────────────────
+
+
+class FunnelRunRequest(BaseModel):
+    domain: str
+
+
+def _iso(value) -> Optional[str]:
+    """Serialize datetime-or-string timestamps without assuming a type."""
+    if value is None:
+        return None
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return str(value)
+
+
+@router.post("/funnel/runs")
+async def create_funnel_run(body: FunnelRunRequest,
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+    """Start a funnel run for one of my domains (session-gated).
+
+    Free plans get exactly one lifetime teaser run capped at
+    TEASER_FUNNEL_URLS; paid plans are bounded per calendar month by
+    funnel_runs_per_month with fan-out capped at funnel_urls_per_run.
+    Discovery failure persists a failed run with the reason in
+    scorecard.error and still answers 200."""
+    email = bind_email(principal, None)
+    from platform_api.services import funnel
+    dom = funnel.normalize_domain(body.domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+    ent = await resolve_for_email(email)
+    try:
+        await audit_db.connect()
+        return await funnel.create_run(email, dom, ent, audit_db.pool)
+    except HTTPException:
+        raise
+    except UniqueViolationError:
+        raise HTTPException(status_code=409, detail={
+            "message": "A run is already active for this domain"})
+    except Exception as e:
+        logger.error("funnel run create failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel unavailable")
+
+
+@router.get("/funnel/runs")
+async def get_latest_funnel_run(
+        domain: str = Query(..., min_length=4, max_length=255),
+        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ))):
+    """Latest funnel run for my domain with scorecard + pages summary."""
+    email = bind_email(principal, None)
+    from platform_api.services import funnel
+    dom = funnel.normalize_domain(domain)
+    if dom is None:
+        raise HTTPException(status_code=400, detail="Bad domain")
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            run = await conn.fetchrow(
+                """SELECT id, domain, status, requested_count,
+                          discovered_count, plan_snapshot, scorecard,
+                          coverage_pct, created_at, completed_at
+                   FROM funnel_runs WHERE email=$1 AND domain=$2
+                   ORDER BY created_at DESC LIMIT 1""", email, dom)
+            if run is None:
+                raise HTTPException(status_code=404,
+                                    detail="No funnel run for this domain")
+            pages = await conn.fetch(
+                """SELECT fp.url AS url,
+                          CASE WHEN fp.status IN ('done','failed')
+                               THEN fp.status
+                               WHEN a.status='completed' THEN 'done'
+                               WHEN a.status='failed' THEN 'failed'
+                               ELSE fp.status END AS status,
+                          COALESCE(a.score, fp.score) AS score
+                   FROM funnel_pages fp
+                   LEFT JOIN audits a ON a.id = fp.audit_id
+                   WHERE fp.run_id=$1 ORDER BY fp.created_at""", run["id"])
+        scorecard = run["scorecard"]
+        if isinstance(scorecard, str):
+            try:
+                scorecard = json.loads(scorecard)
+            except json.JSONDecodeError:
+                scorecard = None
+        return {
+            "run": {
+                "id": str(run["id"]),
+                "domain": run["domain"],
+                "status": run["status"],
+                "requested_count": run["requested_count"],
+                "discovered_count": run["discovered_count"],
+                "plan": run["plan_snapshot"],
+                "scorecard": scorecard,
+                "coverage_pct": (
+                    float(run["coverage_pct"])
+                    if run["coverage_pct"] is not None else None),
+                "created_at": _iso(run["created_at"]),
+                "completed_at": _iso(run["completed_at"]),
+            },
+            "pages": [
+                {"url": p["url"], "status": p["status"],
+                 "score": float(p["score"]) if p["score"] is not None else None}
+                for p in pages
+            ],
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("funnel run lookup failed for %s/%s: %s", email, dom, e,
+                     exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel unavailable")
+
+
+@router.post("/funnel/sweep",
+             dependencies=[Depends(internal_service_dependency)])
+async def funnel_sweep(request: Request):
+    """Internal: reconcile funnel page states from their audits and finalize
+    every fully-terminal running run. Called hourly by analytics_cron.sh
+    after the rollups refresh."""
+    require_internal_service(request)
+    try:
+        from platform_api.services import funnel
+        await audit_db.connect()
+        processed = await funnel.sweep_completed(audit_db.pool)
+    except Exception as e:
+        logger.error("funnel sweep failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=503, detail="Funnel sweep failed")
+    return {"status": "ok", "processed": processed}
 
 
 @router.get("/stats/recent-finding")

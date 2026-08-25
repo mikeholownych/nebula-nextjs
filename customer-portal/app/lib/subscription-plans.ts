@@ -18,6 +18,10 @@ export interface SubscriptionPlan {
   }
   auditQuotaPerMonth: number | 'unlimited'
   monitoredUrls: number | 'unlimited'
+  competitorSlots: number
+  funnelRunsPerMonth: number | null
+  funnelUrlsPerRun: number
+  analyticsDepth: 'none' | 'percentile' | 'segment'
   teamSeats: number | 'unlimited'
   clientWorkspaces: number
   features: string[]
@@ -34,6 +38,10 @@ export const SUBSCRIPTION_PLANS: Record<PlanKey, SubscriptionPlan> = {
     stripe: { product: null, monthlyPrice: null, annualPrice: null },
     auditQuotaPerMonth: 1,
     monitoredUrls: 0,
+    competitorSlots: 0,
+    funnelRunsPerMonth: 0,
+    funnelUrlsPerRun: 0,
+    analyticsDepth: 'none',
     teamSeats: 1,
     clientWorkspaces: 0,
     features: [
@@ -56,6 +64,10 @@ export const SUBSCRIPTION_PLANS: Record<PlanKey, SubscriptionPlan> = {
     },
     auditQuotaPerMonth: 20,
     monitoredUrls: 3,
+    competitorSlots: 2,
+    funnelRunsPerMonth: 3,
+    funnelUrlsPerRun: 10,
+    analyticsDepth: 'percentile',
     teamSeats: 1,
     clientWorkspaces: 0,
     features: [
@@ -82,6 +94,10 @@ export const SUBSCRIPTION_PLANS: Record<PlanKey, SubscriptionPlan> = {
     },
     auditQuotaPerMonth: 'unlimited',
     monitoredUrls: 10,
+    competitorSlots: 5,
+    funnelRunsPerMonth: 10,
+    funnelUrlsPerRun: 25,
+    analyticsDepth: 'segment',
     teamSeats: 5,
     clientWorkspaces: 0,
     highlighted: true,
@@ -110,6 +126,10 @@ export const SUBSCRIPTION_PLANS: Record<PlanKey, SubscriptionPlan> = {
     },
     auditQuotaPerMonth: 'unlimited',
     monitoredUrls: 'unlimited',
+    competitorSlots: 10,
+    funnelRunsPerMonth: null,
+    funnelUrlsPerRun: 100,
+    analyticsDepth: 'segment',
     teamSeats: 'unlimited',
     clientWorkspaces: 25,
     features: [

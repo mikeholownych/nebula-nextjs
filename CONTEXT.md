@@ -165,3 +165,19 @@ Cloudflare cache purge after static asset changes:
 - **Monitoring engine**: the platform `/audit/monitors` CRUD + `run-due` runner +
   regression alert emails in nebula_audit. The portal `monitored_pages` tables are dormant.
 - **Cadence clamp**: per-plan restriction of monitor cadence (Pro -> monthly only).
+
+## Paid Analytics Glossary (2026-08-24)
+
+- **Funnel run**: a batch audit of one domain's pages discovered from its sitemap,
+  stored in `nebula_audit.funnel_runs` + `funnel_pages`. One active run per domain.
+- **Teaser rule**: every workspace email may run exactly ONE lifetime funnel run
+  capped at 3 URLs regardless of plan; enforced by counting prior
+  `plan_snapshot='teaser'` runs.
+- **Rival link**: row in `competitor_audits` mapping a workspace owner_email to a
+  persisted competitor audit. History = rows over time.
+- **Benchmark rollup**: daily-refreshed percentile/ok-rate aggregates in
+  `benchmark_rollups`; served stale-with-computed_at when refresh lags.
+- **Program step**: one sequenced remediation item in `program_steps`;
+  completion derives from recommendation done/verified or fix_implementations rows.
+- **Analytics depth**: `none|basic|percentile|segment` on Entitlements;
+  free=none, pro=percentile, growth+agency=segment.

@@ -82,6 +82,16 @@ class EntitlementMatrixTests(unittest.TestCase):
             self.assertEqual(ent.audits_per_month, f["auditsPerMonth"], plan)
             self.assertEqual(ent.monitored_urls, f["monitoredUrls"], plan)
             self.assertEqual(ent.min_interval_hours, f["minIntervalHours"], plan)
+            self.assertEqual(ent.competitor_slots, f["competitorSlots"], plan)
+            self.assertEqual(ent.funnel_runs_per_month,
+                             f["funnelRunsPerMonth"], plan)
+            self.assertEqual(ent.funnel_urls_per_run,
+                             f["funnelUrlsPerRun"], plan)
+            self.assertEqual(ent.analytics_depth, f["analyticsDepth"], plan)
+
+    def test_teaser_constants_documented(self):
+        e = self._svc()
+        self.assertEqual(e.TEASER_FUNNEL_URLS, 3)
 
 
 if __name__ == "__main__":
