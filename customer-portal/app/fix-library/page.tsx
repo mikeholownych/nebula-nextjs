@@ -85,7 +85,7 @@ export default async function FixLibraryPage() {
         </p>
         <div className="mt-6 flex items-center space-x-4">
           <a 
-            href="/workspace" 
+            href="https://app.nebulacomponents.com"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm hover:bg-indigo-50"
           >
             Back to Workspace

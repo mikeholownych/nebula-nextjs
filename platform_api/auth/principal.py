@@ -152,6 +152,20 @@ async def resolve_principal(
             email = getattr(user, "email", None) or (
                 user.get("email") if isinstance(user, dict) else None
             )
+            workspace_email = email
+            if user is not None:
+                from platform_api.db.models import AgencyClient
+                binding = (
+                    session.query(AgencyClient.client_email)
+                    .filter(
+                        AgencyClient.invited_user_id == getattr(user, "id", None),
+                        AgencyClient.status == "active",
+                    )
+                    .order_by(AgencyClient.updated_at.desc())
+                    .first()
+                )
+                if binding and binding[0]:
+                    workspace_email = binding[0]
         except HTTPException:
             user, email = None, None
         except Exception:
@@ -161,7 +175,7 @@ async def resolve_principal(
                 principal_type="user",
                 principal_id=str(ctx.get("user_id") or email),
                 email=email.strip().lower(),
-                workspace_email=email.strip().lower(),
+                workspace_email=(workspace_email or email).strip().lower(),
                 scopes=frozenset(ALL_SCOPES),
             )
     raise HTTPException(status_code=401, detail="Authentication required")

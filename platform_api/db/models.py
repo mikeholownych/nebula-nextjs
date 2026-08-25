@@ -169,6 +169,70 @@ class Subscription(Base):
         return f"<Subscription {self.plan} ({self.status})>"
 
 
+class AgencyClient(Base):
+    """Client account managed by an agency organization.
+
+    client_email is the system-managed audit ownership key for nebula_audit.
+    Pattern: {slug}+{org_id_prefix8}@clients.nebulacomponents.com
+    Never a real mailbox.
+    """
+
+    __tablename__ = "agency_clients"
+    __table_args__ = (
+        UniqueConstraint("organization_id", "slug", name="uq_agency_clients_org_slug"),
+        Index("ix_agency_clients_org", "organization_id"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(
+        ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False
+    )
+    name: Mapped[str] = mapped_column(nullable=False)
+    slug: Mapped[str] = mapped_column(nullable=False)
+    domain: Mapped[str] = mapped_column(nullable=False)
+    client_email: Mapped[str] = mapped_column(nullable=False, unique=True)
+    status: Mapped[str] = mapped_column(nullable=False, default="active")
+    notes: Mapped[Optional[str]] = mapped_column(nullable=True)
+    invited_user_id: Mapped[Optional[UUID]] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
+    invite_token: Mapped[Optional[str]] = mapped_column(nullable=True)
+    invite_expires_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utcnow
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utcnow, onupdate=utcnow
+    )
+
+    def __repr__(self) -> str:
+        return f"<AgencyClient {self.name!r} org={self.organization_id}>"
+
+
+class BrandProfile(Base):
+    """Draft or published workspace branding for an agency organization."""
+
+    __tablename__ = "brand_profiles"
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, unique=True
+    )
+    display_name: Mapped[str] = mapped_column(Text, nullable=False)
+    logo_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    logo_dark_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    primary_color: Mapped[str] = mapped_column(Text, nullable=False, default="#c7ff2f")
+    support_email: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    footer_text: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    published: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utcnow, onupdate=utcnow
+    )
+
+
 class AuditEvent(Base):
     """Append-only audit log for compliance and debugging.
 

@@ -1,26 +1,10 @@
-import { Metadata } from 'next'
+import { permanentRedirect } from 'next/navigation'
 
-// Session-scoped surface: renders per-user data client-side. Must never be
-// treated as static or cached by any shared cache (CDN or otherwise).
+// Deprecated 2026-08-25: workspace has moved to app.nebulacomponents.com.
+// All nav and auth callbacks already point there. This permanent redirect
+// handles any bookmarks or external links still using the old URL.
 export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: 'Workspace - Nebula Components',
-  description:
-    'Your optimization workspace: audit history, project health, and what to work on next.',
-  openGraph: {
-    title: 'Workspace - Nebula Components',
-    description:
-      'Dashboard, projects, and immutable audit history for your landing pages.',
-    url: 'https://nebulacomponents.com/workspace',
-  },
-  alternates: {
-    canonical: 'https://nebulacomponents.com/workspace',
-  },
-}
-
 export default function WorkspacePage() {
-  return <WorkspaceClient />
+  permanentRedirect('https://app.nebulacomponents.com')
 }
-
-import WorkspaceClient from './WorkspaceClient'

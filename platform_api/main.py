@@ -164,6 +164,14 @@ from platform_api.routes.teardown_claim_routes import router as teardown_claim_r
 app.include_router(teardown_claim_router)
 from platform_api.routes.teardown_claim_routes import router_verify as teardown_claim_router_verify
 app.include_router(teardown_claim_router_verify)
+from platform_api.routes.agency_clients import router as agency_clients_router
+from platform_api.routes.agency_clients import accept_router as agency_clients_accept_router
+from platform_api.routes.brand_profiles import router as brand_profiles_router
+from platform_api.routes.domain_routes import router as domain_router
+app.include_router(agency_clients_router)
+app.include_router(agency_clients_accept_router)
+app.include_router(brand_profiles_router)
+app.include_router(domain_router)
 from platform_api.routes.teardown_claim_routes import router_session as teardown_claim_router_session
 app.include_router(teardown_claim_router_session)
 app.include_router(audit_schedule_router)

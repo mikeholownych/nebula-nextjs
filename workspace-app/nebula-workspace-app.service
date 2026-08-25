@@ -1,0 +1,15 @@
+[Unit]
+Description=Nebula Workspace App (app.nebulacomponents.com build target)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/mike/nebula/workspace-app
+EnvironmentFile=-/home/mike/nebula/workspace-app/.env
+ExecStart=/usr/bin/npx next start -p 3005
+Restart=always
+RestartSec=3
+User=mike
+
+[Install]
+WantedBy=multi-user.target

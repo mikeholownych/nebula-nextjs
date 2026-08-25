@@ -66,6 +66,10 @@ async def resolve_for_email(email: str):
 
     Module-level symbol so tests patch a single seam. Resolution failure
     degrades to free with zero monitored urls: premium mutations fail closed.
+
+    For system-managed client emails (*@clients.nebulacomponents.com), the
+    owning agency's entitlements are resolved instead by looking up the
+    agency_clients table to find the owning organization's owner email.
     """
     import asyncio
 
@@ -73,6 +77,34 @@ async def resolve_for_email(email: str):
     from platform_api.services.entitlements import Entitlements, resolve_sync
 
     norm = (email or "").strip().lower()
+
+    # Client email bypass: resolve as the owning agency org's subscription.
+    if norm.endswith("@clients.nebulacomponents.com"):
+        try:
+            import asyncpg as _pg
+            DSN = "host=/var/run/postgresql port=5433 dbname=nebula_platform user=postgres"
+            conn = await _pg.connect(DSN)
+            try:
+                row = await conn.fetchrow(
+                    """SELECT u.email FROM agency_clients ac
+                       JOIN memberships m ON m.organization_id = ac.organization_id
+                       JOIN users u ON u.id = m.user_id
+                       WHERE ac.client_email = $1 AND m.role = 'owner' AND m.status = 'active'
+                       LIMIT 1""",
+                    norm,
+                )
+                if row:
+                    agency_email = row["email"]
+                    def _q2():
+                        with session_scope() as session:
+                            return resolve_sync(agency_email, session)
+                    return await asyncio.to_thread(_q2)
+            finally:
+                await conn.close()
+        except Exception:  # noqa: BLE001
+            logger.warning("client email entitlement bypass failed for %s; gating free", norm)
+        return Entitlements(plan="free", status="error", audits_per_month=None,
+                            monitored_urls=0, min_interval_hours=None)
 
     def _query():
         with session_scope() as session:
