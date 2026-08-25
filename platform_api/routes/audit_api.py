@@ -1860,26 +1860,29 @@ async def override_page_intent(
         raise HTTPException(status_code=409, detail="Audit not yet completed")
 
     # Update ALL audits for the same URL + owner, not just this one.
+    # Both statements run in one transaction so affected_ids reflects exactly
+    # the rows written -- no concurrent-insert window between UPDATE and SELECT.
     try:
         await audit_db.connect()
         async with audit_db.pool.acquire() as conn:
-            await conn.execute(
-                """UPDATE audits
-                      SET page_intent       = $1,
-                          intent_confidence = 1.0,
-                          intent_signals    = COALESCE(intent_signals, '{}'::jsonb)
-                                             || '{"override": true}'::jsonb
-                    WHERE url   = $2
-                      AND email = $3""",
-                body.page_intent,
-                row.get("url"),
-                own,
-            )
-            affected_rows = await conn.fetch(
-                "SELECT id FROM audits WHERE url = $1 AND email = $2",
-                row.get("url"),
-                own,
-            )
+            async with conn.transaction():
+                await conn.execute(
+                    """UPDATE audits
+                          SET page_intent       = $1,
+                              intent_confidence = 1.0,
+                              intent_signals    = COALESCE(intent_signals, '{}'::jsonb)
+                                                 || '{"override": true}'::jsonb
+                        WHERE url   = $2
+                          AND email = $3""",
+                    body.page_intent,
+                    row.get("url"),
+                    own,
+                )
+                affected_rows = await conn.fetch(
+                    "SELECT id FROM audits WHERE url = $1 AND email = $2",
+                    row.get("url"),
+                    own,
+                )
         affected_ids = [str(r["id"]) for r in affected_rows]
     except HTTPException:
         raise
@@ -1888,16 +1891,14 @@ async def override_page_intent(
         raise HTTPException(status_code=503, detail="Override failed")
 
     # Re-sync findings for each affected audit (guarded: sync failure never blocks).
-    import asyncio as _asyncio
-
     async def _resync(aid: str) -> None:
         try:
-            await _asyncio.to_thread(sync_findings_for_audit, aid, _INTENT_OVERRIDE_DSN)
+            await asyncio.to_thread(sync_findings_for_audit, aid, _INTENT_OVERRIDE_DSN)
         except Exception:
             logger.exception("intent override resync failed for %s", aid)
 
     for _aid in affected_ids:
-        _asyncio.ensure_future(_resync(_aid))
+        asyncio.create_task(_resync(_aid))
 
     return {
         "audit_id": str(audit_uuid),

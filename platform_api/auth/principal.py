@@ -84,7 +84,7 @@ async def _load_api_key_principal(raw_key: str) -> Optional[Principal]:
     async with audit_db.pool.acquire() as conn:
         row = await conn.fetchrow(
             """
-            SELECT id, workspace_email, COALESCE(scopes, NULL) AS scopes
+            SELECT id, workspace_email, scopes
             FROM api_keys
             WHERE key_hash = $1 AND is_active = TRUE AND revoked_at IS NULL
             """,

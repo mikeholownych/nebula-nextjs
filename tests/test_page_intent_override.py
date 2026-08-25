@@ -48,6 +48,12 @@ async def test_override_updates_all_same_url_audits(client, mock_principal):
         {"id": AUDIT_ID},
         {"id": SIBLING_ID},
     ])
+    # asyncpg conn.transaction() returns a Transaction object (sync), not a coroutine.
+    # Mock it as an async context manager so `async with conn.transaction()` works.
+    mock_txn = MagicMock()
+    mock_txn.__aenter__ = AsyncMock(return_value=None)
+    mock_txn.__aexit__ = AsyncMock(return_value=False)
+    mock_conn.transaction = MagicMock(return_value=mock_txn)
 
     mock_pool = MagicMock()
     mock_pool.acquire = MagicMock(return_value=AsyncMock(

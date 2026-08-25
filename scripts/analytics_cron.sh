@@ -3,6 +3,7 @@
 # Replaces scripts/run_due_monitors.sh as the crontab target (kept intact
 # for rollback). Schedule lives in root's crontab: 23 * * * *.
 set -euo pipefail
+mkdir -p /tmp/opencode
 LOCK=/tmp/nebula-analytics-cron.lock
 trap 'rm -f "$LOCK"' EXIT
 exec 9>"$LOCK"

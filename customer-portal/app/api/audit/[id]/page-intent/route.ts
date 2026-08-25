@@ -23,7 +23,7 @@ export async function PATCH(
   if ('response' in auth) return auth.response
 
   const { id } = await params
-  if (!/^[0-9a-fA-F-]{36}$/.test(id)) {
+  if (!/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
     return NextResponse.json({ error: 'Invalid audit ID' }, { status: 400 })
   }
 
