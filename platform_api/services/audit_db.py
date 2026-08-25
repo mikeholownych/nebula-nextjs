@@ -307,7 +307,8 @@ class AuditDB:
                        score, grade, composite, composite_anchor, findings,
                        engine_input, engine_output, guided_implementation,
                        strategic_finding, screenshot_url, created_at, completed_at,
-                       email_sent_at, paid_at, paid_product
+                       email_sent_at, paid_at, paid_product,
+                       page_intent, intent_confidence, intent_signals
                 FROM audits WHERE id = $1
                 """,
                 audit_id,
@@ -415,7 +416,8 @@ class AuditDB:
             rows = await conn.fetch(
                 """
                 SELECT id, url, status, score, grade, composite, composite_anchor,
-                       created_at, completed_at, screenshot_url
+                       created_at, completed_at, screenshot_url,
+                       page_intent, intent_confidence
                 FROM audits
                 WHERE email = $1
                 ORDER BY created_at DESC
@@ -630,7 +632,10 @@ class AuditDB:
                           engine_version: Optional[str] = None,
                           guided_implementation: Optional[dict] = None,
                           strategic_finding: Optional[str] = None,
-                          engine_output: Optional[dict] = None) -> bool:
+                          engine_output: Optional[dict] = None,
+                          page_intent: Optional[str] = None,
+                          intent_confidence: Optional[float] = None,
+                          intent_signals: Optional[dict] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -644,7 +649,10 @@ class AuditDB:
                     engine_version = COALESCE($8, engine_version),
                     guided_implementation = $9,
                     strategic_finding = $10,
-                    engine_output = COALESCE($11::jsonb, engine_output)
+                    engine_output = COALESCE($11::jsonb, engine_output),
+                    page_intent = COALESCE($12, page_intent),
+                    intent_confidence = COALESCE($13, intent_confidence),
+                    intent_signals = COALESCE($14::jsonb, intent_signals)
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, _safe_json_dumps(findings or []), status,
@@ -652,6 +660,9 @@ class AuditDB:
                 _safe_json_dumps(guided_implementation),
                 strategic_finding,
                 _safe_json_dumps(engine_output),
+                page_intent,
+                intent_confidence,
+                _safe_json_dumps(intent_signals),
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':

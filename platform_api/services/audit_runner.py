@@ -174,6 +174,34 @@ async def _load_historical(job: dict) -> None:
 
 async def _complete(job: dict, data: dict) -> None:
     audit_id = job["id"]
+
+    # Classify page intent from the engine's scraped content.
+    # Runs synchronously (pure CPU) and is guarded: a classifier failure
+    # must never prevent the audit from being marked complete.
+    page_intent = None
+    intent_confidence = None
+    intent_signals = None
+    try:
+        from platform_api.services.page_intent import classify_page
+        classification = classify_page(
+            url=job.get("url", ""),
+            title=data.get("page_title", ""),
+            h1=data.get("page_h1", ""),
+            # engine_output may carry scraped meta_desc in future; tolerate absence
+            meta_desc=data.get("page_meta_desc", ""),
+            text=data.get("page_text", ""),
+            html=data.get("page_html", ""),
+        )
+        page_intent = classification.intent
+        intent_confidence = float(classification.confidence)
+        intent_signals = classification.signals
+        logger.info(
+            "page_intent classified: audit=%s url=%s intent=%s conf=%.2f",
+            audit_id, job.get("url"), page_intent, intent_confidence,
+        )
+    except Exception:
+        logger.exception("page_intent classification failed for %s", audit_id)
+
     await audit_db.update_audit(
         audit_id=audit_id,
         score=data.get("score", 0),
@@ -186,6 +214,9 @@ async def _complete(job: dict, data: dict) -> None:
         guided_implementation=data.get("guided_implementation"),
         strategic_finding=data.get("strategic_finding"),
         engine_output=data,
+        page_intent=page_intent,
+        intent_confidence=intent_confidence,
+        intent_signals=intent_signals,
     )
     await _finalize_completed(job, data)
 
