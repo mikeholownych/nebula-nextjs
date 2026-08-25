@@ -22,7 +22,7 @@ Design principles
 -----------------
 - Every signal fires independently; the total votes determine winner + confidence.
 - Signals are weighted by diagnostic value (high, medium, low).
-- Confidence = winner_votes / total_possible_votes (0.0–1.0).
+- Confidence = winner_votes / total_possible_votes (0.0-1.0).
 - Ties broken by specificity (more specific categories win).
 - Minimum confidence 0.15 required to assign a non-unknown intent.
 - scrape_page() data is sufficient: url, title, h1, text, html.
@@ -229,7 +229,7 @@ def classify_page(
     confidence = min(winner_votes / winner_max, 1.0)
 
     if confidence < 0.15:
-        # Not enough signal — fall back to unknown
+        # Not enough signal; fall back to unknown
         return ClassificationResult(
             intent="unknown",
             confidence=confidence,
