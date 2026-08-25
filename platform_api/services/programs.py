@@ -158,8 +158,10 @@ async def refresh_completion(email, domain, pool, program_id=None,
                              steps=None, done_index=None):
     """Flip pending/active steps whose work is complete; persist updates.
 
-    Accepts preloaded steps/done_index (read path reuse); otherwise loads
-    them for the active program. Returns [(step_id, new_status)].
+    Accepts preloaded steps/done_index (read path reuse; must be plain dicts);
+    otherwise loads the active program and converts Records to dicts so the
+    loop below can mutate status in-place without TypeError.
+    Returns [(step_id, new_status)].
     """
     async with pool.acquire() as conn:
         if program_id is None or steps is None or done_index is None:
@@ -170,9 +172,11 @@ async def refresh_completion(email, domain, pool, program_id=None,
             if prog is None:
                 return []
             program_id = prog["id"]
-            steps = await conn.fetch(
+            # Convert to dicts: asyncpg Records are read-only; the loop below
+            # mutates step["status"] to avoid a second DB round-trip per step.
+            steps = [dict(r) for r in await conn.fetch(
                 "SELECT * FROM program_steps WHERE program_id=$1 "
-                "ORDER BY seq", program_id)
+                "ORDER BY seq", program_id)]
             rec_rows = await conn.fetch(
                 """SELECT url, finding_key, status, verified_at, audit_id
                    FROM recommendations WHERE email=$1""", email)

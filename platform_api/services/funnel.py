@@ -119,7 +119,14 @@ async def discover_urls(domain: str) -> list[str]:
 
 
 async def _gate(email: str, ent, conn) -> tuple[str, int]:
-    """(plan_snapshot, url_cap) or HTTPException on denial."""
+    """(plan_snapshot, url_cap) or HTTPException on denial.
+
+    Gate order note: free-plan lifetime check fires BEFORE the one-active-per-domain
+    INSERT (which would yield 409). This means a free user whose teaser is exhausted
+    receives 403 even when they also have a conflicting active run.  The 409 conflict
+    path is therefore only reachable by paid plans.  Denial semantics are correct in
+    both cases; the ordering is intentional (lifetime block is the stronger constraint).
+    """
     plan = getattr(ent, "plan", "free")
     degraded = getattr(ent, "status", "error") == "error"
     if degraded or plan == "free":
