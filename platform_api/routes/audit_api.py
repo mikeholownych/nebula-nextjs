@@ -31,6 +31,7 @@ from platform_api.services.signal_extract import extract_signal_map
 from platform_api.services.teardown_db import get_teardown_db
 from platform_api.services.analytics import analytics
 from platform_api.infra.circuit_breaker import CircuitBreaker, CircuitOpenError
+from platform_api.services.findings_sync import sync_findings_for_audit
 
 # Import track assignment trigger
 import sys
@@ -1809,6 +1810,102 @@ async def get_share_token(audit_id: str):
         raise
     except Exception:
         raise HTTPException(status_code=500, detail="Share token unavailable")
+
+
+class PageIntentOverride(BaseModel):
+    page_intent: str
+    reason: Optional[str] = None  # optional note from the user
+
+
+_VALID_INTENTS = frozenset({
+    "paid_landing", "seo_content", "faq_support", "product_explainer",
+    "comparison", "category", "about_trust", "checkout", "unknown",
+})
+
+_INTENT_OVERRIDE_DSN = "host=/var/run/postgresql port=5433 dbname=nebula_audit user=postgres"
+
+
+@router.patch("/{audit_id}/page-intent")
+async def override_page_intent(
+    audit_id: str,
+    body: PageIntentOverride,
+    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE)),
+):
+    """Manual override for the classifier's page intent on a completed audit.
+
+    The user can correct misclassified pages from the workspace. The override
+    writes page_intent with confidence=1.0 (manual) to ALL audits for the same
+    URL and owner, then triggers a findings re-sync for each affected audit so
+    the signal gate reflects the new intent.
+    """
+    if body.page_intent not in _VALID_INTENTS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid intent. Valid values: {sorted(_VALID_INTENTS)}",
+        )
+    try:
+        from uuid import UUID
+        audit_uuid = UUID(audit_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid audit ID")
+
+    # Ownership: only the audit's email owner may override.
+    own = (principal.workspace_email or principal.email or "").strip().lower()
+    row = await audit_db.get_audit(audit_uuid)
+    if not row:
+        raise HTTPException(status_code=404, detail="Audit not found")
+    if (row.get("email") or "").strip().lower() != own:
+        raise HTTPException(status_code=403, detail="Not your audit")
+    if row.get("status") != "completed":
+        raise HTTPException(status_code=409, detail="Audit not yet completed")
+
+    # Update ALL audits for the same URL + owner, not just this one.
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            await conn.execute(
+                """UPDATE audits
+                      SET page_intent       = $1,
+                          intent_confidence = 1.0,
+                          intent_signals    = COALESCE(intent_signals, '{}'::jsonb)
+                                             || '{"override": true}'::jsonb
+                    WHERE url   = $2
+                      AND email = $3""",
+                body.page_intent,
+                row.get("url"),
+                own,
+            )
+            affected_rows = await conn.fetch(
+                "SELECT id FROM audits WHERE url = $1 AND email = $2",
+                row.get("url"),
+                own,
+            )
+        affected_ids = [str(r["id"]) for r in affected_rows]
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("intent override failed for %s: %s", audit_id, e, exc_info=True)
+        raise HTTPException(status_code=503, detail="Override failed")
+
+    # Re-sync findings for each affected audit (guarded: sync failure never blocks).
+    import asyncio as _asyncio
+
+    async def _resync(aid: str) -> None:
+        try:
+            await _asyncio.to_thread(sync_findings_for_audit, aid, _INTENT_OVERRIDE_DSN)
+        except Exception:
+            logger.exception("intent override resync failed for %s", aid)
+
+    for _aid in affected_ids:
+        _asyncio.ensure_future(_resync(_aid))
+
+    return {
+        "audit_id": str(audit_uuid),
+        "page_intent": body.page_intent,
+        "intent_confidence": 1.0,
+        "overridden": True,
+        "affected_audits": len(affected_ids),
+    }
 
 
 class EmailRequest(BaseModel):
