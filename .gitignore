@@ -275,3 +275,6 @@ scripts/logs/
 /ledgers/leads-journal.jsonl
 /ledgers/leads.json
 /ops/social_drip_queue.json
+
+# ── Deploy snapshots ────────────────────────────────────────────────────────
+.deploy-backups/
