@@ -19,6 +19,23 @@ QUEUE_FILE = ROOT / 'ops' / 'queued_replies.json'
 SENT_LOG = ROOT / 'ledgers' / 'queued_replies_sent.jsonl'
 
 
+def is_approved(item: dict) -> bool:
+    """Fail closed unless an explicit approver and timestamp are persisted."""
+    return bool(
+        item.get('status') == 'approved'
+        and item.get('approved_by')
+        and item.get('approved_at')
+    )
+
+
+def queue_disposition(item: dict) -> str:
+    if item.get('status') == 'rejected':
+        return 'drop'
+    if is_approved(item):
+        return 'send'
+    return 'retain'
+
+
 def main() -> int:
     if not QUEUE_FILE.exists():
         return 0
@@ -37,6 +54,13 @@ def main() -> int:
     for item in queue:
         to = item.get('to', '')
         send_after = item.get('send_after_utc')
+
+        disposition = queue_disposition(item)
+        if disposition == 'drop':
+            continue
+        if disposition == 'retain':
+            remaining.append(item)
+            continue
 
         # Check time gate
         if send_after:

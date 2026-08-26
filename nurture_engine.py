@@ -547,8 +547,78 @@ AUDIT_SEQ = [
 ]
 
 
-def pick_audit_nurture(send_log, max_count=2) -> list:
-    """Audit completers with submitted email, due for next post-audit step."""
+def classify_lifecycle(events: set[str], paid: bool, relationship_stage: str | None) -> str:
+    """Return the only nurture path authorized by canonical lifecycle state."""
+    if paid or "purchase_completed" in events:
+        return "suppress_paid"
+    if relationship_stage in RELATIONSHIP_STAGES:
+        return "suppress_relationship"
+    if "checkout_started" in events:
+        return "suppress_checkout"
+    if "audit_result_viewed" in events:
+        return "post_audit"
+    if "audit_completed" in events:
+        return "delivery_recovery"
+    return "suppress_unverified"
+
+
+def load_lifecycle_states(pairs: list[tuple[str, str]]) -> dict | None:
+    """Bulk-load authoritative funnel and payment state; None means unavailable."""
+    if not pairs:
+        return {}
+    try:
+        import psycopg2
+
+        audit_ids = sorted({audit_id for audit_id, _email in pairs if audit_id})
+        emails = sorted({email.lower() for _audit_id, email in pairs if email})
+        states = {audit_id: {"events": set(), "paid": False} for audit_id in audit_ids}
+        conn = psycopg2.connect(
+            "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433",
+            connect_timeout=5,
+            options="-c statement_timeout=10000",
+        )
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT audit_id, event_name
+                    FROM analytics_event_ledger
+                    WHERE audit_id = ANY(%s)
+                      AND environment = 'production'
+                      AND COALESCE(is_synthetic, FALSE) = FALSE
+                    """,
+                    (audit_ids,),
+                )
+                for audit_id, event_name in cur.fetchall():
+                    states.setdefault(audit_id, {"events": set(), "paid": False})["events"].add(event_name)
+
+                cur.execute(
+                    """
+                    SELECT LOWER(customer_email)
+                    FROM purchases
+                    WHERE LOWER(customer_email) = ANY(%s)
+                      AND livemode = TRUE
+                      AND payment_status = 'paid'
+                    """,
+                    (emails,),
+                )
+                paid_emails = {row[0] for row in cur.fetchall()}
+        finally:
+            conn.close()
+
+        for audit_id, email in pairs:
+            if email.lower() in paid_emails:
+                states.setdefault(audit_id, {"events": set(), "paid": False})["paid"] = True
+        return states
+    except Exception as exc:
+        print(f"  [LIFECYCLE GATE CLOSED] {exc}")
+        return None
+
+
+def pick_audit_nurture(
+    send_log, max_count=2, lifecycle_loader=load_lifecycle_states
+) -> list:
+    """Audit completers with submitted email, gated by canonical lifecycle state."""
     audit_path = BASE / "audit_leads.jsonl"
     if not audit_path.exists():
         return []
@@ -567,12 +637,27 @@ def pick_audit_nurture(send_log, max_count=2) -> list:
             continue
         leads.setdefault(email, entry)
 
+    lifecycle = lifecycle_loader([
+        (entry.get("audit_id") or "", email) for email, entry in leads.items()
+    ])
+    if lifecycle is None:
+        return []
+
     from lead_store import LeadStore
     db = LeadStore()
     now = datetime.now(timezone.utc)
     candidates = []
     for email, entry in leads.items():
         if db.is_bounced(email):
+            continue
+        audit_id = entry.get("audit_id") or ""
+        state = lifecycle.get(audit_id, {"events": set(), "paid": False})
+        decision = classify_lifecycle(
+            set(state.get("events") or set()),
+            bool(state.get("paid")),
+            lead_state_info(email).get("stage"),
+        )
+        if decision.startswith("suppress_"):
             continue
         try:
             completed = datetime.fromisoformat(entry.get("timestamp", ""))
@@ -583,6 +668,8 @@ def pick_audit_nurture(send_log, max_count=2) -> list:
         days = (now - completed).days
 
         for tmpl in AUDIT_SEQ:
+            if decision == "delivery_recovery" and tmpl["step"] != "d1":
+                continue
             cid = f"campaign:nurture-audit-{email}-{tmpl['step']}"
             if cid in send_log.get("client_ids", set()):
                 continue
@@ -595,6 +682,7 @@ def pick_audit_nurture(send_log, max_count=2) -> list:
                 "segment": "audit",
                 "client_id": cid,
                 "track_id": "post-audit",
+                "lifecycle_path": decision,
                 "track_position_days": days,
                 "subject": tmpl["subject"].format(domain=domain),
                 "body": tmpl["body"].format(

@@ -102,6 +102,28 @@ describe('audit status poller', () => {
     poller.stop()
   })
 
+  it('emits authoritative pending and running progress without stopping', async () => {
+    const progress: string[] = []
+    const fetch_ = queuedFetch([
+      jsonResponse(200, { status: 'pending' }),
+      jsonResponse(200, { status: 'running' }),
+    ])
+    const clock = manualSchedule()
+    const poller = createAuditStatusPoller(fetch_.impl, AUDIT_ID, () => undefined, {
+      schedule: clock.schedule,
+      onProgress: (status: 'pending' | 'running') => progress.push(status),
+    })
+
+    poller.start()
+    await drainMicrotasks()
+    clock.tick()
+    await drainMicrotasks()
+
+    expect(progress).toEqual(['pending', 'running'])
+    expect(poller.stopped).toBe(false)
+    poller.stop()
+  })
+
   it('emits completed exactly once and stops polling (D4)', async () => {
     const { poller, events, calls, clock } = setup({
       queue: [jsonResponse(200, { status: 'completed' })],

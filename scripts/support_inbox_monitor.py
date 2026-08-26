@@ -20,6 +20,9 @@ Cron: every 15 minutes.
 """
 
 import argparse
+import fcntl
+import json
+import os
 import re
 import sys
 import subprocess
@@ -36,6 +39,9 @@ LABEL_NOTIFIED   = "support-notified"
 LABEL_AUTO_REPLIED = "auto-replied"
 LABEL_SPAM       = "spam"
 LABEL_CLOSED_WON = "closed-won"
+APPROVAL_QUEUE = NEBULA_DIR / "ops" / "queued_replies.json"
+APPROVAL_LOCK = NEBULA_DIR / ".queued_replies.lock"
+MAX_APPROVAL_QUEUE = 1000
 
 SKIP_SENDERS = {
     "noreply", "no-reply", "mailer-daemon", "postmaster",
@@ -261,6 +267,66 @@ def is_skip_sender(addr: str) -> bool:
     return any(s in addr.lower() for s in SKIP_SENDERS)
 
 
+def _draft_for_intent(intent: str, is_customer: bool) -> str:
+    if intent == "billing":
+        return REPLY_BILLING
+    if intent == "implementation":
+        return REPLY_IMPLEMENTATION_GENERIC
+    if intent == "positive":
+        return REPLY_POSITIVE
+    if intent == "reaudit":
+        if is_customer:
+            return (
+                "Hi,\n\nI found your purchase and can trigger the included re-audit. "
+                "I am checking the original audit URL before I run it.\n\n-\nMike\nNebula Components"
+            )
+        return (
+            "Hi,\n\nI could not match this address to a purchase. Reply with the "
+            "email on your Stripe receipt and I will check it manually.\n\n-\nMike\nNebula Components"
+        )
+    return ""
+
+
+def queue_pending_reply(
+    *, thread_id: str, message_id: str, recipient: str, subject: str,
+    body: str, intent: str, is_customer: bool,
+) -> str:
+    """Atomically append one idempotent, approval-required reply draft."""
+    item_id = f"support:{thread_id}:{message_id}"
+    APPROVAL_QUEUE.parent.mkdir(parents=True, exist_ok=True)
+    APPROVAL_LOCK.parent.mkdir(parents=True, exist_ok=True)
+    with open(APPROVAL_LOCK, "a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        try:
+            try:
+                queue = json.loads(APPROVAL_QUEUE.read_text()) if APPROVAL_QUEUE.exists() else []
+            except (json.JSONDecodeError, OSError):
+                queue = []
+            if any(item.get("id") == item_id for item in queue):
+                return item_id
+            if len(queue) >= MAX_APPROVAL_QUEUE:
+                raise RuntimeError("support approval queue is full")
+            queue.append({
+                "id": item_id,
+                "to": recipient,
+                "subject": subject,
+                "body": body,
+                "in_reply_to": message_id,
+                "thread_id": thread_id,
+                "intent": intent,
+                "is_customer": is_customer,
+                "status": "pending_approval",
+                "approval_required": True,
+                "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            })
+            tmp = APPROVAL_QUEUE.with_suffix(".tmp")
+            tmp.write_text(json.dumps(queue, indent=2))
+            os.replace(tmp, APPROVAL_QUEUE)
+            return item_id
+        finally:
+            fcntl.flock(lock, fcntl.LOCK_UN)
+
+
 # ── Main processing loop ──────────────────────────────────────────────────────
 
 def process(am: AgentMailClient, dry_run: bool = False):
@@ -315,54 +381,26 @@ def process(am: AgentMailClient, dry_run: bool = False):
             acted += 1
             continue
 
-        if intent == "reaudit":
-            if is_customer and purchase.get("audit_url"):
-                ok = (not dry_run) and trigger_reaudit_for_customer(purchase, sender_email)
-                reply_text = REPLY_REAUDIT_TRIGGERED
-            else:
-                reply_text = (
-                    "Hi,\n\nThe 30-day re-audit is included with the One-Leak Repair Sprint. "
-                    "If you've purchased, reply with your order email and I'll trigger it manually.\n\n-\nMike"
+        if intent in {"reaudit", "positive", "billing", "implementation"}:
+            draft = _draft_for_intent(intent, is_customer)
+            if dry_run:
+                log(f"    [DRY RUN] Would queue {intent} reply for approval")
+            elif last_msg_id:
+                item_id = queue_pending_reply(
+                    thread_id=thread_id,
+                    message_id=last_msg_id,
+                    recipient=sender_email,
+                    subject=subject,
+                    body=draft,
+                    intent=intent,
+                    is_customer=is_customer,
                 )
-            if not dry_run and last_msg_id:
-                am.reply(last_msg_id, recipient=sender_email, text=reply_text)
-                am.label_thread(thread_id, add=[LABEL_AUTO_REPLIED])
-            else:
-                log(f"    [DRY RUN] Would reply: re-audit{'triggered' if is_customer else 'not found'}")
-            acted += 1
-            continue
-
-        if intent == "positive":
-            if not dry_run and last_msg_id:
-                am.reply(last_msg_id, recipient=sender_email, text=REPLY_POSITIVE)
-                am.label_thread(thread_id, add=[LABEL_AUTO_REPLIED])
-            else:
-                log(f"    [DRY RUN] Would send positive reply to {sender_email}")
-            acted += 1
-            continue
-
-        if intent == "billing":
-            # Auto-reply policy, but also alert Mike
-            if not dry_run and last_msg_id:
-                am.reply(last_msg_id, recipient=sender_email, text=REPLY_BILLING)
-                am.label_thread(thread_id, add=[LABEL_AUTO_REPLIED, LABEL_NOTIFIED])
-            telegram(
-                f"💳 BILLING CONTACT - heads-up (auto-reply sent)\n"
-                f"From: {sender_email}\n"
-                f"Subject: {subject}\n"
-                f"Preview: {preview[:200]}\n"
-                f"{'Customer: ' + purchase['created_at'] + ' / ' + str(purchase['amount']//100) + '$' if is_customer else 'Not a known customer'}"
-            )
-            acted += 1
-            continue
-
-        if intent == "implementation":
-            # Generic auto-reply first; only escalate if they reply again
-            if not dry_run and last_msg_id:
-                am.reply(last_msg_id, recipient=sender_email, text=REPLY_IMPLEMENTATION_GENERIC)
-                am.label_thread(thread_id, add=[LABEL_AUTO_REPLIED])
-            else:
-                log(f"    [DRY RUN] Would send implementation guide to {sender_email}")
+                am.label_thread(thread_id, add=[LABEL_NOTIFIED])
+                telegram(
+                    f"SUPPORT APPROVAL REQUIRED\nIntent: {intent}\nFrom: {sender_email}\n"
+                    f"Subject: {subject[:120]}\nDraft ID: {item_id}\n"
+                    f"Approve: venv/bin/python3 scripts/reply_approval.py approve '{item_id}' --by mike"
+                )
             acted += 1
             continue
 
