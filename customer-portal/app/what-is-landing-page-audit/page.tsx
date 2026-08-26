@@ -58,7 +58,7 @@ export default function WhatIsLandingPageAudit() {
           <p className="text-accent text-xs font-bold mb-4">
             Landing Page Guide
           </p>
-          <h1 className="heading-1 text-fg md:text-5xl">Discover What a Landing Page Audit Is and How to Fix Leaks</h1>
+          <h1 className="heading-1 text-fg md:text-5xl">What Is a Landing Page Audit? Find and Fix Conversion Leaks</h1>
           <p className="text-gray-400 text-lg">
             A systematic audit evaluates nine conversion signals and should show evidence for every recommended fix.
           </p>

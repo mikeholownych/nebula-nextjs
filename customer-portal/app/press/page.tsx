@@ -207,7 +207,8 @@ export default function PressPage() {
                   Nebula Components evaluates landing pages against 9 observable conversion signals
                   and delivers a scored report with pass/fail findings ranked by priority. The $97
                   Repair Sprint provides the exact fix for the highest-priority failing signal - you
-                  or your developer implements it. No retainer, no subscription.
+                  or your developer implements it. No retainer, no subscription. The methodology is documented in the{' '}
+                  <a href="/spec/landing-page-diagnostic-v1" className="text-accent underline underline-offset-2 hover:text-fg">Landing Page Diagnostic Specification v1</a>.
                 </p>
                 <p className="text-xs text-fg-muted/60 italic">
                   &ldquo;Check the page before you change the ad.&rdquo;

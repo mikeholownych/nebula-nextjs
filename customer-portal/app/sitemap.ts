@@ -58,6 +58,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/ecommerce-landing-page-audit',
       '/page-intent-aware-audit',
       '/ai-readiness-landing-page-check',
+      '/conversion-rate-optimization-audit',
       '/why-cro-agencies-dont-work',
       '/lead-generation-landing-page-audit',
     ],

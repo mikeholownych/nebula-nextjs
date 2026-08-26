@@ -140,6 +140,11 @@ export default function ResourcesPage() {
               <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">Page-intent-aware audit</h2>
               <p className="mt-2 text-sm leading-relaxed text-fg-muted">See how audit signals change for landing pages, SEO content, FAQs, explainers, and checkout pages.</p>
             </Link>
+            <Link href="/conversion-rate-optimization-audit" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">CRO methodology</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">Conversion rate optimization audit</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">Reduce uncertainty before a redesign, A/B test, or ongoing optimization engagement.</p>
+            </Link>
             <Link href="/why-cro-agencies-dont-work" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Commercial model</p>
               <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">CRO alternative without a retainer</h2>

@@ -26,7 +26,11 @@ DEFAULT_DB = BASE / "mailcheck_beta.db"
 
 BLOCKED_CLASSIFICATIONS = frozenset({"CONFIRMED_INVALID"})
 APPROVED_CLASSIFICATIONS = frozenset({"HIGH_CONFIDENCE_VALID", "VALID"})
-REVIEW_CLASSIFICATIONS = frozenset({"ACCEPT_ALL", "CATCH_ALL", "RISKY", "UNKNOWN", "PENDING"})
+# Evidence is uncertain but not confirmed bad — Nebula policy: allow when Hunter corroborates.
+# We are a MailCheck design partner; sending to ALLOW_WITH_EVIDENCE addresses and reporting
+# outcomes back is how we help calibrate the ACCEPT_ALL / PROBABLE_VALID boundary.
+ALLOW_WITH_EVIDENCE_CLASSIFICATIONS = frozenset({"ACCEPT_ALL", "CATCH_ALL", "PROBABLE_VALID"})
+REVIEW_CLASSIFICATIONS = frozenset({"RISKY", "UNKNOWN", "PENDING"})
 
 
 class MailCheckError(RuntimeError):
@@ -240,6 +244,10 @@ class MailCheckAdapter:
             return ReleaseDecision(False, "BLOCK", "confirmed_invalid", verification_id, classification)
         if classification in APPROVED_CLASSIFICATIONS:
             return ReleaseDecision(True, "ALLOW_TECHNICAL_REVIEW", "classification_approved_pending_nebula_gate", verification_id, classification)
+        if classification in ALLOW_WITH_EVIDENCE_CLASSIFICATIONS:
+            # Evidence is uncertain but not confirmed bad. Nebula policy: allow.
+            # Outcome feedback (delivered/bounced) closes the loop back to MailCheck.
+            return ReleaseDecision(True, "ALLOW_WITH_EVIDENCE", "classification_uncertain_allow_with_outcome_feedback", verification_id, classification)
         if classification in REVIEW_CLASSIFICATIONS or not classification:
             return ReleaseDecision(False, "PENDING_REVIEW", "classification_requires_review", verification_id, classification)
         return ReleaseDecision(False, "PENDING_REVIEW", "unknown_classification", verification_id, classification)
