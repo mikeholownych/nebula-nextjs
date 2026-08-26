@@ -47,12 +47,14 @@ export function createAuditStatusPoller(
     intervalMs?: number
     maxConsecutiveFailures?: number
     schedule?: ScheduleFunctions
+    onProgress?: (status: 'pending' | 'running') => void
   } = {},
 ): AuditStatusPoller {
   const intervalMs = options.intervalMs ?? DEFAULT_POLL_INTERVAL_MS
   const maxConsecutiveFailures =
     options.maxConsecutiveFailures ?? DEFAULT_MAX_CONSECUTIVE_FAILURES
   const schedule = options.schedule ?? realSchedule
+  const onProgress = options.onProgress
 
   let stopped = false
   let handle: unknown
@@ -88,7 +90,12 @@ export function createAuditStatusPoller(
       if (stopped) return
       if (body.status === 'completed') finish({ kind: 'completed' })
       else if (body.status === 'failed') finish({ kind: 'failed' })
-      else consecutiveFailures = 0
+      else {
+        consecutiveFailures = 0
+        if (onProgress && (body.status === 'pending' || body.status === 'running')) {
+          onProgress(body.status)
+        }
+      }
     } catch {
       registerFailure()
     }

@@ -8,73 +8,51 @@ import posthog from '@/app/lib/posthog-browser'
 import { analyticsHeaders, auditAttemptIdFor } from '@/app/lib/client-analytics'
 import { createAuditStatusPoller } from '@/app/lib/audit-status-poller'
 
-const STATUS_MESSAGES = [
-  { message: 'Scanning page structure...', duration: 2000 },
-  { message: 'Analyzing conversion elements...', duration: 2000 },
-  { message: 'Checking trust signals...', duration: 2000 },
-  { message: 'Measuring load performance...', duration: 2000 },
-  { message: 'Generating findings...', duration: 2000 },
-]
+const WORKER_MESSAGES: Record<'pending' | 'running', string> = {
+  pending: 'Audit accepted - worker is analyzing your page',
+  running: 'Worker is analyzing your page',
+}
 
 export default function ProcessingPage() {
   const params = useParams()
   const router = useRouter()
   const auditId = params.id as string
 
-  const [progress, setProgress] = useState(0)
-  const [messageIndex, setMessageIndex] = useState(0)
+  const [workerStatus, setWorkerStatus] = useState<'pending' | 'running'>('pending')
   const [status, setStatus] = useState<'processing' | 'ready' | 'error' | 'not_found'>('processing')
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
 
   useEffect(() => {
     let cancelled = false
-    const totalDuration = STATUS_MESSAGES.reduce((sum, m) => sum + m.duration, 0)
-    const steps = 10
-    const progressInterval = setInterval(() => {
-      setProgress(prev => (prev >= 90 ? prev : prev + 100 / steps))
-    }, totalDuration / steps)
 
-    const messageTimeouts: NodeJS.Timeout[] = []
-    STATUS_MESSAGES.forEach((_, index) => {
-      if (index > 0) {
-        const timeout = setTimeout(() => {
-          setMessageIndex(index)
-        }, STATUS_MESSAGES.slice(0, index).reduce((sum, m) => sum + m.duration, 0))
-        messageTimeouts.push(timeout)
-      }
-    })
-
-    // Terminal-state machine (invalid/expired IDs, sustained outages, stop at
-    // terminal) lives in the injectable poller so it stays unit-testable.
     const poller = createAuditStatusPoller(fetch, auditId, (event) => {
       if (cancelled) return
       switch (event.kind) {
         case 'completed':
-          clearInterval(progressInterval)
           posthog.capture('audit_ready', { audit_id: auditId })
           setStatus('ready')
           break
         case 'failed':
-          clearInterval(progressInterval)
           setStatus('error')
           break
         case 'not_found':
           setStatus('not_found')
           break
         case 'unreachable':
-          clearInterval(progressInterval)
           setStatus('error')
           break
       }
+    }, {
+      onProgress: (s) => {
+        if (!cancelled) setWorkerStatus(s)
+      },
     })
     poller.start()
 
     return () => {
       cancelled = true
       poller.stop()
-      clearInterval(progressInterval)
-      messageTimeouts.forEach(clearTimeout)
     }
   }, [auditId])
 
@@ -117,7 +95,6 @@ export default function ProcessingPage() {
         posthog.identify(data.analytics_person_id)
       }
 
-      // Cookie is now set - redirect to results page (no ?unlocked query param needed)
       pushWithViewTransition(router, `/audit/${auditId}/results`)
       return true
     } catch (err) {
@@ -136,19 +113,10 @@ export default function ProcessingPage() {
     await doUnlock(email, name)
   }
 
-  // Terminal completion renders the bar full even though the interval stopped
-  // below 100 - derived, so no second setState is needed on the ready path.
-  const effectiveProgress = status === 'ready' ? 100 : progress
-
-  // Logged-in workspace user: skip the email capture step entirely. The audit
-  // was already started with their workspace email, so unlock with it and
-  // route straight to the full report. If unlock fails, fall back to the form.
+  // Logged-in workspace user: resolve identity server-side, skip the email step.
   useEffect(() => {
     if (status !== 'ready' || autoUnlocking) return
 
-    // Resolve identity from the server-validated session, not localStorage.
-    // localStorage identity state is not authoritative and is absent for
-    // workspace users who never visited the Lab page.
     let cancelled = false
     fetch('/api/auth/me', { cache: 'no-store' })
       .then(async (response) => {
@@ -178,21 +146,13 @@ export default function ProcessingPage() {
               Analyzing Your Page
             </h1>
 
-            {/* Progress Bar */}
+            {/* Indeterminate progress - driven by real worker state, not a timer */}
             <div className="mb-6">
               <div className="h-3 w-full overflow-hidden rounded-full bg-border">
-                <div
-                  className="h-full w-full origin-left rounded-full bg-accent transition-transform duration-1000 ease-linear"
-                  style={{ transform: `scaleX(${effectiveProgress / 100})` }}
-                />
+                <div className="h-full w-full origin-left rounded-full bg-accent animate-pulse" />
               </div>
-              <p className="mt-2 text-sm text-fg-muted">{Math.round(effectiveProgress)}% complete</p>
-            </div>
-
-            {/* Status Message */}
-            <div className="min-h-[2rem]">
-              <p className="text-lg text-fg animate-pulse">
-                {STATUS_MESSAGES[messageIndex].message}
+              <p className="mt-2 text-sm text-fg-muted">
+                {WORKER_MESSAGES[workerStatus]}
               </p>
             </div>
           </Card>
@@ -284,7 +244,7 @@ export default function ProcessingPage() {
               Something Went Wrong
             </h1>
             <p className="mb-6 text-fg-muted">
-              We couldn't complete your audit. Please try again.
+              We couldn&apos;t complete your audit. Please try again.
             </p>
             <button
               onClick={() => router.push('/audit')}
