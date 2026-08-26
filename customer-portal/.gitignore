@@ -90,3 +90,11 @@ public/audit-screenshots/
 *storybook.log
 storybook-static
 .legacy/
+
+# YouTube/yt_channel credentials (auto-rotated, not committed)
+yt_channel/creds/token.pickle
+
+# Bing SEO integration scripts (runtime scripts, auto-generated credentials)
+scripts/bing_*.py
+scripts/seo_*.py
+scripts/weekly_*.py
