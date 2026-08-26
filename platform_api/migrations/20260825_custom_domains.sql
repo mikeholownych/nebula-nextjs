@@ -1,3 +1,4 @@
+-- target: platform
 ALTER TABLE org_domains ADD COLUMN IF NOT EXISTS verification_token text;
 ALTER TABLE org_domains ADD COLUMN IF NOT EXISTS cf_hostname_id text;
 

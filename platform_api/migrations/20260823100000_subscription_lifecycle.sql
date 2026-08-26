@@ -1,3 +1,4 @@
+-- target: platform
 -- Phase 2 billing spine: lifecycle columns for org-keyed subscriptions.
 -- Additive only. Founder seed row keeps defaults (NULL interval, livemode=false).
 

@@ -1,3 +1,4 @@
+-- target: platform
 -- One published or draft brand profile per agency organization.
 CREATE TABLE IF NOT EXISTS brand_profiles (
     id               uuid        NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,

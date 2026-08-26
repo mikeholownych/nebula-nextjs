@@ -1,3 +1,4 @@
+-- target: audit
 -- Phase 3 paid analytics surfaces. Additive only.
 
 CREATE TABLE IF NOT EXISTS funnel_runs (

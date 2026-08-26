@@ -1,3 +1,4 @@
+-- target: audit
 -- api_keys.scopes column
 -- principal.py _load_api_key_principal() references this column for per-key
 -- scope restriction. Without it every nbk_ request errors with

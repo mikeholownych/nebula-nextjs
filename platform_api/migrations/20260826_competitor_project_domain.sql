@@ -1,3 +1,4 @@
+-- target: platform
 -- Competitor per-project attribution.
 --
 -- Canonical migration for the change first applied to production on 2026-08-25.

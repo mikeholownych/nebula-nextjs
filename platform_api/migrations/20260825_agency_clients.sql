@@ -1,3 +1,4 @@
+-- target: platform
 -- agency_clients: client accounts managed by agency organizations.
 -- client_email is a system-managed audit ownership key (never a real mailbox):
 --   {slug}+{org_id_prefix8}@clients.nebulacomponents.com
