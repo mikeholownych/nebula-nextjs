@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export const dynamic = 'force-dynamic'
-
-export async function GET(_request?: NextRequest) {
-  return NextResponse.json(
-    { status: 'ok' },
-    { headers: { 'Cache-Control': 'no-store' } },
-  )
+export async function GET() {
+  return NextResponse.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    build_id: process.env.BUILD_ID || 'unknown',
+    message: 'Customer portal health check',
+  })
 }
