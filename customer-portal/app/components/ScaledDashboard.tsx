@@ -49,7 +49,7 @@ export const ScaledDashboard: React.FC = () => {
   return (
     <div
       ref={outerRef}
-      className="relative w-full max-w-[896px] mx-auto flex justify-center overflow-hidden [aspect-ratio:896/612]"
+      className="absolute inset-0 flex justify-center overflow-hidden"
       style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
     >
       <div

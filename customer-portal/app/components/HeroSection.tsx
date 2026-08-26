@@ -14,7 +14,7 @@ import { SignalHorizon } from './SignalHorizon'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
-const ScaledDashboard = dynamic(() => import('./ScaledDashboard'), { ssr: false })
+const ScaledDashboard = dynamic(() => import('./ScaledDashboard'))
 
 export const HeroSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -200,8 +200,10 @@ export const HeroSection: React.FC = () => {
       {/* Spacer */}
       <div className="h-10 sm:h-14 lg:h-18" />
 
-      {/* Instrument preview is desktop-only */}
-      <div className="relative z-10 hidden w-full overflow-hidden md:-mb-20 md:block lg:-mb-32">
+      {/* Instrument preview is desktop-only. The aspect-ratio box is
+          server-rendered so the dashboard's final height is reserved from
+          first paint (prevents CLS when the client-only mockup mounts). */}
+      <div className="relative z-10 mx-auto hidden w-full max-w-[896px] overflow-hidden [aspect-ratio:896/612] md:-mb-20 md:block lg:-mb-32">
         <ScaledDashboard />
       </div>
       <SignalHorizon />
