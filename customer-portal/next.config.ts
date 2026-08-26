@@ -77,7 +77,7 @@ const nextConfig: NextConfig = {
       // Trailing-slash duplicate (skipTrailingSlashRedirect is on globally for
       // the PostHog /ingest proxy, so this one page needs its own explicit rule)
       { source: '/pricing/', destination: '/pricing', permanent: true },
-      { source: '/billing', destination: '/workspace?tab=billing', permanent: false },
+      { source: '/billing', destination: 'https://app.nebulacomponents.com/billing', permanent: false },
       // Legacy .html -> live equivalents (301). Single source of truth in
       // app/lib/legacy-routes.ts - proxy.ts must match these BEFORE its
       // generic .html blocker or the 301s never fire (D9 incident).

@@ -124,6 +124,29 @@ export default function ResourcesPage() {
             </Link>
           </div>
 
+          <section className="mt-12 grid gap-4 sm:grid-cols-2">
+            <Link href="/ecommerce-landing-page-audit" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Paid traffic diagnosis</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">Ecommerce landing page audit</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">Inspect the page-side conditions that can interrupt paid traffic before changing targeting or bidding.</p>
+            </Link>
+            <Link href="/ai-readiness-landing-page-check" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">AI search readiness</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">AI readiness checks</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">Inspect entity clarity, structured consistency, crawl access, and citation-ready content.</p>
+            </Link>
+            <Link href="/page-intent-aware-audit" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Diagnostic method</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">Page-intent-aware audit</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">See how audit signals change for landing pages, SEO content, FAQs, explainers, and checkout pages.</p>
+            </Link>
+            <Link href="/why-cro-agencies-dont-work" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Commercial model</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-fg">CRO alternative without a retainer</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">Understand why diagnosis can come before an ongoing CRO engagement.</p>
+            </Link>
+          </section>
+
           <section className="mt-16 border-t border-border pt-12">
             <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg">Why we build in the open</h2>
             <p className="mb-4 max-w-2xl leading-relaxed text-fg-muted">

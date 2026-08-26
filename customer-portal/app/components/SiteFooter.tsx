@@ -70,7 +70,7 @@ export default function SiteFooter() {
               Nebula
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
-              <li><Link href="/workspace" className="hover:text-accent transition-colors">Client Workspace</Link></li>
+              <li><Link href="https://app.nebulacomponents.com" className="hover:text-accent transition-colors">Client Workspace</Link></li>
               <li><Link href="/about" className="hover:text-accent transition-colors">About</Link></li>
               <li><Link href="/press" className="hover:text-accent transition-colors">Press</Link></li>
               <li><Link href="/brand" className="hover:text-accent transition-colors">Brand Assets</Link></li>

@@ -34,11 +34,6 @@ export const TAB_ACCESS_REQUIREMENTS: Record<string, AccessLevel> = {
   dashboard: 'free',
   billing: 'free',
   settings: 'free',
-  // Paid analytics (Phase 3): roadmap requires Pro; the funnel tab stays
-  // visible to free so their single teaser run has a home - depth gating
-  // happens inside funnelView after the teaser is consumed.
-  program: 'pro',
-  funnel: 'free',
 }
 
 const PLAN_RANK: Record<AccessLevel, number> = {
@@ -108,7 +103,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
           See plans →
         </Link>
         <Link
-          href="/workspace?tab=billing"
+          href="https://app.nebulacomponents.com/billing"
           className="rounded-lg border border-border px-6 py-3 text-sm font-semibold text-fg-muted transition-colors hover:border-accent hover:text-fg"
         >
           View billing

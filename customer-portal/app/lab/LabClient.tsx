@@ -351,7 +351,7 @@ export default function LabClient() {
                   production.
                 </p>
                 <Link
-                  href="/workspace"
+                  href="https://app.nebulacomponents.com/experiments"
                   className="mt-3 inline-block rounded bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
                 >
                   Open workspace →

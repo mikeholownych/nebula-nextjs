@@ -28,7 +28,7 @@ export default function Footer() {
               <li><a href="/audit?utm_source=site-nav&utm_medium=internal" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</a></li>
               <li><a href="/score" className="text-sm text-fg-muted hover:text-fg transition-colors">Score My Page</a></li>
               <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
-              <li><a href="/workspace" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
+              <li><a href="https://app.nebulacomponents.com" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
               <li><a href="/teardowns" className="text-sm text-fg-muted hover:text-fg transition-colors">Teardowns</a></li>
               <li><a href="/case-studies" className="text-sm text-fg-muted hover:text-fg transition-colors">Case Studies</a></li>
             </ul>

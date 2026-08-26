@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/ga4", tags=["ga4"])
 
-_PORTAL_SETTINGS_URL = "https://nebulacomponents.com/workspace?tab=settings"
+_PORTAL_SETTINGS_URL = "https://app.nebulacomponents.com/settings"
 
 
 async def _summaries_or_clean_error(token: str) -> list[dict]:

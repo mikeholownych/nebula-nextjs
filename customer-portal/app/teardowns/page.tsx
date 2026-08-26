@@ -23,8 +23,35 @@ export default async function TeardownsPage() {
       (rank.get(b.slug) ?? CURATED_ORDER.length),
   )
 
+  // CollectionPage + ItemList schema improves AI citation and rich result eligibility
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Public Audit Teardowns',
+    description:
+      'Evidence-backed landing page audits run by Nebula on well-known public pages. Raw findings, 9-signal engine, published for transparency.',
+    url: 'https://nebulacomponents.com/teardowns',
+    mainEntity: {
+      '@type': 'ItemList',
+      name: 'Landing Page Audit Teardowns',
+      numberOfItems: ordered.length,
+      itemListElement: ordered.map((row, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: row.name ?? row.domain,
+        url: `https://nebulacomponents.com/teardowns/${row.slug}`,
+        description: `Nebula audit of ${row.domain}: score ${row.score}/10, grade ${row.grade}.`,
+      })),
+    },
+  }
+
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardowns
@@ -108,5 +135,6 @@ export default async function TeardownsPage() {
         </Link>
       </section>
     </main>
+    </>
   )
 }

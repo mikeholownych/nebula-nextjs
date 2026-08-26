@@ -8,7 +8,8 @@ const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://127.0.0.1:8001'
  * Google OAuth redirects here after the user grants/denies GSC access.
  * We forward the full query string (code, state, error) to the FastAPI backend
  * which validates state, exchanges the code, and saves the tokens.
- * The backend then redirects to /workspace?tab=settings (or an error URL).
+ * The backend then redirects to the workspace settings surface
+ * (https://app.nebulacomponents.com/settings, or an error URL).
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -23,14 +24,20 @@ export async function GET(req: NextRequest) {
     redirect: 'manual',
   })
 
-  // Backend responds with a 302 redirect to /workspace?tab=settings
+  // Backend responds with a 302 redirect to the workspace settings surface.
   const location = res.headers.get('location')
   if (location) {
-    // Rewrite absolute backend URLs to relative ones if needed
-    const dest = location.startsWith('http')
-      ? new URL(location).pathname + new URL(location).search
-      : location
-    return NextResponse.redirect(new URL(dest, req.url), { status: 302 })
+    // Pass through absolute URLs to other origins (the app host) untouched;
+    // relativize same-origin backend URLs onto the current host.
+    if (location.startsWith('http')) {
+      const parsed = new URL(location)
+      if (parsed.host !== req.headers.get('host')) {
+        return NextResponse.redirect(location, { status: 302 })
+      }
+      const dest = parsed.pathname + parsed.search
+      return NextResponse.redirect(new URL(dest, req.url), { status: 302 })
+    }
+    return NextResponse.redirect(new URL(location, req.url), { status: 302 })
   }
 
   // Forward error response from backend

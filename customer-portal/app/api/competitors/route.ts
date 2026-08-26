@@ -4,8 +4,10 @@ import { authHeaders } from '@/app/lib/workspace-auth'
 const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://127.0.0.1:8001'
 
 export async function GET(req: NextRequest) {
+  const projectDomain = req.nextUrl.searchParams.get('project_domain')
+  const query = projectDomain ? `?project_domain=${encodeURIComponent(projectDomain)}` : ''
   try {
-    const res = await fetch(`${PLATFORM_API}/api/competitors/`, {
+    const res = await fetch(`${PLATFORM_API}/api/competitors/${query}`, {
       headers: authHeaders(req),
       cache: 'no-store',
     })

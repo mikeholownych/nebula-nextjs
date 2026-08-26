@@ -118,7 +118,7 @@ export default function CitablePage() {
                 Synchronized package facts
               </p>
               <h2 id="release-facts-heading" className="mt-3 text-2xl font-bold tracking-tight text-fg">
-                Current documented release
+                Latest Citable Release Information
               </h2>
             </div>
             <p className="text-sm text-fg-muted">
@@ -216,7 +216,7 @@ export default function CitablePage() {
 
         <section aria-labelledby="citable-faq-heading" className="mt-14 border-t border-border pt-12">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Direct answers
+            Frequently Asked Questions about Citable
           </p>
           <h2 id="citable-faq-heading" className="mt-3 text-3xl font-bold tracking-tight text-fg">
             Citable questions, answered

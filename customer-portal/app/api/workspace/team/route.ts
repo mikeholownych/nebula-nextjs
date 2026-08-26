@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
-import { randomBytes } from 'crypto'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**

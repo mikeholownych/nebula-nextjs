@@ -40,9 +40,9 @@ describe('site surface integrity', () => {
   it('exposes Client Workspace in the live nav and footer', () => {
     const nav = readFileSync(path.join(repo, 'components/SiteNav.tsx'), 'utf8')
     const footer = readFileSync(path.join(repo, 'app/components/SiteFooter.tsx'), 'utf8')
-    expect(nav).toContain('href="/workspace"')
+    expect(nav).toContain('href="https://app.nebulacomponents.com"')
     expect(nav).toMatch(/Client Workspace|Workspace/)
-    expect(footer).toContain('href="/workspace"')
+    expect(footer).toContain('href="https://app.nebulacomponents.com"')
     expect(footer).toMatch(/Client Workspace/)
   })
 

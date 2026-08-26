@@ -187,7 +187,7 @@ describe('POST /api/subscribe', () => {
     expect(body).toContain(`customer_email=${encodeURIComponent(email)}`)
     expect(body).toContain('allow_promotion_codes=true')
     expect(body).toContain(
-      `success_url=${encodeURIComponent('https://nebulacomponents.com/workspace?upgraded=pro')}`,
+      `success_url=${encodeURIComponent('https://app.nebulacomponents.com/billing?upgraded=pro')}`,
     )
   })
 

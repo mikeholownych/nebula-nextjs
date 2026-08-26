@@ -5,6 +5,7 @@ import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
 import GscWidget from './gscWidget'
 import Ga4Widget from './ga4Widget'
 import SiteHealthHero from './SiteHealthHero'
+import IntentBadge from '@/components/IntentBadge'
 
 // ── Helpers ───────────────────────────────────────────────────────────
 
@@ -86,7 +87,7 @@ function Sparkline({ points, width = 260, height = 64 }: { points: number[]; wid
   )
 }
 
-export function DashboardView({ audits, latestDetail, email }: { audits: WorkspaceAudit[]; latestDetail: AuditDetail | null; email?: string }) {
+export function DashboardView({ audits, latestDetail, email, selectedProject }: { audits: WorkspaceAudit[]; latestDetail: AuditDetail | null; email?: string; selectedProject?: string }) {
   const sorted = useMemo(
     () => [...audits].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')),
     [audits]
@@ -144,12 +145,12 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
           <section className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">Est. Monthly Leak</p>
             <p className="mt-4 text-lg font-semibold text-fg-muted">-</p>
-            <a href="/workspace?tab=settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
+            <a href="https://app.nebulacomponents.com/settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
           </section>
         )}
       </div>
 
-      <CompetitorCard />
+      <CompetitorCard selectedProject={selectedProject} />
 
       <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">
         <section className="rounded-md border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
@@ -175,7 +176,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
           <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-priority condition.</h2>
           <p className="mt-3 text-sm leading-6 text-[#b9b9b2]">Use the latest findings to choose one bounded repair, then re-audit the same page to verify the condition changed.</p>
           <div className="mt-8 flex items-center justify-between border-t border-white/15 pt-4 text-sm"><span className="text-[#b9b9b2]">Latest status</span><span className="font-semibold">{counts.critical > 0 ? `${counts.critical} critical` : 'No critical findings'}</span></div>
-          <a href="/workspace?tab=recommendations" className="mt-4 inline-flex w-full justify-center rounded-lg bg-bg-elevated px-4 py-2.5 text-sm font-semibold text-fg hover:bg-[#e9e9e5]">Open fix queue →</a>
+          <a href="https://app.nebulacomponents.com/fix-queue" className="mt-4 inline-flex w-full justify-center rounded-lg bg-bg-elevated px-4 py-2.5 text-sm font-semibold text-fg hover:bg-[#e9e9e5]">Open fix queue →</a>
         </section>
       </div>
 
@@ -215,17 +216,21 @@ interface CompetitorComparison {
   }[]
 }
 
-function CompetitorCard() {
+function CompetitorCard({ selectedProject }: { selectedProject?: string }) {
   const [data, setData] = useState<CompetitorComparison | null>(null)
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    fetch('/api/competitors/comparison', { cache: 'no-store' })
+    const query = selectedProject && selectedProject !== 'all'
+      ? `?project_domain=${encodeURIComponent(selectedProject)}`
+      : ''
+    setLoaded(false)
+    fetch(`/api/competitors/comparison${query}`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => setData(d))
       .catch(() => setData(null))
       .finally(() => setLoaded(true))
-  }, [])
+  }, [selectedProject])
 
   if (!loaded) {
     return (
@@ -257,7 +262,7 @@ function CompetitorCard() {
       {competitors.length === 0 ? (
         <div className="mt-4">
           <p className="text-sm text-fg-muted">Track up to 3 competitor pages and see how your score stacks up.</p>
-          <a href="/workspace?tab=settings" className="mt-2 inline-block text-sm font-semibold text-[#c7ff2f] hover:underline">
+          <a href="https://app.nebulacomponents.com/settings" className="mt-2 inline-block text-sm font-semibold text-[#c7ff2f] hover:underline">
             Add competitors in Settings →
           </a>
         </div>
@@ -293,6 +298,7 @@ function CompetitorCard() {
 // ── Audits (immutable versions) ───────────────────────────────────────
 
 export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
+  const [intentOverrides, setIntentOverrides] = useState<Record<string, string>>({})
   const byPath = useMemo(() => {
     const map = new Map<string, WorkspaceAudit[]>()
     for (const a of audits) {
@@ -344,7 +350,7 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
             {versions.map((v, i) => (
               <li key={v.id}>
                 <a
-                  href={`/audit/${v.id}/results`}
+                  href={`https://nebulacomponents.com/audit/${v.id}/results`}
                   className="flex items-center justify-between rounded-lg border border-border bg-bg-panel px-4 py-3 hover:border-accent/50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
@@ -352,10 +358,18 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
                       v{i + 1}
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-fg">
-                        {Math.round(scoreOf(v) * 10)}/100
-                        {v.grade ? <span className="text-fg-dim ml-2">Grade {v.grade}</span> : null}
-                      </p>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="text-sm font-medium text-fg">
+                          {Math.round(scoreOf(v) * 10)}/100
+                          {v.grade ? <span className="text-fg-dim ml-2">Grade {v.grade}</span> : null}
+                        </p>
+                        <IntentBadge
+                          auditId={v.id}
+                          intent={intentOverrides[v.id] ?? v.page_intent}
+                          confidence={v.intent_confidence}
+                          onUpdated={(newIntent: string) => setIntentOverrides(prev => ({ ...prev, [v.id]: newIntent }))}
+                        />
+                      </div>
                       <p className="text-xs text-fg-dim">{fmtDate(v.completed_at || v.created_at)}</p>
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { auditWebApplicationSchema, createHowToSchema } from '@/app/lib/schema'
+import { auditWebApplicationSchema } from '@/app/lib/schema'
 import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 import HonestyGrid from '@/app/components/HonestyGrid'
@@ -70,36 +70,8 @@ const softwareAppSchema = {
     '@type': 'Organization',
     name: 'Nebula Components',
     url: 'https://nebulacomponents.com',
-  },
+  }
 }
-
-const howToSchema = createHowToSchema({
-  name: 'How to audit a landing page for conversion',
-  description: 'Use Nebula to find conversion leaks on any landing page in under 2 minutes.',
-  steps: [
-    {
-      name: 'Enter your domain',
-      text: 'Paste the full URL of your landing page into the audit tool field above.',
-      position: 1,
-    },
-    {
-      name: 'Wait for the 9-signal scan',
-      text: 'Nebula fetches your page and evaluates it across 9 conversion signal categories including message match, trust signals, mobile CTA, load speed, and AI readiness.',
-      position: 2,
-    },
-    {
-      name: 'Review findings ranked by priority',
-      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by priority.',
-      position: 3,
-    },
-    {
-      name: 'Fix the top leak',
-      text: 'Address the highest-priority failing signal first. The $97 One-Leak Repair Sprint delivers one scoped fix package with exact copy, code, or configuration changes within 48 hours.',
-      position: 4,
-    },
-  ],
-  totalTime: 'PT2M',
-})
 
 export default async function AuditPage() {
   const stats = await getAuditStats()
@@ -118,10 +90,6 @@ export default async function AuditPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
@@ -205,7 +173,7 @@ export default async function AuditPage() {
                       { initial: 'BC', bg: 'bg-rose-800 text-rose-200' },
                       { initial: 'NT', bg: 'bg-cyan-800 text-cyan-200' },
                       { initial: 'WK', bg: 'bg-indigo-800 text-indigo-200' },
-                      { initial: 'SH', bg: 'bg-teal-800 text-teal-200' },
+                      { initial: 'SH', bg: 'bg-red-800 text-red-200' },
                       { initial: 'FL', bg: 'bg-fuchsia-800 text-fuchsia-200' },
                       { initial: 'KP', bg: 'bg-lime-800 text-lime-200' },
                       { initial: 'MV', bg: 'bg-orange-800 text-orange-200' },

@@ -667,3 +667,28 @@ All DoD gates exercised on production with captured artifacts. Two production de
 ## 2026-08-23 - phase 2 cutover decisions (verbatim)
 - Mike: 'skip' live-money validation this cycle. First real subscription becomes the first true end-to-end validation of Stripe->webhook->entitlement delivery. Sandbox E2E (10/10) + unit/integration coverage stand as the evidence base.
 - Mike: 'proceed' on merge to main + push to nebula-origin.
+
+## 2026-08-23 - phase 2 merged and pushed
+- feat/billing-entitlements (19 commits, 828b10bf4..425bd8039) merged into local main, 581/581 tests green on merged result, live surfaces healthy, journals clean.
+- Third-stream WIP stashed during merge; non-ledger files restored from stash; live-written ledger files left at newer on-disk versions. Snapshot stash (7017e867) preserved for that stream.
+- Pushed: nebula-origin/main -> 425bd8039.
+
+## 2026-08-25 - Agency brand profiles Phase B
+
+- Implemented `brand_profiles` persistence, agency-admin CRUD, published public lookup, workspace BFF, and settings UI.
+- Applied `platform_api/migrations/20260825_brand_profiles.sql` to `nebula_platform`.
+- Object storage is not configured; logo signing deliberately returns `503` rather than fabricating an upload URL.
+- Live temporary profile evidence: create `201`, read `200`, publish `200`, `/api/tenant-brand` `200`, delete `204`, post-delete lookup `404`; invalid color `422`.
+- Browser evidence: authenticated `workspace-app /settings` `200` with visible `Workspace branding` content; anonymous app root remains `307` to `/login`.
+- Regression: `670 passed, 3 warnings`; workspace typecheck and production build passed.
+- No commit or push performed.
+
+## 2026-08-26 - Post-merge followups, working-tree reconciliation (agent)
+
+- PR #24 (agency workspace tenant routing) merged to main via admin squash 94b5d8510 on 2026-08-25 with CI bypassed (GitHub Actions billing/spend limit; user authorized). Local main fast-forwarded; local feat/agency-clients removed; remote branch auto-deleted.
+- User directive: CI stays dark until monthly reset; local CI-equivalent testing is the bar. Proceed with all other outstanding work.
+- Four parallel review streams completed over the uncommitted working tree (workspace cutover, marketing/content, competitor analytics, services+deploy tooling). Key findings: findings_sync.py/signal_intent_map.py untracked but imported by tracked+deployed audit_api.py:34; em-dash violations incl. one live rendered headline on /press; competitor project_domain applied to prod nebula_platform manually but only recorded by a colliding alembic revision (two heads vs 0006_ai_rewrites) outside the canonical platform_api/migrations/*.sql pipeline; stale /workspace?tab= return URLs in GSC/GA4/Stripe/fixes flows broken by cutover redirect chain; clientsView score rendered score/10 against a 0-100 scale in both portal copies.
+- Incident checks: no competitor/project_domain 500s in journalctl (401s are unauth probes); ChunkedIteratorResult TypeError x4 all at 2026-08-25T11:17:53Z during agency release testing, current committed code is synchronous-correct; latent, not recurring.
+- Fixes applied: 4x em-dash removal (PressKitClient headline was customer-visible), 3x curly apostrophe normalization on page-intent page, teal avatar -> red on /audit, dead HowTo placeholder comments removed, stale /workspace?tab= links -> app-host deep links (views, planGate gate config, next.config /billing, gsc/ga4/subscribe/fixes return URLs, LabClient experiments deep link), gsc BFF callback now passes through app-host absolute redirects, proxy.ts unreachable workspace block removed, clientsView score display fixed in both copies, list_competitors now honors project_domain filter matching /comparison normalization, canonical idempotent SQL migration added (column already live), colliding alembic revision archived to .legacy with inventory, deploy script dead find-line removed, probe SKIP_EXACT extended to lead/newsletter capture POSTs, IntentBadge caret + monitoringView arrows moved off banned geometric-shape range per pre-commit content rule, lint errors fixed across 6 files (unused imports/vars, empty catches, bad disable directive), subscription-plans test updated to app-host success_url.
+- Verification (local CI replication): compileall OK; live route probe 172 routes 0x5xx; pytest platform_api 129 passed; root suite 549 passed; Real-PG locking 2 passed; portal eslint 0 errors; tsc clean; Jest 747 passed with coverage floors; governance validator 31 pass/0 fail after force-adding missing customer-portal/.legacy/ARCHIVE_INVENTORY.md; npm audit prod 0 vulns; production build OK; Lighthouse budgets green except homepage CLS 0.1166 > 0.1 which reproduces identically on clean HEAD (3/3) = PRE-EXISTING on frozen homepage, needs Mike decision, untouched here.
+- Excluded from all commits: yt_channel/creds/token.pickle (tracked credential; rotation + untracking still owed).

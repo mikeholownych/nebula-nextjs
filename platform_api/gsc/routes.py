@@ -36,9 +36,11 @@ from .oauth import (
 
 router = APIRouter(prefix="/api/gsc", tags=["gsc"])
 
-# Portal redirect after successful connect
-_PORTAL_SUCCESS_URL = "/workspace?tab=settings"
-_PORTAL_ERROR_URL = "/workspace?tab=settings&gsc_error=1"
+# Portal redirect after successful connect (workspace cutover 2026-08-25:
+# deep-link the app host directly so users land on settings, not a
+# parameter-stripping redirect chain through the apex)
+_PORTAL_SUCCESS_URL = "https://app.nebulacomponents.com/settings"
+_PORTAL_ERROR_URL = "https://app.nebulacomponents.com/settings?gsc_error=1"
 
 
 def _gsc_redirect_uri() -> str:

@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Redirect to workspace and set persistent HTTP-only cookie
-    const redirectResponse = NextResponse.redirect(new URL('/workspace', SITE_URL))
+    const redirectResponse = NextResponse.redirect(new URL('/', 'https://app.nebulacomponents.com'))
 
     redirectResponse.cookies.set('access_token', accessToken, {
       domain: '.nebulacomponents.com',

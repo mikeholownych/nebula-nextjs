@@ -81,9 +81,15 @@ export function PressReleaseTabs({ children }: { children: React.ReactNode }) {
         ))}
       </div>
       <div role="tabpanel" aria-label={tabs.find(t => t.id === active)?.label}>
-        {active === 'releases' && <PressReleasesList />}
-        {active === 'coverage' && <StoryAngles />}
-        {active === 'angles' && <>{children}</>}
+        <div className={active === 'releases' ? '' : 'hidden'}>
+          <PressReleasesList />
+        </div>
+        <div className={active === 'coverage' ? '' : 'hidden'}>
+          <StoryAngles />
+        </div>
+        <div className={active === 'angles' ? '' : 'hidden'}>
+          {children}
+        </div>
       </div>
     </div>
   )
@@ -91,6 +97,19 @@ export function PressReleaseTabs({ children }: { children: React.ReactNode }) {
 
 function PressReleasesList() {
   const releases = [
+    {
+      date: '2026-08-25',
+      headline: 'Nebula launches page intent classification: audit signals now adapt to page type',
+      summary: 'A deterministic classifier detects whether an audited page is a paid landing page, SEO content, FAQ, product explainer, checkout, or other type, then gates which signals apply. A FAQ page will no longer receive a "missing CTA above the fold" finding. Customers can override the detected intent per audit.',
+      type: 'product' as const,
+    },
+    {
+      date: '2026-08-23',
+      headline: 'Nebula launches dedicated customer workspace at app.nebulacomponents.com',
+      summary: 'The customer workspace moves to its own subdomain and product surface. Durable findings with a full lifecycle state machine (new → acknowledged → resolved → regressed), org-scoped domain ownership, tenant isolation, and a findings history that survives individual audits. The free audit remains at nebulacomponents.com/audit.',
+      type: 'product' as const,
+      link: 'https://app.nebulacomponents.com',
+    },
     {
       date: '2026-08-06',
       headline: 'Nebula Components launches diagnostic brand kit',
@@ -165,6 +184,11 @@ function StoryAngles() {
       number: '3',
       headline: 'The CRO agency model sells retainers before diagnosis.',
       body: 'Nebula argues the industry model is structurally broken - retainer before diagnosis, A/B tests on pages without enough traffic for significance, 90-day timelines for problems fixable in a week. The audit takes 90 seconds and costs nothing.',
+    },
+    {
+      number: '4',
+      headline: 'Most audit tools treat every page the same. That is the problem.',
+      body: 'A FAQ page should not be penalized for lacking a primary CTA above the fold. An SEO article has a different success model than a paid traffic landing page. Nebula now classifies page intent before scoring - paid landing, SEO content, FAQ, product explainer, checkout - and applies only the signals that are relevant. It is the first conversion audit tool to make this distinction.',
     },
   ]
 

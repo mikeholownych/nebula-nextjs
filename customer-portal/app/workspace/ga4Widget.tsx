@@ -76,7 +76,7 @@ export default function Ga4Widget({
       ) : !status.connected || !status.property_id ? (
         <p className="text-sm text-fg-muted">
           Connect Google Analytics in{' '}
-          <a href="/workspace?tab=settings#integrations" className="underline">
+          <a href="https://app.nebulacomponents.com/settings#integrations" className="underline">
             Settings → Integrations
           </a>{' '}
           to prove your fixes moved real conversions.

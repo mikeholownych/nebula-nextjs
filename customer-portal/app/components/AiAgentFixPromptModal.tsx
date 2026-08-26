@@ -195,7 +195,7 @@ Instructions: Implement the exact fixes specified above and verify that the page
 
             <div className="mt-4 flex items-center justify-between gap-3">
               <a
-                href="/workspace?tab=settings"
+                href="https://app.nebulacomponents.com/settings"
                 className="text-xs text-accent hover:underline font-medium"
               >
                 Manage API Keys in Settings →

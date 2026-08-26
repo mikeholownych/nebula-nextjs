@@ -39,7 +39,7 @@ export async function GET(
       {
         error: 'Nebula API key required.',
         code: 'AUTH_REQUIRED',
-        hint: 'Generate an API key in your customer workspace at https://nebulacomponents.com/workspace?tab=settings',
+        hint: 'Generate an API key in your customer workspace at https://app.nebulacomponents.com/settings',
       },
       { status: 401 }
     )
@@ -50,7 +50,7 @@ export async function GET(
       {
         error: 'Invalid or expired Nebula API key.',
         code: 'AUTH_REQUIRED',
-        hint: 'Generate an API key in your customer workspace at https://nebulacomponents.com/workspace?tab=settings',
+        hint: 'Generate an API key in your customer workspace at https://app.nebulacomponents.com/settings',
       },
       { status: 401 }
     )

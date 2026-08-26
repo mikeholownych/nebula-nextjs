@@ -12,9 +12,10 @@ import asyncio
 from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID
+from urllib.parse import urlparse
 
 import httpx
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from pydantic import BaseModel
 
 from platform_api.auth.routes import get_current_user
@@ -30,12 +31,17 @@ AUDIT_API_URL = "http://localhost:8001/audit/run"
 class CompetitorCreateRequest(BaseModel):
     url: str
     label: Optional[str] = None
+    project_domain: Optional[str] = None
 
 
 def _competitor_email(user_id: str) -> str:
     """Synthetic identity for competitor audits - keeps them out of the
     user's workspace audit list (which is keyed by their real email)."""
     return f"competitor+{user_id}@internal.nebulacomponents.com"
+
+
+def _audit_domain(url: str) -> str:
+    return (urlparse(url).hostname or "").lower().removeprefix("www.")
 
 
 def _owner_email(session, user_id: str) -> Optional[str]:
@@ -135,8 +141,14 @@ async def _run_competitor_audit(tracking_id: str, user_id: str, url: str) -> Non
 
 
 @router.get("/")
-async def list_competitors(current_user=Depends(get_current_user)):
-    """List the current user's tracked competitors."""
+async def list_competitors(
+    project_domain: Optional[str] = Query(default=None),
+    current_user=Depends(get_current_user),
+):
+    """List the current user's tracked competitors.
+
+    Optional project_domain filter mirrors /comparison normalization.
+    """
     user_id = current_user["user_id"]
     from platform_api.db.session import SessionLocal
     if SessionLocal is None:
@@ -146,12 +158,20 @@ async def list_competitors(current_user=Depends(get_current_user)):
         from sqlalchemy import text
         rows = session.execute(
             text("""
-                SELECT id, competitor_url, label, last_score, last_audited_at, created_at
+                SELECT id, competitor_url, label, project_domain, last_score, last_audited_at, created_at
                 FROM competitor_tracking
                 WHERE user_id = :user_id
+                  AND (:project_domain IS NULL OR project_domain = :project_domain)
                 ORDER BY created_at ASC
             """),
-            {"user_id": user_id},
+            {
+                "user_id": user_id,
+                "project_domain": (
+                    project_domain.strip().lower().removeprefix("www.")
+                    if project_domain and project_domain.strip()
+                    else None
+                ),
+            },
         ).fetchall()
         competitors = []
         for row in rows:
@@ -159,6 +179,7 @@ async def list_competitors(current_user=Depends(get_current_user)):
                 "id": str(row.id),
                 "url": row.competitor_url,
                 "label": row.label,
+                "project_domain": row.project_domain,
                 "last_score": float(row.last_score) if row.last_score is not None else None,
                 "last_audited_at": row.last_audited_at.isoformat() if row.last_audited_at else None,
                 "created_at": row.created_at.isoformat() if row.created_at else None,
@@ -180,6 +201,7 @@ async def add_competitor(
     if not url.startswith(("http://", "https://")):
         raise HTTPException(status_code=400, detail="Valid URL required (http/https)")
     label = (body.label or "").strip()[:200] or None
+    project_domain = (body.project_domain or "").strip().lower().removeprefix("www.") or None
 
     from platform_api.db.session import SessionLocal
     if SessionLocal is None:
@@ -222,11 +244,11 @@ async def add_competitor(
         try:
             result = session.execute(
                 text("""
-                    INSERT INTO competitor_tracking (user_id, competitor_url, label)
-                    VALUES (:user_id, :url, :label)
-                    RETURNING id, competitor_url, label, last_score, last_audited_at, created_at
+                    INSERT INTO competitor_tracking (user_id, competitor_url, label, project_domain)
+                    VALUES (:user_id, :url, :label, :project_domain)
+                    RETURNING id, competitor_url, label, project_domain, last_score, last_audited_at, created_at
                 """),
-                {"user_id": user_id, "url": url, "label": label},
+                {"user_id": user_id, "url": url, "label": label, "project_domain": project_domain},
             ).fetchone()
             session.commit()
         except HTTPException:
@@ -243,6 +265,7 @@ async def add_competitor(
             "id": tracking_id,
             "url": result.competitor_url,
             "label": result.label,
+            "project_domain": result.project_domain,
             "last_score": None,
             "last_audited_at": None,
             "created_at": result.created_at.isoformat() if result.created_at else None,
@@ -291,7 +314,10 @@ async def delete_competitor(competitor_id: str, current_user=Depends(get_current
 
 
 @router.get("/comparison")
-async def get_comparison(current_user=Depends(get_current_user)):
+async def get_comparison(
+    project_domain: Optional[str] = Query(default=None),
+    current_user=Depends(get_current_user),
+):
     """Your latest audit score vs tracked competitors (0-100 scale)."""
     user_id = current_user["user_id"]
     user = current_user.get("user")
@@ -300,8 +326,16 @@ async def get_comparison(current_user=Depends(get_current_user)):
     your_score = None
     if email:
         try:
-            audits = await audit_db.get_audits_by_email(email, limit=1)
-            completed = [a for a in audits if a.get("status") == "completed" and a.get("score") is not None]
+            audits = await audit_db.get_audits_by_email(email, limit=50)
+            completed = [
+                a for a in audits
+                if a.get("status") == "completed"
+                and a.get("score") is not None
+                and (
+                    not project_domain
+                    or _audit_domain(a.get("url", "")) == project_domain.strip().lower().removeprefix("www.")
+                )
+            ]
             if completed:
                 # audits table stores score on the 0-100 scale
                 your_score = float(completed[0]["score"])
@@ -316,18 +350,20 @@ async def get_comparison(current_user=Depends(get_current_user)):
         from sqlalchemy import text
         rows = session.execute(
             text("""
-                SELECT competitor_url, label, last_score, last_audited_at
+                SELECT competitor_url, label, project_domain, last_score, last_audited_at
                 FROM competitor_tracking
                 WHERE user_id = :user_id
+                  AND (:project_domain IS NULL OR project_domain = :project_domain)
                 ORDER BY created_at ASC
             """),
-            {"user_id": user_id},
+            {"user_id": user_id, "project_domain": project_domain.strip().lower().removeprefix("www.") if project_domain else None},
         ).fetchall()
         competitors = []
         for row in rows:
             competitors.append({
                 "url": row.competitor_url,
                 "label": row.label,
+                "project_domain": row.project_domain,
                 "last_score": float(row.last_score) if row.last_score is not None else None,
                 "last_audited_at": row.last_audited_at.isoformat() if row.last_audited_at else None,
             })

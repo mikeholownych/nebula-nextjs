@@ -259,3 +259,19 @@ company_os/rollback/
 .warp/
 .windsurf/
 customer-portal/.next-previous/
+
+# ── Generated review and build state ────────────────────────────────────────
+*.tsbuildinfo
+*.eml
+reports/ai_visibility/
+seo-reports/
+scripts/logs/
+
+# ── Local runtime state previously tracked ──────────────────────────────────
+/error_enricher_state.json
+/company_os/memory_registry.json
+/ledgers/ceo-action-log.jsonl
+/ledgers/latest_ceo_directive.json
+/ledgers/leads-journal.jsonl
+/ledgers/leads.json
+/ops/social_drip_queue.json

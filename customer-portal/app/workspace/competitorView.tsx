@@ -1,19 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { WorkspaceAudit } from './WorkspaceClient'
 import Link from 'next/link'
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-} from 'recharts'
-import type { AccessLevel } from './planGate'
-import { signalLabel } from './signalLabels'
 
 interface CompetitorSignalResult {
   key: string
@@ -33,257 +22,36 @@ interface CompetitorCompareResult {
   signals: CompetitorSignalResult[]
 }
 
-interface TrackedRival {
-  id?: string
-  url: string
-  label: string | null
-  last_score: number | null
-  last_audited_at?: string | null
-}
-
-interface RivalDiagnostics {
-  you?: { url?: string; score?: number | null; grade?: string | null; signals?: Record<string, boolean> }
-  rival?: { url?: string; label?: string | null; score?: number | null; grade?: string | null; signals?: Record<string, boolean>; last_score?: number | null }
-  your_edge?: string[]
-  threats?: string[]
-  history?: { date: string; you: number; rival: number }[]
-}
-
 interface CompetitorViewProps {
   audits: WorkspaceAudit[]
   email?: string
-  planLevel: AccessLevel
+  selectedProject?: string
 }
 
-function PassFail({ value }: { value: boolean }) {
-  return value ? (
-    <span className="inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold text-accent">
-      <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.5 9L10 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      Pass
-    </span>
-  ) : (
-    <span className="inline-flex items-center rounded-full border border-danger/30 bg-danger-dim px-2 py-0.5 text-[10px] font-semibold text-danger">
-      Fail
-    </span>
-  )
-}
+export default function CompetitorView({ audits, selectedProject }: CompetitorViewProps) {
+  // audits is already filtered to the selected project by WorkspaceClient.
+  // Pick the most recent audit for the selected domain as the default "your URL".
+  const projectAudits = selectedProject && selectedProject !== 'all'
+    ? audits.filter(a => {
+        try { return new URL(a.url).hostname.replace(/^www\./, '') === selectedProject } catch { return false }
+      })
+    : audits
+  const initialUrlA = projectAudits[0]?.url || audits[0]?.url || 'https://example.com'
 
-/** Pro diagnostics for one tracked rival: signal table + gaps + history chart. */
-function RivalDiagnosticsPanel() {
-  const [rivals, setRivals] = useState<TrackedRival[]>([])
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [data, setData] = useState<RivalDiagnostics | null>(null)
-  const [loadingList, setLoadingList] = useState(true)
-  const [loadingDetail, setLoadingDetail] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    fetch('/api/competitors', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => setRivals(d?.competitors ?? []))
-      .catch(() => setRivals([]))
-      .finally(() => setLoadingList(false))
-  }, [])
-
-  const loadDiagnostics = useCallback(async (trackingId: string) => {
-    setLoadingDetail(true)
-    setError(null)
-    setData(null)
-    try {
-      const res = await fetch(`/api/competitors/comparison/${encodeURIComponent(trackingId)}`, { cache: 'no-store' })
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        setError(body?.error ?? body?.detail ?? 'Diagnostics unavailable.')
-        return
-      }
-      setData(await res.json())
-    } catch {
-      setError('Network error loading diagnostics.')
-    } finally {
-      setLoadingDetail(false)
-    }
-  }, [])
-
-  const selected = rivals.find((r) => r.id === selectedId) ?? null
-  const hasSignals = Boolean(
-    data && Object.keys(data.you?.signals ?? {}).length > 0 &&
-    Object.keys(data.rival?.signals ?? {}).length > 0
-  )
-  const history = data?.history ?? []
-  const edge = data?.your_edge ?? []
-  const threats = data?.threats ?? []
-
-  return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <div className="mb-1.5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-0.5 text-[11px] font-semibold text-accent">
-            Pro diagnostics
-          </div>
-          <h3 className="text-lg font-bold text-fg">Rival Signal Diagnostics</h3>
-          <p className="text-sm text-fg-muted">Per-signal pass maps against each tracked rival, your edges, their threats, and paired score history.</p>
-        </div>
-        <Link href="/workspace?tab=settings" className="text-xs font-semibold text-fg-muted underline-offset-2 hover:text-accent hover:underline">
-          Manage rivals in Settings →
-        </Link>
-      </div>
-
-      {/* Rival selector */}
-      <div className="rounded-xl border border-border bg-bg-panel p-4">
-        {loadingList ? (
-          <p className="text-xs text-fg-muted">Loading tracked rivals…</p>
-        ) : rivals.length === 0 ? (
-          <p className="text-xs text-fg-muted">
-            No tracked rivals yet. Add competitors in Settings and their first audit fills this panel automatically.
-          </p>
-        ) : (
-          <div className="flex flex-wrap gap-2">
-            {rivals.map((r) => (
-              <button
-                key={r.id ?? r.url}
-                type="button"
-                onClick={() => {
-                  if (!r.id) return
-                  setSelectedId(r.id)
-                  loadDiagnostics(r.id)
-                }}
-                className={`rounded-full border px-3 py-1 font-mono text-[11px] transition-colors ${
-                  selectedId === r.id ? 'border-accent/50 bg-accent/10 text-accent' : 'border-border text-fg-muted hover:border-accent/40 hover:text-fg'
-                }`}
-              >
-                {r.label || r.url.replace(/^https?:\/\/(www\.)?/, '')}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {loadingDetail && <p className="text-sm text-fg-muted">Crunching the head-to-head…</p>}
-      {error && <div className="rounded-lg border border-danger/40 bg-danger-dim p-3 text-xs text-danger">{error}</div>}
-
-      {data && !loadingDetail && (
-        <>
-          {!hasSignals ? (
-            <div className="rounded-xl border border-border bg-bg-panel p-6 text-sm text-fg-muted">
-              No linked completed audit on one side yet for{' '}
-              <strong className="text-fg">{selected?.label || selected?.url}</strong>. Diagnostics appear once both your latest audit and this rival&apos;s audit have completed.
-            </div>
-          ) : (
-            <div className="space-y-5">
-              {/* Score header */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-border bg-bg-panel p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-fg-dim">You</p>
-                  <div className="mt-2 flex items-baseline gap-2">
-                    <span className="font-mono text-4xl font-black text-accent">{Math.round(data.you?.score ?? 0)}</span>
-                    {data.you?.grade && <span className="text-xs text-fg-muted">Grade {data.you.grade}</span>}
-                  </div>
-                </div>
-                <div className="rounded-xl border border-border bg-bg-panel p-5">
-                  <p className="truncate text-xs font-semibold uppercase tracking-wider text-fg-dim">{data.rival?.label || data.rival?.url || 'Rival'}</p>
-                  <div className="mt-2 flex items-baseline gap-2">
-                    <span className="font-mono text-4xl font-black text-fg">{Math.round(data.rival?.score ?? data.rival?.last_score ?? 0)}</span>
-                    {data.rival?.grade && <span className="text-xs text-fg-muted">Grade {data.rival.grade}</span>}
-                  </div>
-                </div>
-              </div>
-
-              {/* Edge / threat lists */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-accent/30 bg-accent/[0.06] p-5">
-                  <h4 className="text-sm font-bold text-accent">Your edge</h4>
-                  {edge.length === 0 ? (
-                    <p className="mt-2 text-xs text-fg-muted">No signals where you pass and they fail.</p>
-                  ) : (
-                    <ul className="mt-2 space-y-1.5">
-                      {edge.map((k) => (
-                        <li key={k} className="flex items-center gap-2 text-xs text-fg">
-                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" /> {signalLabel(k)}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <div className="rounded-xl border border-danger/40 bg-danger-dim p-5">
-                  <h4 className="text-sm font-bold text-danger">Threats</h4>
-                  {threats.length === 0 ? (
-                    <p className="mt-2 text-xs text-fg-muted">No signals where they pass and you fail.</p>
-                  ) : (
-                    <ul className="mt-2 space-y-1.5">
-                      {threats.map((k) => (
-                        <li key={k} className="flex items-center gap-2 text-xs text-fg">
-                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-danger" /> {signalLabel(k)}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-
-              {/* Signal side-by-side table */}
-              <div className="overflow-x-auto rounded-xl border border-border bg-bg-panel">
-                <table className="w-full text-left text-sm">
-                  <thead className="border-b border-border bg-bg-elevated/60 text-xs font-semibold uppercase tracking-wider text-fg-dim">
-                    <tr>
-                      <th className="py-3 px-4">Signal</th>
-                      <th className="py-3 px-4 text-center">You</th>
-                      <th className="py-3 px-4 text-center">{data.rival?.label || 'Rival'}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {Object.keys(data.you?.signals ?? {}).map((key) => {
-                      const youPass = Boolean(data.you?.signals?.[key])
-                      const rivalPass = Boolean(data.rival?.signals?.[key])
-                      return (
-                        <tr key={key} className="transition-colors hover:bg-bg-elevated/40">
-                          <td className="py-3 px-4 font-medium text-fg">{signalLabel(key)}</td>
-                          <td className="py-3 px-4 text-center"><PassFail value={youPass} /></td>
-                          <td className="py-3 px-4 text-center"><PassFail value={rivalPass} /></td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Paired history line chart */}
-              {history.length >= 2 && (
-                <section className="rounded-xl border border-border bg-bg-panel p-6">
-                  <h4 className="mb-4 text-base font-bold text-fg">Score history</h4>
-                  <div className="h-64 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={history.map((h) => ({ date: h.date.slice(5), You: Math.round(h.you * 10), Rival: Math.round(h.rival * 10) }))} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#242a26" />
-                        <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#888881' }} tickLine={false} axisLine={false} />
-                        <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: '#888881' }} tickLine={false} axisLine={false} />
-                        <Tooltip
-                          contentStyle={{ background: '#10140f', border: '1px solid #242a26', borderRadius: 8, fontSize: 12 }}
-                          labelStyle={{ color: '#888881' }}
-                        />
-                        <Line type="monotone" dataKey="You" stroke="#c7ff2f" strokeWidth={2} dot={false} />
-                        <Line type="monotone" dataKey="Rival" stroke="#888881" strokeWidth={2} dot={false} strokeDasharray="4 3" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <p className="mt-2 text-center font-mono text-[10px] text-fg-dim">composite score, 0 to 100 scale</p>
-                </section>
-              )}
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  )
-}
-
-export default function CompetitorView({ audits, planLevel }: CompetitorViewProps) {
-  const initialUrlA = audits[0]?.url || 'https://example.com'
   const [urlA, setUrlA] = useState(initialUrlA)
   const [urlB, setUrlB] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<CompetitorCompareResult | null>(null)
   const [copied, setCopied] = useState(false)
+
+  // Reset "your URL" when the selected project changes
+  useEffect(() => {
+    const refreshed = projectAudits[0]?.url || audits[0]?.url || 'https://example.com'
+    setUrlA(refreshed)
+    setResult(null)
+    setError(null)
+  }, [selectedProject])
 
   const handleCompare = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -369,7 +137,7 @@ export default function CompetitorView({ audits, planLevel }: CompetitorViewProp
 
           <div className="flex items-center gap-3 shrink-0">
             <Link
-              href="/vs/fixroast"
+              href="https://nebulacomponents.com/vs/fixroast"
               className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-bg-elevated px-4 py-2.5 text-xs font-semibold text-fg hover:border-accent hover:text-accent transition-colors"
             >
               <span>View Nebula vs FixRoast ↗</span>
@@ -518,7 +286,7 @@ export default function CompetitorView({ audits, planLevel }: CompetitorViewProp
                 {copied ? '✓ Copied Battlecard' : '📋 Copy Battlecard'}
               </button>
               <Link
-                href="/pricing"
+                href="https://nebulacomponents.com/pricing"
                 className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-1.5 text-xs font-bold text-bg hover:opacity-85 transition-opacity"
               >
                 Claim $97 Repair Sprint →
@@ -572,22 +340,6 @@ export default function CompetitorView({ audits, planLevel }: CompetitorViewProp
             </table>
           </div>
         </div>
-      )}
-
-      {/* Tracked-rival diagnostics (Pro) or legacy-only note (free tier) */}
-      {planLevel === 'free' ? (
-        <div className="rounded-xl border border-border bg-bg-panel p-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">Pro feature</p>
-          <h3 className="mt-1 text-base font-bold text-fg">Rival Signal Diagnostics</h3>
-          <p className="mx-auto mt-2 max-w-md text-sm text-fg-muted">
-            Per-signal pass maps against every tracked rival, your edge, their threats, and paired score history. Upgrade to Pro ($29/mo) to unlock it.
-          </p>
-          <Link href="/pricing" className="mt-4 inline-block rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85">
-            See plans →
-          </Link>
-        </div>
-      ) : (
-        <RivalDiagnosticsPanel />
       )}
     </div>
   )

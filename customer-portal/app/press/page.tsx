@@ -1,5 +1,13 @@
 import { CROSS_INDUSTRY_PAID_TRAFFIC_STUDY } from '@/app/lib/brand-evidence'
-import { CopyPanel, PressReleaseTabs, ScanLine } from './PressKitClient'
+import dynamic from 'next/dynamic'
+
+// Dynamically import interactive client components to defer hydration until
+// after first paint; reduces TBT on mobile by moving JS execution off the
+// critical path. SSR remains on so content is still server-rendered for crawlers.
+// Only the JS hydration (interactivity) is deferred, not the HTML.
+const CopyPanel = dynamic(() => import('./PressKitClient').then(m => ({ default: m.CopyPanel })))
+const PressReleaseTabs = dynamic(() => import('./PressKitClient').then(m => ({ default: m.PressReleaseTabs })))
+const ScanLine = dynamic(() => import('./PressKitClient').then(m => ({ default: m.ScanLine })))
 
 // ─── Server Primitives ───────────────────────────────────────────────────────
 
@@ -72,16 +80,34 @@ const breadcrumbSchema = {
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Nebula Components Press Kit - Conversion Diagnostics',
+  name: 'Nebula Components Press Kit - Key Metrics and Insights for Journalists',
   description:
     'Editorial press kit for Nebula Components with governed conversion-diagnostics research, approved boilerplate, founder facts, and downloadable brand assets.',
   url: 'https://nebulacomponents.com/press',
   datePublished: '2026-08-01',
+  dateModified: '2026-08-25',
   primaryImageOfPage: {
     '@type': 'ImageObject',
     url: 'https://nebulacomponents.com/press/scorecard-example.png',
   },
   publisher: {
+    '@type': 'Organization',
+    name: 'Nebula Components',
+    url: 'https://nebulacomponents.com',
+  },
+}
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Mike Holownych',
+  jobTitle: 'Founder & CEO',
+  url: 'https://nebulacomponents.com/press',
+  sameAs: [
+    'https://linkedin.com/in/mikeholownych',
+    'https://x.com/mikeholownych',
+  ],
+  worksFor: {
     '@type': 'Organization',
     name: 'Nebula Components',
     url: 'https://nebulacomponents.com',
@@ -101,6 +127,10 @@ export default function PressPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* ─── Hero ──────────────────────────────────────────────────── */}
       <section className="relative py-24 sm:py-32 px-6 overflow-hidden" aria-labelledby="press-hero-title">
         <ScanLine />
@@ -108,6 +138,7 @@ export default function PressPage() {
           <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
             <MetaTag label="System" value="Press // Newsroom" />
             <MetaTag label="Rev" value="2026.08" />
+            <MetaTag label="Updated" value="2026-08-25" />
             <MetaTag label="Status" value="Active" />
           </div>
           <h1 className="heading-1 text-fg">Discover Nebula Press Assets, Brand Facts, and Media Kit</h1>
@@ -130,8 +161,8 @@ export default function PressPage() {
       {/* ─── Company Facts Panel ──────────────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="company-facts-title">
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>01 / Key Company Metrics for Press</SectionLabel>
-          <SectionTitle><span id="company-facts-title">Key Company Metrics for Press</span></SectionTitle>
+          <SectionLabel>01 / Essential Metrics for Media Coverage</SectionLabel>
+          <SectionTitle><span id="company-facts-title">Essential Metrics for Media Coverage</span></SectionTitle>
           <SectionDescription>
             Core metrics and positioning data for press reference.
           </SectionDescription>
@@ -190,8 +221,8 @@ export default function PressPage() {
       {/* ─── Signal Failure Frequency ────────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="signal-failure-title">
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>02 / Insights from Conversion Diagnostics Research</SectionLabel>
-          <SectionTitle><span id="signal-failure-title">Insights from Conversion Diagnostics Research</span></SectionTitle>
+          <SectionLabel>02 / Key Metrics for Journalists</SectionLabel>
+          <SectionTitle><span id="signal-failure-title">Key Metrics for Journalists</span></SectionTitle>
           <SectionDescription>
             Historical July 2026 research snapshot from {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.denominator}.
             Figures use the methodology then in use, not the current production engine or registry.
@@ -246,8 +277,8 @@ export default function PressPage() {
       {/* ─── Press Releases & Story Angles ────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="press-releases-title">
         <div className="max-w-5xl mx-auto">
-          <SectionLabel>03 / Press Content</SectionLabel>
-          <SectionTitle><span id="press-releases-title">Releases &amp; Angles</span></SectionTitle>
+          <SectionLabel>03 / Recent Press Releases and Key Findings</SectionLabel>
+          <SectionTitle><span id="press-releases-title">Recent Press Releases and Key Findings</span></SectionTitle>
           <SectionDescription>
             Press releases, ready-to-use story angles, and key research data points.
           </SectionDescription>

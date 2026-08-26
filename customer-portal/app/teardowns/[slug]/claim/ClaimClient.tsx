@@ -87,9 +87,9 @@ export default function ClaimClient({ slug, domain }: { slug: string; domain: st
               <pre className="bg-white/5 border border-white/10 rounded p-3 overflow-x-auto text-xs">{recordName}  IN TXT  "{dnsValue}"</pre>
               <button disabled={busy} onClick={async () => {
                 setBusy(true); setMessage('')
-                const { ok, data } = await post(`/api/teardowns/${slug}/claim/dns-check`, { value: dnsValue })
+                const { data } = await post(`/api/teardowns/${slug}/claim/dns-check`, { value: dnsValue })
                 setBusy(false)
-                if (data.verified) router.push('/workspace')
+                if (data.verified) window.location.assign('https://app.nebulacomponents.com')
                 else setMessage('Not found yet. DNS can take a few minutes.')
               }} className="bg-accent text-black font-semibold px-4 py-2 rounded">
                 Check now

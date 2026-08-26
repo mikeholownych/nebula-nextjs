@@ -35,8 +35,8 @@ const STATUS_META: Record<
   MonitorEvent['status'],
   { label: string; cls: string; arrow: string }
 > = {
-  improved: { label: 'Improved', cls: 'bg-accent-dim text-accent border-accent/30', arrow: '▲' },
-  regressed: { label: 'Regressed', cls: 'bg-danger-dim text-danger border-danger/30', arrow: '▼' },
+  improved: { label: 'Improved', cls: 'bg-accent-dim text-accent border-accent/30', arrow: '↑' },
+  regressed: { label: 'Regressed', cls: 'bg-danger-dim text-danger border-danger/30', arrow: '↓' },
   new_fail: { label: 'New critical', cls: 'bg-danger-dim text-danger border-danger/30', arrow: '🚨' },
   no_change: { label: 'No change', cls: 'bg-bg-elevated text-fg-muted border-border', arrow: '→' },
   error: { label: 'Run failed', cls: 'bg-signal-fail/10 text-signal-fail border-signal-fail/30', arrow: '⚠' },
@@ -63,7 +63,7 @@ const fmtWhen = (iso: string | null): string => {
   return `in ${days}d`
 }
 
-export default function MonitoringView({ email }: { email: string }) {
+export default function MonitoringView({ email: _email }: { email: string }) {
   const [monitors, setMonitors] = useState<Monitor[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

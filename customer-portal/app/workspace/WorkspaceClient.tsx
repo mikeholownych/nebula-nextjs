@@ -17,8 +17,6 @@ const DashboardView = dynamic(() => import('./views').then((mod) => mod.Dashboar
 const AuditsView = dynamic(() => import('./views').then((mod) => mod.AuditsView))
 const ProjectsView = dynamic(() => import('./views').then((mod) => mod.ProjectsView))
 const CompetitorView = dynamic(() => import('./competitorView'))
-const ProgramView = dynamic(() => import('./programView'))
-const FunnelView = dynamic(() => import('./funnelView'))
 const AiSearchView = dynamic(() => import('./aiSearchView'))
 const RoiCalculatorView = dynamic(() => import('./roiCalculatorView'))
 const RecsView = dynamic(() => import('./recsView'))
@@ -34,6 +32,7 @@ const AchievementsView = dynamic(() => import('./achievementsView'))
 const AssistantView = dynamic(() => import('./assistantView'))
 const TeamView = dynamic(() => import('./teamView'))
 const SettingsView = dynamic(() => import('./settingsView'))
+const ClientsView = dynamic(() => import('./clientsView'))
 
 export interface WorkspaceAudit {
   id: string
@@ -86,8 +85,6 @@ type TabId =
   | 'pages'
   | 'diff'
   | 'compare'
-  | 'program'
-  | 'funnel'
   | 'recommendations'
   | 'experiments'
   | 'tracker'
@@ -101,14 +98,39 @@ type TabId =
   | 'assistant'
   | 'team'
   | 'settings'
+  | 'clients'
 
 const VALID_TAB_IDS = new Set<string>([
   'dashboard', 'audits', 'projects', 'pages', 'diff', 'compare',
-  'program', 'funnel',
   'recommendations', 'experiments', 'tracker', 'aiSearch',
   'roiCalculator', 'billing', 'monitoring', 'timeline', 'reports',
-  'achievements', 'assistant', 'team', 'settings',
+  'achievements', 'assistant', 'team', 'settings', 'clients',
 ])
+
+// Tab -> real route path. Each tab is a page under /workspace-app routes;
+// dashboard is the root. Legacy ?tab= deep links resolve on mount.
+const TAB_ROUTES: Record<string, string> = {
+  dashboard: '/',
+  audits: '/audits',
+  projects: '/projects',
+  pages: '/pages',
+  diff: '/audit-diff',
+  compare: '/competitor-intel',
+  recommendations: '/fix-queue',
+  experiments: '/component-lab',
+  tracker: '/experiments',
+  aiSearch: '/aeo-citability',
+  roiCalculator: '/conversion-roi',
+  billing: '/billing',
+  monitoring: '/monitoring',
+  timeline: '/score-timeline',
+  reports: '/reports',
+  achievements: '/achievements',
+  assistant: '/ai-fix-agent',
+  team: '/team',
+  settings: '/settings',
+  clients: '/clients',
+}
 
 function getDomain(url?: string): string {
   if (!url) return ''
@@ -119,7 +141,7 @@ function getDomain(url?: string): string {
   }
 }
 
-export default function WorkspaceClient() {
+export default function WorkspaceClient({ initialTab }: { initialTab?: string }) {
   const [email, setEmail] = useState('')
   const [authLoading, setAuthLoading] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -129,11 +151,13 @@ export default function WorkspaceClient() {
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
   const [selectedProject, setSelectedProject] = useState<string>('all')
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
-  // Read searchParams only after mount to avoid SSR/client mismatch.
-  // Initial state below is corrected by the mount effect; changes are written
-  // back to the URL so tab + project survive page refreshes.
-  const [tab, setTab] = useState<TabId>('dashboard')
+  // Initial tab comes from the route (initialTab prop). Legacy ?tab= links
+  // are honored once on mount; navigation happens via real routes.
+  const [tab, setTab] = useState<TabId>(
+    initialTab && VALID_TAB_IDS.has(initialTab) ? (initialTab as TabId) : 'dashboard'
+  )
   const [planLevel, setPlanLevel] = useState<AccessLevel>('free')
+  const [isAgency, setIsAgency] = useState(false)
 
   // Merge whole-domain attach results into the by-email list: dedupe by
   // audit id, sort newest first.
@@ -206,19 +230,45 @@ export default function WorkspaceClient() {
     }
   }, [mergeAudits])
 
-  // --- URL state sync: tab + project survive refreshes and back/forward ---
-  // Read once on mount (client-only to avoid SSR mismatch), then keep the URL
-  // in step with state via replaceState so refresh restores the exact view.
+  // --- Project + tab persistence across full-page navigation ---
+  // Tabs are real routes; each tab switch is a full page load. Project
+  // selection must survive that. Persistence priority:
+  //   1. ?project= query param (shareable link, highest priority)
+  //   2. localStorage 'nebula_workspace_project' (cross-tab navigation)
+  //   3. 'all' (default)
   const urlHydrated = useRef(false)
   useEffect(() => {
     if (urlHydrated.current) return
     urlHydrated.current = true
     try {
       const params = new URLSearchParams(window.location.search)
+
+      // Legacy deep links (?tab=pages) still resolve once on mount.
       const t = params.get('tab') as TabId | null
       if (t && VALID_TAB_IDS.has(t)) setTab(t)
-      const p = params.get('project')
-      if (p) setSelectedProject(p)
+
+      // Project: URL param > localStorage > default
+      const urlProject = params.get('project')
+      if (urlProject) {
+        setSelectedProject(urlProject)
+        try { localStorage.setItem('nebula_workspace_project', urlProject) } catch { /* storage unavailable */ }
+      } else {
+        try {
+          const stored = localStorage.getItem('nebula_workspace_project')
+          if (stored) {
+            setSelectedProject(stored)
+            params.set('project', stored)
+          }
+        } catch { /* storage unavailable */ }
+      }
+
+      // Clean up legacy ?tab= from URL without navigating
+      if (t) {
+        params.delete('tab')
+      }
+
+      const qs = params.toString()
+      window.history.replaceState(null, '', qs ? `${window.location.pathname}?${qs}` : window.location.pathname)
     } catch {
       // malformed URL: fall back to defaults silently
     }
@@ -228,22 +278,43 @@ export default function WorkspaceClient() {
     try {
       const params = new URLSearchParams(window.location.search)
       if (next.tab) {
-        params.set('tab', next.tab)
         setTab(next.tab)
       }
       if (next.project !== undefined) {
-        if (next.project === 'all') params.delete('project')
-        else params.set('project', next.project)
+        if (next.project === 'all') {
+          params.delete('project')
+          try { localStorage.removeItem('nebula_workspace_project') } catch { /* storage unavailable */ }
+        } else {
+          params.set('project', next.project)
+          try { localStorage.setItem('nebula_workspace_project', next.project) } catch { /* storage unavailable */ }
+        }
         setSelectedProject(next.project)
       }
       const qs = params.toString()
-      window.history.replaceState(null, '', qs ? `/workspace?${qs}` : '/workspace')
+      window.history.replaceState(null, '', qs ? `${window.location.pathname}?${qs}` : window.location.pathname)
     } catch {
       // never let URL bookkeeping break the UI
     }
   }, [])
 
-  const goTab = useCallback((t: TabId) => syncUrl({ tab: t }), [syncUrl])
+  const goTab = useCallback((t: TabId) => {
+    setTab(t)
+    const route = TAB_ROUTES[t] ?? '/'
+    // Carry the current project selection into the new route via query param
+    // so the project preference survives the full-page navigation without
+    // depending solely on localStorage.
+    try {
+      const stored = localStorage.getItem('nebula_workspace_project')
+      if (stored && stored !== 'all') {
+        const target = `${route}?project=${encodeURIComponent(stored)}`
+        window.location.assign(target)
+        return
+      }
+    } catch {
+      /* storage unavailable */
+    }
+    window.location.assign(route)
+  }, [setTab])
   const goProject = useCallback((d: string) => syncUrl({ project: d }), [syncUrl])
 
   // Unique projects/domains
@@ -275,6 +346,11 @@ export default function WorkspaceClient() {
     if (selectedProject === 'all') return audits
     return audits.filter((a) => getDomain(a.url) === selectedProject)
   }, [audits, selectedProject])
+
+  const projectDomains = useMemo(
+    () => [...new Set((audits || []).map((a) => getDomain(a.url)).filter(Boolean))].sort(),
+    [audits],
+  )
 
   // Project-specific detail findings
   const [projectDetail, setProjectDetail] = useState<AuditDetail | null>(null)
@@ -338,6 +414,13 @@ export default function WorkspaceClient() {
     }
   }, [email, load])
 
+  useEffect(() => {
+    fetch('/api/organizations/current')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.is_agency) setIsAgency(true) })
+      .catch(() => {})
+  }, [])
+
   const signOut = async () => {
     analytics.resetIdentity()
     await fetch('/api/auth/logout', { method: 'POST' }).catch(() => undefined)
@@ -383,8 +466,6 @@ export default function WorkspaceClient() {
         { id: 'audits', label: 'All Audits', icon: 'scan' },
         { id: 'pages', label: 'Monitored Pages', icon: 'map' },
         { id: 'projects', label: 'Projects', icon: 'folder' },
-        { id: 'program', label: 'Fix Roadmap', icon: 'check' },
-        { id: 'funnel', label: 'Funnel Scan', icon: 'funnel' },
       ],
     },
     {
@@ -418,6 +499,7 @@ export default function WorkspaceClient() {
         { id: 'assistant', label: 'AI Fix Agent', icon: 'spark' },
         { id: 'billing', label: 'Billing & Quota', icon: 'card' },
         { id: 'team', label: 'Team', icon: 'users' },
+        ...(isAgency ? [{ id: 'clients' as TabId, label: 'Clients', icon: 'users' }] : []),
         { id: 'settings', label: 'Settings', icon: 'gear' },
       ],
     },
@@ -472,7 +554,7 @@ export default function WorkspaceClient() {
                     <button
                       type="button"
                       onClick={() => {
-                        setSelectedProject('all')
+                        goProject('all')
                         setProjectMenuOpen(false)
                       }}
                       className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors ${
@@ -498,7 +580,7 @@ export default function WorkspaceClient() {
                           key={p.domain}
                           type="button"
                           onClick={() => {
-                            setSelectedProject(p.domain)
+                            goProject(p.domain)
                             setProjectMenuOpen(false)
                           }}
                           className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors ${
@@ -526,7 +608,7 @@ export default function WorkspaceClient() {
                     <div className="my-1 border-t border-border/50" />
 
                     <a
-                      href="/audit?utm_source=project-selector&utm_medium=internal"
+                      href="https://nebulacomponents.com/audit?utm_source=project-selector&utm_medium=internal"
                       className="flex w-full items-center justify-center rounded-lg bg-bg-panel py-1.5 font-mono text-[11px] font-semibold text-fg hover:bg-bg-elevated hover:text-accent transition-colors"
                     >
                       + Audit New Domain
@@ -642,7 +724,7 @@ export default function WorkspaceClient() {
                 <span className="font-bold text-accent">{displayedAudits.length}</span>
               </div>
               <a
-                href={selectedProject !== 'all' ? `/audit?url=https://${encodeURIComponent(selectedProject)}` : '/audit?utm_source=workspace-top&utm_medium=internal'}
+                href={selectedProject !== 'all' ? `https://nebulacomponents.com/audit?url=https://${encodeURIComponent(selectedProject)}` : 'https://nebulacomponents.com/audit?utm_source=workspace-top&utm_medium=internal'}
                 className="rounded-lg bg-accent px-4 py-2 font-mono text-xs font-bold text-bg hover:opacity-90 transition-opacity"
               >
                 + Audit URL
@@ -701,7 +783,7 @@ export default function WorkspaceClient() {
                       </p>
                       <Link
                         className="text-xs underline text-white/60"
-                        href={`/teardowns/${claim.slug}`}
+                        href={`https://nebulacomponents.com/teardowns/${claim.slug}`}
                       >
                         View public page
                       </Link>
@@ -711,24 +793,12 @@ export default function WorkspaceClient() {
               </div>
             </div>
           )}
-          {tab === 'dashboard' && <DashboardView audits={displayedAudits} latestDetail={projectDetail} email={email} />}
+          {tab === 'dashboard' && <DashboardView audits={displayedAudits} latestDetail={projectDetail} email={email} selectedProject={selectedProject} />}
           {tab === 'audits' && <AuditsView audits={displayedAudits} />}
           {tab === 'projects' && <ProjectsView audits={audits || []} onSelectProject={(d) => { goProject(d); goTab('dashboard'); }} />}
           {tab === 'pages' && <PagesView audits={displayedAudits} latestDetail={projectDetail} />}
           {tab === 'diff' && <DiffView audits={displayedAudits} />}
-  {tab === 'program' && (
-    canAccess(planLevel, 'pro')
-      ? <ProgramView domains={projectsList.map((p) => p.domain)} initialDomain={selectedProject !== 'all' ? selectedProject : undefined} />
-      : <LockedTab tabLabel="Fix Roadmap" requiredPlan="pro" currentPlan={planLevel} />
-  )}
-  {tab === 'funnel' && (
-    <FunnelView
-      domains={projectsList.map((p) => p.domain)}
-      initialDomain={selectedProject !== 'all' ? selectedProject : undefined}
-      planLevel={planLevel}
-    />
-  )}
-          {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} planLevel={planLevel} />}
+          {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} selectedProject={selectedProject} />}
           {tab === 'aiSearch' && <AiSearchView audits={displayedAudits} email={email} />}
           {tab === 'roiCalculator' && <RoiCalculatorView />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={projectDetail} />}
@@ -765,7 +835,8 @@ export default function WorkspaceClient() {
               ? <TeamView email={email} />
               : <LockedTab tabLabel="Team" requiredPlan="growth" currentPlan={planLevel} />
           )}
-          {tab === 'settings' && <SettingsView email={email} />}
+          {tab === 'settings' && <SettingsView email={email} projectDomains={projectDomains} selectedProject={selectedProject} />}
+          {tab === 'clients' && <ClientsView />}
         </div>
       </div>
     </main>

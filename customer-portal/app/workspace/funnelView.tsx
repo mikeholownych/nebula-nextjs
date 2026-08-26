@@ -188,7 +188,7 @@ export default function FunnelView({ domains, initialDomain, planLevel }: Funnel
         <Link href="/pricing" className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-colors hover:opacity-85">
           See plans →
         </Link>
-        <Link href="/workspace?tab=billing" className="rounded-lg border border-border px-6 py-3 text-sm font-semibold text-fg-muted transition-colors hover:border-accent hover:text-fg">
+        <Link href="https://app.nebulacomponents.com/billing" className="rounded-lg border border-border px-6 py-3 text-sm font-semibold text-fg-muted transition-colors hover:border-accent hover:text-fg">
           View billing
         </Link>
       </div>

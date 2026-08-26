@@ -1,6 +1,8 @@
 'use client'
 
 import IntegrationsSection from './settingsIntegrations'
+import BrandSettings from './brandSettings'
+import DomainSettings from './domainSettings'
 import { useCallback, useEffect, useState } from 'react'
 
 const NOTIF_KEY = 'nebula_notification_prefs'
@@ -58,7 +60,7 @@ const TIMEZONES: string[] = [
   'Pacific/Auckland',
 ]
 
-export default function SettingsView({ email }: { email: string }) {
+export default function SettingsView({ email, projectDomains, selectedProject }: { email: string; projectDomains?: string[]; selectedProject?: string }) {
   const [notifPrefs, setNotifPrefs] = useState<NotifPrefs>(defaultNotifPrefs)
   const [timezone, setTimezone] = useState<string>('')
   const [toast, setToast] = useState<string | null>(null)
@@ -209,6 +211,8 @@ export default function SettingsView({ email }: { email: string }) {
   return (
     <div className="space-y-10 max-w-2xl">
       <IntegrationsSection email={email} />
+      <BrandSettings />
+      <DomainSettings />
 
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 rounded-lg bg-bg-panel px-5 py-3 text-sm font-medium text-fg shadow-lg border border-border">
@@ -467,7 +471,7 @@ export default function SettingsView({ email }: { email: string }) {
       </section>
 
       {/* Competitor Tracking */}
-      <CompetitorSection showToast={showToast} />
+      <CompetitorSection showToast={showToast} projectDomains={projectDomains} selectedProject={selectedProject} />
 
       {/* Weekly Digest */}
       <section>
@@ -583,23 +587,28 @@ interface TrackedCompetitor {
   id: string
   url: string
   label: string | null
+  project_domain: string | null
   last_score: number | null
   last_audited_at: string | null
 }
 
 const MAX_COMPETITORS = 3
 
-function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) {
+function CompetitorSection({ showToast, projectDomains = [], selectedProject }: { showToast: (msg: string) => void; projectDomains?: string[]; selectedProject?: string }) {
   const [competitors, setCompetitors] = useState<TrackedCompetitor[]>([])
   const [loaded, setLoaded] = useState(false)
   const [url, setUrl] = useState('')
   const [label, setLabel] = useState('')
+  const [projectDomain, setProjectDomain] = useState(selectedProject && selectedProject !== 'all' ? selectedProject : '')
   const [adding, setAdding] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
 
   const loadCompetitors = useCallback(async () => {
     try {
-      const res = await fetch('/api/competitors', { cache: 'no-store' })
+      const query = selectedProject && selectedProject !== 'all'
+        ? `?project_domain=${encodeURIComponent(selectedProject)}`
+        : ''
+      const res = await fetch(`/api/competitors${query}`, { cache: 'no-store' })
       if (res.ok) {
         const data = await res.json()
         setCompetitors(data.competitors || [])
@@ -609,7 +618,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
     } finally {
       setLoaded(true)
     }
-  }, [])
+  }, [selectedProject])
 
   useEffect(() => {
     loadCompetitors()
@@ -626,7 +635,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
       const res = await fetch('/api/competitors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: trimmed, label: label.trim() || null }),
+        body: JSON.stringify({ url: trimmed, label: label.trim() || null, project_domain: projectDomain || null }),
       })
       const data = await res.json().catch(() => ({}))
       if (res.ok) {
@@ -677,7 +686,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
           <div key={c.id} className="flex items-center justify-between gap-4 px-5 py-4">
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-fg">{c.label || c.url}</p>
-              <p className="truncate text-xs text-fg-dim">{c.url}</p>
+              <p className="truncate text-xs text-fg-dim">{c.url}{c.project_domain ? ` · ${c.project_domain}` : ' · Unassigned'}</p>
             </div>
             <div className="flex shrink-0 items-center gap-4">
               <span className="text-sm font-semibold text-fg">
@@ -695,7 +704,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
         ))}
 
         <div className="px-5 py-4">
-          <div className="grid gap-3 sm:grid-cols-[1.4fr_1fr]">
+          <div className="grid gap-3 sm:grid-cols-[1.2fr_1fr_1fr]">
             <input
               type="url"
               placeholder="https://competitor.com/landing-page"
@@ -712,6 +721,16 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
               disabled={atMax}
               className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none disabled:opacity-50"
             />
+            <select
+              value={projectDomain}
+              onChange={(e) => setProjectDomain(e.target.value)}
+              disabled={atMax || projectDomains.length === 0}
+              aria-label="Project to attribute competitor to"
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg focus:border-accent focus:outline-none disabled:opacity-50"
+            >
+              <option value="">All projects / unassigned</option>
+              {projectDomains.map((domain) => <option key={domain} value={domain}>{domain}</option>)}
+            </select>
           </div>
           <div className="mt-3 flex items-center justify-between">
             <p className="text-xs text-fg-dim">
@@ -847,7 +866,7 @@ function ApiKeysSection({ email }: { email: string }) {
             API key access requires a <strong className="text-fg">Pro plan</strong> or above.
           </p>
           <a
-            href="/pricing"
+            href="https://nebulacomponents.com/pricing"
             className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Upgrade to unlock API access →

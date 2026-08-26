@@ -16,12 +16,12 @@ export async function GET(request: NextRequest) {
   })
   const rawLocation =
     upstream.headers.get('location') ??
-    new URL('/workspace?tab=settings&ga4=done', 'https://nebulacomponents.com').toString()
+    new URL('/settings?ga4=done', 'https://app.nebulacomponents.com').toString()
   // NextResponse.redirect requires absolute URLs; FastAPI already returns one,
   // but harden against relative just in case.
   const location = rawLocation.startsWith('http')
     ? rawLocation
-    : new URL(rawLocation, 'https://nebulacomponents.com').toString()
+    : new URL(rawLocation, 'https://app.nebulacomponents.com').toString()
   const res = NextResponse.redirect(location, 302)
   const setCookie = upstream.headers.get('set-cookie')
   if (setCookie) res.headers.set('set-cookie', setCookie)

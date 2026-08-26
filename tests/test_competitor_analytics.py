@@ -66,6 +66,7 @@ class FakeSession:
                 id=str(uuid4()),
                 competitor_url=params["url"],
                 label=params["label"],
+                project_domain=params.get("project_domain"),
                 created_at=None,
             ))
         if "FROM competitor_tracking" in text:
