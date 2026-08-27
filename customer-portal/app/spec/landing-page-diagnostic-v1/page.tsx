@@ -69,6 +69,17 @@ export default function SpecPage() {
       />
       <link rel="alternate" type="application/ld+json" href={SPEC_JSON_URL} />
       <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+        {/* Answer Capsule */}
+        <div
+          data-answer-capsule
+          className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-8"
+        >
+          <p className="text-fg leading-relaxed text-sm">
+            The Nebula Landing Page Diagnostic Specification defines the 9 conversion signals checked on every audit, the decision rules for each finding, and the evidence record each finding must carry.
+            Version 1.0.0, effective 2026-08-22.
+            Machine-readable version available at /spec/landing-page-diagnostic-v1.json.
+          </p>
+        </div>
         {/* Header */}
         <SectionLabel>Nebula Components · Diagnostic Specification</SectionLabel>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-4">

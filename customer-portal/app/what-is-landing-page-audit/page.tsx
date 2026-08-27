@@ -53,6 +53,16 @@ export default function WhatIsLandingPageAudit() {
       />
 
       <main id="main-content">
+        <div
+          data-answer-capsule
+          className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-8 mx-auto max-w-3xl mt-8"
+        >
+          <p className="text-fg leading-relaxed text-sm">
+            A landing page audit is a structured diagnostic that scores a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-fold clarity, ad signals, SEO foundations, and AI readiness.
+            Each signal produces a pass or fail finding with an evidence record.
+            The Nebula audit runs automatically and returns results in under 2 minutes.
+          </p>
+        </div>
       <header className="bg-[#0d1117] pt-28 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent text-xs font-bold mb-4">

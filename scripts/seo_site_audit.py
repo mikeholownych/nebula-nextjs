@@ -10,7 +10,7 @@ from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-SITE = "https://nebulacomponents.com"
+SITE = "http://localhost:3000"  # internal fetch — bypasses Cloudflare
 SITEMAP = f"{SITE}/sitemap.xml"
 REPORT_DIR = Path("/home/mike/nebula/seo-reports")
 REPORT_DIR.mkdir(exist_ok=True)
@@ -25,7 +25,7 @@ def fetch(url, max_redirects=MAX_REDIRECTS):
     current = url
     for _ in range(max_redirects):
         try:
-            req = urllib.request.Request(current, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"})
+            req = urllib.request.Request(current, headers={"User-Agent": "NebulaSEOBot/1.0 (+https://nebulacomponents.com/crawler-policy)"})
             with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
                 return {"final_url": r.geturl(), "status": r.status, "chain": chain, "error": None}
         except urllib.error.HTTPError as e:
@@ -43,7 +43,7 @@ def fetch(url, max_redirects=MAX_REDIRECTS):
 
 def get_sitemap_urls():
     try:
-        req_sm = urllib.request.Request(SITEMAP, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"})
+        req_sm = urllib.request.Request(SITEMAP, headers={"User-Agent": "NebulaSEOBot/1.0 (+https://nebulacomponents.com/crawler-policy)"})
         with urllib.request.urlopen(req_sm, timeout=TIMEOUT) as r:
             xml = r.read().decode()
         return re.findall(r'<loc>(https?://[^<]+)</loc>', xml)
@@ -53,7 +53,7 @@ def get_sitemap_urls():
 def get_page_links(url):
     """Scrape internal links from a page."""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"})
+        req = urllib.request.Request(url, headers={"User-Agent": "NebulaSEOBot/1.0 (+https://nebulacomponents.com/crawler-policy)"})
         with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
             html = r.read().decode(errors='replace')
         hrefs = re.findall(r'href=["\'](https?://[^"\']+|/[^"\']*)["\']', html)

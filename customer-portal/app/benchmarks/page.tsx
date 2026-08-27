@@ -110,6 +110,23 @@ export default async function BenchmarksPage() {
           </div>
         </div>
       </section>
+      {data && (
+        <div
+          data-answer-capsule
+          className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-8 mx-auto max-w-6xl mt-8 px-6"
+        >
+          <p className="text-fg leading-relaxed text-sm">
+            The Landing Page Leak Index reports aggregate finding rates from{' '}
+            {data.audit_count} completed Nebula audits.
+            {data.top_leak
+              ? ` Headline failures appear in ${Math.round(data.top_leak.share * 100)}% of audited pages.`
+              : null}{' '}
+            {data.avg_failures_per_page !== null
+              ? `The average page has ${data.avg_failures_per_page.toFixed(1)} conversion leaks.`
+              : null}
+          </p>
+        </div>
+      )}
       <Benchmarks initialData={data} />
       <PersonalPositioning />
       <section aria-labelledby="data-sources-heading" className="border-t border-border px-6 py-12">

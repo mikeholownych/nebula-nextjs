@@ -99,6 +99,16 @@ export default async function SignalPage({
       />
       <link rel="alternate" type="application/ld+json" href={SPEC_JSON_URL} />
       <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
+        {/* Answer Capsule */}
+        <div
+          data-answer-capsule
+          className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-8"
+        >
+          <p className="text-fg leading-relaxed text-sm">
+            <span className="font-mono text-accent text-xs mr-1">{s.num}</span>
+            <strong>{s.label}:</strong>{' '}{s.definition}
+          </p>
+        </div>
         <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-fg-muted">
           <Link href="/resources" className="hover:text-fg transition-colors">Resources</Link>
           <span aria-hidden>/</span>

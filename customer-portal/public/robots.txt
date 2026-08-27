@@ -95,4 +95,11 @@ Disallow: /lead-dashboard/
 Disallow: /audit-dashboard/
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# ── Nebula first-party diagnostic crawler ────────────────────────────────────
+# NebulaSEOBot is the Nebula Components CRO diagnostic crawler.
+# Crawl policy: https://nebulacomponents.com/crawler-policy
+User-Agent: NebulaSEOBot
+Allow: /
+Crawl-delay: 2
+
 Sitemap: https://nebulacomponents.com/sitemap.xml
