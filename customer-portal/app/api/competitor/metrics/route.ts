@@ -21,7 +21,7 @@ export async function GET() {
       totalCompetitors: parseInt(competitorsResult.rows[0].total),
       activeCompetitors: parseInt(competitorsResult.rows[0].active),
       priceChangesLast30Days: parseInt(changesResult.rows[0].changes),
-      avgPriceChange: parseFloat(changesResult.rows[0].avg_change?.toFixed(2) || '0'),
+      avgPriceChange: parseFloat((changesResult.rows[0].avg_change || '0').toString().replace(/[^0-9.-]+/g, "")),
       timestamp: new Date().toISOString(),
     })
   } catch (error: any) {
