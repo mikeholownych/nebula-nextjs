@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.com/playbooks/specialist-ai-agent-library' },
 }
 
+const techArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth',
+  description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
+  url: 'https://nebulacomponents.com/playbooks/specialist-ai-agent-library',
+  datePublished: '2025-07-15',
+  dateModified: '2026-07-19',
+  author: { '@id': 'https://nebulacomponents.com/#organization' },
+  publisher: { '@id': 'https://nebulacomponents.com/#organization' },
+  proficiencyLevel: 'Beginner',
+  articleSection: 'AI Agents',
+}
+
 const articleSchema = createArticleSchema({
   headline: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth',
   description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
@@ -77,6 +91,7 @@ const ANTI_PATTERNS = [
 export default function SpecialistAiAgentLibraryPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(techArticleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <nav aria-label="Breadcrumb" className="mx-auto max-w-3xl px-6 pt-6">

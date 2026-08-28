@@ -21,13 +21,13 @@ SITEMAP = f"{SITE}/sitemap.xml"
 SCHEMA_MAP = {
     "homepage": ["WebSite", "Organization"],
     "faq": ["FAQPage"],
-    "pricing": ["Product", "Offer"],
+    "pricing": ["Product"],  # Offer is correctly nested inside Product per schema.org
     "blog": ["BlogPosting", "Article"],
-    "landing": ["Product", "Service"],
+    "landing": ["ItemList"],  # tool comparison / pricing guide pages use ItemList
     "audit": ["Service", "HowTo"],
     "spec": ["TechArticle"],
-    "signals": ["Article"],
-    "case_study": ["Article"],
+    "signals": ["CollectionPage"],  # signals hub is a DefinedTermSet collection, not an Article
+    "case_study": ["CollectionPage"],  # case studies index is a collection page
     "about": ["Organization", "AboutPage"],
     "contact": ["ContactPage"],
     "default": ["WebPage"],
@@ -43,12 +43,12 @@ def detect_page_type(url):
         return "pricing"
     if "/blog" in path or "/article" in path:
         return "blog"
+    if "/spec" in path:
+        return "spec"
     if "/lp/" in path or "/landing" in path:
         return "landing"
     if "/audit" in path:
         return "audit"
-    if "/spec" in path:
-        return "spec"
     if "/signals" in path:
         return "signals"
     if "/case-stud" in path:
@@ -94,19 +94,21 @@ def check_page_schema(url):
         for block in ld_blocks:
             try:
                 data = json.loads(block.strip())
-                if isinstance(data, list):
-                    for d in data:
-                        t = d.get("@type", "")
+                def _extract_types(obj):
+                    """Recursively extract @type values, including @graph arrays."""
+                    if isinstance(obj, list):
+                        for item in obj:
+                            _extract_types(item)
+                    elif isinstance(obj, dict):
+                        t = obj.get("@type", "")
                         if isinstance(t, list):
                             found_types.extend(t)
                         elif t:
                             found_types.append(t)
-                else:
-                    t = data.get("@type", "")
-                    if isinstance(t, list):
-                        found_types.extend(t)
-                    elif t:
-                        found_types.append(t)
+                        # Traverse @graph
+                        for g in obj.get("@graph", []):
+                            _extract_types(g)
+                _extract_types(data)
             except Exception:
                 pass
         return found_types

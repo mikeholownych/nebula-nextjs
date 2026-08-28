@@ -53,6 +53,41 @@ async function getAuditStats(): Promise<AuditStats | null> {
   }
 }
 
+const auditServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://nebulacomponents.com/audit#service',
+  name: 'Nebula Landing Page Audit',
+  description: 'Free landing page audit that scores 9 conversion signals and returns evidence-backed findings in under 2 minutes.',
+  serviceType: 'Landing Page Diagnostic',
+  provider: { '@type': 'Organization', name: 'Nebula Components', url: 'https://nebulacomponents.com' },
+  url: 'https://nebulacomponents.com/audit',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Conversion signal checks',
+    itemListElement: [
+      'Message Match', 'Trust Signals', 'Mobile CTA', 'Load Speed',
+      'CTA Clarity', 'Above-Fold Clarity', 'Ad Signal Continuity',
+      'SEO Foundations', 'AI Readiness',
+    ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+  },
+}
+
+const auditHowToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Run a Landing Page Audit with Nebula',
+  description: 'Submit a URL and receive a scored diagnostic across 9 conversion signals in under 2 minutes.',
+  totalTime: 'PT2M',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: 'Enter your URL', text: 'Paste the full URL of the landing page you want to audit into the input field.' },
+    { '@type': 'HowToStep', position: 2, name: 'Submit for analysis', text: 'Click Audit. Nebula fetches the public page and evaluates it against 9 conversion signal checks.' },
+    { '@type': 'HowToStep', position: 3, name: 'Review findings', text: 'Each signal returns a pass or fail with an evidence record showing exactly what was checked.' },
+    { '@type': 'HowToStep', position: 4, name: 'Prioritise by impact', text: 'Findings are ordered by impact score. Start with the highest-impact failing signal.' },
+  ],
+}
+
 const softwareAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -79,6 +114,14 @@ export default async function AuditPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditServiceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditHowToSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(auditWebApplicationSchema) }}

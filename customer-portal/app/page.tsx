@@ -7,6 +7,21 @@ import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
 import { homeFAQSchema } from './lib/faq-schemas'
 
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://nebulacomponents.com/#webpage',
+  url: 'https://nebulacomponents.com/',
+  name: 'Nebula Components — Free Landing Page Audit',
+  isPartOf: { '@id': 'https://nebulacomponents.com/#website' },
+  about: { '@id': 'https://nebulacomponents.com/#organization' },
+  description: 'Free landing page audit that scores 9 conversion signals in under 2 minutes. Built for founders spending on ads who are not seeing conversions.',
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.com/' }],
+  },
+}
+
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
   description: HOMEPAGE_DESCRIPTION,
@@ -57,6 +72,10 @@ const FAQ_ITEMS = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFAQSchema) }}

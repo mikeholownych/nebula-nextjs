@@ -2,6 +2,24 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': 'https://nebulacomponents.com/about#webpage',
+  url: 'https://nebulacomponents.com/about',
+  name: 'About Nebula Components',
+  description: 'Evidence-backed landing page diagnosis for founders running paid ads.',
+  isPartOf: { '@id': 'https://nebulacomponents.com/#website' },
+  about: { '@id': 'https://nebulacomponents.com/#organization' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.com/' },
+      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://nebulacomponents.com/about' },
+    ],
+  },
+}
+
 export const metadata: Metadata = {
   title: 'About Nebula Components | Evidence-Backed CRO',
   description:
@@ -14,6 +32,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg text-fg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
       <BreadcrumbSchema />
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="heading-1 text-fg">Discover How Nebula Helps Founders Fix Conversion Leaks</h1>

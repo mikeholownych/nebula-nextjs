@@ -67,6 +67,21 @@ const HUB_FAQ_SCHEMA = {
   })),
 }
 
+const toolComparisonSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Landing Page Audit Tool Pricing Comparison 2026',
+  description: 'Verified pricing for 8 landing page audit tools compared head-to-head.',
+  url: 'https://nebulacomponents.com/landing-page-audit-tools-pricing',
+  numberOfItems: 8,
+  itemListElement: PRICING_ROWS.map((row, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: row.tool,
+    description: `Price: ${row.price}`,
+  })),
+}
+
 export default function ToolPricingPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
@@ -194,7 +209,11 @@ export default function ToolPricingPage() {
           </div>
         </section>
 
-        {/* FAQPage JSON-LD */}
+        {/* ItemList + FAQPage JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(toolComparisonSchema) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(HUB_FAQ_SCHEMA) }}

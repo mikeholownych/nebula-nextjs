@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ auditId: string }> }
+) {
+  const { auditId } = await params
   const { searchParams } = new URL(request.url)
-  const auditId = searchParams.get('auditId')
   const format = searchParams.get('format') || 'widget'
   const theme = searchParams.get('theme') || 'light'
 

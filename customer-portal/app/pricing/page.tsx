@@ -72,6 +72,24 @@ const faqItems = [
   },
 ]
 
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://nebulacomponents.com/pricing#repair-sprint',
+  name: 'Nebula One-Leak Repair Sprint',
+  description: 'A bounded single-condition landing page repair. Nebula scopes the highest-priority finding, writes the exact fix, and re-audits after 30 days.',
+  brand: { '@type': 'Brand', name: 'Nebula Components' },
+  url: 'https://nebulacomponents.com/pricing',
+  offers: {
+    '@type': 'Offer',
+    price: '97',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: 'https://nebulacomponents.com/pricing',
+    seller: { '@type': 'Organization', name: 'Nebula Components', url: 'https://nebulacomponents.com' },
+  },
+}
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -88,6 +106,10 @@ export default function PricingPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       {serviceSchema && (
         <script
           type="application/ld+json"
