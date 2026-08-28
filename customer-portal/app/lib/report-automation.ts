@@ -114,17 +114,46 @@ export async function scheduleReportDelivery(
   nextDelivery: string
 }> {
   try {
+    // Check if schedule exists
+    const existing = await auditPool.query(`
+      SELECT id, customer_id, frequency, report_type, is_enabled, next_delivery
+      FROM report_schedules
+      WHERE customer_id = $1
+    `, [data.customerId])
+
+    if (existing.rows.length > 0) {
+      // Update existing
+      const result = await auditPool.query(`
+        UPDATE report_schedules SET
+          frequency = $1,
+          report_type = $2,
+          is_enabled = $3,
+          next_delivery = NOW() + ($4::text || ' days')::interval,
+          updated_at = NOW()
+        WHERE customer_id = $5
+        RETURNING id, customer_id, frequency, report_type, is_enabled, next_delivery
+      `, [
+        data.frequency,
+        data.reportType,
+        data.enabled,
+        data.frequency === 'daily' ? 1 : data.frequency === 'weekly' ? 7 : 30,
+        data.customerId,
+      ])
+      return {
+        scheduleId: result.rows[0].id,
+        customerId: result.rows[0].customer_id,
+        frequency: result.rows[0].frequency,
+        enabled: result.rows[0].is_enabled,
+        nextDelivery: result.rows[0].next_delivery,
+      }
+    }
+
+    // Insert new
     const result = await auditPool.query(`
       INSERT INTO report_schedules (
         customer_id, frequency, report_type, is_enabled, next_delivery, created_at
       )
       VALUES ($1, $2, $3, $4, NOW() + ($5::text || ' days')::interval, NOW())
-      ON CONFLICT (customer_id) DO UPDATE SET
-        frequency = excluded.frequency,
-        report_type = excluded.report_type,
-        is_enabled = excluded.is_enabled,
-        next_delivery = excluded.next_delivery,
-        updated_at = NOW()
       RETURNING id, customer_id, frequency, report_type, is_enabled, next_delivery
     `, [
       data.customerId,
