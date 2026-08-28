@@ -198,6 +198,9 @@ await auditPool.query(`
   )
 `)
 await auditPool.query(`
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_report_schedules_customer ON report_schedules(customer_id)
+`)
+await auditPool.query(`
   CREATE TABLE IF NOT EXISTS report_deliveries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
