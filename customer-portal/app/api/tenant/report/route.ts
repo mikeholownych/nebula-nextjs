@@ -1,0 +1,38 @@
+import { NextResponse } from 'next/server'
+import { auditPool } from '@/app/lib/audit-db'
+import { getTenantAuditSummary, getTenantComparison, getTenantWeakSpots } from '@/app/lib/multi-tenant-reporting'
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const tenantId = searchParams.get('tenant_id')
+  const days = parseInt(searchParams.get('days') || '30')
+
+  if (!tenantId) {
+    return NextResponse.json(
+      { error: 'tenant_id query parameter is required' },
+      { status: 400 }
+    )
+  }
+
+  try {
+    const [summary, comparison, weakSpots] = await Promise.all([
+      getTenantAuditSummary(tenantId, days),
+      getTenantComparison(tenantId, days),
+      getTenantWeakSpots(tenantId, days),
+    ])
+
+    return NextResponse.json({
+      timestamp: new Date().toISOString(),
+      tenantId,
+      days,
+      summary,
+      comparison,
+      weakSpots,
+    })
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    )
+  }
+}
