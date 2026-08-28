@@ -27,19 +27,19 @@ const PROVIDERS = {
     name: 'HubSpot',
     type: 'api',
     icon: 'hubspot',
-    apiKey: require('HUBSPOT_API_KEY'),
+    apiKey: process.env.HUBSPOT_API_KEY,
   },
   salesforce: {
     name: 'Salesforce',
     type: 'api',
     icon: 'salesforce',
-    apiKey: require('SALESFORCE_API_KEY'),
+    apiKey: process.env.SALESFORCE_API_KEY,
   },
   airtable: {
     name: 'Airtable',
     type: 'api',
     icon: 'airtable',
-    apiKey: require('AIRTABLE_API_KEY'),
+    apiKey: process.env.AIRTABLE_API_KEY,
   },
 }
 
