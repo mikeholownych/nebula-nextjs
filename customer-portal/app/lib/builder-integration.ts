@@ -27,20 +27,8 @@ export async function getSupportedBuilders(): Promise<{
     { name: 'Next.js', key: 'nextjs_token', icon: 'nextjs' },
   ]
 
-  // Check for connected accounts (simplified)
-  const customersResult = await auditPool.query(`
-    SELECT metadata FROM customers WHERE metadata IS NOT NULL
-  `)
-
+  // Simplified - no metadata column in customers table
   const connectedBuilders: Record<string, boolean> = {}
-  customersResult.rows.forEach((row: any) => {
-    const metadata = row.metadata || {}
-    builders.forEach(b => {
-      if (metadata[b.key]) {
-        connectedBuilders[b.key] = true
-      }
-    })
-  })
 
   return {
     builders: builders.map(b => ({
