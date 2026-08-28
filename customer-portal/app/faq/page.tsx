@@ -86,6 +86,59 @@ function Label({ children }: { children: React.ReactNode }) {
   )
 }
 
+function FaqAnswer({ q, a }: { q: string; a: string }) {
+  if (q === 'What does the free audit include?') {
+    return (
+      <p className="leading-relaxed text-fg-muted">
+        Submit a URL and{' '}
+        <Link href="/audit" className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2">
+          run the free Nebula landing page audit
+        </Link>{' '}
+        to get automated scoring across the nine signals in about a minute. The score and initial findings appear before any email; the full report unlocks with an email address. No signup call.
+      </p>
+    )
+  }
+  if (q === 'What are the nine conversion signals?') {
+    return (
+      <p className="leading-relaxed text-fg-muted">
+        Message Match, Trust Signals, Mobile CTA, Load Speed, CTA Clarity, Above-Fold Clarity,
+        Ad Signal Continuity, SEO Foundations, and AI Readiness. Each is formally defined in the
+        public{' '}
+        <Link
+          href="/spec/landing-page-diagnostic-v1"
+          className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2"
+        >
+          Landing Page Diagnostic Specification v1
+        </Link>
+        .
+      </p>
+    )
+  }
+  if (q === 'Where do Nebula benchmarks come from?') {
+    return (
+      <p className="leading-relaxed text-fg-muted">
+        Aggregates computed from completed audits: per-signal failure rates, average impact, and
+        score distribution. No URLs or personal data are published. Live figures are at{' '}
+        <Link
+          href="/benchmarks"
+          className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2"
+        >
+          nebulacomponents.com/benchmarks
+        </Link>
+        . To see how your page compares,{' '}
+        <Link
+          href="/audit"
+          className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2"
+        >
+          run a free audit on your page
+        </Link>
+        .
+      </p>
+    )
+  }
+  return <p className="leading-relaxed text-fg-muted">{a}</p>
+}
+
 export default function FaqPage() {
   return (
     <main className="min-h-screen bg-bg">
@@ -114,7 +167,7 @@ export default function FaqPage() {
           {FAQS.map((f) => (
             <section key={f.q} id={f.q.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
               <h2 className="text-lg font-semibold text-fg tracking-tight mb-2">{f.q}</h2>
-              <p className="leading-relaxed text-fg-muted">{f.a}</p>
+              <FaqAnswer q={f.q} a={f.a} />
             </section>
           ))}
         </div>

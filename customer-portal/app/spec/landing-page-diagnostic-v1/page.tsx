@@ -29,7 +29,7 @@ const jsonLd = {
       datePublished: SPEC_EFFECTIVE,
       version: SPEC_VERSION,
       url: SPEC_URL,
-      author: { '@id': 'https://nebulacomponents.com/#organization' },
+      author: { '@id': 'https://nebulacomponents.com/#founder' },
       publisher: { '@id': 'https://nebulacomponents.com/#organization' },
       about: {
         '@type': 'DefinedTermSet',
@@ -85,6 +85,22 @@ export default function SpecPage() {
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-4">
           Landing Page Diagnostic Specification v1
         </h1>
+        <div className="flex items-center gap-3 mt-4 mb-8">
+          <img
+            src="/mike-holownych-founder.jpg"
+            alt="Mike Holownych"
+            width={36}
+            height={36}
+            className="rounded-full border border-border object-cover"
+          />
+          <div className="text-sm text-fg-muted">
+            <span className="font-medium text-fg">Mike Holownych</span>
+            {' '}&middot;{' '}
+            <span>Founder, Nebula Components</span>
+            <span className="mx-2 text-border">·</span>
+            <span>Enterprise AI governance lead, TMX Group</span>
+          </div>
+        </div>
         <p className="font-mono text-xs text-fg-muted mb-10">
           Version {SPEC_VERSION} · Effective {SPEC_EFFECTIVE} · Canonical URL:{' '}
           <span className="break-all">{SPEC_URL}</span>

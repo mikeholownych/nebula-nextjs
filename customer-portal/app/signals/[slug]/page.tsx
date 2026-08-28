@@ -58,7 +58,7 @@ export default async function SignalPage({
         version: SPEC_VERSION,
         url: `${SITE}/signals/${s.slug}`,
         isPartOf: { '@id': `${SPEC_URL}#article` },
-        author: { '@id': `${SITE}/#organization` },
+        author: { '@id': `${SITE}/#founder` },
         publisher: { '@id': `${SITE}/#organization` },
         about: {
           '@type': 'DefinedTerm',
@@ -124,6 +124,22 @@ export default async function SignalPage({
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-3">
             {s.label}
           </h1>
+          <div className="flex items-center gap-3 mt-4 mb-8">
+            <img
+              src="/mike-holownych-founder.jpg"
+              alt="Mike Holownych"
+              width={36}
+              height={36}
+              className="rounded-full border border-border object-cover"
+            />
+            <div className="text-sm text-fg-muted">
+              <span className="font-medium text-fg">Mike Holownych</span>
+              {' '}&middot;{' '}
+              <span>Founder, Nebula Components</span>
+              <span className="mx-2 text-border">·</span>
+              <span>Enterprise AI governance lead, TMX Group</span>
+            </div>
+          </div>
           <p className="text-lg leading-relaxed text-fg font-medium">{s.definition}</p>
         </header>
 

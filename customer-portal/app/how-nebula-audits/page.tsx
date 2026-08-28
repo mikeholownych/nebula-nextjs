@@ -19,18 +19,21 @@ export const metadata: Metadata = {
   },
 }
 
-const howToSchema = createHowToSchema({
-  name: 'How Nebula Audits a Landing Page: The 9-Signal Diagnostic',
-  description:
-    'Nebula evaluates any publicly accessible landing page across 9 deterministic conversion signals. Each signal produces a pass or fail verdict backed by raw evidence extracted from the page HTML. The full diagnostic completes in under 2 minutes.',
-  totalTime: 'PT2M',
-  steps: SIGNALS.map((signal, index) => ({
-    position: index + 1,
-    name: signal.label,
-    text: signal.rule,
-    url: `https://nebulacomponents.com/signals/${signal.slug}`,
-  })),
-})
+const howToSchema = {
+  ...createHowToSchema({
+    name: 'How Nebula Audits a Landing Page: The 9-Signal Diagnostic',
+    description:
+      'Nebula evaluates any publicly accessible landing page across 9 deterministic conversion signals. Each signal produces a pass or fail verdict backed by raw evidence extracted from the page HTML. The full diagnostic completes in under 2 minutes.',
+    totalTime: 'PT2M',
+    steps: SIGNALS.map((signal, index) => ({
+      position: index + 1,
+      name: signal.label,
+      text: signal.rule,
+      url: `https://nebulacomponents.com/signals/${signal.slug}`,
+    })),
+  }),
+  author: { '@id': 'https://nebulacomponents.com/#founder' },
+}
 
 const softwareApplicationSchema = {
   '@context': 'https://schema.org',
@@ -76,6 +79,22 @@ export default function HowNebulaAuditsPage() {
           <h1 className="heading-1 tracking-tight text-fg md:text-5xl">
             How Nebula Audits a Landing Page
           </h1>
+          <div className="flex items-center gap-3 mt-4 mb-8">
+            <img
+              src="/mike-holownych-founder.jpg"
+              alt="Mike Holownych"
+              width={36}
+              height={36}
+              className="rounded-full border border-border object-cover"
+            />
+            <div className="text-sm text-fg-muted">
+              <span className="font-medium text-fg">Mike Holownych</span>
+              {' '}&middot;{' '}
+              <span>Founder, Nebula Components</span>
+              <span className="mx-2 text-border">·</span>
+              <span>Enterprise AI governance lead, TMX Group</span>
+            </div>
+          </div>
           <div className="mt-6 rounded-md border border-accent/30 bg-accent/5 px-6 py-5">
             <p className="text-base leading-7 text-fg">
               Nebula fetches your publicly accessible landing page and evaluates it across 9
@@ -179,7 +198,15 @@ export default function HowNebulaAuditsPage() {
               The audit engine is a browser-based application built by Nebula Components. It
               operates on publicly accessible HTML and does not require login credentials, site
               access, or a CMS integration. It does not submit forms, traverse checkout flows, or
-              retain raw page screenshots beyond the analysis window.
+              retain raw page screenshots beyond the analysis window. The full set of checks and
+              pass/fail criteria is published in the{' '}
+              <Link
+                href="/spec/landing-page-diagnostic-v1"
+                className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2"
+              >
+                Landing Page Diagnostic Specification v1
+              </Link>
+              .
             </p>
             <dl className="grid gap-3 sm:grid-cols-2">
               {[

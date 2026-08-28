@@ -95,7 +95,15 @@ export default async function BenchmarksPage() {
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted md:text-lg">
             Live failure-rate data from every completed Nebula audit. It reports only what was
             measured - never estimates or placeholder averages. When the verified dataset is empty,
-            this page says so.
+            this page says so. All findings are collected through the{' '}
+            <Link href="/audit" className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2">
+              free Nebula landing page audit
+            </Link>{' '}
+            and scored against the{' '}
+            <Link href="/spec/landing-page-diagnostic-v1" className="text-accent hover:opacity-80 transition-opacity underline underline-offset-2">
+              Landing Page Diagnostic Specification v1
+            </Link>
+            .
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link

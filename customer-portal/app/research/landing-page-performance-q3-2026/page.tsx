@@ -102,6 +102,24 @@ export default function LandingPagePerformanceQ3Page() {
             </Link>
           </div>
 
+          {/* Author byline */}
+          <div className="flex items-center gap-3 mt-4 mb-8">
+            <img
+              src="/mike-holownych-founder.jpg"
+              alt="Mike Holownych"
+              width={36}
+              height={36}
+              className="rounded-full border border-border object-cover"
+            />
+            <div className="text-sm text-[#9e9e9e]">
+              <span className="font-medium text-white">Mike Holownych</span>
+              {' '}&middot;{' '}
+              <span>Founder, Nebula Components</span>
+              <span className="mx-2 text-border">·</span>
+              <span>Enterprise AI governance lead, TMX Group</span>
+            </div>
+          </div>
+
           {/* Meta row */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#9e9e9e] border-t border-border pt-6">
             <span>
@@ -178,7 +196,14 @@ export default function LandingPagePerformanceQ3Page() {
             <p>
               <span className="text-white font-medium">Evaluation method.</span> The engine fetches
               the public page and records observable conversion findings against its documented
-              checks. No pages are excluded from aggregate calculations. Named teardowns are
+              checks. Signal definitions and pass/fail criteria are published in the{' '}
+              <Link
+                href="/spec/landing-page-diagnostic-v1"
+                className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                Landing Page Diagnostic Specification v1
+              </Link>
+              . No pages are excluded from aggregate calculations. Named teardowns are
               published at{' '}
               <Link
                 href="/teardowns"

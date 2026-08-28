@@ -69,6 +69,22 @@ export default function WhatIsLandingPageAudit() {
             Landing Page Guide
           </p>
           <h1 className="heading-1 text-fg md:text-5xl">What Is a Landing Page Audit? Find and Fix Conversion Leaks</h1>
+          <div className="flex items-center gap-3 mt-4 mb-8 justify-center">
+            <img
+              src="/mike-holownych-founder.jpg"
+              alt="Mike Holownych"
+              width={36}
+              height={36}
+              className="rounded-full border border-border object-cover"
+            />
+            <div className="text-sm text-gray-400">
+              <span className="font-medium text-white">Mike Holownych</span>
+              {' '}&middot;{' '}
+              <span>Founder, Nebula Components</span>
+              <span className="mx-2 text-border">·</span>
+              <span>Enterprise AI governance lead, TMX Group</span>
+            </div>
+          </div>
           <p className="text-gray-400 text-lg">
             A systematic audit evaluates nine conversion signals and should show evidence for every recommended fix.
           </p>
@@ -100,7 +116,9 @@ export default function WhatIsLandingPageAudit() {
             What Is a Landing Page Audit?
           </h2>
           <p className="text-gray-300 mb-4">
-            A landing page audit is a <strong className="text-white">systematic evaluation</strong> of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness.
+            A landing page audit is a <strong className="text-white">systematic evaluation</strong> of a page across 9 conversion signals:{' '}
+            <Link href="/signals/message-match" className="text-emerald-400 hover:underline">message match</Link>,{' '}
+            <Link href="/signals/trust-signals" className="text-emerald-400 hover:underline">trust signals</Link>, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness.
           </p>
           <p className="text-gray-300 mb-4">
             It evaluates each signal and produces a prioritized fix list. It is not a subjective opinion - it is a scored diagnostic that shows which observable page conditions are failing and which are passing.
@@ -137,7 +155,8 @@ export default function WhatIsLandingPageAudit() {
             Ad platforms optimize for <strong className="text-white">clicks, not conversions</strong>. If you are spending on ads and not seeing results, the page is one of the variables worth investigating.
           </p>
           <p className="text-gray-300 mb-4">
-            A verified audit checks observable page conditions so you can rule the page in or out before spending more on ad traffic.
+            A verified audit checks observable page conditions so you can rule the page in or out before spending more on ad traffic.{' '}
+            You can <Link href="/audit" className="text-emerald-400 hover:underline">run a free Nebula landing page audit</Link> on your page in under 2 minutes.
           </p>
           <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-6 my-6">
             <p className="text-red-400 font-semibold mb-2">⚠️ Warning Sign</p>
