@@ -10,7 +10,7 @@ export async function GET(request: Request) {
       SELECT 
         stage,
         COUNT(DISTINCT customer_id) as count,
-        AVG(COALESCE(metadata->>'amount', '97'))::numeric as avg_value
+        97 as avg_value
       FROM customer_onboarding
       WHERE stage_changed_at > NOW() - INTERVAL '${days} days'
       GROUP BY stage
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
     }
 
     const currentMonthPayments = pipeline.find((s: any) => s.stage === 'payment_received')
-    const currentMonthValue = currentMonthPayments ? currentMonthPayments.count * (currentMonthPayments.value || 97) : 0
+    const currentMonthValue = currentMonthPayments ? currentMonthPayments.count * 97 : 0
     const nextMonthForecast = currentMonthValue * (conversionRates.payment_to_onboarding || 0.6)
     const nextQuarterForecast = nextMonthForecast * 3
 

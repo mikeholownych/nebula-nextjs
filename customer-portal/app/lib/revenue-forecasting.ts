@@ -32,7 +32,7 @@ export async function getPipelineValue(days: number = 30): Promise<RevenueForeca
       SELECT 
         stage,
         COUNT(DISTINCT customer_id) as count,
-        AVG(COALESCE(metadata->>'amount', '97'))::numeric as avg_value
+        97 as avg_value
       FROM customer_onboarding
       WHERE stage_changed_at > NOW() - INTERVAL '${days} days'
       GROUP BY stage
