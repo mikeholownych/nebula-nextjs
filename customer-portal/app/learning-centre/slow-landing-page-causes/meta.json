@@ -1,0 +1,6 @@
+{
+  "slug": "slow-landing-page-causes",
+  "title": "Why Is My Landing Page Slow? The 5 Most Common Causes and Fixes",
+  "category": "Load Speed",
+  "description": "Five structural causes behind slow landing pages: uncompressed images, sync scripts, font render-block, missing CDN, and high-TTFB hosting. How to confirm each one and what to do about it."
+}
