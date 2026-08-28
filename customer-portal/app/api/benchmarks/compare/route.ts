@@ -17,9 +17,8 @@ export async function POST(request: Request) {
       SELECT 
         a.source as industry,
         COUNT(*) as count,
-        AVG(a.score) as avg_score,
-        AVG(a.load_time) as avg_load_time,
-        AVG(a.cls) as avg_cls
+      AVG(a.score) as avg_score,
+      COUNT(*) as count
       FROM audits a
       WHERE a.completed_at > NOW() - INTERVAL '${days} days'
       AND a.source = ANY($1)
@@ -31,8 +30,6 @@ export async function POST(request: Request) {
       industry: row.industry,
       count: parseInt(row.count),
       avgScore: parseFloat(row.avg_score?.toFixed(1) || '0'),
-      avgLoadTime: parseFloat(row.avg_load_time?.toFixed(1) || '0'),
-      avgCls: parseFloat(row.avg_cls?.toFixed(4) || '0'),
     }))
 
     return NextResponse.json({

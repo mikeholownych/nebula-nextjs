@@ -97,9 +97,17 @@ for i, url in enumerate(sitemap_urls):
 # Classify
 broken = [r for r in results if r["status"] not in (200, 301, 302, 303, 307, 308) or r["error"]]
 long_redirects = [r for r in results if r["redirect_count"] >= 2]
-sitemap_set = set(u.rstrip('/') for u in sitemap_urls)
-linked_normalized = set(u.rstrip('/') for u in all_linked)
-orphans = [u for u in sitemap_set if u not in linked_normalized and u != SITE]
+
+# Orphan detection: compare by path only — sitemap uses nebulacomponents.com URLs,
+# get_page_links collects localhost:3000 URLs; normalise both to path for comparison.
+def _path(url: str) -> str:
+    p = urlparse(url).path.rstrip('/') or '/'
+    return p
+
+sitemap_paths = set(_path(u) for u in sitemap_urls)
+linked_paths = set(_path(u) for u in all_linked)
+# Root path '/' is never an orphan
+orphans = [u for u in sitemap_urls if _path(u) not in linked_paths and _path(u) != '/']
 
 report = {
     "generated_at": datetime.now().isoformat(),

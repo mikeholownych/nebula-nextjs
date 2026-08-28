@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       totalAudits: parseInt(totalResult.rows[0].total),
       industries: parseInt(industryResult.rows[0].count),
-      avgScore: parseFloat(totalResult.rows[0].avg?.toFixed(1) || '0'),
+      avgScore: parseFloat((totalResult.rows[0].avg || '0').toString().replace(/[^0-9.-]+/g, "")),
       percentileBreakdown: {
         A: parseInt(rows.grade_a),
         B: parseInt(rows.grade_b),
