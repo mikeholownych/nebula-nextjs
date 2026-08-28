@@ -242,7 +242,6 @@ export async function testWebhook(
         payload: { test: true, timestamp: new Date().toISOString() },
         timestamp: new Date().toISOString(),
       }),
-      timeout: 10000,
     })
 
     const responseTime = Date.now() - startTime
