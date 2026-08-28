@@ -67,6 +67,12 @@ def get_page_links(url):
     except Exception:
         return set()
 
+CANONICAL_SITE = "https://nebulacomponents.com"
+
+def to_local(url: str) -> str:
+    """Convert a canonical URL to its localhost equivalent for internal fetching."""
+    return url.replace(CANONICAL_SITE, SITE)
+
 print(f"[{datetime.now().isoformat()}] Starting site audit for {SITE}", file=sys.stderr)
 
 sitemap_urls = get_sitemap_urls()
@@ -77,16 +83,17 @@ results = []
 all_linked = set()
 
 for i, url in enumerate(sitemap_urls):
-    r = fetch(url)
+    local_url = to_local(url)
+    r = fetch(local_url)
     # Also collect outbound links to find orphans
     if r["status"] == 200:
-        links = get_page_links(url)
+        links = get_page_links(local_url)
         all_linked.update(links)
     results.append({
-        "url": url,
+        "url": url,  # always report the canonical public URL
         "status": r["status"],
-        "final_url": r["final_url"],
-        "redirect_chain": r["chain"],
+        "final_url": r["final_url"].replace(SITE, CANONICAL_SITE),
+        "redirect_chain": [u.replace(SITE, CANONICAL_SITE) for u in r["chain"]],
         "redirect_count": len(r["chain"]) - 1,
         "error": r["error"],
     })

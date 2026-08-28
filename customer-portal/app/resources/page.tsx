@@ -177,6 +177,42 @@ export default function ResourcesPage() {
               </Link>
             </p>
           </section>
+
+          <section className="mt-16 border-t border-border pt-12">
+            <h2 className="mb-6 text-2xl font-bold tracking-tight text-fg">Guides and references</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Link href="/how-nebula-audits" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">Methodology</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">How Nebula audits landing pages</h3>
+                <p className="mt-1 text-sm text-fg-muted">The 9-signal diagnostic process, step by step.</p>
+              </Link>
+              <Link href="/concepts" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">Concepts</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">Nebula concepts</h3>
+                <p className="mt-1 text-sm text-fg-muted">Definitions and framework for the 9-signal audit.</p>
+              </Link>
+              <Link href="/faq" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">FAQ</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">Frequently asked questions</h3>
+                <p className="mt-1 text-sm text-fg-muted">What the audit checks, what it does not, and how the repair sprint works.</p>
+              </Link>
+              <Link href="/what-is-nebula-components" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">About</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">What is Nebula Components?</h3>
+                <p className="mt-1 text-sm text-fg-muted">Evidence-based landing page diagnostics for founders running paid traffic.</p>
+              </Link>
+              <Link href="/ai-sdr-vs-audit" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">Comparison</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">AI SDR vs landing page audit</h3>
+                <p className="mt-1 text-sm text-fg-muted">Why audit the page before deploying an AI sales agent.</p>
+              </Link>
+              <Link href="/7-systems" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">Ecommerce</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">7 systems every ecom brand needs</h3>
+                <p className="mt-1 text-sm text-fg-muted">The systems most ecommerce brands skip that cost them conversions.</p>
+              </Link>
+            </div>
+          </section>
         </div>
       </main>
     </>
