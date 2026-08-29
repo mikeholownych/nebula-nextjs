@@ -72,6 +72,40 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  // Check for internal API secret authorization (for workspace-app proxy)
+  const authHeader = request.headers.get('authorization')
+  if (authHeader?.startsWith('Bearer ') && INTERNAL_SECRET) {
+    const token = authHeader.slice(7)
+    if (token === INTERNAL_SECRET) {
+      try {
+        const body = await request.json().catch(() => null)
+        if (!body) {
+          return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+        }
+        const { url, label, score, grade, components, adCopy } = body
+        const email = body.email
+
+        const response = await fetch(`${API_BASE}/audit/lab-experiments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, label, score, grade, components, adCopy, email }),
+        })
+
+        if (!response.ok) {
+          return NextResponse.json(
+            { error: 'Failed to save experiment' },
+            { status: response.status }
+          )
+        }
+        const data = await response.json()
+        return NextResponse.json(data)
+      } catch (error) {
+        console.error('Lab experiment save error:', error)
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+      }
+    }
+  }
+
   const auth = await requireWorkspaceUser(request)
   if ('response' in auth) return auth.response
   try {
@@ -103,6 +137,32 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  // Check for internal API secret authorization (for workspace-app proxy)
+  const authHeader = request.headers.get('authorization')
+  if (authHeader?.startsWith('Bearer ') && INTERNAL_SECRET) {
+    const token = authHeader.slice(7)
+    if (token === INTERNAL_SECRET) {
+      try {
+        const { id } = await request.json()
+        const response = await fetch(`${API_BASE}/audit/lab-experiments/${id}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+        })
+
+        if (!response.ok) {
+          return NextResponse.json(
+            { error: 'Failed to delete experiment' },
+            { status: response.status }
+          )
+        }
+        return NextResponse.json({ success: true })
+      } catch (error) {
+        console.error('Lab experiment delete error:', error)
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+      }
+    }
+  }
+
   const auth = await requireWorkspaceUser(request)
   if ('response' in auth) return auth.response
   try {
