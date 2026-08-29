@@ -211,7 +211,10 @@ export default function RecsView({
   const cardsByStatus = (status: Status) => {
     const filtered = (recs || []).filter((r) => r.status === status)
     if (projectDomain) {
-      const matches = filtered.filter((r) => domainOf(r.url) === projectDomain)
+      const matches = filtered.filter((r) => {
+        const recDomain = domainOf(r.url)
+        return recDomain === projectDomain
+      })
       return matches
     }
     return filtered
