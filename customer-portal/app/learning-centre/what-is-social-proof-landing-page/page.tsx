@@ -19,12 +19,47 @@ const articleSchema = createArticleSchema({
   publishedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What counts as social proof on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Social proof is any verifiable evidence that other people have already made the commitment you are asking the visitor to make. Named testimonials with specific results, aggregate review scores with counts, recognizable customer logos, usage numbers, and links to published case studies all qualify. Generic quotes without a name or specific result do not.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Where should social proof appear on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'At least one verifiable proof element should appear adjacent to or immediately above the primary call to action, visible without scrolling on mobile. Social proof placed only in a testimonials section at the bottom of the page is seen after the visitor has already decided whether to act.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does having more social proof always help conversion?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Four specific configurations actively reduce trust: stock-photo avatars on testimonials, undated or stale reviews, testimonials from buyers who do not match the target audience, and generic quotes with no specifics. These configurations lower trust below the baseline of having no testimonials at all.',
+      },
+    },
+  ],
+}
+
 export default function WhatIsSocialProofLandingPagePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -213,6 +248,24 @@ export default function WhatIsSocialProofLandingPagePage() {
             >
               Check your page for trust signal gaps &rarr;
             </Link>
+          </div>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">What counts as social proof on a landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Social proof is any verifiable evidence that other people have already made the commitment you are asking the visitor to make. Named testimonials with specific results, aggregate review scores with counts, recognizable customer logos, usage numbers, and links to published case studies all qualify. Generic quotes without a name or specific result do not.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Where should social proof appear on a landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">At least one verifiable proof element should appear adjacent to or immediately above the primary call to action, visible without scrolling on mobile. Social proof placed only in a testimonials section at the bottom of the page is seen after the visitor has already decided whether to act.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Does having more social proof always help conversion?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">No. Four specific configurations actively reduce trust: stock-photo avatars on testimonials, undated or stale reviews, testimonials from buyers who do not match the target audience, and generic quotes with no specifics. These configurations lower trust below the baseline of having no testimonials at all.</p>
+            </div>
           </div>
         </section>
       </div>

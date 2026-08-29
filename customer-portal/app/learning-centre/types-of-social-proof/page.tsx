@@ -19,12 +19,47 @@ const articleSchema = createArticleSchema({
   publishedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Which type of social proof converts best on landing pages?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Named testimonials with specific, measurable results convert best. A quote from a real person at a recognizable company that includes a specific number ("reduced cost per lead from $45 to $18") outperforms all other formats. The specificity makes the result checkable and therefore credible.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do customer logos on a landing page help conversion?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, when the logos are recognizable to the specific target buyer. A logo strip featuring brands your ICP respects builds credibility through association. A logo strip of unknown companies provides no benefit and can create confusion about who the product is actually for.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the minimum viable social proof for a new product with no reviews?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A usage number works when the product is genuinely in use. "Analyzed by 293 teams" or "used in 14 countries" is verifiable and signals real adoption. Avoid round numbers and invented figures. If there is truly no proof yet, a case study from a beta user with specific results beats a fabricated testimonial section.',
+      },
+    },
+  ],
+}
+
 export default function TypesOfSocialProofPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -203,6 +238,24 @@ export default function TypesOfSocialProofPage() {
             >
               Check your page for trust gaps &rarr;
             </Link>
+          </div>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">Which type of social proof converts best on landing pages?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Named testimonials with specific, measurable results convert best. A quote from a real person at a recognizable company that includes a specific number (&ldquo;reduced cost per lead from $45 to $18&rdquo;) outperforms all other formats. The specificity makes the result checkable and therefore credible.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Do customer logos on a landing page help conversion?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Yes, when the logos are recognizable to the specific target buyer. A logo strip featuring brands your ICP respects builds credibility through association. A logo strip of unknown companies provides no benefit and can create confusion about who the product is actually for.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">What is the minimum viable social proof for a new product with no reviews?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">A usage number works when the product is genuinely in use. &ldquo;Analyzed by 293 teams&rdquo; or &ldquo;used in 14 countries&rdquo; is verifiable and signals real adoption. Avoid round numbers and invented figures. If there is truly no proof yet, a case study from a beta user with specific results beats a fabricated testimonial section.</p>
+            </div>
           </div>
         </section>
       </div>

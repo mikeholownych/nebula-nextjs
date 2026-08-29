@@ -19,12 +19,47 @@ const articleSchema = createArticleSchema({
   publishedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What makes a landing page headline effective?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An effective landing page headline states who it is for, what outcome they get, and how or how fast they get it. It mirrors the language and promise of the traffic source that sent the visitor. Generic benefit claims and brand-name-only headlines are the two most common failures.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long should a landing page headline be?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Landing page headlines work best at 6 to 12 words. Long enough to communicate a specific outcome, short enough to be parsed at a glance. Headlines over 15 words typically lose the scannability that above-fold real estate demands.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should the landing page headline match the ad headline exactly?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Not word-for-word, but in promise and intent. The ad creates an expectation; the landing page headline must fulfill that expectation immediately. Copying the ad headline verbatim can feel mechanical. Rephrasing the same promise in slightly different language is fine as long as the core offer and audience match.',
+      },
+    },
+  ],
+}
+
 export default function LandingPageHeadlineFormulaPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -375,6 +410,25 @@ export default function LandingPageHeadlineFormulaPage() {
                 <p className="mt-1 text-sm text-fg-muted">{article.description}</p>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">What makes a landing page headline effective?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">An effective landing page headline states who it is for, what outcome they get, and how or how fast they get it. It mirrors the language and promise of the traffic source that sent the visitor. Generic benefit claims and brand-name-only headlines are the two most common failures.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">How long should a landing page headline be?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Landing page headlines work best at 6 to 12 words. Long enough to communicate a specific outcome, short enough to be parsed at a glance. Headlines over 15 words typically lose the scannability that above-fold real estate demands.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Should the landing page headline match the ad headline exactly?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Not word-for-word, but in promise and intent. The ad creates an expectation; the landing page headline must fulfill that expectation immediately. Copying the ad headline verbatim can feel mechanical. Rephrasing the same promise in slightly different language is fine as long as the core offer and audience match.</p>
+            </div>
           </div>
         </section>
 

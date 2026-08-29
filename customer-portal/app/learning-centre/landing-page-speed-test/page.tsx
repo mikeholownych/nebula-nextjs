@@ -21,12 +21,47 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I test my landing page speed?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Use Google PageSpeed Insights (pagespeed.web.dev) with the actual URL of the landing page receiving paid traffic, not the homepage. Look at the LCP score first on mobile. A score under 2.5 seconds is passing. The tool also identifies the specific resources causing the slowdown.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I test my landing page on mobile or desktop?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Mobile first. Over 60% of paid ad traffic lands on mobile devices, and mobile scores are consistently lower than desktop. A page that passes on desktop can fail on mobile by a significant margin. Google's ranking signals also use the mobile version of the page as the primary index.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between PageSpeed Insights and the Nebula audit for speed?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PageSpeed Insights measures real load performance by actually loading the page. The Nebula audit checks structural signals in the page HTML, such as render-blocking scripts, image compression, and font loading strategy. Both are useful: PageSpeed gives the measured outcome, Nebula identifies the structural causes.',
+      },
+    },
+  ],
+}
+
 export default function LandingPageSpeedTestPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -268,6 +303,24 @@ export default function LandingPageSpeedTestPage() {
               </Link>
             </li>
           </ul>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">How do I test my landing page speed?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Use Google PageSpeed Insights (pagespeed.web.dev) with the actual URL of the landing page receiving paid traffic, not the homepage. Look at the LCP score first on mobile. A score under 2.5 seconds is passing. The tool also identifies the specific resources causing the slowdown.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Should I test my landing page on mobile or desktop?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Mobile first. Over 60% of paid ad traffic lands on mobile devices, and mobile scores are consistently lower than desktop. A page that passes on desktop can fail on mobile by a significant margin. Google&apos;s ranking signals also use the mobile version of the page as the primary index.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">What is the difference between PageSpeed Insights and the Nebula audit for speed?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">PageSpeed Insights measures real load performance by actually loading the page. The Nebula audit checks structural signals in the page HTML, such as render-blocking scripts, image compression, and font loading strategy. Both are useful: PageSpeed gives the measured outcome, Nebula identifies the structural causes.</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>

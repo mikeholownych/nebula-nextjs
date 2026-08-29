@@ -21,12 +21,47 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is LCP and why does it matter for landing pages?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "LCP (Largest Contentful Paint) is the time it takes for the largest visible element on the page to fully render. Google's threshold is 2.5 seconds for a good score. For landing pages receiving paid traffic, a slow LCP means visitors see a blank or partially loaded page immediately after clicking an ad, which causes them to leave before the content appears.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the most common cause of a slow LCP on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An uncompressed hero image is the most common cause. A hero image over 300KB that loads before the page content renders delays LCP significantly. Compressing the image to WebP format and serving it at the correct display size typically reduces LCP by 30-60%.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does LCP affect Google Ads Quality Score?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. Google's landing page experience score, which factors into Quality Score and therefore CPC, considers page load speed as a signal. A page with poor LCP may receive a lower quality score, raising the cost per click for campaigns sending traffic to that URL.",
+      },
+    },
+  ],
+}
+
 export default function LandingPageLcpPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -264,6 +299,24 @@ export default function LandingPageLcpPage() {
               </Link>
             </li>
           </ul>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">What is LCP and why does it matter for landing pages?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">LCP (Largest Contentful Paint) is the time it takes for the largest visible element on the page to fully render. Google&apos;s threshold is 2.5 seconds for a good score. For landing pages receiving paid traffic, a slow LCP means visitors see a blank or partially loaded page immediately after clicking an ad, which causes them to leave before the content appears.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">What is the most common cause of a slow LCP on a landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">An uncompressed hero image is the most common cause. A hero image over 300KB that loads before the page content renders delays LCP significantly. Compressing the image to WebP format and serving it at the correct display size typically reduces LCP by 30-60%.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Does LCP affect Google Ads Quality Score?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Yes. Google&apos;s landing page experience score, which factors into Quality Score and therefore CPC, considers page load speed as a signal. A page with poor LCP may receive a lower quality score, raising the cost per click for campaigns sending traffic to that URL.</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>

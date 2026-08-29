@@ -6,6 +6,7 @@ import GscWidget from './gscWidget'
 import Ga4Widget from './ga4Widget'
 import SiteHealthHero from './SiteHealthHero'
 import IntentBadge from '@/components/IntentBadge'
+import { CustomerOverviewCard } from './CustomerOverviewCard'
 
 // ── Helpers ───────────────────────────────────────────────────────────
 

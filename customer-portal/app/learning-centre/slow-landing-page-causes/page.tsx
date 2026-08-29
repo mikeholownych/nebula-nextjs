@@ -21,12 +21,47 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why is my landing page slow?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The five most common causes are: an uncompressed hero image over 500KB, third-party scripts (chat widgets, heatmaps, analytics) loading synchronously before page content, web fonts blocking render, no CDN for static assets, and slow server response time from shared hosting. PageSpeed Insights identifies which applies to a specific page.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to fix a slow landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest impact on visitors who are geographically far from the server.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does a slow landing page affect ad performance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes directly. Google's landing page experience score factors into Ad Rank, which determines both ad position and cost per click. A slow page with poor LCP can raise CPC and reduce ad impressions compared to a competitor sending traffic to a faster page targeting the same keywords.",
+      },
+    },
+  ],
+}
+
 export default function SlowLandingPageCausesPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -302,6 +337,24 @@ export default function SlowLandingPageCausesPage() {
               </Link>
             </li>
           </ul>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">Why is my landing page slow?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">The five most common causes are: an uncompressed hero image over 500KB, third-party scripts (chat widgets, heatmaps, analytics) loading synchronously before page content, web fonts blocking render, no CDN for static assets, and slow server response time from shared hosting. PageSpeed Insights identifies which applies to a specific page.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">How long does it take to fix a slow landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest impact on visitors who are geographically far from the server.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Does a slow landing page affect ad performance?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Yes directly. Google&apos;s landing page experience score factors into Ad Rank, which determines both ad position and cost per click. A slow page with poor LCP can raise CPC and reduce ad impressions compared to a competitor sending traffic to a faster page targeting the same keywords.</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>

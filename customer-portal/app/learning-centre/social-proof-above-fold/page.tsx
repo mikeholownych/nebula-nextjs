@@ -21,12 +21,47 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does "above the fold" mean on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Above the fold means the portion of the page visible on screen without scrolling. On mobile at 375px width, this is typically 600-700px of vertical space. Any element a visitor must scroll to see is below the fold and will be missed by visitors who bounce before engaging.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why should social proof be above the fold?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Visitors make the decision whether to continue reading within a few seconds of landing. If social proof is only at the bottom of the page, visitors who are uncertain whether to trust the offer will never see it. One piece of verifiable proof above the fold reduces uncertainty before the visitor decides to leave.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I add social proof above the fold without cluttering the design?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Three patterns work without adding visual noise: a single-line trust bar with a review count and score directly under the headline, a compact testimonial with name and one-sentence result placed beside the CTA button, or a row of three recognizable customer logos above the fold. Each adds proof without competing with the primary CTA for attention.',
+      },
+    },
+  ],
+}
+
 export default function SocialProofAboveFoldPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -261,6 +296,24 @@ export default function SocialProofAboveFoldPage() {
               </Link>
             </li>
           </ul>
+        </section>
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">What does &ldquo;above the fold&rdquo; mean on a landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Above the fold means the portion of the page visible on screen without scrolling. On mobile at 375px width, this is typically 600-700px of vertical space. Any element a visitor must scroll to see is below the fold and will be missed by visitors who bounce before engaging.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Why should social proof be above the fold?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Visitors make the decision whether to continue reading within a few seconds of landing. If social proof is only at the bottom of the page, visitors who are uncertain whether to trust the offer will never see it. One piece of verifiable proof above the fold reduces uncertainty before the visitor decides to leave.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">How do I add social proof above the fold without cluttering the design?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Three patterns work without adding visual noise: a single-line trust bar with a review count and score directly under the headline, a compact testimonial with name and one-sentence result placed beside the CTA button, or a row of three recognizable customer logos above the fold. Each adds proof without competing with the primary CTA for attention.</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>

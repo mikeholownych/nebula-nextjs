@@ -19,12 +19,47 @@ const articleSchema = createArticleSchema({
   publishedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is message match on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Message match is the degree of alignment between what your ad says and what your landing page says. When a visitor clicks an ad promising a free trial and lands on a page talking about scheduling a demo, the message match has broken. That mismatch triggers doubt before a single word is read.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why does message match affect conversion rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Paid traffic arrives with an expectation set by the ad. If the landing page does not immediately confirm that expectation, visitors conclude they clicked the wrong result and leave. In Nebula\'s data from 293 audits, 62% of pages fail the headline check, making message match the most common conversion leak.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I check if my landing page has a message match problem?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Read your ad copy, then read your landing page H1 and first paragraph without any prior context. Ask whether a first-time visitor who saw only the ad would feel they arrived at the right place. If there is any hesitation, there is a message match gap.',
+      },
+    },
+  ],
+}
+
 export default function WhatIsMessageMatchPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -352,6 +387,25 @@ export default function WhatIsMessageMatchPage() {
                 <p className="mt-1 text-sm text-fg-muted">{article.description}</p>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">What is message match on a landing page?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Message match is the degree of alignment between what your ad says and what your landing page says. When a visitor clicks an ad promising a free trial and lands on a page talking about scheduling a demo, the message match has broken. That mismatch triggers doubt before a single word is read.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">Why does message match affect conversion rates?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Paid traffic arrives with an expectation set by the ad. If the landing page does not immediately confirm that expectation, visitors conclude they clicked the wrong result and leave. In Nebula&apos;s data from 293 audits, 62% of pages fail the headline check, making message match the most common conversion leak.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">How do I check if my landing page has a message match problem?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Read your ad copy, then read your landing page H1 and first paragraph without any prior context. Ask whether a first-time visitor who saw only the ad would feel they arrived at the right place. If there is any hesitation, there is a message match gap.</p>
+            </div>
           </div>
         </section>
 

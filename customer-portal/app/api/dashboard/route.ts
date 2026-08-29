@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
+import { getCurrentUser } from '@/app/lib/auth'
 
 export async function GET() {
-  // For now, using a fixed customer ID for testing
-  // In production, extract from session
-  const customerId = '7fa4cd42-dd42-4efb-a54f-d909ee3182c3'
+  const user = await getCurrentUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  const email = user.email
+  const customerId = user.id
 
   try {
     // Simplified dashboard data - aggregate stats without customer filtering
@@ -39,24 +44,49 @@ export async function GET() {
       LIMIT 10
     `)
 
-    // Health score (generic - would be per-customer in production)
-    const healthScore = Math.floor(Math.random() * 40) + 60
-    let grade: string
-    if (healthScore >= 80) grade = 'excellent'
-    else if (healthScore >= 60) grade = 'good'
-    else if (healthScore >= 40) grade = 'fair'
-    else if (healthScore >= 20) grade = 'critical'
-    else grade = 'at-risk'
+    // Get customer's health score
+    const customerHealthResult = await auditPool.query(`
+      SELECT 
+        COALESCE(AVG(score), 0) as avg_score,
+        MAX(completed_at) as last_audit
+      FROM audits 
+      WHERE customer_id = $1
+    `, [customerId])
+
+    const customerHealthScore = parseFloat(customerHealthResult.rows[0].avg_score || '0')
+    const lastAudit = customerHealthResult.rows[0].last_audit as string | null
+
+    // Convert to 0-100 scale (DB stores as 0-10)
+    const healthScore = Math.round(customerHealthScore * 10)
+    let healthGrade: string
+    if (healthScore >= 80) healthGrade = 'excellent'
+    else if (healthScore >= 60) healthGrade = 'good'
+    else if (healthScore >= 40) healthGrade = 'fair'
+    else if (healthScore >= 20) healthGrade = 'critical'
+    else healthGrade = 'at-risk'
+
+    // Calculate referral credits for this customer
+    const referralCreditsResult = await auditPool.query(`
+      SELECT COUNT(*) as credits_count FROM referral_redemptions 
+      WHERE referrer_email = $1
+    `, [email])
+
+    const referralCredits = parseInt(referralCreditsResult.rows[0].credits_count || '0')
+
+    const customerJoinedResult = await auditPool.query(`
+      SELECT created_at FROM customers WHERE id = $1
+    `, [customerId])
+    const joinedAt = customerJoinedResult.rows[0]?.created_at || '2026-08-01T00:00:00Z'
 
     return NextResponse.json({
       timestamp: new Date().toISOString(),
       customerId,
       profile: {
-        email: 'test@example.com',
-        joinedAt: '2026-08-01T00:00:00Z',
+        email,
+        joinedAt,
         totalAudits,
         paidAudits,
-        creditBalance: 0,
+        creditBalance: referralCredits * 50,
       },
       revenue: {
         totalPaid,
@@ -85,15 +115,15 @@ export async function GET() {
       },
       health: {
         healthScore,
-        grade,
-        lastCheckIn: new Date().toISOString(),
+        grade: healthGrade,
+        lastCheckIn: lastAudit || new Date().toISOString(),
         overdue: healthScore < 40,
         atRisk: healthScore < 40,
       },
       referrals: {
-        code: (Math.random().toString(36).substring(2, 8).toUpperCase()),
-        referralsCount: Math.floor(Math.random() * 10),
-        creditsEarned: 0,
+        code: 'NEBULA26',  // Placeholder - should be customer-specific
+        referralsCount: referralCredits,
+        creditsEarned: referralCredits * 50,
         pendingCredits: 0,
       },
       nurture: {

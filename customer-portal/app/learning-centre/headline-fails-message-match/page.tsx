@@ -19,12 +19,47 @@ const articleSchema = createArticleSchema({
   publishedDate: '2026-08-28',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why does my landing page headline not match my ad?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The three most common causes are: the ad and page were written by different people without a shared brief, the ad copy was updated after the landing page was built without updating the page, or the headline was deliberately broadened to appeal to a wider audience at the cost of relevance. All three are fixable in under an hour.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How common is headline mismatch on landing pages?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'In Nebula\'s Q3 2026 data from 293 audited pages, 62% failed the headline check. That makes headline mismatch the most common single conversion leak detected, ahead of load speed failures (40%) and missing social proof (39%).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the fastest way to fix a headline that fails message match?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Pull the exact promise from the ad that sent the most traffic to that page. Rewrite the H1 to fulfill that promise directly, using the same verb and outcome language. Then check that the first sentence of body copy reinforces the same promise. The whole fix takes under 15 minutes if you know what the ad said.',
+      },
+    },
+  ],
+}
+
 export default function HeadlineFailsMessageMatchPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -330,6 +365,25 @@ export default function HeadlineFailsMessageMatchPage() {
                 <p className="mt-1 text-sm text-fg-muted">{article.description}</p>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* FAQ section */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="text-xl font-bold text-fg">Frequently Asked Questions</h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="font-semibold text-fg">Why does my landing page headline not match my ad?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">The three most common causes are: the ad and page were written by different people without a shared brief, the ad copy was updated after the landing page was built without updating the page, or the headline was deliberately broadened to appeal to a wider audience at the cost of relevance. All three are fixable in under an hour.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">How common is headline mismatch on landing pages?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">In Nebula&apos;s Q3 2026 data from 293 audited pages, 62% failed the headline check. That makes headline mismatch the most common single conversion leak detected, ahead of load speed failures (40%) and missing social proof (39%).</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-fg">What is the fastest way to fix a headline that fails message match?</h3>
+              <p className="mt-2 leading-relaxed text-fg-muted">Pull the exact promise from the ad that sent the most traffic to that page. Rewrite the H1 to fulfill that promise directly, using the same verb and outcome language. Then check that the first sentence of body copy reinforces the same promise. The whole fix takes under 15 minutes if you know what the ad said.</p>
+            </div>
           </div>
         </section>
 
