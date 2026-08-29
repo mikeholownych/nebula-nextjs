@@ -181,7 +181,7 @@ export default function RecsView({
     } finally {
       setLoading(false)
     }
-  }, [email])
+  }, [email, selectedProject])
 
   useEffect(() => {
     load()
