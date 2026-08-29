@@ -158,6 +158,21 @@ export default function PressPage() {
         </div>
       </section>
 
+      {/* ─── Answer Capsule ───────────────────────────────────────── */}
+      <section className="px-6 pb-8">
+        <div className="max-w-5xl mx-auto">
+          <div
+            data-answer-capsule
+            className="mb-8 border-l-2 border-accent bg-bg-panel rounded-r-md px-5 py-4"
+          >
+            <p className="text-sm leading-relaxed text-fg-muted">Nebula Components is a free landing page audit tool that scores pages across 9 conversion signals in under 2 minutes. Nebula published Q3 2026 benchmark data from 293 audits: 62% of pages fail the headline test, average page has 2.7 conversion leaks. For press inquiries: mike@nebulacomponents.com</p>
+            <p className="mt-2 text-sm text-fg-muted">
+              Press contact: <a href="mailto:mike@nebulacomponents.com" className="text-accent hover:text-fg transition-colors">mike@nebulacomponents.com</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Company Facts Panel ──────────────────────────────────── */}
       <section className="px-6 pb-20" aria-labelledby="company-facts-title">
         <div className="max-w-5xl mx-auto">

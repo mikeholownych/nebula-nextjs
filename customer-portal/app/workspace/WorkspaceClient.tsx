@@ -802,7 +802,7 @@ export default function WorkspaceClient({ initialTab }: { initialTab?: string })
           {tab === 'compare' && <CompetitorView audits={displayedAudits} email={email} selectedProject={selectedProject} />}
           {tab === 'aiSearch' && <AiSearchView audits={displayedAudits} email={email} />}
           {tab === 'roiCalculator' && <RoiCalculatorView />}
-          {tab === 'recommendations' && <RecsView email={email} latestDetail={projectDetail} />}
+          {tab === 'recommendations' && <RecsView email={email} latestDetail={projectDetail} selectedProject={selectedProject} />}
           {tab === 'experiments' && (
             canAccess(planLevel, 'pro')
               ? <ExperimentsView email={email} />

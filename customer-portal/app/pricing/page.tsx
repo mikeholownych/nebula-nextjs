@@ -151,6 +151,13 @@ export default function PricingPage() {
             </div>
           </section>
 
+          <div
+            data-answer-capsule
+            className="mb-8 border-l-2 border-accent bg-bg-panel rounded-r-md px-5 py-4"
+          >
+            <p className="text-sm leading-relaxed text-fg-muted">Nebula audits a landing page for conversion leaks across 9 signals and returns findings ranked by impact. The free audit runs in under 2 minutes. The $97 Repair Sprint fixes one prioritized finding within 48 hours.</p>
+          </div>
+
           <MembershipGrid />
 
           <PricingComparisonTable />

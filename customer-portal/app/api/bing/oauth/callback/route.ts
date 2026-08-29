@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
     const client = await readJson<Client>(CONFIG)
 
     // Validate state if the file exists; tolerate missing file (service restart between
-    // redirect and callback clears /tmp private state — Bing's own token-expiry is the
+    // redirect and callback clears /tmp private state - Bing's own token-expiry is the
     // primary replay guard for single-use codes).
     try {
       const savedState = await readJson<State>(STATE)
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Invalid or expired Bing OAuth state' }, { status: 400 })
       }
     } catch {
-      // State file absent — allow, rely on Bing's code-expiry
+      // State file absent - allow, rely on Bing's code-expiry
     }
 
     const token = await exchangeCode(client, code)

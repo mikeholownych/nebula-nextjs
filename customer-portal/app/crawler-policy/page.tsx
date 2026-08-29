@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Crawler Policy — NebulaSEOBot | Nebula Components',
+  title: 'Crawler Policy: NebulaSEOBot | Nebula Components',
   description: 'NebulaSEOBot is the Nebula Components CRO diagnostic crawler. This page describes what it crawls, how to identify it, and how to opt out.',
   robots: { index: true, follow: true },
 }
@@ -18,7 +18,7 @@ export default function CrawlerPolicyPage() {
         <p className="text-fg-secondary leading-relaxed">
           NebulaSEOBot is the diagnostic crawler operated by{' '}
           <a href="https://nebulacomponents.com" className="text-accent hover:underline">Nebula Components</a>.
-          It fetches web pages to perform CRO (conversion rate optimization) diagnostics — checking
+          It fetches web pages to perform CRO (conversion rate optimization) diagnostics, checking
           page structure, headline quality, CTA placement, load performance, and AI-readiness signals.
           It does not index content for search, build training datasets, or aggregate content for
           redistribution.
@@ -35,9 +35,9 @@ export default function CrawlerPolicyPage() {
       <section className="mb-10">
         <h2 className="text-lg font-semibold mb-3">What it crawls</h2>
         <ul className="space-y-2 text-fg-secondary">
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>URLs explicitly submitted by a site owner for diagnostic purposes</span></li>
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>URLs discovered via a site&apos;s published sitemap, when a site owner initiates a site-wide audit</span></li>
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>URLs explicitly submitted by a site owner for diagnostic purposes</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>URLs discovered via a site&apos;s published sitemap, when a site owner initiates a site-wide audit</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>
             <code className="font-mono text-sm bg-surface-muted px-1 py-0.5 rounded">nebulacomponents.com</code> itself, for internal SEO monitoring
           </span></li>
         </ul>
@@ -50,10 +50,10 @@ export default function CrawlerPolicyPage() {
       <section className="mb-10">
         <h2 className="text-lg font-semibold mb-3">Rate limits</h2>
         <ul className="space-y-2 text-fg-secondary">
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>Maximum 1 request per 2 seconds per domain</span></li>
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>Respects <code className="font-mono text-sm bg-surface-muted px-1 py-0.5 rounded">Crawl-delay</code> directives in robots.txt</span></li>
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>Respects <code className="font-mono text-sm bg-surface-muted px-1 py-0.5 rounded">Retry-After</code> headers on 429 responses</span></li>
-          <li className="flex gap-2"><span className="text-accent mt-1">—</span><span>One concurrent connection per domain at a time</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>Maximum 1 request per 2 seconds per domain</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>Respects <code className="font-mono text-sm bg-surface-muted px-1 py-0.5 rounded">Crawl-delay</code> directives in robots.txt</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>Respects <code className="font-mono text-sm bg-surface-muted px-1 py-0.5 rounded">Retry-After</code> headers on 429 responses</span></li>
+          <li className="flex gap-2"><span className="text-accent mt-1">&middot;</span><span>One concurrent connection per domain at a time</span></li>
         </ul>
       </section>
 

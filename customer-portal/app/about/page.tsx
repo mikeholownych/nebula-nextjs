@@ -39,6 +39,12 @@ export default function AboutPage() {
       <BreadcrumbSchema />
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="heading-1 text-fg">Discover How Nebula Helps Founders Fix Conversion Leaks</h1>
+        <div
+          data-answer-capsule
+          className="mb-8 border-l-2 border-accent bg-bg-panel rounded-r-md px-5 py-4"
+        >
+          <p className="text-sm leading-relaxed text-fg-muted">Nebula Components is a landing page conversion diagnostic tool built for founders spending on paid ads who are not seeing sales. It checks 9 structural signals on any public URL and returns evidence-backed findings. Founded in 2024 by Mike Holownych.</p>
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href="/audit?utm_source=about-hero&utm_medium=hero-cta"

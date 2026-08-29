@@ -7,27 +7,12 @@ Current backlink profile: 12 referring domains, 0 dofollow links, DR 98
 
 ## Existing Mentions Found
 
-### 1. softrankings.com — WRONG DOMAIN (highest priority)
+### 1. softrankings.com — WRONG DOMAIN (DEAD — no response)
 **URL:** https://softrankings.com/products/nebula-components
 **Status:** Has a product listing page for Nebula Components
-**Problem:** All 3 links point to `nebulacomponents.shop` not `nebulacomponents.com`
-**Action:** Email to request canonical domain update from .shop to .com
-**Contact path:** Check softrankings.com for contact/submit page
-
-**Draft email:**
-Subject: Nebula Components listing — canonical domain update
-
-Hi,
-
-I noticed softrankings.com has a listing for Nebula Components — thank you for including us.
-
-One quick fix: our canonical domain is nebulacomponents.com (not nebulacomponents.shop, which redirects). If you could update the links to point to nebulacomponents.com, that would reflect the correct site.
-
-Happy to provide any updated information about the product.
-
-Mike Holownych
-Founder, Nebula Components
-mike@nebulacomponents.com
+**Problem:** All 3 links point to `nebulacomponents.com.shop` not `nebulacomponents.com`
+**Outreach:** Emailed + contacted on LinkedIn multiple times. No response as of Aug 2026.
+**Decision:** Not worth further effort. Low DR, unresponsive. Move on.
 
 ---
 

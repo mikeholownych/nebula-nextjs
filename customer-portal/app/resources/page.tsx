@@ -62,6 +62,13 @@ export default function ResourcesPage() {
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
             Open-source tools built from real problems on real sites. Each one addresses a specific, reproducible failure mode we encountered while diagnosing and fixing landing pages.
           </p>
+          <div
+            data-answer-capsule
+            className="mb-8 border-l-2 border-accent bg-bg-panel rounded-r-md px-5 py-4"
+          >
+            <p className="text-sm leading-relaxed text-fg-muted">This page collects Nebula&apos;s published research, diagnostic specifications, benchmark data, and learning resources. All content is freely available and citable. Data sources are linked where applicable.</p>
+          </div>
+
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href="/audit?utm_source=resources-hero&utm_medium=hero-cta"

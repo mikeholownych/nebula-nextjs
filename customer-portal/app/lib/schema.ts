@@ -49,6 +49,7 @@ export const organizationSchema = {
     }
   },
   sameAs: [
+    'https://www.wikidata.org/wiki/Q141206192',
     'https://www.linkedin.com/company/nebulacomponents',
     'https://github.com/Nebula-Components/nebula-components',
     'https://twitter.com/nebula_components',
@@ -62,6 +63,7 @@ export const organizationSchema = {
     jobTitle: 'Founder',
     url: 'https://nebulacomponents.com/about/team',
     sameAs: [
+      'https://www.wikidata.org/wiki/Q141206972',
       'https://www.linkedin.com/in/mikeholownych',
       'https://github.com/mikeholownych',
       'https://twitter.com/mikeholownych',

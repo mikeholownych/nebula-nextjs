@@ -138,9 +138,11 @@ function FindingsSummary({ detail }: { detail: AuditDetail }) {
 export default function RecsView({
   email,
   latestDetail,
+  selectedProject,
 }: {
   email: string
   latestDetail?: AuditDetail | null
+  selectedProject?: string
 }) {
   const [recs, setRecs] = useState<Recommendation[] | null>(null)
   const [loading, setLoading] = useState(true)
@@ -205,8 +207,14 @@ export default function RecsView({
     }
   }
 
-  const cardsByStatus = (status: Status) =>
-    (recs || []).filter((r) => r.status === status)
+  const projectDomain = selectedProject && selectedProject !== 'all' ? selectedProject : null
+  const cardsByStatus = (status: Status) => {
+    const filtered = (recs || []).filter((r) => r.status === status)
+    if (projectDomain) {
+      return filtered.filter((r) => domainOf(r.url) === projectDomain)
+    }
+    return filtered
+  }
 
   if (loading && !recs) {
     return <p className="text-sm text-fg-dim">Loading recommendations…</p>

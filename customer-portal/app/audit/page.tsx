@@ -454,13 +454,13 @@ export default async function AuditPage() {
           <p className="text-xs font-medium uppercase tracking-widest text-fg-muted mb-4">Related tools</p>
           <div className="flex flex-wrap gap-3">
             <Link href="/lab" className="rounded-md border border-border bg-bg-panel px-4 py-2 text-sm text-fg hover:border-accent/40 transition-colors">
-              Component Lab — test your headline, CTA, and message match
+              Component Lab: test your headline, CTA, and message match
             </Link>
             <Link href="/how-nebula-audits" className="rounded-md border border-border bg-bg-panel px-4 py-2 text-sm text-fg hover:border-accent/40 transition-colors">
-              How Nebula audits — the 9-signal methodology
+              How Nebula audits: the 9-signal methodology
             </Link>
             <Link href="/benchmarks" className="rounded-md border border-border bg-bg-panel px-4 py-2 text-sm text-fg hover:border-accent/40 transition-colors">
-              Leak Index — aggregate finding rates from {'>'}290 audits
+              Leak Index: aggregate finding rates from {'>'}290 audits
             </Link>
           </div>
         </section>

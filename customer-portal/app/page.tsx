@@ -12,7 +12,7 @@ const webPageSchema = {
   '@type': 'WebPage',
   '@id': 'https://nebulacomponents.com/#webpage',
   url: 'https://nebulacomponents.com/',
-  name: 'Nebula Components — Free Landing Page Audit',
+  name: 'Nebula Components: Free Landing Page Audit',
   isPartOf: { '@id': 'https://nebulacomponents.com/#website' },
   about: { '@id': 'https://nebulacomponents.com/#organization' },
   description: 'Free landing page audit that scores 9 conversion signals in under 2 minutes. Built for founders spending on ads who are not seeing conversions.',

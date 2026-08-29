@@ -164,7 +164,7 @@ export default function WhatIsMessageMatchPage() {
           <div className="mt-6 space-y-8">
             {/* Example 1 */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 1 &mdash; Offer Mismatch</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 1: Offer Mismatch</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="rounded border border-border bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-fg-muted mb-2">Ad says</p>
@@ -184,7 +184,7 @@ export default function WhatIsMessageMatchPage() {
 
             {/* Example 2 */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 2 &mdash; Audience Mismatch</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 2: Audience Mismatch</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="rounded border border-border bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-fg-muted mb-2">Ad says</p>
@@ -204,7 +204,7 @@ export default function WhatIsMessageMatchPage() {
 
             {/* Example 3 */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 3 &mdash; Tone Mismatch</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 3: Tone Mismatch</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="rounded border border-border bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-fg-muted mb-2">Ad says</p>
@@ -224,7 +224,7 @@ export default function WhatIsMessageMatchPage() {
 
             {/* Example 4 */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 4 &mdash; Keyword Mismatch</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">Example 4: Keyword Mismatch</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="rounded border border-border bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-fg-muted mb-2">Ad says</p>
