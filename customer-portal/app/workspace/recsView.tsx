@@ -185,7 +185,7 @@ export default function RecsView({
 
   useEffect(() => {
     load()
-  }, [load])
+  }, [load, selectedProject])
 
   const move = async (rec: Recommendation, status: Status) => {
     setMoving(rec.id)
@@ -211,7 +211,8 @@ export default function RecsView({
   const cardsByStatus = (status: Status) => {
     const filtered = (recs || []).filter((r) => r.status === status)
     if (projectDomain) {
-      return filtered.filter((r) => domainOf(r.url) === projectDomain)
+      const matches = filtered.filter((r) => domainOf(r.url) === projectDomain)
+      return matches
     }
     return filtered
   }
