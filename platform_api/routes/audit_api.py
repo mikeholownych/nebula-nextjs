@@ -1057,9 +1057,48 @@ class LabExperimentUpdate(BaseModel):
     status: str
 
 
+async def lab_experiment_auth(
+    request: Request,
+) -> Principal:
+    """Accept either INTERNAL_SERVICE or workspace principal for lab experiments."""
+    try:
+        require_internal_service(request)
+        email = request.query_params.get("email")
+        return Principal(
+            principal_type="internal",
+            principal_id="internal-service",
+            workspace_email=email.strip().lower() if email else None,
+            scopes=frozenset({
+                SCOPE_WORKSPACE_READ,
+                SCOPE_WORKSPACE_WRITE,
+            }),
+        )
+    except HTTPException:
+        pass
+    return await require_principal(SCOPE_WORKSPACE_READ)(request)
+
+
+async def timeline_auth(
+    request: Request,
+) -> Principal:
+    """Accept either INTERNAL_SERVICE or workspace principal for activity timeline."""
+    try:
+        require_internal_service(request)
+        email = request.query_params.get("email")
+        return Principal(
+            principal_type="internal",
+            principal_id="internal-service",
+            workspace_email=email.strip().lower() if email else None,
+            scopes=frozenset({SCOPE_WORKSPACE_READ}),
+        )
+    except HTTPException:
+        pass
+    return await require_principal(SCOPE_WORKSPACE_READ)(request)
+
+
 @router.get("/lab-experiments")
 async def list_lab_experiments(email: str = Query(..., min_length=3, max_length=320),
-    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
+    principal: Principal = Depends(lab_experiment_auth),):
     """List saved Component Lab experiments for a workspace email (newest first)."""
     email = bind_email(principal, email)
     try:
@@ -1071,7 +1110,7 @@ async def list_lab_experiments(email: str = Query(..., min_length=3, max_length=
 
 @router.post("/lab-experiments")
 async def create_lab_experiment(body: LabExperimentCreate,
-        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+        principal: Principal = Depends(lab_experiment_auth)):
     """Save a lab run as an experiment in the workspace (tenant-bound)."""
     body.email = bind_email(principal, body.email)
     email = body.email.strip().lower()
@@ -1097,7 +1136,7 @@ async def create_lab_experiment(body: LabExperimentCreate,
 
 @router.patch("/lab-experiments/{exp_id}")
 async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate,
-        principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_WRITE))):
+        principal: Principal = Depends(lab_experiment_auth)):
     """Mark an experiment as production (or back to saved). Tenant-owned only."""
     if body.status not in ("saved", "production"):
         raise HTTPException(status_code=400, detail="Invalid status")
@@ -1124,7 +1163,7 @@ async def update_lab_experiment(exp_id: str, body: LabExperimentUpdate,
 
 @router.get("/timeline")
 async def get_activity_timeline(email: str = Query(..., min_length=3, max_length=320),
-    principal: Principal = Depends(require_principal(SCOPE_WORKSPACE_READ)),):
+    principal: Principal = Depends(timeline_auth),):
     """Aggregate activity timeline for a workspace email.
     Combines audit completions, recommendation status changes, and monitor run events,
     sorted by created_at DESC, limited to 100 events."""
@@ -1199,7 +1238,11 @@ async def get_activity_timeline(email: str = Query(..., min_length=3, max_length
         # Sort by created_at DESC, put None last
         def _sort_key(ev: dict):
             ca = ev.get("created_at")
-            return ca if ca is not None else ""
+            if ca is None:
+                return (1, "")  # Put None at the end
+            if isinstance(ca, str):
+                return (0, ca)  # Strings sort before (1, "")
+            return (0, ca.isoformat())  # Convert datetime to comparable string
 
         events.sort(key=_sort_key, reverse=True)
         events = events[:100]

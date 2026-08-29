@@ -145,7 +145,7 @@ export function DashboardView({ audits, latestDetail, email, selectedProject }: 
           <section className="rounded-md border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">Est. Monthly Leak</p>
             <p className="mt-4 text-lg font-semibold text-fg-muted">-</p>
-            <a href="/workspace?tab=settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
+            <a href="/workspace/settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
           </section>
         )}
       </div>
@@ -262,7 +262,7 @@ function CompetitorCard({ selectedProject }: { selectedProject?: string }) {
       {competitors.length === 0 ? (
         <div className="mt-4">
           <p className="text-sm text-fg-muted">Track up to 3 competitor pages and see how your score stacks up.</p>
-          <a href="/workspace?tab=settings" className="mt-2 inline-block text-sm font-semibold text-[#c7ff2f] hover:underline">
+          <a href="/workspace/settings" className="mt-2 inline-block text-sm font-semibold text-[#c7ff2f] hover:underline">
             Add competitors in Settings →
           </a>
         </div>

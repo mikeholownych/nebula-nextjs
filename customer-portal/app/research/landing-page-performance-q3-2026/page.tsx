@@ -512,6 +512,11 @@ export default function LandingPagePerformanceQ3Page() {
         <section>
           <h2 className="text-xl font-bold text-white mb-4">Cite this report</h2>
           <CitationCopy />
+          {/* Follow Nebula in Google Search to see future reports */}
+          <div className="mt-6 flex items-center gap-3">
+            <span className="text-sm text-[#9e9e9e]">Follow for future reports:</span>
+            <div google-add-preferred-source-btn data-theme="dark" data-lang="en" />
+          </div>
         </section>
 
       </div>

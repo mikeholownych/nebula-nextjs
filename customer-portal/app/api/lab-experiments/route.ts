@@ -23,9 +23,11 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
       }
       try {
+        const headers = new Headers()
+        headers.set('Authorization', `Bearer ${INTERNAL_SECRET}`)
         const response = await fetch(
           `${API_BASE}/audit/lab-experiments?email=${encodeURIComponent(email)}`,
-          { signal: AbortSignal.timeout(10000) }
+          { signal: AbortSignal.timeout(10000), headers }
         )
 
         if (!response.ok) {
@@ -85,9 +87,12 @@ export async function POST(request: NextRequest) {
         const { url, label, score, grade, components, adCopy } = body
         const email = body.email
 
+        const headers = new Headers()
+        headers.set('Content-Type', 'application/json')
+        headers.set('Authorization', `Bearer ${INTERNAL_SECRET}`)
         const response = await fetch(`${API_BASE}/audit/lab-experiments`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
           body: JSON.stringify({ url, label, score, grade, components, adCopy, email }),
         })
 
@@ -144,9 +149,12 @@ export async function DELETE(request: NextRequest) {
     if (token === INTERNAL_SECRET) {
       try {
         const { id } = await request.json()
+        const headers = new Headers()
+        headers.set('Content-Type', 'application/json')
+        headers.set('Authorization', `Bearer ${INTERNAL_SECRET}`)
         const response = await fetch(`${API_BASE}/audit/lab-experiments/${id}`, {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
         })
 
         if (!response.ok) {

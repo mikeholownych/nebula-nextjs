@@ -281,6 +281,14 @@ export default function SocialProofAboveFoldPage() {
             </li>
             <li>
               <Link
+                href="/learning-centre/types-of-social-proof"
+                className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
+              >
+                Types of Social Proof: Which Work and Which Backfire
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/learning-centre/social-proof-backfire"
                 className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
               >

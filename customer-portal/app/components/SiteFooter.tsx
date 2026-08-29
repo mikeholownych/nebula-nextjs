@@ -100,8 +100,10 @@ export default function SiteFooter() {
 
       {/* Copyright bar */}
       <div className="border-t border-border/20 px-6 py-4">
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-fg-dim">
+        <div className="mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-fg-dim">
           <p>© {new Date().getFullYear()} Nebula Components. All rights reserved.</p>
+          {/* Google Preferred Sources button — dark theme to match site */}
+          <div google-add-preferred-source-btn data-theme="dark" data-lang="en" />
           <nav aria-label="Legal" className="flex gap-4">
             <Link href="/privacy-policy" className="hover:text-fg-muted transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-fg-muted transition-colors">Terms</Link>

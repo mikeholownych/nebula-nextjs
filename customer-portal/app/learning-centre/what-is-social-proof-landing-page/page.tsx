@@ -231,6 +231,11 @@ export default function WhatIsSocialProofLandingPagePage() {
               </Link>
             </li>
             <li>
+              <Link href="/learning-centre/types-of-social-proof" className="text-accent hover:text-fg transition-colors">
+                Types of social proof ranked by conversion impact
+              </Link>
+            </li>
+            <li>
               <Link href="/learning-centre/social-proof-backfire" className="text-accent hover:text-fg transition-colors">
                 4 testimonial configurations that actively hurt conversion
               </Link>

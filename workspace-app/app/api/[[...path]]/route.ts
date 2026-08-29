@@ -50,6 +50,8 @@ async function proxy(request: NextRequest, params: { path?: string[] }): Promise
     if (value) headers.set(key, value)
   }
   headers.set('x-forwarded-host', incoming.host)
+  const secret = (process.env.INTERNAL_API_SECRET || '').trim()
+  if (secret) headers.set('authorization', `Bearer ${secret}`)
 
   try {
     const upstream = await fetch(target, {
