@@ -39,22 +39,22 @@ export async function GET(request: Request) {
       WHERE last_scored_at IS NOT NULL
     `)
 
-    const grades = gradesResult.rows.reduce((acc: Record<string, number>, row: any) => {
+    const grades = gradesResult.rows.reduce((acc: Record<string, number>, row: { grade: string; count: string }) => {
       acc[row.grade] = parseInt(row.count)
       return acc
-    }, {})
+    }, {} as Record<string, number>)
 
     return NextResponse.json({
       totalLeads: parseInt(totalResult.rows[0].total),
       scoredLeads: parseInt(scoredResult.rows[0].scored),
       grades,
-      avgScore: parseFloat(avgResult.rows[0].avg?.toFixed(1) || '0'),
+      avgScore: parseFloat(String(avgResult.rows[0].avg))?.toFixed(1) || '0',
       days,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

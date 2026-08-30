@@ -118,7 +118,7 @@ export async function calculateChurnRisk(
       auditCount,
       emailOpenRate,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Churn] Error calculateChurnRisk:', error)
     throw error
   }
@@ -149,7 +149,7 @@ export async function getChurningCustomers(days: number = 90): Promise<{
       WHERE completed_at > NOW() - INTERVAL '${days} days'
     `)
 
-    const customerIds = customersResult.rows.map((row: any) => row.customer_id)
+    const customerIds = customersResult.rows.map((row: { [key: string]: unknown }) => row.customer_id)
 
     const riskCounts = { low: 0, medium: 0, high: 0 }
     const processedCustomers: Array<{
@@ -173,8 +173,8 @@ export async function getChurningCustomers(days: number = 90): Promise<{
           auditCount: risk.auditCount,
           emailOpenRate: risk.emailOpenRate,
         })
-      } catch (err: any) {
-        console.error(`[Churn] Failed to process customer ${customerId}:`, err.message)
+      } catch (err: unknown) {
+        console.error(`[Churn] Failed to process customer ${customerId}:`, err instanceof Error ? err.message : String(err))
       }
     }
 
@@ -188,7 +188,7 @@ export async function getChurningCustomers(days: number = 90): Promise<{
       highRisk: riskCounts.high,
       customers: processedCustomers,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Churn] Error getChurningCustomers:', error)
     throw error
   }
@@ -247,7 +247,7 @@ export async function getRetentionMetrics(days: number = 30): Promise<{
       retentionRate: parseFloat(retentionRate.toFixed(1)),
       reAuditRate: parseFloat(retentionRate.toFixed(1)),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Churn] Error getRetentionMetrics:', error)
     throw error
   }

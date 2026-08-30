@@ -17,8 +17,8 @@ export async function GET(request: Request) {
       ORDER BY month
     `)
 
-    const trend = result.rows.map((row: any) => ({
-      month: row.month.toISOString().split('T')[0],
+    const trend = result.rows.map((row: { month: string | Date; customers: string }) => ({
+      month: (row.month instanceof Date ? row.month : new Date(row.month as string)).toISOString().split('T')[0],
       revenue: parseInt(row.customers) * 97,
     }))
 
@@ -42,9 +42,9 @@ export async function GET(request: Request) {
       growthRate: 0,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

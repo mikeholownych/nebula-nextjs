@@ -18,12 +18,12 @@ export async function GET(request: Request) {
       ORDER BY payments DESC
     `)
 
-    const revenueBySource = result.rows.reduce((acc: Record<string, number>, row: any) => {
+    const revenueBySource = result.rows.reduce((acc: Record<string, number>, row: { source: string; payments: string }) => {
       acc[row.source] = parseInt(row.payments) * 97
       return acc
     }, {} as Record<string, number>)
 
-    const totalRevenue = Object.values(revenueBySource).reduce((sum: number, v: unknown) => sum + (v as number), 0)
+    const totalRevenue = (Object.values(revenueBySource) as number[]).reduce((sum: number, v: number) => sum + v, 0)
 
     return NextResponse.json({
       revenueBySource,
@@ -31,9 +31,9 @@ export async function GET(request: Request) {
       days,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

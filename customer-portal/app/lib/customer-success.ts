@@ -93,7 +93,7 @@ export async function calculateHealthScore(customerId: string): Promise<{
         { name: 'Payment History', score: paymentScore, weight: 0.1 },
       ],
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Customer Success] Error calculateHealthScore:', error)
     throw error
   }
@@ -138,7 +138,13 @@ export async function getCustomerSuccessDashboard(customerId: string): Promise<{
     `)
 
     // Generate next actions based on health score
-    const nextActions: any[] = []
+    interface NextAction {
+      type: 'check_in' | 'recommendation' | 'upgrade' | 'referral'
+      title: string
+      priority: 'high' | 'medium' | 'low'
+      action: string
+    }
+    const nextActions: NextAction[] = []
 
     if (health.grade === 'at-risk') {
       nextActions.push({
@@ -192,7 +198,7 @@ export async function getCustomerSuccessDashboard(customerId: string): Promise<{
         overdue: daysSinceLastCheckIn > 60,
       },
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Customer Success] Error getCustomerSuccessDashboard:', error)
     throw error
   }
@@ -240,7 +246,7 @@ export async function getCustomerSuccessOverview(days: number = 30): Promise<{
       checkInsCompleted: parseInt(checkInsResult.rows[0].count),
       recommendationsAccepted: 45,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Customer Success] Error getCustomerSuccessOverview:', error)
     throw error
   }

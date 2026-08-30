@@ -35,9 +35,9 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
       ...result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }
@@ -61,9 +61,9 @@ export async function GET(request: Request) {
       timestamp: new Date().toISOString(),
       ...status,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

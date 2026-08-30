@@ -24,15 +24,15 @@ export async function GET(request: Request) {
       churned: 0.0,
     }
 
-    const pipeline = stagesResult.rows.map((row: any) => ({
+    const pipeline = stagesResult.rows.map((row: { stage: string; count: string; avg_value: string | number }) => ({
       stage: row.stage,
       count: parseInt(row.count),
-      value: parseFloat(row.avg_value) || 97,
+      value: parseFloat(String(row.avg_value)) || 97,
       probability: stageProbabilities[row.stage] || 0.5,
-      projected_value: (parseFloat(row.avg_value) || 97) * parseInt(row.count) * (stageProbabilities[row.stage] || 0.5),
+      projected_value: (parseFloat(String(row.avg_value)) || 97) * parseInt(row.count) * (stageProbabilities[row.stage] || 0.5),
     }))
 
-    const pipelineValue = pipeline.reduce((sum: number, s: any) => sum + s.projected_value, 0)
+    const pipelineValue = pipeline.reduce((sum: number, s: { projected_value: number }) => sum + s.projected_value, 0)
 
     const historicalResult = await auditPool.query(`
       SELECT 
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
     let totalPayments = 0
     let totalOnboards = 0
 
-    historicalResult.rows.forEach((row: any) => {
+    historicalResult.rows.forEach((row: { payments: string; onboards: string }) => {
       totalPayments += parseInt(row.payments)
       totalOnboards += parseInt(row.onboards)
     })
@@ -61,7 +61,7 @@ export async function GET(request: Request) {
       }
     }
 
-    const currentMonthPayments = pipeline.find((s: any) => s.stage === 'payment_received')
+    const currentMonthPayments = pipeline.find((s: { stage: string }) => s.stage === 'payment_received')
     const currentMonthValue = currentMonthPayments ? currentMonthPayments.count * 97 : 0
     const nextMonthForecast = currentMonthValue * (conversionRates.payment_to_onboarding || 0.6)
     const nextQuarterForecast = nextMonthForecast * 3
@@ -75,9 +75,9 @@ export async function GET(request: Request) {
       nextQuarterForecast,
       conversionRates,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

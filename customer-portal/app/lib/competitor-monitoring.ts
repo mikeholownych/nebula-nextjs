@@ -37,7 +37,7 @@ export async function getCompetitors(): Promise<Competitor[]> {
     `)
 
     return result.rows as Competitor[]
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Competitor] Error getCompetitors:', error)
     throw error
   }
@@ -59,7 +59,7 @@ export async function addCompetitor(
     `, [name, url, currentPrice, 'monthly', 'active'])
 
     return result.rows[0] as Competitor
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Competitor] Error addCompetitor:', error)
     throw error
   }
@@ -128,7 +128,7 @@ export async function updateCompetitorPrice(
       },
       changed: true
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Competitor] Error updateCompetitorPrice:', error)
     throw error
   }
@@ -147,7 +147,7 @@ export async function getCompetitorHistory(competitorId: string, days: number = 
     `, [competitorId])
 
     return result.rows as PriceLog[]
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Competitor] Error getCompetitorHistory:', error)
     throw error
   }
@@ -183,7 +183,7 @@ export async function getCompetitorMetrics(): Promise<{
       priceChangesLast30Days: parseInt(changesResult.rows[0].changes),
       avgPriceChange: parseFloat(changesResult.rows[0].avg_change?.toFixed(2) || '0')
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Competitor] Error getCompetitorMetrics:', error)
     throw error
   }

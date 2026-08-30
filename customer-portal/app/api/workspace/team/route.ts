@@ -32,13 +32,13 @@ export async function GET(request: NextRequest) {
         invitationStatus: 'accepted',
         joinedAt: null,
       },
-      ...result.rows.map((row: any) => ({
-        email: row.member_email,
-        role: row.role,
-        invitationStatus: row.invitation_status,
-        invitedAt: row.invited_at?.toISOString() ?? null,
-        joinedAt: row.joined_at?.toISOString() ?? null,
-      })),
+        ...result.rows.map((row: { member_email: string; role: string; invitation_status: string; invited_at: string | Date | null; joined_at: string | Date | null }) => ({
+          email: row.member_email,
+          role: row.role,
+          invitationStatus: row.invitation_status,
+          invitedAt: row.invited_at ? (row.invited_at instanceof Date ? row.invited_at.toISOString() : row.invited_at) : null,
+          joinedAt: row.joined_at ? (row.joined_at instanceof Date ? row.joined_at.toISOString() : row.joined_at) : null,
+        })),
     ]
 
     return NextResponse.json({ email, members })

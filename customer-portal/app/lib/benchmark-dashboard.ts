@@ -38,18 +38,18 @@ export async function getIndustryBenchmarks(days: number = 30): Promise<Industry
       ORDER BY count DESC
     `)
 
-    return result.rows.map((row: any) => ({
+    return result.rows.map((row: { industry: string; count: string; avg_score: string | number; avg_load_time: string | number; avg_fcp: string | number; avg_lcp: string | number; avg_cls: string | number }) => ({
       industry: row.industry,
       count: parseInt(row.count),
-      avgScore: parseFloat(row.avg_score?.toFixed(1) || '0'),
-      avgLoadTime: parseFloat(row.avg_load_time?.toFixed(1) || '0'),
-      avgFcp: parseFloat(row.avg_fcp?.toFixed(1) || '0'),
-      avgLcp: parseFloat(row.avg_lcp?.toFixed(1) || '0'),
-      avgCls: parseFloat(row.avg_cls?.toFixed(4) || '0'),
+      avgScore: typeof row.avg_score === 'number' ? row.avg_score.toFixed(1) : parseFloat(row.avg_score),
+      avgLoadTime: typeof row.avg_load_time === 'number' ? row.avg_load_time.toFixed(1) : parseFloat(row.avg_load_time),
+      avgFcp: typeof row.avg_fcp === 'number' ? row.avg_fcp.toFixed(1) : parseFloat(row.avg_fcp),
+      avgLcp: typeof row.avg_lcp === 'number' ? row.avg_lcp.toFixed(1) : parseFloat(row.avg_lcp),
+      avgCls: typeof row.avg_cls === 'number' ? row.avg_cls.toFixed(4) : parseFloat(row.avg_cls),
       topSignals: {},
       bottomSignals: {},
     }))
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Benchmark] Error getIndustryBenchmarks:', error)
     throw error
   }
@@ -58,7 +58,7 @@ export async function getIndustryBenchmarks(days: number = 30): Promise<Industry
 /**
 Get top/bottom performing signals by industry
  */
-export async function getSignalPerformance(industry: string, days: number = 30): Promise<any> {
+export async function getSignalPerformance(industry: string, days: number = 30): Promise<{ industry: string; signals: Array<{ signal: string; avgScore: number; total: number; passed: number; failed: number; passRate: number }> }> {
   try {
     const result = await auditPool.query(`
       SELECT 
@@ -75,9 +75,9 @@ export async function getSignalPerformance(industry: string, days: number = 30):
       ORDER BY avg_score ASC
     `, [industry])
 
-    const signals = result.rows.map((row: any) => ({
+    const signals = result.rows.map((row: { signal_name: string; avg_score: string | number; total: string; passed: string; failed: string }) => ({
       signal: row.signal_name,
-      avgScore: parseFloat(row.avg_score?.toFixed(2) || '0'),
+      avgScore: typeof row.avg_score === 'number' ? row.avg_score.toFixed(2) : parseFloat(row.avg_score),
       total: parseInt(row.total),
       passed: parseInt(row.passed),
       failed: parseInt(row.failed),
@@ -88,7 +88,7 @@ export async function getSignalPerformance(industry: string, days: number = 30):
       industry,
       signals,
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Benchmark] Error getSignalPerformance:', error)
     throw error
   }
@@ -101,8 +101,8 @@ export async function getBenchmarksSummary(days: number = 30): Promise<{
   totalAudits: number
   industries: number
   avgScore: number
-  trends: any[]
-  percentileBreakdown: any
+  trends: Array<{ stage: string; count: number }>
+  percentileBreakdown: { A: number; B: number; C: number; D: number; F: number }
 }> {
   try {
     const totalResult = await auditPool.query(`
@@ -135,7 +135,7 @@ export async function getBenchmarksSummary(days: number = 30): Promise<{
     return {
       totalAudits: parseInt(totalResult.rows[0].total),
       industries: parseInt(industryResult.rows[0].count),
-      avgScore: parseFloat(totalResult.rows[0].avg?.toFixed(1) || '0'),
+      avgScore: typeof totalResult.rows[0].avg === 'number' ? totalResult.rows[0].avg.toFixed(1) : parseFloat(totalResult.rows[0].avg),
       trends: [],
       percentileBreakdown: {
         A: parseInt(rows.grade_a),
@@ -145,7 +145,7 @@ export async function getBenchmarksSummary(days: number = 30): Promise<{
         F: parseInt(rows.grade_f),
       },
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Benchmark] Error getBenchmarksSummary:', error)
     throw error
   }
@@ -154,7 +154,7 @@ export async function getBenchmarksSummary(days: number = 30): Promise<{
 /**
  * Get industry comparison
  */
-export async function getIndustryComparison(industries: string[], days: number = 30): Promise<any> {
+export async function getIndustryComparison(industries: string[], days: number = 30): Promise<Array<{ industry: string; count: number; avgScore: number; avgLoadTime: number; avgCls: number }>> {
   try {
     const result = await auditPool.query(`
       SELECT 
@@ -170,14 +170,14 @@ export async function getIndustryComparison(industries: string[], days: number =
       ORDER BY avg_score DESC
     `, [industries])
 
-    return result.rows.map((row: any) => ({
+    return result.rows.map((row: { industry: string; count: string; avg_score: string | number; avg_load_time: string | number; avg_cls: string | number }) => ({
       industry: row.industry,
       count: parseInt(row.count),
-      avgScore: parseFloat(row.avg_score?.toFixed(1) || '0'),
-      avgLoadTime: parseFloat(row.avg_load_time?.toFixed(1) || '0'),
-      avgCls: parseFloat(row.avg_cls?.toFixed(4) || '0'),
+      avgScore: typeof row.avg_score === 'number' ? row.avg_score.toFixed(1) : parseFloat(row.avg_score),
+      avgLoadTime: typeof row.avg_load_time === 'number' ? row.avg_load_time.toFixed(1) : parseFloat(row.avg_load_time),
+      avgCls: typeof row.avg_cls === 'number' ? row.avg_cls.toFixed(4) : parseFloat(row.avg_cls),
     }))
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Benchmark] Error getIndustryComparison:', error)
     throw error
   }

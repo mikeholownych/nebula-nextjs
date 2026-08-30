@@ -20,7 +20,7 @@ export interface OnboardingRecord {
   purchase_id: string
   stage: OnboardingStage
   stage_changed_at: string
-  metadata: Record<string, any>
+  metadata: Record<string, unknown>
 }
 
 /**
@@ -40,7 +40,7 @@ export async function getOrCreateOnboarding(
     `, [customerId])
 
     if (existing.rows.length > 0) {
-      return existing.rows[0] as any
+      return existing.rows[0] as OnboardingRecord
     }
 
     const result = await auditPool.query(`
@@ -49,8 +49,8 @@ export async function getOrCreateOnboarding(
       RETURNING *
     `, [customerId, auditId, purchaseId])
 
-    return result.rows[0] as any
-  } catch (error) {
+    return result.rows[0] as OnboardingRecord
+  } catch (error: unknown) {
     console.error('[Onboarding] Error getOrCreate:', error)
     throw error
   }
@@ -62,7 +62,7 @@ export async function getOrCreateOnboarding(
 export async function advanceOnboardingStage(
   customerId: string,
   newStage: OnboardingStage,
-  _metadata: Record<string, any> = {}
+  _metadata: Record<string, unknown> = {}
 ): Promise<OnboardingRecord> {
   try {
     const result = await auditPool.query(`
@@ -78,8 +78,8 @@ export async function advanceOnboardingStage(
       throw new Error(`No onboarding record found for customer ${customerId}`)
     }
 
-    return result.rows[0] as any
-  } catch (error) {
+    return result.rows[0] as OnboardingRecord
+  } catch (error: unknown) {
     console.error('[Onboarding] Error advanceStage:', error)
     throw error
   }
@@ -103,14 +103,14 @@ export async function getOnboardingProgress(customerId: string) {
       ORDER BY stage_changed_at DESC
     `, [customerId])
 
-    return result.rows.map((row: any) => ({
+    return result.rows.map((row: { stage: OnboardingStage; time_in_stage: string; metadata: Record<string, unknown>; created_at: string; updated_at: string }) => ({
       stage: row.stage,
       timeInStage: row.time_in_stage,
       metadata: row.metadata,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
     }))
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Onboarding] Error getProgress:', error)
     return null
   }
@@ -132,15 +132,15 @@ export async function getCohortOnboardingMetrics(days: number = 30) {
       ORDER BY count DESC
     `)
 
-    const stages = result.rows.reduce((acc: Record<string, any>, row: any) => {
+    const stages = result.rows.reduce((acc: Record<string, { count: number; avgDaysInStage: number }>, row: { stage: OnboardingStage; count: string; avg_days_in_stage: string | number }) => {
       acc[row.stage] = {
         count: parseInt(row.count),
-        avgDaysInStage: parseFloat(row.avg_days_in_stage?.toFixed(1) || '0'),
+            avgDaysInStage: parseFloat(parseFloat(String(row.avg_days_in_stage || '0')).toFixed(1)),
       }
       return acc
-    }, {})
+    }, {} as Record<string, { count: number; avgDaysInStage: number }>)
 
-    const totalCustomers = Object.values(stages).reduce((sum: number, s: any) => sum + s.count, 0)
+    const totalCustomers = (Object.values(stages) as { count: number; avgDaysInStage: number }[]).reduce((sum: number, s: { count: number }) => sum + s.count, 0)
 
     return {
       days,
@@ -158,7 +158,7 @@ export async function getCohortOnboardingMetrics(days: number = 30) {
           : 0,
       },
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Onboarding] Error getCohortMetrics:', error)
     return null
   }
@@ -184,8 +184,8 @@ export async function checkReAuditEligibility(customerId: string) {
       WHERE customer_id = $1
     `, [customerId])
 
-    return result.rows[0] as any
-  } catch (error) {
+    return result.rows[0] as { customer_id: string; audit_id: string; stage_changed_at: string; eligible: boolean }
+  } catch (error: unknown) {
     console.error('[Onboarding] Error checkReAudit:', error)
     return null
   }

@@ -45,7 +45,7 @@ export async function validateApiKey(apiKey: string): Promise<{
       usageLimit,
       currentUsage,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Monetization] Error validateApiKey:', error)
     return { valid: false, usageLimit: 0, currentUsage: 0 }
   }
@@ -61,7 +61,7 @@ export async function incrementApiKeyUsage(keyId: string): Promise<void> {
       SET usage_count = COALESCE(usage_count, 0) + 1
       WHERE id = $1
     `, [keyId])
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Monetization] Error incrementApiKeyUsage:', error)
     throw error
   }
@@ -125,16 +125,16 @@ export async function getAuditByShareToken(
       grade: audit.grade,
       completedAt: audit.completed_at,
       signalCount: signalsResult.rows.length,
-      signals: signalsResult.rows.map((row: any) => ({
+      signals: signalsResult.rows.map((row: { signal_key: string; label: string; passed: boolean; score: string | number; issue: string; fix: string }) => ({
         key: row.signal_key,
         label: row.label,
         passed: row.passed,
-        score: parseFloat(row.score?.toFixed(2) || '0'),
+        score: typeof row.score === 'number' ? row.score.toFixed(2) : parseFloat(row.score),
         issue: row.issue,
         fix: row.fix,
       })),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Monetization] Error getAuditByShareToken:', error)
     throw error
   }
@@ -166,7 +166,7 @@ export async function createApiKey(
       apiKey: key,
       createdAt: new Date().toISOString(),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Monetization] Error createApiKey:', error)
     throw error
   }

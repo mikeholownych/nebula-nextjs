@@ -98,7 +98,7 @@ export const TRIGGER_DEFINITIONS = {
 /**
  * Determine which trigger(s) to show for a given audit score
  */
-export function getAuditTriggers(score: number, auditData?: any): Array<{
+export function getAuditTriggers(score: number, auditData?: { bounce_rate?: number; load_time?: number }): Array<{
   id: string
   type: string
   condition: string
@@ -174,7 +174,7 @@ export async function getAuditTriggersForAudit(auditId: string): Promise<{
       score: audit.score,
       triggers,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Growth] Error getAuditTriggersForAudit:', error)
     throw error
   }
@@ -193,7 +193,7 @@ export async function logTriggerImpression(
       INSERT INTO growth_triggers (audit_id, trigger_id, customer_id, viewed_at)
       VALUES ($1, $2, $3, NOW())
     `, [auditId, triggerId, customerId || null])
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Growth] Error logTriggerImpression:', error)
     throw error
   }
@@ -213,7 +213,7 @@ export async function logTriggerAction(
       INSERT INTO growth_trigger_actions (audit_id, trigger_id, action, customer_id, occurred_at)
       VALUES ($1, $2, $3, $4, NOW())
     `, [auditId, triggerId, action, customerId || null])
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Growth] Error logTriggerAction:', error)
     throw error
   }

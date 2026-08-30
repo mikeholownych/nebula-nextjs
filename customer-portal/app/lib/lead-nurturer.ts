@@ -50,7 +50,7 @@ export async function createNurtureSequence(data: {
       isActive: result.rows[0].is_active,
       createdAt: result.rows[0].created_at,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Lead Nurturer] Error createNurtureSequence:', error)
     throw error
   }
@@ -98,7 +98,7 @@ export async function triggerNurtureSequence(
       nextStep: 1,
       message: 'Nurture sequence started',
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Lead Nurturer] Error triggerNurtureSequence:', error)
     throw error
   }
@@ -150,14 +150,14 @@ export async function getLeadNurtureStatus(customerId: string): Promise<{
 
     return {
       customerId,
-      nurtureSequences: sequencesResult.rows.map((row: any) => ({
-        sequenceId: row.id,
-        name: row.name,
-        status: row.status,
-        currentStep: row.current_step,
-        totalSteps: parseInt(row.total_steps),
-        startedAt: row.started_at,
-      })),
+        nurtureSequences: sequencesResult.rows.map((row: { id: string; name: string; status: string; current_step: string; total_steps: string; started_at: string }) => ({
+          sequenceId: row.id,
+          name: row.name,
+          status: row.status,
+          currentStep: parseInt(row.current_step),
+          totalSteps: parseInt(row.total_steps),
+          startedAt: row.started_at,
+        })),
       emailStats: {
         emailsSent: emailsSent,
         emailsOpened: emailsOpened,
@@ -165,7 +165,7 @@ export async function getLeadNurtureStatus(customerId: string): Promise<{
         conversionRate: parseFloat(conversionRate.toFixed(2)),
       },
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Lead Nurturer] Error getLeadNurtureStatus:', error)
     throw error
   }

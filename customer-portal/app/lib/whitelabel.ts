@@ -52,7 +52,7 @@ export async function createClientBrand(
       customDomain: result.rows[0].custom_domain || undefined,
       isEnabled: result.rows[0].is_enabled,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Whitelabel] Error createClientBrand:', error)
     throw error
   }
@@ -82,7 +82,7 @@ export async function updateClientBrand(
   try {
     // Build dynamic update query
     const updates: string[] = []
-    const values: any[] = [brandId]
+    const values: (string | number)[] = [brandId]
 
     if (data.brandName !== undefined) {
       updates.push('brand_name = $' + (values.length + 1))
@@ -110,7 +110,7 @@ export async function updateClientBrand(
     }
     if (data.isEnabled !== undefined) {
       updates.push('is_enabled = $' + (values.length + 1))
-      values.push(data.isEnabled)
+      values.push(data.isEnabled ? 'true' : 'false')
     }
 
     if (updates.length === 0) {
@@ -134,7 +134,7 @@ export async function updateClientBrand(
       customDomain: result.rows[0].custom_domain || undefined,
       isEnabled: result.rows[0].is_enabled,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Whitelabel] Error updateClientBrand:', error)
     throw error
   }
@@ -177,7 +177,7 @@ export async function getClientBrand(clientId: string): Promise<{
       theme: brand.theme,
       isEnabled: brand.is_enabled,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Whitelabel] Error getClientBrand:', error)
     throw error
   }
@@ -225,7 +225,7 @@ export async function getAgencyClients(): Promise<{
       ORDER BY cb.created_at DESC
     `)
 
-    const clients = result.rows.map((row: any) => ({
+    const clients = result.rows.map((row: { client_id: string; brand_name: string; custom_domain: string | null; is_enabled: boolean; total_audits: string; last_audit_date: string | null }) => ({
       clientId: row.client_id,
       brandName: row.brand_name,
       customDomain: row.custom_domain || undefined,
@@ -235,7 +235,7 @@ export async function getAgencyClients(): Promise<{
     }))
 
     return { clients }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Whitelabel] Error getAgencyClients:', error)
     throw error
   }

@@ -24,9 +24,9 @@ export async function GET() {
       avgPriceChange: parseFloat((changesResult.rows[0].avg_change || '0').toString().replace(/[^0-9.-]+/g, "")),
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

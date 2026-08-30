@@ -34,16 +34,16 @@ export async function POST(request: Request) {
       `, [stage, JSON.stringify({ updated_by: 'api', at: new Date().toISOString() }), customerId])
 
       return NextResponse.json({ success: true })
-    } catch (error: any) {
-      if (error.code === '23505' || error.code === '23503') {
+    } catch (error: unknown) {
+      if (error instanceof Error && ((error as { code?: string }).code === '23505' || (error as { code?: string }).code === '23503')) {
         return NextResponse.json({ success: false, message: 'Customer not found or already completed' })
       }
       throw error
     }
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    )
-  }
+    } catch (error: unknown) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : String(error) },
+        { status: 500 }
+      )
+    }
 }

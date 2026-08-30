@@ -63,7 +63,7 @@ export async function getCompetitorIntelligence(
       { date: '2026-08-22', score: 78, grade: 'B' },
     ]
 
-    const signalTrends: Record<string, any> = {
+    const signalTrends: Record<string, { score: number; trend: 'up' | 'down' | 'stable'; latestChange: number }> = {
       headline: { score: 85, trend: 'up', latestChange: 5 },
       cta: { score: 90, trend: 'up', latestChange: 8 },
       above_fold: { score: 70, trend: 'stable', latestChange: 0 },
@@ -87,7 +87,7 @@ export async function getCompetitorIntelligence(
       signalTrends,
       marketingSignals,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Competitor Intelligence] Error getCompetitorIntelligence:', error)
     throw error
   }
@@ -109,7 +109,7 @@ export async function getCompetitorComparison(
   scoreDifference: number
 }> {
   try {
-    const results: any[] = []
+    const results: Array<{ competitorId: string; name: string; score: number; grade: string; lastAudited: string }> = []
 
     for (const id of competitorIds) {
       // Simplified - would query competitor_pricing and estimate score
@@ -130,7 +130,7 @@ export async function getCompetitorComparison(
       comparison: results,
       scoreDifference: parseFloat(scoreDifference.toFixed(1)),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Competitor Intelligence] Error getCompetitorComparison:', error)
     throw error
   }
@@ -179,7 +179,7 @@ export async function getCompetitorDashboardOverview(): Promise<{
       leaders,
       opportunities,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Competitor Intelligence] Error getCompetitorDashboardOverview:', error)
     throw error
   }

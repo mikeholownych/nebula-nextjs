@@ -20,6 +20,6 @@ pool.on('connect', () => {
   console.log('[PostgreSQL] Connected to nebula_platform');
 });
 
-pool.on('error', (err: any) => {
+pool.on('error', (err: Error) => {
   console.error('[PostgreSQL] Connection error:', err);
 });

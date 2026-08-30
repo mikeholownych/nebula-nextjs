@@ -84,7 +84,7 @@ export async function createWebhookIntegration(
       isActive: result.rows[0].is_active,
       lastTriggered: result.rows[0].last_triggered,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Integration] Error createWebhookIntegration:', error)
     throw error
   }
@@ -96,7 +96,7 @@ export async function createWebhookIntegration(
 export async function triggerWebhook(
   provider: string,
   event: string,
-  payload: Record<string, any>
+  payload: Record<string, unknown>
 ): Promise<{ success: boolean; messageId: string; error?: string }> {
   try {
     // Find webhooks for this provider and event
@@ -114,12 +114,12 @@ export async function triggerWebhook(
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              event,
-              payload,
-              timestamp: new Date().toISOString(),
-              integrationId: webhook.integration_id,
-            }),
+      body: JSON.stringify({
+        event,
+        payload,
+        timestamp: new Date().toISOString(),
+        integrationId: (webhook as { integration_id?: string }).integration_id,
+      }),
           })
         } catch (error) {
           console.error(`[Integration] Webhook ${webhook.url} failed:`, error)
@@ -128,9 +128,9 @@ export async function triggerWebhook(
     }
 
     return { success: true, messageId: 'triggered' }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Integration] Error triggerWebhook:', error)
-    return { success: false, messageId: '', error: error.message }
+    return { success: false, messageId: '', error: error instanceof Error ? error.message : String(error) }
   }
 }
 
@@ -167,7 +167,7 @@ export async function createZapierWebhook(
       events: result.rows[0].events,
       isActive: result.rows[0].is_active,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Integration] Error createZapierWebhook:', error)
     throw error
   }
@@ -189,7 +189,7 @@ export async function getIntegrations(provider?: string): Promise<{
   }>
 }> {
   try {
-    let result: any
+    let result: { rows: Array<{ id: string; name: string; provider: string; url?: string; events: string[]; is_active: boolean; created_at: string }> }
 
     if (provider) {
       result = await auditPool.query(`
@@ -206,7 +206,7 @@ export async function getIntegrations(provider?: string): Promise<{
       `)
     }
 
-    const integrations = result.rows.map((row: any) => ({
+    const integrations = result.rows.map((row: { id: string; name: string; provider: string; url?: string; events: string[]; is_active: boolean; created_at: string }) => ({
       id: row.id,
       name: row.name,
       provider: row.provider,
@@ -217,7 +217,7 @@ export async function getIntegrations(provider?: string): Promise<{
     }))
 
     return { integrations }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Integration] Error getIntegrations:', error)
     throw error
   }
@@ -251,9 +251,9 @@ export async function testWebhook(
       success: response.ok,
       responseTime,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Integration] Error testWebhook:', error)
-    return { success: false, responseTime: 0, error: error.message }
+    return { success: false, responseTime: 0, error: error instanceof Error ? error.message : String(error) }
   }
 }
 

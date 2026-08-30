@@ -47,7 +47,7 @@ export async function getAuditInsights(
       WHERE audit_id = $1
     `, [auditId])
 
-    const findings = findingsResult.rows.map((row: any) => ({
+    const findings = findingsResult.rows.map((row: { signal_key: string; label: string; passed: boolean; issue: string; fix: string; effort: string; impact: string }) => ({
       signalKey: row.signal_key,
       label: row.label,
       passed: row.passed,
@@ -57,26 +57,35 @@ export async function getAuditInsights(
       impact: parseFloat(row.impact || '0'),
     }))
 
+    interface Finding {
+      passed: boolean
+      label: string
+      issue: string
+      fix: string
+      effort: number
+      impact: number
+    }
+
     // Get strengths (passed signals with low impact issues)
     const strengths = findings
-      .filter((f: any) => f.passed)
+      .filter((f: Finding) => f.passed)
       .slice(0, 3)
-      .map((f: any) => ({
+      .map((f: Finding) => ({
         signal: f.label,
         insight: `Good: ${f.label} is working well.`,
       }))
 
     // Get improvements (failed signals, sorted by impact)
     const improvements = findings
-      .filter((f: any) => !f.passed)
-      .sort((a: any, b: any) => parseFloat(b.impact) - parseFloat(a.impact))
+      .filter((f: Finding) => !f.passed)
+      .sort((a: Finding, b: Finding) => parseFloat(String(b.impact)) - parseFloat(String(a.impact)))
       .slice(0, 3)
-      .map((f: any) => ({
+      .map((f: Finding) => ({
         signal: f.label,
         issue: f.issue,
         recommendation: f.fix,
         effort: f.effort,
-        impact: parseFloat(f.impact.toFixed(1)),
+        impact: parseFloat(String(f.impact)).toFixed(1),
       }))
 
     // Generate overall summary
@@ -97,7 +106,7 @@ export async function getAuditInsights(
       top3Strengths: strengths.length > 0 ? strengths : [{ signal: 'N/A', insight: 'No strengths identified yet.' }],
       top3Improvements: improvements.length > 0 ? improvements : [{ signal: 'N/A', issue: 'None', recommendation: 'Continue monitoring', effort: 0, impact: 0 }],
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AI Insights] Error getAuditInsights:', error)
     throw error
   }
@@ -114,17 +123,23 @@ export async function getBatchInsights(
   top3Strengths: Array<{ signal: string; insight: string }>
   top3Improvements: Array<{ signal: string; issue: string; recommendation: string; effort: number; impact: number }>
 }>> {
-  const results: Record<string, any> = {}
+  const results: Record<string, { auditId: string; overallSummary: string; top3Strengths: Array<{ signal: string; insight: string }>; top3Improvements: Array<{ signal: string; issue: string; recommendation: string; effort: number; impact: number }> }> = {}
 
   for (const auditId of auditIds) {
     try {
-      results[auditId] = await getAuditInsights(auditId)
-    } catch (error: any) {
-      console.error(`[AI Insights] Failed for audit ${auditId}:`, error.message)
+      const insights = await getAuditInsights(auditId)
+      results[auditId] = {
+        auditId: insights.auditId,
+        overallSummary: insights.overallSummary,
+        top3Strengths: insights.top3Strengths,
+        top3Improvements: insights.top3Improvements,
+      }
+    } catch (error: unknown) {
+      console.error(`[AI Insights] Failed for audit ${auditId}:`, error instanceof Error ? error.message : String(error))
     }
   }
 
-  return results
+      return results
 }
 
 /**
@@ -163,7 +178,7 @@ export async function getSignalAnalysis(
       recommendation: finding.fix,
       expectedImpact: parseFloat(finding.impact || '0') > 0.5 ? 'high' : 'medium',
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AI Insights] Error getSignalAnalysis:', error)
     throw error
   }

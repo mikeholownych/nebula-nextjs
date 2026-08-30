@@ -22,7 +22,7 @@ export async function sendEmail(data: {
   html: string
   text?: string
   template?: string
-  templateData?: Record<string, any>
+  templateData?: Record<string, unknown>
   tags?: string[]
 }): Promise<{ success: boolean; messageId: string; error?: string }> {
   try {
@@ -63,9 +63,9 @@ export async function sendEmail(data: {
     console.log(`[Email] Sending to ${data.to}: ${data.subject}`)
     console.log(`[Email] HTML: ${data.html.substring(0, 200)}...`)
     return { success: true, messageId: 'simulated' }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Email] Error sendEmail:', error)
-    return { success: false, messageId: '', error: error.message }
+    return { success: false, messageId: '', error: error instanceof Error ? error.message : String(error) }
   }
 }
 
@@ -109,7 +109,7 @@ export async function createDripCampaign(data: {
       isActive: result.rows[0].is_active,
       createdAt: result.rows[0].created_at,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Email] Error createDripCampaign:', error)
     throw error
   }
@@ -158,7 +158,7 @@ export async function triggerDripCampaign(
       status: 'active',
       nextStep: 1,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Email] Error triggerDripCampaign:', error)
     throw error
   }
@@ -204,7 +204,7 @@ export async function getEmailStats(_campaignId?: string): Promise<{
       clickRate: parseFloat(clickRate.toFixed(1)),
       campaigns,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Email] Error getEmailStats:', error)
     throw error
   }

@@ -17,15 +17,15 @@ export async function GET(request: Request) {
       ORDER BY count DESC
     `)
 
-    const stages = result.rows.reduce((acc: Record<string, any>, row: any) => {
+    const stages = result.rows.reduce((acc: Record<string, { count: number; avgDaysInStage: number }>, row: { stage: string; count: string; avg_days_in_stage: string | number }) => {
       acc[row.stage] = {
         count: parseInt(row.count),
-        avgDaysInStage: parseFloat(row.avg_days_in_stage?.toFixed(1) || '0'),
+        avgDaysInStage: parseFloat(parseFloat(String(row.avg_days_in_stage || '0')).toFixed(1)),
       }
       return acc
-    }, {})
+    }, {} as Record<string, { count: number; avgDaysInStage: number }>)
 
-    const totalCustomers = Object.values(stages).reduce((sum: number, s: any) => sum + s.count, 0)
+    const totalCustomers = (Object.values(stages) as { count: number }[]).reduce((sum: number, s: { count: number }) => sum + s.count, 0)
 
     return NextResponse.json({
       timestamp: new Date().toISOString(),
@@ -44,9 +44,9 @@ export async function GET(request: Request) {
           : 0,
       },
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

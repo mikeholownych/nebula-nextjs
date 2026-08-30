@@ -48,7 +48,7 @@ export async function createABTest(data: {
       status: result.rows[0].status,
       createdAt: result.rows[0].created_at,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AB Test] Error createABTest:', error)
     throw error
   }
@@ -74,7 +74,7 @@ export async function activateABTest(testId: string): Promise<{
       status: 'active',
       activatedAt: new Date().toISOString(),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AB Test] Error activateABTest:', error)
     throw error
   }
@@ -100,7 +100,7 @@ export async function stopABTest(testId: string): Promise<{
       status: 'completed',
       stoppedAt: new Date().toISOString(),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AB Test] Error stopABTest:', error)
     throw error
   }
@@ -185,7 +185,7 @@ export async function getABTestResults(testId: string): Promise<{
       statisticalSignificance: parseFloat(statisticalSignificance.toFixed(4)),
       estimatedLaunchTime: winner !== 'none' ? 'Immediate' : 'Continue running',
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AB Test] Error getABTestResults:', error)
     throw error
   }

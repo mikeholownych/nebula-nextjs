@@ -51,9 +51,9 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
       ...result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }
@@ -76,9 +76,9 @@ export async function GET() {
       activeSchedules: parseInt(result.rows[0].active_schedules),
       pendingDeliveries: parseInt(result.rows[0].pending_deliveries),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

@@ -96,16 +96,16 @@ export async function GET() {
         },
       },
       auditActivity: {
-        recentAudits: recentAuditsResult.rows.map((row: any) => ({
+        recentAudits: recentAuditsResult.rows.map((row: { id: string; url: string; score: string | number; grade: string; completed_at: string }) => ({
           id: row.id,
           url: row.url,
-          score: parseFloat(row.score || '0'),
+          score: parseFloat(String(row.score)),
           grade: row.grade,
           completedAt: row.completed_at,
         })),
-        scoreTrend: scoreTrendResult.rows.map((row: any) => ({
+        scoreTrend: scoreTrendResult.rows.map((row: { date: string; score: string | number }) => ({
           date: row.date,
-          score: parseFloat(row.score || '0'),
+          score: parseFloat(String(row.score)),
         })),
         topPerformingIndustry: 'SaaS',
       },
@@ -128,9 +128,9 @@ export async function GET() {
         overdueCheckIn: healthScore < 60,
       },
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

@@ -543,7 +543,7 @@ export async function POST(request: NextRequest) {
     let subscriptionInserted = false
     try {
       client = await pool.connect()
-      const provisioned = await provisionOrgForEmail(client, email)
+      const provisioned = await provisionOrgForEmail(pool, email)
       const upsertResult = await client.query(
         `INSERT INTO subscriptions
            (organization_id, stripe_subscription_id, stripe_customer_id, status, plan,

@@ -17,7 +17,7 @@ export async function GET(request: Request) {
       ORDER BY count DESC
     `)
 
-    const industries = result.rows.map((row: any) => ({
+    const industries = result.rows.map((row: { industry: string; count: string; avg_score: string | number }) => ({
       industry: row.industry,
       count: parseInt(row.count),
       avgScore: parseFloat((row.avg_score || '0').toString().replace(/[^0-9.-]+/g, "")),
@@ -28,9 +28,9 @@ export async function GET(request: Request) {
       days,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

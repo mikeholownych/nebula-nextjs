@@ -76,7 +76,7 @@ export async function getTenantAuditSummary(
     `, [lookupValue])
 
     const scoreDistribution: Record<string, number> = { A: 0, B: 0, C: 0, D: 0, F: 0 }
-    distResult.rows.forEach((row: any) => {
+    distResult.rows.forEach((row: { grade: string; count: string }) => {
       scoreDistribution[row.grade] = parseInt(row.count)
     })
 
@@ -95,13 +95,13 @@ export async function getTenantAuditSummary(
       LIMIT 10
     `, [lookupValue])
 
-    const topAudits = topResult.rows.map((row: any) => ({
-      url: row.url,
-      score: parseFloat(row.score?.toFixed(1) || '0'),
-      completedAt: row.completed_at,
-      signalsPassed: parseInt(row.signals_passed),
-      signalsTotal: 9,
-    }))
+     const topAudits = topResult.rows.map((row: { url: string; score: string | number; completed_at: string; signals_passed: string | number }) => ({
+       url: row.url,
+       score: typeof row.score === 'number' ? row.score.toFixed(1) : parseFloat(row.score).toFixed(1),
+       completedAt: row.completed_at,
+       signalsPassed: parseInt(row.signals_passed as string),
+       signalsTotal: 9,
+     }))
 
     return {
       tenantId,
@@ -110,7 +110,7 @@ export async function getTenantAuditSummary(
       scoreDistribution,
       topAudits,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[MultiTenant] Error getTenantAuditSummary:', error)
     throw error
   }
@@ -153,7 +153,7 @@ export async function getTenantComparison(
     `, [lookupValue])
 
     const properties = await Promise.all(
-      propertiesResult.rows.map(async (row: any) => {
+      propertiesResult.rows.map(async (row: { url: string; audit_count: string; avg_score: string | number }) => {
         const signalsResult = await auditPool.query(`
           SELECT 
             f.signal_name,
@@ -167,15 +167,15 @@ export async function getTenantComparison(
           GROUP BY f.signal_name
         `, [lookupValue, row.url])
 
-        const topSignals = signalsResult.rows.map((sig: any) => ({
+        const topSignals = signalsResult.rows.map((sig: { signal_name: string; passed: string; total: string }) => ({
           signal: sig.signal_name,
           passRate: parseFloat(((parseInt(sig.passed) / parseInt(sig.total)) * 100).toFixed(1)),
-        })).sort((a: any, b: any) => b.passRate - a.passRate).slice(0, 5)
+        })).sort((a: { passRate: number }, b: { passRate: number }) => b.passRate - a.passRate).slice(0, 5)
 
         return {
           url: row.url,
           auditCount: parseInt(row.audit_count),
-          avgScore: parseFloat(row.avg_score?.toFixed(1) || '0'),
+          avgScore: typeof row.avg_score === 'number' ? row.avg_score.toFixed(1) : parseFloat(row.avg_score),
           topSignals,
         }
       })
@@ -185,7 +185,7 @@ export async function getTenantComparison(
       tenantId,
       properties,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[MultiTenant] Error getTenantComparison:', error)
     throw error
   }
@@ -227,7 +227,7 @@ export async function getTenantWeakSpots(
       ORDER BY failed_count DESC
     `, [lookupValue])
 
-    const weakSpots = result.rows.map((row: any) => {
+    const weakSpots = result.rows.map((row: { signal_name: string; total_audits: string; failed_count: string; passed_count: string }) => {
       const total = parseInt(row.total_audits)
       const failed = parseInt(row.failed_count)
       const passRate = total > 0 ? (parseInt(row.passed_count) / total) * 100 : 0
@@ -250,7 +250,7 @@ export async function getTenantWeakSpots(
       tenantId,
       weakSpots,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[MultiTenant] Error getTenantWeakSpots:', error)
     throw error
   }

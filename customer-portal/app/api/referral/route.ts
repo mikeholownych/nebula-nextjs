@@ -29,9 +29,9 @@ export async function GET(request: Request) {
       ...metrics,
       referralLink: `https://nebulacomponents.com/referral/${metrics.referralCode}`,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }
@@ -74,9 +74,9 @@ export async function GET_Validate(
       creditAmount: 50,
       message: 'Referral code is valid!',
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }
@@ -101,9 +101,9 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
       ...result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

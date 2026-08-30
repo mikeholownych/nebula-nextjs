@@ -45,9 +45,9 @@ export async function GET(
       html: `<iframe src="https://nebulacomponents.com/audit/${audit.audit_id}/results" width="100%" height="800" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
       generatedAt: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

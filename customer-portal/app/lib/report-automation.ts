@@ -24,7 +24,7 @@ export async function generateAuditReport(
     const url = `/audit/${auditId}/results`
 
     return { buffer, url }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Report] Error generateAuditReport:', error)
     throw error
   }
@@ -89,9 +89,9 @@ export async function emailReport(
     console.log(`[Report] PDFBuffer: ${buffer.byteLength} bytes`)
 
     return { success: true, messageId: 'sent' }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Report] Error emailReport:', error)
-    return { success: false, messageId: '', error: error.message }
+    return { success: false, messageId: '', error: error instanceof Error ? error.message : String(error) }
   }
 }
 
@@ -169,7 +169,7 @@ export async function scheduleReportDelivery(
       enabled: result.rows[0].is_enabled,
       nextDelivery: result.rows[0].next_delivery,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Report] Error scheduleReportDelivery:', error)
     throw error
   }
@@ -200,14 +200,14 @@ export async function triggerScheduledReports(): Promise<{
       try {
         // would call emailReport here
         delivered++
-      } catch (error: any) {
+      } catch (error: unknown) {
         failed++
-        errors.push(error.message)
+        errors.push(error instanceof Error ? error.message : String(error))
       }
     }
 
     return { scheduled, delivered, failed, errors }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Report] Error triggerScheduledReports:', error)
     throw error
   }

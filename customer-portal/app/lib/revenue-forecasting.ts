@@ -47,12 +47,12 @@ export async function getPipelineValue(days: number = 30): Promise<RevenueForeca
       churned: 0.0,
     }
 
-    const pipeline: PipelineStage[] = stagesResult.rows.map((row: any) => ({
-      stage: row.stage,
-      count: parseInt(row.count),
-      value: parseFloat(row.avg_value) || 97,
-      probability: stageProbabilities[row.stage] || 0.5,
-      projected_value: (parseFloat(row.avg_value) || 97) * parseInt(row.count) * (stageProbabilities[row.stage] || 0.5),
+    const pipeline: PipelineStage[] = stagesResult.rows.map((row: { [key: string]: unknown }) => ({
+      stage: row.stage as string,
+      count: parseInt(row.count as string),
+      value: parseFloat(row.avg_value as string) || 97,
+      probability: stageProbabilities[row.stage as string] || 0.5,
+      projected_value: (parseFloat(row.avg_value as string) || 97) * parseInt(row.count as string) * (stageProbabilities[row.stage as string] || 0.5),
     }))
 
     // Calculate total pipeline value
@@ -76,9 +76,9 @@ export async function getPipelineValue(days: number = 30): Promise<RevenueForeca
     let totalPayments = 0
     let totalOnboards = 0
 
-    historicalResult.rows.forEach((row: any) => {
-      totalPayments += parseInt(row.payments)
-      totalOnboards += parseInt(row.onboards)
+    historicalResult.rows.forEach((row: { [key: string]: unknown }) => {
+      totalPayments += parseInt(row.payments as string)
+      totalOnboards += parseInt(row.onboards as string)
     })
 
     if (totalPayments > 0) {
@@ -98,7 +98,7 @@ export async function getPipelineValue(days: number = 30): Promise<RevenueForeca
       pipeline,
       conversion_rates: conversionRates,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Revenue] Error getPipelineValue:', error)
     throw error
   }
@@ -121,11 +121,11 @@ export async function getRevenueBySource(days: number = 30): Promise<Record<stri
       ORDER BY payments DESC
     `)
 
-    return result.rows.reduce((acc: Record<string, number>, row: any) => {
-      acc[row.source] = parseInt(row.payments) * 97
+    return result.rows.reduce((acc: Record<string, number>, row: { [key: string]: unknown }) => {
+      acc[row.source as string] = parseInt(row.payments as string) * 97
       return acc
     }, {})
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Revenue] Error getRevenueBySource:', error)
     throw error
   }
@@ -163,7 +163,7 @@ export async function getLeadToCustomerFunnel(days: number = 30): Promise<Array<
       { stage: 'leads_created', count: parseInt(leads.rows[0].count), rate: total > 0 ? (parseInt(leads.rows[0].count) / total) * 100 : 0 },
       { stage: 'customers_onboarded', count: parseInt(onboarded.rows[0].count), rate: parseInt(leads.rows[0].count) > 0 ? (parseInt(onboarded.rows[0].count) / parseInt(leads.rows[0].count)) * 100 : 0 },
     ]
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Revenue] Error getLeadToCustomerFunnel:', error)
     throw error
   }
@@ -185,11 +185,11 @@ export async function getMonthlyRevenueTrend(months: number = 6): Promise<Array<
       ORDER BY month
     `)
 
-    return result.rows.map((row: any) => ({
-      month: row.month,
-      revenue: parseInt(row.customers) * 97,
+    return result.rows.map((row: { [key: string]: unknown }) => ({
+      month: row.month as string,
+      revenue: parseInt(row.customers as string) * 97,
     }))
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Revenue] Error getMonthlyRevenueTrend:', error)
     throw error
   }

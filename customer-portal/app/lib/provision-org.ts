@@ -16,7 +16,7 @@ import crypto from 'node:crypto'
  * connections, which would silently break the transaction.
  */
 export async function provisionOrgForEmail(
-  db: { query: (sql: string, params?: unknown[]) => Promise<{ rows: any[] }> },
+  db: { query: (sql: string, params?: unknown[]) => Promise<{ rows: Array<{ user_id?: string; org_id?: string; id?: string }> }> },
   rawEmail: string,
 ): Promise<{ userId: string; organizationId: string }> {
   const email = rawEmail.trim().toLowerCase()
@@ -31,7 +31,7 @@ export async function provisionOrgForEmail(
     [email],
   )
   if (existing.rows.length > 0) {
-    return { userId: existing.rows[0].user_id, organizationId: existing.rows[0].org_id }
+    return { userId: existing.rows[0].user_id as string, organizationId: existing.rows[0].org_id as string }
   }
   const userId = crypto.randomUUID()
   const orgId = crypto.randomUUID()

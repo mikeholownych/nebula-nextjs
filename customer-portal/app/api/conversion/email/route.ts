@@ -28,8 +28,8 @@ export async function POST(request: Request) {
       `, [auditId, eventType])
 
       return NextResponse.json({ success: true })
-    } catch (error: any) {
-      if (error.code === '23505') {
+    } catch (error: unknown) {
+      if (error instanceof Error && (error as { code?: string }).code === '23505') {
         return NextResponse.json({ success: true, message: 'Already tracked' })
       }
       throw error

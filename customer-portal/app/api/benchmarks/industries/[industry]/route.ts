@@ -25,9 +25,9 @@ export async function GET(
       ORDER BY avg_score ASC
     `, [industry])
 
-    const signals = result.rows.map((row: any) => ({
+    const signals = result.rows.map((row: { signal_name: string; avg_score: string | number; total: string; passed: string; failed: string }) => ({
       signal: row.signal_name,
-      avgScore: parseFloat(row.avg_score?.toFixed(2) || '0'),
+      avgScore: parseFloat(parseFloat(String(row.avg_score || '0')).toFixed(2)),
       total: parseInt(row.total),
       passed: parseInt(row.passed),
       failed: parseInt(row.failed),
@@ -40,9 +40,9 @@ export async function GET(
       days,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

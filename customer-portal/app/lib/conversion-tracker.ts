@@ -77,7 +77,7 @@ export async function getAuditFunnel(auditId: string) {
       ORDER BY created_at
     `, [auditId])
 
-    const events = result.rows.reduce((acc: Record<string, any>, row: any) => {
+    const events: Record<string, { count: number; first_at: string; last_at: string }> = result.rows.reduce((acc: Record<string, { count: number; first_at: string; last_at: string }>, row: { event_type: string; count: string; first_at: string; last_at: string }) => {
       acc[row.event_type] = {
         count: parseInt(row.count),
         first_at: row.first_at,
@@ -121,7 +121,7 @@ export async function getCohortFunnel(days: number = 30) {
         (SELECT COUNT(*) FROM purchases) as purchased
     `)
 
-    const row = result.rows[0] as any
+    const row = result.rows[0] as { started: string; viewed_email: string; purchased: string }
     const started = parseInt(row.started)
     const viewed = parseInt(row.viewed_email)
     const purchased = parseInt(row.purchased)

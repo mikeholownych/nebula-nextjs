@@ -196,7 +196,7 @@ export async function getCohortLeadMetrics(days: number = 30): Promise<{
       WHERE last_scored_at IS NOT NULL
     `)
 
-    const grades = gradesResult.rows.reduce((acc: Record<string, number>, row: any) => {
+    const grades = gradesResult.rows.reduce((acc: Record<string, number>, row: { grade: string; count: string }) => {
       acc[row.grade] = parseInt(row.count)
       return acc
     }, {})

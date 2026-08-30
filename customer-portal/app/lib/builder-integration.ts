@@ -94,11 +94,11 @@ export async function generateBuilderFix(
       code,
       instructions: `1. Copy the code snippet below\n2. Paste into your ${builder} editor\n3. Test on staging first`,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Builder Fix] Error generateBuilderFix:', error)
     return {
       success: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
     }
   }
 }

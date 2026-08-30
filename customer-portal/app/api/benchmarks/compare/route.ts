@@ -26,10 +26,10 @@ export async function POST(request: Request) {
       ORDER BY avg_score DESC
     `, [industries])
 
-    const comparisons = result.rows.map((row: any) => ({
+    const comparisons = result.rows.map((row: { industry: string; count: string; avg_score: string | number }) => ({
       industry: row.industry,
       count: parseInt(row.count),
-      avgScore: parseFloat(row.avg_score?.toFixed(1) || '0'),
+      avgScore: parseFloat(parseFloat(String(row.avg_score || '0')).toFixed(1)),
     }))
 
     return NextResponse.json({
@@ -37,9 +37,9 @@ export async function POST(request: Request) {
       days,
       timestamp: new Date().toISOString(),
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

@@ -22,9 +22,9 @@ export async function GET(request: Request) {
       days,
       weakSpots: weakSpots.weakSpots ?? weakSpots,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

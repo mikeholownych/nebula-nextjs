@@ -33,7 +33,7 @@ export async function generateReferralCode(customerId: string): Promise<{
       createdAt: referral.created_at,
       referralLink: `https://nebulacomponents.com/referral/${code}`,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Referral] Error generateReferralCode:', error)
     throw error
   }
@@ -119,7 +119,7 @@ export async function redeemReferralCode(
       applied: true,
       message: 'Referral code applied! Your referrer has received a $50 credit.',
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Referral] Error redeemReferralCode:', error)
     throw error
   }
@@ -171,7 +171,7 @@ export async function getReferralMetrics(customerId: string): Promise<{
       creditBalance,
       totalRevenue: 0, // Simplified for now
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Referral] Error getReferralMetrics:', error)
     throw error
   }

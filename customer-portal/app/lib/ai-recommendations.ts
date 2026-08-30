@@ -14,7 +14,7 @@ async function getAuditSignalScores(auditId: string): Promise<Array<{
   score: number
   passed: boolean
   issue: string
-  evidence: any
+  evidence: string | null
 }>> {
   // Score calculation based on findings status
   const findingsResult = await auditPool.query(`
@@ -23,7 +23,7 @@ async function getAuditSignalScores(auditId: string): Promise<Array<{
     WHERE audit_id = $1
   `, [auditId])
 
-  const scores: Array<{ signalKey: string; score: number; passed: boolean; issue: string; evidence: any }> = []
+  const scores: Array<{ signalKey: string; score: number; passed: boolean; issue: string; evidence: string | null }> = []
 
   for (const finding of findingsResult.rows) {
     // Calculate score based on finding status
@@ -137,7 +137,7 @@ export async function generateAuditRecommendations(
     })
 
     return { recommendations }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AI] Error generateAuditRecommendations:', error)
     throw error
   }
@@ -259,18 +259,18 @@ export async function getFixPackOffer(customerId: string): Promise<{
     }
 
     // Generate offer based on audit history
-    const audits = auditResult.rows.map((row: any) => ({
+    const audits = auditResult.rows.map((row: { id: string; url: string; score: string | number; completed_at: string }) => ({
       id: row.id,
       url: row.url,
-      score: parseFloat(row.score || '0'),
+      score: parseFloat(String(row.score)) || 0,
       completedAt: row.completed_at,
     }))
 
     const avgScore = audits.length > 0
-      ? audits.reduce((sum: number, a: any) => sum + a.score, 0) / audits.length
+      ? audits.reduce((sum: number, a: { score: number }) => sum + a.score, 0) / audits.length
       : 0
     void avgScore // calculated for future use
-    const lowScores = audits.filter((a: any) => a.score < 70).length
+    const lowScores = audits.filter((a: { score: number }) => a.score < 70).length
 
     let features: string[] = []
     if (lowScores >= 3) {
@@ -301,13 +301,13 @@ export async function getFixPackOffer(customerId: string): Promise<{
         { text: 'View Past Audits', url: `/workspace/audits` },
       ],
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[AI] Error getFixPackOffer:', error)
     throw error
   }
 }
 
 // Initialize cache on service load
-void new Map<string, { data: any; expires: number }>()
+void new Map<string, { data: unknown; expires: number }>()
 
 export const aiServiceEnabled = true
