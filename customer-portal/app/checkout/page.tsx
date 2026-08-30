@@ -68,6 +68,14 @@ export default async function CheckoutPage({
 
         {eligibleAuditId ? (
           <>
+            {/* Urgency counter - limited repairs this week */}
+            <div className="mb-4 rounded-lg bg-accent/5 px-4 py-3 text-center">
+              <span className="block text-sm font-semibold text-accent">
+                <span className="mr-1">⚡</span>
+                Only 3 repairs scheduled this week
+              </span>
+              <span className="block text-xs text-fg-muted">Your repair will be completed within 48 hours</span>
+            </div>
             {/* Trust badges - critical for cold buyer conversion at payment entry point */}
             <div className="mb-4 flex flex-wrap items-center justify-center gap-4 text-xs text-fg-muted">
               <span className="flex items-center gap-1">
