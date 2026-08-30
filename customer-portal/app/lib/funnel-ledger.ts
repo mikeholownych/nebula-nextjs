@@ -19,6 +19,7 @@
 import { pool } from '@/app/lib/db'
 import { logApiError } from '@/app/lib/ops-log'
 import { getEventDefinition, validateEventPayload, type EventStage, type SourceOfTruth } from './analytics-registry'
+import { getPostHogClient } from './posthog-server'
 
 export interface FunnelEventPayload {
   eventName: string
@@ -124,6 +125,39 @@ export interface IntegrityViolation {
   journeyId: string
   occurredAt: string
   details: Record<string, unknown>
+}
+
+/**
+ * Capture funnel event to PostHog server-side.
+ * Non-blocking: never fails the main operation.
+ */
+async function captureToPostHog(
+  payload: FunnelEventPayload,
+  userContext: { sessionId: string | null; journeyId: string | null; anonymousUserId: string | null }
+): Promise<void> {
+  const ph = getPostHogClient()
+  const def = getEventDefinition(payload.eventName)
+  
+  const postHogProps: Record<string, unknown> = {
+    ...(payload.properties || {}),
+    session_id: payload.sessionId || null,
+    journey_id: userContext.journeyId,
+    anonymous_user_id: payload.anonymousUserId || null,
+    audit_id: payload.auditId || null,
+    audit_attempt_id: payload.auditAttemptId || null,
+    checkout_session_id: payload.checkoutSessionId || null,
+    transaction_id: payload.transactionId || null,
+    device_class: payload.deviceClass || null,
+  }
+
+  if (def?.ga4_projectable) {
+    ph.capture({
+      distinctId: userContext.journeyId || userContext.anonymousUserId || 'anonymous',
+      event: payload.eventName,
+      properties: postHogProps,
+    })
+  }
+  void ph.flush().catch(() => undefined)
 }
 
 /**
@@ -239,7 +273,13 @@ export async function recordFunnelEvent(payload: FunnelEventPayload): Promise<{ 
       return { success: true, duplicate: true }
     }
 
-    return { success: true, id: result.rows[0].id }
+    const eventId = result.rows[0].id
+    void captureToPostHog(payload, {
+      sessionId: payload.sessionId || null,
+      journeyId,
+      anonymousUserId: payload.anonymousUserId || null,
+    }).catch(() => undefined)
+    return { success: true, id: eventId }
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error)
     const requestId = payload.properties && typeof payload.properties.request_id === 'string'
