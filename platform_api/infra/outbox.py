@@ -180,10 +180,10 @@ class Outbox:
         """RES-5: durable audit result delivery (replaces fire-and-forget task)."""
         try:
             from platform_api.routes.audit_api import AuditEmailData
-            from platform_api.services import email_service
+            from platform_api.services.email_service import EmailService
             from platform_api.services.audit_db import audit_db as _adb
 
-            result = await email_service.send_audit_results(
+            result = await EmailService().send_audit_results(
                 AuditEmailData(
                     url=payload.get("url", ""),
                     email=recipient,

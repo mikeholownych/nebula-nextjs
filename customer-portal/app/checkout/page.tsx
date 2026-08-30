@@ -67,11 +67,34 @@ export default async function CheckoutPage({
         </Card>
 
         {eligibleAuditId ? (
-          <CheckoutCTAButton
-            auditId={auditId}
-            endpoint="/api/checkout"
-            offerKey={REPAIR_SPRINT_OFFER.key}
-          />
+          <>
+            {/* Trust badges - critical for cold buyer conversion at payment entry point */}
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-4 text-xs text-fg-muted">
+              <span className="flex items-center gap-1">
+                <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span>256-bit SSL encrypted</span>
+              </span>
+              <span className="flex items-center gap-1">
+                <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Secure Stripe checkout</span>
+              </span>
+              <span className="flex items-center gap-1">
+                <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>30-day money-back guarantee</span>
+              </span>
+            </div>
+            <CheckoutCTAButton
+              auditId={auditId}
+              endpoint="/api/checkout"
+              offerKey={REPAIR_SPRINT_OFFER.key}
+            />
+          </>
         ) : (
           <div className="rounded-xl border border-border bg-bg-muted/30 p-5 text-center">
             <p className="text-sm text-fg-muted">
@@ -120,6 +143,12 @@ export default async function CheckoutPage({
             changed on re-audit. Traffic quality, offer strength, campaign changes, and measurement
             windows remain outside this kit, so the service does not guarantee conversion lift.
           </p>
+
+          {/* Money-back guarantee - critical for cold buyer conversion */}
+          <div className="mt-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-center">
+            <span className="block text-lg font-bold text-accent">✓ 30-day money-back guarantee</span>
+            <span className="text-sm text-fg-muted">If the fix doesn't help, we'll refund every penny. No questions asked.</span>
+          </div>
         </section>
       </div>
     </main>

@@ -310,6 +310,128 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
   )
 }
 
+/**
+ * ── Immediate Repair Offer (above-the-fold) ─────────────────────────────
+ * Adds the $97 "One-Leak Repair Sprint" offer above the checkout CTA button
+ * in the Remediation tab, with a preview of the worst finding's fix.
+ */
+function ImmediateRepairOffer({
+  auditId,
+  unlocked,
+  sharedView,
+  results,
+}: {
+  auditId: string
+  unlocked: boolean
+  sharedView?: boolean
+  results: AuditResult
+}) {
+  return (
+    <section id="immediate-repair" className="scroll-mt-40 border-b border-border py-12">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-6 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Stop the bleeding now</p>
+          <h2 className="mt-2 text-2xl font-extrabold text-fg">One targeted fix for your highest-priority leak</h2>
+          <p className="mt-2 max-w-[65ch] text-base text-fg-muted">
+            Get the exact copy, code, or configuration change for your worst-failing signal.{''}
+            <span className="font-semibold text-danger"> 30-day re-audit included.</span>
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+          <Card variant="bordered" className="border-danger/30">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-danger" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-widest text-danger">Priority #1 finding</span>
+            </div>
+            {(() => {
+              const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0]
+              const disease = worst ? getDisease(worst.key) : null
+              if (!worst || !disease) return null
+
+              return (
+                <>
+                  <h3 className="text-lg font-bold text-fg">{disease.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-fg-muted">{disease.symptom}</p>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">The fix:</p>
+                  <div className="mt-2 rounded-lg border border-border bg-danger/5 p-4 font-mono text-xs leading-relaxed text-fg">
+                    {worst.fix.slice(0, 180)}
+                    {worst.fix.length > 180 ? '...' : ''}
+                  </div>
+                </>
+              )
+            })()}
+          </Card>
+
+          <div className="flex flex-col justify-center">
+            {unlocked && !sharedView ? (
+              <form
+                action="/api/checkout"
+                method="POST"
+                className="space-y-3"
+              >
+                {/* Trust badges and guarantee above checkout button */}
+                <div className="mb-2 flex flex-wrap items-center justify-center gap-3 text-xs text-fg-muted">
+                  <span className="flex items-center gap-1 rounded px-2 py-1 bg-accent/10 text-accent">
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    256-bit SSL encrypted
+                  </span>
+                  <span className="flex items-center gap-1 rounded px-2 py-1 bg-accent/10 text-accent">
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Secure Stripe checkout
+                  </span>
+                  <span className="flex items-center gap-1 rounded px-2 py-1 bg-accent/10 text-accent">
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    30-day guarantee
+                  </span>
+                </div>
+                <input type="hidden" name="auditId" value={auditId} />
+                <input type="hidden" name="offerKey" value={REPAIR_SPRINT_OFFER.key} />
+                <button
+                  type="submit"
+                  className="block w-full rounded-2xl bg-danger px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-danger-light hover:opacity-90"
+                >
+                  Stop the leak - ${REPAIR_SPRINT_OFFER.priceUsd}
+                </button>
+                <p className="text-center text-xs text-fg-muted">
+                  Redirects to secure Stripe checkout. Card details never touch our servers.
+                </p>
+              </form>
+            ) : (
+              <a
+                href="#unlock"
+                onClick={(e) => {
+                  e.preventDefault()
+                  trackClientFunnelEvent('repair_sprint_clicked', {
+                    audit_id: auditId,
+                    offer_key: 'fix_pack',
+                    placement: 'immediate_repair_preview',
+                    unlocked: false,
+                  }, { auditId })
+                  posthog.capture('audit_cta_clicked', {
+                    audit_id: auditId,
+                    cta: 'immediate_repair_preview_locked',
+                    unlocked: false,
+                  })
+                }}
+                className="block w-full rounded-2xl border border-border px-6 py-4 text-center text-lg font-semibold text-fg transition-colors hover:border-accent hover:text-accent"
+              >
+                Unlock this audit first
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function _UnlockConfirmationWrapper({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
   return <UnlockConfirmation emailSent={emailSent} email={email} auditId={auditId} />
@@ -452,9 +574,15 @@ function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: 
 function ReportOverview({
   results,
   onGoToRemediation,
+  auditId,
+  unlocked,
+  sharedView,
 }: {
   results: AuditResult
   onGoToRemediation?: () => void
+  auditId: string
+  unlocked: boolean
+  sharedView?: boolean
 }) {
   const summary = summarizeFindings(results.findings)
   const hostname = new URL(results.url).hostname
@@ -572,6 +700,14 @@ function ReportOverview({
             </p>
           </div>
         </Card>
+
+        {/* Immediate Repair Offer preview */}
+        <ImmediateRepairOffer
+          auditId={auditId}
+          unlocked={unlocked}
+          sharedView={sharedView}
+          results={results}
+        />
       </div>
     </section>
   )
@@ -1035,6 +1171,9 @@ export default function ResultsClient({
             <ReportOverview
               results={results}
               onGoToRemediation={() => setActiveTab('remediation')}
+              auditId={auditId}
+              unlocked={unlocked}
+              sharedView={sharedView}
             />
             <FixFirstQueue
               findings={results.findings}

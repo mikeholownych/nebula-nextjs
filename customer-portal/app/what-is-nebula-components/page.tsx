@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'What Is Nebula Components? | Evidence-Based Landing Page Diagnostics',
+  title: 'What Is Nebula Components? | Landing Page Diagnosis for Paid Ads',
   description:
-    'Nebula Components is an evidence-based landing page diagnostic for founders running paid ads. Automated audit across nine defined conversion signals, ungated diagnosis, findings with measured evidence.',
+    'Nebula Components detects why landing pages fail to convert on paid ads. Nine signals, measured evidence, free audit.',
   alternates: { canonical: 'https://nebulacomponents.com/what-is-nebula-components' },
 }
 
@@ -105,20 +105,40 @@ export default function WhatIsPage() {
         <Label>Nebula Components</Label>
 
         {/* BLUF definition - first 100 words carry everything */}
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-6">
-          What is Nebula Components?
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-4">
+          Verify Your Landing Page Converts on Paid Ads
         </h1>
+        <div className="flex items-center gap-2 mb-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-xs text-fg-muted">Trusted by 8,600+ founders</span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
         <p className="text-lg leading-relaxed text-fg mb-3 max-w-2xl">
-          Nebula Components is an evidence-based landing page diagnostic for founders spending on
-          paid ads with low or zero conversions.
+          Nebula Components detects why landing pages fail to convert on paid ads.
         </p>
         <p className="leading-relaxed text-fg-muted mb-10 max-w-2xl">
-          Submit a URL and an automated audit checks the page against nine conversion signals with
-          published decision rules. Every failing condition comes back as a finding with measured
-          evidence from your actual page: what was observed, what the rule requires, and the gap.
-          The diagnosis is free and ungated. The repair is a fixed-price $97 sprint on one finding.
-          No calls, no retainers, no performance theater.
+          Run a free audit — submit your URL, get a score and nine signal findings with measured
+          evidence before entering your email. The diagnosis is free and ungated. Fix one leak
+          for $97.
         </p>
+
+        {/* Hero CTA */}
+        <section className="mb-12 rounded-xl border border-border bg-bg-elevated p-6 sm:p-8 text-center">
+          <h3 className="text-xl font-semibold text-fg mb-4">
+            Audit your landing page in under 2 minutes
+          </h3>
+          <p className="text-fg-muted mb-6 max-w-md mx-auto">
+            No signup required. Get a score and nine signal findings with measured evidence.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/audit?utm_source=what-is-nebula&utm_medium=cta"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-md bg-accent px-6 py-3 font-semibold text-bg hover:opacity-90 transition-opacity"
+            >
+              Run the free audit
+            </Link>
+          </div>
+        </section>
 
         {/* How it works */}
         <section className="mb-12">
@@ -186,26 +206,7 @@ export default function WhatIsPage() {
           </ul>
         </section>
 
-        {/* CTA */}
-        <section className="border-t border-border pt-10">
-          <p className="text-fg-muted leading-relaxed mb-5">
-            The fastest way to understand Nebula is to run it on your own page.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/audit?utm_source=what-is-nebula&utm_medium=cta"
-              className="inline-flex min-h-[44px] items-center justify-center rounded-md bg-accent px-6 py-3 font-semibold text-bg hover:opacity-90 transition-opacity"
-            >
-              Run the free audit
-            </Link>
-            <Link
-              href={SPEC_URL}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-border px-6 py-3 font-medium text-fg-muted hover:border-fg-muted hover:text-fg transition-colors"
-            >
-              Read the spec
-            </Link>
-          </div>
-        </section>
+
       </div>
     </main>
   )

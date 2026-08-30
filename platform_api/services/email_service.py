@@ -182,7 +182,7 @@ class EmailService:
     """AgentMail email sending service"""
 
     def __init__(self):
-        self.inbox_id = "sedrick@nebulacomponents.com"
+        self.inbox_id = "nebulashop@agentmail.to"
 
     async def send_audit_results(self, data: AuditEmailData) -> dict:
         """Send audit results email using the story framework."""
