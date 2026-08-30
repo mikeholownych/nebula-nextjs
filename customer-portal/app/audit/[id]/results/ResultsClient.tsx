@@ -329,14 +329,20 @@ function ImmediateRepairOffer({
   return (
     <section id="immediate-repair" className="scroll-mt-40 border-b border-border py-12">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-6 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Stop the bleeding now</p>
-          <h2 className="mt-2 text-2xl font-extrabold text-fg">One targeted fix for your highest-priority leak</h2>
-          <p className="mt-2 max-w-[65ch] text-base text-fg-muted">
-            Get the exact copy, code, or configuration change for your worst-failing signal.{''}
-            <span className="font-semibold text-danger"> 30-day re-audit included.</span>
-          </p>
-        </div>
+          <div className="mb-6 text-center">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-md bg-danger/10 px-3 py-1.5">
+              <svg className="h-4 w-4 text-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="text-xs font-semibold text-danger">Only 3 repair sprint slots left this week</span>
+            </div>
+            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Stop the bleeding now</p>
+            <h2 className="mt-2 text-2xl font-extrabold text-fg">One targeted fix for your highest-priority leak</h2>
+            <p className="mt-2 max-w-[65ch] text-base text-fg-muted">
+              Get the exact copy, code, or configuration change for your worst-failing signal.{''}
+              <span className="font-semibold text-danger"> 30-day re-audit included.</span>
+            </p>
+          </div>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <Card variant="bordered" className="border-danger/30">
