@@ -85,17 +85,51 @@ export default function Home() {
         <HeroSection />
         <MobileStickyAuditCTA />
 
-        {/* 2. Evidence artifact */}
+        {/* 2. Benchmark proof — first scroll */}
+        <section className="section-default">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 grid gap-4 md:grid-cols-2 md:items-end">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">Q3 2026 · 293 audits</p>
+                <h2 className="heading-2">Most pages are leaking on the same 3 things.</h2>
+              </div>
+              <p className="text-base text-fg-muted md:text-right">
+                These are not edge cases. They are the norm. From 293 completed Nebula audits.
+              </p>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-3">
+              {[
+                { stat: '62%', label: 'Headline mismatch', detail: 'The page headline does not match the ad that sent the traffic. The visitor bounces in 3 seconds.' },
+                { stat: '39%', label: 'No social proof near CTA', detail: 'Reviews, logos, and ratings are in the footer or missing entirely. The CTA is asking for trust it has not earned.' },
+                { stat: '40%', label: 'Mobile CTA buried', detail: 'On a 375px screen, the primary action is not visible without scrolling. Most paid traffic arrives on mobile.' },
+              ].map((item) => (
+                <div key={item.stat} className="card-default">
+                  <p className="text-4xl font-bold text-accent mb-2">{item.stat}</p>
+                  <p className="font-semibold text-fg mb-2">{item.label}</p>
+                  <p className="text-sm text-fg-muted leading-relaxed">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-xs text-fg-muted">
+              Based on 293 completed Nebula audits, Q3 2026. Full data at{' '}
+              <a href="/research/landing-page-performance-q3-2026" className="text-fg-muted underline underline-offset-2 hover:text-fg transition-colors">
+                nebulacomponents.com/research/landing-page-performance-q3-2026
+              </a>
+            </p>
+          </div>
+        </section>
+
+        {/* 3. What the output looks like */}
         <section className="section-default">
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="heading-2 mb-6">
-                This is the output. Not a pitch deck.
+                This is what you get. Not a PDF. Not a scorecard.
               </h2>
               <p className="text-base text-fg-muted leading-relaxed">
-                Nine pass/fail checks against the public HTML. Each finding carries
-                the raw value from the page. Ranked by priority. The block on the
-                right is an illustrative sample, not a live result.
+                Nine pass/fail checks against your public HTML. Each finding carries
+                the raw value Nebula read from the page. Ranked by the size of the
+                leak, not alphabetically. The block on the right is an illustrative sample.
               </p>
             </div>
             <div className="card-default font-mono text-sm">
@@ -126,7 +160,7 @@ export default function Home() {
                 <h2 className="heading-2">What Nebula checks</h2>
               </div>
               <p className="text-base text-fg-muted md:text-right">
-                Observable page conditions. Specific pass standards. Evidence from your HTML.
+                Each check has a specific pass standard. Either your page meets it or it doesn't.
               </p>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

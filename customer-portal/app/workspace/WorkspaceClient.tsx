@@ -14,7 +14,6 @@ import {
 import { analytics } from '@heycatch/sdk'
 
 const DashboardView = dynamic(() => import('./views').then((mod) => mod.DashboardView), { ssr: false })
-const CustomerOverviewCard = dynamic(() => import('./CustomerOverviewCard').then((mod) => mod.CustomerOverviewCard), { ssr: false })
 const AuditsView = dynamic(() => import('./views').then((mod) => mod.AuditsView))
 const ProjectsView = dynamic(() => import('./views').then((mod) => mod.ProjectsView))
 const CompetitorView = dynamic(() => import('./competitorView'))

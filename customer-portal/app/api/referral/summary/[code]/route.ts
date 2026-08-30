@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
-import { getReferralMetrics } from '@/app/lib/referral-program'
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ code: string }> }
+  { params }: { params: Promise<{ code?: string }> }
 ) {
   const { code } = await params
+  void code
 
   // Convert code to customer ID (reverse lookup)
   // For now, return demo data

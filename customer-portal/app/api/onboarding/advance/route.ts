@@ -6,7 +6,7 @@ type Stage = 'payment_received' | 'onboarding_complete' | 'sprint_delivered' | '
 export async function POST(request: Request) {
   try {
     const data = await request.json()
-    const { customerId, stage, metadata } = data
+    const { customerId, stage } = data
 
     if (!customerId || !stage) {
       return NextResponse.json(

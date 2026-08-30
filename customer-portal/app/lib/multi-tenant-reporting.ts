@@ -3,7 +3,7 @@
  * Aggregates audit data for agencies/enterprises managing multiple properties
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

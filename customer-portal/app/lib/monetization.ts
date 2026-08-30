@@ -3,7 +3,7 @@
  * Rate-limited API access for external developers
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 export const API_KEY_PREFIX = 'nc_api_'

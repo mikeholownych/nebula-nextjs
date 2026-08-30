@@ -19,6 +19,6 @@ auditPool.on('connect', () => {
   console.log('[PostgreSQL] Connected to nebula_audit');
 });
 
-auditPool.on('error', (err: any) => {
+auditPool.on('error', (err: unknown) => {
   console.error('[PostgreSQL] Audit DB connection error:', err);
 });

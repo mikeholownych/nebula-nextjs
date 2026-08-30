@@ -11,7 +11,6 @@ import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from '
 import RewritePreview from './RewritePreview'
 import JsonLdGeneratorModal from '@/app/components/JsonLdGeneratorModal'
 import AiAgentFixPromptModal from '@/app/components/AiAgentFixPromptModal'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import {
   REPORT_NAVIGATION,
   buildPriorityQueue,
@@ -19,6 +18,7 @@ import {
   groupFindingsBySignal,
   summarizeFindings,
 } from './reportArchitecture'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 
 // Quick Win is the one positive/actionable signal and gets Signal Emerald;
 // the other three quadrants are informational, not "good" or "bad\", so they

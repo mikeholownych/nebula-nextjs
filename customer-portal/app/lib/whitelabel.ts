@@ -3,7 +3,7 @@
  * Per-client white-label, custom branding, API-only access, billing aggregation
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

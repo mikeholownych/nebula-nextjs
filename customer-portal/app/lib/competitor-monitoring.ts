@@ -3,7 +3,7 @@
  * Tracks competitor SaaS pricing pages for rate changes
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 interface Competitor {
@@ -84,6 +84,7 @@ export async function updateCompetitorPrice(
 
     const currentPrice = parseFloat(currentResult.rows[0].price)
     const interval = currentResult.rows[0].interval as 'monthly' | 'yearly'
+    void interval
 
     if (currentPrice === newPrice) {
       // Update last checked timestamp only

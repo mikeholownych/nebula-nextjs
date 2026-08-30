@@ -3,7 +3,7 @@
  * Flags customers at risk of churn based on behavior patterns
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

@@ -3,7 +3,7 @@
  * Tracks customers through the $97 One-Leak Repair Sprint funnel
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 type OnboardingStage = 
@@ -62,7 +62,7 @@ export async function getOrCreateOnboarding(
 export async function advanceOnboardingStage(
   customerId: string,
   newStage: OnboardingStage,
-  metadata: Record<string, any> = {}
+  _metadata: Record<string, any> = {}
 ): Promise<OnboardingRecord> {
   try {
     const result = await auditPool.query(`

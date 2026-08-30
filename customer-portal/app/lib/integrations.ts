@@ -3,10 +3,11 @@
  * Webhook triggers, Zapier compatibility, external tool integration
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 // Integration providers
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const PROVIDERS = {
   zapier: {
     name: 'Zapier',

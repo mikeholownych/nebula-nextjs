@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
-import { collectDefaultMetrics, Registry, Counter, Gauge } from 'prom-client'
+import { collectDefaultMetrics, Registry, Gauge } from 'prom-client'
 
 // Prometheus registry and metrics
 const registry = new Registry()

@@ -3,7 +3,7 @@
  * SMTP integration, drip campaigns, transactional emails
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 // Simplified email config - in production would use Resend, SendGrid, etc.
@@ -121,7 +121,7 @@ export async function createDripCampaign(data: {
 export async function triggerDripCampaign(
   customerId: string,
   campaignId: string,
-  triggerType: string
+  _triggerType: string
 ): Promise<{
   customerId: string
   campaignId: string
@@ -167,7 +167,7 @@ export async function triggerDripCampaign(
 /**
  * Get email campaign statistics
  */
-export async function getEmailStats(campaignId?: string): Promise<{
+export async function getEmailStats(_campaignId?: string): Promise<{
   totalSent: number
   totalOpened: number
   totalClicked: number

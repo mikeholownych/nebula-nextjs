@@ -3,7 +3,6 @@
  * Track referrers, generate links, credit rewards, track revenue
  */
 
-import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -148,7 +147,7 @@ export async function getReferralMetrics(customerId: string): Promise<{
       WHERE rc.customer_id = $1
     `, [customerId])
 
-    const revenueResult = await auditPool.query(`
+    void auditPool.query(`
       SELECT COALESCE(SUM(audits.score), 0) as revenue
       FROM referral_redemptions rr
       JOIN referral_codes rc ON rr.referral_code_id = rc.id

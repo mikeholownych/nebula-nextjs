@@ -3,7 +3,7 @@
  * Aggregated, anonymized metrics by industry
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 interface IndustryMetric {

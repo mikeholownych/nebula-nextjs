@@ -3,7 +3,7 @@
  * Tracks revenue from lead → paid customer with forecasting
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 export interface PipelineStage {
@@ -56,7 +56,7 @@ export async function getPipelineValue(days: number = 30): Promise<RevenueForeca
     }))
 
     // Calculate total pipeline value
-    const pipelineValue = pipeline.reduce((sum, s) => sum + s.projected_value, 0)
+    void pipeline.reduce((sum, s) => sum + s.projected_value, 0)
 
     // Get historical conversion rates for forecasting
     const historicalResult = await auditPool.query(`

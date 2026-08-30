@@ -23,10 +23,6 @@ export async function GET() {
     const totalAudits = parseInt(auditStatsResult.rows[0].total_audits)
     const paidAudits = parseInt(auditStatsResult.rows[0].paid_audits)
 
-    const revenueResult = await auditPool.query(`
-      SELECT COUNT(*) as paid_count FROM audits WHERE paid_at IS NOT NULL
-    `)
-
     const avgOrderValue = 97
     const totalPaid = paidAudits * 97
 

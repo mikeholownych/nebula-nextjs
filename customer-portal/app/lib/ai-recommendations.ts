@@ -3,7 +3,7 @@
  * LLM-powered fix suggestions, personalized recommendations, custom fix steps
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -148,8 +148,8 @@ export async function generateAuditRecommendations(
  */
 function generateCustomSteps(
   signalKey: string,
-  issue: string,
-  currentScore: number
+  _issue: string,
+  _currentScore: number
 ): Array<{ step: number; action: string; estimateHours: number }> {
   const steps = []
   let step = 1
@@ -266,7 +266,10 @@ export async function getFixPackOffer(customerId: string): Promise<{
       completedAt: row.completed_at,
     }))
 
-    const avgScore = audits.reduce((sum: number, a: any) => sum + a.score, 0) / audits.length
+    const avgScore = audits.length > 0
+      ? audits.reduce((sum: number, a: any) => sum + a.score, 0) / audits.length
+      : 0
+    void avgScore // calculated for future use
     const lowScores = audits.filter((a: any) => a.score < 70).length
 
     let features: string[] = []
@@ -305,6 +308,6 @@ export async function getFixPackOffer(customerId: string): Promise<{
 }
 
 // Initialize cache on service load
-const aiRecommendationsCache = new Map<string, { data: any; expires: number }>()
+void new Map<string, { data: any; expires: number }>()
 
 export const aiServiceEnabled = true

@@ -3,7 +3,7 @@
  * LLM-driven analysis of audit findings for actionable recommendations
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

@@ -3,7 +3,7 @@
  * Track competitor landing pages, page health, marketing signals over time
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -47,7 +47,7 @@ export async function getCompetitorIntelligence(
     const competitor = competitorResult.rows[0]
 
     // Get price history for trend analysis
-    const historyResult = await auditPool.query(`
+    void auditPool.query(`
       SELECT price, timestamp
       FROM competitor_price_changes
       WHERE competitor_id = $1

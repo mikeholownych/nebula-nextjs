@@ -72,16 +72,16 @@ export const HeroSection: React.FC = () => {
         {/* Status Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-panel border border-border text-xs text-fg-muted mb-4 sm:mb-6 shadow-inner">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="font-mono text-fg">9 Conversion Signals</span>
+          <span className="font-mono text-fg">293 audits</span>
           <span className="text-fg-muted/60">|</span>
-          <span>Evidence-Backed Diagnosis</span>
+          <span>62% fail the headline check</span>
         </div>
 
         {/* 2-Line Headline */}
         <h1 className="font-sans font-normal leading-[1.04] tracking-tight text-[38px] min-[400px]:text-[44px] sm:text-6xl lg:text-7xl xl:text-[76px] text-fg">
-          <span className="block">Discover page-side leaks.</span>
+          <span className="block">The ad worked.</span>
           <span className="block text-fg-muted mt-1 sm:mt-2">
-            Fix conversion before blaming ads.
+            The page didn&rsquo;t.
           </span>
         </h1>
 
@@ -151,12 +151,12 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Plain Audience Language Subhead (D1.6, D2.1, D1.1) */}
+        {/* Plain Audience Language Subhead */}
         <p className="mt-6 text-sm sm:text-base text-fg-muted max-w-xl mx-auto leading-relaxed">
-          Check your landing page against 9 conversion signals before spending more on ads. See what&apos;s wrong. Ranked by priority. No signup.
+          Your page has a structural failure costing you paid traffic. Nebula finds it in under 2 minutes. Free, no signup.
         </p>
 
-        {/* Quantity Proof & Recent Audits Texture (D3.1) */}
+        {/* Quantity Proof & Recent Audits Texture */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <div className="flex items-center -space-x-2 overflow-hidden py-1">
             {[
@@ -176,23 +176,23 @@ export const HeroSection: React.FC = () => {
             ))}
           </div>
           <p className="text-xs text-fg-muted font-mono">
-            <span className="font-semibold text-fg">147+ landing pages analyzed</span> · <span className="text-accent font-semibold">2.9 avg leaks</span> found
+            <span className="font-semibold text-fg">293 landing pages audited</span> · <span className="text-accent font-semibold">2.7 avg leaks</span> found
           </p>
         </div>
 
-        {/* Diagnostic Trust Signals Strip */}
+        {/* Trust Signals Strip */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-fg-muted">
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-            <span>Inspectable findings</span>
+            <span>No signup required</span>
           </div>
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-            <span>Preserved DOM evidence</span>
+            <span>Ranked by revenue impact</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            <span>$97 One-Leak Sprint option</span>
+            <span>$97 fix for the top finding</span>
           </div>
         </div>
       </div>

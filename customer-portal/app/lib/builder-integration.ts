@@ -4,7 +4,6 @@
  * Note: Requires builder-specific API keys (configured by user)
  */
 
-import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -44,7 +43,7 @@ export async function getSupportedBuilders(): Promise<{
 export async function generateBuilderFix(
   builder: string,
   signal: string,
-  fix: string
+  _fix: string
 ): Promise<{
   success: boolean
   code?: string

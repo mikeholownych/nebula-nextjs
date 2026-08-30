@@ -3,7 +3,7 @@
  * Email nurture flows, auto-triggered by score, behavior, engagement
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

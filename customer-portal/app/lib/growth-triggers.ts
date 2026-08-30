@@ -3,7 +3,7 @@
  * Auto-trigger workflows based on audit scores and user behavior
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

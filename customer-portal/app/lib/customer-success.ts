@@ -3,7 +3,7 @@
  * Track customer health score, auto-trigger check-ins, surface at-risk customers
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -29,7 +29,7 @@ export async function calculateHealthScore(customerId: string): Promise<{
       WHERE customer_id = $1
     `, [customerId])
 
-    const auditCount = parseInt(auditResult.rows[0].total_audits)
+    void parseInt(auditResult.rows[0].total_audits)
     const lastAudit = auditResult.rows[0].last_audit
     const daysSinceLastAudit = lastAudit ? (Date.now() - new Date(lastAudit).getTime()) / (1000 * 60 * 60 * 24) : 999
     const auditScore = Math.max(0, Math.min(100, 100 - (daysSinceLastAudit * 2)))
@@ -130,7 +130,7 @@ export async function getCustomerSuccessDashboard(customerId: string): Promise<{
     `, [customerId])
 
     // Get at-risk customers (for this customer's reference)
-    const atRiskCount = await auditPool.query(`
+    void await auditPool.query(`
       SELECT COUNT(*) as count FROM (
         SELECT DISTINCT customer_id FROM audits
         WHERE completed_at < NOW() - INTERVAL '60 days'

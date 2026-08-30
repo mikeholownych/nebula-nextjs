@@ -4,7 +4,7 @@ import { auditPool } from '@/app/lib/audit-db'
 export async function POST(request: Request) {
   try {
     const data = await request.json()
-    const { url, leadId } = data
+    const { url } = data
 
     if (!url) {
       return NextResponse.json(

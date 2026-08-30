@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAuditInsights, getSignalAnalysis } from '@/app/lib/ai-insights'
+import { getAuditInsights } from '@/app/lib/ai-insights'
 
 export async function GET(
   request: Request,
@@ -23,9 +23,10 @@ export async function GET(
       timestamp: new Date().toISOString(),
       ...insights,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: error.message },
+      { error: msg },
       { status: 404 }
     )
   }

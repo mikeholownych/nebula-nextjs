@@ -3,7 +3,6 @@
  * Unified view of audit activity, revenue, health, referrals
  */
 
-import { NextResponse } from 'next/server'
 import { auditPool } from '@/app/lib/audit-db'
 
 /**
@@ -84,7 +83,7 @@ export async function getCustomerDashboard(
     const paidAudits = parseInt(auditStatsResult.rows[0].paid_audits)
 
     // Revenue calculation
-    const revenueResult = await auditPool.query(`
+    void auditPool.query(`
       SELECT 
         COUNT(*) FILTER (WHERE paid_at IS NOT NULL) as paid_count,
         COALESCE(AVG(score) FILTER (WHERE paid_at IS NOT NULL), 0) as avg_score

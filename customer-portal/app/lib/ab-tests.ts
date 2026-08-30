@@ -3,7 +3,7 @@
  * Full AB test dashboard with statistical significance, variant performance
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 /**

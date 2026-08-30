@@ -35,7 +35,7 @@ const incidents = [
   },
 ]
 
-const maintenance = []
+
 
 export default function StatusPage() {
   return (

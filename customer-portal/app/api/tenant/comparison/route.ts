@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { auditPool } from '@/app/lib/audit-db'
 import { getTenantComparison } from '@/app/lib/multi-tenant-reporting'
 
 export async function GET(request: Request) {

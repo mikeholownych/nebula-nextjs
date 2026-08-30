@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { createNurtureSequence, triggerNurtureSequence, getLeadNurtureStatus } from '@/app/lib/lead-nurturer'
-import { auditPool } from '@/app/lib/audit-db'
 
 export async function POST(request: Request) {
   const body = await request.json()

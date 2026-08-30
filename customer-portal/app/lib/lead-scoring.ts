@@ -3,7 +3,7 @@
  * Automated scoring based on URL signals and intent indicators
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
 
 interface LeadScore {
@@ -18,7 +18,7 @@ interface LeadScore {
 /**
  * Calculate lead score based on multiple signals
  */
-export async function calculateLeadScore(leadId: string, url: string): Promise<LeadScore> {
+export async function calculateLeadScore(leadId: string, _url: string): Promise<LeadScore> {
   try {
     // Default score calculation
     // Score components:
@@ -92,7 +92,7 @@ function getGradeFromScore(score: number): string {
 export async function scoreLeadByUrl(url: string): Promise<LeadScore> {
   try {
     // Extract domain and signals
-    const domain = new URL(url).hostname
+    void new URL(url).hostname
 
     // Get or create lead record
     let lead = await auditPool.query(`

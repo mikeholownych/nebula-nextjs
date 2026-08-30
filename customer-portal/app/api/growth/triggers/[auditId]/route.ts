@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { auditPool } from '@/app/lib/audit-db'
 import { getAuditTriggersForAudit } from '@/app/lib/growth-triggers'
 
 export async function GET(

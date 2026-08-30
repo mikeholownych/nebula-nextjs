@@ -15,8 +15,7 @@ interface CustomerStats {
   nurtureNext?: string
 }
 
-export function CustomerOverviewCard({ email: propEmail }: { email?: string }) {
-  const [email, setEmail] = useState<string | undefined>(propEmail)
+export function CustomerOverviewCard({ email }: { email?: string }) {
   const [stats, setStats] = useState<CustomerStats | null>(null)
   const [loading, setLoading] = useState(true)
 

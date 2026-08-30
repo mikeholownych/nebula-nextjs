@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getSupportedBuilders, generateBuilderFix } from '@/app/lib/builder-integration'
+import { getSupportedBuilders } from '@/app/lib/builder-integration'
 
 export async function GET() {
   try {
@@ -9,9 +9,10 @@ export async function GET() {
       timestamp: new Date().toISOString(),
       ...result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: error.message },
+      { error: msg },
       { status: 500 }
     )
   }

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { redeemReferralCode, getReferralMetrics } from '@/app/lib/referral-program'
+import { redeemReferralCode } from '@/app/lib/referral-program'
 
 export async function GET(
   request: Request,

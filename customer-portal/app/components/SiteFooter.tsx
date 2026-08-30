@@ -105,14 +105,13 @@ export default function SiteFooter() {
           {/* Google Preferred Sources button — dark theme to match site */}
           <div google-add-preferred-source-btn data-theme="dark" data-lang="en" />
           {/* VisibAI badge — AI visibility score for nebulacomponents.com */}
-          <a
-            href="https://getvisibai.com/score/e7dc341b-e44a-40e9-980c-4a8effcf8aae"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="AI Visibility Score by VisibAI"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <a
+              href="https://getvisibai.com/score/e7dc341b-e44a-40e9-980c-4a8effcf8aae"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="AI Visibility Score by VisibAI"
+            >
+              <img
               src="https://getvisibai.com/api/badge/e7dc341b-e44a-40e9-980c-4a8effcf8aae"
               alt="AI Visibility Score"
               width={120}

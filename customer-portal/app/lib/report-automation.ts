@@ -3,9 +3,8 @@
  * Auto-email PDF reports, schedule reports, delivery tracking
  */
 
-import { NextResponse } from 'next/server'
+
 import { auditPool } from '@/app/lib/audit-db'
-import { generateAuditPDF } from '@/app/lib/audit-pdf'
 
 // Email config
 const EMAIL_CONFIG = {
@@ -197,6 +196,7 @@ export async function triggerScheduledReports(): Promise<{
 
     // Simplified - in production would iterate and trigger emails
     for (const row of scheduledResult.rows) {
+      void row
       try {
         // would call emailReport here
         delivered++

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { generateReferralCode, redeemReferralCode, getReferralMetrics, createReferralTables } from '@/app/lib/referral-program'
+import { redeemReferralCode, createReferralTables, getReferralMetrics } from '@/app/lib/referral-program'
 import { auditPool } from '@/app/lib/audit-db'
 
 // Ensure tables exist
