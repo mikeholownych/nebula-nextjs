@@ -1,0 +1,53 @@
+{
+  "registry_version": "2026.08.31",
+  "engine_compat": ["2.1.0"],
+  "notes": "Additive ID map. Does not change live scoring. Legacy keys remain the persisted finding.key values.",
+  "conditions": [
+    {
+      "legacy_key": "cta",
+      "condition_id": "PRIMARY_CTA_CLARITY_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "above_fold",
+      "condition_id": "ABOVE_FOLD_CLARITY_V1",
+      "layer": "observation",
+      "caveat": "Current evidence is an unrendered HTML proxy unless a rendered audit is attached."
+    },
+    {
+      "legacy_key": "headline",
+      "condition_id": "HEADLINE_MESSAGE_MATCH_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "social_proof",
+      "condition_id": "TRUST_PROOF_PROXIMITY_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "load_speed",
+      "condition_id": "LOAD_SPEED_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "mobile",
+      "condition_id": "MOBILE_VIEWPORT_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "ad_signals",
+      "condition_id": "AD_TRACKING_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "seo_foundations",
+      "condition_id": "SEO_FOUNDATIONS_V1",
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "ai_readiness",
+      "condition_id": "AI_READINESS_V1",
+      "layer": "observation"
+    }
+  ]
+}
