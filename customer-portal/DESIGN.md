@@ -9,9 +9,9 @@ colors:
   accent: "#c7ff2f"
   accent-dim: "rgba(199, 255, 47, 0.10)"
   accent-mid: "rgba(199, 255, 47, 0.20)"
-  fg: "#ffffff"
-  fg-muted: "#9e9e9e"
-  fg-dim: "#666666"
+  fg: "#e8ebe7"
+  fg-muted: "#a0aaa2"
+  fg-dim: "#9fa99f"
   signal-fail: "#f59e0b"
   danger: "#f37979"
   border: "rgba(255, 255, 255, 0.06)"
@@ -114,6 +114,32 @@ CASE FILE, CONDITION, EVIDENCE, PASS / FAIL / REVIEW, PRIORITY, OBSERVED.
 Public teardowns carry `PUBLIC AUDIT / NOT A CUSTOMER`.
 Dataset provenance uses instrumentation: `DATASET / Q3-2026 / N=293 / COMPLETED AUDITS / METHODOLOGY`.
 Repair lifecycle: 01 Audit / 02 Isolate / 03 Repair / 04 Re-audit.
+
+## Lime scarcity
+
+- Lime field/background: at most one major occurrence per long-form page.
+- Lime typography: primary semantic emphasis only.
+- Lime UI: actionable or active state.
+- Lime metadata: exceptional status.
+- Never decorative.
+
+## Type floors
+
+- 12px: instrumentation / metadata minimum (`text-xs`)
+- 14px: secondary explanation (`text-sm`)
+- 16px+: substantive body (`text-base` and up)
+- Do not invent one-off `font-size` values outside this scale.
+
+## Contrast
+
+Canonical greys on `#050505` / `#0a0a0a` / `#111111` must stay at WCAG AA (4.5:1) for readable copy.
+`#666666` is banned. Use `fg-muted` `#a0aaa2` or `fg-dim` `#9fa99f`.
+Black (`#050505`) on accent (`#c7ff2f`) for primary CTAs. Never white on accent.
+
+## Workspace transfer
+
+Carry colour, type, rails, rules, metadata, and diagnostic semantics.
+Do not carry giant editorial headlines, lime chapter fields, or marketing sequencing into the application.
 
 ## Homepage structure (canonical, Aug 2026 overhaul)
 

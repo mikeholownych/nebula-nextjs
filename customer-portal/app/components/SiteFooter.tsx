@@ -16,7 +16,7 @@ export default function SiteFooter() {
 
           {/* Product */}
           <div>
-            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-fg-dim">
               Product
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
@@ -32,7 +32,7 @@ export default function SiteFooter() {
 
           {/* Audit Types - expose the cluster, link to hub */}
           <div>
-            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-fg-dim">
               Audit Types
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
@@ -47,7 +47,7 @@ export default function SiteFooter() {
 
           {/* Learn - expose category not inventory; hub carries the rest */}
           <div>
-            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-fg-dim">
               Learn
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">
@@ -66,7 +66,7 @@ export default function SiteFooter() {
 
           {/* Company */}
           <div>
-            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-fg-dim">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-fg-dim">
               Nebula
             </h3>
             <ul className="space-y-2.5 text-sm text-fg-muted">

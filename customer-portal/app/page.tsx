@@ -123,7 +123,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-dim">
+            <p className="mt-5 font-mono text-xs uppercase tracking-[0.14em] text-fg-dim">
               DATASET / Q3-2026 / N=293 / COMPLETED AUDITS /{' '}
               <Link href="/research/landing-page-performance-q3-2026" className="underline underline-offset-4 hover:text-fg">
                 METHODOLOGY
@@ -145,7 +145,7 @@ export default function Home() {
             </div>
 
             <div className="border border-border-strong bg-[#0b0c0b]">
-              <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-fg-muted">
+              <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-xs uppercase tracking-[0.12em] text-fg-muted">
                 <span>Case file / illustrative</span>
                 <span>Not a live result</span>
               </div>
@@ -187,7 +187,7 @@ export default function Home() {
                   </div>
                   <h3 className="mt-10 text-xl font-bold text-fg">{signal.label}</h3>
                   <p className="mt-3 text-base leading-7 text-fg-muted">{signal.job}</p>
-                  <p className="mt-8 border-t border-border pt-4 font-mono text-[11px] leading-5 text-fg-dim">
+                  <p className="mt-8 border-t border-border pt-4 font-mono text-xs leading-5 text-fg-dim">
                     Pass: {signal.pass}
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export default function Home() {
                   >
                     <span className="font-mono text-xs text-fg-dim">0{index + 1}</span>
                     <div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-fg-dim">Public audit / not a customer</span>
+                    <span className="font-mono text-xs uppercase tracking-[0.14em] text-fg-dim">Public audit / not a customer</span>
                     <p className="mt-2 text-xl font-bold text-fg">{teardown.domain}</p>
                       <p className="mt-1 font-mono text-xs text-signal-fail">{teardown.findings.length} documented findings</p>
                     </div>
@@ -269,7 +269,7 @@ export default function Home() {
               <p className="mt-8 max-w-xl text-lg leading-8 text-fg-muted">
                 The $97 One-Leak Repair Sprint turns the highest-priority finding into exact copy, code, or configuration. You implement it. We run the same check again within 30 days.
               </p>
-              <ol className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim">
+              <ol className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-[0.16em] text-fg-dim">
                 <li>01 Audit</li>
                 <li>02 Isolate</li>
                 <li>03 Repair</li>

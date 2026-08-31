@@ -42,7 +42,7 @@ export const HeroSection: React.FC = () => {
       className="relative overflow-hidden border-b border-border bg-bg text-fg selection:bg-accent selection:text-bg"
     >
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between border-b border-border/70 py-4 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-xs">
+        <div className="flex items-center justify-between border-b border-border/70 py-4 font-mono text-xs uppercase tracking-[0.16em] text-fg-muted sm:text-xs">
           <div className="flex items-center gap-3">
             <NebulaLogo size={17} />
             <span>Conversion diagnostic</span>
@@ -106,7 +106,7 @@ export const HeroSection: React.FC = () => {
               </form>
             </VisibilityBeacon>
 
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-fg-muted sm:text-xs">
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-fg-muted sm:text-xs">
               <span>No signup</span>
               <span aria-hidden="true">/</span>
               <span>Under 2 minutes</span>
@@ -118,7 +118,7 @@ export const HeroSection: React.FC = () => {
           <div data-hero-case-file className="relative hidden lg:block">
             <div className="absolute -left-7 top-10 bottom-10 w-px bg-accent/50" aria-hidden="true" />
             <div className="border border-border-strong bg-[#0b0c0b] shadow-[0_32px_80px_rgba(0,0,0,0.48)]">
-              <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
+              <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-xs uppercase tracking-[0.14em] text-fg-muted">
                 <span>Case file 0293</span>
                 <span>Sample audit output</span>
                 <span className="text-signal-fail">3 failures found</span>
@@ -126,13 +126,13 @@ export const HeroSection: React.FC = () => {
               <div className="relative overflow-hidden [aspect-ratio:896/612]">
                 <ScaledDashboard />
               </div>
-              <div className="grid grid-cols-3 border-t border-border font-mono text-[10px] uppercase tracking-[0.1em] text-fg-muted">
+              <div className="grid grid-cols-3 border-t border-border font-mono text-xs uppercase tracking-[0.1em] text-fg-muted">
                 <span className="border-r border-border px-4 py-3">HTML inspected</span>
                 <span className="border-r border-border px-4 py-3">Viewport measured</span>
                 <span className="px-4 py-3 text-accent">Evidence attached</span>
               </div>
             </div>
-            <p className="mt-3 text-right font-mono text-[10px] uppercase tracking-[0.14em] text-fg-dim">
+            <p className="mt-3 text-right font-mono text-xs uppercase tracking-[0.14em] text-fg-dim">
               Illustrative product view. Not a live result.
             </p>
           </div>
