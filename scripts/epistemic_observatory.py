@@ -17,9 +17,8 @@ GATE_AUDIT_COUNT = 500
 GATE_DAYS = 14
 ACTIVATED_AT = datetime(2026, 8, 31, 22, 0, tzinfo=timezone.utc)
 DSN = (
-    os.environ.get("DATABASE_URL")
-    or os.environ.get("AUDIT_DATABASE_URL")
-    or "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433"
+    os.environ.get("AUDIT_DATABASE_URL")
+    or "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"
 )
 OUT = Path("/home/mike/nebula/ledgers/epistemic_observatory.json")
 
