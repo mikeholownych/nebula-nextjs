@@ -46,7 +46,7 @@ SeoLoupe's SaaS landing-page "case study" lists unclear headlines and weak CTAs 
 These are the better differentiation bets. None are P1 engine work.
 
 1. Bind the diagnosis to live paid traffic. Neither product requires proof the URL is receiving ad spend. A founder can audit a homepage and get a conversion FAIL that is NOT_APPLICABLE in spirit.
-2. Prove a fix changed conversion, not just a page condition. Nebula can now verify FAIL to PASS on the same condition ID. Neither side has purchase or conversion telemetry attached to that transition.
+2. Same-condition re-observation tied to the original conversion-context diagnosis, without claiming conversion impact. Nebula can verify FAIL to PASS on the same condition ID. That proves the diagnosed condition changed. It does not prove conversion consequence. The boundary is differentiation, not a gap to paper over.
 3. Capture-quality under bot walls, personalization, and experiments, then say so. Nebula now instruments this. SeoLoupe claims sub-10s scans. Neither has a public capture-failure rate.
 4. Challengeable determinations with a recorded outcome. Absent on both.
 5. Cohort claims with inspectable denominators. SeoLoupe "1,000+ SaaS landing pages" has no published method on the post. Nebula's 293-audit rates are frozen and must not expand from this review.
