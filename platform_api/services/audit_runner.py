@@ -202,6 +202,12 @@ async def _complete(job: dict, data: dict) -> None:
     except Exception:
         logger.exception("page_intent classification failed for %s", audit_id)
 
+    try:
+        from platform_api.services.epistemic import apply_page_intent
+        data = apply_page_intent(data, page_intent)
+    except Exception:
+        logger.exception("epistemic intent stamp failed for %s", audit_id)
+
     await audit_db.update_audit(
         audit_id=audit_id,
         score=data.get("score", 0),

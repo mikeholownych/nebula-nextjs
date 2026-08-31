@@ -92,6 +92,9 @@ def score_inprocess(job: dict) -> dict:
         "strategic_finding": audit.get("strategic_finding"),
         "historical_data": audit.get("historical_data"),
         "historical_insights": audit.get("historical_insights"),
+        "observation": audit.get("observation"),
+        "case_file": audit.get("case_file"),
+        "registry_version": audit.get("registry_version"),
     }
 
 

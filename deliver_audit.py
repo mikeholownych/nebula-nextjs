@@ -971,7 +971,17 @@ def score_audit(page):
             "opp_matrix": opp_matrix
         })
         result["guided_implementation"] = guided_implementation
-    
+
+    try:
+        from platform_api.services.epistemic import attach_epistemic
+        attach_epistemic(
+            result,
+            html=html_text,
+            title=page.get("title") if isinstance(page, dict) else None,
+        )
+    except Exception:
+        logging.exception("epistemic stamp failed")
+
     return result
 
 
@@ -1134,6 +1144,15 @@ def score_audit_with_signal_verifiers(page: dict) -> dict:
     }
     if strategic_finding:
         result["strategic_finding"] = strategic_finding
+    try:
+        from platform_api.services.epistemic import attach_epistemic
+        attach_epistemic(
+            result,
+            html=html_text,
+            title=page.get("title") if isinstance(page, dict) else None,
+        )
+    except Exception:
+        logging.exception("epistemic stamp failed")
     return result
 
 

@@ -1,52 +1,74 @@
 {
   "registry_version": "2026.08.31",
   "engine_compat": ["2.1.0"],
-  "notes": "Additive ID map. Does not change live scoring. Legacy keys remain the persisted finding.key values.",
+  "pass_score": 7.0,
+  "notes": "Additive ID map. Does not change live scoring. Legacy keys remain finding.key. condition_id is stable; condition_version increments when the check changes.",
   "conditions": [
     {
       "legacy_key": "cta",
-      "condition_id": "PRIMARY_CTA_CLARITY_V1",
+      "condition_id": "PRIMARY_CTA_CLARITY",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "above_fold",
-      "condition_id": "ABOVE_FOLD_CLARITY_V1",
+      "condition_id": "ABOVE_FOLD_CLARITY",
+      "condition_version": 1,
       "layer": "observation",
       "caveat": "Current evidence is an unrendered HTML proxy unless a rendered audit is attached."
     },
     {
       "legacy_key": "headline",
-      "condition_id": "HEADLINE_MESSAGE_MATCH_V1",
+      "condition_id": "HEADLINE_MESSAGE_MATCH",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "social_proof",
-      "condition_id": "TRUST_PROOF_PROXIMITY_V1",
+      "condition_id": "TRUST_PROOF_PROXIMITY",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "load_speed",
-      "condition_id": "LOAD_SPEED_V1",
+      "condition_id": "LOAD_SPEED",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "mobile",
-      "condition_id": "MOBILE_VIEWPORT_V1",
+      "condition_id": "MOBILE_VIEWPORT",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "ad_signals",
-      "condition_id": "AD_TRACKING_V1",
+      "condition_id": "AD_TRACKING",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "seo_foundations",
-      "condition_id": "SEO_FOUNDATIONS_V1",
+      "condition_id": "SEO_FOUNDATIONS",
+      "condition_version": 1,
       "layer": "observation"
     },
     {
       "legacy_key": "ai_readiness",
-      "condition_id": "AI_READINESS_V1",
+      "condition_id": "AI_READINESS",
+      "condition_version": 1,
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "ai_crawler_access",
+      "condition_id": "AI_CRAWLER_ACCESS",
+      "condition_version": 1,
+      "layer": "observation"
+    },
+    {
+      "legacy_key": "local_gbp",
+      "condition_id": "LOCAL_GBP_PRODUCTS",
+      "condition_version": 1,
       "layer": "observation"
     }
   ]

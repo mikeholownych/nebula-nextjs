@@ -36,6 +36,29 @@ def _domain_from_url(url: str | None) -> str | None:
     return host or None
 
 
+def _provenance(f: dict[str, Any], page_intent: str | None = None) -> dict[str, Any]:
+    prov = dict(f.get("scoring_provenance") or {})
+    for key in (
+        "condition_id",
+        "condition_version",
+        "registry_version",
+        "determination",
+        "determination_reason_code",
+        "observation_integrity",
+        "observation_integrity_reason",
+        "determination_confidence",
+        "not_established",
+    ):
+        if f.get(key) is not None:
+            prov[key] = f[key]
+    if page_intent:
+        prov.setdefault("page_intent", page_intent)
+    if prov.get("determination") in {"FAIL", "REVIEW"} and not prov.get("not_established"):
+        from platform_api.services.epistemic import NOT_ESTABLISHED_DEFAULT
+        prov["not_established"] = NOT_ESTABLISHED_DEFAULT
+    return prov
+
+
 def _evidence_class(f: dict[str, Any]) -> str:
     ev = f.get("evidence") or {}
     measured = ev.get("measured")
@@ -47,7 +70,15 @@ def _evidence_class(f: dict[str, Any]) -> str:
 def sync_findings_for_audit(audit_id: str, dsn: str) -> dict:
     """Reconcile one completed audit into the findings store. Returns counts."""
     conn = psycopg2.connect(dsn)
-    counts = {"created": 0, "redetected": 0, "regressed": 0, "resolved": 0, "skipped_stale": 0}
+    counts = {
+        "created": 0,
+        "redetected": 0,
+        "regressed": 0,
+        "resolved": 0,
+        "skipped_stale": 0,
+        "not_applicable": 0,
+        "skipped_not_applicable": 0,
+    }
     try:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             cur.execute(
@@ -78,26 +109,20 @@ def sync_findings_for_audit(audit_id: str, dsn: str) -> dict:
                 if isinstance(f, dict) and f.get("key")
             ]
 
-            # Filter findings to those relevant for this page's intent.
-            # Unknown intent -> all signals pass (classifier wasn't confident).
-            if page_intent != "unknown":
-                try:
-                    from platform_api.services.signal_intent_map import is_relevant
-                    incoming = [
-                        f for f in incoming_all
-                        if is_relevant(str(f["key"]), page_intent)
-                    ]
-                    suppressed = len(incoming_all) - len(incoming)
-                    if suppressed:
-                        import logging as _l
-                        _l.getLogger("nebula.findings_sync").info(
-                            "intent_gate suppressed %d findings for intent=%s audit=%s",
-                            suppressed, page_intent, audit_id,
-                        )
-                except Exception:
-                    incoming = incoming_all  # safe fallback
-            else:
+            # Failures stay in the workspace lifecycle. NOT_APPLICABLE is
+            # recorded on the audit case file and must not auto-resolve
+            # an open finding as if the condition passed.
+            try:
+                from platform_api.services.epistemic import gated_signal_keys
+                from platform_api.services.signal_intent_map import is_relevant
+                incoming = [
+                    f for f in incoming_all
+                    if is_relevant(str(f["key"]), page_intent)
+                ]
+                counts["not_applicable"] = len(incoming_all) - len(incoming)
+            except Exception:
                 incoming = incoming_all
+                counts["not_applicable"] = 0
 
             incoming_keys = [str(f["key"]) for f in incoming]
             sync_marker = f"sync:{audit_id}"
@@ -134,7 +159,7 @@ def sync_findings_for_audit(audit_id: str, dsn: str) -> dict:
                             f.get("quadrant"), impact, effort, f.get("signal_type"),
                             _evidence_class(f),
                             json.dumps(f.get("evidence") or {}),
-                            json.dumps(f.get("scoring_provenance") or {}),
+                            json.dumps(_provenance(f, page_intent)),
                             (audit["email"] or "").strip().lower() or None,
                             finished_at, finished_at,
                         ),
@@ -200,9 +225,19 @@ def sync_findings_for_audit(audit_id: str, dsn: str) -> dict:
                         )
                         counts["redetected"] += 1
 
+            na_keys = set()
+            try:
+                from platform_api.services.epistemic import gated_signal_keys
+                na_keys = gated_signal_keys(list(existing.keys()), page_intent)
+            except Exception:
+                na_keys = set()
+
             # --- pass 2: durable open signals absent from this audit ---
             for key, row in existing.items():
                 if key in incoming_keys:
+                    continue
+                if key in na_keys:
+                    counts["skipped_not_applicable"] += 1
                     continue
                 if row["status"] not in ("new", "acknowledged", "in_progress", "regressed"):
                     continue
