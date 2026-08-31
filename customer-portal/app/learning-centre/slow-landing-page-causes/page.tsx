@@ -38,7 +38,7 @@ const faqSchema = {
       name: 'How long does it take to fix a slow landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest impact on visitors who are geographically far from the server.',
+        text: 'Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest priority on visitors who are geographically far from the server.',
       },
     },
     {
@@ -348,7 +348,7 @@ export default function SlowLandingPageCausesPage() {
             </div>
             <div>
               <h3 className="font-semibold text-fg">How long does it take to fix a slow landing page?</h3>
-              <p className="mt-2 leading-relaxed text-fg-muted">Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest impact on visitors who are geographically far from the server.</p>
+              <p className="mt-2 leading-relaxed text-fg-muted">Fixing an uncompressed hero image takes under 30 minutes. Deferring third-party scripts takes 1-2 hours depending on how they were installed. Moving to a CDN or upgrading hosting takes longer but has the highest priority on visitors who are geographically far from the server.</p>
             </div>
             <div>
               <h3 className="font-semibold text-fg">Does a slow landing page affect ad performance?</h3>

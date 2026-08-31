@@ -47,10 +47,10 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
 
 export default function SiteNav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/90 px-6 py-3.5 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg/95 px-5 py-3.5 backdrop-blur-md sm:px-8 lg:px-12">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-wide flex-row items-center justify-between"
+        className="mx-auto flex max-w-[1296px] flex-row items-center justify-between"
       >
         <Brand />
 

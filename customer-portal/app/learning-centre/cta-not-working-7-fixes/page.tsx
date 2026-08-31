@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'CTA Not Working? 7 Fixes That Actually Convert | Nebula Components',
   description:
-    'Your CTA isn\'t broken—it\'s buried. 7 proven fixes that move the needle: above-the-fold placement, contrast, copy clarity, urgency, mobile-tap targets, trust signals, and A/B testing.',
+    'Your CTA isn\'t broken,it\'s buried. 7 proven fixes that move the needle: above-the-fold placement, contrast, copy clarity, urgency, mobile-tap targets, trust signals, and A/B testing.',
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/cta-not-working-7-fixes',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Fix Your CTA: 7 Proven Conversions Boosters',
   description:
-    'Your CTA isn\'t broken—it\'s buried. 7 proven fixes that move the needle: above-the-fold placement, contrast, copy clarity, urgency, mobile-tap targets, trust signals, and A/B testing.',
+    'Your CTA isn\'t broken,it\'s buried. 7 proven fixes that move the needle: above-the-fold placement, contrast, copy clarity, urgency, mobile-tap targets, trust signals, and A/B testing.',
   url: 'https://nebulacomponents.com/learning-centre/cta-not-working-7-fixes',
   publishedDate: '2026-08-30',
   modifiedDate: '2026-08-30',
@@ -40,17 +40,17 @@ export default function CTANotWorkingSevenFixes() {
               CTA Not Working? 7 Fixes That Actually Convert
             </h1>
             <p className="text-lg leading-relaxed text-fg-muted">
-              Your CTA isn't broken—it's buried. Here are 7 proven fixes that move the needle, from above-the-fold placement to urgency signals and A/B testing.
+              Your CTA isn't broken,it's buried. Here are 7 proven fixes that move the needle, from above-the-fold placement to urgency signals and A/B testing.
             </p>
           </div>
 
           <div className="prose prose-fg mx-auto max-w-none">
             <p className="lead">
-              You've invested in ad creative, audience targeting, and landing page design—but your CTA sits there like a life raft on a sinking ship. Visitors scroll, read, nod… and click away to a competitor.
+              You've invested in ad creative, audience targeting, and landing page design,but your CTA sits there like a life raft on a sinking ship. Visitors scroll, read, nod… and click away to a competitor.
             </p>
 
             <p>
-              The problem isn't that your CTA button is "broken." It's that it's competing with 17 distractions, a 3-second attention span, and zero urgency. Here are 7 fixes that actually move conversion rate metrics—not theory, but the tactics we've seen lift CTR by 230% and conversions by 41%.
+              The problem isn't that your CTA button is "broken." It's that it's competing with 17 distractions, a 3-second attention span, and zero urgency. Here are 7 fixes that actually move conversion rate metrics,not theory, but the tactics we've seen lift CTR by 230% and conversions by 41%.
             </p>
 
             <h2 className="heading-3 mt-12 mb-6">1. Above-the-Fold, Not Above-the-Fold</h2>
@@ -60,7 +60,7 @@ export default function CTANotWorkingSevenFixes() {
             </p>
 
             <p>
-              Most CTAs live in a content carousel: headline, sub-headline, paragraph, bullet points, <em>then</em> the CTA. That's a conversion leak. The CTA should be a visual anchor—same height as the headline, same color family as the primary brand accent, with at least 2x the horizontal whitespace of nearby elements.
+              Most CTAs live in a content carousel: headline, sub-headline, paragraph, bullet points, <em>then</em> the CTA. That's a conversion leak. The CTA should be a visual anchor,same height as the headline, same color family as the primary brand accent, with at least 2x the horizontal whitespace of nearby elements.
             </p>
 
             <div className="my-8 grid gap-6 md:grid-cols-2">
@@ -124,7 +124,7 @@ export default function CTANotWorkingSevenFixes() {
             </p>
 
             <p>
-              The CTA copy should mirror the headline's promise. If your headline says "Fix Your CTA", your CTA should say "Fix My CTA"—not "Learn About CTAs".
+              The CTA copy should mirror the headline's promise. If your headline says "Fix Your CTA", your CTA should say "Fix My CTA",not "Learn About CTAs".
             </p>
 
             <h2 className="heading-3 mt-12 mb-6">4. Urgency: The 48-Hour Rule</h2>
@@ -136,7 +136,7 @@ export default function CTANotWorkingSevenFixes() {
             <ul className="mb-8 space-y-3">
               <li className="flex gap-3">
                 <span className="mt-1.5 size-2 rounded-full bg-accent" />
-                <span>"One specific fix for your highest-priority leak—prepared within 48 hours"</span>
+                <span>"One specific fix for your highest-priority leak,prepared within 48 hours"</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1.5 size-2 rounded-full bg-accent" />
@@ -144,7 +144,7 @@ export default function CTANotWorkingSevenFixes() {
               </li>
               <li className="flex gap-3">
                 <span className="mt-1.5 size-2 rounded-full bg-accent" />
-                <span>"Only X repairs scheduled this week—book before [date]" (rotate weekly)</span>
+                <span>"Only X repairs scheduled this week,book before [date]" (rotate weekly)</span>
               </li>
             </ul>
 
@@ -216,7 +216,7 @@ export default function CTANotWorkingSevenFixes() {
             </div>
 
             <p>
-              Run the test until you hit statistical significance (95% confidence, 200+ conversions per variant). If no winner emerges after 500 conversions, the issue isn't the CTA—it's the surrounding signals.
+              Run the test until you hit statistical significance (95% confidence, 200+ conversions per variant). If no winner emerges after 500 conversions, the issue isn't the CTA,it's the surrounding signals.
             </p>
 
             <h2 className="heading-3 mt-12 mb-6">Your CTA Audit Checklist</h2>
@@ -265,13 +265,13 @@ export default function CTANotWorkingSevenFixes() {
             </div>
 
             <p>
-              Score 3 or fewer "Y"? Your CTA is structurally broken—not just a copy tweak. Run a full conversion leak audit before shipping changes.
+              Score 3 or fewer "Y"? Your CTA is structurally broken,not just a copy tweak. Run a full conversion leak audit before shipping changes.
             </p>
 
             <div className="my-12 rounded-xl bg-bg-muted p-8 text-center">
               <h3 className="heading-3 mb-4">Tired of Guessing?</h3>
               <p className="mb-6 text-fg-muted">
-                Run the free conversion leak audit. We'll show you exactly which of the 9 signals is killing your CTA—and the exact fix to fix it.
+                Run the free conversion leak audit. We'll show you exactly which of the 9 signals is killing your CTA,and the exact fix to fix it.
               </p>
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=cta-7-fixes&utm_campaign=cta-no-working"

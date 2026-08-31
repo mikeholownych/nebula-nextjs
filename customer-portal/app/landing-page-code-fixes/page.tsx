@@ -5,7 +5,7 @@ import Script from 'next/script'
 export const metadata: Metadata = {
   title: 'Landing Page Code Fixes: Get Specific Code Changes for Conversion Issues | Nebula',
   description:
-    'The Nebula Repair Sprint delivers specific code changes for your highest-impact conversion finding. Not a list of recommendations. Actual code, in 48 hours, for $97.',
+    'The Nebula Repair Sprint delivers specific code changes for your highest-priority conversion finding. Not a list of recommendations. Actual code, in 48 hours, for $97.',
   alternates: { canonical: 'https://nebulacomponents.com/landing-page-code-fixes' },
 }
 
@@ -13,7 +13,7 @@ const faqItems = [
   {
     question: 'What does the Nebula $97 Repair Sprint include?',
     answer:
-      'The Repair Sprint delivers one specific code implementation for the highest-impact finding from your audit. It includes the exact change needed (HTML, CSS, or copy), implementation instructions, and a confidence rating. Delivered in 48 hours. Not a recommendations report.',
+      'The Repair Sprint delivers one specific code implementation for the highest-priority finding from your audit. It includes the exact change needed (HTML, CSS, or copy), implementation instructions, and a confidence rating. Delivered in 48 hours. Not a recommendations report.',
   },
   {
     question: 'Can I get code diffs for my landing page conversion issues?',
@@ -60,7 +60,7 @@ const fixTypes = [
   },
   {
     type: 'Load Speed Optimization',
-    desc: 'The highest-impact load speed fix for your specific page, typically image compression, render-blocking script deferral, or font loading. Includes the exact implementation.',
+    desc: 'The highest-priority load speed fix for your specific page, typically image compression, render-blocking script deferral, or font loading. Includes the exact implementation.',
   },
   {
     type: 'Structured Data Addition',
@@ -90,7 +90,7 @@ export default function LandingPageCodeFixes() {
         </h1>
         <p className="text-fg-muted text-lg mb-6">
           Most audits give you a list of problems. The Nebula Repair Sprint gives you the specific
-          code change that fixes the highest-impact one.
+          code change that fixes the highest-priority one.
         </p>
 
         {/* Answer capsule */}

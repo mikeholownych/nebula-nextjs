@@ -229,7 +229,7 @@ export default function LandingPageSpeedTestPage() {
             What to Do With the Results
           </h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            After running all three tools, you will have a list of issues ranked by impact.
+            After running all three tools, you will have a list of issues ranked by priority.
             Work through them in this order: LCP first, then First Input Delay or Interaction to
             Next Paint, then Cumulative Layout Shift. Within LCP, fix image compression before
             script loading before TTFB - image compression is the cheapest fix with the largest

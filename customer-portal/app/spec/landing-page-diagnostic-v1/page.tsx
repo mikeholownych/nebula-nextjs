@@ -142,7 +142,7 @@ export default function SpecPage() {
               below.
             </li>
             <li>
-              Order findings by priority: highest impact first, lowest effort breaks ties, label
+              Order findings by priority: highest priority first, lowest effort breaks ties, label
               alphabetical as final tiebreaker.
             </li>
           </ol>
@@ -152,7 +152,7 @@ export default function SpecPage() {
         <section className="mb-14">
           <SectionLabel>Severity Model</SectionLabel>
           <p className="text-fg-muted leading-relaxed mb-4">
-            Every finding carries an impact score from 0 to 10 and an effort score. Severity bands
+            Every finding carries an priority score from 0 to 10 and an effort score. Severity bands
             are deterministic:
           </p>
           <div className="overflow-x-auto">

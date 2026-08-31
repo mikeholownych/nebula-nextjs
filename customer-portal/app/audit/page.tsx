@@ -84,7 +84,7 @@ const auditHowToSchema = {
     { '@type': 'HowToStep', position: 1, name: 'Enter your URL', text: 'Paste the full URL of the landing page you want to audit into the input field.' },
     { '@type': 'HowToStep', position: 2, name: 'Submit for analysis', text: 'Click Audit. Nebula fetches the public page and evaluates it against 9 conversion signal checks.' },
     { '@type': 'HowToStep', position: 3, name: 'Review findings', text: 'Each signal returns a pass or fail with an evidence record showing exactly what was checked.' },
-    { '@type': 'HowToStep', position: 4, name: 'Prioritise by impact', text: 'Findings are ordered by impact score. Start with the highest-impact failing signal.' },
+    { '@type': 'HowToStep', position: 4, name: 'Prioritise by impact', text: 'Findings are ordered by priority score. Start with the highest-priority failing signal.' },
   ],
 }
 

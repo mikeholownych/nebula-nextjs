@@ -211,39 +211,40 @@ export default function CookieConsent({ country = null }: { country?: string | n
         tabIndex={-1}
         aria-labelledby="cookie-banner-title"
         aria-describedby="cookie-banner-description"
-        className="fixed bottom-0 left-0 right-0 z-50 max-h-[42vh] overflow-y-auto border-t border-border bg-bg-panel p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] opacity-100 motion-reduce:transition-none [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 [&.consent-dismissing]:transition-[opacity,transform] [&.consent-dismissing]:duration-300 [&.consent-dismissing]:ease-out md:max-h-none md:p-6"
+        className="fixed bottom-0 left-3 right-3 z-50 max-h-[42vh] overflow-y-auto border border-border-strong bg-bg-panel p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] opacity-100 shadow-[0_20px_70px_rgba(0,0,0,0.62)] motion-reduce:transition-none [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 [&.consent-dismissing]:transition-[opacity,transform] [&.consent-dismissing]:duration-300 [&.consent-dismissing]:ease-out sm:left-auto sm:right-5 sm:max-h-none sm:w-[520px] sm:p-5"
       >
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
-            <div className="flex-1">
-              <h2 id="cookie-banner-title" className="mb-1 text-base font-semibold text-fg">
-                We use cookies
-              </h2>
-              <p id="cookie-banner-description" className="text-sm leading-relaxed text-fg-muted">
-                We use cookies for analytics to improve our site. Essential cookies keep your
-                session active. You can accept all cookies or only essential ones.{' '}
+        <div>
+          <div className="flex flex-col gap-3">
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <h2 id="cookie-banner-title" className="text-sm font-semibold text-fg">
+                  Cookie controls
+                </h2>
                 <a
                   href="/privacy-policy"
-                  className="text-accent underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
+                  className="shrink-0 text-xs text-accent underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
-                  Privacy Policy
+                  Privacy
                 </a>
+              </div>
+              <p id="cookie-banner-description" className="mt-1 text-xs leading-5 text-fg-muted">
+                Analytics help us improve Nebula. Essential cookies keep the audit working.
               </p>
             </div>
-            <div className="flex flex-row gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 id="cookie-consent-essential"
                 type="button"
-                className="rounded-lg border border-border bg-bg px-5 py-2.5 text-sm font-medium text-fg-muted transition-colors hover:bg-bg-panel focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
+                className="min-h-11 border border-border-strong bg-bg px-4 py-2.5 text-xs font-semibold text-fg transition-colors hover:border-fg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Essential only
               </button>
               <button
                 id="cookie-consent-all"
                 type="button"
-                className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
+                className="min-h-11 bg-accent px-4 py-2.5 text-xs font-bold text-bg transition-colors hover:bg-accent-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
               >
-                Accept all
+                Accept all analytics
               </button>
             </div>
           </div>

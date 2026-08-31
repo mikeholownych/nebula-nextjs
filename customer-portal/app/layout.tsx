@@ -110,7 +110,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        {/* Google Preferred Sources — lets readers follow Nebula in Google Search/AI Mode */}
+        {/* Google Preferred Sources , lets readers follow Nebula in Google Search/AI Mode */}
         {/* https://developers.google.com/search/docs/appearance/preferred-sources */}
         <script async src="https://news.google.com/swg/js/v1/publisher.js" />
       </head>

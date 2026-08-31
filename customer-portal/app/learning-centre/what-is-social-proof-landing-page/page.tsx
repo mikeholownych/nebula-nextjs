@@ -192,7 +192,7 @@ export default function WhatIsSocialProofLandingPagePage() {
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             In Nebula&rsquo;s data across 293 audited pages, social proof failures have the
-            highest average impact score of any conversion signal (4.1 out of 5) and appear on
+            highest average priority score of any conversion signal (4.1 out of 5) and appear on
             39% of pages. That combination means it is both common and costly when it is wrong.
           </p>
         </section>
@@ -232,7 +232,7 @@ export default function WhatIsSocialProofLandingPagePage() {
             </li>
             <li>
               <Link href="/learning-centre/types-of-social-proof" className="text-accent hover:text-fg transition-colors">
-                Types of social proof ranked by conversion impact
+                Types of social proof ranked by conversion relevance
               </Link>
             </li>
             <li>

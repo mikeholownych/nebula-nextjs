@@ -354,7 +354,7 @@ export default function LandingPageHeadlineFormulaPage() {
           <p className="mb-6 leading-relaxed text-fg-muted">
             The Nebula audit checks your above-fold copy, headline specificity, and CTA
             alignment in one pass. If the headline fails message match, the audit flags
-            exactly why. The{' '}
+            the observed reason. The{' '}
             <strong className="text-fg">$97 One-Leak Repair Sprint</strong> then supplies
             a replacement headline built from the formula above. You implement it; a
             30-day re-audit confirms the fix held.

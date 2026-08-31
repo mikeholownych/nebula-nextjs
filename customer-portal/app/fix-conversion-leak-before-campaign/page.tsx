@@ -22,7 +22,7 @@ const jsonLd = {
         name: 'How do I find and fix a conversion leak before my next campaign?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'To fix a conversion leak before a paid traffic campaign: run a structural audit on the landing page to identify the highest-impact failure, fix that one thing first, then launch. Nebula audits 9 signals in under 2 minutes for free. The $97 Repair Sprint implements the highest-impact fix in 48 hours.',
+          text: 'To fix a conversion leak before a paid traffic campaign: run a structural audit on the landing page to identify the highest-priority failure, fix that one thing first, then launch. Nebula audits 9 signals in under 2 minutes for free. The $97 Repair Sprint implements the highest-priority fix in 48 hours.',
         },
       },
       {
@@ -38,7 +38,7 @@ const jsonLd = {
         name: 'How long does it take to fix a landing page before a campaign?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'The audit takes under 2 minutes and identifies the highest-impact failure. The $97 Repair Sprint implements that fix in 48 hours. Total time from identifying the problem to launching a fixed campaign: 48 to 72 hours.',
+          text: 'The audit takes under 2 minutes and identifies the highest-priority failure. The $97 Repair Sprint implements that fix in 48 hours. Total time from identifying the problem to launching a fixed campaign: 48 to 72 hours.',
         },
       },
     ],
@@ -72,9 +72,9 @@ export default function FixConversionLeakBeforeCampaign() {
               <strong className="text-fg">Quick Answer:</strong>{' '}
               <span className="text-fg-muted">
                 To fix a conversion leak before a paid traffic campaign: run a structural audit on
-                the landing page to identify the highest-impact failure, fix that one thing first,
+                the landing page to identify the highest-priority failure, fix that one thing first,
                 then launch. Nebula audits 9 signals in under 2 minutes for free. The $97 Repair
-                Sprint implements the highest-impact fix in 48 hours.
+                Sprint implements the highest-priority fix in 48 hours.
               </span>
             </div>
 
@@ -112,7 +112,7 @@ export default function FixConversionLeakBeforeCampaign() {
           </p>
           <p className="mb-6">
             The result: the campaign launches, the click-through rate looks fine, but conversion is
-            low. The instinct is to adjust the ad. Most of the time, the ad is not the problem.
+            low. The instinct is to adjust the ad. Most of the time, inspect the page before changing the ad.
           </p>
 
           {/* Section 2 */}
@@ -159,7 +159,7 @@ export default function FixConversionLeakBeforeCampaign() {
           </p>
           <p className="mb-4">
             The right sequence is simpler. First, audit the page to find the dominant failure, the
-            one issue that, if fixed, would have the highest impact on conversion. Then fix only that.
+            one issue that, if fixed, would have the highest priority on conversion. Then fix only that.
             Launch. Measure. If conversion still needs improvement, audit again.
           </p>
           <p className="mb-6">
@@ -184,7 +184,7 @@ export default function FixConversionLeakBeforeCampaign() {
               <span className="bg-accent text-bg text-sm font-bold px-3 py-1 rounded-full shrink-0 mt-0.5">Step 2</span>
               <p className="m-0">
                 <strong className="text-fg">Repair Sprint:</strong> 48 hours. The $97 Repair Sprint
-                implements the highest-impact fix identified in the audit. One targeted change,
+                implements the highest-priority fix identified in the audit. One targeted change,
                 delivered within two business days.
               </p>
             </div>

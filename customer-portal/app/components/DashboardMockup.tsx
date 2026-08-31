@@ -86,7 +86,7 @@ export const DashboardMockup: React.FC = () => {
   })
 
   return (
-    <div className="w-[896px] overflow-hidden rounded-2xl bg-bg-surface border border-border shadow-[0_24px_80px_rgba(0,0,0,0.85),0_0_40px_rgba(199,255,47,0.08)] text-left font-sans select-none">
+    <div className="w-[896px] overflow-hidden border border-border bg-bg-surface text-left font-sans shadow-[0_24px_80px_rgba(0,0,0,0.65)] select-none">
       {/* 1. Browser Chrome Header */}
       <div className="flex h-11 items-center justify-between border-b border-border bg-bg-panel px-4">
         {/* Window controls */}

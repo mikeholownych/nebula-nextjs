@@ -23,11 +23,11 @@ const config: Config = {
       colors: {
         // ── Backgrounds - four tones for depth layering ──────────────
         bg: {
-          DEFAULT: '#080909',    // slightly warmer than pure black - avoids harsh edge
-          elevated: '#0d0f0e',   // +5% elevated surface
-          muted: '#0d0f0e',      // alias used by interior pages
-          panel: '#131615',      // component panels
-          surface: '#191c1a',    // lifted cards - warmly tinted
+          DEFAULT: '#050505',    // near-black foundation
+          elevated: '#0a0a0a',   // section contrast
+          muted: '#0a0a0a',      // alias used by interior pages
+          panel: '#111111',      // component panels
+          surface: '#151515',    // lifted diagnostic surfaces
         },
         // ── Foreground ───────────────────────────────────────────────
         fg: {

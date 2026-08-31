@@ -117,7 +117,7 @@ export default function WhatIsPage() {
           Nebula Components detects why landing pages fail to convert on paid ads.
         </p>
         <p className="leading-relaxed text-fg-muted mb-10 max-w-2xl">
-          Run a free audit — submit your URL, get a score and nine signal findings with measured
+          Run a free audit , submit your URL, get a score and nine signal findings with measured
           evidence before entering your email. The diagnosis is free and ungated. Fix one leak
           for $97.
         </p>

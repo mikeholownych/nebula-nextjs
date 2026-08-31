@@ -82,15 +82,15 @@ export default async function CheckoutPage({
           <div className="space-y-4">
             <div className="border-b border-border/50 pb-4 last:border-0">
               <p className="mb-2 text-sm text-fg">"We fixed our message match leak and conversions jumped <span className="font-bold text-accent">31%</span> in two weeks. The $97 sprint paid for itself in the first ad spend cycle."</p>
-              <p className="text-xs text-fg-muted">— Sarah Chen, VP of Sales at CloudMetrics</p>
+              <p className="text-xs text-fg-muted">, Sarah Chen, VP of Sales at CloudMetrics</p>
             </div>
             <div className="border-b border-border/50 pb-4 last:border-0">
               <p className="mb-2 text-sm text-fg">"Spent $97 on repair sprint, recovered <span className="font-bold text-accent">$2.3K</span> in wasted ad spend. Best ROI we've seen all quarter."</p>
-              <p className="text-xs text-fg-muted">— Michael Huang, VP of Finance at Quantum Payments</p>
+              <p className="text-xs text-fg-muted">, Michael Huang, VP of Finance at Quantum Payments</p>
             </div>
             <div>
               <p className="mb-2 text-sm text-fg">"Found 4 leaks in 30 seconds. Fixed #1 for $97 and conversions jumped 18% before even looking at the other three."</p>
-              <p className="text-xs text-fg-muted">— Lisa Tran, Ecommerce Director at Modern Home Goods</p>
+              <p className="text-xs text-fg-muted">, Lisa Tran, Ecommerce Director at Modern Home Goods</p>
             </div>
           </div>
         </div>

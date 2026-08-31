@@ -1,62 +1,36 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { DashboardMockup } from './DashboardMockup'
 
 const DESIGN_WIDTH = 896
 const DESIGN_HEIGHT = 612
 
-/**
- * ScaledDashboard wraps the fixed-width 896px DashboardMockup in a dynamic
- * ResizeObserver scale container that shrinks proportionally on smaller viewports
- * without horizontal overflow or cumulative layout shift.
- */
 export const ScaledDashboard: React.FC = () => {
   const outerRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined)
 
   useEffect(() => {
-    const el = outerRef.current
-    if (!el) return
+    const element = outerRef.current
+    if (!element) return
 
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const availableWidth = entry.contentRect.width
-        const newScale = Math.min(1, availableWidth / DESIGN_WIDTH)
-        setScale(newScale)
-
-        if (innerRef.current) {
-          const naturalHeight = innerRef.current.offsetHeight || DESIGN_HEIGHT
-          setContainerHeight(naturalHeight * newScale)
-        }
-      }
+    const updateScale = (width: number) => setScale(Math.min(1, width / DESIGN_WIDTH))
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) updateScale(entry.contentRect.width)
     })
 
-    ro.observe(el)
-
-    if (innerRef.current) {
-      const naturalHeight = innerRef.current.offsetHeight || DESIGN_HEIGHT
-      const initialScale = Math.min(1, el.offsetWidth / DESIGN_WIDTH)
-      setScale(initialScale)
-      setContainerHeight(naturalHeight * initialScale)
-    }
-
-    return () => ro.disconnect()
+    updateScale(element.offsetWidth)
+    observer.observe(element)
+    return () => observer.disconnect()
   }, [])
 
   return (
-    <div
-      ref={outerRef}
-      className="absolute inset-0 flex justify-center overflow-hidden"
-      style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
-    >
+    <div ref={outerRef} className="absolute inset-0 overflow-hidden">
       <div
-        ref={innerRef}
-        className="w-[896px] shrink-0 origin-top"
+        className="absolute left-1/2 top-0 w-[896px] origin-top"
         style={{
-          transform: `scale(${scale})`,
+          height: `${DESIGN_HEIGHT}px`,
+          transform: `translateX(-50%) scale(${scale})`,
         }}
       >
         <DashboardMockup />

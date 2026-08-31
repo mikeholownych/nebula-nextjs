@@ -1,36 +1,33 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import {
-  Globe,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  Sparkles,
-} from 'lucide-react'
-import { SignalHorizon } from './SignalHorizon'
+import { ArrowRight, Globe } from 'lucide-react'
+import { NebulaLogo } from '@/components/NebulaMark'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
 import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 
 const ScaledDashboard = dynamic(() => import('./ScaledDashboard'))
 
+const PROOF_POINTS = [
+  ['293', 'pages audited'],
+  ['09', 'signals checked'],
+  ['2.7', 'average leaks found'],
+]
+
 export const HeroSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleAuditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget
+  const handleAuditSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const form = event.currentTarget
     const input = form.elements.namedItem('url')
+
     if (input instanceof HTMLInputElement) {
       const trimmed = input.value.trim()
-      if (trimmed && !/^https?:\/\//i.test(trimmed)) {
-        input.value = `https://${trimmed}`
-      }
+      if (trimmed && !/^https?:\/\//i.test(trimmed)) input.value = `https://${trimmed}`
     }
 
     setIsSubmitting(true)
-
     trackClientFunnelEvent('audit_cta_clicked', {
       cta_id: 'hero_run_free_audit',
       cta_location: 'homepage_hero',
@@ -41,172 +38,124 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section
-      className="relative overflow-hidden bg-bg text-fg flex flex-col justify-between pt-8 sm:pt-12 pb-0 selection:bg-accent selection:text-bg"
-      aria-label="Nebula Conversion Diagnostics Hero"
+      aria-label="Landing page conversion diagnosis"
+      className="relative overflow-hidden border-b border-border bg-bg text-fg selection:bg-accent selection:text-bg"
     >
-      {/* 1. Atmospheric Ambient Background Lighting & Calibration Grid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden [contain:paint_layout]"
-      >
-        {/* Heavy blurs stay off mobile */}
-        <div className="absolute top-24 left-1/2 hidden h-[450px] w-[900px] -translate-x-1/2 rounded-full bg-accent/[0.06] blur-[120px] md:block" />
-        <div className="absolute top-16 right-[20%] hidden h-[300px] w-[400px] rounded-full bg-[#3b82f6]/[0.03] blur-[100px] md:block" />
-
-        {/* Diagnostic Hairline Calibration Grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #e8ebe7 1px, transparent 0)`,
-            backgroundSize: '32px 32px',
-          }}
-        />
-
-        {/* Viewport Boundary Calibration Corners */}
-        <div className="absolute top-4 left-4 w-3 h-3 border-t border-l border-fg-muted/40" />
-        <div className="absolute top-4 right-4 w-3 h-3 border-t border-r border-fg-muted/40" />
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-y-0 left-[7.5%] w-px bg-border/50" />
+        <div className="absolute inset-y-0 right-[7.5%] w-px bg-border/50" />
+        <div className="absolute left-0 right-0 top-[58%] h-px bg-border/40" />
       </div>
 
-      {/* 2. Center Hero Content Block */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-panel border border-border text-xs text-fg-muted mb-4 sm:mb-6 shadow-inner">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="font-mono text-fg">293 audits</span>
-          <span className="text-fg-muted/60">|</span>
-          <span>62% fail the headline check</span>
-        </div>
-
-        {/* 2-Line Headline */}
-        <h1 className="font-sans font-normal leading-[1.04] tracking-tight text-[38px] min-[400px]:text-[44px] sm:text-6xl lg:text-7xl xl:text-[76px] text-fg">
-          <span className="block">The ad worked.</span>
-          <span className="block text-fg-muted mt-1 sm:mt-2">
-            The page didn&rsquo;t.
-          </span>
-        </h1>
-
-        {/* Unified Pill Search / Primary CTA Bar */}
-        <div className="mt-6 sm:mt-8 max-w-xl mx-auto">
-          <VisibilityBeacon
-            beaconId="homepage_hero_audit_cta"
-            eventName="audit_cta_exposed"
-            properties={{
-              cta_id: 'hero_run_free_audit',
-              cta_location: 'homepage_hero',
-            }}
-          >
-          <form
-            action="/audit"
-            method="get"
-            onSubmit={handleAuditSubmit}
-            className="relative overflow-hidden flex items-center rounded-full bg-bg-panel/90 backdrop-blur-xl border border-border p-1.5 pl-4 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_30px_rgba(199,255,47,0.08)] focus-within:border-accent/60 focus-within:shadow-[0_0_35px_rgba(199,255,47,0.18)] transition-all"
-          >
-            <Globe className="h-4 w-4 shrink-0 mr-2.5 text-fg-muted transition-colors" />
-            <label htmlFor="hero-landing-url" className="sr-only">
-              Landing Page URL
-            </label>
-            <input
-              id="hero-landing-url"
-              name="url"
-              type="text"
-              inputMode="url"
-              autoCapitalize="none"
-              autoCorrect="off"
-              spellCheck={false}
-              required
-              placeholder="https://yourlandingpage.com/pricing"
-              className="w-full bg-transparent text-sm sm:text-base text-fg placeholder:text-fg-muted/70 focus:outline-none"
-            />
-            <input type="hidden" name="utm_source" value="hero-search" />
-
-            {/* Unified Submit CTA Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              aria-label="Run Free Audit"
-              className="group relative flex h-10 sm:h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-accent px-4 sm:px-5 font-semibold text-xs sm:text-sm text-bg transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-75 shadow-sm"
-            >
-              {isSubmitting ? (
-                <div className="h-4 w-4 rounded-full border-2 border-bg border-t-transparent animate-spin" />
-              ) : (
-                <>
-                  <span>Run Free Audit</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </>
-              )}
-            </button>
-          </form>
-          </VisibilityBeacon>
-
-          {/* Secondary Discovery Link */}
-          <div className="mt-3.5 flex items-center justify-center gap-1.5 text-xs sm:text-sm text-fg-muted">
-            <span>or</span>
-            <Link
-              href="/teardowns"
-              className="inline-flex items-center gap-1 font-medium text-fg hover:text-accent transition-colors"
-            >
-              <span>explore verified public teardowns</span>
-              <ArrowRight className="h-3 w-3" />
-            </Link>
+      <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between border-b border-border/70 py-4 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-xs">
+          <div className="flex items-center gap-3">
+            <NebulaLogo size={17} />
+            <span>Conversion diagnostic</span>
           </div>
+          <span className="hidden sm:block">293 audits / Q3 2026</span>
+          <span className="text-accent">Engine online</span>
         </div>
 
-        {/* Plain Audience Language Subhead */}
-        <p className="mt-6 text-sm sm:text-base text-fg-muted max-w-xl mx-auto leading-relaxed">
-          Your page has a structural failure costing you paid traffic. Nebula finds it in under 2 minutes. Free, no signup.
-        </p>
+        <div className="grid min-h-[calc(100svh-150px)] items-center gap-12 py-12 lg:grid-cols-[minmax(0,0.94fr)_minmax(520px,0.86fr)] lg:gap-16 lg:py-16 xl:gap-24">
+          <div className="max-w-[760px]">
+            <p className="mb-5 max-w-md font-mono text-xs uppercase tracking-[0.14em] text-fg-muted sm:mb-7 sm:text-sm">
+              Clicks arriving. Stripe still quiet.
+            </p>
 
-        {/* Quantity Proof & Recent Audits Texture */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <div className="flex items-center -space-x-2 overflow-hidden py-1">
-            {[
-              { initial: 'LC', bg: 'bg-emerald-800 text-emerald-200' },
-              { initial: 'NS', bg: 'bg-blue-800 text-blue-200' },
-              { initial: 'FR', bg: 'bg-purple-800 text-purple-200' },
-              { initial: 'ZP', bg: 'bg-amber-800 text-amber-200' },
-              { initial: 'BC', bg: 'bg-rose-800 text-rose-200' },
-              { initial: 'NT', bg: 'bg-cyan-800 text-cyan-200' },
-            ].map((av, idx) => (
-              <div
-                key={idx}
-                className={`inline-flex h-6 w-6 items-center justify-center rounded-full border border-border text-[9px] font-bold font-mono ${av.bg}`}
+            <h1 className="text-[clamp(3.35rem,7.2vw,7.4rem)] font-extrabold leading-[0.88] tracking-[-0.065em] text-fg">
+              <span className="block">You paid for the click.</span>
+              <span className="mt-3 block text-accent">Your page lost the sale.</span>
+            </h1>
+
+            <p className="mt-6 max-w-[590px] text-lg leading-8 text-fg-muted sm:mt-8 sm:text-xl sm:leading-9">
+              Find the page failure before you spend another dollar on traffic.
+              Free audit. Raw evidence. Ranked fixes.
+            </p>
+
+            <VisibilityBeacon
+              beaconId="homepage_hero_audit_cta"
+              eventName="audit_cta_exposed"
+              properties={{ cta_id: 'hero_run_free_audit', cta_location: 'homepage_hero' }}
+            >
+              <form
+                action="/audit"
+                method="get"
+                onSubmit={handleAuditSubmit}
+                className="mt-6 max-w-[650px] border border-border-strong bg-bg-panel p-2 transition-colors focus-within:border-accent sm:mt-9 sm:flex sm:items-stretch"
               >
-                {av.initial}
+                <div className="flex min-h-14 flex-1 items-center gap-3 px-3 sm:px-4">
+                  <Globe className="h-4 w-4 shrink-0 text-fg-muted" aria-hidden="true" />
+                  <label htmlFor="hero-landing-url" className="sr-only">Landing page URL</label>
+                  <input
+                    id="hero-landing-url"
+                    name="url"
+                    type="text"
+                    inputMode="url"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    required
+                    placeholder="yourlandingpage.com"
+                    className="w-full bg-transparent text-base text-fg placeholder:text-fg-dim focus:outline-none"
+                  />
+                </div>
+                <input type="hidden" name="utm_source" value="hero-search" />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group flex min-h-14 w-full items-center justify-between gap-5 rounded bg-accent px-5 font-bold text-bg transition-[opacity,transform] hover:opacity-90 active:translate-y-px disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+                >
+                  <span>{isSubmitting ? 'Opening audit' : 'Run free audit'}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </button>
+              </form>
+            </VisibilityBeacon>
+
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-fg-muted sm:text-xs">
+              <span>No signup</span>
+              <span aria-hidden="true">/</span>
+              <span>Under 2 minutes</span>
+              <span aria-hidden="true">/</span>
+              <span>Findings ranked by priority</span>
+            </div>
+          </div>
+
+          <div data-hero-case-file className="relative hidden lg:block">
+            <div className="absolute -left-7 top-10 bottom-10 w-px bg-accent/50" aria-hidden="true" />
+            <div className="border border-border-strong bg-[#0b0c0b] shadow-[0_32px_80px_rgba(0,0,0,0.48)]">
+              <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
+                <span>Case file 0293</span>
+                <span>Sample audit output</span>
+                <span className="text-signal-fail">3 failures found</span>
               </div>
-            ))}
-          </div>
-          <p className="text-xs text-fg-muted font-mono">
-            <span className="font-semibold text-fg">293 landing pages audited</span> · <span className="text-accent font-semibold">2.7 avg leaks</span> found
-          </p>
-        </div>
-
-        {/* Trust Signals Strip */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-fg-muted">
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-            <span>No signup required</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-            <span>Ranked by revenue impact</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            <span>$97 fix for the top finding</span>
+              <div className="relative overflow-hidden [aspect-ratio:896/612]">
+                <ScaledDashboard />
+              </div>
+              <div className="grid grid-cols-3 border-t border-border font-mono text-[10px] uppercase tracking-[0.1em] text-fg-muted">
+                <span className="border-r border-border px-4 py-3">HTML inspected</span>
+                <span className="border-r border-border px-4 py-3">Viewport measured</span>
+                <span className="px-4 py-3 text-accent">Evidence attached</span>
+              </div>
+            </div>
+            <p className="mt-3 text-right font-mono text-[10px] uppercase tracking-[0.14em] text-fg-dim">
+              Illustrative product view. Not a live result.
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Spacer */}
-      <div className="h-10 sm:h-14 lg:h-18" />
-
-      {/* Instrument preview is desktop-only. The aspect-ratio box is
-          server-rendered so the dashboard's final height is reserved from
-          first paint (prevents CLS when the client-only mockup mounts). */}
-      <div className="relative z-10 mx-auto hidden w-full max-w-[896px] overflow-hidden [aspect-ratio:896/612] md:-mb-20 md:block lg:-mb-32">
-        <ScaledDashboard />
+        <div className="grid border-t border-border sm:grid-cols-3">
+          {PROOF_POINTS.map(([value, label], index) => (
+            <div
+              key={label}
+              className={`flex items-baseline gap-4 py-5 sm:px-6 ${index > 0 ? 'border-t border-border sm:border-l sm:border-t-0' : ''}`}
+            >
+              <span className="font-mono text-3xl font-bold tracking-tight text-fg">{value}</span>
+              <span className="text-sm text-fg-muted">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
-      <SignalHorizon />
     </section>
   )
 }

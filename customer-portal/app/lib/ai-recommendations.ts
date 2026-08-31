@@ -234,7 +234,7 @@ function getSignalName(signalKey: string): string {
 }
 
 /**
- * Get recommended fix pack offer for customer
+ * Get recommended repair sprint offer for customer
  */
 export async function getFixPackOffer(customerId: string): Promise<{
   offerId: string

@@ -102,9 +102,9 @@ export default function SiteFooter() {
       <div className="border-t border-border/20 px-6 py-4">
         <div className="mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-fg-dim">
           <p>© {new Date().getFullYear()} Nebula Components. All rights reserved.</p>
-          {/* Google Preferred Sources button — dark theme to match site */}
+          {/* Google Preferred Sources button , dark theme to match site */}
           <div google-add-preferred-source-btn data-theme="dark" data-lang="en" />
-          {/* VisibAI badge — AI visibility score for nebulacomponents.com */}
+          {/* VisibAI badge , AI visibility score for nebulacomponents.com */}
             <a
               href="https://getvisibai.com/score/e7dc341b-e44a-40e9-980c-4a8effcf8aae"
               target="_blank"

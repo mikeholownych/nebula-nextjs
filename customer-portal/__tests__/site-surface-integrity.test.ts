@@ -56,11 +56,11 @@ describe('site surface integrity', () => {
     expect(publicDs).toMatch(/--accent:\s*#c7ff2f/)
   })
 
-  it('keeps the homepage compressed to the instrument sequence', () => {
+  it('keeps the homepage compressed to the diagnostic sequence', () => {
     const home = readFileSync(path.join(repo, 'app/page.tsx'), 'utf8')
     expect(home).toContain('HeroSection')
-    expect(home).toContain('What Nebula checks')
-    expect(home).toContain('See the Repair Sprint')
+    expect(home).toContain('Nine ways a page loses the click.')
+    expect(home).toContain('See the repair contract')
     expect(home).toContain('What the audit can prove')
     expect(home).not.toContain('ROICalculator')
     expect(home).not.toContain('WithWithout')
@@ -70,14 +70,11 @@ describe('site surface integrity', () => {
     expect(home).not.toContain('Not a sales call in disguise')
   })
 
-  it('keeps the hero instrument off the mobile first screen', () => {
+  it('keeps the hero instrument off the mobile first screen without ambient glow', () => {
     const hero = readFileSync(path.join(repo, 'app/components/HeroSection.tsx'), 'utf8')
-    const horizon = readFileSync(path.join(repo, 'app/components/SignalHorizon.tsx'), 'utf8')
-    expect(hero).toContain('hidden w-full overflow-hidden md:-mb-20 md:block')
-    expect(hero).toContain('hidden h-[450px] w-[900px]')
-    expect(horizon).toContain('hidden w-full')
-    expect(horizon).toContain('md:flex')
-    expect(horizon).not.toContain('animate-ping')
+    expect(hero).toContain('data-hero-case-file className="relative hidden lg:block"')
+    expect(hero).not.toMatch(/blur-\[(?:100|120)px\]/)
+    expect(hero).not.toContain('animate-ping')
   })
 
   it('instruments homepage hero CTA exposure and click without changing the offer', () => {

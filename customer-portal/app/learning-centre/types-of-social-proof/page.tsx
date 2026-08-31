@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Types of Social Proof for Landing Pages: Which Work and Which Backfire | Nebula',
   description:
-    '6 types of social proof ranked by conversion impact, with the specific conditions under which each works, backfires, or becomes invisible. Named testimonials, review counts, logos, usage numbers, case studies, and generic quotes.',
+    '6 types of social proof ranked by conversion relevance, with the specific conditions under which each works, backfires, or becomes invisible. Named testimonials, review counts, logos, usage numbers, case studies, and generic quotes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/learning-centre/types-of-social-proof',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Types of Social Proof for Landing Pages: Which Work and Which Backfire',
   description:
-    '6 types of social proof ranked by conversion impact, with the specific conditions under which each works, backfires, or becomes invisible.',
+    '6 types of social proof ranked by conversion relevance, with the specific conditions under which each works, backfires, or becomes invisible.',
   url: 'https://nebulacomponents.com/learning-centre/types-of-social-proof',
   publishedDate: '2026-08-28',
 })
@@ -78,8 +78,8 @@ export default function TypesOfSocialProofPage() {
             Not all social proof is equal. A named testimonial with a specific result converts
             differently than a logo strip, which converts differently than a generic quote.
             Understanding the hierarchy lets you prioritize the right evidence and avoid the
-            configurations that actively reduce trust. Here are the 6 types, ranked by conversion
-            impact, with the exact conditions that make each one work or backfire.
+            configurations that actively reduce trust. Here are the 6 types, ranked by diagnostic
+            priority, with the specific conditions that make each one work or backfire.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
@@ -99,7 +99,7 @@ export default function TypesOfSocialProofPage() {
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">1. Named testimonial with a specific result</h2>
-          <p className="mt-2 text-xs font-medium uppercase tracking-widest text-accent">Highest impact</p>
+          <p className="mt-2 text-xs font-medium uppercase tracking-widest text-accent">Highest priority</p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             A real full name, a recognizable company or role, and a specific measurable outcome.
             &ldquo;We cut our cost per lead from $45 to $18 in six weeks&rdquo; from &ldquo;Sarah
