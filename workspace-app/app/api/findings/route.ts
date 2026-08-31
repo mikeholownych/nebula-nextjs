@@ -118,9 +118,34 @@ export async function GET(request: NextRequest) {
       params
     )
 
+    const NOT_ESTABLISHED =
+      'Nebula has not established that this condition caused conversion loss or that changing it will increase conversion rate.'
+
+    const findings = result.rows.map((row) => {
+      const prov = (row.scoring_provenance && typeof row.scoring_provenance === 'object')
+        ? row.scoring_provenance as Record<string, unknown>
+        : {}
+      const determination = typeof prov.determination === 'string' ? prov.determination : null
+      const notEstablished = determination === 'FAIL' || determination === 'REVIEW'
+        ? (typeof prov.not_established === 'string' ? prov.not_established : NOT_ESTABLISHED)
+        : (typeof prov.not_established === 'string' ? prov.not_established : null)
+      return {
+        ...row,
+        condition_id: prov.condition_id ?? null,
+        condition_version: prov.condition_version ?? null,
+        registry_version: prov.registry_version ?? null,
+        determination,
+        determination_reason_code: prov.determination_reason_code ?? null,
+        observation_integrity: prov.observation_integrity ?? null,
+        observation_integrity_reason: prov.observation_integrity_reason ?? null,
+        determination_confidence: prov.determination_confidence ?? null,
+        not_established: notEstablished,
+      }
+    })
+
     const res = NextResponse.json({
-      findings: result.rows,
-      count: result.rows.length,
+      findings,
+      count: findings.length,
       limit,
       offset,
     })

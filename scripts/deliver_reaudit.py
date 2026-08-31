@@ -92,12 +92,11 @@ def grade_label(score):
     return "F"
 
 
-def build_email_body(url, original_score, new_score, new_findings, purchase_date):
+def build_email_body(url, original_score, new_score, new_findings, purchase_date, transitions=None):
     grade = grade_label(new_score)
     delta = new_score - (original_score or new_score)
     delta_str = f"+{delta:.1f}" if delta >= 0 else f"{delta:.1f}"
 
-    # Categorise findings
     critical = [f for f in new_findings if f.get("impact", 0) >= 7]
     top_3 = sorted(new_findings, key=lambda f: -f.get("impact", 0))[:3]
 
@@ -106,6 +105,15 @@ def build_email_body(url, original_score, new_score, new_findings, purchase_date
         f"    {f.get('issue', '')}"
         for f in top_3
     ) if top_3 else "  No failing signals detected."
+
+    transition_lines = []
+    for row in transitions or []:
+        mark = "VERIFIED condition change" if row.get("verified_condition_change") else "observed change"
+        transition_lines.append(
+            f"  • {row.get('condition_id')} v{row.get('condition_version')}: "
+            f"{row.get('from') or 'n/a'} -> {row.get('to') or 'n/a'} ({mark})"
+        )
+    transitions_text = "\n".join(transition_lines) if transition_lines else "  No condition transitions vs the original audit."
 
     subject = f"Your 30-day re-audit: {url} - {grade} ({new_score:.1f}/10)"
 
@@ -116,13 +124,16 @@ Your 30-day re-audit for:
 
 Score: {new_score:.1f}/10  (Grade {grade})  [{delta_str} vs your original audit]
 
-{"✅ The page condition improved - the fix held." if delta > 0 else "⚠️  The score hasn't changed yet - the fix may not have been deployed, or the signal hasn't cleared." if delta == 0 else "⚠️  The score dropped - something may have regressed or the fix wasn't applied."}
+Condition changes (same condition ID and version only):
+{transitions_text}
+
+NOT ESTABLISHED: conversion or revenue impact. A condition changing from FAIL to PASS means the observed page condition changed. It does not prove conversion changed.
 
 Top remaining signals to address:
 {findings_text}
 
 ---
-Next step: If you implemented the fix and the score didn't move, reply to this email with what you changed and I'll take a look.
+Next step: If you implemented the fix and the condition did not change, reply to this email with what you changed and I'll take a look.
 
 If you haven't implemented the fix yet, the One-Leak Repair Sprint kit is still in your inbox from {purchase_date}.
 
@@ -135,38 +146,128 @@ Nebula Components
     return subject, body
 
 
+def lookup_predecessor(conn, email, url, before):
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT id, score, findings, engine_output, completed_at
+            FROM audits
+            WHERE lower(coalesce(email,'')) = lower(%s)
+              AND url = %s
+              AND status = 'completed'
+              AND completed_at <= %s
+            ORDER BY completed_at DESC
+            LIMIT 1
+            """,
+            (email or "", url, before),
+        )
+        row = cur.fetchone()
+        if not row:
+            return None
+        cols = [d[0] for d in cur.description]
+        return dict(zip(cols, row))
+
+
+def _case_file_rows(audit_or_output):
+    if not isinstance(audit_or_output, dict):
+        return []
+    case_file = audit_or_output.get("case_file")
+    if isinstance(case_file, dict) and isinstance(case_file.get("determinations"), list):
+        return case_file["determinations"]
+    engine_output = audit_or_output.get("engine_output")
+    if isinstance(engine_output, str):
+        try:
+            engine_output = json.loads(engine_output)
+        except json.JSONDecodeError:
+            engine_output = {}
+    if isinstance(engine_output, dict):
+        nested = engine_output.get("case_file") or {}
+        if isinstance(nested, dict) and isinstance(nested.get("determinations"), list):
+            return nested["determinations"]
+    return []
+
+
+def ensure_reaudit_columns(conn):
+    with conn.cursor() as cur:
+        cur.execute("ALTER TABLE purchases ADD COLUMN IF NOT EXISTS predecessor_audit_id UUID")
+        cur.execute("ALTER TABLE purchases ADD COLUMN IF NOT EXISTS reaudit_condition_delta JSONB")
+    conn.commit()
+
+
+def store_reaudit_link(conn, purchase_id, predecessor_id, delta):
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            UPDATE purchases
+            SET predecessor_audit_id = COALESCE(%s, predecessor_audit_id),
+                reaudit_condition_delta = %s
+            WHERE id = %s
+            """,
+            (predecessor_id, json.dumps(delta), purchase_id),
+        )
+    conn.commit()
+
+
 def run_reaudit(url):
-    """Run the 9-signal audit script on a URL. Returns (score, findings) or raises."""
+    """Run the 9-signal audit. Returns the full audit dict."""
     page = scrape_page(url)
-    audit = score_audit(page)
-    score = audit.get("score", 0)
-    findings = audit.get("findings", [])
-    return score, findings
+    return score_audit(page)
 
 
-def process_purchase(purchase, dry_run=False):
+def process_purchase(purchase, conn=None, dry_run=False):
     url = purchase["audit_url"]
     email = purchase["customer_email"]
     pid = purchase["id"]
-    session_id = purchase["stripe_session_id"]
     purchase_date = str(purchase["created_at"])[:10]
 
     log(f"Processing purchase {pid} for {email} - URL: {url}")
 
     try:
-        new_score, new_findings = run_reaudit(url)
+        audit = run_reaudit(url)
     except Exception as e:
-        log(f"  ✗ Audit failed for {url}: {e}")
+        log(f"  Audit failed for {url}: {e}")
         return False
 
-    log(f"  Score: {new_score:.1f} | Findings: {len(new_findings)}")
+    new_score = float(audit.get("overall") or audit.get("score") or 0)
+    new_findings = audit.get("opp_matrix") or audit.get("findings") or []
+    predecessor = None
+    original_score = None
+    transitions = []
+    if conn is not None:
+        try:
+            predecessor = lookup_predecessor(conn, email, url, purchase["created_at"])
+            if predecessor:
+                original_score = predecessor.get("score")
+                if original_score is not None:
+                    original_score = float(original_score) / 10.0 if float(original_score) > 10 else float(original_score)
+                from platform_api.services.epistemic import diff_determinations
+                transitions = diff_determinations(
+                    _case_file_rows(predecessor),
+                    _case_file_rows(audit),
+                )
+                if not dry_run:
+                    store_reaudit_link(
+                        conn,
+                        pid,
+                        predecessor.get("id"),
+                        {
+                            "predecessor_audit_id": str(predecessor.get("id")),
+                            "registry_version": audit.get("registry_version"),
+                            "transitions": transitions,
+                        },
+                    )
+        except Exception as e:
+            log(f"  predecessor link failed: {e}")
+
+    log(f"  Score: {new_score:.1f} | Findings: {len(new_findings)} | transitions: {len(transitions)}")
 
     subject, body = build_email_body(
         url=url,
-        original_score=None,  # original score not stored yet; future: look up from audit_id
+        original_score=original_score,
         new_score=new_score,
         new_findings=new_findings,
         purchase_date=purchase_date,
+        transitions=transitions,
     )
 
     if dry_run:
@@ -181,10 +282,10 @@ def process_purchase(purchase, dry_run=False):
             subject=subject,
             body=body,
         )
-        log(f"  ✓ Re-audit email sent to {email}")
+        log(f"  Re-audit email sent to {email}")
         return True
     except Exception as e:
-        log(f"  ✗ Email send failed for {email}: {e}")
+        log(f"  Email send failed for {email}: {e}")
         return False
 
 
@@ -201,6 +302,11 @@ def main():
         log(f"ERROR: DB connection failed: {e}")
         sys.exit(1)
 
+    try:
+        ensure_reaudit_columns(conn)
+    except Exception as e:
+        log(f"reaudit column ensure failed: {e}")
+
     due = get_due_reaudits(conn)
     log(f"Found {len(due)} re-audit(s) due")
 
@@ -214,7 +320,7 @@ def main():
         if args.force_email:
             purchase = {**purchase, "customer_email": args.force_email}
 
-        ok = process_purchase(purchase, dry_run=args.dry_run)
+        ok = process_purchase(purchase, conn=conn, dry_run=args.dry_run)
         if ok and not args.dry_run:
             mark_sent(conn, purchase["id"])
             delivered += 1

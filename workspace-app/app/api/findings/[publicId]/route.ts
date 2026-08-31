@@ -256,7 +256,27 @@ export async function GET(
        FROM finding_events WHERE finding_id = $1 ORDER BY occurred_at ASC`,
       [finding.rows[0].id]
     )
-    const res = NextResponse.json({ finding: finding.rows[0], history: events.rows })
+    const row = finding.rows[0]
+    const prov = (row.scoring_provenance && typeof row.scoring_provenance === 'object')
+      ? row.scoring_provenance as Record<string, unknown>
+      : {}
+    const determination = typeof prov.determination === 'string' ? prov.determination : null
+    const notEstablished = determination === 'FAIL' || determination === 'REVIEW'
+      ? (typeof prov.not_established === 'string' ? prov.not_established : 'Nebula has not established that this condition caused conversion loss or that changing it will increase conversion rate.')
+      : (typeof prov.not_established === 'string' ? prov.not_established : null)
+    const payload = {
+      ...row,
+      condition_id: prov.condition_id ?? null,
+      condition_version: prov.condition_version ?? null,
+      registry_version: prov.registry_version ?? null,
+      determination,
+      determination_reason_code: prov.determination_reason_code ?? null,
+      observation_integrity: prov.observation_integrity ?? null,
+      observation_integrity_reason: prov.observation_integrity_reason ?? null,
+      determination_confidence: prov.determination_confidence ?? null,
+      not_established: notEstablished,
+    }
+    const res = NextResponse.json({ finding: payload, history: events.rows })
     res.headers.set('Cache-Control', 'no-store')
     res.headers.set('X-Request-ID', ctx.requestId)
     return res
