@@ -37,6 +37,7 @@ describe('GET /api/healthz', () => {
 
     expect(response.status).toBe(200)
     expect(body.status).toBe('ok')
+    expect(body.build_id).not.toBe('unknown')
     expect(query).not.toHaveBeenCalled()
     expect(connect).not.toHaveBeenCalled()
     expect(fetchSpy).not.toHaveBeenCalled()
