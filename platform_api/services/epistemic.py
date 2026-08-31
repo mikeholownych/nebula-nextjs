@@ -7,9 +7,12 @@ issue, fix, or evidence.confidence. Public scoring stays unchanged.
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any, Literal
+
+_log = logging.getLogger("nebula.epistemic")
 
 Determination = Literal[
     "PASS",
@@ -322,6 +325,13 @@ def attach_epistemic(
     page_intent: str | None = None,
 ) -> dict[str, Any]:
     """Stamp observation + case_file + finding fields. Scores are copied, not recomputed."""
+    before_scores = {
+        "overall": result.get("overall"),
+        "composite": result.get("composite"),
+        "score": result.get("score"),
+        "overall_grade": result.get("overall_grade"),
+        "grade": result.get("grade"),
+    }
     integrity, integrity_reason = observation_integrity(
         html=html,
         fetch_error=fetch_error,
@@ -361,6 +371,7 @@ def attach_epistemic(
         title=title,
     )
     result["registry_version"] = registry_version()
+    _log_invariants(result, before_scores)
     return result
 
 
@@ -411,7 +422,45 @@ def apply_page_intent(data: dict[str, Any], page_intent: str | None) -> dict[str
         )
         if isinstance(data.get("observation"), dict):
             data["observation"] = dict(data["observation"])
+    _log_invariants(data, None)
     return data
+
+
+def collect_invariants(result: dict[str, Any], before_scores: dict[str, Any] | None = None) -> list[str]:
+    """Return logically impossible combinations. Never mutates result."""
+    violations: list[str] = []
+    observation = result.get("observation") if isinstance(result.get("observation"), dict) else {}
+    integrity = observation.get("integrity")
+    case_file = result.get("case_file") if isinstance(result.get("case_file"), dict) else {}
+    rows = case_file.get("determinations") if isinstance(case_file.get("determinations"), list) else []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        det = row.get("determination")
+        cid = row.get("condition_id") or row.get("legacy_key")
+        if integrity == "unusable" and det == "PASS":
+            violations.append(f"unusable_integrity_pass:{cid}")
+        if det == "NOT_APPLICABLE" and row.get("score") is not None:
+            # NA may still carry a leftover score; that is allowed. Opening is not.
+            pass
+    findings = result.get("findings") or result.get("opp_matrix") or []
+    if isinstance(findings, list):
+        for finding in findings:
+            if not isinstance(finding, dict):
+                continue
+            if finding.get("determination") == "NOT_APPLICABLE" and finding.get("open_in_workspace") is True:
+                violations.append(f"na_opened:{finding.get('key')}")
+    if before_scores:
+        for key in ("overall", "composite", "score", "overall_grade", "grade"):
+            if key in before_scores and result.get(key) != before_scores.get(key):
+                violations.append(f"score_mutated:{key}")
+    return violations
+
+
+def _log_invariants(result: dict[str, Any], before_scores: dict[str, Any] | None) -> None:
+    violations = collect_invariants(result, before_scores)
+    if violations:
+        _log.warning("epistemic_invariant_violation %s", ",".join(violations))
 
 
 def gated_signal_keys(signal_keys: list[str], page_intent: str | None) -> set[str]:

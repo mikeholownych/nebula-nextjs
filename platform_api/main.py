@@ -2,6 +2,7 @@
 
 from contextlib import asynccontextmanager
 import os
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -235,13 +236,28 @@ async def not_found_handler(request: Request, exc: HTTPException) -> JSONRespons
     )
 
 
+def _repo_revision() -> str:
+    env = os.getenv("NEBULA_BUILD_REVISION")
+    if env:
+        return env
+    head = Path("/home/mike/nebula/.git/HEAD")
+    try:
+        raw = head.read_text(encoding="utf-8").strip()
+        if raw.startswith("ref:"):
+            ref = Path("/home/mike/nebula/.git") / raw.split(" ", 1)[1]
+            return ref.read_text(encoding="utf-8").strip()[:40]
+        return raw[:40]
+    except Exception:
+        return "unknown"
+
+
 @app.get("/healthz", response_model=dict, status_code=status.HTTP_200_OK)
 async def health_check(request: Request) -> dict:
     """Health check endpoint without dependency checks."""
     request_id = request.headers.get("X-Request-ID") or (
         request.state.request_id if hasattr(request.state, "request_id") else None
     )
-    return {"status": "ok", "revision": os.getenv("NEBULA_BUILD_REVISION", "unknown"), "request_id": request_id}
+    return {"status": "ok", "revision": _repo_revision(), "request_id": request_id}
 
 
 @app.get("/build-info", response_model=dict, status_code=status.HTTP_200_OK)

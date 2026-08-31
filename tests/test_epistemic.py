@@ -1,5 +1,6 @@
 from platform_api.services.epistemic import (
     attach_epistemic,
+    collect_invariants,
     condition_id_for,
     condition_ref,
     determination_confidence_for,
@@ -173,3 +174,31 @@ def test_condition_transition_is_verified_only_for_pass_fail():
     assert len(diff) == 1
     assert diff[0]["verified_condition_change"] is True
     assert "conversion" in diff[0]["not_established"].lower()
+
+
+def test_unusable_integrity_cannot_pass():
+    violations = collect_invariants(
+        {
+            "observation": {"integrity": "unusable"},
+            "case_file": {
+                "determinations": [
+                    {"condition_id": "PRIMARY_CTA_CLARITY", "determination": "PASS"}
+                ]
+            },
+        }
+    )
+    assert any(v.startswith("unusable_integrity_pass:") for v in violations)
+
+
+def test_stamp_does_not_mutate_score_invariant():
+    result = {
+        "overall": 5.0,
+        "composite": 5.1,
+        "engine_version": "2.1.0",
+        "dimensions": {"cta": {"score": 3.0, "weight": "high"}},
+        "opp_matrix": [{"key": "cta", "score": 3.0, "evidence": {"confidence": "high"}}],
+    }
+    attach_epistemic(result, html="<html><body>" + ("landing page copy " * 40) + "</body></html>")
+    assert collect_invariants(result, {"overall": 5.0, "composite": 5.1}) == []
+    assert result["overall"] == 5.0
+    assert result["composite"] == 5.1

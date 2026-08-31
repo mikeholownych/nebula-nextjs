@@ -118,6 +118,7 @@ def sync_findings_for_audit(audit_id: str, dsn: str) -> dict:
                 incoming = [
                     f for f in incoming_all
                     if is_relevant(str(f["key"]), page_intent)
+                    and f.get("determination") != "NOT_APPLICABLE"
                 ]
                 counts["not_applicable"] = len(incoming_all) - len(incoming)
             except Exception:
