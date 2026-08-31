@@ -10,6 +10,16 @@ jest.mock('posthog-js', () => ({
   default: { capture: jest.fn() },
 }))
 
+jest.mock('@/app/lib/db', () => ({
+  pool: {
+    query: jest.fn().mockResolvedValue({
+      rowCount: 1,
+      rows: [{ id: '11111111-2222-4333-8444-555555555555' }],
+    }),
+    connect: jest.fn(),
+  },
+}))
+
 jest.mock('@/app/lib/email-service', () => ({
   getQueueStats: jest.fn(),
   queueLeadForOutreach: jest.fn(),

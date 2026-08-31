@@ -5,7 +5,7 @@ purposes only. Nothing here is built, served, or referenced by the live app.
 
 ## Contents
 
-- No archived source files are currently tracked in this directory.
+- `learning-centre/landing-page-bounce-rate-fix-leaks/meta.json` (2026-08-31): archived orphan metadata. No matching `page.tsx` ever shipped, and the active article `landing-page-bounce-rate-high` already covers the intent. Keeping this sidecar active created a ghost sitemap URL.
 - Retired scripts were moved out of version control per `.gitignore`
   (`.legacy/`, `*.legacy/`); recover them from git history if needed.
 

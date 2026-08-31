@@ -33,6 +33,8 @@ export default function LearningCentreIndex() {
     'Conversion Copy',
     'Message Match',
     'Trust Leaks',
+    'Trust Signals',
+    'Load Speed',
     'Form Leaks',
     'Mobile Leaks',
     'Industry Specific',

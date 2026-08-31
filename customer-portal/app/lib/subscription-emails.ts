@@ -38,7 +38,7 @@ async function sendEmail(payload: EmailPayload): Promise<boolean> {
         payload: {
           subject: payload.subject,
           body: payload.html,
-          from_email: 'audits@nebulacomponents.shop',
+          from_email: 'audits@nebulacomponents.com',
           content_type: 'text/html',
         },
       }),

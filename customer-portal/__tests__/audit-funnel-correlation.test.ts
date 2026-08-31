@@ -23,6 +23,14 @@ type Captured = { distinctId: string; event: string; properties: Record<string, 
 
 const captured: Captured[] = []
 const calls: string[] = []
+const ledgerQuery = jest.fn().mockResolvedValue({
+  rowCount: 1,
+  rows: [{ id: '11111111-2222-4333-8444-555555555555' }],
+})
+
+jest.mock('@/app/lib/db', () => ({
+  pool: { query: (...args: unknown[]) => ledgerQuery(...args) },
+}))
 
 jest.mock('@/app/lib/ssrf-guard', () => ({
   assertPublicHttpUrl: jest.fn().mockResolvedValue(undefined),
@@ -94,7 +102,7 @@ describe('audit funnel correlation', () => {
     })
 
     it('emits audit_started after persist so the event carries audit_id and still precedes completion', () => {
-      expect(calls).toEqual(['fetch:/audit/accept', 'capture:audit_started'])
+      expect(calls).toEqual(['fetch:/audit/accept', 'capture:audit_accepted', 'capture:audit_started'])
     })
 
     it('stamps the correlation key on audit_started', () => {

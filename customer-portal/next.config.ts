@@ -269,16 +269,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Next.js static chunks: immutable long cache (content-hashed filenames).
-      // Also sets Cloudflare-CDN-Cache-Control to prevent CF from caching 404s
-      // that occur during the brief window between build deploy and service restart.
+      // Next.js owns browser cache headers for content-hashed static chunks.
+      // The Cloudflare-specific directive protects the edge from retaining
+      // transient 404s during the build-to-restart window without overriding
+      // Next.js development behavior.
       {
         source: '/_next/static/(.*)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
           {
             key: 'Cloudflare-CDN-Cache-Control',
             value: 'public, max-age=31536000, immutable',

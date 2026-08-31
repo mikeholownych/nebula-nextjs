@@ -50,6 +50,8 @@ export interface FunnelEventPayload {
   environment?: 'production' | 'staging' | 'test'
   paymentMode?: 'live' | 'test'
   isSynthetic?: boolean
+  /** Explicit visitor consent gate for third-party analytics projection. */
+  analyticsConsent?: boolean
   properties?: Record<string, unknown>
 }
 
@@ -274,11 +276,13 @@ export async function recordFunnelEvent(payload: FunnelEventPayload): Promise<{ 
     }
 
     const eventId = result.rows[0].id
-    void captureToPostHog(payload, {
-      sessionId: payload.sessionId || null,
-      journeyId,
-      anonymousUserId: payload.anonymousUserId || null,
-    }).catch(() => undefined)
+    if (payload.analyticsConsent === true) {
+      void captureToPostHog(payload, {
+        sessionId: payload.sessionId || null,
+        journeyId,
+        anonymousUserId: payload.anonymousUserId || null,
+      }).catch(() => undefined)
+    }
     return { success: true, id: eventId }
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error)

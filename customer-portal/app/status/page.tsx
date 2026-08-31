@@ -16,7 +16,7 @@ const services = [
   },
   {
     name: 'Audit API',
-    url: 'https://api.nebulacomponents.shop',
+    url: 'https://nebulacomponents.com/api/healthz',
     impact: 'Audit functionality affected',
     status: 'operational',
     description: 'FastAPI audit processing API on port 8001',

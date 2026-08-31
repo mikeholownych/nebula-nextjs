@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import type { PoolClient } from 'pg'
-import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
+import { captureServerException } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 import { planFromStripePrice } from '@/app/lib/subscription-plans'
@@ -300,6 +300,10 @@ export async function POST(request: NextRequest) {
         stage: 'purchase',
         sourceSystem: 'stripe_webhook',
         journeyId,
+        anonymousUserId: session.metadata?.analytics_consent === 'all'
+          ? session.metadata?.analytics_person_id || null
+          : null,
+        analyticsConsent: session.metadata?.analytics_consent === 'all',
         auditId: typeof auditId === 'string' ? auditId : null,
         checkoutSessionId: session.id,
         transactionId,
@@ -362,30 +366,6 @@ export async function POST(request: NextRequest) {
       } catch (gaErr) {
         console.error('Failed to project purchase to GA4:', gaErr)
       }
-    }
-
-    const analyticsPersonId = session.metadata?.analytics_person_id
-    if (
-      session.metadata?.analytics_consent === 'all'
-      && typeof analyticsPersonId === 'string'
-      && /^person_[0-9a-f]{32}$/.test(analyticsPersonId)
-    ) try {
-      const ph = getPostHogClient()
-      ph.capture({
-        distinctId: analyticsPersonId,
-        event: 'purchase_completed',
-        properties: {
-          stripe_session_id: session.id,
-          transaction_id: transactionId,
-          offer_key: session.metadata?.offer_key ?? undefined,
-          amount_total: session.amount_total,
-          currency: session.currency,
-          payment_status: session.payment_status,
-        },
-      })
-      void ph.flush().catch(() => undefined)
-    } catch {
-      // Fulfillment must not depend on analytics.
     }
 
     if (customerEmail) {
@@ -461,7 +441,7 @@ export async function POST(request: NextRequest) {
                     `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
                     `with price <code>${priceId ?? 'none'}</code>, which maps to no Nebula plan.</p>` +
                     `<p>No subscription row was written. Map the price in app/lib/subscription-plans.ts, then replay the event.</p>`,
-                  from_email: 'audits@nebulacomponents.shop',
+                  from_email: 'audits@nebulacomponents.com',
                   content_type: 'text/html',
                 },
               }),
@@ -512,7 +492,7 @@ export async function POST(request: NextRequest) {
                     `(customer <code>${typeof sub.customer === 'string' ? sub.customer : sub.customer.id}</code>) ` +
                     `but no resolvable email was present.</p>` +
                     `<p>Bind it manually in Stripe + subscriptions table.</p>`,
-                  from_email: 'audits@nebulacomponents.shop',
+                  from_email: 'audits@nebulacomponents.com',
                   content_type: 'text/html',
                 },
               }),
@@ -543,7 +523,7 @@ export async function POST(request: NextRequest) {
     let subscriptionInserted = false
     try {
       client = await pool.connect()
-      const provisioned = await provisionOrgForEmail(pool, email)
+      const provisioned = await provisionOrgForEmail(client, email)
       const upsertResult = await client.query(
         `INSERT INTO subscriptions
            (organization_id, stripe_subscription_id, stripe_customer_id, status, plan,

@@ -37,8 +37,9 @@ export function getArticles(): ArticleMeta[] {
     if (SKIP.has(entry.name)) continue
     if (entry.name.startsWith('[')) continue
 
+    const pagePath = path.join(LC_DIR, entry.name, 'page.tsx')
     const metaPath = path.join(LC_DIR, entry.name, 'meta.json')
-    if (!fs.existsSync(metaPath)) continue
+    if (!fs.existsSync(pagePath) || !fs.existsSync(metaPath)) continue
 
     try {
       const raw = fs.readFileSync(metaPath, 'utf-8')

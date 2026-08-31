@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'node:crypto'
-import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
+import { captureServerException } from '@/app/lib/posthog-server'
 import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
-import { clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
+import { clientAnalyticsDistinctId, hasServerAnalyticsConsent } from '@/app/lib/analytics-consent'
 import { checkAuditQuota } from '@/app/lib/audit-quota'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 import { logApiError } from '@/app/lib/ops-log'
@@ -45,7 +45,6 @@ function auditRunHeaders(request: NextRequest, email: string): Record<string, st
 }
 
 export async function POST(request: NextRequest) {
-  const attribution = readAttributionHeader(request)
   const analyticsConsent = hasServerAnalyticsConsent(request)
   const distinctId = clientAnalyticsDistinctId(request)
   const requestId = request.headers.get('x-request-id')?.trim() || null
@@ -70,7 +69,7 @@ export async function POST(request: NextRequest) {
       return parsed.response
     }
     const body = parsed.body
-    const { url, referrer, audit_reason, monthly_ad_spend } = body
+    const { url, referrer, monthly_ad_spend } = body
     auditAttemptId =
       typeof body.audit_attempt_id === 'string' && body.audit_attempt_id.trim().length > 0
         ? body.audit_attempt_id.trim().slice(0, 100)
@@ -282,6 +281,8 @@ export async function POST(request: NextRequest) {
       eventName: 'audit_accepted',
       stage: 'audit_intake',
       sourceSystem: 'server_api',
+      anonymousUserId: distinctId,
+      analyticsConsent,
       auditAttemptId,
       auditId,
       journeyId,
@@ -298,6 +299,8 @@ export async function POST(request: NextRequest) {
       eventName: 'audit_started',
       stage: 'audit_execution',
       sourceSystem: 'server_api',
+      anonymousUserId: distinctId,
+      analyticsConsent,
       auditAttemptId,
       auditId,
       journeyId,
@@ -309,26 +312,6 @@ export async function POST(request: NextRequest) {
         referrer_class: referrer || null,
       }),
     })
-
-    if (analyticsConsent && distinctId) try {
-      const ph = getPostHogClient()
-      ph.capture({
-        distinctId,
-        event: 'audit_started',
-        properties: {
-          audit_id: auditId,
-          audit_attempt_id: auditAttemptId,
-          journey_id: journeyId,
-          page_url: processedUrl,
-          page_domain: parsedUrl.hostname,
-          referrer: referrer || null,
-          audit_reason: audit_reason || null,
-          ...attribution,
-        },
-      })
-    } catch {
-      // Non-fatal - never let analytics block the response
-    }
 
     const response = NextResponse.json({
       audit_id: auditId,
@@ -359,6 +342,8 @@ export async function POST(request: NextRequest) {
       eventName: 'audit_failed',
       stage: 'audit_execution',
       sourceSystem: 'server_api',
+      anonymousUserId: distinctId,
+      analyticsConsent,
       auditAttemptId,
       journeyId,
       failureReason,
