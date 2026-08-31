@@ -31,7 +31,15 @@ export interface Finding {
     source?: string
     basis?: string
     limitation?: string
+    condition_id?: string
+    condition_version?: number
+    determination?: string
+    not_established?: string
   }
+  condition_id?: string
+  condition_version?: number
+  determination?: string
+  not_established?: string
 }
 
 export interface AuditResult {
@@ -99,6 +107,10 @@ function finding(value: unknown, index: number): Finding | null {
     principle_explanation: typeof value.principle_explanation === 'string'
       ? text(value.principle_explanation, '', 400)
       : undefined,
+    condition_id: typeof value.condition_id === 'string' ? text(value.condition_id, '', 80) : undefined,
+    condition_version: typeof value.condition_version === 'number' ? value.condition_version : undefined,
+    determination: typeof value.determination === 'string' ? text(value.determination, '', 24) : undefined,
+    not_established: typeof value.not_established === 'string' ? text(value.not_established, '', 400) : undefined,
   }
 }
 

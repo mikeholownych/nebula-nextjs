@@ -19,6 +19,15 @@ import {
   summarizeFindings,
 } from './reportArchitecture'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
+import {
+  conditionIdFor,
+  conditionVersionFor,
+  isExactArtifact,
+  rankFirstReason,
+  QUADRANT_DEFINITIONS,
+} from './conditionLineage'
+
+const REPAIR_CTA = `Get the repair: $${REPAIR_SPRINT_OFFER.priceUsd}`
 
 // Quick Win is the one positive/actionable signal and gets Signal Emerald;
 // the other three quadrants are informational, not "good" or "bad\", so they
@@ -256,7 +265,7 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
   return (
     <Card variant="elevated" className="mt-8">
       <div className="text-center">
-        <h3 className="mb-1 text-2xl font-extrabold text-accent">Full Report Unlocked</h3>
+        <h3 className="mb-1 text-2xl font-extrabold text-accent">Complete audit results</h3>
         <p className="mb-5 text-sm text-fg-muted">
           {emailSent
             ? 'The complete report is heading to your inbox now'
@@ -330,17 +339,11 @@ function ImmediateRepairOffer({
     <section id="immediate-repair" className="scroll-mt-40 border-b border-border py-12">
       <div className="mx-auto max-w-4xl">
           <div className="mb-6 text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-md bg-danger/10 px-3 py-1.5">
-              <svg className="h-4 w-4 text-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span className="text-xs font-semibold text-danger">Only 3 repair sprint slots left this week</span>
-            </div>
-            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Stop the bleeding now</p>
-            <h2 className="mt-2 text-2xl font-extrabold text-fg">One targeted fix for your highest-priority leak</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Highest-priority failed condition</p>
+            <h2 className="mt-2 text-2xl font-extrabold text-fg">One scoped repair for the first failed condition</h2>
             <p className="mt-2 max-w-[65ch] text-base text-fg-muted">
-              Get the exact copy, code, or configuration change for your worst-failing signal.{''}
-              <span className="font-semibold text-danger"> 30-day re-audit included.</span>
+              If the artifact is exact, you get copy, code, or configuration for that condition.
+              <span className="font-semibold text-fg"> 30-day re-audit verifies whether that condition changed.</span>
             </p>
           </div>
 
@@ -357,13 +360,34 @@ function ImmediateRepairOffer({
 
               return (
                 <>
-                  <h3 className="text-lg font-bold text-fg">{disease.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-fg-muted">{disease.symptom}</p>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">The fix:</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-fg-muted">
+                    {conditionIdFor(worst)} / v{conditionVersionFor(worst)} · {worst.determination || 'FAIL'}
+                  </p>
+                  <h3 className="mt-2 text-lg font-bold text-fg">{disease.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-fg-muted">{worst.issue}</p>
+                  {worst.evidence?.measured && (
+                    <p className="mt-3 text-xs leading-5 text-fg-muted">
+                      <span className="font-semibold text-fg">Observed:</span> {worst.evidence.measured}
+                    </p>
+                  )}
+                  {worst.evidence?.required && (
+                    <p className="mt-2 text-xs leading-5 text-fg-muted">
+                      <span className="font-semibold text-fg">Threshold:</span> {worst.evidence.required}
+                    </p>
+                  )}
+                  {worst.evidence?.selector && worst.evidence.selector !== 'N/A' && (
+                    <p className="mt-2 font-mono text-xs text-fg-muted">Selector: {worst.evidence.selector}</p>
+                  )}
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">
+                    {isExactArtifact(worst.fix) ? 'Exact artifact' : 'Recommended change'}
+                  </p>
                   <div className="mt-2 rounded-lg border border-border bg-danger/5 p-4 font-mono text-xs leading-relaxed text-fg">
                     {worst.fix.slice(0, 180)}
                     {worst.fix.length > 180 ? '...' : ''}
                   </div>
+                  <p className="mt-3 text-xs text-fg-muted">
+                    Nebula has not established conversion impact. A later PASS on this condition ID means the page condition changed.
+                  </p>
                 </>
               )
             })()}
@@ -403,7 +427,7 @@ function ImmediateRepairOffer({
                   type="submit"
                   className="block w-full rounded-2xl bg-danger px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-danger-light hover:opacity-90"
                 >
-                  Stop the leak - ${REPAIR_SPRINT_OFFER.priceUsd}
+                  {REPAIR_CTA}
                 </button>
                 <p className="text-center text-xs text-fg-muted">
                   Redirects to secure Stripe checkout. Card details never touch our servers.
@@ -594,18 +618,7 @@ function ReportOverview({
   const hostname = new URL(results.url).hostname
   const headline = results.composite ?? results.score
   const weighted = results.composite !== undefined
-
-  // Psychology: Estimate monthly ad spend loss (sunk cost motivation)
-  // Rough heuristic: typical founder spends $5-50k/month on ads
-  // Each conversion leak costs ~5-15% of spend
-  const estimatedMonthlyLoss = headline < 5
-    ? '$500–2,000/month bleeding'
-    : headline < 6
-    ? '$200–800/month lost'
-    : '$100–500/month at risk'
-
-  // Benchmark comparison (relativity principle)
-  const benchmarkDiff = 7.0 - headline  // Industry average ~7.0
+  const firstFailed = buildPriorityQueue(results.findings)[0]
 
   return (
     <section id="overview" className="scroll-mt-40 border-b border-border pb-16">
@@ -614,24 +627,22 @@ function ReportOverview({
           <p className="text-sm font-semibold text-accent">Audit overview</p>
 
           {/* Psychology: Loss aversion + urgency (System 1 activation) */}
-          <h1 className="mt-2 text-3xl font-extrabold text-danger md:text-4xl md:tracking-[-0.03em]">
-            Your ads are attracting the wrong visitors
+          <h1 className="mt-2 text-3xl font-extrabold text-fg md:text-4xl md:tracking-[-0.03em]">
+            Failed page conditions on this URL
           </h1>
           <p className="mt-2 break-all text-base text-fg-muted">{hostname}</p>
 
-          {/* Psychology: Sunk cost + emotional hook */}
-          <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted font-semibold text-signal-fail">
-            You're bleeding {estimatedMonthlyLoss}. Here's why.
+          <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted">
+            {summary.critical + summary.warning} conditions failed this run. Conversion impact is not established.
           </p>
 
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
-            We checked your landing page against 9 conversion signals. We found {summary.critical + summary.warning} failing signals. Your {summary.critical} highest-priority findings are listed first.
+            We checked this landing page against 9 conversion conditions. Highest-priority failed conditions are listed first.
           </p>
 
-          {/* Psychology: Endowment effect + autonomy (founder psychology) */}
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
-            <span className="font-semibold text-fg">The fix is specific to your page:</span>{' '}
-            Not "improve your H1" - the actual replacement. Not "add social proof" - the specific element and where to put it. The{' '}
+            <span className="font-semibold text-fg">Repair is scoped to one condition:</span>{' '}
+            The{' '}
             {onGoToRemediation ? (
               <button
                 type="button"
@@ -643,43 +654,38 @@ function ReportOverview({
             ) : (
               <span className="font-semibold text-accent">$97 Repair Sprint</span>
             )}{' '}
-            delivers the exact copy, code, or configuration change for your highest-priority finding. A 30-day re-audit confirms it held.
+            produces one implementation artifact for the first failed condition. A 30-day re-audit verifies whether that same condition ID changed.
           </p>
         </div>
 
         <Card variant="elevated" className="vt-audit-card border-danger/30">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              {/* Psychology: Anchor (huge low score) + relativity (benchmark) */}
-              <p className="text-sm font-semibold text-danger">⚠️ Conversion readiness</p>
+              <p className="text-sm font-semibold text-fg">Page condition score</p>
               <div className="flex items-end gap-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Your score</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Composite</p>
                   <p className="mt-1 tabular-nums">
-                    <span className="text-5xl font-extrabold text-danger">{headline.toFixed(1)}</span>
+                    <span className="text-5xl font-extrabold text-fg">{headline.toFixed(1)}</span>
                     <span className="text-xl text-fg-muted">/10</span>
                   </p>
-
-                  {/* Relativity: show vs. benchmark */}
-                  <div className="mt-3 flex items-center gap-2 text-xs text-fg-muted">
-                    <span>Industry avg:</span>
-                    <span className="font-semibold">7.0</span>
-                    <span className="text-signal-fail">(-{benchmarkDiff.toFixed(1)})</span>
-                  </div>
+                  <p className="mt-3 max-w-[28ch] text-xs text-fg-muted">
+                    Score is a compatibility number. It is not conversion proof.
+                  </p>
                 </div>
                 <div className="border-l border-border pl-6">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Critical leaks</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Failed conditions</p>
                   <p className="mt-1 font-mono text-[96px] font-extrabold leading-none text-danger tracking-tighter">{summary.critical}</p>
                 </div>
               </div>
               <p className="mt-3 text-sm text-fg-muted">
-                {weighted ? 'Weighted across high-impact signals' : 'Evidence-backed assessment'}
+                {weighted ? 'Weighted across high-impact conditions' : 'Evidence-backed assessment'}
               </p>
-
-              {/* Psychology: Scarcity + urgency */}
-              <p className="mt-2 text-xs font-semibold text-danger">
-                ⏱️ This audit expires in 7 days
-              </p>
+              {firstFailed && (
+                <p className="mt-2 font-mono text-xs text-fg-muted">
+                  First condition: {conditionIdFor(firstFailed)} / v{conditionVersionFor(firstFailed)}
+                </p>
+              )}
             </div>
 
             {/* Psychology: Social proof (pattern matching) */}
@@ -736,15 +742,9 @@ function FixFirstQueue({
     <section id="fix-first" className="scroll-mt-40 border-b border-border py-16">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          {/* Psychology: Loss frame + action verb */}
-          <h2 className="text-2xl font-extrabold text-fg">Stop the bleeding</h2>
+          <h2 className="text-2xl font-extrabold text-fg">Fix first</h2>
           <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
-            Your top {queue.length} leaks, ranked by priority. Address the top condition first, then re-audit.
-          </p>
-
-          {/* Psychology: Anti-marketing honesty */}
-          <p className="mt-3 max-w-[65ch] text-sm leading-6 text-fg-muted">
-            No fluff. No philosophy. Just the 3 changes that matter most for your conversion rate.
+            The first failed condition worth changing. Rank uses severity and effort, not predicted conversion loss.
           </p>
         </div>
         {onGoToRemediation ? (
@@ -756,11 +756,11 @@ function FixFirstQueue({
             className="min-h-11 shrink-0 rounded-lg bg-danger px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-danger-light"
           >
             {/* Psychology: Loss frame CTA */}
-            Stop the leak - $97
+            {REPAIR_CTA}
           </button>
         ) : (
           <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
-            Stop the leak - $97
+            {REPAIR_CTA}
           </span>
         )}
       </div>
@@ -778,6 +778,9 @@ function FixFirstQueue({
                   </span>
                 </div>
                 <p className="mt-2 max-w-[65ch] text-sm leading-6 text-fg-muted">{finding.issue}</p>
+                {index === 0 && (
+                  <p className="mt-2 max-w-[65ch] text-xs leading-5 text-fg-muted">{rankFirstReason(finding)}</p>
+                )}
               </div>
               <div className="flex items-center gap-4 md:flex-col md:items-end">
                 <span className="text-xs tabular-nums text-fg-muted" aria-label="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">Priority {finding.impact}/10</span>
@@ -1507,43 +1510,68 @@ export default function ResultsClient({
           {/* NEW: Before/After Proof Layer (Psychology: Remove risk perception) */}
           {results.findings.length > 0 && (
             <Card variant="elevated" className="border-accent/30 bg-accent/5">
-              <div className="mb-4">
-                <p className="text-sm font-semibold uppercase tracking-widest text-accent">Your Exact Fix</p>
-                <h3 className="mt-2 text-xl font-extrabold text-fg">See exactly what you are paying for</h3>
-              </div>
-
               {(() => {
-                const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0];
-                if (!worst) return null;
-
+                const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0]
+                if (!worst) return null
+                const exact = isExactArtifact(worst.fix)
                 return (
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 text-sm font-semibold text-fg-muted">BEFORE (Your current issue)</p>
-                      <div className="rounded-lg border border-border bg-danger/5 p-4 font-mono text-sm leading-relaxed text-fg-muted">
-                        {worst.evidence?.measured ? (
-                          <p>{worst.evidence.measured.slice(0, 150)}{worst.evidence.measured.length > 150 ? "..." : ""}</p>
-                        ) : (
-                          <p className="italic">{worst.label}: not meeting threshold</p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex justify-center">
-                      <span className="text-2xl text-accent">↓</span>
-                    </div>
-
-                    <div>
-                      <p className="mb-2 text-sm font-semibold text-fg-muted">AFTER (Your fix - ready to paste)</p>
-                      <div className="rounded-lg border border-border bg-accent/5 p-4 font-mono text-sm leading-relaxed text-fg">
-                        <p>{worst.fix.slice(0, 150)}{worst.fix.length > 150 ? "..." : ""}</p>
-                      </div>
-                      <p className="mt-2 text-xs text-fg-muted">
-                        Exact copy/code/config. No rewrites needed. Paste it in and test.
+                      <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+                        {exact ? 'Exact artifact' : 'Recommended change'}
+                      </p>
+                      <h3 className="mt-2 text-xl font-extrabold text-fg">
+                        {conditionIdFor(worst)} / v{conditionVersionFor(worst)}
+                      </h3>
+                      <p className="mt-1 font-mono text-xs uppercase tracking-widest text-fg-muted">
+                        {worst.determination || 'FAIL'}
                       </p>
                     </div>
+                    <dl className="space-y-3 text-sm leading-6 text-fg-muted">
+                      <div>
+                        <dt className="font-semibold text-fg">Condition</dt>
+                        <dd>{worst.issue}</dd>
+                      </div>
+                      {worst.evidence?.measured && (
+                        <div>
+                          <dt className="font-semibold text-fg">Observed</dt>
+                          <dd>{worst.evidence.measured}</dd>
+                        </div>
+                      )}
+                      {worst.evidence?.required && (
+                        <div>
+                          <dt className="font-semibold text-fg">Threshold</dt>
+                          <dd>{worst.evidence.required}</dd>
+                        </div>
+                      )}
+                      {worst.evidence?.selector && worst.evidence.selector !== 'N/A' && (
+                        <div>
+                          <dt className="font-semibold text-fg">Selector</dt>
+                          <dd className="font-mono text-xs">{worst.evidence.selector}</dd>
+                        </div>
+                      )}
+                      <div>
+                        <dt className="font-semibold text-fg">What changes this determination</dt>
+                        <dd>{worst.evidence?.delta || worst.fix}</dd>
+                      </div>
+                    </dl>
+                    {exact ? (
+                      <div>
+                        <p className="mb-2 text-sm font-semibold text-fg-muted">Paste-ready artifact</p>
+                        <div className="rounded-lg border border-border bg-accent/5 p-4 font-mono text-sm leading-relaxed text-fg">
+                          <p>{worst.fix}</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-fg-muted">
+                        No paste-ready copy, code, or configuration is attached to this run. The Repair Sprint produces that artifact.
+                      </p>
+                    )}
+                    <p className="text-xs text-fg-muted">
+                      {worst.not_established || 'Nebula has not established conversion impact for this condition.'}
+                    </p>
                   </div>
-                );
+                )
               })()}
             </Card>
           )}
@@ -1562,13 +1590,12 @@ export default function ResultsClient({
                 <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
                 <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
                 <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                  Not a 12-point checklist. One specific fix for your highest-priority finding - exact copy, code, or configuration change - for you or your developer to implement.
+                  One scoped repair package for the highest-priority failed condition. Copy, code, or configuration for that condition ID. You or your developer implements it.
                 </p>
                 <ul className="mb-5 space-y-2 text-sm text-fg-muted">
-                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-priority finding, prepared within 48 hours</li>
-                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
-                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
-                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One condition. Prepared within 48 hours.</li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Implementation artifact for that condition, not a 12-point checklist</li>
+                  <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Included:</strong> 30-day re-audit to verify whether the audited condition changed</span></li>
                 </ul>
                 <a
                   href={
@@ -1592,7 +1619,7 @@ export default function ResultsClient({
                   className="block w-full rounded-lg bg-danger px-4 py-2 text-center font-semibold text-white transition-colors hover:bg-danger-light"
                 >
                   {unlocked && !sharedView
-                    ? `Stop the leak - $${REPAIR_SPRINT_OFFER.priceUsd}`
+                    ? REPAIR_CTA
                     : "Unlock this audit to select its repair"}
                 </a>
               </div>
@@ -1608,7 +1635,7 @@ export default function ResultsClient({
               <div>
                 <p className="font-semibold text-fg">Know another founder with the same problem?</p>
                 <p className="mt-1 max-w-[65ch] text-base leading-7 text-fg-muted">
-                  Forward their site for a free audit - takes a couple of minutes. The report names the exact leaks, same as yours.
+                  Forward their site for a free audit. The report names failed conditions the same way.
                 </p>
               </div>
               <a
@@ -1625,11 +1652,13 @@ export default function ResultsClient({
 
         {/* Priority Matrix Legend */}
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <span className="text-xs text-fg-muted">Priority quadrants:</span>
+          <span className="text-xs text-fg-muted">Priority quadrants (severity x implementation effort, not conversion impact):</span>
           {Object.entries(QUADRANT_LABELS).map(([key, value]) => (
             <div key={key} className="flex items-center gap-1.5">
               <div className={`h-2 w-2 rounded-full ${value.tone === 'accent' ? 'bg-accent' : 'bg-fg-muted/40'}`} />
-              <span className="text-xs text-fg-muted">{value.label}</span>
+              <span className="text-xs text-fg-muted">
+                {value.label}: {QUADRANT_DEFINITIONS[key] || ''}
+              </span>
             </div>
           ))}
         </div>
