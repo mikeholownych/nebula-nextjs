@@ -70,8 +70,8 @@ export default async function TeardownPage({
         </nav>
 
         {/* Header */}
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-          Public Audit Teardown
+        <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+          Public audit / not a customer
         </p>
         <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover What the Audit Engine Found on {t.domain}</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">

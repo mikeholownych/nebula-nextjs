@@ -90,6 +90,31 @@ SiteNav (`components/SiteNav.tsx`): NebulaLogo + "Nebula Components" wordmark | 
 
 SiteFooter (`app/components/SiteFooter.tsx`): 4-column layout (Product | Audit Types | Learn | Nebula) + CTA strip + copyright bar with Google Preferred Sources button + VisibAI badge.
 
+## Art direction freeze (2026-08-31)
+
+Do not redesign the homepage hero, lime interruption, black field, diagnostic case file, nine-signal sequence, Citable strip, or Repair Sprint visual model. Remaining work is system codification, desktop validation, accessibility, and sitewide consistency.
+
+Banned additions: rounded SaaS cards, gradient blobs, glassmorphism, generic icon grids, extra typefaces, extra accent colors, invented social proof, sticky CTA without an A/B test.
+
+## Exposed diagnostic frame
+
+Brand infrastructure. Vertical rails survive section boundaries.
+
+- `--frame-max`: 1296px
+- `--frame-gutter`: 20px / 32px / 48px
+- `--frame-rail`: 7.5%
+- `--frame-rule`: 1px
+- `.nebula-document`: persistent left/right rails under the nav
+- `.nebula-frame`: content inset
+- `.nebula-signal`: 280px min-height, shared padding for 01/09 through 09/09
+
+## Diagnostic vocabulary
+
+CASE FILE, CONDITION, EVIDENCE, PASS / FAIL / REVIEW, PRIORITY, OBSERVED.
+Public teardowns carry `PUBLIC AUDIT / NOT A CUSTOMER`.
+Dataset provenance uses instrumentation: `DATASET / Q3-2026 / N=293 / COMPLETED AUDITS / METHODOLOGY`.
+Repair lifecycle: 01 Audit / 02 Isolate / 03 Repair / 04 Re-audit.
+
 ## Homepage structure (canonical, Aug 2026 overhaul)
 
 1. Hero, pain-first, URL input, trust strip, social proof row

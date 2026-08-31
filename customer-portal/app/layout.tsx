@@ -119,8 +119,10 @@ export default function RootLayout({
           Skip to main content
         </a>
         <SiteNav />
-        {children}
-        <SiteFooter />
+        <div className="nebula-document">
+          {children}
+          <SiteFooter />
+        </div>
         {/* GeoConsent: isolated dynamic component - reads country from x-nebula-country header */}
         <Suspense fallback={null}>
           <GeoConsent />

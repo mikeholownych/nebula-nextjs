@@ -92,7 +92,10 @@ export default async function TeardownsPage() {
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">
+                  Public audit / not a customer
+                </p>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-fg-muted">
                       {urlDisplay}
                     </p>
                     <h2 className="mt-1 text-2xl font-bold text-fg">{row.name}</h2>

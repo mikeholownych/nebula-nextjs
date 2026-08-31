@@ -39,6 +39,18 @@ describe('homepage bespoke redesign contract', () => {
     expect(`${hero}\n${home}\n${nav}`).not.toContain('&mdash;')
   })
 
+  it('codifies the diagnostic frame, dataset provenance, and public-audit qualifier', () => {
+    const css = read('app/globals.css')
+    const layout = read('app/layout.tsx')
+    expect(css).toContain('--frame-rail')
+    expect(css).toContain('.nebula-document')
+    expect(layout).toContain('nebula-document')
+    expect(home).toContain('DATASET / Q3-2026 / N=293 / COMPLETED AUDITS')
+    expect(home).toContain('Public audit / not a customer')
+    expect(home).toContain('The evidence stops where observation stops.')
+    expect(home).toContain('01 Audit')
+  })
+
   it('prevents first-viewport layout regressions', () => {
     const dashboard = read('app/components/ScaledDashboard.tsx')
     const consent = read('app/components/CookieConsent.tsx')

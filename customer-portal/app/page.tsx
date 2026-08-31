@@ -123,10 +123,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mt-5 font-mono text-[11px] text-fg-dim">
-              Source: 293 completed Nebula audits, Q3 2026.{' '}
+            <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-dim">
+              DATASET / Q3-2026 / N=293 / COMPLETED AUDITS /{' '}
               <Link href="/research/landing-page-performance-q3-2026" className="underline underline-offset-4 hover:text-fg">
-                Read the methodology
+                METHODOLOGY
               </Link>
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function Home() {
 
             <div className="border border-border-strong bg-[#0b0c0b]">
               <div className="flex items-center justify-between border-b border-border px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-fg-muted">
-                <span>Sample output</span>
+                <span>Case file / illustrative</span>
                 <span>Not a live result</span>
               </div>
               <div className="divide-y divide-border">
@@ -180,7 +180,7 @@ export default function Home() {
 
             <div className="mt-14 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3">
               {SIGNALS.map((signal) => (
-                <div key={signal.key} className="group min-h-[280px] border-b border-r border-border p-6 transition-colors hover:bg-bg-panel sm:p-8">
+                <div key={signal.key} className="nebula-signal group border-b border-r border-border transition-colors hover:bg-bg-panel">
                   <div className="flex items-center justify-between">
                     <SignalIcon signalKey={signal.key} className="h-6 w-6 text-accent" />
                     <span className="font-mono text-xs text-fg-dim">{signal.number} / 09</span>
@@ -241,7 +241,8 @@ export default function Home() {
                   >
                     <span className="font-mono text-xs text-fg-dim">0{index + 1}</span>
                     <div>
-                      <p className="text-xl font-bold text-fg">{teardown.domain}</p>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-fg-dim">Public audit / not a customer</span>
+                    <p className="mt-2 text-xl font-bold text-fg">{teardown.domain}</p>
                       <p className="mt-1 font-mono text-xs text-signal-fail">{teardown.findings.length} documented findings</p>
                     </div>
                     <div className="max-w-2xl">
@@ -249,7 +250,7 @@ export default function Home() {
                       <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">{finding?.evidence}</p>
                     </div>
                     <span className="inline-flex items-center gap-2 text-sm font-bold text-accent">
-                      Open case <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    Open case file <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Link>
                 )
@@ -268,6 +269,12 @@ export default function Home() {
               <p className="mt-8 max-w-xl text-lg leading-8 text-fg-muted">
                 The $97 One-Leak Repair Sprint turns the highest-priority finding into exact copy, code, or configuration. You implement it. We run the same check again within 30 days.
               </p>
+              <ol className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim">
+                <li>01 Audit</li>
+                <li>02 Isolate</li>
+                <li>03 Repair</li>
+                <li>04 Re-audit</li>
+              </ol>
             </div>
 
             <div className="border border-accent/40 bg-accent/[0.04] p-7 sm:p-9">
@@ -342,8 +349,11 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="mt-7 max-w-3xl text-sm leading-7 text-fg-muted">
-              We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, it will appear here. Until then, the evidence stops where observation stops.
+            <p className="mt-10 font-mono text-sm uppercase tracking-[0.16em] text-fg sm:text-base">
+              The evidence stops where observation stops.
+            </p>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-fg-muted">
+              We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, it will appear here.
             </p>
           </div>
         </section>
@@ -368,8 +378,6 @@ export default function Home() {
         </section>
 
         <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
-          <div className="absolute inset-y-0 left-[7.5%] w-px bg-border/50" aria-hidden="true" />
-          <div className="absolute inset-y-0 right-[7.5%] w-px bg-border/50" aria-hidden="true" />
           <div className="relative mx-auto max-w-[1296px] text-center">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent">Stop changing the ad first</p>
             <h2 className="mx-auto mt-6 max-w-5xl text-[clamp(3rem,7vw,7.5rem)] font-extrabold leading-[0.88] tracking-[-0.065em] text-fg">

@@ -41,12 +41,6 @@ export const HeroSection: React.FC = () => {
       aria-label="Landing page conversion diagnosis"
       className="relative overflow-hidden border-b border-border bg-bg text-fg selection:bg-accent selection:text-bg"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-y-0 left-[7.5%] w-px bg-border/50" />
-        <div className="absolute inset-y-0 right-[7.5%] w-px bg-border/50" />
-        <div className="absolute left-0 right-0 top-[58%] h-px bg-border/40" />
-      </div>
-
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between border-b border-border/70 py-4 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-xs">
           <div className="flex items-center gap-3">
