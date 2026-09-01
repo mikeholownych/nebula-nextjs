@@ -68,7 +68,7 @@ const PLAN_DETAILS: Record<AccessLevel, { name: string; price: string; href: str
   free: { name: 'Free', price: '$0', href: '/pricing' },
   pro: { name: 'Pro', price: '$29/mo', href: '/pricing#pro' },
   growth: { name: 'Growth', price: '$79/mo', href: '/pricing#growth' },
-  agency: { name: 'Agency', price: '$199/mo', href: '/pricing#agency' },
+  agency: { name: 'Agency', price: '$497/mo', href: '/pricing#agency' },
 }
 
 export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProps) {

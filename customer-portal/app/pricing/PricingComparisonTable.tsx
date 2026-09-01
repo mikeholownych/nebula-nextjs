@@ -191,7 +191,7 @@ export default function PricingComparisonTable() {
               </th>
               <th className="p-4 text-center font-semibold text-fg min-w-[120px]">
                 Agency
-                <span className="block text-xs font-normal text-fg-muted">$199/mo</span>
+                <span className="block text-xs font-normal text-fg-muted">$497/mo</span>
               </th>
             </tr>
           </thead>
