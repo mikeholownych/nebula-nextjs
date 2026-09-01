@@ -45,6 +45,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
     paths: [
       '/learning-centre',
       '/resources',
+      '/observatory',
       '/case-studies',
       '/why-is-my-landing-page-not-converting',
       '/ads-getting-clicks-but-no-sales',
