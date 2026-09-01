@@ -119,7 +119,7 @@ ${bulletsHtml}
 </ul>
 <p><strong>Next steps:</strong></p>
 <ol>
-  <li><a href="https://nebulacomponents.com/audit">Run your first audit</a> - paste your landing page URL, get 9 signals scored in 90 seconds</li>
+  <li><a href="https://nebulacomponents.com/audit">Run your first audit</a> - paste your landing page URL, get 9 signals scored in under 2 minutes</li>
   <li><a href="https://nebulacomponents.com/workspace">Set up page monitoring</a> - add your page to get weekly score-drop alerts</li>
 </ol>
 <p>If you have questions, reply to this email.</p>

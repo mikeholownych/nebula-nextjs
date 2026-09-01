@@ -19,14 +19,14 @@ export const REPAIR_SPRINT_OFFER = {
 
   closedLoop: 'Nebula identifies the highest-priority failed condition on your page and delivers the exact fix - copy, code, or configuration - written for your specific URL. A 30-day re-audit then verifies the condition actually changed. You get a finding, the fix, and the proof it resolved.',
 
-  timeClaim: 'Nebula checks 9 conversion signals against your actual page HTML in under 30 seconds. The same checks done manually take 15–25 minutes in DevTools. A CRO agency discovery call takes 45 minutes before anyone looks at your page.',
+  timeClaim: 'Nebula checks 9 conversion signals against your actual page HTML in under 2 minutes. The same checks done manually take 15–25 minutes in DevTools. A CRO agency discovery call takes 45 minutes before anyone looks at your page.',
 
   specificityClaim: 'Not generic advice. Every fix is written for the specific values found on your page - your H1 text, your CTA label, your meta description, your JSON-LD structure. You receive the replacement, not a recommendation to improve it.',
 
   summary: 'Nebula identifies the highest-priority failed condition on your landing page, delivers the exact fix - copy, code, or configuration change - for you or your developer to implement. A 30-day re-audit confirms it resolved.',
 
   howItWorks: [
-    'Paste your URL - Nebula checks 9 signals against your actual page HTML in under 30 seconds',
+    'Paste your URL - Nebula checks 9 signals against your actual page HTML in under 2 minutes',
     'See your score and the initial findings - specific evidence from your page, not generic advice',
     'Pay $97 - receive the exact fix for your highest-priority finding within 48 hours',
     'Apply the fix - exact copy, code snippet, or configuration change written for your specific page',

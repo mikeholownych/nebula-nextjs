@@ -256,7 +256,7 @@ export const comparisons: Comparison[] = [
       'Black-box methods: proprietary agency feedback rather than transparent, open-source diagnostic rules.',
     ],
     nebulaFit: [
-      'Instant free audit: scans 9 conversion signals in under 30 seconds.',
+      'Instant free audit: scans 9 conversion signals in under 2 minutes.',
       'Bounded $97 Repair Sprint: focuses on fixing the single highest-priority leak first.',
       'Transparent engine: powered by open-source Citable CLI with 123 detectors.',
       'Verifiable re-audit: 30-day check confirms the specific HTML condition was fixed.',

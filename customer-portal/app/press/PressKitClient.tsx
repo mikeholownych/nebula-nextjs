@@ -132,7 +132,7 @@ function PressReleasesList() {
     {
       date: '2026-06-15',
       headline: 'Nebula Components launches free 9-signal landing page audit',
-      summary: 'AI-powered audit checks message match, trust signals, mobile CTA, load speed, and 5 additional conversion signals in under 90 seconds.',
+      summary: 'AI-powered audit checks message match, trust signals, mobile CTA, load speed, and 5 additional conversion signals in under 2 minutes.',
       type: 'product' as const,
       link: '/audit',
     },
@@ -183,7 +183,7 @@ function StoryAngles() {
     {
       number: '3',
       headline: 'The CRO agency model sells retainers before diagnosis.',
-      body: 'Nebula argues the industry model is structurally broken - retainer before diagnosis, A/B tests on pages without enough traffic for significance, 90-day timelines for problems fixable in a week. The audit takes 90 seconds and costs nothing.',
+      body: 'Nebula argues the industry model is structurally broken - retainer before diagnosis, A/B tests on pages without enough traffic for significance, 90-day timelines for problems fixable in a week. The audit takes under 2 minutes and costs nothing.',
     },
     {
       number: '4',

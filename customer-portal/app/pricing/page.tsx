@@ -8,11 +8,19 @@ import PricingComparisonTable from './PricingComparisonTable'
 
 
 export const metadata: Metadata = {
-  title: 'Pricing - Memberships & One-Leak Repair Sprint | Nebula',
+  title: 'Pricing - One-Leak Repair Sprint | Nebula',
   description:
-    'Free evidence-backed landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time repair sprint.',
+    'Free evidence-backed landing page audit plus a $97 one-time repair sprint. Nebula identifies the highest-priority failed condition and delivers the exact fix.',
   alternates: {
     canonical: 'https://nebulacomponents.com/pricing',
+  },
+  openGraph: {
+    title: 'Pricing - One-Leak Repair Sprint | Nebula',
+    description:
+      'Free evidence-backed landing page audit plus a $97 one-time repair sprint. Nebula identifies the highest-priority failed condition and delivers the exact fix.',
+    url: 'https://nebulacomponents.com/pricing',
+    siteName: 'Nebula Components',
+    type: 'website',
   },
 }
 
@@ -64,7 +72,7 @@ const faqItems = [
   },
   {
     q: 'How long does the whole process take?',
-    a: 'The audit completes in under 30 seconds. The repair kit arrives within 48 hours of payment. Implementation time depends on what the fix requires - copy changes are minutes, code changes depend on your stack.',
+    a: 'The audit completes in under 2 minutes. The repair kit arrives within 48 hours of payment. Implementation time depends on what the fix requires - copy changes are minutes, code changes depend on your stack.',
   },
   {
     q: 'Does the repair guarantee more conversions?',
@@ -206,7 +214,7 @@ export default function PricingPage() {
                 Less than one day of ad spend. Less than 5% of a CRO consultant&apos;s audit fee.
               </p>
               <p className="mt-4 text-fg-muted leading-relaxed">
-                One landing page, one finding. Run the free audit first - Nebula checks 9 signals against your actual page HTML in under 30 seconds.
+                One landing page, one finding. Run the free audit first - Nebula checks 9 signals against your actual page HTML in under 2 minutes.
                 Then pay $97 and receive the exact fix for your highest-priority finding within 48 hours.
                 Not generic advice - the replacement copy, code snippet, or configuration change written for your specific page.
                 You or your developer implements the change. A 30-day re-audit confirms the condition changed.

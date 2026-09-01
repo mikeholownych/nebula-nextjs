@@ -20,7 +20,7 @@ export const organizationSchema = {
     'Generative Engine Optimization (GEO)',
     'Core Web Vitals',
   ],
-  foundingDate: '2024',
+  foundingDate: '2026',
   dateModified: new Date().toISOString().split('T')[0],
   contactPoint: [
     {

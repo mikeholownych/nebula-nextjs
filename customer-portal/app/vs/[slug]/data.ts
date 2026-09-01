@@ -40,7 +40,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     rows: [
       { feature: "Cost", nebula: "Free audit + $97 repair sprint", competitor: "Free", nebulaWins: false },
       { feature: "Requires signup", nebula: "No", competitor: "No", nebulaWins: true },
-      { feature: "Results in under 30 seconds", nebula: "Yes", competitor: "Yes - 10 to 30 seconds", nebulaWins: true },
+      { feature: "Results in under 2 minutes", nebula: "Yes", competitor: "Yes - 10 to 30 seconds", nebulaWins: true },
       { feature: "Checks conversion criteria", nebula: "Yes - message match, CTA, trust, mobile CTA, form friction, compliance", competitor: "No - Core Web Vitals and performance only", nebulaWins: true },
       { feature: "Output language", nebula: "Conversion-framed for founders", competitor: "Technical metrics - LCP, CLS, INP, TTFB", nebulaWins: true },
       { feature: "Page-specific findings", nebula: "Yes - evidence from your actual page HTML", competitor: "Yes - performance data for the submitted URL", nebulaWins: true },

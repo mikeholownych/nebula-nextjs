@@ -66,46 +66,25 @@ export default async function CheckoutPage({
           </div>
         </Card>
 
-        {/* ROI framing - critical for decision velocity */}
-        <div className="my-6 rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
-          <p className="mb-2 font-semibold text-accent">
-            Avg. 15-25% conversion lift across 32 audits
-          </p>
+        {/* What the repair sprint actually delivers */}
+        <div className="my-6 rounded-xl border border-border bg-bg-muted/10 px-4 py-4 text-sm text-fg-muted">
+          <p className="mb-1 font-semibold text-fg">What you receive</p>
           <p>
-            At $2000/mo ad spend, 15% lift = $300/mo ROI. Your $97 investment pays back in <span className="font-semibold text-fg">less than 1 week</span>.
+            Paste-ready copy, code, or configuration addressing the highest-priority failed
+            condition identified in your audit. A same-scope re-audit within 30 days
+            verifies whether the condition moved from FAIL to PASS.
+          </p>
+          <p className="mt-2 text-xs text-fg-muted/70">
+            Nebula verifies observable condition changes. Conversion impact is not established
+            and is not claimed.
           </p>
         </div>
 
-        {/* Social proof - customer testimonials (placeholder until real data available) */}
-        <div className="mb-6 rounded-xl border border-border bg-bg-muted/30 p-5">
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-accent">Founders who fixed leaks</h3>
-          <div className="space-y-4">
-            <div className="border-b border-border/50 pb-4 last:border-0">
-              <p className="mb-2 text-sm text-fg">"We fixed our message match leak and conversions jumped <span className="font-bold text-accent">31%</span> in two weeks. The $97 sprint paid for itself in the first ad spend cycle."</p>
-              <p className="text-xs text-fg-muted">, Sarah Chen, VP of Sales at CloudMetrics</p>
-            </div>
-            <div className="border-b border-border/50 pb-4 last:border-0">
-              <p className="mb-2 text-sm text-fg">"Spent $97 on repair sprint, recovered <span className="font-bold text-accent">$2.3K</span> in wasted ad spend. Best ROI we've seen all quarter."</p>
-              <p className="text-xs text-fg-muted">, Michael Huang, VP of Finance at Quantum Payments</p>
-            </div>
-            <div>
-              <p className="mb-2 text-sm text-fg">"Found 4 leaks in 30 seconds. Fixed #1 for $97 and conversions jumped 18% before even looking at the other three."</p>
-              <p className="text-xs text-fg-muted">, Lisa Tran, Ecommerce Director at Modern Home Goods</p>
-            </div>
-          </div>
-        </div>
+        {/* No fabricated testimonials — first real repair verification will appear here */}
 
         {eligibleAuditId ? (
           <>
-            {/* Urgency counter - limited repairs this week */}
-            <div className="mb-4 rounded-lg bg-accent/5 px-4 py-3 text-center">
-              <span className="block text-sm font-semibold text-accent">
-                <span className="mr-1">⚡</span>
-                Only 3 repairs scheduled this week
-              </span>
-              <span className="block text-xs text-fg-muted">Your repair will be completed within 48 hours</span>
-            </div>
-            {/* Trust badges - critical for cold buyer conversion at payment entry point */}
+            {/* Trust badges */}
             <div className="mb-4 flex flex-wrap items-center justify-center gap-4 text-xs text-fg-muted">
               <span className="flex items-center gap-1">
                 <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
