@@ -61,7 +61,31 @@ Citable capabilities that Nebula has not decided to commercialize must not appea
 - A Nebula Component without a corresponding commercialization gate decision.
 - A public claim without a corresponding evidence entry in `CLAIM_REGISTER.md`.
 
-**Minimum threshold for a signal to be "repeated":** Three or more independent customers expressing the same underlying job/problem across at least two distinct observation sessions. A single interview session with multiple participants does not satisfy independence.
+**Minimum threshold for a signal to be a "demand pattern":**
+
+Three or more independent customers expressing the same underlying job/problem across at least two distinct observation sessions. "Three customers" means three distinct economic buyers — not three contacts, users, departments, or accounts that resolve to the same controlling entity.
+
+**Independence requires all of the following:**
+
+1. Each customer is a distinct economic buyer capable of an independent purchase decision.
+2. Multiple contacts, users, divisions, or subsidiaries of the same company, group, or controlling entity do not satisfy independence regardless of organizational separation.
+3. The customer described the problem without Nebula prompting the description. Customers who responded to a Nebula-authored inquiry — survey, post, event presentation, direct outreach, or any other request for their experience on the specific problem under investigation — are a **prompted cohort** and are not independent for this threshold.
+4. "Distinct observation sessions" means sessions with distinct customers present, not two separate contacts with the same customer.
+
+**Demand provenance classes:**
+
+| Class | Meaning | Counts toward C5 independence? |
+|---|---|---|
+| SPONTANEOUS | Customer described the problem without Nebula prompting | Yes |
+| PROMPTED | Customer responded to a Nebula-authored inquiry about the specific problem | No — counts as supporting evidence only (pain characterization, hypothesis refinement) |
+| DERIVED | Signal originated from Nebula's own framing, content, or audit output | No |
+| UNKNOWN | Provenance of the signal cannot be verified | No — fails closed |
+
+PROMPTED and DERIVED evidence is not worthless. It may support qualitative investigation, pain characterization, and hypothesis refinement. It must not be counted toward the independence threshold for C5.
+
+**OSS adoption metrics are not demand evidence.** GitHub stars, forks, issues, downloads, and contributor enthusiasm for Citable or any open-source project do not constitute customer demand for a commercial product. A customer is a person or organization that would exchange money for the capability.
+
+A single interview session with multiple participants from different organizations may satisfy "multiple customers" if provenance is SPONTANEOUS and the session was not convened in response to a Nebula inquiry. Apply conservative judgment; if in doubt, classify as PROMPTED.
 
 ### Layer 3: Convergence
 
@@ -145,7 +169,77 @@ GATE_ASSESSMENT
 
 ---
 
-## What This System Does NOT Govern
+## New Commercial Offer Gate Invariant
+
+**NO NEW COMMERCIAL OFFER MAY ENTER `public-facts.ts` WITHOUT A PRIOR AUTHORIZED PASS COMMERCIALIZATION GATE RECORD.**
+
+### What constitutes a new commercial offer
+
+A new commercial offer is any addition to `public-facts.ts` that:
+- Introduces a new offer `key` not present in a prior committed version of that file, or
+- Changes the commercial terms (price, delivery method, implementation owner, or re-audit terms) of an existing offer in a way that materially changes the value proposition.
+
+### Grandfathered offers
+
+The following offer keys existed before this governance system was established and are grandfathered. They do not require a retrospective gate record, but any future material change to their commercial terms does:
+
+- `fix-pack` (the $97 One-Leak Repair Sprint, established 2026-07-24)
+
+### Required gate reference
+
+When a new offer key is added to `public-facts.ts`, the corresponding gate record in `docs/governance/commercialization-gates.md` must have:
+- `gate_outcome: PASS`
+- `adr_ref:` pointing to a committed ADR
+- `opportunity_id:` that matches a field in the `public-facts.ts` entry's associated documentation
+
+The `public-facts.ts` file itself should include a comment citing the `opportunity_id` for each non-grandfathered offer key.
+
+### Missing, invalid, or stale gate references
+
+If a new offer key appears in `public-facts.ts` without a matching PASS gate record:
+- The state is a governance violation, not a CI error (until I3 is implemented).
+- The violation must be corrected by either removing the offer key or writing a retroactive gate record with honest assessor attestation and git-attributable authorship.
+- A retroactive gate record is acceptable only if the evidence on which it is based predates the offer's public availability.
+
+### Renamed or restructured offers
+
+Renaming an existing offer key is not a new offer provided the commercial terms are unchanged and the git history makes the lineage clear. A comment in `public-facts.ts` should cite the prior key and the reason for the rename.
+
+### CI enforcement status
+
+**PENDING IMPLEMENTATION (I3):** A CI test that cross-references `public-facts.ts` offer keys against the gate decision log in `commercialization-gates.md` is planned. Until implemented, this invariant is PROCESS-ENFORCED.
+
+---
+
+## Control Classification
+
+Each governance control in this system is classified by how it actually enforces behavior:
+
+| Control | Classification | Basis |
+|---|---|---|
+| `public-facts.ts` + `public-facts.test.ts` | MACHINE-ENFORCED | CI fails if offer facts are structurally invalid or expired |
+| `CLAIM_REGISTER.md` + claim-expiry test | MACHINE-ENFORCED (partial) | Expiry test PENDING IMPLEMENTATION (I1); structural rules are documentary |
+| Gate criteria C1-C7 requiring non-circular evidence | PROCESS-ENFORCED | Gate format enforces structural completeness; evidence quality is assessor-attested |
+| Observatory authoring gate (`observatory_status` field) | PENDING IMPLEMENTATION (I2) | Field defined in schema; CI test not yet written |
+| New offer gate invariant (R2) | PENDING IMPLEMENTATION (I3) | Rule documented; CI cross-reference test not yet written |
+| `subtractive-differentiation.md` Refuse list check (C7) | PROCESS-ENFORCED | No CI gate; assessor must consult the document |
+| Independence and provenance rules (C5) | PROCESS-ENFORCED | Schema captures provenance class; no automated verification |
+| Adverse result disclosure obligation | PROCESS-ENFORCED | Policy stated; no automated detection of missing adverse disclosures |
+| Convergence independence verification | DOCUMENTARY / DELIBERATIVE | `independence_verified` is self-attested; git history is the audit trail |
+| Gate record immutability | DOCUMENTARY / DELIBERATIVE | Convention; git diff detects violations but no CI enforcement |
+| Customer demand signal log (append-only) | DOCUMENTARY / DELIBERATIVE | Convention; no CI enforcement of append-only semantics |
+| ADR requirement for PASS/REJECTED/COMMERCIALIZED | PROCESS-ENFORCED | Gate record format includes `adr_ref` field; CI check pending (I3) |
+
+**MACHINE-ENFORCED:** A currently running executable test or CI check prevents the prohibited state.  
+**PROCESS-ENFORCED:** The rule is documented and operationally required; a competent operator applying the rule correctly will comply; no automated gate prevents bypass.  
+**DOCUMENTARY / DELIBERATIVE:** The artifact creates a record and establishes a convention; it does not prevent incorrect behavior, but it makes incorrect behavior visible and attributable.  
+**PENDING IMPLEMENTATION:** The enforcement mechanism is designed and specified; it is not yet operational.
+
+Documentary and deliberative controls are not automatically inadequate. At current scale, deliberative governance is appropriate where deterministic enforcement is not yet justified. The classification exists so operators know which controls they are relying on human judgment for.
+
+---
+
+
 
 - Day-to-day Citable CLI development and detector releases.
 - Architectural decisions about the Nebula platform (governed by `docs/architecture/` ADRs).

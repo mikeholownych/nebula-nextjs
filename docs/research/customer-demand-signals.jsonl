@@ -9,7 +9,17 @@
 #   "recorded_by":      "string",                   // operator who recorded it
 #   "source_type":      "audit_reason_pattern | support_classification | interview | survey | behavior_analysis | external",
 #   "observation_window": "YYYY-MM to YYYY-MM",     // collection period, not individual timestamp
-#   "independent_customer_count": N,                // minimum integer; never inflate; N < 3 is not "pattern"
+#   "demand_provenance": "SPONTANEOUS | PROMPTED | DERIVED | UNKNOWN",
+#                                                   // Provenance classification per opportunity-governance.md Layer 2.
+#                                                   // SPONTANEOUS: customer described the problem without Nebula initiating
+#                                                   // PROMPTED: customer responded to a Nebula-authored inquiry about this problem
+#                                                   // DERIVED: signal originated from Nebula framing, content, or audit output
+#                                                   // UNKNOWN: origin cannot be verified
+#                                                   // Only SPONTANEOUS counts toward C5 independence.
+#                                                   // UNKNOWN fails closed for any threshold requiring independence.
+#   "independent_customer_count": N,                // Count of distinct economic buyers — not contacts, users, or accounts.
+#                                                   // Multiple contacts/divisions of one company are ONE economic buyer.
+#                                                   // If in doubt, record the lower bound. Never inflate.
 #   "observation_count": N,                         // total observations, may exceed customer count
 #   "independence_verified": true|false,            // were these from distinct sessions/sources?
 #   "underlying_job":   "string",                   // the job-to-be-done in the customer's words or close paraphrase
@@ -22,17 +32,21 @@
 # }
 #
 # Rules:
-# 1. "independent_customer_count" must be a verified count, not an estimate.
-#    If in doubt, record the lower bound.
-# 2. Three or more independent customers across two or more distinct sessions
-#    is the minimum threshold for demand_state: "pattern".
-# 3. Customers reached through the same content campaign, the same Reddit thread,
-#    or the same Nebula-framed audit are not independent.
-# 4. economic_consequence must use the customer's own framing where possible.
+# 1. "independent_customer_count" must be a count of distinct economic buyers, not contacts.
+#    Multiple people from the same company count as ONE. If in doubt, record the lower bound.
+# 2. Three or more distinct economic buyers (SPONTANEOUS provenance) across two or more
+#    distinct-customer sessions is the minimum threshold for demand_state: "pattern".
+#    PROMPTED, DERIVED, and UNKNOWN signals do not count toward this threshold.
+# 3. Customers reached through the same content campaign, the same Nebula inquiry,
+#    the same event, the same Reddit thread, or the same Nebula-framed audit are NOT
+#    independent for this criterion. Record them as PROMPTED or DERIVED.
+# 4. OSS adoption metrics (GitHub stars, forks, issues, downloads) are NOT customer demand.
+#    Do not record Citable OSS activity as commercial demand evidence.
+# 5. economic_consequence must use the customer's own framing where possible.
 #    Do not substitute Nebula's projected value.
-# 5. This file must never contain email addresses, names, company names,
+# 6. This file must never contain email addresses, names, company names,
 #    or any other personal identifiers. Use generic descriptions.
-# 6. This file is the demand evidence record. The lead pipeline (lead_state.db)
+# 7. This file is the demand evidence record. The lead pipeline (lead_state.db)
 #    is the operational pipeline. Do not conflate them.
 #
 # No entries yet. First entry will appear when a qualifying signal is observed.

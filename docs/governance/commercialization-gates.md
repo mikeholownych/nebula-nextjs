@@ -82,6 +82,17 @@ Each criterion must be assigned one of four determinations:
 
 **Note:** This is a Nebula capability assessment, not a Citable capability assertion. Citable's ability to detect a condition is not evidence that Nebula can address the underlying customer problem.
 
+**What C3 PASS establishes at investigation stage:** A credible, addressable intervention hypothesis exists. Nothing more.
+
+**What C3 PASS does NOT establish:**
+- Implementation feasibility
+- Production readiness
+- Repeatability or scalability
+- Delivery economics
+- Customer outcome
+
+These require later evidence, validation experiments, or subsequent gate assessments. C3 PASS is not a commitment to build.
+
 **Determination thresholds:**
 - PASS: A specific, bounded intervention is described with explicit scope boundaries and at least one identifiable limitation.
 - INDETERMINATE: An intervention is conceivable but not specified.
@@ -91,24 +102,38 @@ Each criterion must be assigned one of four determinations:
 
 ### C4: Customer ROI Potential
 
-**Question:** Can a customer plausibly recover the cost of the intervention from the relief it provides?
+**Question:** Can a customer plausibly realize sufficient economic value from the intervention to justify its cost?
+
+**Separation from C6:** C4 evaluates the customer's economics independently. C6 evaluates Nebula's ability to sustainably deliver and capture value. These must not be collapsed.
 
 **Required evidence:**
-- Customer-side cost or value estimate (not Nebula's internal economics).
-- Enough specificity to allow a rough breakeven calculation.
+- Customer-side cost, loss, or economic consequence that the intervention would materially reduce — in the customer's terms, not Nebula's projection.
+- Evidence that the customer's recoverable value plausibly exceeds the cost of the intervention.
 
-**Failure mode:** Value is entirely in the form of "peace of mind" or "best practice" with no attributable economic consequence.
+**Acceptable evidence forms:**
+- Customer-named willingness to pay for solving the problem.
+- Customer-accepted proposed price.
+- Observable current spend on alternatives being displaced.
+- Measurable economic value with a defensible customer-side capture assumption.
+- Validated purchasing behavior for comparable interventions.
+
+**What Nebula cannot do to satisfy C4:**
+- Choose a hypothetical low price and then declare the customer economics support breakeven at that price.
+- Use Nebula's desired margin target to reverse-engineer a C4 PASS.
+- Substitute Nebula's modeled revenue projection for customer-stated economic value.
+
+**Failure mode:** Value is entirely in the form of "best practice," "peace of mind," or "competitive hygiene" with no attributable economic consequence the customer has described.
 
 **Determination thresholds:**
-- PASS: At least one customer-side cost or value estimate that supports a plausible breakeven at a price point Nebula can charge.
-- INDETERMINATE: Value is acknowledged but unquantifiable.
+- PASS: At least one customer-described economic consequence (cost, lost value, or displaced spend) whose magnitude plausibly exceeds the intervention cost at a price the customer has named, accepted, or demonstrated willingness to pay for comparable value.
+- INDETERMINATE: Economic value is acknowledged by customers but not quantified, or willingness to pay has not been demonstrated.
 - FAIL: Customer explicitly states the problem does not affect revenue, cost, or efficiency in a measurable way.
 
 ---
 
 ### C5: Observable Demand and Willingness to Act
 
-**Question:** Do multiple independent customers exhibit behavior (not just stated preference) that signals they would exchange value for the intervention?
+**Question:** Do multiple independent customers exhibit demand for the intervention — through behavior or well-evidenced stated intent — independently of Nebula prompting?
 
 **Required evidence:**
 - Three or more independent customers expressing the same underlying job/problem.
@@ -116,15 +141,32 @@ Each criterion must be assigned one of four determinations:
 - Behavioral evidence (search, spend, workaround, purchase of alternative) is stronger than stated preference.
 
 **The minimum threshold:**
-- Three independent customers, two distinct observation sessions.
-- "Independent" means no shared prompt or Nebula framing. Customers reached through the same content campaign are not independent.
+- Three distinct economic buyers, across at least two distinct observation sessions.
+- "Distinct economic buyers" means three independent parties capable of separate purchase decisions. Multiple contacts, users, divisions, or subsidiaries of the same controlling entity are not distinct economic buyers for this criterion.
+- "Distinct observation sessions" means sessions including different customers. Two separate conversations with the same customer do not satisfy the two-session requirement.
 
-**Failure mode:** All evidence comes from the same NPS survey, the same Reddit thread, or customers who self-selected into a Nebula-framed audit.
+**Demand provenance for C5:** Only SPONTANEOUS demand counts toward independence.
+
+| Provenance class | Definition | Counts toward C5? |
+|---|---|---|
+| SPONTANEOUS | Customer described the problem without Nebula initiating the inquiry | Yes |
+| PROMPTED | Customer responded to a Nebula-authored request for their experience on the specific problem | No |
+| DERIVED | Signal originated from Nebula's own framing, content, or prior audit output | No |
+| UNKNOWN | Origin cannot be verified | No — fails closed |
+
+PROMPTED and DERIVED evidence is not worthless. It may support pain characterization, hypothesis refinement, and qualitative investigation, but it must not be counted toward the independence threshold.
+
+OSS adoption metrics (GitHub stars, forks, issues, downloads, contributor activity) do not constitute demand for a commercial product regardless of volume.
+
+**Failure modes:**
+- All evidence comes from the same NPS survey, the same Reddit thread, customers who self-selected into a Nebula-framed audit, or customers responding to a Nebula-authored inquiry about the specific problem.
+- "Three customers" are three contacts at one company.
+- Two sessions with the same customer substitute for two distinct-customer sessions.
 
 **Determination thresholds:**
-- PASS: Three or more independent customers, behavioral or strong stated evidence, across at least two distinct sessions.
-- INDETERMINATE: Fewer than three, or independence is unverified.
-- FAIL: All observations are single-session or share a common framing source.
+- PASS: Three or more distinct economic buyers with SPONTANEOUS provenance, across at least two distinct-customer observation sessions. Behavioral evidence (search, spend, workaround) is required unless stated intent is well-documented and explicitly not prompted by Nebula.
+- INDETERMINATE: Fewer than three distinct economic buyers, or provenance is UNKNOWN for any of the qualifying signals, or independence is unverified.
+- FAIL: All qualifying signals share a common framing source (same Nebula content, same event, same inquiry, same company), or all signals are PROMPTED or DERIVED.
 
 ---
 

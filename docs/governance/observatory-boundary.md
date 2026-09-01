@@ -69,9 +69,25 @@ Before a new Observatory entry is authored:
 
 1. The capability must have COMMERCIALIZED status in `docs/governance/commercialization-gates.md`.
 2. An ADR must exist (`docs/adr/`) recording the commercialization decision.
-3. The `observatory_status` field in the corresponding evidence entry must be set to `publishing_authorized`.
+3. The `observatory_status` field in the corresponding evidence entry in `customer-portal/.citable/evidence.yaml` must be set to `publishing_authorized`.
 
-This gate is enforced by the `citable-proof-integrity.test.ts` mechanism for case studies. It must be extended for any new Observatory content type.
+**`observatory_status` field definition:**
+
+This field is added to the `evidence.yaml` schema as an optional field on any entry that may be referenced by Observatory content.
+
+| Value | Meaning |
+|---|---|
+| `not_applicable` | This evidence entry is for Citable purposes only and will not appear on the Observatory. Default for Citable-sourced entries. |
+| `publishing_authorized` | Mike (founder) has authorized Observatory publication of this capability, a PASS gate record exists, and an ADR has been committed. |
+
+An evidence entry without `observatory_status` defaults to `not_applicable`. An entry must be explicitly set to `publishing_authorized` before Observatory content referencing it can be published.
+
+**Enforcement status:**
+
+- **DOCUMENTED OBLIGATION:** The rule is stated here and is operationally required.
+- **PENDING IMPLEMENTATION (I2):** A CI test that verifies `observatory_status: publishing_authorized` exists on any evidence entry referenced by live Observatory content is planned. Until implemented, this gate is PROCESS-ENFORCED.
+
+The `citable-proof-integrity.test.ts` test enforces case-study governance via the compile script mechanism. It does **not** currently enforce the `observatory_status` field. This test must be extended in the implementation phase (I2).
 
 ---
 

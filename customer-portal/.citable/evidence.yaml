@@ -28,6 +28,20 @@ updated: '2026-07-19T01:00:00.000Z'
 #     - declined:     Gate assessment completed; not commercializing.
 #     - admitted:     Gate passed; capability is COMMERCIALIZED.
 #
+#   observatory_status:
+#     Whether this evidence entry may be referenced by published Observatory content.
+#     Values: not_applicable | publishing_authorized
+#     Default for entries without this field: not_applicable
+#     - not_applicable:        This entry is for Citable or internal purposes only.
+#                              It may not appear on the Observatory.
+#     - publishing_authorized: Mike (founder) has explicitly authorized Observatory
+#                              publication of this capability. A PASS gate record must
+#                              exist in commercialization-gates.md and an ADR must be
+#                              committed before this value is set.
+#     CI ENFORCEMENT: PENDING IMPLEMENTATION (I2). Until I2 is implemented, this
+#     field is PROCESS-ENFORCED. Do not set publishing_authorized without the
+#     required gate record and ADR.
+#
 # Important invariant: A Citable evidence entry with signal_source: citable
 # and nebula_commercial_consideration: none does NOT imply Nebula is considering
 # commercialization. Citable evidence entries exist for Citable reasons.
@@ -47,6 +61,7 @@ entries:
     signal_source: citable
     demand_state: not_assessed
     nebula_commercial_consideration: none
+    observatory_status: not_applicable
 
   - evidence_id: evidence-delivery-sla
     title: Fix Pack 24-48 Hour Delivery SLA
@@ -58,6 +73,7 @@ entries:
     signal_source: citable
     demand_state: not_assessed
     nebula_commercial_consideration: none
+    observatory_status: not_applicable
 
   - evidence_id: evidence-reaudit-policy
     title: 30-Day Re-Audit Guarantee Policy
@@ -69,6 +85,7 @@ entries:
     signal_source: citable
     demand_state: not_assessed
     nebula_commercial_consideration: none
+    observatory_status: not_applicable
 
   - evidence_id: evidence-citable-detector-count
     title: Citable v1.3.1 Detector Count Verification
@@ -82,3 +99,4 @@ entries:
     signal_source: citable
     demand_state: not_assessed
     nebula_commercial_consideration: none
+    observatory_status: not_applicable

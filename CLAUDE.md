@@ -103,6 +103,7 @@ For autonomous work, give agents outcome contracts rather than micromanaged step
 - Never send email without checking LeadStore.is_bounced()
 - Never claim SOC 2/GDPR/HIPAA certification - use "-ready" or "practices" language
 - Never disable `flock` trap - stale lock files cause false health warnings every cycle
+- `system_setup/GOVERNANCE_POLICIES.md` and `system_setup/PROVENANCE_SYSTEM.md` are aspirational, non-authoritative artifacts. Authoritative governance lives in `docs/governance/`, `docs/adr/`, `customer-portal/docs/governance/CLAIM_REGISTER.md`, and `customer-portal/app/lib/public-facts.ts`.
 
 ## Design Context (customer-portal)
 Full strategic brief lives in `customer-portal/PRODUCT.md` (visual system in `customer-portal/DESIGN.md`). Summary: brand-register marketing site for founders/operators burning ad spend on underperforming landing pages (ecommerce, B2B SaaS, coaches/consultants), plus agencies as a secondary audience via the $497 partner offer. Positioning: "the problem was never the ad, it was the page" - evidence-first, one-time Fix Pack over any retainer framing. Personality: assertive, clinical, evidence-first - diagnostic equipment, not a lifestyle brand. Anti-references: generic AI-SaaS cream, CRO-agency theatrics, black-box-AI styling, SEO-audit-tool genericism. Accessibility target: WCAG 2.2 AAA (DESIGN.md now targets AAA throughout - reconciled 2026-07-23).

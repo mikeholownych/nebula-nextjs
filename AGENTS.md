@@ -73,3 +73,19 @@ An orchestrator that delegates without embedding items 1-3 has not actually dele
 ## When Unsure
 
 Escalate to Mike rather than guessing. Guessing in production is how credibility gets spent. Reversible experiments are fine; irreversible ones are not yours to authorize.
+
+---
+
+## Governance Authority Note
+
+The files `system_setup/GOVERNANCE_POLICIES.md` and `system_setup/PROVENANCE_SYSTEM.md` are aspirational reference artifacts — consulting-style frameworks that were never operationalized. They are **not** authoritative Nebula operational governance.
+
+Authoritative governance is defined by the following tracked files in this repository:
+
+- `docs/governance/opportunity-governance.md` — opportunity governance system
+- `docs/governance/commercialization-gates.md` — commercialization gate criteria
+- `docs/governance/observatory-boundary.md` — Observatory disclosure obligations
+- `docs/adr/` — all product-governance and architecture decisions
+- `customer-portal/docs/governance/CLAIM_REGISTER.md` — active commercial claims
+- `customer-portal/app/lib/public-facts.ts` — canonical commercial offer facts
+- `docs/product/subtractive-differentiation.md` — what not to build
