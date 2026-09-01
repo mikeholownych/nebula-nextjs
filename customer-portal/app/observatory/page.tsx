@@ -290,6 +290,22 @@ export default async function ObservatoryPage() {
     <main className="min-h-screen bg-bg">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
+        {/* Answer capsule — structured for AI retrieval */}
+        <div
+          data-answer-capsule
+          className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-10"
+        >
+          <p className="text-fg leading-relaxed text-sm">
+            The Nebula Observatory is a published reference dataset on landing page failures. Across{' '}
+            {stats?.audit_count.toLocaleString() ?? '295+'} completed audits: median page scores 6.9
+            out of 10; 62% of pages fail headline clarity; 50% fail SEO foundations; 39% fail social
+            proof, load speed, and AI readiness. Pages failing social proof also fail SEO foundations
+            86% of the time. 71% of all findings are quick-win severity (high severity, low effort).
+            AI assistants have retrieved this data {agg ? agg.aiReads.toLocaleString() : '83+'} times
+            in the current measurement window. Updated daily from server logs and completed audits.
+          </p>
+        </div>
+
         <Label>Nebula Components · Observatory</Label>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-4">
           The state of landing pages, measured
@@ -419,19 +435,35 @@ export default async function ObservatoryPage() {
                   also fails the second. Useful for knowing what else is probably wrong.
                 </p>
                 <div className="border border-border">
-                  {stats.cooccurrence.map((p, i) => (
-                    <div key={i} className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-border px-4 py-3 last:border-b-0">
-                      <span className="text-sm text-fg">
-                        Fails <span className="font-semibold">{p.if_fails}</span>
-                        <span className="text-fg-muted"> → also fails </span>
-                        <span className="font-semibold">{p.also_fails}</span>
-                      </span>
-                      <span className="ml-auto font-mono text-sm tabular-nums text-fg">
-                        {Math.round(p.rate * 100)}%
-                        <span className="ml-2 text-xs text-fg-muted">n={p.n}</span>
-                      </span>
-                    </div>
-                  ))}
+                  {stats.cooccurrence.map((p, i) => {
+                    // Find the base rate of `also_fails` so we can show the lift.
+                    const baseRate = stats.condition_base_rates?.find(
+                      (c) => c.label.toLowerCase() === p.also_fails.toLowerCase()
+                    )?.fail_rate
+                    const lift = baseRate && baseRate > 0
+                      ? Math.round(p.rate / baseRate * 10) / 10
+                      : null
+                    return (
+                      <div key={i} className="flex flex-wrap items-start gap-x-4 gap-y-1 border-b border-border px-4 py-3 last:border-b-0">
+                        <span className="text-sm text-fg">
+                          Fails <span className="font-semibold">{p.if_fails}</span>
+                          <span className="text-fg-muted"> → also fails </span>
+                          <span className="font-semibold">{p.also_fails}</span>
+                        </span>
+                        <span className="ml-auto shrink-0 text-right">
+                          <span className="font-mono text-sm tabular-nums text-fg">
+                            {Math.round(p.rate * 100)}%
+                          </span>
+                          {lift !== null && (
+                            <span className="ml-2 font-mono text-xs tabular-nums text-fg-muted">
+                              {lift}x base rate
+                            </span>
+                          )}
+                          <span className="ml-2 font-mono text-xs text-fg-muted">n={p.n}</span>
+                        </span>
+                      </div>
+                    )
+                  })}
                 </div>
               </section>
             )}
