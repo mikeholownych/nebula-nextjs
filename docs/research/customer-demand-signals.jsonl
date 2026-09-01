@@ -1,0 +1,38 @@
+# Customer Demand Signal Log
+# Format: one JSON object per line. Append-only. Never edit or delete existing lines.
+# Each line is one demand pattern observation.
+#
+# Schema:
+# {
+#   "signal_id":        "DS-YYYYMM-NNN",          // unique, assigned at recording
+#   "recorded_at":      "YYYY-MM-DDTHH:MM:SSZ",    // UTC ISO 8601
+#   "recorded_by":      "string",                   // operator who recorded it
+#   "source_type":      "audit_reason_pattern | support_classification | interview | survey | behavior_analysis | external",
+#   "observation_window": "YYYY-MM to YYYY-MM",     // collection period, not individual timestamp
+#   "independent_customer_count": N,                // minimum integer; never inflate; N < 3 is not "pattern"
+#   "observation_count": N,                         // total observations, may exceed customer count
+#   "independence_verified": true|false,            // were these from distinct sessions/sources?
+#   "underlying_job":   "string",                   // the job-to-be-done in the customer's words or close paraphrase
+#   "observed_workaround": "string or null",        // what customers are doing now instead
+#   "economic_consequence": "string or null",       // observable cost or lost value in customer terms (no Nebula projection)
+#   "evidence_refs":    ["string"],                 // references to evidence files, interview IDs, or external URLs
+#   "pii_free_notes":   "string",                   // any additional context; must not contain email, name, company
+#   "demand_state":     "observed | pattern | insufficient_data | invalidated",
+#   "opportunity_id":   "OPP-YYYYMM-NNN or null"   // if this signal is linked to a gate assessment
+# }
+#
+# Rules:
+# 1. "independent_customer_count" must be a verified count, not an estimate.
+#    If in doubt, record the lower bound.
+# 2. Three or more independent customers across two or more distinct sessions
+#    is the minimum threshold for demand_state: "pattern".
+# 3. Customers reached through the same content campaign, the same Reddit thread,
+#    or the same Nebula-framed audit are not independent.
+# 4. economic_consequence must use the customer's own framing where possible.
+#    Do not substitute Nebula's projected value.
+# 5. This file must never contain email addresses, names, company names,
+#    or any other personal identifiers. Use generic descriptions.
+# 6. This file is the demand evidence record. The lead pipeline (lead_state.db)
+#    is the operational pipeline. Do not conflate them.
+#
+# No entries yet. First entry will appear when a qualifying signal is observed.

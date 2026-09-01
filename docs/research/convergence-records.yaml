@@ -1,0 +1,40 @@
+version: 1
+kind: convergence_records
+# Convergence records link independently originated Citable observations to customer demand signals.
+# A convergence record does NOT authorize commercialization.
+# It documents that two independent signal sources point at the same problem domain.
+#
+# A record may only be written when:
+# 1. At least one Citable evidence entry (signal_source: citable) exists in evidence.yaml.
+# 2. At least one customer demand signal entry exists in customer-demand-signals.jsonl.
+# 3. The operator can affirm that the two signals originated independently
+#    (the customer observation was not prompted by Nebula's Citable framing).
+#
+# If independence cannot be verified, the relationship field must be:
+#   "possibly_related_unverified_independence"
+# and commercialization assessment cannot cite this record as evidence of independent convergence.
+#
+# Schema:
+#   convergence_id:          string    # CR-YYYYMM-NNN
+#   recorded_at:             string    # UTC ISO 8601
+#   recorded_by:             string
+#   citable_signal_ids:      list      # evidence_id values from evidence.yaml
+#   demand_signal_ids:       list      # signal_id values from customer-demand-signals.jsonl
+#   problem_domain:          string    # shared problem domain in neutral language
+#   independence_verified:   bool      # true only if origins are demonstrably separate
+#   independence_rationale:  string    # explain how independence was verified or why it is unverified
+#   relationship:            string    # co-directional | corroborating | possibly_related_unverified_independence
+#   confidence:              string    # low | medium | high (narrative, not a score)
+#   confidence_rationale:    string
+#   opportunity_id:          string|null  # if linked to a gate assessment
+#
+# Relationship types:
+#   co-directional:                    Both sources observe the same condition and the same customer-facing problem.
+#   corroborating:                     Sources observe related conditions; same direction but not identical problem.
+#   possibly_related_unverified_independence: Sources may share a cause but independence cannot be confirmed.
+#
+# Records are immutable once committed. If the assessment changes, append a new record
+# referencing the previous one.
+
+entries: []
+# No convergence records yet. First entries will appear when qualifying independent signals exist.

@@ -1,6 +1,41 @@
 version: 1
 kind: evidence
 updated: '2026-07-19T01:00:00.000Z'
+# Schema version 2 adds three optional governance fields to each entry:
+#
+#   signal_source:
+#     Where the observation originated.
+#     Values: citable | customer_behavior | customer_interview | external_research
+#     Default for entries without this field: citable
+#
+#   demand_state:
+#     The current evidence state for this signal relative to Nebula demand validation.
+#     Values: not_assessed | observed | pattern | insufficient_data | invalidated
+#     Default for entries without this field: not_assessed
+#     - not_assessed: No demand assessment has been performed.
+#     - observed:     Signal has been observed at least once from an independent source.
+#     - pattern:      Signal meets the minimum threshold (3+ independent customers, 2+ sessions).
+#     - insufficient_data: Assessment performed; evidence is insufficient for PASS.
+#     - invalidated:  Assessment performed; signal is not supported by evidence.
+#
+#   nebula_commercial_consideration:
+#     Whether this signal has entered Nebula's commercialization assessment.
+#     Values: none | watching | under_review | declined | admitted
+#     Default for entries without this field: none
+#     - none:         No commercialization assessment initiated.
+#     - watching:     Signal is being monitored for additional observations.
+#     - under_review: A gate assessment is in progress (see commercialization-gates.md).
+#     - declined:     Gate assessment completed; not commercializing.
+#     - admitted:     Gate passed; capability is COMMERCIALIZED.
+#
+# Important invariant: A Citable evidence entry with signal_source: citable
+# and nebula_commercial_consideration: none does NOT imply Nebula is considering
+# commercialization. Citable evidence entries exist for Citable reasons.
+# Only entries that have been explicitly advanced have non-none commercial_consideration.
+#
+# Do not change the demand_state or nebula_commercial_consideration of an existing entry.
+# Append a new entry or add a separate gate record in commercialization-gates.md.
+
 entries:
   - evidence_id: evidence-7point-framework-definition
     title: 7-Point Diagnosis Framework Definition
@@ -9,6 +44,9 @@ entries:
     source: internal - audit pipeline definition
     access_status: internal
     reuse_status: no_express_reuse_license
+    signal_source: citable
+    demand_state: not_assessed
+    nebula_commercial_consideration: none
 
   - evidence_id: evidence-delivery-sla
     title: Fix Pack 24-48 Hour Delivery SLA
@@ -17,6 +55,9 @@ entries:
     source: internal - service operations policy
     access_status: internal
     reuse_status: no_express_reuse_license
+    signal_source: citable
+    demand_state: not_assessed
+    nebula_commercial_consideration: none
 
   - evidence_id: evidence-reaudit-policy
     title: 30-Day Re-Audit Guarantee Policy
@@ -25,6 +66,9 @@ entries:
     source: internal - service terms
     access_status: internal
     reuse_status: no_express_reuse_license
+    signal_source: citable
+    demand_state: not_assessed
+    nebula_commercial_consideration: none
 
   - evidence_id: evidence-citable-detector-count
     title: Citable v1.3.1 Detector Count Verification
@@ -35,3 +79,6 @@ entries:
     reuse_status: open_license
     methodology: Source code enumeration of detector files in the citable package dist
     measurement_period: '2026-07-19'
+    signal_source: citable
+    demand_state: not_assessed
+    nebula_commercial_consideration: none

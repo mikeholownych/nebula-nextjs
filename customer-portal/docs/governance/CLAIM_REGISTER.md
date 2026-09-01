@@ -11,18 +11,18 @@
 
 ### Product Claims
 
-| Claim | Evidence | Source | Date | Approval | Expiry | Used In |
-|-------|----------|--------|------|----------|--------|---------|
-| "$97 One-Leak Repair Sprint" | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/pricing`, `/checkout`, schema |
-| "Stripe Payment Link checkout" | https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/checkout`, `/pricing` |
-| "GA4 measurement ID: G-KJ9S3450LH" | GA4 Property | Google Analytics | 2026-07-15 | Mike (founder) | - | `app/layout.tsx` |
+| Claim | Evidence | Source | Date | Approval | Expiry | Used In | Observatory |
+|-------|----------|--------|------|----------|--------|---------|-------------|
+| "$97 One-Leak Repair Sprint" | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/pricing`, `/checkout`, schema | none |
+| "Stripe Payment Link checkout" | https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/checkout`, `/pricing` | none |
+| "GA4 measurement ID: G-KJ9S3450LH" | GA4 Property | Google Analytics | 2026-07-15 | Mike (founder) | - | `app/layout.tsx` | none |
 
 ### Service Claims
 
-| Claim | Evidence | Source | Date | Approval | Expiry | Used In |
-|-------|----------|--------|------|----------|--------|---------|
-| "Landing page audit scoring" | Service definition | Service description | 2026-07-16 | Mike (founder) | - | `/audit`, schema |
-| "Evidence-backed audit results" | Service promise | Service description | 2026-07-16 | Mike (founder) | - | `/about` |
+| Claim | Evidence | Source | Date | Approval | Expiry | Used In | Observatory |
+|-------|----------|--------|------|----------|--------|---------|-------------|
+| "Landing page audit scoring" | Service definition | Service description | 2026-07-16 | Mike (founder) | - | `/audit`, schema | none |
+| "Evidence-backed audit results" | Service promise | Service description | 2026-07-16 | Mike (founder) | - | `/about` | none |
 
 ---
 
@@ -79,6 +79,14 @@ The following claims were removed from public surfaces because they lacked evide
 5. **Expiry:**
    - All claims with date-specific evidence expire in 90 days
    - Expired claims must be removed or re-validated
+   - **CI enforcement:** A test in `customer-portal/__tests__/` will fail the build if any active claim has a past expiry date. Use `-` for claims with no scheduled expiry; do not use a date you are not prepared to enforce.
+
+6. **Observatory column:**
+   - `none` — claim is not Observatory-relevant.
+   - `pending` — Observatory publication authorized but not yet live.
+   - `published` — claim appears on the Observatory surface.
+   - `adverse_disclosed` — an adverse or inconclusive result was found and has been disclosed in the Excluded Claims section.
+   - Values are governed by `docs/governance/observatory-boundary.md`.
 
 ---
 
