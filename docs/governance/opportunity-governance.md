@@ -207,8 +207,7 @@ Renaming an existing offer key is not a new offer provided the commercial terms 
 
 ### CI enforcement status
 
-**PENDING IMPLEMENTATION (I3):** A CI test that cross-references `public-facts.ts` offer keys against the gate decision log in `commercialization-gates.md` is planned. Until implemented, this invariant is PROCESS-ENFORCED.
-
+**MACHINE-ENFORCED (I3):** `npm run check:opportunity-governance` compares current commercial offer identity with the parent Git revision and requires a corresponding authorized PASS gate record. A new or materially changed offer without that record fails closed.
 ---
 
 ## Control Classification
@@ -218,17 +217,17 @@ Each governance control in this system is classified by how it actually enforces
 | Control | Classification | Basis |
 |---|---|---|
 | `public-facts.ts` + `public-facts.test.ts` | MACHINE-ENFORCED | CI fails if offer facts are structurally invalid or expired |
-| `CLAIM_REGISTER.md` + claim-expiry test | MACHINE-ENFORCED (partial) | Expiry test PENDING IMPLEMENTATION (I1); structural rules are documentary |
+| `CLAIM_REGISTER.md` + claim-expiry test | MACHINE-ENFORCED | `check-opportunity-governance.mjs` fails expired/overdue governed claims, malformed metadata, evidence regressions, and unsupported published Observatory claims |
 | Gate criteria C1-C7 requiring non-circular evidence | PROCESS-ENFORCED | Gate format enforces structural completeness; evidence quality is assessor-attested |
-| Observatory authoring gate (`observatory_status` field) | PENDING IMPLEMENTATION (I2) | Field defined in schema; CI test not yet written |
-| New offer gate invariant (R2) | PENDING IMPLEMENTATION (I3) | Rule documented; CI cross-reference test not yet written |
+| Observatory authoring gate (`observatory_status` field) | MACHINE-ENFORCED | `check-opportunity-governance.mjs` resolves Observatory evidence references and requires authorized, valid evidence |
+| New offer gate invariant (R2) | MACHINE-ENFORCED | `check-opportunity-governance.mjs` compares offer identity to the parent Git revision and validates the gate record |
 | `subtractive-differentiation.md` Refuse list check (C7) | PROCESS-ENFORCED | No CI gate; assessor must consult the document |
 | Independence and provenance rules (C5) | PROCESS-ENFORCED | Schema captures provenance class; no automated verification |
 | Adverse result disclosure obligation | PROCESS-ENFORCED | Policy stated; no automated detection of missing adverse disclosures |
 | Convergence independence verification | DOCUMENTARY / DELIBERATIVE | `independence_verified` is self-attested; git history is the audit trail |
 | Gate record immutability | DOCUMENTARY / DELIBERATIVE | Convention; git diff detects violations but no CI enforcement |
 | Customer demand signal log (append-only) | DOCUMENTARY / DELIBERATIVE | Convention; no CI enforcement of append-only semantics |
-| ADR requirement for PASS/REJECTED/COMMERCIALIZED | PROCESS-ENFORCED | Gate record format includes `adr_ref` field; CI check pending (I3) |
+| ADR requirement for PASS/REJECTED/COMMERCIALIZED | PROCESS-ENFORCED | Gate record format includes `adr_ref` field; I3 validates `adr_ref` only for offer authorization, but does not enforce every ADR workflow outcome |
 
 **MACHINE-ENFORCED:** A currently running executable test or CI check prevents the prohibited state.  
 **PROCESS-ENFORCED:** The rule is documented and operationally required; a competent operator applying the rule correctly will comply; no automated gate prevents bypass.  

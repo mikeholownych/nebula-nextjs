@@ -38,9 +38,9 @@ updated: '2026-07-19T01:00:00.000Z'
 #                              publication of this capability. A PASS gate record must
 #                              exist in commercialization-gates.md and an ADR must be
 #                              committed before this value is set.
-#     CI ENFORCEMENT: PENDING IMPLEMENTATION (I2). Until I2 is implemented, this
-#     field is PROCESS-ENFORCED. Do not set publishing_authorized without the
-#     required gate record and ADR.
+#     CI ENFORCEMENT: MACHINE-ENFORCED (I2) by scripts/check-opportunity-governance.mjs.
+#     The checker fails closed when an Observatory reference is missing, unresolved,
+#     unauthorized, or backed by invalid evidence.
 #
 # Important invariant: A Citable evidence entry with signal_source: citable
 # and nebula_commercial_consideration: none does NOT imply Nebula is considering

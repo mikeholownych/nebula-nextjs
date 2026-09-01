@@ -11,18 +11,18 @@
 
 ### Product Claims
 
-| Claim | Evidence | Source | Date | Approval | Expiry | Used In | Observatory |
-|-------|----------|--------|------|----------|--------|---------|-------------|
-| "$97 One-Leak Repair Sprint" | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/pricing`, `/checkout`, schema | none |
-| "Stripe Payment Link checkout" | https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | `/checkout`, `/pricing` | none |
-| "GA4 measurement ID: G-KJ9S3450LH" | GA4 Property | Google Analytics | 2026-07-15 | Mike (founder) | - | `app/layout.tsx` | none |
+| Claim ID | Claim | Class | Evidence | Source | Date | Approval | Expiry | Review Due | Evidence State | Dependency | Used In | Observatory |
+|-----------|-------|-------|----------|--------|------|----------|--------|------------|---------------|------------|---------|-------------|
+| claim-fix-pack-price | "$97 One-Leak Repair Sprint" | commercial | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | 2026-12-31 | 2026-12-01 | verified | stripe:price_1TwYwlEINR1kU9chLpOPfOJD | `/pricing`, `/checkout`, schema | none |
+| claim-stripe-checkout | "Stripe Payment Link checkout" | descriptive | https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h | Stripe Dashboard | 2026-07-24 | Mike (founder) | - | - | verified | stripe:payment-link | `/checkout`, `/pricing` | none |
+| claim-ga4-measurement-id | "GA4 measurement ID: G-KJ9S3450LH" | descriptive | GA4 Property | Google Analytics | 2026-07-15 | Mike (founder) | - | - | verified | ga4:property | `app/layout.tsx` | none |
 
 ### Service Claims
 
-| Claim | Evidence | Source | Date | Approval | Expiry | Used In | Observatory |
-|-------|----------|--------|------|----------|--------|---------|-------------|
-| "Landing page audit scoring" | Service definition | Service description | 2026-07-16 | Mike (founder) | - | `/audit`, schema | none |
-| "Evidence-backed audit results" | Service promise | Service description | 2026-07-16 | Mike (founder) | - | `/about` | none |
+| Claim ID | Claim | Class | Evidence | Source | Date | Approval | Expiry | Review Due | Evidence State | Dependency | Used In | Observatory |
+|-----------|-------|-------|----------|--------|------|----------|--------|------------|---------------|------------|---------|-------------|
+| claim-audit-scoring | "Landing page audit scoring" | descriptive | Service definition | Service description | 2026-07-16 | Mike (founder) | - | - | verified | audit-spec:v1 | `/audit`, schema | none |
+| claim-evidence-backed-results | "Evidence-backed audit results" | descriptive | Service promise | Service description | 2026-07-16 | Mike (founder) | - | - | verified | audit-spec:v1 | `/about` | none |
 
 ---
 
@@ -79,7 +79,7 @@ The following claims were removed from public surfaces because they lacked evide
 5. **Expiry:**
    - All claims with date-specific evidence expire in 90 days
    - Expired claims must be removed or re-validated
-   - **CI enforcement:** A test in `customer-portal/__tests__/` will fail the build if any active claim has a past expiry date. Use `-` for claims with no scheduled expiry; do not use a date you are not prepared to enforce.
+   - **CI enforcement:** `npm run check:opportunity-governance` fails the build if any governed active claim has a past expiry or review date, invalid required metadata, invalid evidence state, or invalid published Observatory support. Use `-` only for non-empirical/ descriptive claims that do not require scheduled expiry.
 
 6. **Observatory column:**
    - `none` — claim is not Observatory-relevant.

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import type { Metadata } from 'next'
-
+import { OBSERVATORY_SOURCES } from '@/app/lib/datasets'
 export const revalidate = 3600
 
 const LEDGER_PATH = '/home/mike/nebula/seo-reports/ai-traffic-ledger.json'
@@ -284,6 +284,7 @@ export default async function ObservatoryPage() {
     temporalCoverage: `${ledger?.started ?? '2026-09-01'}/..`,
     measurementTechnique:
       'Server access log classification by user agent; completed-audit aggregation against the published diagnostic specification.',
+    isBasedOn: OBSERVATORY_SOURCES.map((source) => ({ '@type': 'Dataset', identifier: source.id })),
   }
 
   return (

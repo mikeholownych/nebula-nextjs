@@ -1,5 +1,22 @@
 export const DATASET_REGISTRY_VERSION = '2026-08-22.v1'
 
+export interface ObservatorySourceRecord {
+  id: string
+  contentClass: 'aggregate-dataset' | 'operational-ledger' | 'epistemic-ledger'
+  sourcePath: string
+  observatory_status: 'publishing_authorized'
+  datasetIds?: string[]
+}
+
+export const OBSERVATORY_SOURCES: ObservatorySourceRecord[] = [
+  { id: 'observatory-api-stats', contentClass: 'aggregate-dataset', sourcePath: 'platform_api/services/audit_db.py', observatory_status: 'publishing_authorized', datasetIds: ['landing-page-leak-index-live'] },
+  { id: 'ai-traffic-ledger', contentClass: 'operational-ledger', sourcePath: 'seo-reports/ai-traffic-ledger.json', observatory_status: 'publishing_authorized' },
+  { id: 'ai-visibility-runs', contentClass: 'operational-ledger', sourcePath: 'reports/ai_visibility', observatory_status: 'publishing_authorized' },
+  { id: 'repair-verification-ledger', contentClass: 'epistemic-ledger', sourcePath: 'ledgers/repair_verification.json', observatory_status: 'publishing_authorized' },
+  { id: 'epistemic-observatory-ledger', contentClass: 'epistemic-ledger', sourcePath: 'ledgers/epistemic_observatory.json', observatory_status: 'publishing_authorized' },
+]
+
+
 /**
  * Single public registry of Nebula's published landing-page datasets.
  *
