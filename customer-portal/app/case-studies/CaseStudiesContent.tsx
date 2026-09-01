@@ -14,7 +14,7 @@ export default function CaseStudiesContent({
     <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
-        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Discover Verified Landing Page Case Studies and Audit Proof</h1>
+        <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Overview of Our Case Study Process</h1>
         {hasPublishedStudies ? (
           <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
             Every entry below passed the public-fact evidence, measurement-window, permission,
@@ -85,7 +85,7 @@ export default function CaseStudiesContent({
                 Public Teardowns
               </p>
               <h2 className="mb-2 text-2xl font-bold text-fg">
-                Real audits on well-known pages
+                Detailed Audits of Popular Websites
               </h2>
               <p className="mb-8 max-w-2xl text-fg-muted leading-7">
                 These companies are not Nebula customers. We run the same 9-signal engine on their
