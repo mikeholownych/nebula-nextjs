@@ -234,6 +234,8 @@ Each governance control in this system is classified by how it actually enforces
 **DOCUMENTARY / DELIBERATIVE:** The artifact creates a record and establishes a convention; it does not prevent incorrect behavior, but it makes incorrect behavior visible and attributable.  
 **PENDING IMPLEMENTATION:** The enforcement mechanism is designed and specified; it is not yet operational.
 
+**Anti-vacuity doctrine:** A governance control is not considered enforced merely because its validator passes. The validator must also prove that its discovery mechanism identifies the governed production objects it claims to control.
+
 Documentary and deliberative controls are not automatically inadequate. At current scale, deliberative governance is appropriate where deterministic enforcement is not yet justified. The classification exists so operators know which controls they are relying on human judgment for.
 
 ---

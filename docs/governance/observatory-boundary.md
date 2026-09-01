@@ -85,7 +85,7 @@ An evidence entry without `observatory_status` defaults to `not_applicable`. An 
 **Enforcement status:**
 
 - **DOCUMENTED OBLIGATION:** The rule remains a policy obligation for operators.
-- **MACHINE-ENFORCED (I2):** `npm run check:opportunity-governance` extracts evidence references from `app/observatory/page.tsx` and fails when an ID is missing, lacks `publishing_authorized`, has an invalid evidence state, or cannot resolve. `observatory_status` is an additional gate, not a bypass.
+- **MACHINE-ENFORCED (I2):** `npm run check:opportunity-governance` resolves the canonical Observatory source registry used by `app/observatory/page.tsx`, rejects empty or unresolved production bindings, and fails when a governed source lacks `publishing_authorized`, has an invalid evidence state, or cannot resolve. `observatory_status` is an additional gate, not a bypass.
 
 The `citable-proof-integrity.test.ts` test continues to enforce case-study governance via the compile script mechanism. I2 is implemented in the dedicated governance checker and its focused Jest fixtures.
 
