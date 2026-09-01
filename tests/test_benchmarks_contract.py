@@ -72,6 +72,7 @@ def _run_aggregation(rows):
     for entry in component_counts.values():
         components.append(
             {
+                "key": entry["key"],
                 "label": entry["label"],
                 "failures": entry["failures"],
                 "avg_impact": round(entry["impact_sum"] / entry["failures"], 1) if entry["failures"] else 0,
@@ -138,3 +139,54 @@ class TestBenchmarksDataContract:
         assert "Ad Signals" not in labels
         assert "Headline" in labels
         assert total == 1
+
+    def test_cardinality_matches_distinct_canonical_keys(self):
+        """After aggregation, number of components == number of distinct canonical keys.
+        This catches any future label-drift that re-introduces identity fragmentation."""
+        rows = _build_rows([
+            (70, [
+                {"key": "headline",      "label": "Headline",         "impact": 8},
+                {"key": "cta",           "label": "CTA",              "impact": 5},
+                {"key": "social_proof",  "label": "Social Proof",     "impact": 6},
+                {"key": "seo_foundations","label": "SEO Foundations",  "impact": 3},
+                {"key": "ai_readiness",  "label": "AI Readiness",     "impact": 4},
+            ]),
+            (65, [
+                {"key": "headline",      "label": "Headline clarity", "impact": 8},  # label variant
+                {"key": "cta",           "label": "CTA clarity",      "impact": 5},  # label variant
+                {"key": "seo_foundations","label": "Seo Foundations",  "impact": 3},  # label variant
+            ]),
+        ])
+        components, _, _ = _run_aggregation(rows)
+        canonical_keys = [c["key"] for c in components]
+        assert len(canonical_keys) == len(set(canonical_keys)), (
+            "Duplicate canonical keys in output — identity fragmentation present: "
+            f"{[k for k in canonical_keys if canonical_keys.count(k) > 1]}"
+        )
+        # Five distinct conditions were submitted; cardinality must be exactly 5.
+        assert len(components) == 5, (
+            f"Expected 5 canonical conditions, got {len(components)}: {canonical_keys}"
+        )
+
+    def test_no_duplicate_canonical_keys_production_fixture(self):
+        """Production fixture: simulate label drift across engine versions.
+        'AI Citation Readiness' and 'AI Readiness' both have key='ai_readiness'.
+        They must produce exactly one component."""
+        rows = _build_rows([
+            (70, [{"key": "ai_readiness", "label": "AI Citation Readiness", "impact": 4}]),
+            (68, [{"key": "ai_readiness", "label": "Ai Readiness",          "impact": 4}]),
+            (72, [{"key": "ai_readiness", "label": "AI readiness",          "impact": 4}]),
+            (71, [{"key": "seo_foundations", "label": "SEO Foundations",    "impact": 3}]),
+            (69, [{"key": "seo_foundations", "label": "Seo Foundations",    "impact": 3}]),
+        ])
+        components, scores, _ = _run_aggregation(rows)
+        ai_components = [c for c in components if c["key"] == "ai_readiness"]
+        seo_components = [c for c in components if c["key"] == "seo_foundations"]
+        assert len(ai_components) == 1, f"ai_readiness fragmented: {ai_components}"
+        assert len(seo_components) == 1, f"seo_foundations fragmented: {seo_components}"
+        # Combined share: 3 out of 5 audits for ai_readiness = 60%
+        assert ai_components[0]["failures"] == 3
+        assert ai_components[0]["share"] == 60
+        # Combined share: 2 out of 5 for seo_foundations = 40%
+        assert seo_components[0]["failures"] == 2
+        assert seo_components[0]["share"] == 40
