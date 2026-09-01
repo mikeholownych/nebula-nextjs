@@ -268,7 +268,6 @@ export default async function ObservatoryPage() {
 
   const maxReads = agg?.perBot.length ? agg.perBot[0].reads : 0
   const maxContent = agg?.topContent.length ? agg.topContent[0][1] : 0
-  const topConditions = benchmarks?.components?.slice(0, 6) ?? []
   const vis = visibility?.summary?.status === 'ok' ? visibility.summary : null
   const visQueries = vis ? vis.gap_queries.length + (vis.canonical_citations > 0 ? 2 : 0) : 0
 
@@ -291,7 +290,7 @@ export default async function ObservatoryPage() {
     <main className="min-h-screen bg-bg">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        {/* Answer capsule — structured for AI retrieval */}
+        {/* Answer capsule - structured for AI retrieval */}
         <div
           data-answer-capsule
           className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-10"
@@ -584,7 +583,7 @@ export default async function ObservatoryPage() {
           </p>
         </section>
 
-        {/* Citation outcomes — the part reads alone cannot show */}
+        {/* Citation outcomes - the part reads alone cannot show */}
         <section className="mb-14">
           <Label>Does reading turn into citing? Measured answer outcomes</Label>
           {vis ? (

@@ -386,7 +386,7 @@ function ImmediateRepairOffer({
                     {worst.fix.length > 180 ? '...' : ''}
                   </div>
                   <p className="mt-3 text-xs text-fg-muted">
-                    Nebula has not established conversion impact. A later PASS on this condition ID means the page condition changed.
+                    Nebula has not established an effect on conversion outcomes. A later PASS on this condition ID means the page condition changed.
                   </p>
                 </>
               )
@@ -633,7 +633,7 @@ function ReportOverview({
           <p className="mt-2 break-all text-base text-fg-muted">{hostname}</p>
 
           <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted">
-            {summary.critical + summary.warning} conditions failed this run. Conversion impact is not established.
+            {summary.critical + summary.warning} conditions failed this run. An effect on conversion outcomes is not established.
           </p>
 
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
@@ -1568,7 +1568,7 @@ export default function ResultsClient({
                       </p>
                     )}
                     <p className="text-xs text-fg-muted">
-                      {worst.not_established || 'Nebula has not established conversion impact for this condition.'}
+                      {worst.not_established || 'Nebula has not established an effect on conversion outcomes for this condition.'}
                     </p>
                   </div>
                 )

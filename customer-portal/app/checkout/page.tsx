@@ -75,12 +75,12 @@ export default async function CheckoutPage({
             verifies whether the condition moved from FAIL to PASS.
           </p>
           <p className="mt-2 text-xs text-fg-muted/70">
-            Nebula verifies observable condition changes. Conversion impact is not established
-            and is not claimed.
+            Nebula verifies observable condition changes. An effect on conversion outcomes is not
+            established and is not claimed.
           </p>
         </div>
 
-        {/* No fabricated testimonials — first real repair verification will appear here */}
+        {/* No fabricated testimonials - first real repair verification will appear here */}
 
         {eligibleAuditId ? (
           <>
