@@ -570,33 +570,6 @@ export default async function ObservatoryPage() {
           )}
         </section>
 
-        {/* Dataset conditions */}
-        <section className="mb-14">
-          <Label>What the audit dataset shows</Label>
-          {benchmarks && topConditions.length > 0 ? (
-            <>
-              <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
-                Across {benchmarks.audit_count.toLocaleString()} completed audits, pages average{' '}
-                {benchmarks.avg_failures_per_page} failed conditions. The most frequently failed
-                conditions, as defined in the published specification:
-              </p>
-              <div className="border border-border">
-                {topConditions.map((c) => (
-                  <div key={c.label} className="flex items-center gap-4 border-b border-border px-4 py-3 last:border-b-0">
-                    <span className="w-44 shrink-0 text-sm text-fg">{c.label}</span>
-                    <Bar share={c.share} />
-                    <span className="w-14 shrink-0 text-right font-mono text-sm tabular-nums text-fg-muted">
-                      {Math.round(c.share * 100)}%
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <p className="text-sm text-fg-muted">Dataset statistics are temporarily unavailable.</p>
-          )}
-        </section>
-
         {/* ── Tier 2: verification & reliability, gated by real denominators ── */}
         <section className="mb-14">
           <Label>Repair verification: measured, not promised</Label>
