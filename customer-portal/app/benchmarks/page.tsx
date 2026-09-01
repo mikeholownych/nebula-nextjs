@@ -127,7 +127,7 @@ export default async function BenchmarksPage() {
             The Landing Page Leak Index reports aggregate finding rates from{' '}
             {data.audit_count} completed Nebula audits.
             {data.top_leak
-              ? ` Headline failures appear in ${Math.round(data.top_leak.share * 100)}% of audited pages.`
+              ? ` Headline failures appear in ${data.top_leak.share}% of audited pages.`
               : null}{' '}
             {data.avg_failures_per_page !== null
               ? `The average page has ${data.avg_failures_per_page.toFixed(1)} conversion leaks.`

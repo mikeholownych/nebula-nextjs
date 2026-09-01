@@ -1057,6 +1057,17 @@ class AuditDB:
         scores = []
         total_findings = 0
         deprecated_keys = {"above_fold", "ad_signals"}
+        display_map = {
+            "headline": "Headline clarity",
+            "cta": "CTA clarity",
+            "social_proof": "Social proof",
+            "load_speed": "Load speed",
+            "seo_foundations": "SEO foundations",
+            "ai_readiness": "AI readiness",
+            "mobile": "Mobile layout",
+            "local_gbp": "Local business profile",
+            "ai_crawler_access": "AI crawler access",
+        }
 
         for row in rows:
             score = row["score"]
@@ -1085,12 +1096,19 @@ class AuditDB:
                 if not isinstance(f, dict) or f.get("key") in deprecated_keys:
                     continue
                 total_findings += 1
-                key = f.get("key") or f.get("label") or "unknown"
-                key = str(key).replace("_", " ").title()
-                label = f.get("label") or key
+                # Deduplicate by canonical key to prevent label-drift across engine versions.
+                canon_key = str(f.get("key") or "").lower().strip()
+                if not canon_key:
+                    continue
+                # Use canonical display map; fall back to first-seen label.
+                display_label = (
+                    display_map.get(canon_key)
+                    or f.get("label")
+                    or canon_key.replace("_", " ").title()
+                )
                 impact = f.get("impact") or 0
                 entry = component_counts.setdefault(
-                    label, {"key": key, "label": label, "failures": 0, "impact_sum": 0.0}
+                    canon_key, {"key": canon_key, "label": display_label, "failures": 0, "impact_sum": 0.0}
                 )
                 entry["failures"] += 1
                 entry["impact_sum"] += float(impact)
