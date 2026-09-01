@@ -527,6 +527,18 @@ async def get_benchmarks():
         raise HTTPException(status_code=503, detail="Benchmarks unavailable")
 
 
+@router.get("/stats/observatory")
+async def get_observatory_stats():
+    """Reference statistics for the public /observatory page: score
+    percentiles + histogram, condition failure base rates, co-occurrence
+    pairs, quadrant mix. Cells below min_cell_n are suppressed server-side.
+    Must be defined before /{audit_id}."""
+    try:
+        return await audit_db.get_observatory_stats()
+    except Exception:
+        raise HTTPException(status_code=503, detail="Observatory stats unavailable")
+
+
 # ── Paid analytics: rollups + personal positioning (Phase 3 Task 4) ─────────
 
 

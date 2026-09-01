@@ -70,6 +70,17 @@ interface BenchmarkData {
   components: Array<{ label: string; failures: number; share: number }>
 }
 
+interface ObservatoryStats {
+  audit_count: number
+  min_cell_n: number
+  score_percentiles?: { p10: number; p25: number; p50: number; p75: number; p90: number }
+  score_histogram?: number[]
+  pages_with_failures_rate?: number
+  condition_base_rates?: Array<{ key: string; label: string; fail_rate: number; n: number }>
+  cooccurrence?: Array<{ if_fails: string; also_fails: string; rate: number; n: number }>
+  quadrant_mix?: Record<string, number>
+}
+
 /* ---------- data loading ---------- */
 
 function readLedger(): Ledger | null {
@@ -100,6 +111,16 @@ function readLatestVisibility(): VisibilitySummary | null {
 async function getBenchmarks(): Promise<BenchmarkData | null> {
   try {
     const res = await fetch(`${API_BASE}/audit/stats/benchmarks`, { next: { revalidate: 3600 } })
+    if (!res.ok) return null
+    return res.json()
+  } catch {
+    return null
+  }
+}
+
+async function getObservatoryStats(): Promise<ObservatoryStats | null> {
+  try {
+    const res = await fetch(`${API_BASE}/audit/stats/observatory`, { next: { revalidate: 3600 } })
     if (!res.ok) return null
     return res.json()
   } catch {
@@ -196,7 +217,7 @@ function Bar({ share }: { share: number }) {
 export default async function ObservatoryPage() {
   const ledger = readLedger()
   const visibility = readLatestVisibility()
-  const benchmarks = await getBenchmarks()
+  const [benchmarks, stats] = await Promise.all([getBenchmarks(), getObservatoryStats()])
 
   const agg = ledger ? aggregate(ledger) : null
   const windowLabel = !agg
@@ -231,13 +252,12 @@ export default async function ObservatoryPage() {
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <Label>Nebula Components · Observatory</Label>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-fg mb-4">
-          How AI systems read Nebula
+          The state of landing pages, measured
         </h1>
         <p className="max-w-[65ch] text-fg-muted leading-relaxed mb-4">
-          AI assistants retrieve Nebula&apos;s audit dataset, diagnostic specification, and teardown
-          evidence around the clock. This page publishes what our server logs record, what those
-          systems retrieve, and where Nebula actually appears in live AI answers. Measured, not
-          modeled.
+          Reference statistics from completed Nebula audits: how pages score, which conditions fail
+          most, and which failures travel together. Below that, the AI systems retrieving this
+          dataset and where Nebula appears in live AI answers. Measured, not modeled.
         </p>
         <p className="font-mono text-xs text-fg-muted mb-12">
           Source: server access logs + live answer-engine queries · Updated daily
@@ -267,6 +287,124 @@ export default async function ObservatoryPage() {
             window="all time"
           />
         </section>
+
+        {/* ── Reference statistics: the visitor-facing dataset ── */}
+        {stats && stats.audit_count >= stats.min_cell_n && (
+          <>
+            {/* Score distribution */}
+            <section className="mb-14">
+              <Label>How landing pages score · N={stats.audit_count}</Label>
+              <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+                Score distribution across all {stats.audit_count.toLocaleString()} completed
+                audits. The median page scores {stats.score_percentiles!.p50} out of 10;{' '}
+                {Math.round((stats.pages_with_failures_rate ?? 0) * 100)}% of audited pages carry
+                at least one failed condition.
+              </p>
+              {stats.score_histogram && (
+                <div className="flex h-32 items-end gap-1 border border-border bg-bg-panel p-4">
+                  {stats.score_histogram.map((c, i) => {
+                    const max = Math.max(...stats.score_histogram!)
+                    return (
+                      <div key={i} className="flex flex-1 flex-col items-center gap-1">
+                        <div
+                          className="w-full bg-accent"
+                          style={{ height: `${max ? Math.max(2, Math.round((c / max) * 88)) : 2}px` }}
+                        />
+                        <span className="font-mono text-[9px] text-fg-muted">{i}-{i + 1}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+              {stats.score_percentiles && (
+                <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs text-fg-muted">
+                  <span>p10 {stats.score_percentiles.p10}</span>
+                  <span>p25 {stats.score_percentiles.p25}</span>
+                  <span className="text-fg">median {stats.score_percentiles.p50}</span>
+                  <span>p75 {stats.score_percentiles.p75}</span>
+                  <span>p90 {stats.score_percentiles.p90}</span>
+                </div>
+              )}
+              <p className="mt-3 text-xs text-fg-muted">
+                Run an audit to see where your page sits on this distribution.
+              </p>
+            </section>
+
+            {/* Condition failure base rates */}
+            {stats.condition_base_rates && stats.condition_base_rates.length > 0 && (
+              <section className="mb-14">
+                <Label>Condition failure base rates</Label>
+                <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+                  The share of audited pages that fail each condition, as defined in the published
+                  specification. If your page fails one of these, this is how common that failure
+                  is.
+                </p>
+                <div className="border border-border">
+                  {stats.condition_base_rates.map((c) => (
+                    <div key={c.key} className="flex items-center gap-4 border-b border-border px-4 py-3 last:border-b-0">
+                      <span className="w-44 shrink-0 text-sm text-fg">{c.label}</span>
+                      <Bar share={c.fail_rate} />
+                      <span className="w-14 shrink-0 text-right font-mono text-sm tabular-nums text-fg-muted">
+                        {Math.round(c.fail_rate * 100)}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Co-occurrence */}
+            {stats.cooccurrence && stats.cooccurrence.length > 0 && (
+              <section className="mb-14">
+                <Label>Failures that travel together</Label>
+                <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+                  Conditional failure rates: when a page fails the first condition, how often it
+                  also fails the second. Useful for knowing what else is probably wrong.
+                </p>
+                <div className="border border-border">
+                  {stats.cooccurrence.map((p, i) => (
+                    <div key={i} className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-border px-4 py-3 last:border-b-0">
+                      <span className="text-sm text-fg">
+                        Fails <span className="font-semibold">{p.if_fails}</span>
+                        <span className="text-fg-muted"> → also fails </span>
+                        <span className="font-semibold">{p.also_fails}</span>
+                      </span>
+                      <span className="ml-auto font-mono text-sm tabular-nums text-fg">
+                        {Math.round(p.rate * 100)}%
+                        <span className="ml-2 text-xs text-fg-muted">n={p.n}</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Quadrant mix */}
+            {stats.quadrant_mix && Object.keys(stats.quadrant_mix).length > 0 && (
+              <section className="mb-14">
+                <Label>How fixable are the failures</Label>
+                <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+                  Every finding is classified by severity and implementation effort. The split
+                  across all findings in the dataset:
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {Object.entries(stats.quadrant_mix).map(([k, v]) => (
+                    <div key={k} className="border border-border bg-bg-panel p-5">
+                      <p className="text-3xl font-extrabold tabular-nums text-fg">{Math.round(v * 100)}%</p>
+                      <p className="mt-1 text-sm text-fg-muted">
+                        {k === 'quick_win'
+                          ? 'Quick wins: high severity, low implementation effort'
+                          : k === 'major_project'
+                            ? 'Major projects: high severity, substantial effort'
+                            : k.replace(/_/g, ' ')}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
+        )}
 
         {/* Per-AI-system detail */}
         <section className="mb-14">
@@ -424,6 +562,12 @@ export default async function ObservatoryPage() {
             <li>
               The measurement window starts {ledger?.started ?? '2026-09-01'} and accumulates daily.
               We publish the exact window rather than implying a longer history.
+            </li>
+            <li>
+              Dataset statistics (score distribution, base rates, co-occurrence) aggregate all
+              completed audits with internal traffic excluded. Any cell with fewer than 30
+              observations is suppressed rather than published. Conditional rates state their own
+              denominator (n).
             </li>
             <li>
               Audit dataset figures come from completed audits only. Counts are facts about the

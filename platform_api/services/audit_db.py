@@ -1126,6 +1126,154 @@ class AuditDB:
             "distribution": [],
         }
 
+    async def get_observatory_stats(self) -> dict:
+        """Reference statistics for /observatory: score distribution with
+        percentiles, condition failure base rates, co-occurrence pairs, and
+        quadrant mix. Privacy-safe aggregates from completed audits only.
+        Cells below MIN_CELL_N are suppressed (null-stays-null doctrine)."""
+        MIN_CELL_N = 30
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT score, findings
+                FROM audits
+                WHERE status = 'completed'
+                  AND score IS NOT NULL
+                  AND email != ALL($1::text[])
+                  AND split_part(email, '@', 2) != ALL($2::text[])
+                """,
+                list(INTERNAL_EMAILS),
+                list(SELF_DOMAINS),
+            )
+
+        import json as _json
+        deprecated = {"above_fold", "ad_signals"}
+        display = {
+            "headline": "Headline clarity",
+            "cta": "CTA clarity",
+            "social_proof": "Social proof",
+            "load_speed": "Load speed",
+            "seo_foundations": "SEO foundations",
+            "ai_readiness": "AI readiness",
+            "mobile": "Mobile layout",
+            "local_gbp": "Local business profile",
+            "ai_crawler_access": "AI crawler access",
+        }
+
+        scores: list[float] = []
+        fail_counts: dict[str, int] = {}
+        labels: dict[str, str] = {}
+        pair_counts: dict[tuple, int] = {}
+        quadrant_counts: dict[str, int] = {}
+        pages_with_failures = 0
+
+        for row in rows:
+            scores.append(row["score"] / 10.0)
+            findings = row["findings"]
+            if isinstance(findings, str):
+                try:
+                    findings = _json.loads(findings)
+                except Exception:
+                    findings = []
+            if not isinstance(findings, list):
+                continue
+            keys = []
+            for f in findings:
+                if not isinstance(f, dict):
+                    continue
+                key = f.get("key")
+                if not key or key in deprecated:
+                    continue
+                keys.append(key)
+                labels[key] = display.get(key) or f.get("label") or key.replace("_", " ").title()
+                fail_counts[key] = fail_counts.get(key, 0) + 1
+                q = f.get("quadrant")
+                if q:
+                    quadrant_counts[q] = quadrant_counts.get(q, 0) + 1
+            if keys:
+                pages_with_failures += 1
+            uniq = sorted(set(keys))
+            for i in range(len(uniq)):
+                for j in range(i + 1, len(uniq)):
+                    pair = (uniq[i], uniq[j])
+                    pair_counts[pair] = pair_counts.get(pair, 0) + 1
+
+        n = len(scores)
+        if n == 0:
+            return {"audit_count": 0, "min_cell_n": MIN_CELL_N}
+
+        scores.sort()
+
+        def pct(p: float) -> float:
+            idx = min(n - 1, max(0, int(round(p * (n - 1)))))
+            return round(scores[idx], 1)
+
+        # 10-bucket histogram over 0-10.
+        hist = [0] * 10
+        for s in scores:
+            hist[min(9, int(s))] += 1
+
+        base_rates = [
+            {
+                "key": k,
+                "label": labels[k],
+                "fail_rate": round(c / n, 3),
+                "n": n,
+            }
+            for k, c in sorted(fail_counts.items(), key=lambda x: -x[1])
+            if c >= 1
+        ]
+
+        # Co-occurrence: P(B fails | A fails) for top pairs, gated on the
+        # conditioning denominator (failures of A), not total audits.
+        cooccurrence = []
+        for (a, b), c in sorted(pair_counts.items(), key=lambda x: -x[1])[:12]:
+            for cond, other in ((a, b), (b, a)):
+                denom = fail_counts.get(cond, 0)
+                if denom >= MIN_CELL_N:
+                    cooccurrence.append(
+                        {
+                            "if_fails": labels.get(cond, cond),
+                            "also_fails": labels.get(other, other),
+                            "rate": round(c / denom, 3),
+                            "n": denom,
+                        }
+                    )
+        cooccurrence.sort(key=lambda x: -x["rate"])
+        # Dedupe on the pair text, keep strongest direction first.
+        seen = set()
+        top_pairs = []
+        for p in cooccurrence:
+            sig = (p["if_fails"], p["also_fails"])
+            if sig in seen:
+                continue
+            seen.add(sig)
+            top_pairs.append(p)
+            if len(top_pairs) >= 6:
+                break
+
+        total_q = sum(quadrant_counts.values()) or 1
+        quadrants = {
+            k: round(v / total_q, 3) for k, v in sorted(
+                quadrant_counts.items(), key=lambda x: -x[1])
+        }
+
+        return {
+            "audit_count": n,
+            "min_cell_n": MIN_CELL_N,
+            "score_percentiles": {
+                "p10": pct(0.10), "p25": pct(0.25), "p50": pct(0.50),
+                "p75": pct(0.75), "p90": pct(0.90),
+            },
+            "score_histogram": hist,
+            "pages_with_failures_rate": round(pages_with_failures / n, 3),
+            "condition_base_rates": base_rates,
+            "cooccurrence": top_pairs,
+            "quadrant_mix": quadrants,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+        }
+
     async def get_recent_finding(self) -> dict | None:
         """Return the most interesting finding from the most recent completed audit."""
         await self.connect()
