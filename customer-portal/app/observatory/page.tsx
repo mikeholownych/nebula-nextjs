@@ -6,6 +6,8 @@ export const revalidate = 3600
 
 const LEDGER_PATH = '/home/mike/nebula/seo-reports/ai-traffic-ledger.json'
 const VISIBILITY_DIR = '/home/mike/nebula/reports/ai_visibility'
+const VERIFICATION_LEDGER = '/home/mike/nebula/ledgers/repair_verification.json'
+const EPISTEMIC_LEDGER = '/home/mike/nebula/ledgers/epistemic_observatory.json'
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 const CANONICAL = 'https://nebulacomponents.com/observatory'
 
@@ -79,6 +81,31 @@ interface ObservatoryStats {
   condition_base_rates?: Array<{ key: string; label: string; fail_rate: number; n: number }>
   cooccurrence?: Array<{ if_fails: string; also_fails: string; rate: number; n: number }>
   quadrant_mix?: Record<string, number>
+}
+
+interface VerificationLedger {
+  generated_at: string
+  delivered_reaudits: number
+  conditions_reobserved: number
+  fail_to_pass: number
+  fail_to_fail: number
+}
+
+interface EpistemicLedger {
+  generated_at: string
+  stamped_audits: number
+  audits_with_indeterminate: number
+  determination_counts?: Record<string, number>
+  integrity_states?: Record<string, number>
+  gate?: { need_stamped_audits: number; need_days: number; stamped_audits: number; days_open: number }
+}
+
+function readJson<T>(p: string): T | null {
+  try {
+    return JSON.parse(fs.readFileSync(p, 'utf8'))
+  } catch {
+    return null
+  }
 }
 
 /* ---------- data loading ---------- */
@@ -217,6 +244,8 @@ function Bar({ share }: { share: number }) {
 export default async function ObservatoryPage() {
   const ledger = readLedger()
   const visibility = readLatestVisibility()
+  const verification = readJson<VerificationLedger>(VERIFICATION_LEDGER)
+  const epistemic = readJson<EpistemicLedger>(EPISTEMIC_LEDGER)
   const [benchmarks, stats] = await Promise.all([getBenchmarks(), getObservatoryStats()])
 
   const agg = ledger ? aggregate(ledger) : null
@@ -540,6 +569,105 @@ export default async function ObservatoryPage() {
           )}
         </section>
 
+        {/* ── Tier 2: verification & reliability, gated by real denominators ── */}
+        <section className="mb-14">
+          <Label>Repair verification: measured, not promised</Label>
+          <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+            After a Repair Sprint, Nebula re-observes the same versioned condition on the same
+            page and records whether it moved from FAIL to PASS. That is a condition-state
+            change, not a conversion claim. We publish this rate only from real re-observations.
+          </p>
+          {verification && verification.conditions_reobserved >= 10 ? (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {Math.round(
+                    (verification.fail_to_pass / verification.conditions_reobserved) * 100,
+                  )}
+                  %
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">
+                  of re-observed conditions independently verified FAIL to PASS
+                </p>
+              </div>
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {verification.conditions_reobserved}
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">conditions re-observed</p>
+              </div>
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {verification.delivered_reaudits}
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">independent re-audits delivered</p>
+              </div>
+            </div>
+          ) : (
+            <div className="border border-border bg-bg-panel p-5">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
+                Status: accumulating evidence
+              </p>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                {verification ? verification.conditions_reobserved : 0} conditions re-observed so
+                far. This number publishes when at least 10 independent re-observations exist. A
+                rate computed from fewer would be theater, so until then the honest value is:
+                not yet established.
+              </p>
+            </div>
+          )}
+        </section>
+
+        <section className="mb-14">
+          <Label>Diagnostic reliability: how often the instrument can determine</Label>
+          <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
+            Every determination is stamped with observation integrity. When the engine cannot
+            establish an observation, the finding says INDETERMINATE with a reason code instead
+            of guessing. We publish the determinable rate once the measurement gate is met.
+          </p>
+          {epistemic && epistemic.gate && epistemic.stamped_audits >= epistemic.gate.need_stamped_audits ? (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {Math.round(
+                    ((epistemic.stamped_audits - epistemic.audits_with_indeterminate) /
+                      epistemic.stamped_audits) *
+                      100,
+                  )}
+                  %
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">of audits fully determinable</p>
+              </div>
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {epistemic.stamped_audits.toLocaleString()}
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">stamped production audits</p>
+              </div>
+              <div className="border border-border bg-bg-panel p-5">
+                <p className="text-3xl font-extrabold tabular-nums text-fg">
+                  {epistemic.audits_with_indeterminate}
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">audits with an indeterminate observation</p>
+              </div>
+            </div>
+          ) : (
+            <div className="border border-border bg-bg-panel p-5">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-fg-muted">
+                Status: measurement gate open
+              </p>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                {epistemic?.gate
+                  ? `${epistemic.gate.stamped_audits} of ${epistemic.gate.need_stamped_audits} stamped audits collected, day ${epistemic.gate.days_open} of ${epistemic.gate.need_days}.`
+                  : 'Instrumentation active; gate progress unavailable.'}{' '}
+                The reliability rate publishes when the gate closes. Publishing it earlier from a
+                small denominator would overstate certainty. Most tools never publish this number
+                at all.
+              </p>
+            </div>
+          )}
+        </section>
+
         {/* Methodology */}
         <section className="mb-14" id="methodology">
           <Label>How these numbers are counted</Label>
@@ -568,6 +696,12 @@ export default async function ObservatoryPage() {
               completed audits with internal traffic excluded. Any cell with fewer than 30
               observations is suppressed rather than published. Conditional rates state their own
               denominator (n).
+            </li>
+            <li>
+              Repair verification counts condition-state changes (FAIL to PASS on the same
+              versioned condition ID) from independent re-audits. Reliability counts audits whose
+              observations were all determinable. Both publish only after their stated evidence
+              gates are met; before that, the gate state itself is shown.
             </li>
             <li>
               Audit dataset figures come from completed audits only. Counts are facts about the

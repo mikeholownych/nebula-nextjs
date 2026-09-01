@@ -289,6 +289,62 @@ def process_purchase(purchase, conn=None, dry_run=False):
         return False
 
 
+def write_verification_ledger(conn) -> None:
+    """Refresh ledgers/repair_verification.json: how many delivered re-audits
+    exist, and of the conditions they re-observed, how many moved FAIL->PASS.
+    Facts about condition-state changes only; no conversion claims."""
+    import json as _json
+    from datetime import datetime, timezone
+    ledger_path = Path(__file__).resolve().parent.parent / "ledgers" / "repair_verification.json"
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT reaudit_condition_delta
+                FROM purchases
+                WHERE reaudit_condition_delta IS NOT NULL
+                """
+            )
+            rows = cur.fetchall()
+    except Exception as e:
+        log(f"verification ledger query failed: {e}")
+        return
+
+    reaudits = len(rows)
+    conditions_reobserved = 0
+    fail_to_pass = 0
+    fail_to_fail = 0
+    for (delta,) in rows:
+        if isinstance(delta, str):
+            try:
+                delta = _json.loads(delta)
+            except Exception:
+                continue
+        if not isinstance(delta, dict):
+            continue
+        for _cid, change in delta.items():
+            if not isinstance(change, dict):
+                continue
+            conditions_reobserved += 1
+            before = str(change.get("before", "")).upper()
+            after = str(change.get("after", "")).upper()
+            if before == "FAIL" and after == "PASS":
+                fail_to_pass += 1
+            elif before == "FAIL" and after == "FAIL":
+                fail_to_fail += 1
+
+    ledger_path.parent.mkdir(exist_ok=True)
+    ledger_path.write_text(_json.dumps({
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "delivered_reaudits": reaudits,
+        "conditions_reobserved": conditions_reobserved,
+        "fail_to_pass": fail_to_pass,
+        "fail_to_fail": fail_to_fail,
+        "note": "Condition-state changes on re-observation. Not conversion claims.",
+    }, indent=2))
+    log(f"verification ledger written: {ledger_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Deliver 30-day re-audits")
     parser.add_argument("--dry-run", action="store_true", help="Print without sending")
@@ -309,6 +365,8 @@ def main():
 
     due = get_due_reaudits(conn)
     log(f"Found {len(due)} re-audit(s) due")
+
+    write_verification_ledger(conn)
 
     if not due:
         conn.close()
