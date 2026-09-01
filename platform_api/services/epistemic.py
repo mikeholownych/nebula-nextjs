@@ -472,7 +472,13 @@ def diff_determinations(
     before: list[dict[str, Any]] | None,
     after: list[dict[str, Any]] | None,
 ) -> list[dict[str, Any]]:
-    """Condition transitions only. Same condition_id + version."""
+    """Condition transitions only. Same condition_id + version.
+
+    Semantic-version guard: if the same condition_id appears at different
+    versions between before and after, it is flagged as INCOMPARABLE rather
+    than credited as repair. A rule change between observations must not
+    be counted as remediation.
+    """
     def _index(rows: list[dict[str, Any]] | None) -> dict[tuple[str, int], dict[str, Any]]:
         out: dict[tuple[str, int], dict[str, Any]] = {}
         for row in rows or []:
@@ -489,21 +495,147 @@ def diff_determinations(
 
     t0 = _index(before)
     t1 = _index(after)
+
+    # Build version-aware index: condition_id → set of versions observed
+    t0_by_cid: dict[str, int] = {k[0]: k[1] for k in t0}
+    t1_by_cid: dict[str, int] = {k[0]: k[1] for k in t1}
+
     keys = sorted(set(t0) | set(t1))
     transitions = []
+    emitted_incomparable: set[str] = set()
     for key in keys:
+        cid, ver = key
         left = t0.get(key) or {}
         right = t1.get(key) or {}
         a = left.get("determination")
         b = right.get("determination")
+
+        # Semantic-version guard: same condition_id appeared at different version.
+        # Do not credit as repair — rule semantics may have changed.
+        # Emit exactly one INCOMPARABLE entry per condition_id (not per version key).
+        if cid in t0_by_cid and cid in t1_by_cid and t0_by_cid[cid] != t1_by_cid[cid]:
+            if cid not in emitted_incomparable:
+                emitted_incomparable.add(cid)
+                # Use the before/after values from the actually-indexed versions.
+                before_row = t0.get((cid, t0_by_cid[cid])) or {}
+                after_row  = t1.get((cid, t1_by_cid[cid])) or {}
+                transitions.append({
+                    "condition_id": cid,
+                    "condition_version_before": t0_by_cid[cid],
+                    "condition_version_after": t1_by_cid[cid],
+                    "from": before_row.get("determination"),
+                    "to": after_row.get("determination"),
+                    "verified_condition_change": False,
+                    "incomparable": True,
+                    "incomparable_reason": "CONDITION_VERSION_CHANGED",
+                    "not_established": NOT_ESTABLISHED_DEFAULT,
+                })
+            continue
+
         if a == b:
             continue
         transitions.append({
-            "condition_id": key[0],
-            "condition_version": key[1],
+            "condition_id": cid,
+            "condition_version": ver,
             "from": a,
             "to": b,
             "verified_condition_change": a in {"PASS", "FAIL"} and b in {"PASS", "FAIL"} and a != b,
             "not_established": NOT_ESTABLISHED_DEFAULT,
         })
     return transitions
+
+
+def classify_reaudit_transition(
+    transition: dict[str, Any],
+) -> str:
+    """Return a canonical class label for one transition dict.
+
+    Classes:
+      REMEDIATED        — FAIL → PASS on matching condition/version
+      REGRESSION        — PASS → FAIL on matching condition/version
+      PERSISTED_FAIL    — FAIL → FAIL (condition unchanged after repair attempt)
+      PERSISTED_PASS    — PASS → PASS (condition was already passing)
+      INCOMPARABLE      — version changed between observations
+      INDETERMINATE     — one or both sides are INDETERMINATE/NOT_APPLICABLE
+      UNKNOWN           — unexpected combination
+
+    These are condition-state facts. None imply conversion impact.
+    """
+    if transition.get("incomparable"):
+        return "INCOMPARABLE"
+    a = str(transition.get("from") or "").upper()
+    b = str(transition.get("to") or "").upper()
+    if a == "FAIL" and b == "PASS":
+        return "REMEDIATED"
+    if a == "PASS" and b == "FAIL":
+        return "REGRESSION"
+    if a == "FAIL" and b == "FAIL":
+        return "PERSISTED_FAIL"
+    if a == "PASS" and b == "PASS":
+        return "PERSISTED_PASS"
+    if "INDETERMINATE" in (a, b) or "NOT_APPLICABLE" in (a, b):
+        return "INDETERMINATE"
+    return "UNKNOWN"
+
+
+def validate_reaudit_pair(
+    baseline_audit: dict[str, Any] | None,
+    reaudit: dict[str, Any],
+) -> dict[str, Any]:
+    """Validate that a re-audit is eligible for verification counting.
+
+    Returns a validation result with:
+      eligible: bool — whether this pair can be counted toward verification
+      reason: str    — if not eligible, why
+      transitions: list — classified transitions (empty if ineligible)
+
+    Ineligible cases (must not count toward FAIL→PASS denominator):
+      - Missing baseline (no prior audit found)
+      - Duplicate re-observation (same audit_id as baseline)
+      - Condition version changed between observations (INCOMPARABLE)
+      - Baseline has no determinations (cannot establish FAIL state)
+    """
+    if baseline_audit is None:
+        return {
+            "eligible": False,
+            "reason": "MISSING_BASELINE",
+            "transitions": [],
+        }
+
+    if str(baseline_audit.get("id", "")) == str(reaudit.get("id", "")):
+        return {
+            "eligible": False,
+            "reason": "DUPLICATE_OBSERVATION",
+            "transitions": [],
+        }
+
+    baseline_findings = baseline_audit.get("findings") or []
+    reaudit_findings = reaudit.get("findings") or []
+
+    if not baseline_findings:
+        return {
+            "eligible": False,
+            "reason": "BASELINE_NO_FINDINGS",
+            "transitions": [],
+        }
+
+    raw_transitions = diff_determinations(baseline_findings, reaudit_findings)
+
+    # Classify each transition and check for version incompatibility.
+    classified = []
+    has_incomparable = False
+    for t in raw_transitions:
+        cls = classify_reaudit_transition(t)
+        classified.append({**t, "class": cls})
+        if cls == "INCOMPARABLE":
+            has_incomparable = True
+
+    return {
+        "eligible": True,
+        "has_incomparable": has_incomparable,
+        "transitions": classified,
+        "remediated": [t for t in classified if t["class"] == "REMEDIATED"],
+        "regressions": [t for t in classified if t["class"] == "REGRESSION"],
+        "persisted_fail": [t for t in classified if t["class"] == "PERSISTED_FAIL"],
+        "incomparable": [t for t in classified if t["class"] == "INCOMPARABLE"],
+    }
