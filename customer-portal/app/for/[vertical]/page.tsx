@@ -48,6 +48,36 @@ export default async function VerticalPage({
   const v = getVertical(slug)
   if (!v) notFound()
 
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `https://nebulacomponents.com/for/${slug}#service`,
+    name: `Nebula Landing Page Audit for ${v.name}`,
+    description: `Evidence-backed landing page audit for ${v.name} pages. Identifies conversion leaks across 9 signals.`,
+    serviceType: 'Landing Page Diagnostic',
+    provider: { '@id': 'https://nebulacomponents.com/#organization' },
+    url: `https://nebulacomponents.com/for/${slug}`,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `https://nebulacomponents.com/audit`,
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Conversion signal checks',
+      itemListElement: [
+        'Message Match', 'Trust Signals', 'Mobile CTA', 'Load Speed',
+        'CTA Clarity', 'Above-Fold Clarity', 'Ad Signal Continuity',
+        'SEO Foundations', 'AI Readiness',
+      ].map((name) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name },
+      })),
+    },
+  }
+
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -60,13 +90,17 @@ export default async function VerticalPage({
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-
-      <div className="max-w-3xl mx-auto px-6">
+      <main id="main-content" className="min-h-screen bg-bg pt-24 pb-20">
+        <div className="max-w-3xl mx-auto px-6">
 
         {/* Header */}
         <div className="mb-12">
@@ -214,5 +248,6 @@ export default async function VerticalPage({
 
       </div>
     </main>
+    </>
   )
 }

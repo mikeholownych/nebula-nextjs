@@ -5,6 +5,7 @@ import { REPAIR_GUARANTEE, EARLY_STAGE_DISCLOSURE } from '@/config/repair-guaran
 import { PRIORITY_SCORE_SHORT } from '@/config/priority-score'
 import { SIGNAL_COUNT } from '@/config/signals'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
+import StructuredData from '@/app/components/StructuredData'
 
 export const metadata: Metadata = {
   title: 'Repair Sprint - One Page, One Condition, One Fix | Nebula',
@@ -13,10 +14,38 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.com/repair-sprint' },
 }
 
+const repairSprintServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://nebulacomponents.com/repair-sprint#service',
+  name: REPAIR_SPRINT_OFFER.name,
+  description: REPAIR_SPRINT_OFFER.summary,
+  serviceType: 'Landing Page Conversion Optimization',
+  provider: { '@id': 'https://nebulacomponents.com/#organization' },
+  url: 'https://nebulacomponents.com/repair-sprint',
+  offers: {
+    '@type': 'Offer',
+    price: String(REPAIR_SPRINT_OFFER.priceUsd),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: 'https://nebulacomponents.com/repair-sprint',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Repair Sprint deliverables',
+    itemListElement: REPAIR_SPRINT_OFFER.includes.map((name) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name },
+    })),
+  },
+}
+
 export default function RepairSprintPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
-      <div className="mx-auto max-w-3xl px-6">
+    <>
+      <StructuredData data={repairSprintServiceSchema} />
+      <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
+        <div className="mx-auto max-w-3xl px-6">
 
         {/* Hero */}
         <VisibilityBeacon
@@ -280,5 +309,6 @@ export default function RepairSprintPage() {
 
       </div>
     </main>
+    </>
   )
 }

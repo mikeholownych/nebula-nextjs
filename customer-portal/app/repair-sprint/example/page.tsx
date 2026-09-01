@@ -8,10 +8,50 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.com/repair-sprint/example' },
 }
 
+const repairSprintExampleServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://nebulacomponents.com/repair-sprint/example#service',
+  name: 'Nebula One-Leak Repair Sprint',
+  description: 'A bounded single-condition landing page repair. Nebula scopes the highest-priority finding, writes the exact fix, and re-audits after 30 days.',
+  serviceType: 'Landing Page Conversion Optimization',
+  provider: { '@type': 'Organization', name: 'Nebula Components', url: 'https://nebulacomponents.com' },
+  url: 'https://nebulacomponents.com/repair-sprint',
+  offers: {
+    '@type': 'Offer',
+    price: '97',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: 'https://nebulacomponents.com/repair-sprint',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Repair Sprint deliverables',
+    itemListElement: [
+      'Validation of the selected finding against your live page',
+      'Exact replacement copy, code snippet, or configuration change',
+      'Scoped rationale explaining why this specific change addresses the failed condition',
+      'Implementation location - which element, file, or CMS field to change',
+      'Before-state evidence (what Nebula observed at audit time)',
+      'After-state validation criteria (what PASS looks like for this condition)',
+      'Same-scope re-audit within 30 days to verify the condition changed',
+      'Rollback guidance where the change carries known side-effect risk',
+    ].map((name) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name },
+    })),
+  },
+}
+
 export default function RepairSprintExamplePage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
-      <div className="mx-auto max-w-3xl px-6">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(repairSprintExampleServiceSchema) }}
+      />
+      <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
+        <div className="mx-auto max-w-3xl px-6">
 
         {/* Demonstration label */}
         <div className="mb-8 rounded-lg border border-signal-fail/30 bg-signal-fail/5 px-4 py-3">
@@ -241,5 +281,6 @@ export default function RepairSprintExamplePage() {
         </div>
       </div>
     </main>
+    </>
   )
 }
