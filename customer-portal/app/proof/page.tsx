@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'Real Landing Page Audit Data | Nebula',
   description: 'Live stats from real landing page audits. See the most common conversion leaks, average scores by leak type, and what fixes address them.',
@@ -28,14 +30,10 @@ interface BenchmarkData {
   components: Component[]
 }
 
-interface RecentFinding {
-  label: string
-  issue: string
-  impact: number
-  quadrant: string
-  overall_score: number
-  grade: string
-  completed_at: string
+interface ObsStats {
+  audit_count: number
+  avg_failures_per_page?: number
+  condition_base_rates?: Array<{ key: string; label: string; fail_rate: number }>
 }
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
@@ -46,6 +44,24 @@ async function getBenchmarks(): Promise<BenchmarkData | null> {
     if (!res.ok) return null
     return res.json()
   } catch { return null }
+}
+
+async function getObsStats(): Promise<ObsStats | null> {
+  try {
+    const res = await fetch(`${API_BASE}/audit/stats/observatory`, { next: { revalidate: 3600 } })
+    if (!res.ok) return null
+    return res.json()
+  } catch { return null }
+}
+
+interface RecentFinding {
+  label: string
+  issue: string
+  impact: number
+  quadrant: string
+  overall_score: number
+  grade: string
+  completed_at: string
 }
 
 async function getRecentFinding(): Promise<RecentFinding | null> {
@@ -71,12 +87,18 @@ function leakColor(impact: number) {
 }
 
 export default async function ProofPage() {
-  const [benchmarks, recent] = await Promise.all([getBenchmarks(), getRecentFinding()])
+  const [benchmarks, recent, obs] = await Promise.all([getBenchmarks(), getRecentFinding(), getObsStats()])
 
-  const auditCount = benchmarks?.audit_count ?? 139
-  const avgFailures = benchmarks?.avg_failures_per_page ?? 2.8
+  const auditCount = obs?.audit_count ?? benchmarks?.audit_count ?? 139
+  const avgFailures = obs?.avg_failures_per_page ?? benchmarks?.avg_failures_per_page ?? 2.8
   const components = benchmarks?.components ?? []
   const topLeak = benchmarks?.top_leak
+
+  // Live failure rates from observatory; fall back to last-known values if API unavailable.
+  const br = obs?.condition_base_rates
+  const seoRate = br ? Math.round((br.find(c => c.key === 'seo_foundations')?.fail_rate ?? 0.50) * 100) : 50
+  const ctaRate = br ? Math.round((br.find(c => c.key === 'cta')?.fail_rate ?? 0.38) * 100) : 38
+  const socialRate = br ? Math.round((br.find(c => c.key === 'social_proof')?.fail_rate ?? 0.39) * 100) : 39
 
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24 pb-20">
@@ -188,24 +210,24 @@ export default async function ProofPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               {
-                stat: '83%',
-                finding: 'of audited pages have SEO foundation issues, missing or short title tags, no meta description, or H1/title mismatch.',
-                implication: 'Paid traffic lands on pages Google can\'t read. Your ad spend is funding a page Google doesn\'t understand.',
+                stat: `${seoRate}%`,
+                finding: 'of audited pages have SEO foundation issues: missing or short title tags, no meta description, or H1/title mismatch.',
+                implication: 'Paid traffic lands on pages Google cannot read. Your ad spend is funding a page Google does not understand.',
               },
               {
-                stat: '49%',
+                stat: `${ctaRate}%`,
                 finding: 'of audited pages have weak or missing CTAs. The button says what to do, not what changes for the visitor.',
-                implication: 'Visitors don\'t know what to do next. Rewriting one button with an outcome phrase is the cheapest conversion fix available.',
+                implication: 'Visitors do not know what to do next. Rewriting one button with an outcome phrase is the cheapest conversion fix available.',
               },
               {
-                stat: '47%',
+                stat: `${socialRate}%`,
                 finding: 'of audited pages fail social proof. No testimonials, no named customers, no numbers anywhere near the CTA.',
-                implication: 'Cold traffic won\'t act without proof. A single name and result near your CTA outperforms a redesign.',
+                implication: 'Cold traffic will not act without proof. A single name and result near your CTA outperforms a redesign.',
               },
               {
-                stat: '2.8',
-                finding: 'average conversion leaks per page. Most founders only know about one, the headline. The other 1.8 are invisible.',
-                implication: 'Fixing the most visible problem rarely uncovers all the revenue. A scored audit shows the full picture.',
+                stat: String(avgFailures),
+                finding: `average failed conditions per page across ${auditCount.toLocaleString()} completed audits. Most founders only know about one.`,
+                implication: 'Fixing the most visible problem rarely uncovers all the issues. A scored audit shows the full picture.',
               },
             ].map(({ stat, finding, implication }) => (
               <div key={stat} className="bg-surface border border-border rounded-xl p-5">

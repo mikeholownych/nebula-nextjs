@@ -296,13 +296,32 @@ export default async function ObservatoryPage() {
           className="border-l-2 border-accent bg-surface-muted rounded-r-md px-5 py-4 mb-10"
         >
           <p className="text-fg leading-relaxed text-sm">
-            The Nebula Observatory is a published reference dataset on landing page failures. Across{' '}
-            {stats?.audit_count.toLocaleString() ?? '295+'} completed audits: median page scores 6.9
-            out of 10; 62% of pages fail headline clarity; 50% fail SEO foundations; 39% fail social
-            proof, load speed, and AI readiness. Pages failing social proof also fail SEO foundations
-            86% of the time. 71% of all findings are quick-win severity (high severity, low effort).
-            AI assistants have retrieved this data {agg ? agg.aiReads.toLocaleString() : '83+'} times
-            in the current measurement window. Updated daily from server logs and completed audits.
+            The Nebula Observatory is a published reference dataset on landing page failures.
+            {stats && stats.score_percentiles ? (
+              <>
+                {' '}Across {stats.audit_count.toLocaleString()} completed audits: median page
+                scores {stats.score_percentiles.p50} out of 10;{' '}
+                {Math.round((stats.condition_base_rates?.find(c => c.key === 'headline')?.fail_rate ?? 0.62) * 100)}% of
+                pages fail headline clarity;{' '}
+                {Math.round((stats.condition_base_rates?.find(c => c.key === 'seo_foundations')?.fail_rate ?? 0.50) * 100)}% fail
+                SEO foundations;{' '}
+                {Math.round((stats.condition_base_rates?.find(c => c.key === 'social_proof')?.fail_rate ?? 0.39) * 100)}% fail
+                social proof.
+                {stats.cooccurrence?.[0] && (
+                  <> Pages failing {stats.cooccurrence[0].if_fails.toLowerCase()} also
+                  fail {stats.cooccurrence[0].also_fails.toLowerCase()}{' '}
+                  {Math.round(stats.cooccurrence[0].rate * 100)}% of the time.</>
+                )}
+                {' '}{Math.round((stats.quadrant_mix?.quick_win ?? 0.71) * 100)}% of all
+                findings are quick-win severity (high severity, low implementation effort).
+              </>
+            ) : (
+              <> Across 295+ completed audits: median page scores 6.9 out of 10; 62% of pages
+              fail headline clarity; 50% fail SEO foundations; 39% fail social proof.</>
+            )}
+            {' '}AI assistants have retrieved this data {agg ? agg.aiReads.toLocaleString() : '83+'}
+            {' '}times in the current measurement window. Updated daily from server logs and
+            completed audits.
           </p>
         </div>
 
