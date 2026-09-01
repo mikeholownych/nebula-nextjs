@@ -21,7 +21,7 @@ const REGISTRATION_INFO = {
   ],
   credential_provisioning: {
     method: 'email',
-    contact: 'nebulashop@agentmail.to',
+    contact: 'hello@nebulacomponents.com',
     credential_types_supported: ['bearer_token'],
     scopes_supported: ['read', 'write'],
     note: 'Contact the above address to request API credentials for write-access endpoints.',
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       purpose,
       next_steps: [
         'Use public endpoints without credentials.',
-        'Contact nebulashop@agentmail.to for API key provisioning if write access is needed.',
+        'Contact hello@nebulacomponents.com for API key provisioning if write access is needed.',
       ],
       documentation: 'https://nebulacomponents.com/auth.md',
     },

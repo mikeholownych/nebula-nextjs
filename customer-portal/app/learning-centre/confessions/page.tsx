@@ -150,7 +150,7 @@ export default function ConfessionsPage() {
             Include your landing page URL and we'll run a free audit alongside it. You'll receive the findings before we publish anything.
           </p>
           <a
-            href="mailto:nebulashop@agentmail.to?subject=My%20confession&body=Industry%3A%20%0ASpend%3A%20%0ADuration%3A%20%0AWhat%20I%20blamed%3A%20%0A%0AThe%20story%3A%20%0A%0AMy%20page%20URL%20(optional%2C%20for%20the%20free%20audit)%3A"
+            href="mailto:hello@nebulacomponents.com?subject=My%20confession&body=Industry%3A%20%0ASpend%3A%20%0ADuration%3A%20%0AWhat%20I%20blamed%3A%20%0A%0AThe%20story%3A%20%0A%0AMy%20page%20URL%20(optional%2C%20for%20the%20free%20audit)%3A"
             className="inline-flex rounded border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/10 transition-colors"
           >
             Submit anonymously →

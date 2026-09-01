@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Find Failed Page Conditions on Your Landing Page | Nebula Components',
     description: 'Free landing page audit that finds failed page conditions on public HTML. Evidence-backed, no signup, results in under 2 minutes.',
-    creator: '@nebula_components',
+    creator: '@NebulaCRO',
     images: [brand.assets.ogDefault],
   },
   icons: {

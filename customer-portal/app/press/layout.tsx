@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Nebula Components Press Kit',
     description:
       'Governed research, editorial boilerplate, founder facts, and approved press assets from Nebula Components.',
-    creator: '@nebula_components',
+    creator: '@NebulaCRO',
   },
   alternates: {
     canonical: 'https://nebulacomponents.com/press',

@@ -76,7 +76,7 @@ export default function SiteFooter() {
               <li><Link href="/brand" className="hover:text-accent transition-colors">Brand Assets</Link></li>
               <li><Link href="/editorial-standards" className="hover:text-accent transition-colors">Editorial Standards</Link></li>
               <li>
-                <a href="mailto:nebulashop@agentmail.to" className="hover:text-accent transition-colors">
+                <a href="mailto:hello@nebulacomponents.com" className="hover:text-accent transition-colors">
                   Contact
                 </a>
               </li>

@@ -52,7 +52,7 @@ export const organizationSchema = {
     'https://www.wikidata.org/wiki/Q141206192',
     'https://www.linkedin.com/company/nebulacomponents',
     'https://github.com/Nebula-Components/nebula-components',
-    'https://twitter.com/nebula_components',
+    'https://twitter.com/NebulaCRO',
     'https://www.facebook.com/nebula.components',
     'https://www.instagram.com/nebula.components/',
   ],
