@@ -198,6 +198,13 @@ export default async function SignalPage({
             </Link>{' '}
             ({SPEC_URL}). Quoting with attribution is welcome; pin citations to the version.
           </p>
+          <p className="mt-3 text-sm leading-relaxed text-fg-muted">
+            Failure base rates for this condition across all completed audits are published in the{' '}
+            <Link href="/observatory#condition-base-rates" className="text-accent hover:text-fg transition-colors">
+              Observatory
+            </Link>
+            , updated daily.
+          </p>
           <div className="mt-4 flex flex-col sm:flex-row gap-3">
             <Link
               href={`/audit?utm_source=signal-page&utm_medium=${s.slug}`}

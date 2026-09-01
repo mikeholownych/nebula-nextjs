@@ -224,6 +224,14 @@ export default async function ProofPage() {
             The audit checks your page against 9 signals, ranks findings by priority, and shows the evidence.
             Free. No signup required to see your score.
           </p>
+          <p className="text-sm text-fg-muted mb-6">
+            Full failure base rates, score distribution, and co-occurrence patterns across all completed
+            audits are published on the{' '}
+            <Link href="/observatory" className="text-accent hover:text-fg transition-colors">
+              Observatory
+            </Link>
+            .
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/score"

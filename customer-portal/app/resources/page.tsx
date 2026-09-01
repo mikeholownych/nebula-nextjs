@@ -203,6 +203,11 @@ export default function ResourcesPage() {
                 <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">Frequently asked questions</h3>
                 <p className="mt-1 text-sm text-fg-muted">What the audit checks, what it does not, and how the repair sprint works.</p>
               </Link>
+              <Link href="/observatory" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
+                <p className="text-xs font-medium uppercase tracking-widest text-accent">Dataset</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">Observatory: landing page failure rates</h3>
+                <p className="mt-1 text-sm text-fg-muted">Score distribution, condition failure base rates, and co-occurrence pairs from 295+ completed audits. Updated daily.</p>
+              </Link>
               <Link href="/what-is-nebula-components" className="rounded-md border border-border bg-bg-panel p-6 hover:border-accent/30">
                 <p className="text-xs font-medium uppercase tracking-widest text-accent">About</p>
                 <h3 className="mt-2 text-lg font-semibold tracking-tight text-fg">What is Nebula Components?</h3>

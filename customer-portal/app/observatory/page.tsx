@@ -157,6 +157,17 @@ async function getObservatoryStats(): Promise<ObservatoryStats | null> {
 
 /* ---------- aggregation ---------- */
 
+// Observatory finding keys → signal reference pages. Only mapped keys link.
+const SIGNAL_PAGE: Record<string, string> = {
+  headline: '/signals/message-match',
+  cta: '/signals/cta-clarity',
+  social_proof: '/signals/trust-signals',
+  load_speed: '/signals/load-speed',
+  seo_foundations: '/signals/seo-foundations',
+  ai_readiness: '/signals/ai-readiness',
+  mobile: '/signals/mobile-cta',
+}
+
 const NON_CONTENT = new Set(['/robots.txt', '/sitemap.xml', '/manifest.webmanifest'])
 
 function isContentPath(p: string): boolean {
@@ -361,7 +372,7 @@ export default async function ObservatoryPage() {
 
             {/* Condition failure base rates */}
             {stats.condition_base_rates && stats.condition_base_rates.length > 0 && (
-              <section className="mb-14">
+              <section className="mb-14" id="condition-base-rates">
                 <Label>Condition failure base rates</Label>
                 <p className="mb-4 max-w-[65ch] text-fg-muted leading-relaxed">
                   The share of audited pages that fail each condition, as defined in the published
@@ -371,7 +382,16 @@ export default async function ObservatoryPage() {
                 <div className="border border-border">
                   {stats.condition_base_rates.map((c) => (
                     <div key={c.key} className="flex items-center gap-4 border-b border-border px-4 py-3 last:border-b-0">
-                      <span className="w-44 shrink-0 text-sm text-fg">{c.label}</span>
+                      {SIGNAL_PAGE[c.key] ? (
+                        <a
+                          href={SIGNAL_PAGE[c.key]}
+                          className="w-44 shrink-0 text-sm text-fg underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                        >
+                          {c.label}
+                        </a>
+                      ) : (
+                        <span className="w-44 shrink-0 text-sm text-fg">{c.label}</span>
+                      )}
                       <Bar share={c.fail_rate} />
                       <span className="w-14 shrink-0 text-right font-mono text-sm tabular-nums text-fg-muted">
                         {Math.round(c.fail_rate * 100)}%
@@ -379,6 +399,14 @@ export default async function ObservatoryPage() {
                     </div>
                   ))}
                 </div>
+                <p className="mt-3 text-xs text-fg-muted">
+                  Each condition links to its reference page: definition, decision rule, and
+                  pass/fail examples from the{' '}
+                  <a href="/spec/landing-page-diagnostic-v1" className="text-accent hover:text-fg transition-colors">
+                    published specification
+                  </a>
+                  .
+                </p>
               </section>
             )}
 

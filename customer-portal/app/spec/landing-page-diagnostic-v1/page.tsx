@@ -128,6 +128,13 @@ export default function SpecPage() {
               controlled experiments. A signal without a returned finding means the run observed no
               failure for that category; it is not a certification.
             </p>
+            <p>
+              For aggregate failure rates across all completed audits, see the{' '}
+              <a href="/observatory" className="text-accent hover:text-fg transition-colors">
+                Observatory
+              </a>
+              : failure base rates, score distribution, and co-occurrence pairs, updated daily.
+            </p>
           </div>
         </section>
 
