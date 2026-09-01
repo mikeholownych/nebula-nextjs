@@ -49,8 +49,7 @@ function internalHeaders(): Record<string, string> {
 }
 const response = await fetch(`${API_BASE}/audit/email`, {
       method: 'POST',
-      ...internalHeaders(),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...internalHeaders() },
       body: JSON.stringify({
         url: audit.url,
         email: owner,

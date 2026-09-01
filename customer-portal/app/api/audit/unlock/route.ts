@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Claim the audit before delivery or token minting. Unlock is the single
     // ownership transition, so a later email cannot take over a claimed audit.
-    const claimRes = await fetch('http://127.0.0.1:8001/audit/claim', {
+    const claimRes = await fetch('http://127.0.0.1:3000/api/audit/claim', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ audit_id, email: normalizedEmail }),
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     //    down, but the response must never claim an unconfirmed send.
     let emailSent = false
     try {
-      const deliveryRes = await fetch('http://127.0.0.1:8001/audit/email', {
+      const deliveryRes = await fetch('http://127.0.0.1:3000/api/audit/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
