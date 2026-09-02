@@ -58,6 +58,16 @@ from acquisition.recommendation_engine import (
     reconcile_page_coverage,
 )
 from acquisition.reporting import render_baseline_report, render_weekly_observation_report
+from acquisition.ai_engine import list_ai_runs, review_ai_analysis, run_ai_analysis
+from acquisition.ai_reporting import (
+    generate_28d_ai_appendix,
+    generate_84d_ai_appendix,
+    generate_weekly_ai_appendix,
+)
+from acquisition.learning_store import (
+    list_learning_records,
+    sync_learning_store_from_experiments,
+)
 from acquisition.route_sync import sync_routes_to_db
 from acquisition.state_engine import evaluate_and_persist_state_transitions
 
@@ -452,6 +462,123 @@ def cmd_decision_review_84d(args):
         print(report)
 
 
+def cmd_ai_run(args):
+    print(f"=== Executing AI Analysis `{args.analysis_type}` for `{args.measurement_id}` (env={args.environment}) ===")
+    res = run_ai_analysis(
+        measurement_id=args.measurement_id,
+        analysis_type=args.analysis_type,
+        target_type=args.target_type,
+        target_id=args.target_id,
+        prompt_version=args.prompt_version,
+        model_provider=args.model_provider,
+        model_identifier=args.model_identifier,
+        environment=args.environment,
+        generation_mode=args.generation_mode,
+        dry_run=args.dry_run,
+        db_uri=args.db_uri,
+    )
+    print(f"Run ID: {res['run_id']}")
+    print(f"Status: {res['status']}")
+    print(f"Manifest Hash: {res['manifest_hash']}")
+    print(f"Latency: {res['latency_ms']}ms")
+    if res["validation_errors"]:
+        print(f"Validation Errors: {res['validation_errors']}")
+    print("\n--- Structured AI Output ---")
+    print(json.dumps(res["raw_structured_output"], indent=2))
+
+
+def cmd_ai_inspect(args):
+    print(f"=== Inspecting AI Analysis Runs for Measurement `{args.measurement_id}` (env={args.environment}) ===")
+    runs = list_ai_runs(
+        measurement_id=args.measurement_id,
+        environment=args.environment,
+        limit=args.limit,
+        db_uri=args.db_uri,
+    )
+    print(f"Total Runs Found: {len(runs)}")
+    for r in runs:
+        print(f"  [{r['status']}] {r['id']} | Type: {r['analysis_type']} | Target: [{r['target_type']}] {r['target_id'] or 'sitewide'} | Review: {r.get('review_status', 'UNREVIEWED')}")
+
+
+def cmd_ai_review(args):
+    print(f"=== Submitting Human Review for AI Run `{args.run_id}` ===")
+    res = review_ai_analysis(
+        run_id=args.run_id,
+        review_status=args.status,
+        reviewed_by=args.reviewed_by,
+        review_notes=args.notes,
+        db_uri=args.db_uri,
+    )
+    print(f"Review Recorded Successfully for run `{args.run_id}`")
+    print(f"  Review Status: {res['review_status']}")
+    print(f"  Reviewed By: {res['reviewed_by']}")
+    print(f"  Notes: {res['review_notes']}")
+
+
+def cmd_ai_weekly(args):
+    print(f"=== Generating Weekly AI Interpretation Appendix for `{args.measurement_id}` ===")
+    report = generate_weekly_ai_appendix(
+        args.measurement_id,
+        environment=args.environment,
+        db_uri=args.db_uri,
+    )
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved weekly AI interpretation appendix to {args.output_path}")
+    else:
+        print(report)
+
+
+def cmd_ai_28d(args):
+    print(f"=== Generating 28-Day AI Interpretation Appendix for `{args.measurement_id}` ===")
+    report = generate_28d_ai_appendix(
+        args.measurement_id,
+        environment=args.environment,
+        db_uri=args.db_uri,
+    )
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved 28-day AI interpretation appendix to {args.output_path}")
+    else:
+        print(report)
+
+
+def cmd_ai_84d(args):
+    print(f"=== Generating 84-Day AI Interpretation Appendix for `{args.measurement_id}` ===")
+    report = generate_84d_ai_appendix(
+        args.measurement_id,
+        environment=args.environment,
+        db_uri=args.db_uri,
+    )
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved 84-day AI interpretation appendix to {args.output_path}")
+    else:
+        print(report)
+
+
+def cmd_ai_learning_sync(args):
+    print(f"=== Synchronizing Longitudinal Learning Store (env={args.environment}) ===")
+    recs = sync_learning_store_from_experiments(
+        environment=args.environment,
+        db_uri=args.db_uri,
+    )
+    print(f"Synchronized {len(recs)} Learning Store Record(s)")
+    for r in recs:
+        print(f"  [{r.evidence_state}] Scope: {r.scope_id} ({r.intervention_type}) -> {r.pattern_statement}")
+
+
+def cmd_ai_learning_list(args):
+    print(f"=== Listing Longitudinal Learning Store Records (env={args.environment}) ===")
+    recs = list_learning_records(
+        environment=args.environment,
+        db_uri=args.db_uri,
+    )
+    print(f"Total Learning Records: {len(recs)}")
+    for r in recs:
+        print(f"  [{r.evidence_state}] Scope: {r.scope_id} ({r.intervention_type}) -> {r.pattern_statement}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Acquisition Learning System CLI")
     parser.add_argument("--db-uri", default=DEFAULT_DB_URI, help="PostgreSQL connection URI")
@@ -628,6 +755,51 @@ def main():
     p_dr_84d.add_argument("--measurement-id", required=True)
     p_dr_84d.add_argument("--output-path", help="Optional markdown output path")
     p_dr_84d.set_defaults(func=cmd_decision_review_84d)
+
+    # 6. Phase 7 AI Interpretation & Learning Commands
+    p_ai_run = subparsers.add_parser("ai-analysis-run", help="Execute an evidence-bound AI interpretation analysis run")
+    p_ai_run.add_argument("--measurement-id", required=True)
+    p_ai_run.add_argument("--analysis-type", required=True, choices=["SITE_SUMMARY", "COHORT_INTERPRETATION", "PAGE_INTERPRETATION", "QUERY_ALIGNMENT", "CANNIBALIZATION_REVIEW", "EXPERIMENT_HISTORY_SYNTHESIS", "HYPOTHESIS_GENERATION"])
+    p_ai_run.add_argument("--target-type", default="SITEWIDE", choices=["SITEWIDE", "COHORT", "PAGE", "QUERY", "EXPERIMENT_HISTORY"])
+    p_ai_run.add_argument("--target-id", help="Optional target cohort name, page URL/ID, or query text")
+    p_ai_run.add_argument("--prompt-version", default="1.0.0")
+    p_ai_run.add_argument("--model-provider", default="MOCK")
+    p_ai_run.add_argument("--model-identifier", default="mock-grounded-v1")
+    p_ai_run.add_argument("--dry-run", action="store_true")
+    p_ai_run.set_defaults(func=cmd_ai_run)
+
+    p_ai_insp = subparsers.add_parser("ai-analysis-inspect", help="Inspect AI analysis runs")
+    p_ai_insp.add_argument("--measurement-id")
+    p_ai_insp.add_argument("--limit", type=int, default=50)
+    p_ai_insp.set_defaults(func=cmd_ai_inspect)
+
+    p_ai_rev = subparsers.add_parser("ai-analysis-review", help="Submit human review for an AI analysis run")
+    p_ai_rev.add_argument("--run-id", required=True)
+    p_ai_rev.add_argument("--status", required=True, choices=["ACCEPTED_AS_ANALYSIS", "REJECTED", "NEEDS_MORE_EVIDENCE"])
+    p_ai_rev.add_argument("--reviewed-by", required=True)
+    p_ai_rev.add_argument("--notes", required=True)
+    p_ai_rev.set_defaults(func=cmd_ai_review)
+
+    p_ai_week = subparsers.add_parser("ai-analysis-weekly", help="Generate Weekly AI Interpretation Appendix markdown")
+    p_ai_week.add_argument("--measurement-id", required=True)
+    p_ai_week.add_argument("--output-path", help="Optional markdown output path")
+    p_ai_week.set_defaults(func=cmd_ai_weekly)
+
+    p_ai_28d = subparsers.add_parser("ai-analysis-28d", help="Generate 28-Day AI Interpretation Appendix markdown")
+    p_ai_28d.add_argument("--measurement-id", required=True)
+    p_ai_28d.add_argument("--output-path", help="Optional markdown output path")
+    p_ai_28d.set_defaults(func=cmd_ai_28d)
+
+    p_ai_84d = subparsers.add_parser("ai-analysis-84d", help="Generate 84-Day AI Interpretation Appendix markdown")
+    p_ai_84d.add_argument("--measurement-id", required=True)
+    p_ai_84d.add_argument("--output-path", help="Optional markdown output path")
+    p_ai_84d.set_defaults(func=cmd_ai_84d)
+
+    p_ai_lsync = subparsers.add_parser("ai-learning-sync", help="Synchronize longitudinal learning store from experiment history")
+    p_ai_lsync.set_defaults(func=cmd_ai_learning_sync)
+
+    p_ai_llist = subparsers.add_parser("ai-learning-list", help="List records in the longitudinal learning store")
+    p_ai_llist.set_defaults(func=cmd_ai_learning_list)
 
     args = parser.parse_args()
     args.func(args)

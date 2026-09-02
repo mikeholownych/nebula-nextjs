@@ -1,6 +1,7 @@
 """Data models, constants, and typing for the Acquisition Learning System."""
 
 import os
+import subprocess
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from typing import Any, Dict, List, Optional, Set
@@ -10,6 +11,25 @@ DEFAULT_DB_URI = os.getenv(
     "ACQUISITION_DB_URI",
     "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433",
 )
+
+DECISION_RULE_SET_ID = "ruleset_2_0_0"
+MEASUREMENT_VERSION = "2.0.0"
+
+
+def get_current_git_commit() -> str:
+    """Get current git commit hash for acquisition provenance."""
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=os.path.dirname(os.path.abspath(__file__)),
+        )
+        return res.stdout.strip()
+    except Exception:
+        return "b86a35af263c9b2095b7e23cf8c1765e63020722"
+
 
 # Canonical Cohort Names
 COHORTS: Set[str] = {
@@ -495,5 +515,212 @@ class PageCoverageReconciliation:
     blocked_pages: int
     unaccounted_pages: int
     excluded_details: Dict[str, List[str]] = field(default_factory=dict)
+
+
+# ---------------------------------------------------------------------------
+# Phase 7: AI Interpretation, Grounding, and Learning Models
+# ---------------------------------------------------------------------------
+
+ANALYSIS_TYPES = [
+    "SITE_SUMMARY",
+    "COHORT_INTERPRETATION",
+    "PAGE_INTERPRETATION",
+    "QUERY_ALIGNMENT",
+    "CANNIBALIZATION_REVIEW",
+    "EXPERIMENT_HISTORY_SYNTHESIS",
+    "HYPOTHESIS_GENERATION",
+]
+
+EPISTEMIC_CLASSES = [
+    "OBSERVATION",
+    "INFERENCE",
+    "HYPOTHESIS",
+    "ALTERNATIVE_EXPLANATION",
+    "INVESTIGATION_SUGGESTION",
+    "UNCERTAINTY",
+]
+
+CHALLENGE_TYPES = [
+    "POSSIBLE_RULE_GAP",
+    "POSSIBLE_DATA_GAP",
+    "POSSIBLE_CLASSIFICATION_GAP",
+    "POSSIBLE_QUERY_ALIGNMENT_GAP",
+]
+
+LEARNING_EVIDENCE_STATES = [
+    "ONE_OBSERVATION",
+    "REPEATED_SIGNAL",
+    "SUPPORTED_PATTERN",
+    "CONFLICTING_EVIDENCE",
+    "INSUFFICIENT_EVIDENCE",
+]
+
+AI_RUN_STATUSES = [
+    "PENDING",
+    "SUCCESS",
+    "INVALID_OUTPUT",
+    "CONTRADICTED",
+    "FAILED",
+]
+
+AI_REVIEW_STATUSES = [
+    "UNREVIEWED",
+    "ACCEPTED_AS_ANALYSIS",
+    "REJECTED",
+    "NEEDS_MORE_EVIDENCE",
+]
+
+
+@dataclass
+class PromptTemplateRecord:
+    prompt_id: str
+    prompt_version: str
+    analysis_type: str
+    system_instructions: str
+    user_template: str
+    template_hash: str
+    description: str
+    status: str = "ACTIVE"
+    effective_from: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class EvidenceManifest:
+    analysis_id: str
+    measurement_ids: List[str]
+    page_measurement_ids: List[str]
+    query_measurement_ids: List[str]
+    recommendation_ids: List[str]
+    experiment_ids: List[str]
+    anomaly_ids: List[str]
+    decision_rule_set_id: str
+    measurement_version_id: str
+    engine_code_commit: str
+    ai_analysis_code_commit: str
+    generated_at: str
+    manifest_hash: str
+    environment: str = "PRODUCTION"
+    generation_mode: str = "PRODUCTION"
+
+
+@dataclass
+class EpistemicStatement:
+    statement: str
+    epistemic_class: str  # OBSERVATION, INFERENCE, HYPOTHESIS, etc.
+    supporting_evidence_ids: List[str] = field(default_factory=list)
+    confidence: str = "MEDIUM"  # NONE, LOW, MEDIUM, HIGH
+
+
+@dataclass
+class HypothesisStatement:
+    hypothesis_id: str
+    target: str
+    hypothesis: str
+    supporting_evidence_ids: List[str]
+    alternative_explanations: List[str]
+    expected_if_true: str
+    expected_if_false: str
+    required_evidence: str
+    suggested_test: Optional[str] = None
+
+
+@dataclass
+class QueryAlignmentFinding:
+    query_text: str
+    intended_intent: str
+    observed_intent: str
+    classification: str  # ALIGNED, PARTIALLY_ALIGNED, POSSIBLE_MISMATCH, INSUFFICIENT_EVIDENCE
+    semantic_overlap: List[str] = field(default_factory=list)
+    semantic_divergence: List[str] = field(default_factory=list)
+    supporting_evidence_ids: List[str] = field(default_factory=list)
+
+
+@dataclass
+class CannibalizationFinding:
+    query_text: str
+    competing_urls: List[str]
+    overlap_classification: str  # POSSIBLE_INTENT_OVERLAP, POSSIBLE_COMPLEMENTARY_INTENT, INSUFFICIENT_EVIDENCE
+    supporting_evidence_ids: List[str] = field(default_factory=list)
+    recommendation_for_investigation: Optional[str] = None
+
+
+@dataclass
+class AIAnalysisRunRecord:
+    id: str
+    analysis_type: str
+    measurement_id: str
+    target_type: str
+    prompt_id: str
+    prompt_version: str
+    model_provider: str
+    model_identifier: str
+    evidence_manifest: Dict[str, Any]
+    evidence_manifest_hash: str
+    target_id: Optional[str] = None
+    environment: str = "PRODUCTION"
+    generation_mode: str = "PRODUCTION"
+    model_temperature: float = 0.0
+    output_schema_version: str = "1.0.0"
+    status: str = "SUCCESS"
+    error_message: Optional[str] = None
+    latency_ms: Optional[int] = None
+    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    completed_at: Optional[datetime] = None
+
+
+@dataclass
+class AIAnalysisResultRecord:
+    id: str
+    run_id: str
+    raw_structured_output: Dict[str, Any]
+    observations: List[Dict[str, Any]] = field(default_factory=list)
+    inferences: List[Dict[str, Any]] = field(default_factory=list)
+    hypotheses: List[Dict[str, Any]] = field(default_factory=list)
+    alternative_explanations: List[str] = field(default_factory=list)
+    investigation_suggestions: List[str] = field(default_factory=list)
+    uncertainties: List[str] = field(default_factory=list)
+    contradictions: List[str] = field(default_factory=list)
+    challenges: List[Dict[str, Any]] = field(default_factory=list)
+    required_evidence: List[str] = field(default_factory=list)
+    review_status: str = "UNREVIEWED"
+    reviewed_by: Optional[str] = None
+    review_notes: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
+
+
+@dataclass
+class AIChallengeRecord:
+    id: str
+    run_id: str
+    challenge_type: str  # POSSIBLE_RULE_GAP, etc.
+    target_type: str
+    target_id: Optional[str]
+    deterministic_decision: str
+    challenge_reason: str
+    supporting_evidence_ids: List[str]
+    proposed_review: str
+    status: str = "OPEN"
+    reviewed_by: Optional[str] = None
+    review_notes: Optional[str] = None
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class LearningStoreRecord:
+    id: str
+    scope_type: str  # COHORT, SITEWIDE, PAGE_TYPE
+    scope_id: str
+    intervention_type: str
+    pattern_statement: str
+    evidence_state: str  # ONE_OBSERVATION, REPEATED_SIGNAL, SUPPORTED_PATTERN, CONFLICTING_EVIDENCE, INSUFFICIENT_EVIDENCE
+    supporting_experiment_ids: List[str] = field(default_factory=list)
+    contradicting_experiment_ids: List[str] = field(default_factory=list)
+    confounded_experiment_ids: List[str] = field(default_factory=list)
+    environment: str = "PRODUCTION"
+    metadata: Dict[str, Any] = field(default_factory=dict)
+    first_observed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    last_updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 
