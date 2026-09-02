@@ -251,6 +251,30 @@ class NormalizedMeasurement:
     application_commit: Optional[str] = None
 
 
+ENVIRONMENTS: List[str] = [
+    "PRODUCTION",
+    "TEST",
+    "SIMULATION",
+    "REPLAY",
+    "SYNTHETIC",
+]
+
+EVIDENCE_ORIGINS: List[str] = [
+    "PRODUCTION",
+    "SYNTHETIC",
+    "REPLAY",
+    "SIMULATION",
+    "TEST",
+]
+
+GENERATION_MODES: List[str] = [
+    "PRODUCTION",
+    "REPLAY",
+    "SIMULATION",
+    "TEST",
+]
+
+
 @dataclass
 class ChangeRecord:
     id: str
@@ -270,6 +294,8 @@ class ChangeRecord:
     rollback_change_id: Optional[str] = None
     rollback_reason: Optional[str] = None
     rollback_at: Optional[datetime] = None
+    environment: str = "PRODUCTION"
+    evidence_origin: str = "PRODUCTION"
 
 
 @dataclass
@@ -297,6 +323,8 @@ class ExperimentRecord:
     cancelled_at: Optional[datetime] = None
     cancelled_by: Optional[str] = None
     cancellation_reason: Optional[str] = None
+    environment: str = "PRODUCTION"
+    evidence_origin: str = "PRODUCTION"
 
 
 @dataclass
@@ -319,6 +347,7 @@ class EvaluationRecord:
     synthesis_notes: str = ""
     learning_accumulated: Dict[str, Any] = field(default_factory=dict)
     evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    environment: str = "PRODUCTION"
 
 
 # ---------------------------------------------------------------------------
@@ -423,6 +452,10 @@ class RecommendationRecord:
     do_not_change_conditions: List[str] = field(default_factory=list)
     lifecycle_status: str = "GENERATED"
     experiment_candidate_id: Optional[str] = None
+    environment: str = "PRODUCTION"
+    evidence_origin: str = "PRODUCTION"
+    generation_mode: str = "PRODUCTION"
+    measurement_code_commit: Optional[str] = None
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
@@ -434,6 +467,7 @@ class RecommendationReviewRecord:
     reviewed_by: str
     review_action: str
     review_notes: str
+    environment: str = "PRODUCTION"
     reviewed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -446,5 +480,20 @@ class RecommendationSuppressionRecord:
     suppressed_by: str
     suppression_reason: str
     suppressed_until: datetime
+    environment: str = "PRODUCTION"
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class PageCoverageReconciliation:
+    measurement_id: str
+    total_canonical_pages: int
+    visible_pages: int
+    eligible_pages: int
+    page_recommendation_targets: int
+    excluded_pages: int
+    blocked_pages: int
+    unaccounted_pages: int
+    excluded_details: Dict[str, List[str]] = field(default_factory=dict)
+
 

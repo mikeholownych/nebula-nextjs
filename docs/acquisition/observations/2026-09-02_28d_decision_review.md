@@ -1,6 +1,12 @@
 # 28-Day Acquisition Decision Review: `meas_20260830_canonical_w28`
 
-**Current Window:** 2026-08-03 to 2026-08-30 (28 days)
+**Measurement ID:** `meas_20260830_canonical_w28`  
+**Measurement Version:** `2.0.0`  
+**Decision Rule Set ID:** `ruleset_2_0_0`  
+**Environment:** `PRODUCTION` | **Generation Mode:** `PRODUCTION`  
+**Generated At:** 2026-09-02 13:57:24 UTC  
+**Code Commit:** `b86a35af263c9b2095b7e23cf8c1765e63020722`  
+**Current Window:** 2026-08-03 to 2026-08-30 (28 days)  
 **Comparison Window:** 2026-07-06 to 2026-08-02 (28 days, `ADJACENT_PERIOD`)
 
 ---

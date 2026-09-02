@@ -148,16 +148,19 @@ python3 /home/mike/nebula/scripts/log_change.py --change "Update Service schema"
 uv run python scripts/acquisition_cli.py recommendations-generate --measurement-id meas_20260830_canonical_w28
 ```
 
-### 2. Decision Review Workflows
+### 2. Decision Review & Provenance Workflows
 ```bash
+# Reconcile canonical page coverage (Invariant: unaccounted == 0)
+uv run python scripts/acquisition_cli.py reconcile-coverage --measurement-id meas_20260830_canonical_w28
+
 # Human decision review
 uv run python scripts/acquisition_cli.py recommendations-review --rec-id <REC_ID> --action ACCEPT --reviewed-by "mike" --notes "Valid hypothesis"
 
 # Bridge accepted candidate to Phase 5 experiment draft
 uv run python scripts/acquisition_cli.py recommendation-create-experiment-draft --rec-id <REC_ID> --change-id <CHG_ID>
 
-# Decision review reports
-uv run python scripts/acquisition_cli.py decision-review-weekly --measurement-id meas_20260830_canonical_w28
-uv run python scripts/acquisition_cli.py decision-review-28d --measurement-id meas_20260830_canonical_w28
-uv run python scripts/acquisition_cli.py decision-review-84d --measurement-id meas_20260830_canonical_w28
+# Decision review reports (with complete provenance headers)
+uv run python scripts/acquisition_cli.py decision-review-weekly --measurement-id meas_20260830_canonical_w28 --environment PRODUCTION --generation-mode PRODUCTION
+uv run python scripts/acquisition_cli.py decision-review-28d --measurement-id meas_20260830_canonical_w28 --environment PRODUCTION --generation-mode PRODUCTION
+uv run python scripts/acquisition_cli.py decision-review-84d --measurement-id meas_20260830_canonical_w28 --environment PRODUCTION --generation-mode PRODUCTION
 ```

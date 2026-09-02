@@ -1,11 +1,12 @@
 """Deterministic Recommendation Engine for the Acquisition Learning System.
 
 Implements evidence sufficiency gating, metric-specific directionality,
-and deterministic intervention recommendation classes without AI speculation.
+environment/provenance isolation, and deterministic intervention recommendation classes without AI speculation.
 """
 
 import hashlib
 import json
+import subprocess
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Set, Tuple
 import psycopg
@@ -15,9 +16,28 @@ from acquisition.metric_semantics import evaluate_metric_materiality, get_metric
 from acquisition.models import (
     COHORTS,
     DEFAULT_DB_URI,
+    ENVIRONMENTS,
+    EVIDENCE_ORIGINS,
+    GENERATION_MODES,
     MetricSemantics,
+    PageCoverageReconciliation,
     RecommendationRecord,
 )
+
+
+def _get_current_commit() -> str:
+    """Get current git commit hash for recommendation provenance."""
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        return res.stdout.strip()
+    except Exception:
+        return "unknown"
 
 
 def _compute_rec_id(
@@ -36,23 +56,23 @@ def _compute_rec_id(
 def list_recommendations(
     lifecycle_status: Optional[str] = None,
     target_type: Optional[str] = None,
+    environment: str = "PRODUCTION",
     limit: int = 50,
     db_uri: str = DEFAULT_DB_URI,
 ) -> List[RecommendationRecord]:
-    """Retrieve persisted recommendations from database."""
-    query = "SELECT * FROM acquisition_recommendations"
-    params: List[Any] = []
-    clauses: List[str] = []
+    """Retrieve persisted recommendations from database with environment filtering."""
+    if environment not in ENVIRONMENTS:
+        raise ValueError(f"Invalid environment '{environment}'")
+
+    query = "SELECT * FROM acquisition_recommendations WHERE environment = %s"
+    params: List[Any] = [environment]
 
     if lifecycle_status:
-        clauses.append("lifecycle_status = %s")
+        query += " AND lifecycle_status = %s"
         params.append(lifecycle_status)
     if target_type:
-        clauses.append("target_type = %s")
+        query += " AND target_type = %s"
         params.append(target_type)
-
-    if clauses:
-        query += " WHERE " + " AND ".join(clauses)
 
     query += " ORDER BY created_at DESC LIMIT %s;"
     params.append(limit)
@@ -86,6 +106,10 @@ def list_recommendations(
                     do_not_change_conditions=r["do_not_change_conditions"] or [],
                     lifecycle_status=r["lifecycle_status"],
                     experiment_candidate_id=r["experiment_candidate_id"],
+                    environment=r.get("environment", "PRODUCTION"),
+                    evidence_origin=r.get("evidence_origin", "PRODUCTION"),
+                    generation_mode=r.get("generation_mode", "PRODUCTION"),
+                    measurement_code_commit=r.get("measurement_code_commit"),
                     created_at=r["created_at"],
                     updated_at=r["updated_at"],
                 )
@@ -97,13 +121,24 @@ def generate_recommendations(
     measurement_id: str,
     comparison_measurement_id: Optional[str] = None,
     decision_rule_set_id: str = "ruleset_2_0_0",
+    environment: str = "PRODUCTION",
+    evidence_origin: str = "PRODUCTION",
+    generation_mode: str = "PRODUCTION",
     dry_run: bool = False,
     db_uri: str = DEFAULT_DB_URI,
 ) -> List[RecommendationRecord]:
     """
     Deterministically generate acquisition recommendations across sitewide, cohort,
-    page, and query targets.
+    page, and query targets with strict environment and provenance boundaries.
     """
+    if environment not in ENVIRONMENTS:
+        raise ValueError(f"Invalid environment '{environment}'")
+    if evidence_origin not in EVIDENCE_ORIGINS:
+        raise ValueError(f"Invalid evidence_origin '{evidence_origin}'")
+    if generation_mode not in GENERATION_MODES:
+        raise ValueError(f"Invalid generation_mode '{generation_mode}'")
+
+    code_commit = _get_current_commit()
     recommendations: List[RecommendationRecord] = []
 
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
@@ -132,16 +167,18 @@ def generate_recommendations(
                 )
                 comp_meas = cur.fetchone()
 
-            # 3. Check Active Experiments / Holdouts
+            # 3. Check Active Experiments / Holdouts (Strictly filtered by environment!)
             cur.execute(
                 """
                 SELECT ae.id, ae.change_id, ae.approval_status, ae.do_not_change_until,
                        ac.affected_page_ids, ac.affected_cohorts
                 FROM acquisition_experiments ae
                 JOIN acquisition_changes ac ON ae.change_id = ac.id
-                WHERE ae.approval_status IN ('HOLDOUT', 'RUNNING')
+                WHERE ae.environment = %s
+                  AND ae.approval_status IN ('HOLDOUT', 'RUNNING')
                   AND (ae.do_not_change_until IS NULL OR ae.do_not_change_until > now());
-                """
+                """,
+                (environment,),
             )
             active_experiments = cur.fetchall()
             protected_page_ids: Set[str] = set()
@@ -152,8 +189,11 @@ def generate_recommendations(
                 for c in exp["affected_cohorts"]:
                     protected_cohorts.add(c)
 
-            # 4. Check Active Suppressions
-            cur.execute("SELECT * FROM recommendation_suppressions WHERE suppressed_until > now();")
+            # 4. Check Active Suppressions (Strictly filtered by environment!)
+            cur.execute(
+                "SELECT * FROM recommendation_suppressions WHERE environment = %s AND suppressed_until > now();",
+                (environment,),
+            )
             suppressions = cur.fetchall()
             suppressed_targets: Set[Tuple[str, str, str]] = {
                 (s["target_type"], s["target_id"], s["recommendation_class"]) for s in suppressions
@@ -181,6 +221,10 @@ def generate_recommendations(
                     uncertainties=["Pipeline telemetry unverified"],
                     minimum_observation_period=28,
                     lifecycle_status="GENERATED",
+                    environment=environment,
+                    evidence_origin=evidence_origin,
+                    generation_mode=generation_mode,
+                    measurement_code_commit=code_commit,
                 )
                 recommendations.append(rec)
                 if not dry_run:
@@ -223,6 +267,10 @@ def generate_recommendations(
                         uncertainties=["Initial search indexing trajectory unestablished"],
                         minimum_observation_period=28,
                         do_not_change_conditions=["Maintain stable route structure during initial indexing"],
+                        environment=environment,
+                        evidence_origin=evidence_origin,
+                        generation_mode=generation_mode,
+                        measurement_code_commit=code_commit,
                     )
                 )
             elif comp_meas and comp_imps and comp_imps > 0:
@@ -255,6 +303,10 @@ def generate_recommendations(
                             },
                             confidence="HIGH",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
 
@@ -301,6 +353,10 @@ def generate_recommendations(
                             supporting_metrics={"total_impressions": c_imps, "total_pages": crow["total_pages"]},
                             confidence="HIGH",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                     continue
@@ -328,6 +384,10 @@ def generate_recommendations(
                             supporting_metrics={"total_impressions": 0, "total_pages": crow["total_pages"]},
                             confidence="LOW",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                 elif c_imps >= 100 and c_pos and 21.0 <= c_pos <= 50.0:
@@ -353,6 +413,10 @@ def generate_recommendations(
                             supporting_metrics={"total_impressions": c_imps, "avg_position": c_pos},
                             confidence="MEDIUM",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                 else:
@@ -376,10 +440,14 @@ def generate_recommendations(
                             supporting_metrics={"total_impressions": c_imps, "avg_position": c_pos},
                             confidence="MEDIUM",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
 
-            # 8. Page-Level Evaluation
+            # 8. Page-Level Evaluation (Every visible page receives an explicit disposition)
             cur.execute(
                 """
                 SELECT 
@@ -431,6 +499,10 @@ def generate_recommendations(
                             supporting_metrics={"impressions": p_imps, "clicks": p_clicks, "position": p_pos},
                             confidence="HIGH",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                     continue
@@ -461,12 +533,16 @@ def generate_recommendations(
                             supporting_metrics={"impressions": p_imps, "clicks": p_clicks, "position": p_pos, "ctr": p_ctr},
                             confidence="HIGH",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                     continue
 
-                # Hard Rule 2: Top-10 / Top-20 High Exposure Low CTR
-                if p_pos and p_pos <= 20.0 and p_imps >= 100 and (p_ctr is None or p_ctr < 0.01):
+                # Hard Rule 2: Top-10 / Top-20 High Exposure Low CTR (Position <= 20 and impressions >= 100)
+                elif p_pos and p_pos <= 20.0 and p_imps >= 100 and (p_ctr is None or p_ctr < 0.01):
                     rec_id = _compute_rec_id(measurement_id, decision_rule_set_id, "PAGE", pid_str, "REVIEW_SERP_PRESENTATION")
                     recommendations.append(
                         RecommendationRecord(
@@ -490,9 +566,76 @@ def generate_recommendations(
                             supporting_metrics={"impressions": p_imps, "clicks": p_clicks, "position": p_pos, "ctr": p_ctr},
                             confidence="HIGH",
                             minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
                         )
                     )
                     continue
+
+                # Hard Rule 3: Top-10 / Top-20 with Low Observation Volume (< 100 impressions)
+                elif p_pos and p_pos <= 20.0 and p_imps < 100:
+                    rec_id = _compute_rec_id(measurement_id, decision_rule_set_id, "PAGE", pid_str, "OBSERVE")
+                    recommendations.append(
+                        RecommendationRecord(
+                            id=rec_id,
+                            measurement_id=measurement_id,
+                            comparison_measurement_id=comp_meas["id"] if comp_meas else None,
+                            decision_rule_set_id=decision_rule_set_id,
+                            target_type="PAGE",
+                            target_page_id=pid_str,
+                            detected_condition="TOP_RANKING_LOW_EXPOSURE_VOLUME",
+                            trend_classification="STABLE",
+                            search_state=p_bucket,
+                            evidence_status="INSUFFICIENT",
+                            recommendation_class="OBSERVE",
+                            reason_code="INSUFFICIENT_OBSERVATION",
+                            reason_text=(
+                                f"Page '{p_route}' achieved ranking exposure (position {p_pos:.1f}) but has low observation volume "
+                                f"({p_imps} impressions). Maintain passive observation until statistical sample threshold (>= 100 impressions) is reached."
+                            ),
+                            primary_metric="gsc_aggregate_position",
+                            supporting_metrics={"impressions": p_imps, "clicks": p_clicks, "position": p_pos, "ctr": p_ctr},
+                            confidence="MEDIUM",
+                            minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
+                        )
+                    )
+                    continue
+
+                # Fallback for any other visible pages
+                else:
+                    rec_id = _compute_rec_id(measurement_id, decision_rule_set_id, "PAGE", pid_str, "OBSERVE")
+                    pos_disp = f"{p_pos:.1f}" if p_pos is not None else "N/A"
+                    recommendations.append(
+                        RecommendationRecord(
+                            id=rec_id,
+                            measurement_id=measurement_id,
+                            comparison_measurement_id=comp_meas["id"] if comp_meas else None,
+                            decision_rule_set_id=decision_rule_set_id,
+                            target_type="PAGE",
+                            target_page_id=pid_str,
+                            detected_condition="GENERAL_PAGE_OBSERVATION",
+                            trend_classification="STABLE",
+                            search_state=p_bucket,
+                            evidence_status="INSUFFICIENT",
+                            recommendation_class="OBSERVE",
+                            reason_code="INSUFFICIENT_OBSERVATION",
+                            reason_text=f"Page '{p_route}' recorded {p_imps} impressions (avg pos {pos_disp}). Maintain passive observation.",
+                            primary_metric="gsc_total_impressions",
+                            supporting_metrics={"impressions": p_imps, "clicks": p_clicks, "position": p_pos, "ctr": p_ctr},
+                            confidence="MEDIUM",
+                            minimum_observation_period=28,
+                            environment=environment,
+                            evidence_origin=evidence_origin,
+                            generation_mode=generation_mode,
+                            measurement_code_commit=code_commit,
+                        )
+                    )
 
             # 9. Query-Level Cannibalization Detection
             cur.execute(
@@ -514,9 +657,9 @@ def generate_recommendations(
 
             for qrow in cannibal_rows:
                 qtext = qrow["query_text"]
-                q_imps = qrow["total_query_impressions"]
-                q_pos = qrow["avg_query_position"]
                 p_count = qrow["competing_page_count"]
+                q_imps = qrow["total_query_impressions"]
+                q_pos = float(qrow["avg_query_position"])
 
                 rec_id = _compute_rec_id(measurement_id, decision_rule_set_id, "QUERY", qtext, "REVIEW_CANNIBALIZATION")
                 recommendations.append(
@@ -544,6 +687,10 @@ def generate_recommendations(
                         },
                         confidence="MEDIUM",
                         minimum_observation_period=28,
+                        environment=environment,
+                        evidence_origin=evidence_origin,
+                        generation_mode=generation_mode,
+                        measurement_code_commit=code_commit,
                     )
                 )
 
@@ -552,6 +699,88 @@ def generate_recommendations(
                 _persist_recommendations(conn, recommendations)
 
     return recommendations
+
+
+def reconcile_page_coverage(
+    measurement_id: str,
+    environment: str = "PRODUCTION",
+    db_uri: str = DEFAULT_DB_URI,
+) -> PageCoverageReconciliation:
+    """
+    Computes exact coverage reconciliation across all canonical pages.
+    Invariant: total_canonical_pages = page_recommendation_targets + excluded_pages + blocked_pages
+    unaccounted_pages MUST equal 0.
+    """
+    with psycopg.connect(db_uri, row_factory=dict_row) as conn:
+        with conn.cursor() as cur:
+            # 1. Total canonical pages in registry
+            cur.execute("SELECT id, route_path, canonical_url, is_indexable, is_active, retired_at FROM page_registry;")
+            all_pages = cur.fetchall()
+            total_pages = len(all_pages)
+
+            # 2. Visible pages for this measurement
+            cur.execute(
+                """
+                SELECT page_id, impressions, clicks, weighted_avg_position
+                FROM page_measurements
+                WHERE measurement_id = %s;
+                """,
+                (measurement_id,),
+            )
+            meas_pages = cur.fetchall()
+            visible_page_ids = {str(p["page_id"]) for p in meas_pages if p["impressions"] > 0}
+            visible_count = len(visible_page_ids)
+
+            # 3. Recommendations generated for pages in this measurement
+            cur.execute(
+                """
+                SELECT target_page_id, recommendation_class, reason_code
+                FROM acquisition_recommendations
+                WHERE measurement_id = %s AND target_type = 'PAGE' AND environment = %s;
+                """,
+                (measurement_id, environment),
+            )
+            rec_rows = cur.fetchall()
+            rec_page_ids = {str(r["target_page_id"]) for r in rec_rows if r["target_page_id"]}
+            rec_count = len(rec_page_ids)
+
+            # 4. Categorize all non-recommendation pages
+            excluded_details: Dict[str, List[str]] = {
+                "EXCLUDED_ZERO_SEARCH_PRESENCE": [],
+                "EXCLUDED_NON_INDEXABLE": [],
+                "BLOCKED": [],
+            }
+
+            for page in all_pages:
+                pid = str(page["id"])
+                if pid in rec_page_ids:
+                    continue
+
+                if not page["is_indexable"] or not page["is_active"] or page["retired_at"] is not None:
+                    excluded_details["EXCLUDED_NON_INDEXABLE"].append(page["route_path"])
+                elif pid not in visible_page_ids:
+                    excluded_details["EXCLUDED_ZERO_SEARCH_PRESENCE"].append(page["route_path"])
+                else:
+                    excluded_details["BLOCKED"].append(page["route_path"])
+
+            excluded_count = len(excluded_details["EXCLUDED_ZERO_SEARCH_PRESENCE"]) + len(excluded_details["EXCLUDED_NON_INDEXABLE"])
+            blocked_count = len(excluded_details["BLOCKED"])
+            unaccounted = total_pages - (rec_count + excluded_count + blocked_count)
+
+            if unaccounted != 0:
+                raise ValueError(f"Page coverage invariant violated! Unaccounted pages: {unaccounted}")
+
+            return PageCoverageReconciliation(
+                measurement_id=measurement_id,
+                total_canonical_pages=total_pages,
+                visible_pages=visible_count,
+                eligible_pages=visible_count,
+                page_recommendation_targets=rec_count,
+                excluded_pages=excluded_count,
+                blocked_pages=blocked_count,
+                unaccounted_pages=unaccounted,
+                excluded_details=excluded_details,
+            )
 
 
 def _persist_recommendations(conn: psycopg.Connection, recommendations: List[RecommendationRecord]) -> None:
@@ -567,17 +796,32 @@ def _persist_recommendations(conn: psycopg.Connection, recommendations: List[Rec
                     recommendation_class, reason_code, reason_text, primary_metric,
                     supporting_metrics, confidence, uncertainties, minimum_observation_period,
                     do_not_change_conditions, lifecycle_status, experiment_candidate_id,
+                    environment, evidence_origin, generation_mode, measurement_code_commit,
                     created_at, updated_at
                 ) VALUES (
                     %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-                    %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                 )
                 ON CONFLICT (id) DO UPDATE SET
                     comparison_measurement_id = EXCLUDED.comparison_measurement_id,
+                    detected_condition = EXCLUDED.detected_condition,
+                    trend_classification = EXCLUDED.trend_classification,
+                    search_state = EXCLUDED.search_state,
+                    product_state = EXCLUDED.product_state,
                     evidence_status = EXCLUDED.evidence_status,
+                    recommendation_class = EXCLUDED.recommendation_class,
+                    reason_code = EXCLUDED.reason_code,
                     reason_text = EXCLUDED.reason_text,
+                    primary_metric = EXCLUDED.primary_metric,
                     supporting_metrics = EXCLUDED.supporting_metrics,
                     confidence = EXCLUDED.confidence,
+                    uncertainties = EXCLUDED.uncertainties,
+                    minimum_observation_period = EXCLUDED.minimum_observation_period,
+                    do_not_change_conditions = EXCLUDED.do_not_change_conditions,
+                    environment = EXCLUDED.environment,
+                    evidence_origin = EXCLUDED.evidence_origin,
+                    generation_mode = EXCLUDED.generation_mode,
+                    measurement_code_commit = EXCLUDED.measurement_code_commit,
                     updated_at = now();
                 """,
                 (
@@ -604,6 +848,10 @@ def _persist_recommendations(conn: psycopg.Connection, recommendations: List[Rec
                     r.do_not_change_conditions,
                     r.lifecycle_status,
                     r.experiment_candidate_id,
+                    r.environment,
+                    r.evidence_origin,
+                    r.generation_mode,
+                    r.measurement_code_commit,
                     r.created_at,
                     r.updated_at,
                 ),

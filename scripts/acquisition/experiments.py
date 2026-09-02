@@ -40,6 +40,8 @@ def register_change(
     pre_change_measurement_id: Optional[str] = None,
     min_observation_days: int = 28,
     logged_by: str = "system",
+    environment: str = "PRODUCTION",
+    evidence_origin: str = "PRODUCTION",
     db_uri: str = DEFAULT_DB_URI,
 ) -> ChangeRecord:
     """Register a material acquisition change in canonical PostgreSQL storage."""
@@ -51,6 +53,10 @@ def register_change(
         raise ValueError(f"Invalid execution_status '{execution_status}'")
     if expected_impact not in ["positive", "neutral", "investigative", "defensive"]:
         raise ValueError(f"Invalid expected_impact '{expected_impact}'")
+    if environment not in ["PRODUCTION", "TEST", "SIMULATION", "REPLAY", "SYNTHETIC"]:
+        raise ValueError(f"Invalid environment '{environment}'")
+    if evidence_origin not in ["PRODUCTION", "SYNTHETIC", "REPLAY", "SIMULATION", "TEST"]:
+        raise ValueError(f"Invalid evidence_origin '{evidence_origin}'")
 
     dep_at = deployed_at or datetime.now(timezone.utc)
     eval_due = (dep_at + timedelta(days=min_observation_days)).date()
@@ -70,16 +76,20 @@ def register_change(
                 INSERT INTO acquisition_changes (
                     id, change_type, summary, affected_page_ids, affected_cohorts,
                     deployed_commit, deployed_at, expected_impact, actor_type, execution_status,
-                    pre_change_measurement_id, min_observation_days, evaluation_due_date, logged_by
+                    pre_change_measurement_id, min_observation_days, evaluation_due_date, logged_by,
+                    environment, evidence_origin
                 ) VALUES (
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    %s, %s, %s, %s
+                    %s, %s, %s, %s,
+                    %s, %s
                 )
                 ON CONFLICT (id) DO UPDATE SET
                     summary = EXCLUDED.summary,
                     execution_status = EXCLUDED.execution_status,
-                    deployed_commit = EXCLUDED.deployed_commit
+                    deployed_commit = EXCLUDED.deployed_commit,
+                    environment = EXCLUDED.environment,
+                    evidence_origin = EXCLUDED.evidence_origin
                 RETURNING *;
                 """,
                 (
@@ -97,6 +107,8 @@ def register_change(
                     min_observation_days,
                     eval_due,
                     logged_by,
+                    environment,
+                    evidence_origin,
                 ),
             )
             r = cur.fetchone()
@@ -117,6 +129,8 @@ def register_change(
                 min_observation_days=r["min_observation_days"],
                 evaluation_due_date=r["evaluation_due_date"],
                 logged_by=r["logged_by"],
+                environment=r["environment"],
+                evidence_origin=r["evidence_origin"],
             )
 
 
@@ -146,12 +160,12 @@ def rollback_change(
                     id, change_type, summary, affected_page_ids, affected_cohorts,
                     deployed_commit, deployed_at, expected_impact, actor_type, execution_status,
                     pre_change_measurement_id, min_observation_days, evaluation_due_date, logged_by,
-                    rollback_change_id, rollback_reason, rollback_at
+                    rollback_change_id, rollback_reason, rollback_at, environment, evidence_origin
                 ) VALUES (
                     %s, %s, %s, %s, %s,
                     %s, %s, 'defensive', %s, 'DEPLOYED',
                     %s, %s, %s, %s,
-                    %s, %s, %s
+                    %s, %s, %s, %s, %s
                 ) RETURNING *;
                 """,
                 (
@@ -170,6 +184,8 @@ def rollback_change(
                     original_change_id,
                     rollback_reason,
                     now,
+                    orig.get("environment", "PRODUCTION"),
+                    orig.get("evidence_origin", "PRODUCTION"),
                 ),
             )
             rb_row = cur.fetchone()
@@ -202,6 +218,8 @@ def rollback_change(
                 rollback_change_id=original_change_id,
                 rollback_reason=rollback_reason,
                 rollback_at=now,
+                environment=rb_row["environment"],
+                evidence_origin=rb_row["evidence_origin"],
             )
 
 
@@ -253,11 +271,17 @@ def create_experiment(
     decision_rule_set_id: str = "ruleset_2_0_0",
     measurement_version_id: str = "mver_2_0_0",
     minimum_holdout_days: int = 28,
+    environment: str = "PRODUCTION",
+    evidence_origin: str = "PRODUCTION",
     db_uri: str = DEFAULT_DB_URI,
 ) -> ExperimentRecord:
     """Register a formal controlled experiment with an immutable hypothesis."""
     if expected_direction not in ["INCREASE", "DECREASE", "MAINTAIN"]:
         raise ValueError(f"Invalid expected_direction '{expected_direction}'")
+    if environment not in ["PRODUCTION", "TEST", "SIMULATION", "REPLAY", "SYNTHETIC"]:
+        raise ValueError(f"Invalid environment '{environment}'")
+    if evidence_origin not in ["PRODUCTION", "SYNTHETIC", "REPLAY", "SIMULATION", "TEST"]:
+        raise ValueError(f"Invalid evidence_origin '{evidence_origin}'")
 
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
         with conn.cursor() as cur:
@@ -287,12 +311,12 @@ def create_experiment(
                     id, change_id, hypothesis_statement, target_metric, expected_direction,
                     expected_magnitude, pre_metric_value, pre_change_measurement_id,
                     decision_rule_set_id, measurement_version_id, approval_status,
-                    started_at, scheduled_evaluation_at
+                    started_at, scheduled_evaluation_at, environment, evidence_origin
                 ) VALUES (
                     %s, %s, %s, %s, %s,
                     %s, %s, %s,
                     %s, %s, 'DRAFT',
-                    now(), now() + (%s || ' days')::interval
+                    now(), now() + (%s || ' days')::interval, %s, %s
                 ) RETURNING *;
                 """,
                 (
@@ -307,6 +331,8 @@ def create_experiment(
                     decision_rule_set_id,
                     measurement_version_id,
                     minimum_holdout_days,
+                    environment,
+                    evidence_origin,
                 ),
             )
             r = cur.fetchone()
@@ -327,6 +353,8 @@ def create_experiment(
                 started_at=r["started_at"],
                 scheduled_evaluation_at=r["scheduled_evaluation_at"],
                 minimum_holdout_days=minimum_holdout_days,
+                environment=r["environment"],
+                evidence_origin=r["evidence_origin"],
             )
 
 

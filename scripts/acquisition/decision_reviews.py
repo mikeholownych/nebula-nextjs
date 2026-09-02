@@ -2,8 +2,10 @@
 
 Produces structured 7-day weekly reviews, 28-day comparative reviews,
 84-day strategic assessments, and bridges accepted recommendations into Phase 5 experiment drafts.
+Enforces environment boundaries and explicit provenance metadata across all decision outputs.
 """
 
+import subprocess
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 import psycopg
@@ -12,11 +14,30 @@ from psycopg.rows import dict_row
 from acquisition.experiments import create_experiment
 from acquisition.models import (
     DEFAULT_DB_URI,
+    ENVIRONMENTS,
+    GENERATION_MODES,
     ExperimentRecord,
+    PageCoverageReconciliation,
     RecommendationRecord,
     RecommendationReviewRecord,
     RecommendationSuppressionRecord,
 )
+from acquisition.recommendation_engine import reconcile_page_coverage
+
+
+def _get_current_commit() -> str:
+    """Get current git commit hash for review provenance."""
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        return res.stdout.strip()
+    except Exception:
+        return "unknown"
 
 
 def review_recommendation(
@@ -24,11 +45,14 @@ def review_recommendation(
     action: str,  # ACCEPT, REJECT, DEFER, REQUEST_MORE_EVIDENCE
     reviewed_by: str,
     review_notes: str,
+    environment: str = "PRODUCTION",
     db_uri: str = DEFAULT_DB_URI,
 ) -> RecommendationReviewRecord:
     """Submit a human decision review for a recommendation."""
     if action not in ["ACCEPT", "REJECT", "DEFER", "REQUEST_MORE_EVIDENCE"]:
         raise ValueError(f"Invalid review action '{action}'")
+    if environment not in ENVIRONMENTS:
+        raise ValueError(f"Invalid environment '{environment}'")
 
     status_map = {
         "ACCEPT": "ACCEPTED",
@@ -50,10 +74,10 @@ def review_recommendation(
             # Insert review record
             cur.execute(
                 """
-                INSERT INTO recommendation_reviews (id, recommendation_id, reviewed_by, review_action, review_notes, reviewed_at)
-                VALUES (%s, %s, %s, %s, %s, %s);
+                INSERT INTO recommendation_reviews (id, recommendation_id, reviewed_by, review_action, review_notes, environment, reviewed_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s);
                 """,
-                (review_id, recommendation_id, reviewed_by, action, review_notes, now),
+                (review_id, recommendation_id, reviewed_by, action, review_notes, environment, now),
             )
 
             # Update recommendation lifecycle status
@@ -74,8 +98,8 @@ def review_recommendation(
                     """
                     INSERT INTO recommendation_suppressions (
                         id, target_type, target_id, recommendation_class, suppressed_by,
-                        suppression_reason, suppressed_until, created_at
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+                        suppression_reason, suppressed_until, environment, created_at
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
                     """,
                     (
                         supp_id,
@@ -85,6 +109,7 @@ def review_recommendation(
                         reviewed_by,
                         review_notes,
                         now + timedelta(days=90),
+                        environment,
                         now,
                     ),
                 )
@@ -97,6 +122,7 @@ def review_recommendation(
                 reviewed_by=reviewed_by,
                 review_action=action,
                 review_notes=review_notes,
+                environment=environment,
                 reviewed_at=now,
             )
 
@@ -108,9 +134,13 @@ def suppress_recommendation(
     suppressed_by: str,
     suppression_reason: str,
     days: int = 90,
+    environment: str = "PRODUCTION",
     db_uri: str = DEFAULT_DB_URI,
 ) -> RecommendationSuppressionRecord:
     """Manually configure recommendation suppression for a target."""
+    if environment not in ENVIRONMENTS:
+        raise ValueError(f"Invalid environment '{environment}'")
+
     supp_id = f"supp_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
     now = datetime.now(timezone.utc)
     until = now + timedelta(days=days)
@@ -121,11 +151,11 @@ def suppress_recommendation(
                 """
                 INSERT INTO recommendation_suppressions (
                     id, target_type, target_id, recommendation_class, suppressed_by,
-                    suppression_reason, suppressed_until, created_at
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    suppression_reason, suppressed_until, environment, created_at
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING *;
                 """,
-                (supp_id, target_type, target_id, recommendation_class, suppressed_by, suppression_reason, until, now),
+                (supp_id, target_type, target_id, recommendation_class, suppressed_by, suppression_reason, until, environment, now),
             )
             r = cur.fetchone()
             conn.commit()
@@ -138,6 +168,7 @@ def suppress_recommendation(
                 suppressed_by=r["suppressed_by"],
                 suppression_reason=r["suppression_reason"],
                 suppressed_until=r["suppressed_until"],
+                environment=r["environment"],
                 created_at=r["created_at"],
             )
 
@@ -148,12 +179,17 @@ def create_experiment_draft_from_recommendation(
     exp_id: Optional[str] = None,
     expected_direction: str = "INCREASE",
     expected_magnitude: Optional[float] = None,
+    environment: str = "PRODUCTION",
+    evidence_origin: str = "PRODUCTION",
     db_uri: str = DEFAULT_DB_URI,
 ) -> ExperimentRecord:
     """
     Bridge an accepted recommendation into a Phase 5 DRAFT experiment.
     Does NOT approve or activate the experiment.
     """
+    if environment not in ENVIRONMENTS:
+        raise ValueError(f"Invalid environment '{environment}'")
+
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM acquisition_recommendations WHERE id = %s;", (recommendation_id,))
@@ -181,6 +217,8 @@ def create_experiment_draft_from_recommendation(
                 expected_magnitude=expected_magnitude,
                 decision_rule_set_id=rec["decision_rule_set_id"],
                 minimum_holdout_days=rec["minimum_observation_period"],
+                environment=environment,
+                evidence_origin=evidence_origin,
                 db_uri=db_uri,
             )
 
@@ -198,8 +236,15 @@ def create_experiment_draft_from_recommendation(
             return exp
 
 
-def generate_weekly_decision_review(measurement_id: str, db_uri: str = DEFAULT_DB_URI) -> str:
-    """Generate structured markdown Weekly Acquisition Decision Review."""
+def generate_weekly_decision_review(
+    measurement_id: str,
+    environment: str = "PRODUCTION",
+    generation_mode: str = "PRODUCTION",
+    db_uri: str = DEFAULT_DB_URI,
+) -> str:
+    """Generate structured markdown Weekly Acquisition Decision Review with complete provenance."""
+    code_commit = _get_current_commit()
+
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM acquisition_measurements WHERE id = %s;", (measurement_id,))
@@ -210,30 +255,43 @@ def generate_weekly_decision_review(measurement_id: str, db_uri: str = DEFAULT_D
             cur.execute(
                 """
                 SELECT * FROM acquisition_recommendations
-                WHERE measurement_id = %s
+                WHERE measurement_id = %s AND environment = %s
                 ORDER BY target_type, recommendation_class;
                 """,
-                (measurement_id,),
+                (measurement_id, environment),
             )
             recs = cur.fetchall()
 
-            # Active experiments
+            # Active experiments strictly for requested environment
             cur.execute(
                 """
                 SELECT ae.id, ae.approval_status, ae.target_metric, ac.summary
                 FROM acquisition_experiments ae
                 JOIN acquisition_changes ac ON ae.change_id = ac.id
-                WHERE ae.approval_status IN ('HOLDOUT', 'RUNNING');
-                """
+                WHERE ae.environment = %s
+                  AND ae.approval_status IN ('HOLDOUT', 'RUNNING');
+                """,
+                (environment,),
             )
             active_exps = cur.fetchall()
 
+            # Coverage reconciliation
+            coverage = reconcile_page_coverage(measurement_id, environment=environment, db_uri=db_uri)
+
             eff_days = (meas["effective_period_end"] - meas["effective_period_start"]).days + 1
+            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
             lines: List[str] = []
             lines.append(f"# Weekly Acquisition Decision Review: `{measurement_id}`")
             lines.append("")
-            lines.append(f"**Period:** {meas['effective_period_start']} to {meas['effective_period_end']} ({eff_days} days)")
-            lines.append(f"**Data Quality Status:** `{meas['data_completeness_status']}` | **Measurement Version:** `{meas['measurement_version_code'] or '2.0.0'}`")
+            lines.append(f"**Measurement ID:** `{measurement_id}`  ")
+            lines.append(f"**Measurement Version:** `{meas['measurement_version_code'] or '2.0.0'}`  ")
+            lines.append(f"**Decision Rule Set ID:** `ruleset_2_0_0`  ")
+            lines.append(f"**Environment:** `{environment}` | **Generation Mode:** `{generation_mode}`  ")
+            lines.append(f"**Generated At:** {now_str}  ")
+            lines.append(f"**Code Commit:** `{code_commit}`  ")
+            lines.append(f"**Observation Period:** {meas['effective_period_start']} to {meas['effective_period_end']} ({eff_days} days)  ")
+            lines.append(f"**Data Quality Status:** `{meas['data_completeness_status']}`")
             lines.append("")
             lines.append("---")
             lines.append("")
@@ -254,11 +312,22 @@ def generate_weekly_decision_review(measurement_id: str, db_uri: str = DEFAULT_D
                 for a in active_exps:
                     lines.append(f"- **`{a['id']}`** (`{a['approval_status']}`): {a['summary']} (Target: `{a['target_metric']}`)")
             else:
-                lines.append("*Zero active experiment holdouts currently running.*")
+                lines.append(f"*Zero active {environment.lower()} experiment holdouts currently running.*")
             lines.append("")
-            lines.append("## 3. Intervention Candidates & Decisions (RECOMMENDATION)")
+            lines.append("## 3. Page Coverage Reconciliation & Invariant (FACT)")
+            lines.append("")
+            lines.append(f"- **Total Canonical Pages Registered:** {coverage.total_canonical_pages}")
+            lines.append(f"- **Visible Pages (Impressions > 0):** {coverage.visible_pages}")
+            lines.append(f"- **Page Recommendation Targets Evaluated:** {coverage.page_recommendation_targets}")
+            lines.append(f"- **Excluded Pages (Handled at Cohort Level / Zero Presence):** {coverage.excluded_pages}")
+            lines.append(f"- **Blocked Pages:** {coverage.blocked_pages}")
+            lines.append(f"- **Unaccounted Pages:** {coverage.unaccounted_pages} (Invariant: `unaccounted == 0`)")
+            lines.append("")
+            lines.append("## 4. Intervention Candidates & Decisions (RECOMMENDATION)")
             lines.append("")
             if recs:
+                lines.append(f"Total Recommendations Generated: **{len(recs)}**")
+                lines.append("")
                 lines.append("| Target Type | Target ID / Cohort | Recommendation Class | Evidence Status | Reason Code | Confidence |")
                 lines.append("|:---|:---|:---|:---|:---|:---|")
                 for r in recs:
@@ -268,9 +337,9 @@ def generate_weekly_decision_review(measurement_id: str, db_uri: str = DEFAULT_D
                         f"`{r['evidence_status']}` | `{r['reason_code']}` | `{r['confidence']}` |"
                     )
             else:
-                lines.append("*No candidate recommendations generated for this period.*")
+                lines.append(f"*No candidate recommendations generated for environment '{environment}'.*")
             lines.append("")
-            lines.append("## 4. Epistemic Boundary & Limitations (LIMITATION)")
+            lines.append("## 5. Epistemic Boundary & Limitations (LIMITATION)")
             lines.append("")
             lines.append("- Recommendations represent deterministic candidate classifications based on pre-registered decision rules.")
             lines.append("- Recommendations do not constitute authorization to modify production without formal approval.")
@@ -280,8 +349,15 @@ def generate_weekly_decision_review(measurement_id: str, db_uri: str = DEFAULT_D
             return "\n".join(lines)
 
 
-def generate_28d_decision_review(measurement_id: str, db_uri: str = DEFAULT_DB_URI) -> str:
-    """Generate substantive 28-day longitudinal decision review comparing adjacent windows."""
+def generate_28d_decision_review(
+    measurement_id: str,
+    environment: str = "PRODUCTION",
+    generation_mode: str = "PRODUCTION",
+    db_uri: str = DEFAULT_DB_URI,
+) -> str:
+    """Generate substantive 28-day longitudinal decision review comparing adjacent windows with full provenance."""
+    code_commit = _get_current_commit()
+
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM acquisition_measurements WHERE id = %s;", (measurement_id,))
@@ -302,11 +378,18 @@ def generate_28d_decision_review(measurement_id: str, db_uri: str = DEFAULT_DB_U
 
             curr_eff_days = (curr["effective_period_end"] - curr["effective_period_start"]).days + 1
             prev_eff_days = (prev["effective_period_end"] - prev["effective_period_start"]).days + 1 if prev else 0
+            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
             lines: List[str] = []
             lines.append(f"# 28-Day Acquisition Decision Review: `{measurement_id}`")
             lines.append("")
-            lines.append(f"**Current Window:** {curr['effective_period_start']} to {curr['effective_period_end']} ({curr_eff_days} days)")
+            lines.append(f"**Measurement ID:** `{measurement_id}`  ")
+            lines.append(f"**Measurement Version:** `{curr['measurement_version_code'] or '2.0.0'}`  ")
+            lines.append(f"**Decision Rule Set ID:** `ruleset_2_0_0`  ")
+            lines.append(f"**Environment:** `{environment}` | **Generation Mode:** `{generation_mode}`  ")
+            lines.append(f"**Generated At:** {now_str}  ")
+            lines.append(f"**Code Commit:** `{code_commit}`  ")
+            lines.append(f"**Current Window:** {curr['effective_period_start']} to {curr['effective_period_end']} ({curr_eff_days} days)  ")
             if prev:
                 lines.append(f"**Comparison Window:** {prev['effective_period_start']} to {prev['effective_period_end']} ({prev_eff_days} days, `ADJACENT_PERIOD`)")
             else:
@@ -376,11 +459,18 @@ def generate_28d_decision_review(measurement_id: str, db_uri: str = DEFAULT_DB_U
             return "\n".join(lines)
 
 
-def generate_84d_strategic_review(measurement_id: str, db_uri: str = DEFAULT_DB_URI) -> str:
+def generate_84d_strategic_review(
+    measurement_id: str,
+    environment: str = "PRODUCTION",
+    generation_mode: str = "PRODUCTION",
+    db_uri: str = DEFAULT_DB_URI,
+) -> str:
     """
-    Generate 84-day strategic review over 3 adjacent canonical windows.
+    Generate 84-day strategic review over 3 adjacent canonical windows with full provenance.
     Returns STRATEGIC_TREND_NOT_ESTABLISHED if insufficient compatible history exists.
     """
+    code_commit = _get_current_commit()
+
     with psycopg.connect(db_uri, row_factory=dict_row) as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM acquisition_measurements WHERE id = %s;", (measurement_id,))
@@ -409,8 +499,19 @@ def generate_84d_strategic_review(measurement_id: str, db_uri: str = DEFAULT_DB_
                 if len(distinct_windows) == 3:
                     break
 
+            now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
             lines: List[str] = []
             lines.append(f"# 84-Day Strategic Acquisition Review: `{measurement_id}`")
+            lines.append("")
+            lines.append(f"**Measurement ID:** `{measurement_id}`  ")
+            lines.append(f"**Measurement Version:** `{target_meas['measurement_version_code'] or '2.0.0'}`  ")
+            lines.append(f"**Decision Rule Set ID:** `ruleset_2_0_0`  ")
+            lines.append(f"**Environment:** `{environment}` | **Generation Mode:** `{generation_mode}`  ")
+            lines.append(f"**Generated At:** {now_str}  ")
+            lines.append(f"**Code Commit:** `{code_commit}`  ")
+            lines.append("")
+            lines.append("---")
             lines.append("")
 
             if len(distinct_windows) < 3:

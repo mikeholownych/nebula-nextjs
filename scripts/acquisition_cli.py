@@ -55,6 +55,7 @@ from acquisition.models import ACTOR_TYPES, CHANGE_TYPES, DEFAULT_DB_URI
 from acquisition.recommendation_engine import (
     generate_recommendations,
     list_recommendations,
+    reconcile_page_coverage,
 )
 from acquisition.reporting import render_baseline_report, render_weekly_observation_report
 from acquisition.route_sync import sync_routes_to_db
@@ -283,11 +284,14 @@ def cmd_confound_check(args):
 # 4. Phase 6 Recommendation & Decision Review Commands
 
 def cmd_rec_generate(args):
-    print(f"=== Generating Acquisition Recommendations for `{args.measurement_id}` ===")
+    print(f"=== Generating Acquisition Recommendations for `{args.measurement_id}` (env={args.environment}) ===")
     recs = generate_recommendations(
         measurement_id=args.measurement_id,
         comparison_measurement_id=args.comparator_id,
         decision_rule_set_id=args.ruleset_id,
+        environment=args.environment,
+        evidence_origin=args.evidence_origin,
+        generation_mode=args.generation_mode,
         dry_run=args.dry_run,
         db_uri=args.db_uri,
     )
@@ -309,10 +313,11 @@ def cmd_rec_generate(args):
 
 
 def cmd_rec_list(args):
-    print(f"=== Listing Persisted Acquisition Recommendations (status={args.status}) ===")
+    print(f"=== Listing Persisted Acquisition Recommendations (status={args.status}, env={args.environment}) ===")
     recs = list_recommendations(
         lifecycle_status=args.status,
         target_type=args.target_type,
+        environment=args.environment,
         limit=args.limit,
         db_uri=args.db_uri,
     )
@@ -326,7 +331,7 @@ def cmd_rec_list(args):
 
 
 def cmd_rec_inspect(args):
-    recs = list_recommendations(limit=1000, db_uri=args.db_uri)
+    recs = list_recommendations(limit=1000, environment=args.environment, db_uri=args.db_uri)
     matched = next((r for r in recs if r.id == args.rec_id), None)
     if not matched:
         print(f"Recommendation '{args.rec_id}' not found.")
@@ -335,12 +340,13 @@ def cmd_rec_inspect(args):
 
 
 def cmd_rec_review(args):
-    print(f"=== Submitting Decision Review for `{args.rec_id}` ===")
+    print(f"=== Submitting Decision Review for `{args.rec_id}` (env={args.environment}) ===")
     rev = review_recommendation(
         recommendation_id=args.rec_id,
         action=args.action,
         reviewed_by=args.reviewed_by,
         review_notes=args.notes,
+        environment=args.environment,
         db_uri=args.db_uri,
     )
     print(f"Review Submitted Successfully (ID: {rev.id})")
@@ -350,7 +356,7 @@ def cmd_rec_review(args):
 
 
 def cmd_rec_suppress(args):
-    print(f"=== Configuring Recommendation Suppression ===")
+    print(f"=== Configuring Recommendation Suppression (env={args.environment}) ===")
     supp = suppress_recommendation(
         target_type=args.target_type,
         target_id=args.target_id,
@@ -358,6 +364,7 @@ def cmd_rec_suppress(args):
         suppressed_by=args.suppressed_by,
         suppression_reason=args.reason,
         days=args.days,
+        environment=args.environment,
         db_uri=args.db_uri,
     )
     print(f"Suppression Created (ID: {supp.id})")
@@ -374,6 +381,8 @@ def cmd_rec_create_experiment_draft(args):
         exp_id=args.exp_id,
         expected_direction=args.direction,
         expected_magnitude=args.magnitude,
+        environment=args.environment,
+        evidence_origin=args.evidence_origin,
         db_uri=args.db_uri,
     )
     print(f"Experiment Draft Created Successfully (ID: {exp.id})")
@@ -382,9 +391,30 @@ def cmd_rec_create_experiment_draft(args):
     print(f"  Hypothesis: {exp.hypothesis_statement}")
 
 
+def cmd_reconcile_coverage(args):
+    print(f"=== Reconciling Canonical Page Coverage for `{args.measurement_id}` ===")
+    cov = reconcile_page_coverage(args.measurement_id, environment=args.environment, db_uri=args.db_uri)
+    print(f"Total Canonical Pages: {cov.total_canonical_pages}")
+    print(f"Visible Pages (Impressions > 0): {cov.visible_pages}")
+    print(f"Eligible Pages: {cov.eligible_pages}")
+    print(f"Page Recommendation Targets: {cov.page_recommendation_targets}")
+    print(f"Excluded Pages: {cov.excluded_pages}")
+    print(f"Blocked Pages: {cov.blocked_pages}")
+    print(f"Unaccounted Pages: {cov.unaccounted_pages}")
+    if cov.unaccounted_pages == 0:
+        print("Coverage Invariant Status: VALID (unaccounted == 0)")
+    else:
+        print("Coverage Invariant Status: VIOLATED")
+
+
 def cmd_decision_review_weekly(args):
     print(f"=== Rendering Weekly Decision Review for `{args.measurement_id}` ===")
-    report = generate_weekly_decision_review(args.measurement_id, db_uri=args.db_uri)
+    report = generate_weekly_decision_review(
+        args.measurement_id,
+        environment=args.environment,
+        generation_mode=args.generation_mode,
+        db_uri=args.db_uri,
+    )
     if args.output_path:
         Path(args.output_path).write_text(report)
         print(f"Saved weekly decision review to {args.output_path}")
@@ -394,7 +424,12 @@ def cmd_decision_review_weekly(args):
 
 def cmd_decision_review_28d(args):
     print(f"=== Rendering 28-Day Decision Review for `{args.measurement_id}` ===")
-    report = generate_28d_decision_review(args.measurement_id, db_uri=args.db_uri)
+    report = generate_28d_decision_review(
+        args.measurement_id,
+        environment=args.environment,
+        generation_mode=args.generation_mode,
+        db_uri=args.db_uri,
+    )
     if args.output_path:
         Path(args.output_path).write_text(report)
         print(f"Saved 28-day decision review to {args.output_path}")
@@ -404,7 +439,12 @@ def cmd_decision_review_28d(args):
 
 def cmd_decision_review_84d(args):
     print(f"=== Rendering 84-Day Strategic Decision Review for `{args.measurement_id}` ===")
-    report = generate_84d_strategic_review(args.measurement_id, db_uri=args.db_uri)
+    report = generate_84d_strategic_review(
+        args.measurement_id,
+        environment=args.environment,
+        generation_mode=args.generation_mode,
+        db_uri=args.db_uri,
+    )
     if args.output_path:
         Path(args.output_path).write_text(report)
         print(f"Saved 84-day strategic review to {args.output_path}")
@@ -415,6 +455,9 @@ def cmd_decision_review_84d(args):
 def main():
     parser = argparse.ArgumentParser(description="Acquisition Learning System CLI")
     parser.add_argument("--db-uri", default=DEFAULT_DB_URI, help="PostgreSQL connection URI")
+    parser.add_argument("--environment", default="PRODUCTION", choices=["PRODUCTION", "TEST", "SIMULATION", "REPLAY", "SYNTHETIC"])
+    parser.add_argument("--evidence-origin", default="PRODUCTION", choices=["PRODUCTION", "SYNTHETIC", "REPLAY", "SIMULATION", "TEST"])
+    parser.add_argument("--generation-mode", default="PRODUCTION", choices=["PRODUCTION", "REPLAY", "SIMULATION", "TEST"])
     
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -565,6 +608,10 @@ def main():
     p_rec_exp.add_argument("--direction", default="INCREASE", choices=["INCREASE", "DECREASE", "MAINTAIN"])
     p_rec_exp.add_argument("--magnitude", type=float, help="Expected magnitude")
     p_rec_exp.set_defaults(func=cmd_rec_create_experiment_draft)
+
+    p_cov = subparsers.add_parser("reconcile-coverage", help="Reconcile canonical page coverage")
+    p_cov.add_argument("--measurement-id", required=True)
+    p_cov.set_defaults(func=cmd_reconcile_coverage)
 
     # 5. Phase 6 Decision Reviews
     p_dr_week = subparsers.add_parser("decision-review-weekly", help="Generate Weekly Decision Review markdown")

@@ -36,6 +36,7 @@ from acquisition.models import DEFAULT_DB_URI, MetricSemantics
 from acquisition.recommendation_engine import (
     generate_recommendations,
     list_recommendations,
+    reconcile_page_coverage,
 )
 
 
@@ -105,41 +106,108 @@ def test_low_ranking_zero_click_rule_blocks_serp_review():
     """Page with position > 20 and 0 clicks must produce OBSERVE, NEVER REVIEW_SERP_PRESENTATION."""
     recs = generate_recommendations(
         measurement_id="meas_20260830_canonical_w28",
+        environment="PRODUCTION",
         dry_run=True,
     )
     page_recs = [r for r in recs if r.target_type == "PAGE"]
-    assert len(page_recs) > 0
+    assert len(page_recs) == 41
     for pr in page_recs:
-        if pr.supporting_metrics.get("position") and pr.supporting_metrics["position"] > 20.0:
+        if pr.supporting_metrics.get("position") and pr.supporting_metrics["position"] > 20.0 and pr.supporting_metrics.get("clicks", 0) == 0:
             assert pr.recommendation_class == "OBSERVE"
-            assert pr.reason_code in ["LOW_RANKING_EXPOSURE", "ACTIVE_EXPERIMENT"]
+            assert pr.reason_code == "LOW_RANKING_EXPOSURE"
             assert pr.recommendation_class != "REVIEW_SERP_PRESENTATION"
 
 
-def test_active_experiment_target_is_protected():
-    """Pages or cohorts participating in an active experiment holdout must receive OBSERVE / ACTIVE_EXPERIMENT."""
-    recs = generate_recommendations(
+def test_active_experiment_target_is_protected_in_test_environment_only():
+    """Pages or cohorts in test experiments receive ACTIVE_EXPERIMENT in TEST mode, but not in PRODUCTION mode."""
+    # 1. Create and activate a TEST experiment
+    run_uid = datetime.now().strftime("%Y%m%d%H%M%S%f")
+    cid = f"test_chg_rec_exp_{run_uid}"
+    register_change(
+        change_id=cid,
+        change_type="CONTENT",
+        summary="Test change for recommendation protection",
+        affected_page_urls=["/vs/screaming-frog"],
+        affected_cohorts=["commercial_comparison"],
+        deployed_commit="commit_rec_exp_01",
+        environment="TEST",
+        evidence_origin="TEST",
+    )
+    eid = f"test_exp_rec_{run_uid}"
+    create_experiment(
+        experiment_id=eid,
+        change_id=cid,
+        hypothesis_statement="Test experiment protection.",
+        target_metric="gsc_total_impressions",
+        expected_direction="INCREASE",
+        pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
+    )
+    from acquisition.experiments import activate_experiment, approve_experiment
+    approve_experiment(eid, approved_by="admin")
+    activate_experiment(eid)
+
+    # 2. In TEST environment, target receives ACTIVE_EXPERIMENT
+    test_recs = generate_recommendations(
         measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
         dry_run=True,
     )
-    exp_recs = [r for r in recs if r.reason_code == "ACTIVE_EXPERIMENT"]
-    assert len(exp_recs) > 0
-    for er in exp_recs:
+    test_exp_recs = [r for r in test_recs if r.reason_code == "ACTIVE_EXPERIMENT"]
+    assert len(test_exp_recs) > 0
+    for er in test_exp_recs:
         assert er.recommendation_class == "OBSERVE"
         assert er.confidence == "HIGH"
         assert "experiment holdout" in er.reason_text
 
+    # 3. In PRODUCTION environment, test experiment is ignored!
+    prod_recs = generate_recommendations(
+        measurement_id="meas_20260830_canonical_w28",
+        environment="PRODUCTION",
+        dry_run=True,
+    )
+    prod_exp_recs = [r for r in prod_recs if r.reason_code == "ACTIVE_EXPERIMENT"]
+    assert len(prod_exp_recs) == 0
+
+
+def test_page_coverage_reconciliation_invariant():
+    """Verify that every canonical page in registry is accounted for with unaccounted == 0."""
+    cov = reconcile_page_coverage("meas_20260830_canonical_w28", environment="PRODUCTION")
+    assert cov.total_canonical_pages == 95
+    assert cov.visible_pages == 41
+    assert cov.eligible_pages == 41
+    assert cov.page_recommendation_targets == 41
+    assert cov.excluded_pages == 54
+    assert cov.blocked_pages == 0
+    assert cov.unaccounted_pages == 0
+    assert cov.total_canonical_pages == cov.page_recommendation_targets + cov.excluded_pages + cov.blocked_pages
+
+
+def test_environment_and_provenance_isolation():
+    """Verify that recommendation records persist strict provenance and environment metadata."""
+    recs = generate_recommendations(
+        measurement_id="meas_20260830_canonical_w28",
+        environment="PRODUCTION",
+        generation_mode="PRODUCTION",
+        dry_run=False,
+    )
+    assert len(recs) == 51
+    for r in recs:
+        assert r.environment == "PRODUCTION"
+        assert r.evidence_origin == "PRODUCTION"
+        assert r.generation_mode == "PRODUCTION"
+        assert r.measurement_code_commit is not None and len(r.measurement_code_commit) > 0
+
 
 def test_serp_presentation_trigger_gate_logic():
     """Top-10 ranking with high impressions and sub-1% CTR triggers REVIEW_SERP_PRESENTATION."""
-    # Test gate logic directly: position 5.0, 200 impressions, 0 clicks (0% CTR)
     pos = 5.0
     imps = 200
     ctr = 0.002
     assert pos <= 20.0
     assert imps >= 100
     assert ctr < 0.01
-    # Contrast with position 45, 200 imps, 0 clicks -> LOW_RANKING_EXPOSURE
     pos_low = 45.0
     assert pos_low > 20.0  # Blocks SERP review
 
@@ -168,15 +236,17 @@ def test_recommendation_generation_is_idempotent():
     """Running recommendation generation twice on the same measurement must not duplicate rows."""
     recs1 = generate_recommendations(
         measurement_id="meas_20260830_canonical_w28",
+        environment="PRODUCTION",
         dry_run=False,
     )
     recs2 = generate_recommendations(
         measurement_id="meas_20260830_canonical_w28",
+        environment="PRODUCTION",
         dry_run=False,
     )
     assert len(recs1) == len(recs2)
 
-    persisted = list_recommendations(limit=1000)
+    persisted = list_recommendations(environment="PRODUCTION", limit=1000)
     meas_recs = [r for r in persisted if r.measurement_id == "meas_20260830_canonical_w28"]
     assert len(meas_recs) == len(recs1)
 
@@ -187,7 +257,7 @@ def test_recommendation_generation_is_idempotent():
 
 def test_human_decision_review_lifecycle_and_suppression():
     """Test human decision review transitions and automatic suppression on rejection."""
-    recs = list_recommendations(limit=5)
+    recs = list_recommendations(environment="PRODUCTION", limit=5)
     if not recs:
         pytest.skip("No recommendations available for review test")
 
@@ -199,6 +269,7 @@ def test_human_decision_review_lifecycle_and_suppression():
         action="ACCEPT",
         reviewed_by="mike_principal",
         review_notes="Approved for experimental validation.",
+        environment="PRODUCTION",
     )
     assert rev_acc.review_action == "ACCEPT"
 
@@ -208,11 +279,12 @@ def test_human_decision_review_lifecycle_and_suppression():
         action="REJECT",
         reviewed_by="mike_principal",
         review_notes="Intentional brand positioning; do not modify copy.",
+        environment="PRODUCTION",
     )
     assert rev_rej.review_action == "REJECT"
 
     # Check suppression exists
-    updated = list_recommendations(limit=1000)
+    updated = list_recommendations(environment="PRODUCTION", limit=1000)
     target_rec = next(r for r in updated if r.id == rec.id)
     assert target_rec.lifecycle_status == "REJECTED"
 
@@ -232,9 +304,11 @@ def test_recommendation_to_experiment_draft_bridge():
         affected_page_urls=["/"],
         affected_cohorts=["product_core"],
         deployed_commit="commit_bridge_01",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
-    recs = list_recommendations(limit=1)
+    recs = list_recommendations(environment="PRODUCTION", limit=1)
     if not recs:
         pytest.skip("No recommendation available for bridge test")
 
@@ -243,12 +317,15 @@ def test_recommendation_to_experiment_draft_bridge():
         recommendation_id=rec.id,
         change_id=cid,
         expected_direction="INCREASE",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     assert exp.approval_status == "DRAFT"
     assert exp.effective_change_at is None  # Not deployed!
     assert exp.approved_by is None  # Not approved!
     assert exp.target_metric == rec.primary_metric
+    assert exp.environment == "TEST"
 
 
 # ---------------------------------------------------------------------------
@@ -260,22 +337,28 @@ def test_decision_review_report_generators():
     mid = "meas_20260830_canonical_w28"
 
     # 1. Weekly Decision Review
-    weekly = generate_weekly_decision_review(mid)
+    weekly = generate_weekly_decision_review(mid, environment="PRODUCTION")
     assert "# Weekly Acquisition Decision Review:" in weekly
+    assert "**Measurement ID:** `meas_20260830_canonical_w28`" in weekly
+    assert "**Environment:** `PRODUCTION`" in weekly
     assert "## 1. Quantitative Evidence Summary (FACT)" in weekly
-    assert "## 3. Intervention Candidates & Decisions (RECOMMENDATION)" in weekly
-    assert "## 4. Epistemic Boundary & Limitations (LIMITATION)" in weekly
+    assert "## 2. Active Experiments & Protected Targets (FACT)" in weekly
+    assert "## 3. Page Coverage Reconciliation & Invariant (FACT)" in weekly
+    assert "## 4. Intervention Candidates & Decisions (RECOMMENDATION)" in weekly
+    assert "## 5. Epistemic Boundary & Limitations (LIMITATION)" in weekly
     assert "\u2014" not in weekly
 
     # 2. 28-Day Decision Review
-    d28 = generate_28d_decision_review(mid)
+    d28 = generate_28d_decision_review(mid, environment="PRODUCTION")
     assert "# 28-Day Acquisition Decision Review:" in d28
+    assert "**Environment:** `PRODUCTION`" in d28
     assert "## 1. 28-Day Longitudinal Delta Analysis (FACT)" in d28
     assert "## 2. 28-Day Decision Assessment (RECOMMENDATION)" in d28
     assert "\u2014" not in d28
 
     # 3. 84-Day Strategic Decision Review (Only 2 canonical windows exist -> STRATEGIC_TREND_NOT_ESTABLISHED)
-    d84 = generate_84d_strategic_review(mid)
+    d84 = generate_84d_strategic_review(mid, environment="PRODUCTION")
     assert "STRATEGIC_TREND_NOT_ESTABLISHED" in d84
     assert "Insufficient canonical history" in d84
     assert "\u2014" not in d84
+

@@ -106,25 +106,25 @@ def test_zero_to_observed_impressions_trend_is_not_established():
 # 2. Change Lifecycle & Rollback Tests
 # ---------------------------------------------------------------------------
 
-def test_change_registration_and_list():
-    """Test registering a production change and retrieving it."""
+def test_change_registration_and_retrieval():
+    """Test registering a site change and retrieving it via list_changes."""
     cid = f"test_chg_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
     chg = register_change(
         change_id=cid,
-        change_type="INTERNAL_LINKING",
-        summary="Test internal link addition to /teardowns",
-        affected_page_urls=["/teardowns"],
-        affected_cohorts=["teardown_index"],
-        deployed_commit="test_commit_sha_123",
+        change_type="CONTENT",
+        summary="Test change registration for headline clarity",
+        affected_page_urls=["/"],
+        affected_cohorts=["product_core"],
+        deployed_commit="commit_abc123",
         expected_impact="positive",
         actor_type="TERMINAL_AGENT",
-        execution_status="DEPLOYED",
-        min_observation_days=28,
-        logged_by="test_suite",
+        environment="TEST",
+        evidence_origin="TEST",
     )
+
     assert chg.id == cid
-    assert chg.change_type == "INTERNAL_LINKING"
-    assert chg.actor_type == "TERMINAL_AGENT"
+    assert chg.change_type == "CONTENT"
+    assert chg.affected_cohorts == ["product_core"]
     assert chg.execution_status == "DEPLOYED"
 
     changes = list_changes(limit=10)
@@ -141,6 +141,8 @@ def test_change_rollback_preserves_provenance():
         affected_page_urls=["/"],
         affected_cohorts=["product_core"],
         deployed_commit="commit_v1",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     rb = rollback_change(
@@ -176,6 +178,8 @@ def test_experiment_creation_approval_activation_flow():
         affected_page_urls=["/vs/screaming-frog", "/vs/hotjar"],
         affected_cohorts=["commercial_comparison"],
         deployed_commit="commit_exp_01",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     eid = f"test_exp_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
@@ -188,6 +192,8 @@ def test_experiment_creation_approval_activation_flow():
         pre_change_measurement_id="meas_20260830_canonical_w28",
         expected_magnitude=150.0,
         minimum_holdout_days=28,
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     assert exp.id == eid
@@ -218,7 +224,9 @@ def test_experiment_cancellation_preserves_record():
         summary="Navigation redesign",
         affected_page_urls=["/"],
         affected_cohorts=["product_core"],
-        deployed_commit="commit_nav_01",
+        deployed_commit="commit_cancel_01",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     eid = f"test_exp_cancel_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
@@ -229,6 +237,8 @@ def test_experiment_cancellation_preserves_record():
         target_metric="ga4_organic_sessions",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     canc = cancel_experiment(
@@ -255,6 +265,8 @@ def test_eligibility_checks_wall_clock_and_source_days():
         affected_cohorts=["product_core"],
         deployed_commit="commit_recent",
         deployed_at=now - timedelta(days=10),
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     eid = f"test_exp_elig_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
@@ -265,6 +277,8 @@ def test_eligibility_checks_wall_clock_and_source_days():
         target_metric="ga4_organic_sessions",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid, approved_by="admin")
     activate_experiment(eid, effective_change_at=now - timedelta(days=10))
@@ -289,6 +303,8 @@ def test_window_contamination_detection():
         affected_cohorts=["product_core"],
         deployed_commit="commit_aug15",
         deployed_at=dep_time,
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     eid = f"test_exp_contam_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
@@ -299,6 +315,8 @@ def test_window_contamination_detection():
         target_metric="gsc_total_impressions",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260802_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid, approved_by="admin")
     activate_experiment(eid, effective_change_at=dep_time)
@@ -327,6 +345,8 @@ def test_confounding_detection_same_page_overlap():
         affected_cohorts=["product_core"],
         deployed_commit="commit_exp",
         deployed_at=datetime(2026, 8, 2, 10, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     eid = f"test_exp_conf_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
@@ -337,6 +357,8 @@ def test_confounding_detection_same_page_overlap():
         target_metric="internal_audit_started",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     # Register an overlapping change on the same page during the holdout
@@ -349,6 +371,8 @@ def test_confounding_detection_same_page_overlap():
         affected_cohorts=["product_core"],
         deployed_commit="commit_cta_emergency",
         deployed_at=datetime(2026, 8, 10, 10, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
 
     level, details = detect_confounds(eid, t_start, t_end)
@@ -374,6 +398,8 @@ def test_evaluation_outcomes_dry_run_fixtures():
         affected_cohorts=[f"cohort_clean_{run_uid}"],
         deployed_commit="commit_seo_v1",
         deployed_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
     eid_supp = f"test_exp_supp_{run_uid}"
     create_experiment(
@@ -384,6 +410,8 @@ def test_evaluation_outcomes_dry_run_fixtures():
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260802_canonical_w28",  # 0 impressions
         expected_magnitude=500.0,
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid_supp, approved_by="admin")
     activate_experiment(eid_supp, effective_change_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc))
@@ -406,6 +434,8 @@ def test_evaluation_outcomes_dry_run_fixtures():
         target_metric="gsc_total_impressions",
         expected_direction="DECREASE",  # but impressions grew 0 -> 1072
         pre_change_measurement_id="meas_20260802_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid_reg, approved_by="admin")
     activate_experiment(eid_reg, effective_change_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc))
@@ -428,6 +458,8 @@ def test_evaluation_outcomes_dry_run_fixtures():
         affected_cohorts=[f"cohort_clean_{run_uid}"],
         deployed_commit="commit_conf_v2",
         deployed_at=datetime(2026, 8, 12, 0, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
     ev_conf = evaluate_experiment(
         experiment_id=eid_supp,
@@ -452,6 +484,8 @@ def test_experiment_report_generation():
         target_metric="gsc_total_impressions",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
     )
     # 1. Unevaluated report
     draft_report = generate_experiment_report(eid)
@@ -482,6 +516,8 @@ def test_low_volume_denominator_protection():
         affected_cohorts=["checkout"],
         deployed_commit="commit_cta_01",
         deployed_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
     eid = f"test_exp_lowvol_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
     create_experiment(
@@ -491,6 +527,8 @@ def test_low_volume_denominator_protection():
         target_metric="internal_purchases",
         expected_direction="INCREASE",
         pre_change_measurement_id="meas_20260802_canonical_w28",  # 0 purchases
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid, approved_by="admin")
     activate_experiment(eid, effective_change_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc))
@@ -516,6 +554,8 @@ def test_position_ranking_experiment_evaluation():
         affected_cohorts=["commercial_comparison"],
         deployed_commit="commit_sitemap_01",
         deployed_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc),
+        environment="TEST",
+        evidence_origin="TEST",
     )
     eid = f"test_exp_pos_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
     create_experiment(
@@ -525,6 +565,8 @@ def test_position_ranking_experiment_evaluation():
         target_metric="gsc_aggregate_position",
         expected_direction="INCREASE",  # ranking improvement (lower numeric position)
         pre_change_measurement_id="meas_20260830_canonical_w28",  # 44.4 macro pos
+        environment="TEST",
+        evidence_origin="TEST",
     )
     approve_experiment(eid, approved_by="admin")
     activate_experiment(eid, effective_change_at=datetime(2026, 7, 5, 0, 0, 0, tzinfo=timezone.utc))
@@ -536,4 +578,36 @@ def test_position_ranking_experiment_evaluation():
         dry_run=True,
     )
     assert ev.outcome in ["SUPPORTED", "PARTIALLY_SUPPORTED", "NOT_SUPPORTED"]
+
+
+def test_experiment_environment_quarantine():
+    """Verify experiments created in TEST environment do not leak into PRODUCTION queries."""
+    cid = f"test_chg_quarantine_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+    register_change(
+        change_id=cid,
+        change_type="CONTENT",
+        summary="Test quarantine change",
+        affected_page_urls=["/vs/screaming-frog"],
+        affected_cohorts=["commercial_comparison"],
+        deployed_commit="commit_test_quarantine",
+        environment="TEST",
+        evidence_origin="TEST",
+    )
+    eid = f"test_exp_quarantine_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+    exp = create_experiment(
+        experiment_id=eid,
+        change_id=cid,
+        hypothesis_statement="Test experiment quarantine statement.",
+        target_metric="gsc_total_impressions",
+        expected_direction="INCREASE",
+        pre_change_measurement_id="meas_20260830_canonical_w28",
+        environment="TEST",
+        evidence_origin="TEST",
+    )
+    approve_experiment(eid, approved_by="admin")
+    activate_experiment(eid)
+
+    assert exp.environment == "TEST"
+    assert exp.evidence_origin == "TEST"
+
 
