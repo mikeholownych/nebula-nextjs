@@ -76,8 +76,8 @@ class CloudflareAdapter:
             "warp-routing": {"enabled": False},
             "origin-connect-timeout": "30s",
             "ingress": [
-                {"hostname": "nebulacomponents.shop", "service": "http://localhost:8765"},
-                {"hostname": "www.nebulacomponents.shop", "service": "http://localhost:8765"},
+                {"hostname": "nebulacomponents.com", "service": "http://localhost:8765"},
+                {"hostname": "www.nebulacomponents.com", "service": "http://localhost:8765"},
                 {"service": "http_status:404"}
             ]
         }

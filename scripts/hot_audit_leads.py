@@ -31,7 +31,7 @@ INTERNAL_PATTERNS = (
     "@example.invalid",
     "@invalid.nebulacomponents.com",
     "@nebulacomponents.com",
-    "@nebulacomponents.shop",
+    "@nebulacomponents.com",
     "agency-pilot@",
     "audit@nebula",
     "reddit@reply",

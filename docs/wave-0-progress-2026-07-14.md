@@ -52,7 +52,7 @@
 - `scripts/discover_topology.sh`
 
 **What was discovered:**
-- Cloudflare tunnel: `nebulacomponents.shop` → `localhost:8765`
+- Cloudflare tunnel: `nebulacomponents.com` → `localhost:8765`
 - Caddy reverse proxy on port 8080 (internal routing)
 - Python services: `agentic_server.py` (8765), `webhook_server.py` (9000)
 - PostgreSQL + Redis running locally

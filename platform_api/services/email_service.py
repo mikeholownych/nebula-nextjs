@@ -294,7 +294,7 @@ class EmailService:
                 secret, f"px:{data.audit_id}".encode(), hashlib.sha256
             ).hexdigest()[:32]
             open_pixel = (
-                '<img src="https://api.nebulacomponents.shop/audit/px/'
+                '<img src="https://api.nebulacomponents.com/audit/px/'
                 f'{data.audit_id}/{token}/o.gif" width="1" height="1" alt="" '
                 'style="display:block;border:0;">'
             )

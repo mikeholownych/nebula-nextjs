@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nebulacomponents.shop/schemas/evidence-dispatch.json",
+  "$id": "https://nebulacomponents.com/schemas/evidence-dispatch.json",
   "title": "Nebula Evidence Dispatch",
   "type": "object",
   "additionalProperties": false,

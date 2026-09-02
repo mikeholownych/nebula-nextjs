@@ -4,7 +4,7 @@
 
 ## Trigger
 User submits a URL via:
-- Public audit form (`/audit` on nebulacomponents.shop)
+- Public audit form (`/audit` on nebulacomponents.com)
 - Direct POST to `POST /webhook/audit-inbound` (n8n webhook)
 - Reddit/outbound reply offering audit
 

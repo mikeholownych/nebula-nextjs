@@ -170,7 +170,7 @@ NEW WAY:
 
 **Self-Serve Checkout Flow:**
 1. Audit delivered → "Ready to Fix" button
-2. Checkout on subdomain (checkout.nebulacomponents.shop)
+2. Checkout on subdomain (checkout.nebulacomponents.com)
 3. Order summary: "Landing Page Implementation" + specific fixes listed
 4. Trust: "Used by [logos]", "30-day money-back guarantee"
 
@@ -228,7 +228,7 @@ NEW WAY:
 ### Short-Term (Next 2 Weeks):
 
 4. **Create Reddit Engine** - Productize your manual Reddit pivot as $7 upsell
-5. **Build checkout subdomain** - checkout.nebulacomponents.shop for impulse-buy flow
+5. **Build checkout subdomain** - checkout.nebulacomponents.com for impulse-buy flow
 6. **Add "HUGE Discount" urgency framing** - Test early-adopter pricing
 
 ### Medium-Term (Next Month):

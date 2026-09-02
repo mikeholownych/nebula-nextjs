@@ -173,7 +173,7 @@ The following categorization defines how existing assets should be treated in su
 
 ### 5.5 RETIRE
 1. **Legacy Domain References in Scripts:**
-   *Justification:* Retire references to `nebulacomponents.shop` in legacy check scripts (e.g. `check-sitemap-routes.mjs` default fallback) to prevent canonical host confusion.
+   *Justification:* Retire references to `nebulacomponents.com` in legacy check scripts (e.g. `check-sitemap-routes.mjs` default fallback) to prevent canonical host confusion.
 2. **Unweighted Sitewide Average Position Metrics:**
    *Justification:* Discard any unweighted or simple average position calculations to eliminate metric drift.
 

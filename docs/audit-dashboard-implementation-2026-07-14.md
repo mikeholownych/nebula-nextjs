@@ -102,7 +102,7 @@ const auditData = {
 2. **Audit generated** → `audit_leads.jsonl` + email
 3. **Email sent** → Contains:
    - Audit summary
-   - Dashboard link: `https://nebulacomponents.shop/audit/{id}`
+   - Dashboard link: `https://nebulacomponents.com/audit/{id}`
    - Password: `audit{timestamp}`
 4. **Customer views** → Dashboard rendered with their data
 
@@ -113,7 +113,7 @@ const auditData = {
 | Element | CDE | Nebula |
 |---------|-----|--------|
 | **Deliverable** | "A data system, not a PDF" | Password-protected dashboard |
-| **URL Structure** | `dashboard.cde.com/report/{brand}` | `nebulacomponents.shop/audit/{id}` |
+| **URL Structure** | `dashboard.cde.com/report/{brand}` | `nebulacomponents.com/audit/{id}` |
 | **Password** | Password-protected | Password-protected ✅ |
 | **Interactive** | Yes (charts, filters, export) | Yes (planned) |
 | **Data** | Website Readiness + AI Visibility | Landing page audit |
@@ -245,7 +245,7 @@ Expected: "Landing Page Audit Report"
 
 ✅ **"A data system, not a PDF"** - dashboard deliverable
 ✅ **Password-protected** - secure access
-✅ **Shareable link** - `nebulacomponents.shop/audit/{id}`
+✅ **Shareable link** - `nebulacomponents.com/audit/{id}`
 ✅ **Fix priority stack** - ordered by impact
 ✅ **Conversion CTA** - path to purchase
 

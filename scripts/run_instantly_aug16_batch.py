@@ -42,7 +42,7 @@ VENV_PY = Path(__file__).parent.parent / "venv/bin/python3"
 SEND_PACE_SECONDS = 7   # ~8-9/min, well under rate limit
 DRY_RUN = "--dry-run" in sys.argv
 
-AUDIT_URL_BASE = "https://nebulacomponents.shop"
+AUDIT_URL_BASE = "https://nebulacomponents.com"
 STRIPE_LINK = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 
 

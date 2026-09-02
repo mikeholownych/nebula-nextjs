@@ -172,7 +172,7 @@ def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
     COUNTER_FILE.parent.mkdir(parents=True, exist_ok=True)
     COUNTER_FILE.write_text(str(counter))
     log.info(f"No new leads - pool subject #{counter - 1}: {url}")
-    return url, "admin@nebulacomponents.shop", None
+    return url, "admin@nebulacomponents.com", None
 
 
 def log_production(domain, title, score, video_path, duration):

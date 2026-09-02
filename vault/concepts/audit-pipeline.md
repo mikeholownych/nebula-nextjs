@@ -5,7 +5,7 @@
 
 ### scrape_page(url)
 - Fetches page content via Firecrawl
-- Returns: raw HTML/text string (~60k chars for nebulacomponents.shop)
+- Returns: raw HTML/text string (~60k chars for nebulacomponents.com)
 - Note: synchronous, ~5-10s
 
 ### score_audit(page)

@@ -1,6 +1,6 @@
 [Unit]
 Description=Nebula Platform API (FastAPI)
-Documentation=https://nebulacomponents.shop
+Documentation=https://nebulacomponents.com
 After=network.target network-online.target postgresql.service
 Wants=network-online.target
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add DNS record for blog.nebulacomponents.shop"""
+"""Add DNS record for blog.nebulacomponents.com"""
 import json, urllib.request, sys
 
 with open("/home/mike/.hermes/.env", "rb") as f:

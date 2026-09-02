@@ -13,7 +13,7 @@
 
 | Tier | Name | Price | Stripe Link | Status |
 |---|---|---|---|---|
-| 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live - nebulacomponents.shop/audit |
+| 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live - nebulacomponents.com/audit |
 | 2 | Conversion Fix Pack | $97 | [buy.stripe.com/...](https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j) | Live |
 
 > **2026-07-25: price corrected from $147 to the real $97 (locked through 2026-12-31 per CLAUDE.md; see commit a12c8ff0 earlier this session).** Only the dead link and this row are fixed here. The margin/fee/LTV figures further down this doc (Stripe fees "at $147 transaction", "~96%" margin, LTV ">$1,644", "months to recover CAC") were all computed against $147 and have not been recalculated against $97 - flagging rather than guess-substituting, since Stripe's fee is not a flat ratio (2.9% + $0.30) and margin/LTV need a real recalculation, not a text find-replace.
@@ -55,7 +55,7 @@
 | Cloudflare Tunnel | $0 (free tier) | Cloudflare | N/A | N/A |
 | GitHub | $0 (public repo) | GitHub | N/A | N/A |
 | Bedrock API (cron execution) | ~$20-50/mo | AWS Bedrock | Cloud account | Monthly |
-| Domain (nebulacomponents.shop) | ~$15/yr | Namecheap/Cloudflare | Card | Annual |
+| Domain (nebulacomponents.com) | ~$15/yr | Namecheap/Cloudflare | Card | Annual |
 | OpenAI Whisper/TTS | ~$5-10/mo | OpenAI | API creds | Monthly |
 | Stripe Link | $0 | Stripe | N/A | N/A |
 | FAL (image gen) | ~$0 (Nous sub) | FAL.ai | Nous subscription | N/A |

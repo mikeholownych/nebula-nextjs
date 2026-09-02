@@ -56,7 +56,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-Run a free audit on your site → nebulacomponents.shop/audit
+Run a free audit on your site → nebulacomponents.com/audit
 
 ---
 
@@ -112,7 +112,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-Check how many H1 tags Google sees on your page → nebulacomponents.shop/audit
+Check how many H1 tags Google sees on your page → nebulacomponents.com/audit
 
 ---
 
@@ -164,7 +164,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-Run a free audit on your site → nebulacomponents.shop/audit
+Run a free audit on your site → nebulacomponents.com/audit
 
 ---
 
@@ -227,7 +227,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-Check your Google result → nebulacomponents.shop/audit
+Check your Google result → nebulacomponents.com/audit
 
 ---
 
@@ -289,7 +289,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-If your ads aren't converting, the page is the problem → nebulacomponents.shop/audit
+If your ads aren't converting, the page is the problem → nebulacomponents.com/audit
 
 ---
 
@@ -345,7 +345,7 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-Find the leaks → nebulacomponents.shop/audit
+Find the leaks → nebulacomponents.com/audit
 
 ---
 
@@ -408,4 +408,4 @@ Drop a comment if you've seen this on your own site.
 
 ---
 FIRST COMMENT:
-See your agent-readiness score → nebulacomponents.shop/audit
+See your agent-readiness score → nebulacomponents.com/audit

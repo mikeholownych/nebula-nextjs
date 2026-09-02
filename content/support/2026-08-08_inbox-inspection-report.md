@@ -83,7 +83,7 @@ Notable entries in pitch_sent cohort:
 
 **No warm inbound replies. No payment notifications. No complaints. No unsubscribes.**
 
-Webhook registered and active: `ep_3Fj0L52Q1Z8A0ElXVlVKHwGSQx6` → nebulacomponents.shop/webhook/agentmail
+Webhook registered and active: `ep_3Fj0L52Q1Z8A0ElXVlVKHwGSQx6` → nebulacomponents.com/webhook/agentmail
 
 ---
 

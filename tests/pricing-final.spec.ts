@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.com';
 
 test('pricing section fully visible + screenshot', async ({ page }) => {
   await page.goto(BASE_URL, { waitUntil: 'networkidle' });

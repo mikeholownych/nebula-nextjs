@@ -34,7 +34,7 @@ Nebula Components currently offers landing page audits and implementation servic
 
 **Blue Ocean Gap:** Nobody delivers specific diagnosis + dollar leak amount + fast self-serve implementation - all three together.
 
-## 2. CURRENT OFFER ANALYSIS (nebulacomponents.shop)
+## 2. CURRENT OFFER ANALYSIS (nebulacomponents.com)
 
 **Core Offer:** Free Landing Page Audit → $97 Fix Pack → $147 Implementation
 

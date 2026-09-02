@@ -92,7 +92,7 @@
 
 **nebula-platform-api** - systemd unit running FastAPI on :8001.
 
-**Cloudflare Tunnel** - explicit hostnames only: nebulacomponents.com/.shop → :3000, api.nebulacomponents.shop + workers-dev path → :8001 (public FastAPI with per-route exposure classes — see docs/architecture/public-api-model.md), mcp.*.com/.shop → :8002. Unknown hostnames get 404 (catch-all is http_status:404 since the Wave-4 remediation). Changes go live only after `sudo systemctl restart nebula-nextjs`.
+**Cloudflare Tunnel** - explicit hostnames only: nebulacomponents.com/.shop → :3000, api.nebulacomponents.com + workers-dev path → :8001 (public FastAPI with per-route exposure classes — see docs/architecture/public-api-model.md), mcp.*.com/.shop → :8002. Unknown hostnames get 404 (catch-all is http_status:404 since the Wave-4 remediation). Changes go live only after `sudo systemctl restart nebula-nextjs`.
 
 **n8n** - workflow automation at `n8n.mikeholownych.com` (10.0.8.220:5678). Hosts the Trigger Engine workflow (`9HGVFfIPDHRYMtuE`). Webhooks use `/webhook/<path>` (no UUID prefix).
 

@@ -468,11 +468,11 @@ STRIPE_FIX_PACK_PRICE_ID=price_xxx
 
 # Email (SendGrid)
 SENDGRID_API_KEY=SG.xxx
-SENDGRID_FROM_EMAIL=noreply@nebulacomponents.shop
+SENDGRID_FROM_EMAIL=noreply@nebulacomponents.com
 
 # Platform
-PLATFORM_API_BASE_URL=https://api.nebulacomponents.shop
-FRONTEND_BASE_URL=https://nebulacomponents.shop
+PLATFORM_API_BASE_URL=https://api.nebulacomponents.com
+FRONTEND_BASE_URL=https://nebulacomponents.com
 ```
 
 ---

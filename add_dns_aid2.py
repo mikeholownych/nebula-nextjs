@@ -38,7 +38,7 @@ def add_svcb(zone_name, record_name):
     except urllib.error.HTTPError as e:
         print(f"  {record_name}: {e.code}: {e.read().decode()[:100]}")
 
-for domain in ["nebulacomponents.shop", "launchcrate.io"]:
+for domain in ["nebulacomponents.com", "launchcrate.io"]:
     print(f"\n--- {domain} ---")
     add_svcb(domain, f"_a2a._agents.{domain}")
     add_svcb(domain, f"_index._agents.{domain}")

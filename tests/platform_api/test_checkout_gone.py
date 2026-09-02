@@ -34,5 +34,5 @@ def test_fastapi_checkout_stub_has_no_stripe_client_or_shop_urls():
     assert "api.stripe.com" not in lowered
     assert "stripe_secret_key" not in lowered
     assert "urllib.request" not in CHECKOUT_SOURCE
-    assert "nebulacomponents.shop" not in lowered
+    assert "nebulacomponents.com" not in lowered
     assert "class CheckoutRequest" not in CHECKOUT_SOURCE

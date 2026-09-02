@@ -27,14 +27,14 @@
 ```
 http://localhost:3000
 http://localhost:8769
-https://nebulacomponents.shop
+https://nebulacomponents.com
 ```
 
 **Add Authorized redirect URIs:**
 ```
 http://localhost:3000/auth/callback
 http://localhost:8769/api/auth/callback
-https://nebulacomponents.shop/auth/callback
+https://nebulacomponents.com/auth/callback
 ```
 
 **Click Save.**

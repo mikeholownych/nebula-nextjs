@@ -74,7 +74,7 @@ The fix: change 15 to <span>. Keep the real headline.
 
 This is the kind of thing a free audit catches.
 
-nebulacomponents.shop/audit
+nebulacomponents.com/audit
 
 -
 
@@ -278,7 +278,7 @@ The infrastructure works for machines.
 
 Both at the same time.
 
-nebulacomponents.shop/audit - see what breaks on yours.
+nebulacomponents.com/audit - see what breaks on yours.
 
 -
 
@@ -330,7 +330,7 @@ The Fix Pack is $97. 7 days. Pay after you see the draft.
 
 If your ads aren't converting, the page is the problem.
 
-nebulacomponents.shop/audit
+nebulacomponents.com/audit
 
 -
 

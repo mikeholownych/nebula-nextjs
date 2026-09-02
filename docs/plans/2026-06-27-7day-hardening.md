@@ -16,7 +16,7 @@
 - [ ] Stop the user-level cloudflared duplicate (PID 706361)
 - [ ] Create systemd unit for port 8765 (`nebula-site.service`) as mike user
 - [ ] Verify both services survive a `kill -9` + auto-restart
-- [ ] Test: `curl -s https://nebulacomponents.shop` returns HTTP 200 after simulated crash
+- [ ] Test: `curl -s https://nebulacomponents.com` returns HTTP 200 after simulated crash
 
 ### 1B: Stripe webhook as a persistent service
 - [ ] Wrap stripe_webhook.py in systemd unit (`nebula-webhook.service`)
@@ -114,7 +114,7 @@
 ### 5C: SEO basics
 - [ ] Submit blog sitemap to Google Search Console
 - [ ] Add meta descriptions to all posts
-- [ ] Internal link: blog posts → nebulacomponents.shop audit offer
+- [ ] Internal link: blog posts → nebulacomponents.com audit offer
 
 ---
 

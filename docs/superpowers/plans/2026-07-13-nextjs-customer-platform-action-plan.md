@@ -339,7 +339,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 
 - **Owner:** Full-stack and operations workers
 - **Depends on:** BRAND-01, OPS-03
-- **Actions:** Add normalized unique slugs, strict host parsing, host-to-tenant resolution, tenant-keyed caches, and branded shell for `{slug}.app.nebulacomponents.shop`.
+- **Actions:** Add normalized unique slugs, strict host parsing, host-to-tenant resolution, tenant-keyed caches, and branded shell for `{slug}.app.nebulacomponents.com`.
 - **Evidence:** Two agencies cannot share branding, protected data, assets, or cached HTML.
 - **Exit gate:** Managed subdomains pass staging and one controlled production tenant.
 

@@ -11,7 +11,7 @@
 
 ### Test Results
 ```
-URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&url=https://aisyndicate.io
+URL: https://nebulacomponents.com/checkout?email=mike.holownych@aisyndicate.io&url=https://aisyndicate.io
 
 ✅ Parameters extracted: email, url
 ✅ Stripe checkout link: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h?customer_email=mike.holownych%40aisyndicate.io
@@ -187,7 +187,7 @@ URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&
 #### Required Tools
 - **Apify**: balm_snowflake (Reddit), neatrat~upwork-job-scraper
 - **AgentMail**: smtp.agentmail.to:465 (primary)
-- **Resend**: hello@nebulacomponents.shop (fallback)
+- **Resend**: hello@nebulacomponents.com (fallback)
 - **Stripe**: Checkout links for $7, $97, $147
 - **Cron Jobs**: Monitoring, inbox, delivery automation
 

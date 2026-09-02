@@ -1,5 +1,5 @@
 [Unit]
-Description=Cloudflare Tunnel (nebulacomponents.shop)
+Description=Cloudflare Tunnel (nebulacomponents.com)
 After=network.target network-online.target
 Wants=network-online.target
 

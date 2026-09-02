@@ -19,7 +19,7 @@
 
 **Symptoms:**
 - Customer portal (nebulacomponents.com) returns HTTP 500+
-- Audit API (api.nebulacomponents.shop:8001) unresponsive
+- Audit API (api.nebulacomponents.com:8001) unresponsive
 - WebSocket connections failing
 
 **Diagnosis Checklist:**
@@ -59,7 +59,7 @@ curl -s http://127.0.0.1:8001/healthz
 5. Verify recovery:
    ```bash
    curl -s -o /dev/null -w "%{http_code}" -H "Host: nebulacomponents.com" http://127.0.0.1:3000/
-   curl -s -o /dev/null -w "%{http_code}" -H "Host: api.nebulacomponents.shop" http://127.0.0.1:8001/
+   curl -s -o /dev/null -w "%{http_code}" -H "Host: api.nebulacomponents.com" http://127.0.0.1:8001/
    ```
 6. Update status page and notify stakeholders
 

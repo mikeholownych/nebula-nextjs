@@ -2,7 +2,7 @@
 
 ## Wave 0 — P0 containment (same day)
 - Findings: SEC-P0-1, SEC-P0-2.
-- Actions (direction): stop the repo-root HTTP servers; chmod 0400 systemd stripe drop-ins + root env files; remove `api.nebulacomponents.shop` and workers.dev ingress to :8001 (or front with authn) ; set `ENVIRONMENT=production` for platform-api so docs/openapi close and the readiness gate arms.
+- Actions (direction): stop the repo-root HTTP servers; chmod 0400 systemd stripe drop-ins + root env files; remove `api.nebulacomponents.com` and workers.dev ingress to :8001 (or front with authn) ; set `ENVIRONMENT=production` for platform-api so docs/openapi close and the readiness gate arms.
 - Dependencies: none. Blast radius: n8n helpers using api.* host must be re-pointed first (inventory consumers before cutting).
 - Validation: external probes of api.* return 401/404/deny; `.env` unfetchable via 8765; docs UI gone; smoke suite green.
 - Rollback: restore ingress line; restart cloudflared.

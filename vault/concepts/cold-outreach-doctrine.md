@@ -24,7 +24,7 @@ Never contact someone without a specific trigger that proves they have the pain 
 
 ## Email Tooling
 - AgentMail: REST only (no SMTP). 403 = suppressed address.
-- Resend: transactional only (hello@nebulacomponents.shop)
+- Resend: transactional only (hello@nebulacomponents.com)
 - Cold email: separate sending infrastructure needed for scale
 
 ## Channels

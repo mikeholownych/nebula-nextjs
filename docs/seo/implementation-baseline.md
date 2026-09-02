@@ -1,6 +1,6 @@
 # Implementation Baseline - Nebula Components Technical & Strategic SEO
 
-**Domain**: `nebulacomponents.shop`
+**Domain**: `nebulacomponents.com`
 **Date**: July 2026
 **Auditor**: Senior Technical SEO Engineer & Information Architect
 

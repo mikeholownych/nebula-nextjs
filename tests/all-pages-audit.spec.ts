@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'fs';
 
-const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.com';
 
 // Full site coverage: all hand-built pages + a representative sample of the
 // templated public/case-studies/* pages (one per generated vertical category).

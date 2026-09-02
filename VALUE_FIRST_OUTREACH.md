@@ -33,7 +33,7 @@ Use this before any checkout CTA:
 
 ```text
 No ask attached. If it helps, run it here and keep the output either way:
-https://nebulacomponents.shop/audit.html
+https://nebulacomponents.com/audit.html
 ```
 
 ## Revenue logic

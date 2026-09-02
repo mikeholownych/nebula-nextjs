@@ -268,7 +268,7 @@ Use where hierarchy exceeds one meaningful level.
 Example:
 
 ```text
-Projects / nebulacomponents.shop / Audit #NC-29384
+Projects / nebulacomponents.com / Audit #NC-29384
 ```
 
 ### User menu

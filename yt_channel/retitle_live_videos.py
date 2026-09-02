@@ -45,14 +45,14 @@ UPDATES = {
     ),
     "2053xikPsRE": (
         "You're Wasting Ad Spend On This Page #Shorts",
-        "Free landing page audit: nebulacomponents.shop\n\n"
+        "Free landing page audit: nebulacomponents.com\n\n"
         "Get a free audit of your own site - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign=retitle\n\n"
         "#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips",
     ),
     "FLvi-GZqzSQ": (
-        "Why This Landing Page Isn't Converting: nebulacomponents.shop Audit (6/10)",
-        "A data-driven landing page audit of nebulacomponents.shop.\n\n"
+        "Why This Landing Page Isn't Converting: nebulacomponents.com Audit (6/10)",
+        "A data-driven landing page audit of nebulacomponents.com.\n\n"
         "Score: 6.4/10.\n\n"
         "Get your own free landing page audit - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign=retitle\n\n"

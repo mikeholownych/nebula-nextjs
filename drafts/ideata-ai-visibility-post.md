@@ -21,7 +21,7 @@ tool."
 
 Not because of the work. Because of the name.
 
-nebulacomponents.shop - a .shop TLD and the word "components." To a human,
+nebulacomponents.com - a .shop TLD and the word "components." To a human,
 that's a clear description. To an AI model reasoning from patterns, it reads
 like an electronics store.
 
@@ -46,7 +46,7 @@ Perplexity: knows exactly what we do. Cited us.
 
 Then we asked it to compare us to a competitor:
 
-"nebulacomponents.shop sounds like a storefront and is less likely to be an
+"nebulacomponents.com sounds like a storefront and is less likely to be an
 audit tool."
 
 It judged us by the .shop TLD, not the work.
@@ -60,9 +60,9 @@ Your URL gets the same free check. Drop it below.
 
 ## First comment (links live here)
 
-📊 Read the full verbatim check + our pass standards: nebulacomponents.shop/benchmarks
-🧪 Check your headline, CTA & message match in under a minute: nebulacomponents.shop/lab
-🔍 Full free audit, no signup: nebulacomponents.shop/audit
+📊 Read the full verbatim check + our pass standards: nebulacomponents.com/benchmarks
+🧪 Check your headline, CTA & message match in under a minute: nebulacomponents.com/lab
+🔍 Full free audit, no signup: nebulacomponents.com/audit
 
 ## Integrity notes (do not publish)
 

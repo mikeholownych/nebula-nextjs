@@ -378,9 +378,9 @@ We show you the number first. Then you decide if it's worth fixing.
 - Lucky Orange ($10/month) - Live chat + analytics
 
 **Our tools:**
-- Free landing page audit: nebulacomponents.shop/audit
+- Free landing page audit: nebulacomponents.com/audit
 - Dollar leak calculator: Coming soon
-- Fix Pack: nebulacomponents.shop/checkout.html
+- Fix Pack: nebulacomponents.com/checkout.html
 
 ---
 

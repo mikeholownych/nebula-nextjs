@@ -9,7 +9,7 @@
   "hypothesis": "80 cold sends with zero replies from a new or insufficiently warmed domain is more likely a deliverability failure than a messaging failure \u2014 SPF/DKIM/DMARC auth and domain warm-up are the highest-leverage diagnostic checks before rewriting copy.",
   "observed_problem": "Cold email campaigns with well-written copy still land in spam when domain reputation is damaged by missing SPF/DKIM/DMARC, purchased lists, or sudden volume spikes from new domains without warm-up.",
   "research_id": "mailforge-domain-reputation-cold-email-2026",
-  "smallest_safe_change": "Run a SPF/DKIM/DMARC validation check on nebulacomponents.shop and the AgentMail sending domain; check Google Postmaster or MXToolbox for domain reputation score before changing any copy.",
+  "smallest_safe_change": "Run a SPF/DKIM/DMARC validation check on nebulacomponents.com and the AgentMail sending domain; check Google Postmaster or MXToolbox for domain reputation score before changing any copy.",
   "source_url": "https://www.mailforge.ai/blog/how-domain-reputation-impacts-cold-email-success",
   "status": "proposed",
   "stop_condition": "Stop volume if domain reputation score degrades further or bounce rate exceeds 5%",

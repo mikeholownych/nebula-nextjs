@@ -75,5 +75,5 @@ A finding becomes a case study when:
 
 1. **Tweet the before/after** - "Changed 3 words on a landing page. Score went from 43 to 51."
 2. **LinkedIn post** - Results story format (see content-factory/linkedin.md)
-3. **Add to nebulacomponents.shop/teardowns** as a real case study
+3. **Add to nebulacomponents.com/teardowns** as a real case study
 4. **Use in audit delivery emails** as social proof for the Sprint offer

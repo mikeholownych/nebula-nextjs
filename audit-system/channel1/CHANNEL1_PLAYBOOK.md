@@ -42,7 +42,7 @@ fix_purchased → fix_delivered → outcome_measured → case_study_eligible`
 
 ## 3. The offer (no pressure, no call)
 
-1. Free, no-call landing page audit (nebulacomponents.shop/audit).
+1. Free, no-call landing page audit (nebulacomponents.com/audit).
 2. Deliver top 3–5 issues with evidence → then:
    - Implement it themselves (audit findings are the deliverable), or
    - Buy the $97 Fix Pack: targeted AI prompts for their specific failing

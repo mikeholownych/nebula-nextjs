@@ -118,7 +118,7 @@ If your page is getting traffic but not converting, I can usually identify the t
 Would it be useful? Reply with your URL and I'll get it done today.
 
 - Mike
-nebulacomponents.shop"""
+nebulacomponents.com"""
     return subject, body
 
 def main():

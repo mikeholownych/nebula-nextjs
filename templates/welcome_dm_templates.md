@@ -88,7 +88,7 @@ I help founders stop leaking money on ads by fixing their landing pages.
 
 Quick offer: Run this 30-second audit and I'll send you a personalized teardown:
 
-→ nebulacomponents.shop
+→ nebulacomponents.com
 
 No pitch. Just your leak map.
 

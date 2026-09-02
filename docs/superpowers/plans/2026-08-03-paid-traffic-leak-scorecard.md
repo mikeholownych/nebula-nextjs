@@ -428,7 +428,7 @@ Expected: `active`.
 - [ ] **Step 4: Verify public HTML and browser behavior**
 
 ```bash
-curl -sS -o /tmp/scorecard.html -w 'status=%{http_code} bytes=%{size_download}\n' https://nebulacomponents.shop/paid-traffic-leak-scorecard
+curl -sS -o /tmp/scorecard.html -w 'status=%{http_code} bytes=%{size_download}\n' https://nebulacomponents.com/paid-traffic-leak-scorecard
 ```
 
 Then use the browser on the live route to verify:

@@ -52,7 +52,7 @@ Comment AUDIT and I'll send it.
 
 ---
 
-Hey [name], good to connect. I was working with a founder recently who was running solid Meta traffic but getting almost zero conversions. Built a self-audit guide to help them find the gap on their landing page. Since you're also in the paid traffic space, figured this might be useful. Here it is: https://nebulacomponents.shop/roas-cliff.html. Have a good one.
+Hey [name], good to connect. I was working with a founder recently who was running solid Meta traffic but getting almost zero conversions. Built a self-audit guide to help them find the gap on their landing page. Since you're also in the paid traffic space, figured this might be useful. Here it is: https://nebulacomponents.com/roas-cliff.html. Have a good one.
 
 **Nudge (send day 6, max 6 words):**
 Did the link work okay?
@@ -69,15 +69,15 @@ Hey [name], debating this with a client - when conversion drops on a paid traffi
 Still curious which way you lean.
 
 **If they reply to Option 2, follow with:**
-Interesting - a lot of people are saying ad first. I actually put together a guide on the LP side of this, since that's usually where we find the actual problem. Here it is if you want it: https://nebulacomponents.shop/roas-cliff.html
+Interesting - a lot of people are saying ad first. I actually put together a guide on the LP side of this, since that's usually where we find the actual problem. Here it is if you want it: https://nebulacomponents.com/roas-cliff.html
 
 ---
 
 ## 3. EVERGREEN EMAIL SEQUENCE (20 emails)
 
-Bridge asset URL: https://nebulacomponents.shop/roas-cliff (or wherever you host it)
-Free audit URL: https://nebulacomponents.shop/audit.html
-Fix pack URL: https://nebulacomponents.shop (Stripe link)
+Bridge asset URL: https://nebulacomponents.com/roas-cliff (or wherever you host it)
+Free audit URL: https://nebulacomponents.com/audit.html
+Fix pack URL: https://nebulacomponents.com (Stripe link)
 
 ---
 
@@ -96,7 +96,7 @@ They screenshot it and post somewhere. "Is Meta getting worse or is it me?"
 
 It's not Meta. The ad moved the traffic. Something between the click and the checkout failed. And it's almost never the ad - it's the page. Specifically, the first 3 seconds of the page.
 
-The full breakdown of why this happens (and how to find where it's breaking on your specific page) is in the guide here: https://nebulacomponents.shop/roas-cliff.html
+The full breakdown of why this happens (and how to find where it's breaking on your specific page) is in the guide here: https://nebulacomponents.com/roas-cliff.html
 
 Have a good one,
 Mike
@@ -122,7 +122,7 @@ Not because the ads were bad. Because the problem wasn't in the ads. The ad was 
 
 The fix they needed had nothing to do with the ad account. It was one sentence rewrite on the landing page headline.
 
-The distinction between "ad problem" and "page problem" is the difference between weeks of creative testing and one afternoon of copy work. The guide explains how to tell which one you have: https://nebulacomponents.shop/roas-cliff.html
+The distinction between "ad problem" and "page problem" is the difference between weeks of creative testing and one afternoon of copy work. The guide explains how to tell which one you have: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -147,11 +147,11 @@ We call this a message match gap. The ad said one thing. The page opened with so
 
 That subtle gap is the most expensive problem in most paid traffic campaigns. We find it on 85% of pages we audit.
 
-The guide walks through exactly what message match looks like in practice and how to score yours: https://nebulacomponents.shop/roas-cliff.html
+The guide walks through exactly what message match looks like in practice and how to score yours: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. Want us to score yours specifically? The free audit does it in 60 seconds: https://nebulacomponents.shop/audit.html
+P.S. Want us to score yours specifically? The free audit does it in 60 seconds: https://nebulacomponents.com/audit.html
 
 ---
 
@@ -172,7 +172,7 @@ Layer 2 is emotional state. The person who clicked your ad is in a specific ment
 
 Layer 3 is specificity. If the ad named a specific problem, the page needs to name the same problem. Vague pages kill specific ads.
 
-Most pages fix layer 1 and wonder why conversion barely moved. The full guide covers all three: https://nebulacomponents.shop/roas-cliff.html
+Most pages fix layer 1 and wonder why conversion barely moved. The full guide covers all three: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -199,11 +199,11 @@ Dimension 5: Offer clarity - can someone explain your offer without re-reading t
 
 Score yourself 1-10 on each. Add them up. Under 30 and you're running paid traffic into a leak.
 
-The full scoring criteria for each dimension (with what distinguishes a 4 from an 8) is in the guide: https://nebulacomponents.shop/roas-cliff.html
+The full scoring criteria for each dimension (with what distinguishes a 4 from an 8) is in the guide: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. If you want it scored for you: https://nebulacomponents.shop/audit.html
+P.S. If you want it scored for you: https://nebulacomponents.com/audit.html
 
 ---
 
@@ -224,7 +224,7 @@ The difference in conversion rate between a vague CTA and a specific one is usua
 
 The rule: your CTA button should describe the next 60-90 seconds of the visitor's experience, not the long-term value of your product. Specificity removes anxiety. Specificity replaces the decision with a step.
 
-The full guide covers CTA specificity as one of the five audit dimensions: https://nebulacomponents.shop/roas-cliff.html
+The full guide covers CTA specificity as one of the five audit dimensions: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -249,11 +249,11 @@ Most pages treat above-fold as a header section. It's the only section that matt
 
 If any one of those four things is missing, the visitor leaves before they see the rest.
 
-The guide covers above-fold scoring as Dimension 2 in the self-audit: https://nebulacomponents.shop/roas-cliff.html
+The guide covers above-fold scoring as Dimension 2 in the self-audit: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. https://nebulacomponents.shop/audit.html
+P.S. https://nebulacomponents.com/audit.html
 
 ---
 
@@ -274,7 +274,7 @@ The problem: the visitor's silent objection - "I've tried this kind of thing bef
 
 The fix isn't redesigning the page. It's moving one proof point up. Specifically, the most identity-matched proof you have: same vertical as the visitor, same problem, measurable result. That proof should live in the first viewport or immediately after the first CTA.
 
-The guide covers this as Dimension 4 in the scoring system: https://nebulacomponents.shop/roas-cliff.html
+The guide covers this as Dimension 4 in the scoring system: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -301,11 +301,11 @@ That second format answers the question the visitor is actually asking: "Has thi
 
 If your proof reads like a count, it's volume proof. Reframe it as a transformation. The conversion lift is immediate.
 
-Full guide here: https://nebulacomponents.shop/roas-cliff.html
+Full guide here: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. https://nebulacomponents.shop/audit.html
+P.S. https://nebulacomponents.com/audit.html
 
 ---
 
@@ -329,7 +329,7 @@ The 0.4% and the 1.5% feel similar when you're looking at the dashboard. In doll
 
 The guide has a simple formula to calculate your own monthly leak based on your actual traffic and spend numbers. Takes about 2 minutes. Most founders who run it find their leak is between $800 and $4,000/month, sitting inside the page unexploited.
 
-https://nebulacomponents.shop/roas-cliff.html
+https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -354,7 +354,7 @@ The number is what removes the decision friction. Not the feature list. Not the 
 
 That's what the free audit outputs. Your score on 5 dimensions plus your estimated monthly leak, based on your traffic and current conversion rate. Once you see that number, the fix decision is already made.
 
-https://nebulacomponents.shop/audit.html
+https://nebulacomponents.com/audit.html
 
 Mike
 
@@ -379,7 +379,7 @@ If your ad says "your landing page is leaking money," your H1 should not say "la
 
 One rewrite. Usually takes under an hour. Responsible for most of the 0.4% → 1.5% jumps we see in the first 10 days after a fix.
 
-This is Fix 1 in the guide. The other two are covered in the same document: https://nebulacomponents.shop/roas-cliff.html
+This is Fix 1 in the guide. The other two are covered in the same document: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -404,7 +404,7 @@ The fix: move the most identity-matched proof you have to the first viewport, or
 
 One block moved up the page. That's the change. The difference is that the silent objection - "I've been burned before" - gets addressed before it activates, instead of after.
 
-Full breakdown in the guide: https://nebulacomponents.shop/roas-cliff.html
+Full breakdown in the guide: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -429,7 +429,7 @@ The rewrite rule: describe the next 60-90 seconds of the visitor's experience. N
 
 This is the easiest of the three fixes and usually the fastest to see a lift from. Takes 10 minutes to rewrite. Works immediately.
 
-Guide covers all three fixes in the final section: https://nebulacomponents.shop/roas-cliff.html
+Guide covers all three fixes in the final section: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -454,7 +454,7 @@ The actual diagnosis, the specific thing that's breaking on your specific page, 
 
 The reason testing phases take 3 months is that nobody runs the diagnosis on day 1. They start with hypotheses instead.
 
-Guide here: https://nebulacomponents.shop/roas-cliff.html
+Guide here: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
@@ -479,11 +479,11 @@ Sometimes those things are true. More often, the spend increase exposed a landin
 
 This is the ROAS cliff. It almost always signals a page problem, not a targeting problem. Doubling budget into a leaking page just doubles the leak.
 
-Full breakdown in the guide: https://nebulacomponents.shop/roas-cliff.html
+Full breakdown in the guide: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. https://nebulacomponents.shop/audit.html
+P.S. https://nebulacomponents.com/audit.html
 
 ---
 
@@ -506,11 +506,11 @@ CPM and CPC are visible in the ad account. Conversion rate on the landing page r
 
 The fix: run the LP diagnosis before scaling spend. Know your conversion rate bottleneck before assuming the audience is the problem.
 
-Guide: https://nebulacomponents.shop/roas-cliff.html
+Guide: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. https://nebulacomponents.shop/audit.html
+P.S. https://nebulacomponents.com/audit.html
 
 ---
 
@@ -523,7 +523,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 Hi {firstname},
 
-The free audit at nebulacomponents.shop takes 60 seconds.
+The free audit at nebulacomponents.com takes 60 seconds.
 
 Paste your URL. Get a score across 5 dimensions - message match, above-fold clarity, CTA specificity, trust placement, offer clarity. Plus an estimated monthly conversion leak based on your traffic volume.
 
@@ -531,7 +531,7 @@ No email required to see the result. No discovery call. No PDF with 40 recommend
 
 If you find a leak worth fixing, the $97 Fix Pack writes the implementation-ready copy and layout for every identified problem. Delivered within 24 hours. If you don't find a leak worth fixing, email ops@launchcrate.io and say "refund." Every cent back.
 
-https://nebulacomponents.shop/audit.html
+https://nebulacomponents.com/audit.html
 
 Mike
 
@@ -558,11 +558,11 @@ Visitors won't piece it together. They'll leave.
 
 The fix: price, deliverable, and timeline need to be answerable from a single read. Not perfect prose - just answerable.
 
-Guide walks through all 5 dimensions: https://nebulacomponents.shop/roas-cliff.html
+Guide walks through all 5 dimensions: https://nebulacomponents.com/roas-cliff.html
 
 Mike
 
-P.S. https://nebulacomponents.shop/audit.html
+P.S. https://nebulacomponents.com/audit.html
 
 ---
 
@@ -579,11 +579,11 @@ This is the last email in this sequence. It loops back to the beginning next wee
 
 Before it does: the full guide is still here if you haven't read it yet. It covers message match, the above-fold scoring system, the leak math formula, and the three fixes that move conversion the most.
 
-If you run the self-audit and find your score is under 30 with active paid traffic, the free page audit at nebulacomponents.shop will tell you exactly where the leak is and what it's costing you monthly. 60 seconds. No call.
+If you run the self-audit and find your score is under 30 with active paid traffic, the free page audit at nebulacomponents.com will tell you exactly where the leak is and what it's costing you monthly. 60 seconds. No call.
 
 The $97 Fix Pack writes the copy and layout fix for everything the audit finds. Same day. No retainer. Full refund if you don't find a problem worth fixing.
 
-https://nebulacomponents.shop/roas-cliff.html
+https://nebulacomponents.com/roas-cliff.html
 
 Mike
 

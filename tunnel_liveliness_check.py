@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tunnel Liveliness Check
-Checks that Cloudflare tunnel (nebulacomponents.shop) is responsive
+Checks that Cloudflare tunnel (nebulacomponents.com) is responsive
 and in sync with local endpoints (localhost:8765 - main platform API, localhost:8767 - MCP server).
 Logs to tunnel_liveliness.log and tunnel_metrics.json.
 """
@@ -21,8 +21,8 @@ LOCAL_ENDPOINTS = [
 ]
 TUNNEL_ENDPOINTS = [
     ("main",  "https://nebulacomponents.com"),
-    ("www",   "https://www.nebulacomponents.shop"),
-    # blog.nebulacomponents.shop now 301s to nebulacomponents.com - no separate check needed
+    ("www",   "https://www.nebulacomponents.com"),
+    # blog.nebulacomponents.com now 301s to nebulacomponents.com - no separate check needed
 ]
 
 

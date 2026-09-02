@@ -14,7 +14,7 @@ Basis: two confirmed, live P0 exposures (public unauthenticated business API; se
 Cloudflare ingress ↔ FastAPI loopback-trust boundary.
 
 ## Most likely production incident
-Discovery of `api.nebulacomponents.shop` → bulk enumeration of customer audits via `/audit/by-email` and CRM extraction via `/api/crm/*`, or public triggering of `/dispatch/run-all` causing mass unsolicited email.
+Discovery of `api.nebulacomponents.com` → bulk enumeration of customer audits via `/audit/by-email` and CRM extraction via `/api/crm/*`, or public triggering of `/dispatch/run-all` causing mass unsolicited email.
 
 ## Most important test gap
 No integration test exercises queue locking / outbox leases / advisory-lock fulfillment against a real Postgres; nothing tests the public URL's authorization posture.

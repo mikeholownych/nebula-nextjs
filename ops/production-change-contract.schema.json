@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nebulacomponents.shop/schemas/production-change-contract.json",
+  "$id": "https://nebulacomponents.com/schemas/production-change-contract.json",
   "title": "Nebula Production Change Contract",
   "description": "Required intent, risk, verification, and rollback contract for production changes.",
   "type": "object",

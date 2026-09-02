@@ -13,7 +13,7 @@ audit = score_audit(page)
 # Build prompt pack exactly like delivery pipeline does
 pack = build_prompt_pack(
     audit, page,
-    email='payments-test@nebulacomponents.shop',
+    email='payments-test@nebulacomponents.com',
     stated_visitor='founders bleeding money on ads',
     stated_goal='increase landing page conversion',
 )

@@ -10,7 +10,7 @@ import { test, expect } from '@playwright/test';
  * 4. No broken background/foreground combinations
  */
 
-const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.com';
 
 test.describe('Color Contrast & Visual Inspection', () => {
   test.beforeEach(async ({ page }) => {

@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
       // www variants → canonical .com apex (single hop)
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'www.nebulacomponents.shop' }],
+        has: [{ type: 'host', value: 'www.nebulacomponents.com' }],
         destination: 'https://nebulacomponents.com/:path*',
         statusCode: 301,
       },

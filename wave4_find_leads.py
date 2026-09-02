@@ -182,7 +182,7 @@ If your page is getting traffic but not converting, I can usually spot the top 1
 Would it be useful? Just reply with your landing page URL.
 
 - Mike
-nebulacomponents.shop"""
+nebulacomponents.com"""
     return subject, body
 
 def main():

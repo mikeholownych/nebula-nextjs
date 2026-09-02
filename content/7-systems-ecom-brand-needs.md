@@ -155,7 +155,7 @@ Most brands have Google Analytics installed. Few have a feedback loop that actua
 
 We built a free conversion analyzer - enter your URL and we'll score your page across all 7 systems (and more). It takes 10 seconds.
 
-**→ [Run Your Free Audit](https://nebulacomponents.shop/)**
+**→ [Run Your Free Audit](https://nebulacomponents.com/)**
 
 You'll get a detailed Fix Map with specific implementation steps for each dimension. No call required. No credit card. The $97 implementation is only if you want us to ship the fixes in 24 hours.
 

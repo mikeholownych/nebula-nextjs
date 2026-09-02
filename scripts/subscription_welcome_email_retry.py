@@ -59,7 +59,7 @@ def _payload(row: dict) -> dict:
             "Run your first audit &rarr;</a></p>"
             "<p>- Mike<br>Nebula Components</p>"
         ),
-        "from_email": "audits@nebulacomponents.shop",
+        "from_email": "audits@nebulacomponents.com",
         "content_type": "text/html",
     }
 

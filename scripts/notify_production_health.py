@@ -72,7 +72,7 @@ def main() -> int:
         if was_failing:
             send_telegram(
                 f"✅ Production health RECOVERED\n"
-                f"nebulacomponents.shop is healthy again after "
+                f"nebulacomponents.com is healthy again after "
                 f"{state.get('consecutive_failures', '?')} failed check(s).\n\n{output}"
             )
         save_state({"status": "ok", "last_alert_at": state.get("last_alert_at"), "consecutive_failures": 0})

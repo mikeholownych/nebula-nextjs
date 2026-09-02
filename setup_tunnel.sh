@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup Cloudflare tunnel for nebulacomponents.shop
+# Setup Cloudflare tunnel for nebulacomponents.com
 # Must be run as: source /home/mike/.hermes/.env && bash setup_tunnel.sh
 set -e
 
@@ -16,7 +16,7 @@ echo "Account: $ACCOUNT_ID"
 
 echo "=== Getting zone ==="
 ZONE_ID=$(curl -s -H "Authorization: Bearer *** -H "Content-Type: application/json" \
-  "https://api.cloudflare.com/client/v4/zones?name=nebulacomponents.shop" | python3 -c "
+  "https://api.cloudflare.com/client/v4/zones?name=nebulacomponents.com" | python3 -c "
 import json,sys; d=json.load(sys.stdin)
 if d.get('success') and d.get('result'): print(d['result'][0]['id'])
 else:
@@ -73,8 +73,8 @@ config = {
     \"tunnel\": \"$TUNNEL_ID\",
     \"credentials-file\": \"$HOME/.cloudflared/$TUNNEL_ID.json\",
     \"ingress\": [
-        {\"hostname\": \"nebulacomponents.shop\", \"service\": \"http://localhost:8765\"},
-        {\"hostname\": \"www.nebulacomponents.shop\", \"service\": \"http://localhost:8765\"},
+        {\"hostname\": \"nebulacomponents.com\", \"service\": \"http://localhost:8765\"},
+        {\"hostname\": \"www.nebulacomponents.com\", \"service\": \"http://localhost:8765\"},
         {\"service\": \"http_status:404\"}
     ]
 }

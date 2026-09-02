@@ -22,7 +22,7 @@
   - Purpose limitation
   - Data retention periods
   - User rights (access, rectification, erasure, portability)
-  - Contact email: privacy@nebulacomponents.shop
+  - Contact email: privacy@nebulacomponents.com
 
 **3. Google Analytics Configuration**
 - `anonymize_ip: true` - IP anonymization enabled
@@ -31,7 +31,7 @@
 - Consent required before tracking
 
 **4. User Rights Honored**
-- ✅ Right to access (email privacy@nebulacomponents.shop)
+- ✅ Right to access (email privacy@nebulacomponents.com)
 - ✅ Right to rectification (email request)
 - ✅ Right to erasure (email request)
 - ✅ Right to portability (email request)
@@ -66,7 +66,7 @@
 - Provides contact for privacy requests
 
 **3. Consumer Rights**
-- ✅ Right to know (privacy@nebulacomponents.shop)
+- ✅ Right to know (privacy@nebulacomponents.com)
 - ✅ Right to delete (email request)
 - ✅ Right to opt-out of sale (not applicable - we don't sell)
 - ✅ Right to non-discrimination (honored)
@@ -257,9 +257,9 @@
 
 | Request Type | Response Time | Contact |
 |--------------|---------------|---------|
-| Data access | 30 days | privacy@nebulacomponents.shop |
-| Data deletion | 30 days | privacy@nebulacomponents.shop |
-| Data portability | 30 days | privacy@nebulacomponents.shop |
+| Data access | 30 days | privacy@nebulacomponents.com |
+| Data deletion | 30 days | privacy@nebulacomponents.com |
+| Data portability | 30 days | privacy@nebulacomponents.com |
 | Cookie consent change | Instant | Banner → local storage |
 
 ---

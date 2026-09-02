@@ -602,7 +602,7 @@ def _check_purchase_delivery_gap(state: dict, escalations: list) -> None:
                     WHERE c.crm_status = 'purchased'
                       AND c.updated_at < now() - interval '15 minutes'
                       AND c.email NOT LIKE '%@nebulacomponents.com'
-                      AND c.email NOT LIKE '%@nebulacomponents.shop'
+                      AND c.email NOT LIKE '%@nebulacomponents.com'
                       AND c.email NOT LIKE '%@example.com'
                       AND c.email NOT LIKE '%@example.invalid'
                       AND NOT EXISTS (

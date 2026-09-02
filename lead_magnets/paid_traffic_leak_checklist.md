@@ -24,6 +24,6 @@ Score each 0/1.
 - 5-7 leaks: do not buy more traffic until the page is fixed.
 
 ## Next step
-Run the free leak map: https://nebulacomponents.shop/audit.html
+Run the free leak map: https://nebulacomponents.com/audit.html
 
 If you want implementation instead of diagnosis, use the Fix Pack: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h

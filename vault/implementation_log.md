@@ -44,7 +44,7 @@
 
 **Verified:** Link now works with 200 OK
 ```
-https://nebulacomponents.shop/checkout.html?email=X&url=Y
+https://nebulacomponents.com/checkout.html?email=X&url=Y
 ```
 
 ### Next Steps:

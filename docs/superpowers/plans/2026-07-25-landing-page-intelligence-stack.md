@@ -160,7 +160,7 @@ Create `evidence-record.schema.json` as JSON Schema draft 2020-12. Require `work
 - Run only against pages the user is allowed to inspect.
 - Capture URL, timestamp, selector, raw observation, interpretation, and confidence separately.
 - `not_testable` is preferable to invented evidence.
-- The live Nebula audit is available at `https://nebulacomponents.shop/audit`.
+- The live Nebula audit is available at `https://nebulacomponents.com/audit`.
 
 Every workflow file must use these exact headings:
 
@@ -306,7 +306,7 @@ Create the exact `meta.json` asserted in Step 1.
 Create `page.tsx` as a server component with:
 
 - `Metadata` title: `Landing Page Intelligence Stack: 6 Evidence-Grade Workflows | Nebula Components`.
-- Canonical: `https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack`.
+- Canonical: `https://nebulacomponents.com/learning-centre/landing-page-intelligence-stack`.
 - Description matching `meta.json`.
 - `createArticleSchema` using publication/modification date `2026-07-25`.
 - Breadcrumb: Home → Learning Centre → Landing Page Intelligence Stack.
@@ -451,7 +451,7 @@ systemctl is-active nebula-nextjs
 systemctl show nebula-nextjs -p MainPID -p ActiveEnterTimestamp
 ```
 
-Then use a rendered browser against `https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack` to verify one H1, six workflows, no email input, direct download, audit navigation, desktop/mobile layout, and clean browser console. Fetch the live ZIP and compare its SHA-256 with the committed sidecar.
+Then use a rendered browser against `https://nebulacomponents.com/learning-centre/landing-page-intelligence-stack` to verify one H1, six workflows, no email input, direct download, audit navigation, desktop/mobile layout, and clean browser console. Fetch the live ZIP and compare its SHA-256 with the committed sidecar.
 
 - [x] **Step 3: Run production Citable regression**
 

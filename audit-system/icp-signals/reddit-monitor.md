@@ -40,7 +40,7 @@ Triggers: [matched pain keywords]
 3. Reply with specific question: "What's your landing page URL?"
 4. Do NOT paste audit results unsolicited - ask first
 5. If they share URL → audit → reply with ONE finding (the most impactful)
-6. Link to full audit at nebulacomponents.shop only if they ask
+6. Link to full audit at nebulacomponents.com only if they ask
 
 **Why manual response:**
 Automated replies to Reddit posts are flagged as spam.

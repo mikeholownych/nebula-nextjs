@@ -10,7 +10,7 @@ Pattern was brutal:
 
 I turned the teardown list into a live Ad Burn Leak Board:
 
-https://nebulacomponents.shop/ad-burn-leaderboard.html
+https://nebulacomponents.com/ad-burn-leaderboard.html
 
 If you are running paid traffic and conversions are weak, drop your URL. I will find the first visible leak free.
 

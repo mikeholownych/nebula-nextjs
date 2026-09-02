@@ -15,7 +15,7 @@ Port 8765  → agentic_server.py (Nebula main site)
 Port 9000  → webhook_server.py (Stripe webhook receiver)
 Port 8000  → Caddy reverse proxy
 Port 8080  → Caddy reverse proxy (public endpoints)
-Port 8766  → blog.nebulacomponents.shop
+Port 8766  → blog.nebulacomponents.com
 Port 8767  → launchcrate.io
 Port 8768  → sdr.launchcrate.io
 Port 5432  → PostgreSQL
@@ -32,9 +32,9 @@ Port 6379  → Redis (localhost only)
 
 | Hostname | Service | Port |
 |----------|---------|------|
-| `nebulacomponents.shop` | `localhost:8765` | Main Nebula site |
-| `www.nebulacomponents.shop` | `localhost:8765` | Main Nebula site |
-| `blog.nebulacomponents.shop` | `localhost:8766` | Blog subdomain |
+| `nebulacomponents.com` | `localhost:8765` | Main Nebula site |
+| `www.nebulacomponents.com` | `localhost:8765` | Main Nebula site |
+| `blog.nebulacomponents.com` | `localhost:8766` | Blog subdomain |
 | `launchcrate.io` | `localhost:8767` | LaunchCrate product |
 | `www.launchcrate.io` | `localhost:8767` | LaunchCrate product |
 | `sdr.launchcrate.io` | `localhost:8768` | SDR service |
@@ -79,7 +79,7 @@ sdr.launchcrate.io:80 → localhost:8768
 
 ### agentic_server.py
 
-**Process:** `/usr/bin/python3 /home/mike/nebula/agentic_server.py 8765 /home/mike/nebula nebulacomponents.shop`
+**Process:** `/usr/bin/python3 /home/mike/nebula/agentic_server.py 8765 /home/mike/nebula nebulacomponents.com`
 
 **Port:** 8765
 **Purpose:** Main Nebula landing page + audit endpoints
@@ -137,7 +137,7 @@ sdr.launchcrate.io:80 → localhost:8768
    - Must remain signed and idempotent during migration
    - SEC-01 already verified Stripe signature validation
 
-2. **Blog subdomain:** `blog.nebulacomponents.shop` → `localhost:8766`
+2. **Blog subdomain:** `blog.nebulacomponents.com` → `localhost:8766`
    - Separate service, continues unchanged
 
 3. **LaunchCrate domains:** `launchcrate.io` + `sdr.launchcrate.io`

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.com';
 
 test('pricing cards become fully visible after scroll + safety net', async ({ page }) => {
   const errors: string[] = [];

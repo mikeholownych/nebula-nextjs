@@ -2,7 +2,7 @@
 
 import { XMLParser, XMLValidator } from 'fast-xml-parser'
 
-const DEFAULT_BASE_URL = 'https://nebulacomponents.shop'
+const DEFAULT_BASE_URL = 'https://nebulacomponents.com'
 const DEFAULT_CONCURRENCY = 5
 const DEFAULT_RETRIES = 2
 const DEFAULT_RETRY_DELAY_MS = 250

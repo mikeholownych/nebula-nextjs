@@ -42,7 +42,7 @@ Nebula's existing tools map to this directly:
 - Who you help → "Founders bleeding ad spend"
 - What problem → "Landing pages that don't convert"
 - Why trust → "40+ audits, 2-3x avg CVR improvement"
-- Next step → "Free audit at nebulacomponents.shop/audit"
+- Next step → "Free audit at nebulacomponents.com/audit"
 
 **Action:** Mike's LinkedIn profile headline, about, and featured section should all point at ONE thing: the free audit. No "AI agent OS" or "autonomous business" framing unless it supports the audit funnel.
 

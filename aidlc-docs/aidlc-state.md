@@ -70,14 +70,14 @@ Next bounded phase: static/public HTML legacy sweep + rendered-browser verificat
 - Redirect behavior: HTTPS `.shop`, HTTPS `www.shop`, HTTP/HTTPS `www.com`, and HTTP `.com` resolve permanently to HTTPS `.com`; path and query are preserved.
 - Browser proof: `/audit` rendered correctly on `.com`; canonical/OG/JSON-LD/internal-link scan returned zero `.shop` references. The embedded self-audit screenshot was replaced because its pixels still showed `.shop`.
 - Test proof: 4 metadata/discovery suites passed (16 tests); canonical redirect tests passed; production build succeeded; deploy verifier passed 13/13 routes; 58 changed Python files compiled.
-- Remaining blocker: `http://nebulacomponents.shop` and `http://www.nebulacomponents.shop` still take two hops because Cloudflare upgrades HTTP to HTTPS before the application redirects to `.com`. The available `CLOUDFLARE_API_TOKEN` can list zones but receives HTTP 403 for Rulesets, Page Rules, and zone settings, and the browser session is not authenticated. A Cloudflare token with Zone Rulesets/Settings edit permission or an authenticated dashboard session is required to eliminate those two edge chains.
+- Remaining blocker: `http://nebulacomponents.com` and `http://www.nebulacomponents.com` still take two hops because Cloudflare upgrades HTTP to HTTPS before the application redirects to `.com`. The available `CLOUDFLARE_API_TOKEN` can list zones but receives HTTP 403 for Rulesets, Page Rules, and zone settings, and the browser session is not authenticated. A Cloudflare token with Zone Rulesets/Settings edit permission or an authenticated dashboard session is required to eliminate those two edge chains.
 - Status: canonical rendering is live and verified; chain-elimination work remains open and must not be marked complete.
 
 
 ## 2026-08-03T06:49:29Z - Cloudflare edge closure
 
 - Credential received directly from Mike, stored as a mode-600 secret, and never copied into logs or project files.
-- Token verified active and scoped to exactly three zones: `nebulacomponents.com`, `nebulacomponents.shop`, and `mikeholownych.com`.
+- Token verified active and scoped to exactly three zones: `nebulacomponents.com`, `nebulacomponents.com`, and `mikeholownych.com`.
 - Verified API access for DNS, zone settings, rulesets, cache purge, and Cloudflare Tunnel inventory.
 - Created enabled Single Redirect rule `ecaf4770ba3c452da0b1de19fcb76f71` on the `.shop` zone.
 - Purged the `.shop` edge cache to remove the cached Always Use HTTPS response that masked the new rule.

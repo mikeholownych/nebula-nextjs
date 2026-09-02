@@ -28,7 +28,7 @@ function nextWithRequestId(request: NextRequest): NextResponse {
  * Proxy / edge middleware for Nebula Components.
  *
  * Responsibilities:
- * 1. Domain migration: nebulacomponents.shop → nebulacomponents.com (301)
+ * 1. Domain migration: nebulacomponents.com → nebulacomponents.com (301)
  * 2. Block legacy .html routes
  * 3. Markdown for Agents (RFC content negotiation): Accept: text/markdown → llms.txt
  * 4. Propagate geo country header for cookie consent (avoids headers() in layout)
@@ -81,8 +81,8 @@ export function proxy(request: NextRequest) {
 
   // ── 1. Domain migration: every variant → .com apex ──────────────────────────
   if (
-    host === 'nebulacomponents.shop' ||
-    host === 'www.nebulacomponents.shop' ||
+    host === 'nebulacomponents.com' ||
+    host === 'www.nebulacomponents.com' ||
     host === 'www.nebulacomponents.com'
   ) {
     const url = request.nextUrl.clone()

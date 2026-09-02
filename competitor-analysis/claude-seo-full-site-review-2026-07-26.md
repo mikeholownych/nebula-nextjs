@@ -2,7 +2,7 @@
 
 **Review date:** 2026-07-26
 **Competitor:** https://claude-seo.md/
-**Compared with:** https://nebulacomponents.shop/ and the local `customer-portal` source
+**Compared with:** https://nebulacomponents.com/ and the local `customer-portal` source
 **Status:** Research and planning only. No implementation performed.
 
 ## Executive conclusion
@@ -512,10 +512,10 @@ Dates are planning placeholders, not commitments.
 - Sitemap: https://claude-seo.md/sitemap.xml
 - `llms.txt`: https://claude-seo.md/llms.txt
 - GitHub repository: https://github.com/AgriciDaniel/claude-seo
-- Nebula homepage: https://nebulacomponents.shop/
-- Nebula sitemap: https://nebulacomponents.shop/sitemap.xml
-- Nebula learning centre: https://nebulacomponents.shop/learning-centre
-- Citable: https://nebulacomponents.shop/resources/citable
+- Nebula homepage: https://nebulacomponents.com/
+- Nebula sitemap: https://nebulacomponents.com/sitemap.xml
+- Nebula learning centre: https://nebulacomponents.com/learning-centre
+- Citable: https://nebulacomponents.com/resources/citable
 
 ## Handoff summary
 

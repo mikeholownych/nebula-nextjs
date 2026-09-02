@@ -1,6 +1,6 @@
 # [OFFER_MEMO] - Nebula Components
 **Produced by:** TrustOS Offer Architect 3-prompt method (internal run)
-**Inputs:** ICP_MEMO (2026-07-07) + live offer from nebulacomponents.shop/audit.html + index.html
+**Inputs:** ICP_MEMO (2026-07-07) + live offer from nebulacomponents.com/audit.html + index.html
 **Last updated:** 2026-07-07
 
 ---
@@ -108,7 +108,7 @@ At $97 the value equation is already favorable IF the dollar leak is surfaced. A
 version: 1.0
 last_updated: 2026-07-07
 business: Nebula Components
-url: https://nebulacomponents.shop
+url: https://nebulacomponents.com
 
 ## POSITIONING
 category: landing page audit + CRO implementation

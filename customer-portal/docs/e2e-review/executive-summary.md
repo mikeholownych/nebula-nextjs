@@ -17,7 +17,7 @@ Date: 2026-08-21 · Scope: full Nebula stack (Next.js portal, FastAPI platform A
 
 ## The two P0s
 
-1. **SEC-P0-1 — FastAPI exposed publicly with unauthenticated business endpoints.** Cloudflare Tunnel routes `api.nebulacomponents.shop` (and `nebula-api.f489709.workers.dev`) directly to uvicorn :8001, bypassing the Next BFF. Verified live: `/api/crm/funnel`, `/api/crm/sources` return real CRM data; `/audit/by-email?email=…` enumerates any email's audits; `/docs` + `/openapi.json` publish the full API surface; `/dispatch/run-all`, `/verify/deploy-hook`, `/leads/decay-all`, `/audit/monitors/run-due` are publicly triggerable jobs. Root cause: the FastAPI auth model assumes loopback-only deployment ("No auth required - email is the identity for now", `routes/audit_api.py:357`), which the tunnel ingress silently violates.
+1. **SEC-P0-1 — FastAPI exposed publicly with unauthenticated business endpoints.** Cloudflare Tunnel routes `api.nebulacomponents.com` (and `nebula-api.f489709.workers.dev`) directly to uvicorn :8001, bypassing the Next BFF. Verified live: `/api/crm/funnel`, `/api/crm/sources` return real CRM data; `/audit/by-email?email=…` enumerates any email's audits; `/docs` + `/openapi.json` publish the full API surface; `/dispatch/run-all`, `/verify/deploy-hook`, `/leads/decay-all`, `/audit/monitors/run-due` are publicly triggerable jobs. Root cause: the FastAPI auth model assumes loopback-only deployment ("No auth required - email is the identity for now", `routes/audit_api.py:357`), which the tunnel ingress silently violates.
 2. **SEC-P0-2 — Repo root served over HTTP with secrets readable.** A stray `python3 -m http.server 8765` (no systemd unit, cwd `/home/mike/nebula`, bound `0.0.0.0:8765`) serves directory listings and file contents: `GET /.env` → 200 (contains live Stripe/OAuth secrets), `GET /secrets/` → 200 listing, `GET /HOT_LEAD.json` → 200. Additionally, the live Stripe secret key sits world-readable (0644) in `/etc/systemd/system/nebula-nextjs.service.d/stripe.conf`.
 
 ## Highest-risk subsystem
@@ -26,7 +26,7 @@ The **Cloudflare ingress ↔ FastAPI trust boundary**: every downstream control 
 
 ## Most likely production incident (next 90 days)
 
-A third party discovers `api.nebulacomponents.shop/docs`, enumerates competitor/lead data via `/audit/by-email` and `/api/crm/*`, or triggers `/dispatch/run-all` causing a mass unsolicited email event and provider reputation damage.
+A third party discovers `api.nebulacomponents.com/docs`, enumerates competitor/lead data via `/audit/by-email` and `/api/crm/*`, or triggers `/dispatch/run-all` causing a mass unsolicited email event and provider reputation damage.
 
 ## Most important test gap
 

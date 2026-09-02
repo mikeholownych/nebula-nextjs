@@ -50,7 +50,7 @@ class Settings(BaseSettings):
 
     # SendGrid
     SENDGRID_API_KEY: Optional[str] = None
-    SENDGRID_FROM_EMAIL: str = "noreply@nebulacomponents.shop"
+    SENDGRID_FROM_EMAIL: str = "noreply@nebulacomponents.com"
 
     # OpenRouter (AI Assistant)
     OPENROUTER_API_KEY: Optional[str] = None

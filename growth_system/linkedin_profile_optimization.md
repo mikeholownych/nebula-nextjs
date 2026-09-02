@@ -13,14 +13,14 @@ If a founder burning $5K/mo on ads with zero conversions lands on your profile, 
 - Who you help → **Founders bleeding ad spend on landing pages that don't convert**
 - What outcome → **Diagnose exactly what's leaking and fix it in 24h**
 - Why trust → **40+ audits, 2-3x avg CVR improvement, full refund guarantee**
-- Next step → **Run the free audit at nebulacomponents.shop**
+- Next step → **Run the free audit at nebulacomponents.com**
 
 ## Section-by-Section
 
 ### Headline
 
 ❌ Current (generic): "AI Agent OS Builder / Autonomous Business Systems"
-✅ Target: **"I help founders stop burning ad budget on landing pages that don't convert → Free audit at nebulacomponents.shop"**
+✅ Target: **"I help founders stop burning ad budget on landing pages that don't convert → Free audit at nebulacomponents.com"**
 
 *Must contain:* outcome + ICP trigger + free audit CTA
 *Must NOT contain:* generic keywords (AI, agent, autonomous) WITHOUT the context of ad spend/conversion
@@ -35,7 +35,7 @@ If a founder burning $5K/mo on ads with zero conversions lands on your profile, 
 ### Featured Section
 
 Reframe everything around relevant wins:
-- 🥇 **Free Landing Page Audit** - nebulacomponents.shop/audit (pinned first)
+- 🥇 **Free Landing Page Audit** - nebulacomponents.com/audit (pinned first)
 - Sample audit showing the 5-dimension score
 - Case study: Before/after of a page that went from 0.8% → 2.4% CVR
 - The Fix Kit ($97) - what they get after the audit
@@ -43,12 +43,12 @@ Reframe everything around relevant wins:
 ### Profile Banner/Image
 
 - Clean headshot or logo
-- Background banner with: "Free Landing Page Audit → nebulacomponents.shop"
+- Background banner with: "Free Landing Page Audit → nebulacomponents.com"
 
 ### Links
 
-- **Primary:** nebulacomponents.shop/audit (free audit, not homepage)
-- **Secondary:** nebulacomponents.shop/primer (what's included)
+- **Primary:** nebulacomponents.com/audit (free audit, not homepage)
+- **Secondary:** nebulacomponents.com/primer (what's included)
 - Booking link (calendly or similar for $97 calls)
 
 ## The Test

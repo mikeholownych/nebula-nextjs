@@ -50,3 +50,4 @@
 #    is the operational pipeline. Do not conflate them.
 #
 # No entries yet. First entry will appear when a qualifying signal is observed.
+{"signal_id":"DS-202609-001","recorded_at":"2026-09-01T20:50:20Z","recorded_by":"CEO","source_type":"support_classification","observation_window":"2026-07 to 2026-09","demand_provenance":"PROMPTED","independent_customer_count":0,"observation_count":1,"independence_verified":false,"underlying_job":"No underlying job established; the customer expressed a timing objection to a prior Nebula service offer.","observed_workaround":null,"economic_consequence":null,"evidence_refs":["content/support/2026-09-01_inbox-inspection-report.md#real-external-warm-reply-cohort","HOT_LEAD.json#retryfix.com"],"pii_free_notes":"One external reply said the timing was not right. The reply followed Nebula-initiated outreach. No purchase, checkout handoff, or willingness to pay was observed.","demand_state":"observed","opportunity_id":null}

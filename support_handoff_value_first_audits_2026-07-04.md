@@ -22,7 +22,7 @@ Acceptance check:
 Every row in the JSONL includes source_url, exact trigger_context, value-first finding, likely conversion leak, self_serve_cta, post_audit_checkout_cta, and support_next_action.
 
 Self-serve CTA used on every row:
-Run the free audit/tool without a call or reply gate: https://nebulacomponents.shop/audit.html
+Run the free audit/tool without a call or reply gate: https://nebulacomponents.com/audit.html
 
 Post-audit implementation checkout for support after value has been delivered:
 https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b

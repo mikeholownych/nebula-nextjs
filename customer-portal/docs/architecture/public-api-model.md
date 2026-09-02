@@ -1,6 +1,6 @@
 # Public API Model — Exposure Classes (Wave 0+)
 
-The FastAPI service (`api.nebulacomponents.shop`, plus the workers.dev path) is
+The FastAPI service (`api.nebulacomponents.com`, plus the workers.dev path) is
 **intentionally public**. Public reachability is not the defect; implicit trust
 was. Every route now carries one explicit exposure class, enforced in code:
 

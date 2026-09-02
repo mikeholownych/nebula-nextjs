@@ -299,7 +299,7 @@ before it reached the UI, surfacing only the generic fallback message.
 - Reproduced the failure first via a transient `systemd-run` unit mirroring the
   service's sandboxing (PrivateTmp, matching PATH/env), confirming the TCP/password
   error before touching the live unit file.
-- Post-fix: `curl -X POST https://nebulacomponents.shop/api/audit/start` returned a
+- Post-fix: `curl -X POST https://nebulacomponents.com/api/audit/start` returned a
   real `audit_id`, `status: "completed"`, score, grade, and findings.
 - Playwright end-to-end: submitted a URL on the live `/audit` page, confirmed
   navigation to `/audit/<real-uuid>/processing` with no page errors.
@@ -433,7 +433,7 @@ Execution resumed against the live customer portal. Objective: make nebulacompon
 - Decision: `.com` is the only canonical content origin; `.shop` is retained exclusively as a legacy redirect source and for existing verified sender identities where changing mail domains could break delivery.
 - Implemented and deployed canonical metadata, sitemap, robots, OG, JSON-LD, internal/public links, generated markdown, API discovery files, operational URL producers, redirect tests, and deployment verification.
 - Corrected a live HTTP redirect defect where the tunnel-origin URL produced `https://localhost`; the regression test now emulates `Host: nebulacomponents.com` with an internal localhost URL.
-- Replaced the live audit-page screenshot because its pixels still displayed `nebulacomponents.shop` despite corrected alt text.
+- Replaced the live audit-page screenshot because its pixels still displayed `nebulacomponents.com` despite corrected alt text.
 - Verification receipts: Next.js production build passed; 16/16 metadata/discovery tests passed; 2/2 redirect tests passed; 13/13 deployed routes passed; live scans of five representative pages and four discovery resources found zero `.shop` references; rendered-browser inspection passed.
 - Open blocker: HTTP `.shop` variants still have a two-hop Cloudflare chain (`http .shop` → `https .shop` → `https .com`). Cloudflare API writes are blocked: the present token returns 403 for Rulesets, Page Rules, and zone settings; browser dashboard is unauthenticated. HTTPS `.shop` and all `.com`/`www.com` variants are single-hop or direct as appropriate.
 
@@ -587,7 +587,7 @@ Postmaster Tools verification TXT (google-site-verification=c1lineaK0TmRCODX0jBv
 - DB row: slug qa-neb-e2e | claimed_by_email sedrick@... | verification_method email_domain | status active
 
 ### STEP E - DNS TXT round trip
-- DEVIATION: provided Cloudflare token has no gofaultline.dev zone (zones: mikeholownych.com, nebulacomponents.com, nebulacomponents.shop). Same mechanism proven against mikeholownych.com; qa-dns-e2e repointed to that domain.
+- DEVIATION: provided Cloudflare token has no gofaultline.dev zone (zones: mikeholownych.com, nebulacomponents.com, nebulacomponents.com). Same mechanism proven against mikeholownych.com; qa-dns-e2e repointed to that domain.
 - dns-start -> record _nebula-verify.mikeholownych.com, value nebula=<40c64bd5...>, ttl_hours 48 (HTTP 200)
 - Cloudflare TXT created ttl 300: success true, record id <834d66b4...>
 - dns-check after 30 s -> {"verified":true,"email":"dns-claim@invalid.nebulacomponents.com"} HTTP 200

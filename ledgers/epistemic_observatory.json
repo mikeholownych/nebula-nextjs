@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-09-02T08:00:38.824161+00:00",
+  "activation_at": "2026-08-31T22:00:00+00:00",
+  "completed_audits_since_activation": 28,
+  "stamped_audits": 28,
+  "audits_with_indeterminate": 0,
+  "determination_counts": {
+    "NOT_APPLICABLE": 65,
+    "PASS": 160,
+    "FAIL": 27
+  },
+  "indeterminate_reason_codes": {},
+  "indeterminate_by_condition": {},
+  "integrity_states": {
+    "usable": 28
+  },
+  "repeated_indeterminate_urls": {},
+  "invariant_hits": {},
+  "gate": {
+    "need_stamped_audits": 500,
+    "need_days": 14,
+    "stamped_audits": 28,
+    "days_open": 1,
+    "ready_to_revisit_scoring": false,
+    "next_decision": "do_not_change_scoring"
+  }
+}

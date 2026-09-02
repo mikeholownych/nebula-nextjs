@@ -15,7 +15,7 @@ Tino, the 84 to 24 drop is the first thing I would test. That is a 71% loss befo
 
 I also ran the public page through a teardown. The main question is whether the first screen makes the buyer want to try the tool before asking them to leave for a second domain. I would put the working demo and the real-estate use case directly beside the first CTA, then measure landing page to app start separately.
 
-I found two more implementation candidates. The free audit is here if useful: https://nebulacomponents.shop/audit.html?source=ih-smartwatermark-20260811
+I found two more implementation candidates. The free audit is here if useful: https://nebulacomponents.com/audit.html?source=ih-smartwatermark-20260811
 
 ### Attribution
 

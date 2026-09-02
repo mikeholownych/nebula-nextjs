@@ -24,7 +24,7 @@
 |---------|-------------|----------------------|
 | **Deliverable** | Dashboard, not PDF | `/audit/{id}` dashboard ✅ |
 | **Password protection** | Required for access | Client-side password check ✅ |
-| **Shareable link** | `dashboard.cde.com/report/{brand}` | `nebulacomponents.shop/audit/{id}` ✅ |
+| **Shareable link** | `dashboard.cde.com/report/{brand}` | `nebulacomponents.com/audit/{id}` ✅ |
 | **Fix priority stack** | Ordered by impact | Sorted by score (critical → low) ✅ |
 | **Conversion CTA** | In dashboard | "Get Fix Pack - $147" button ✅ |
 
@@ -44,7 +44,7 @@
 - Fix priority stack (color-coded)
 - CTA to Fix Pack checkout
 
-**URL:** `https://nebulacomponents.shop/audit/{audit-id}`
+**URL:** `https://nebulacomponents.com/audit/{audit-id}`
 
 ### 2. Server Route
 

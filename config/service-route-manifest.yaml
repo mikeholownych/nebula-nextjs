@@ -3,8 +3,8 @@
   "manifest_purpose": "current_and_target_service_route_ownership",
   "observed_hostname_path": {
     "hosts": [
-      "nebulacomponents.shop",
-      "www.nebulacomponents.shop"
+      "nebulacomponents.com",
+      "www.nebulacomponents.com"
     ],
     "cloudflared_origin": "http://localhost:8765",
     "owner": "agentic_server"

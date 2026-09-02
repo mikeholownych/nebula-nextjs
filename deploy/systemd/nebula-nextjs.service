@@ -1,6 +1,6 @@
 [Unit]
 Description=Nebula Components Next.js Production Server
-Documentation=https://nebulacomponents.shop
+Documentation=https://nebulacomponents.com
 After=network.target network-online.target
 Wants=network-online.target
 StartLimitBurst=5

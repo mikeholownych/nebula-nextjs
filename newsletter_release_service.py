@@ -18,13 +18,13 @@ from urllib.parse import quote, urlparse
 
 import asyncpg
 
-API_BASE_URL = "https://api.nebulacomponents.shop"
+API_BASE_URL = "https://api.nebulacomponents.com"
 UNSUBSCRIBE_PAGE_URL = "https://nebulacomponents.com/unsubscribe"
 NEWSLETTER_FROM = "hello@nebulacomponents.com"
 NEWSLETTER_FROM_NAME = "Nebula Components"
 NEWSLETTER_REPLY_TO = "hello@nebulacomponents.com"
 BUSINESS_ADDRESS = "Nebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9"
-ALLOWED_LINK_HOSTS = {"nebulacomponents.com", "www.nebulacomponents.com", "api.nebulacomponents.shop"}
+ALLOWED_LINK_HOSTS = {"nebulacomponents.com", "www.nebulacomponents.com", "api.nebulacomponents.com"}
 
 
 class ReleaseBlocked(RuntimeError):
@@ -157,7 +157,7 @@ def assert_release_sendable(release: dict[str, Any] | None, submitted_payload: d
 
 
 def create_release_payload(*, issue_id: str, campaign_id: str, subject: str, preheader: str, approved_html: str, approved_text: str, template_version: str, source_revision: str, build_revision: str, release_metadata: dict[str, Any] | None = None) -> dict[str, Any]:
-    payload = {"from": NEWSLETTER_FROM, "from_name": NEWSLETTER_FROM_NAME, "reply_to": NEWSLETTER_REPLY_TO, "subject": subject, "preheader": preheader, "html": approved_html, "text": approved_text, "headers": {"List-Unsubscribe": "<https://api.nebulacomponents.shop/api/newsletter/unsubscribe-one-click?email={recipient}>", "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"}}
+    payload = {"from": NEWSLETTER_FROM, "from_name": NEWSLETTER_FROM_NAME, "reply_to": NEWSLETTER_REPLY_TO, "subject": subject, "preheader": preheader, "html": approved_html, "text": approved_text, "headers": {"List-Unsubscribe": "<https://api.nebulacomponents.com/api/newsletter/unsubscribe-one-click?email={recipient}>", "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"}}
     return {"issue_id": issue_id, "campaign_id": campaign_id, "status": "APPROVED", "source_type": "newsletter_generation", "subject": subject, "preheader": preheader, "from_name": NEWSLETTER_FROM_NAME, "from_address": NEWSLETTER_FROM, "reply_to": NEWSLETTER_REPLY_TO, "approved_html": approved_html, "approved_text": approved_text, "approved_content_hash": content_hash(payload), "template_version": template_version, "source_revision": source_revision, "build_revision": build_revision, "approved_by": "automated_content_gate", "release_metadata": release_metadata or {}}
 
 

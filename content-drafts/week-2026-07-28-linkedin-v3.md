@@ -49,7 +49,7 @@ What's the most expensive typo you've ever found on a website?
 ---
 
 FIRST COMMENT:
-Run a free audit on your site → nebulacomponents.shop/audit
+Run a free audit on your site → nebulacomponents.com/audit
 
 ---
 
@@ -88,7 +88,7 @@ How many H1 tags does your site have? Most founders have no idea.
 ---
 
 FIRST COMMENT:
-Check yours → nebulacomponents.shop/audit
+Check yours → nebulacomponents.com/audit
 
 ---
 
@@ -135,7 +135,7 @@ Have you ever paid for testing that didn't test the right thing?
 ---
 
 FIRST COMMENT:
-See what's actually broken on your page → nebulacomponents.shop/audit
+See what's actually broken on your page → nebulacomponents.com/audit
 
 ---
 
@@ -182,7 +182,7 @@ Where is your pricing on the page? First scroll? Third? Behind an email gate?
 ---
 
 FIRST COMMENT:
-Find the leaks → nebulacomponents.shop/audit
+Find the leaks → nebulacomponents.com/audit
 
 ---
 
@@ -233,7 +233,7 @@ Have you checked what an AI agent sees when it visits your site?
 ---
 
 FIRST COMMENT:
-See your agent-readiness score → nebulacomponents.shop/audit
+See your agent-readiness score → nebulacomponents.com/audit
 
 ---
 
@@ -282,7 +282,7 @@ Have you ever built something technically solid that nobody asked for?
 ---
 
 FIRST COMMENT:
-If your ads aren't converting, the page is the problem → nebulacomponents.shop/audit
+If your ads aren't converting, the page is the problem → nebulacomponents.com/audit
 
 ---
 
@@ -335,4 +335,4 @@ When did you last audit your page - not your ads?
 ---
 
 FIRST COMMENT:
-See what's actually broken → nebulacomponents.shop/audit
+See what's actually broken → nebulacomponents.com/audit

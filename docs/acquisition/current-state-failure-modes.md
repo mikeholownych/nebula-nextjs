@@ -101,7 +101,7 @@
 - **Mitigation Requirement:** Store all baseline runs as immutable rows in a dedicated PostgreSQL table (`acquisition_daily_metrics` and `acquisition_page_snapshots`). Generate markdown baseline reports dynamically from the database.
 
 ### 5.2 Canonical Host Drift (`.shop` vs `.com`)
-- **Failure Mode:** Legacy scripts and documentation historically referenced `nebulacomponents.shop` (e.g. `check-sitemap-routes.mjs` default fallback, Cloudflare tunnel naming).
+- **Failure Mode:** Legacy scripts and documentation historically referenced `nebulacomponents.com` (e.g. `check-sitemap-routes.mjs` default fallback, Cloudflare tunnel naming).
 - **Risk:** Crawlers or check scripts inspecting the wrong host generate false error alerts or split ranking equity.
 - **Mitigation Requirement:** Standardize all scripts, tests, and configuration to `https://nebulacomponents.com`.
 

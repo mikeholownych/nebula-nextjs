@@ -74,7 +74,7 @@
       "touch_1": {
         "timing": "Within 24h of their comment/engagement",
         "trigger": "Anyone who left a meaningful comment on a CRO post or Nebula post",
-        "template": "Hey {{name}}, saw your comment on {{post_topic}}. Built a free tool that diagnoses conversion leaks on landing pages - found 3 on mine first week. Happy to run yours through it: nebulacomponents.shop/audit. No pitch, just useful.",
+        "template": "Hey {{name}}, saw your comment on {{post_topic}}. Built a free tool that diagnoses conversion leaks on landing pages - found 3 on mine first week. Happy to run yours through it: nebulacomponents.com/audit. No pitch, just useful.",
         "objective": "Warm intro + value-first audit link"
       },
       "touch_2": {
@@ -86,7 +86,7 @@
       "touch_3": {
         "timing": "7-10 days after Touch 2 (if no reply)",
         "trigger": "No response to Touch 1 or 2",
-        "template": "Hey {{name}}, last message from me on this. The audit checks 5 things: headline clarity, CTA actionability, trust signals, load speed, mobile layout. 75% of pages fail on headline alone. Yours might be fine - only one way to know. Up to you: nebulacomponents.shop/audit",
+        "template": "Hey {{name}}, last message from me on this. The audit checks 5 things: headline clarity, CTA actionability, trust signals, load speed, mobile layout. 75% of pages fail on headline alone. Yours might be fine - only one way to know. Up to you: nebulacomponents.com/audit",
         "objective": "Final value summary + soft close, no pressure"
       }
     }

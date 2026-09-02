@@ -102,7 +102,7 @@ stripe.Customer.create(email=user_email)
 stripe.checkout.Session.create(
     customer=customer.id,
     mode="subscription",
-    success_url="https://nebulacomponents.shop/dashboard"
+    success_url="https://nebulacomponents.com/dashboard"
 )
 ```
 
@@ -137,7 +137,7 @@ redirect("/dashboard", set_cookie=jwt)
 # GET /billing
 session = stripe.billing_portal.Session.create(
     customer=user.stripe_customer_id,
-    return_url="https://nebulacomponents.shop/account"
+    return_url="https://nebulacomponents.com/account"
 )
 redirect(session.url)
 ```

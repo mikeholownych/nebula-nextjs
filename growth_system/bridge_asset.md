@@ -167,4 +167,4 @@ If you want the implementation: the $97 Fix Pack takes your scored audit and tur
 
 If you've paid for a testing phase before and ended up with nothing - that's exactly what this is not. The audit is free. The fix is $97. If you don't find a conversion leak worth fixing, email ops@launchcrate.io and say "refund." That's the whole thing.
 
-[Run my free audit →](https://nebulacomponents.shop/audit.html)
+[Run my free audit →](https://nebulacomponents.com/audit.html)

@@ -314,7 +314,7 @@ DATABASE_URL=postgresql+psycopg:///nebula_platform?host=/var/run/postgresql&port
 REDIS_URL=redis://localhost:6379/0
 
 # CORS
-ALLOWED_ORIGINS=["http://localhost:3000","https://nebulacomponents.shop"]
+ALLOWED_ORIGINS=["http://localhost:3000","https://nebulacomponents.com"]
 ```
 
 ### Google Cloud Console (NEEDED)
@@ -323,10 +323,10 @@ Mike needs to configure:
 1. ✅ OAuth 2.0 Client ID created (provided)
 2. ⏭️ **Authorized JavaScript origins:**
    - `http://localhost:3000`
-   - `https://nebulacomponents.shop`
+   - `https://nebulacomponents.com`
 3. ⏭️ **Authorized redirect URIs:**
    - `http://localhost:3000/auth/callback`
-   - `https://nebulacomponents.shop/auth/callback`
+   - `https://nebulacomponents.com/auth/callback`
 
 ---
 

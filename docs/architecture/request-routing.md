@@ -20,11 +20,11 @@ Cloudflare Tunnel 8cfcc2e1-cf49-4d57-b412-c1ec0474ffd2
 cloudflared-tunnel.service (root, cloudflared 2026.7.1)
 config: /home/mike/.cloudflared/config.yml
   |
-  | nebulacomponents.shop, www.nebulacomponents.shop -> localhost:8765
+  | nebulacomponents.com, www.nebulacomponents.com -> localhost:8765
   v
 nebula-site.service (mike, PID 4075913 at capture)
 /usr/bin/python3 /home/mike/nebula/agentic_server.py 8765
-  /home/mike/nebula nebulacomponents.shop
+  /home/mike/nebula nebulacomponents.com
 bind: 0.0.0.0:8765
   |
   | /api/stats is application-proxied
@@ -34,7 +34,7 @@ nebula-webhook.service (mike, PID 4105913 at capture)
 bind: 0.0.0.0:9000
 ```
 
-Cloudflare currently sends the whole `nebulacomponents.shop` and `www.nebulacomponents.shop` path space to `localhost:8765`. Therefore public pages, Stripe, tracking, CRM, discovery documents, and current APIs first reach `agentic_server`. The `/api/stats` handler in `agentic_server` proxies to `webhook_server` on port 9000.
+Cloudflare currently sends the whole `nebulacomponents.com` and `www.nebulacomponents.com` path space to `localhost:8765`. Therefore public pages, Stripe, tracking, CRM, discovery documents, and current APIs first reach `agentic_server`. The `/api/stats` handler in `agentic_server` proxies to `webhook_server` on port 9000.
 
 Other observed tunnel rules route the blog to port 8766 and LaunchCrate traffic to ports 8767/8768. Those applications are outside this package. The ingress list ends with a terminal 404 rule, which must remain terminal.
 
@@ -42,7 +42,7 @@ Other observed tunnel rules route the blog to port 8766 and LaunchCrate traffic 
 
 | Component | Supervisor / user | Command or version | Observed bind | Main-host disposition |
 | --- | --- | --- | --- | --- |
-| `agentic_server` | `nebula-site.service` / `mike` | `/usr/bin/python3 /home/mike/nebula/agentic_server.py 8765 /home/mike/nebula nebulacomponents.shop` | `0.0.0.0:8765` | Direct Cloudflare origin for both Nebula hostnames |
+| `agentic_server` | `nebula-site.service` / `mike` | `/usr/bin/python3 /home/mike/nebula/agentic_server.py 8765 /home/mike/nebula nebulacomponents.com` | `0.0.0.0:8765` | Direct Cloudflare origin for both Nebula hostnames |
 | `webhook_server` | `nebula-webhook.service` / `mike` | `/usr/bin/python3 /home/mike/nebula/webhook_server.py` | `0.0.0.0:9000` | Reached through the current `/api/stats` application proxy; also referenced by Caddy routes |
 | `cloudflared` | `cloudflared-tunnel.service` / `root` | `cloudflared` 2026.7.1, tunnel `8cfcc2e1-cf49-4d57-b412-c1ec0474ffd2` | outbound tunnel | Selects `localhost:8765` for the Nebula hostnames |
 | Caddy | active / `caddy:caddy` | Caddy 2.11.4 | ports 80 and 8080 | **Not in the current main-hostname request path** |

@@ -119,7 +119,7 @@ Status: ✅ MATCHED
 
 ## Recommendations
 
-1. **Immediate:** Visit https://nebulacomponents.shop and verify visually
+1. **Immediate:** Visit https://nebulacomponents.com and verify visually
 2. **Short-term:** Implement sync script for production → worktree
 3. **Long-term:** Decide HTML vs Next.js strategy
 

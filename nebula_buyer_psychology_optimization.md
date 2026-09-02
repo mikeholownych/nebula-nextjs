@@ -1,8 +1,8 @@
 # Nebula Components Buyer Psychology + Autonomous Funnel Optimization
 
 Evidence inspected:
-- Live homepage: `https://nebulacomponents.shop/`
-- Live audit page: `https://nebulacomponents.shop/audit.html`
+- Live homepage: `https://nebulacomponents.com/`
+- Live audit page: `https://nebulacomponents.com/audit.html`
 - Live checkout paths: `/checkout?price=7`, `/checkout?price=97`
 - Local files: `/home/mike/nebula/index.html`, `checkout.html`, `audit.html`
 

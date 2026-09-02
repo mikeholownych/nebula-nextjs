@@ -17,7 +17,7 @@ Investigating what actually held port 3000 found `nebula-site.service` - the *ob
 
 ## Impact
 
-- `nebulacomponents.shop` continued serving traffic throughout the window (the obsolete service kept the site up), so there was no visible outage from a visitor's perspective - but the site was running whatever code was in place when `nebula-site.service` was started, meaning **none of the INC-0001/INC-0002 security fixes (webhook signature enforcement, signed audit-unlock cookie) or the Stripe purchase-persistence fix were live in production** for the ~2.5 hours between that commit landing and this deploy.
+- `nebulacomponents.com` continued serving traffic throughout the window (the obsolete service kept the site up), so there was no visible outage from a visitor's perspective - but the site was running whatever code was in place when `nebula-site.service` was started, meaning **none of the INC-0001/INC-0002 security fixes (webhook signature enforcement, signed audit-unlock cookie) or the Stripe purchase-persistence fix were live in production** for the ~2.5 hours between that commit landing and this deploy.
 - The canonical, monitored, systemd-managed service was down and alarming (crash-loop failed state) for 14+ hours with no indication anyone had responded, because the obsolete service masked the outage by keeping the site reachable.
 - `scripts/verify_production_services.sh` - which exists specifically to catch this class of drift (it checks `nebula-site.service enabled=disabled active=inactive` as one of its 8 assertions) - was not run during that window. Had it been run, it would have failed immediately and surfaced the problem.
 
@@ -58,7 +58,7 @@ Process 2159614 started 2026-07-23 22:03:05 UTC - before commit 7593dd8c (2026-0
 
 ## Verification
 
-`scripts/verify_production_services.sh`: 8/8 PASS, including `nebula-site.service enabled=disabled active=inactive`, `port 3000 listener ... belongs to nebula-nextjs.service`, and both `http://127.0.0.1:3000/` and `https://nebulacomponents.shop/` returning 200. Additionally smoke-tested the SSRF guard (INC-0002-adjacent fix) directly against the live domain - `POST /api/audit/start` with a `169.254.169.254` target returned the expected `{"error":"URL is not a public address"}`, confirming the new build is actually serving, not cached.
+`scripts/verify_production_services.sh`: 8/8 PASS, including `nebula-site.service enabled=disabled active=inactive`, `port 3000 listener ... belongs to nebula-nextjs.service`, and both `http://127.0.0.1:3000/` and `https://nebulacomponents.com/` returning 200. Additionally smoke-tested the SSRF guard (INC-0002-adjacent fix) directly against the live domain - `POST /api/audit/start` with a `169.254.169.254` target returned the expected `{"error":"URL is not a public address"}`, confirming the new build is actually serving, not cached.
 
 ## Prevention
 

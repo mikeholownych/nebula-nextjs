@@ -47,7 +47,7 @@
 | Stripe $197 link | Live - https://buy.stripe.com/14AcN58Qca6Ueql2Nk43S08 |
 | deliver_audit.py | Built and tested |
 | nebula-nextjs (audit page) | Active (200 local + public) |
-| AgentMail webhook | Registered - message.received fires to nebulacomponents.shop/webhook/agentmail |
+| AgentMail webhook | Registered - message.received fires to nebulacomponents.com/webhook/agentmail |
 | HOT_LEAD.json sync | Current |
 | customer-ledger.jsonl | Current |
 | Real revenue | **$0** (stats.json confirmed; 2 test payments excluded) |

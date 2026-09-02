@@ -65,7 +65,7 @@ Every job page contains:
 
 The quick start follows install → audit → inspect → decide → verify. Commands come from the current synchronized package documentation, not memory.
 
-The overview remains the canonical `SoftwareApplication` entity with `@id=https://nebulacomponents.shop/resources/citable#software`. Supporting pages use article and breadcrumb schema.
+The overview remains the canonical `SoftwareApplication` entity with `@id=https://nebulacomponents.com/resources/citable#software`. Supporting pages use article and breadcrumb schema.
 
 ## Proof and error behavior
 

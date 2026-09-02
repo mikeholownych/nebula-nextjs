@@ -81,5 +81,5 @@ score = min(score, 100)
 3. **Generic complaint** - "landing pages don't convert" without specifics
    → Lower signal. Still worth monitoring. Don't respond unless you have something specific.
 
-4. **Inbound audit request** - they submitted their URL at nebulacomponents.shop
+4. **Inbound audit request** - they submitted their URL at nebulacomponents.com
    → Already warm. Move directly to audit delivery.

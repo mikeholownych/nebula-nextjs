@@ -158,7 +158,7 @@ Every tenant-owned row carries `organization_id`. Composite indexes begin with `
 
 Release in two stages:
 
-1. **Managed subdomains:** `{agency-slug}.app.nebulacomponents.shop`; tenant resolution is deterministic and reversible.
+1. **Managed subdomains:** `{agency-slug}.app.nebulacomponents.com`; tenant resolution is deterministic and reversible.
 2. **Custom domains:** agency proves ownership with a DNS token; Cloudflare hostname/certificate activation completes before traffic is accepted.
 
 Brand settings are schema validated. CSS values are emitted as a fixed allowlist of custom properties; arbitrary CSS and JavaScript are prohibited. Logos use signed upload URLs, MIME/size validation, randomized object keys, and tenant-scoped storage paths.

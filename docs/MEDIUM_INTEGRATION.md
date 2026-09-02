@@ -124,7 +124,7 @@
 > 3. **Differentiated positioning** - Instead of competing on category ("We're another CRM"), you compete on outcome ("We're the only CRM that catches prospects before they slip away").
 
 **CTA:**
-> If you want to see how your headline scores, I'll audit it for free → nebulacomponents.shop/audit
+> If you want to see how your headline scores, I'll audit it for free → nebulacomponents.com/audit
 >
 > You'll get specific recommendations tied to your exact copy, not generic best practices.
 

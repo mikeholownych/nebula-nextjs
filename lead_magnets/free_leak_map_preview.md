@@ -22,6 +22,6 @@ Give the lead a taste of the actual result before the paid offer.
 7. Priority fix order
 
 ## Next step
-Run your own free leak map: https://nebulacomponents.shop/audit.html
+Run your own free leak map: https://nebulacomponents.com/audit.html
 
 If the result is obvious and you want it shipped, use the Fix Pack: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h

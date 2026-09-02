@@ -1,10 +1,10 @@
 # Captured 2026-08-21T13:59:13Z
 ## Unauthenticated public endpoints (HTTP status)
-https://api.nebulacomponents.shop/healthz -> 200
-https://api.nebulacomponents.shop/openapi.json -> 200
-https://api.nebulacomponents.shop/docs -> 200
-https://api.nebulacomponents.shop/api/crm/funnel -> 200
-https://api.nebulacomponents.shop/audit/stats/aggregate -> 200
-https://api.nebulacomponents.shop/dispatch/run-all -> 405
+https://api.nebulacomponents.com/healthz -> 200
+https://api.nebulacomponents.com/openapi.json -> 200
+https://api.nebulacomponents.com/docs -> 200
+https://api.nebulacomponents.com/api/crm/funnel -> 200
+https://api.nebulacomponents.com/audit/stats/aggregate -> 200
+https://api.nebulacomponents.com/dispatch/run-all -> 405
 ## Repo HTTP server exposure (loopback test)
 GET http://127.0.0.1:8765/.env -> 200 (1173 bytes)

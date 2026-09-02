@@ -20,10 +20,10 @@ The newsletter schedule remains disabled because no production newsletter recipi
   - `2e9d9c18` use valid AgentMail campaign client IDs
   - `dd4e8180` route newsletter sends through newsletter delivery scope
 - Local production service: `nebula-platform-api.service`, active after restart.
-- Public API evidence: `GET https://api.nebulacomponents.shop/openapi.json` returned HTTP 200 and exposed `/api/newsletter/provider-events`.
+- Public API evidence: `GET https://api.nebulacomponents.com/openapi.json` returned HTTP 200 and exposed `/api/newsletter/provider-events`.
 - Public event endpoint evidence: missing and invalid signatures returned HTTP 401.
 - Public revision endpoint: `/build-info` is exposed and independently returned the deployed revision below.
-- Public build endpoint: `GET https://api.nebulacomponents.shop/build-info` returned revision `c8b24c569ff1af42c70be6141da42551ea4c0dfd`.
+- Public build endpoint: `GET https://api.nebulacomponents.com/build-info` returned revision `c8b24c569ff1af42c70be6141da42551ea4c0dfd`.
 - DB: `nebula_audit` on PostgreSQL port 5433 contains the release authority tables and transition guard. This proves the active host schema, not a separately managed remote database.
 - Scheduler: `nebula-newsletter-autopilot` paused during validation. `weekly-roundup-email` was already paused.
 

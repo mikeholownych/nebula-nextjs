@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-14
 **Status:** ✅ ALL SYSTEMS OPERATIONAL
-**URL:** https://nebulacomponents.shop
+**URL:** https://nebulacomponents.com
 
 ---
 
@@ -12,8 +12,8 @@
 
 | Component | Status | Port | URL |
 |-----------|--------|------|-----|
-| Next.js App | ✅ LIVE | 3000 | nebulacomponents.shop |
-| Platform API | ✅ READY | 8769 | api.nebulacomponents.shop |
+| Next.js App | ✅ LIVE | 3000 | nebulacomponents.com |
+| Platform API | ✅ READY | 8769 | api.nebulacomponents.com |
 | Cloudflare Tunnel | ✅ ACTIVE | - | All domains |
 | GA4 Analytics | ✅ TRACKING | - | G-KJ9S3450LH |
 
@@ -47,13 +47,13 @@ tunnel: 8cfcc2e1-cf49-4d57-b412-c1ec0474ffd2
 
 ingress:
   # Nebula Components - Next.js
-  - hostname: nebulacomponents.shop
+  - hostname: nebulacomponents.com
     service: http://localhost:3000
-  - hostname: www.nebulacomponents.shop
+  - hostname: www.nebulacomponents.com
     service: http://localhost:3000
 
   # Platform API
-  - hostname: api.nebulacomponents.shop
+  - hostname: api.nebulacomponents.com
     service: http://localhost:8769
 
   # Other services unchanged
@@ -133,7 +133,7 @@ localhost:8769 (Platform API)
 
 ### Homepage Test
 ```bash
-curl https://nebulacomponents.shop
+curl https://nebulacomponents.com
 ✓ Returns homepage (5ms)
 ✓ Dark design system
 ✓ Inter font loaded
@@ -142,7 +142,7 @@ curl https://nebulacomponents.shop
 
 ### Checkout Test
 ```bash
-curl https://nebulacomponents.shop/checkout.html
+curl https://nebulacomponents.com/checkout.html
 ✓ Returns checkout page (6ms)
 ✓ Stripe links active
 ✓ Design consistent
@@ -151,7 +151,7 @@ curl https://nebulacomponents.shop/checkout.html
 
 ### Dashboard Test
 ```bash
-curl https://nebulacomponents.shop/dashboard
+curl https://nebulacomponents.com/dashboard
 ✓ Returns React component (8ms)
 ✓ TypeScript compiled
 ✓ Client-side rendering
@@ -387,13 +387,13 @@ All systems operational. Next.js serving all production pages. Performance excel
 Test production:
 ```bash
 # Homepage
-curl https://nebulacomponents.shop
+curl https://nebulacomponents.com
 
 # Checkout
-curl https://nebulacomponents.shop/checkout.html
+curl https://nebulacomponents.com/checkout.html
 
 # Dashboard
-curl https://nebulacomponents.shop/dashboard
+curl https://nebulacomponents.com/dashboard
 
 # Performance
 ./scripts/monitor-performance.sh

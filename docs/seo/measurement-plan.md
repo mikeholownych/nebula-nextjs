@@ -1,6 +1,6 @@
 # Analytics & Telemetry Measurement Plan - Nebula Components
 
-**Domain**: `nebulacomponents.shop`
+**Domain**: `nebulacomponents.com`
 **Privacy Stance**: Zero PII Logging, GDPR/CCPA Compliant, PostHog Proxied
 
 ---

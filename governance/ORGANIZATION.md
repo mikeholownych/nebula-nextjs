@@ -74,7 +74,7 @@ Nebula operates as 13 departments managed by the Hermes CEO Agent with delegated
 | Content calendar | `content_calendar_30d.json` | Reference | growth |
 | GTM content angles | `linkedin_gtm_framework.md` | Reference | growth |
 | Voice enforcement | `Nebula_Voice_DNA.md` | Per post | growth |
-| Lead magnet | Free audit at nebulacomponents.shop/audit | Always live | Product (shared) |
+| Lead magnet | Free audit at nebulacomponents.com/audit | Always live | Product (shared) |
 
 **KPIs:** Post engagement rate, content-driven audit requests, follower growth
 **Targets:** 5-7 posts/week, each with specific CTA (never "what do you think?")

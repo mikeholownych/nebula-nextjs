@@ -198,7 +198,7 @@ async def send_dispatch(email: str, manifest: dict) -> bool:
 
     body = {
         "personalizations": [{"to": [{"email": email}]}],
-        "from": {"email": "audits@nebulacomponents.shop", "name": "Nebula Components"},
+        "from": {"email": "audits@nebulacomponents.com", "name": "Nebula Components"},
         "subject": subject,
         "content": [{"type": "text/plain", "value": text_body}],
     }

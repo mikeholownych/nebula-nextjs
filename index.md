@@ -19,12 +19,12 @@ Premium dark-themed HTML/CSS landing page components for SaaS products.
 
 ## Links
 
-- Homepage: https://nebulacomponents.shop
-- Live Demo: https://nebulacomponents.shop/demo.html
-- Hero Generator: https://nebulacomponents.shop/generator.html
-- Pricing Generator: https://nebulacomponents.shop/pricing-generator.html
-- Checkout: https://nebulacomponents.shop/checkout.html
-- Blog: https://blog.nebulacomponents.shop
+- Homepage: https://nebulacomponents.com
+- Live Demo: https://nebulacomponents.com/demo.html
+- Hero Generator: https://nebulacomponents.com/generator.html
+- Pricing Generator: https://nebulacomponents.com/pricing-generator.html
+- Checkout: https://nebulacomponents.com/checkout.html
+- Blog: https://blog.nebulacomponents.com
 
 ## Contact
 

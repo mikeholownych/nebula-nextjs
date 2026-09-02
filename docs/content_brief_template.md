@@ -75,7 +75,7 @@
 **CTA type:** [Comment | Link | DM]
 
 **If comment:** "Comment [KEYWORD] and I'll send you [resource]"
-**If link:** "Get your free audit: nebulacomponents.shop/audit"
+**If link:** "Get your free audit: nebulacomponents.com/audit"
 **If DM:** "DM me [keyword] and I'll [offer]"
 
 **Compliance:**

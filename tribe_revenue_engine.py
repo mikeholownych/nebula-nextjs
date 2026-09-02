@@ -96,7 +96,7 @@ def usable_email(email: str) -> bool:
 def usable_domain(domain: str) -> bool:
     if not domain or EXCLUDE_EMAIL_RE.search(domain):
         return False
-    return domain not in {"example.com", "localhost", "nebulacomponents.shop", "aisyndicate.io"}
+    return domain not in {"example.com", "localhost", "nebulacomponents.com", "aisyndicate.io"}
 
 
 def referral_body(domain: str) -> str:

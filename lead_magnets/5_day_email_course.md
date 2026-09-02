@@ -15,28 +15,28 @@ Paid clicks are being pushed into a page that fails to capture trust, intent, or
 - The five leak zones: headline, CTA, proof, speed, mobile.
 - Self-check: identify which zone is leaking before changing ad targeting.
 
-CTA: Run the free leak audit → https://nebulacomponents.shop/
+CTA: Run the free leak audit → https://nebulacomponents.com/
 
 ## Day 2: Message Match
 - The promise in the ad must match the promise above the fold.
 - If the ad sells a specific pain and the page opens generic, trust drops instantly.
 - Quick fix: rewrite the H1 to mirror the visitor’s buying trigger.
 
-CTA: Paste the page. See the message-match score → https://nebulacomponents.shop/
+CTA: Paste the page. See the message-match score → https://nebulacomponents.com/
 
 ## Day 3: The One-Action Page
 - Most pages leak because they ask for too many actions.
 - One visitor. One intent. One next step.
 - Quick fix: remove weak CTAs like “learn more,” “submit,” and “contact us.”
 
-CTA: Find your CTA leak → https://nebulacomponents.shop/
+CTA: Find your CTA leak → https://nebulacomponents.com/
 
 ## Day 4: Proof Before Pitch
 - Cold visitors do not trust claims. They trust evidence.
 - Proof can be testimonials, numbers, screenshots, named outcomes, guarantees, or visible process.
 - Quick fix: move proof above the first paid ask.
 
-CTA: Check if your page shows proof early enough → https://nebulacomponents.shop/
+CTA: Check if your page shows proof early enough → https://nebulacomponents.com/
 
 ## Day 5: Fix Before More Spend
 - One recovered sale, booked demo, or checkout can pay for the $97 fix pack.

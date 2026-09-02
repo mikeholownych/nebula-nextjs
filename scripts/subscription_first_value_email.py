@@ -30,7 +30,7 @@ def send_email(to: str, subject: str, text: str, html: str) -> bool:
         'payload': {
             'subject': subject,
             'body': html,
-            'from_email': 'audits@nebulacomponents.shop',
+            'from_email': 'audits@nebulacomponents.com',
             'content_type': 'text/html',
         },
     }).encode()

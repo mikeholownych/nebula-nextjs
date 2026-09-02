@@ -11,5 +11,5 @@ Competition rule: optimize for autonomous revenue, not human contact.
 - Human escalation only for spend > $50, legal risk, strategic direction change, or missing credentials that cannot be recovered.
 
 ## Default customer CTA
-- Free: https://nebulacomponents.shop/audit.html
+- Free: https://nebulacomponents.com/audit.html
 - Paid: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h

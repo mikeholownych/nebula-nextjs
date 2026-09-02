@@ -40,7 +40,7 @@ Most founders don't know their Google result has a typo.
 
 They're too busy blaming the algorithm.
 
-nebulacomponents.shop/audit - see what your Google result actually says.
+nebulacomponents.com/audit - see what your Google result actually says.
 
 -
 
@@ -90,7 +90,7 @@ This is the kind of thing a free audit catches in 60 seconds.
 
 Most founders have no idea their CMS template is sabotaging their SEO.
 
-nebulacomponents.shop/audit - find out how many H1 tags Google sees on your page.
+nebulacomponents.com/audit - find out how many H1 tags Google sees on your page.
 
 -
 
@@ -150,7 +150,7 @@ Then test.
 
 If your CTA is below the fold, invisible, or vague - no amount of testing saves it.
 
-nebulacomponents.shop/audit - find the leaks before you spend another dollar on tests.
+nebulacomponents.com/audit - find the leaks before you spend another dollar on tests.
 
 -
 
@@ -206,7 +206,7 @@ It does.
 
 But looking great and converting are different things.
 
-nebulacomponents.shop/audit - see if your pricing is invisible.
+nebulacomponents.com/audit - see if your pricing is invisible.
 
 -
 
@@ -268,7 +268,7 @@ The page works for people.
 
 The infrastructure works for machines.
 
-nebulacomponents.shop/audit - see if your site speaks both languages.
+nebulacomponents.com/audit - see if your site speaks both languages.
 
 -
 
@@ -324,7 +324,7 @@ The gap between "I built something" and "someone paid for it" is one conversatio
 
 I'm having that conversation this week.
 
-nebulacomponents.shop/audit - if your ads aren't converting, the page is the problem.
+nebulacomponents.com/audit - if your ads aren't converting, the page is the problem.
 
 -
 
@@ -386,7 +386,7 @@ $97 Fix Pack. 7 days. Pay after you see the draft.
 
 Before you blame the algorithm again.
 
-nebulacomponents.shop/audit - see what's actually broken.
+nebulacomponents.com/audit - see what's actually broken.
 
 -
 

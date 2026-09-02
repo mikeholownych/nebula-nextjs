@@ -76,8 +76,8 @@ Nebula needs:
 1. Create Google Cloud project
 2. Configure OAuth consent screen
 3. Create OAuth 2.0 credentials:
-   - Authorized JavaScript origins: `https://nebulacomponents.shop`
-   - Authorized redirect URIs: `https://nebulacomponents.shop/auth/callback`
+   - Authorized JavaScript origins: `https://nebulacomponents.com`
+   - Authorized redirect URIs: `https://nebulacomponents.com/auth/callback`
 4. Note: `client_id` and `client_secret`
 
 **Cost:** $0

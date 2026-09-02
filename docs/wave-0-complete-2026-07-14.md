@@ -48,7 +48,7 @@ Wave 0 is complete. All critical stabilization work packages finished:
 - `scripts/discover_topology.sh`
 
 **Discovery:**
-- Cloudflare tunnel: `nebulacomponents.shop` → `localhost:8765`
+- Cloudflare tunnel: `nebulacomponents.com` → `localhost:8765`
 - Caddy reverse proxy: port 8080
 - Python services: `agentic_server.py` (8765), `webhook_server.py` (9000)
 - Database: PostgreSQL (5432), Redis (6379)

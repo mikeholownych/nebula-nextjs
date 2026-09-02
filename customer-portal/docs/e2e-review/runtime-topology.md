@@ -7,10 +7,10 @@ Sources: `ps`, `ss -tlnp`, `systemctl status/cat`, live curl probes, Postgres/Re
 | Surface | Path | Backing process | Notes |
 | --- | --- | --- | --- |
 | nebulacomponents.com / .shop | Cloudflare Tunnel `8cfcc2e1…` → `localhost:3000` | `nebula-nextjs.service` (Next 16.3.1, `next start --port 3000`) | Primary site + Next API routes |
-| api.nebulacomponents.shop | Tunnel → `localhost:8001` | `nebula-platform-api.service` (uvicorn FastAPI) | **Direct public exposure of FastAPI, bypasses Next BFF** — see SEC-P0-1 |
+| api.nebulacomponents.com | Tunnel → `localhost:8001` | `nebula-platform-api.service` (uvicorn FastAPI) | **Direct public exposure of FastAPI, bypasses Next BFF** — see SEC-P0-1 |
 | nebula-api.f489709.workers.dev | Worker → tunnel → `localhost:8001` | same FastAPI | Second public path to the same unauthenticated surface |
 | mcp.nebulacomponents.com / .shop | Tunnel → `localhost:8002` | `nebula-mcp.service` (`mcp_server.py --http`) | MCP endpoint answers without an auth challenge (INVESTIGATE) |
-| li.nebulacomponents.shop | Tunnel → `10.0.8.220:5678` | n8n host | Out of scope but on same tunnel |
+| li.nebulacomponents.com | Tunnel → `10.0.8.220:5678` | n8n host | Out of scope but on same tunnel |
 | launchcrate.io, sdr.launchcrate.io | Tunnel → localhost:3001/8082 | other apps | Shared tunnel catch-all → localhost:3000 |
 
 ## Internal listeners (host)

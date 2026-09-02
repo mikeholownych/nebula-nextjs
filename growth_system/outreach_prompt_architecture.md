@@ -104,7 +104,7 @@ Available frameworks from cold_email_frameworks.json:
 
 Template starting point (REWRITE in your own words, do not copy):
 [Saw your comment on {{creator}}'s post about {{topic}}] - [your specific insight based on research].
-I built a free tool that diagnoses the exact conversion leak on landing pages - curious if it finds the same patterns on yours: nebulacomponents.shop/audit
+I built a free tool that diagnoses the exact conversion leak on landing pages - curious if it finds the same patterns on yours: nebulacomponents.com/audit
 
 Output: The message. Nothing else.
 ```

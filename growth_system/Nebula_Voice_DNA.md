@@ -43,7 +43,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 ## CTA Format
 - Action verb + outcome + link: "Run my free audit →" not "Click here for more info"
 - No friction claim: "No call. No calendar. No card required."
-- Ends at the URL: every CTA points to nebulacomponents.shop or the audit tool.
+- Ends at the URL: every CTA points to nebulacomponents.com or the audit tool.
 - Keyword-gated CTA for LinkedIn: "Comment '{{KEYWORD}}' to get [the thing]"
   - Example: "Comment 'LEAKS' and I'll DM you the 5-point audit checklist"
   - Only use when the offer is a downloadable artifact, not the audit itself

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.com';
 
 test.describe('Pricing Animation Validation', () => {
   test('pricing cards are visible (not stuck opacity:0)', async ({ page }) => {

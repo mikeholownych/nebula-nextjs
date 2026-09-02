@@ -17,7 +17,7 @@ Based on the 7 requirements outlined, mapping existing skills to each requiremen
 
 **Implementation**:
 ```
-/memory/sites/nebulacomponents.shop/
+/memory/sites/nebulacomponents.com/
   ├── brand-voice.md        # Tone, style, positioning
   ├── target-pages.json     # Priority pages with intent
   ├── keywords.json         # Target keywords by funnel stage
@@ -78,7 +78,7 @@ Cron setup:
 ```bash
 hermes cron schedule \
   --schedule "0 9 * * 0" \
-  --prompt "Run ai-visibility-monitor for nebulacomponents.shop" \
+  --prompt "Run ai-visibility-monitor for nebulacomponents.com" \
   --deliver telegram
 ```
 
@@ -148,7 +148,7 @@ Add to memory as aliases:
 ```bash
 # Monday 8am: Ranking check
 cronjob schedule '0 8 * * 1' \
-  --prompt "Run rank-tracker for nebulacomponents.shop, summarize deltas"
+  --prompt "Run rank-tracker for nebulacomponents.com, summarize deltas"
 
 # Wednesday 8am: AI citation scan
 cronjob schedule '0 8 * * 3' \
@@ -174,7 +174,7 @@ cronjob schedule '0 8 * * 5' \
 
 ```
 /memory/sites/
-  ├── nebulacomponents.shop/
+  ├── nebulacomponents.com/
   │   ├── brand-voice.md
   │   ├── keywords.json
   │   └── targets.json
@@ -205,7 +205,7 @@ Agent loads site-specific memory based on `--site` flag or context.
 
 **Start with**: Site Rulebook + Shortcuts (foundation + quick win)
 
-1. Create `/memory/sites/nebulacomponents.shop/` structure
+1. Create `/memory/sites/nebulacomponents.com/` structure
 2. Document brand voice, keywords, AI description
 3. Add shortcut aliases to memory
 4. Test: `/audit` triggers proper workflow

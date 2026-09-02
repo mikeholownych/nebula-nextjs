@@ -22,4 +22,4 @@ Follow these steps to implement your audit findings and boost conversions:
    - Ensure your page loads in under 3 seconds on mobile.
    - Test on iPhone and Android.
 
-**Done?** Email support@nebulacomponents.shop for a free review.
+**Done?** Email support@nebulacomponents.com for a free review.
