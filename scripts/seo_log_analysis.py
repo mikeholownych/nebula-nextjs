@@ -64,7 +64,7 @@ def get_sitemap_paths() -> set:
     import urllib.request
     try:
         req = urllib.request.Request(
-            "http://localhost:3000/sitemap.xml"  # internal fetch,
+            "http://localhost:3000/sitemap.xml",  # internal fetch
             headers={"User-Agent": "NebulaSEOBot/1.0 (+https://nebulacomponents.com/crawler-policy)"}
         )
         with urllib.request.urlopen(req, timeout=10) as r:
