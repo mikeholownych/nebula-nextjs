@@ -187,13 +187,44 @@ The system was subjected to comprehensive failure injection and adversarial test
 | Risk ID | Severity | Category | Description | Mitigation / Status |
 |:---|:---:|:---:|:---|:---|
 | **RSK-01** | MEDIUM | Telemetry | GSC query privacy sampling censors long-tail search terms. | MITIGATED: Disclosed via `query_sample_is_incomplete: true`. |
-| **RSK-02** | MEDIUM | Statistical | Low absolute conversion volume limits statistical power on small cohorts. | MITIGATED: Strict 100-impression eligibility gate; absolute counts reported. |
+| **RSK-02** | MEDIUM | Statistical | Low absolute conversion volume limits statistical power on small cohorts. | **MITIGATED operationally, not statistically resolved.** Minimum evidence gates prevent premature automated conclusions, but inferential sufficiency remains dependent on baseline rate, effect size, sample size, variance, and metric type. |
 | **RSK-03** | LOW | Attribution | Client privacy protections (ITP, ad blockers) may degrade PostHog cookies. | MITIGATED: PostHog is strictly observational; ledger is authoritative. |
 | **RSK-04** | LOW | Operational | Host timezone shift could misalign scheduler relative to UTC. | MITIGATED: All window boundaries calculated strictly in UTC dates. |
 
 ---
 
-## 12. Final Acceptance Verdict
+## 12. Operational Caveats Carried Forward
+
+1. **Local and Deterministic AI Execution Posture**:
+   The AI interpretation layer is currently `LOCAL_VERIFIED` (running deterministic in-process generation and validation). The remote LLM provider integration has been verified only in fail-closed diagnostic testing. Phase 7 and Phase 8 have proven the AI governance architecture, evidence manifest grounding, schema validation, authority boundary enforcement, and failure containment, but have **not** evaluated the behavioral reliability of a live stochastic external model in production. Any future transition to a live remote model must be managed as an independent controlled production change requiring its own formal validation protocol, rather than an operational configuration toggle.
+2. **Inferential Sufficiency vs Evidence Gating**:
+   Eligibility gates (such as the 100-impression threshold and 28-day window) serve to eliminate noise and premature action, but they do not prove statistical power or resolve underlying low-volume variance. Inferential sufficiency requires ongoing contextual evaluation of baseline rates, effect sizes, variance, and cohort volume.
+
+---
+
+## 13. Governance Trigger: Historical Regression Replay Protocol
+
+To prevent future algorithmic or semantic adjustments from silently altering historical conclusions, any modification to:
+- measurement semantics,
+- decision rule definitions (`decision_rule_sets`),
+- AI prompt templates or model providers,
+- experiment evaluation criteria, or
+- production authority boundaries
+
+MUST trigger a formal version upgrade and execute a full historical regression replay against the canonical corpus:
+
+```text
+change implementation
+→ replay historical acquisition evidence
+→ compare old vs new derived outcomes
+→ inspect semantic deltas
+→ approve version
+→ activate
+```
+
+---
+
+## 14. Final Acceptance Verdict
 
 $$\mathbf{ACCEPTED\_FOR\_PRODUCTION\_OPERATION}$$
 
@@ -205,3 +236,4 @@ $$\mathbf{ACCEPTED\_FOR\_PRODUCTION\_OPERATION}$$
 5. Automated daily backup, PostgreSQL trigger immutability, and disaster recovery procedures are proven.
 6. 100% test pass rate achieved across 232 test cases in the platform test suite.
 7. Zero em-dash violations across all shipped documentation, comments, and application code.
+8. Operational evidence accumulation mode activated with architecture freeze.

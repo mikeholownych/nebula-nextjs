@@ -181,3 +181,23 @@ To re-render baseline and weekly observation reports from PostgreSQL:
 uv run python scripts/acquisition_cli.py render-baseline
 uv run python scripts/acquisition_cli.py render-weekly --measurement-id meas_20260830_canonical_w28
 ```
+
+---
+
+## 9. Historical Regression Replay Protocol
+
+When modifying decision rules (`ruleset_*`), measurement definitions (`mver_*`), AI prompt templates, or evaluation algorithms:
+
+1. **Implement & Register New Version**:
+   Create the new version identifier in `decision_rule_sets` or `measurement_versions` in PostgreSQL without mutating previous active rows.
+2. **Execute Replay in SIMULATION / REPLAY Environment**:
+   ```bash
+   uv run python scripts/acquisition_cli.py run \
+     --days 28 \
+     --environment REPLAY \
+     --rule-set ruleset_2_1_0
+   ```
+3. **Compare Derived Outcomes**:
+   Compare recommendations, state classifications, and evaluation metrics between canonical `PRODUCTION` and `REPLAY` environments to audit semantic deltas.
+4. **Approve and Activate**:
+   Following explicit operator review of the delta report, update the active version pointer.
