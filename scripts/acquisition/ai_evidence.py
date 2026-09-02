@@ -296,8 +296,8 @@ def build_evidence_package(
             analysis_id = f"ai_{analysis_type.lower()}_{measurement_id}_{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}"
 
             # Construct Evidence Manifest
-            manifest_dict = {
-                "analysis_id": analysis_id,
+            manifest_content = {
+                "analysis_type": analysis_type,
                 "measurement_ids": sorted(list(set(measurement_ids))),
                 "page_measurement_ids": sorted(list(set(page_measurement_ids))),
                 "query_measurement_ids": sorted(list(set(query_measurement_ids))),
@@ -308,12 +308,15 @@ def build_evidence_package(
                 "measurement_version_id": MEASUREMENT_VERSION,
                 "engine_code_commit": code_commit,
                 "ai_analysis_code_commit": code_commit,
-                "generated_at": now_iso,
                 "environment": environment,
                 "generation_mode": generation_mode,
             }
-            manifest_canonical_json = json.dumps(manifest_dict, sort_keys=True)
+            manifest_canonical_json = json.dumps(manifest_content, sort_keys=True)
             manifest_hash = hashlib.sha256(manifest_canonical_json.encode("utf-8")).hexdigest()
+
+            manifest_dict = dict(manifest_content)
+            manifest_dict["analysis_id"] = analysis_id
+            manifest_dict["generated_at"] = now_iso
             manifest_dict["manifest_hash"] = manifest_hash
 
             # Construct Full Evidence Package Envelope

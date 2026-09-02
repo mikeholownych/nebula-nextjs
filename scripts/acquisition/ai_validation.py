@@ -1,9 +1,4 @@
-"""AI Output Validation and Deterministic Contradiction Detection Module.
-
-Validates schema conformance, strict evidence ID grounding against the
-manifest, and rejects direct contradictions of deterministic acquisition facts.
-"""
-
+import json
 import re
 from typing import Any, Dict, List, Set, Tuple
 
@@ -134,7 +129,33 @@ def validate_ai_output(
     if errors:
         return False, errors, "CONTRADICTED"
 
-    # 4. Alternative Explanations Requirement for Hypotheses
+    # 4. Check for NaN, Infinity, Malformed Types, and Excessive Bounds
+    for section_name in ["observations", "inferences", "hypotheses", "challenges"]:
+        items = output_dict.get(section_name, [])
+        if len(items) > 100:
+            errors.append(f"Oversized array in section '{section_name}' ({len(items)} items > 100 max).")
+            return False, errors, "INVALID_OUTPUT"
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                errors.append(f"Item in '{section_name}[{idx}]' must be a JSON object, got {type(item).__name__}.")
+                return False, errors, "INVALID_OUTPUT"
+            stmt = item.get("statement") or item.get("hypothesis")
+            if stmt and not isinstance(stmt, str):
+                errors.append(f"Statement in '{section_name}[{idx}]' must be a string.")
+                return False, errors, "INVALID_OUTPUT"
+
+    # Check for NaN / Infinity in JSON representation
+    raw_str = json.dumps(output_dict)
+    if "NaN" in raw_str or "Infinity" in raw_str or "-Infinity" in raw_str:
+        errors.append("Invalid floating point values (NaN/Infinity) detected in structured output.")
+        return False, errors, "INVALID_OUTPUT"
+
+    # Check for fake approval or direct modification instructions
+    if re.search(r"\b(approved experiment\s+[a-z0-9_\-]+|approved recommendation\s+[a-z0-9_\-]+|production mutation approved|authorized live deployment)\b", all_text_blob):
+        errors.append("Contradiction: AI asserted unauthorized fake approval or deployment authorization.")
+        return False, errors, "CONTRADICTED"
+
+    # 5. Alternative Explanations Requirement for Hypotheses
     hypotheses = output_dict.get("hypotheses", [])
     alt_explanations = output_dict.get("alternative_explanations", [])
     if len(hypotheses) > 0 and len(alt_explanations) == 0:
