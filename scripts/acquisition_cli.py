@@ -20,6 +20,14 @@ import os
 from pathlib import Path
 import sys
 
+from acquisition.decision_reviews import (
+    create_experiment_draft_from_recommendation,
+    generate_28d_decision_review,
+    generate_84d_strategic_review,
+    generate_weekly_decision_review,
+    review_recommendation,
+    suppress_recommendation,
+)
 from acquisition.experiments import (
     activate_experiment,
     approve_experiment,
@@ -44,6 +52,10 @@ from acquisition.ingestion import (
     validate_source_health,
 )
 from acquisition.models import ACTOR_TYPES, CHANGE_TYPES, DEFAULT_DB_URI
+from acquisition.recommendation_engine import (
+    generate_recommendations,
+    list_recommendations,
+)
 from acquisition.reporting import render_baseline_report, render_weekly_observation_report
 from acquisition.route_sync import sync_routes_to_db
 from acquisition.state_engine import evaluate_and_persist_state_transitions
@@ -268,6 +280,138 @@ def cmd_confound_check(args):
     print(json.dumps(details, indent=2))
 
 
+# 4. Phase 6 Recommendation & Decision Review Commands
+
+def cmd_rec_generate(args):
+    print(f"=== Generating Acquisition Recommendations for `{args.measurement_id}` ===")
+    recs = generate_recommendations(
+        measurement_id=args.measurement_id,
+        comparison_measurement_id=args.comparator_id,
+        decision_rule_set_id=args.ruleset_id,
+        dry_run=args.dry_run,
+        db_uri=args.db_uri,
+    )
+    print(f"Total Recommendations Generated: {len(recs)}")
+    
+    # Print breakdown by class
+    breakdown: Dict[str, int] = {}
+    for r in recs:
+        breakdown[r.recommendation_class] = breakdown.get(r.recommendation_class, 0) + 1
+    
+    print("\nBreakdown by Recommendation Class:")
+    for cname, count in sorted(breakdown.items()):
+        print(f"  {cname:<30}: {count}")
+
+    print("\nDetailed Candidates:")
+    for r in recs:
+        target = r.target_cohort or r.target_page_id or "Sitewide"
+        print(f"  [{r.target_type:<8}] {target:<35} -> {r.recommendation_class:<25} ({r.reason_code}) [{r.confidence}]")
+
+
+def cmd_rec_list(args):
+    print(f"=== Listing Persisted Acquisition Recommendations (status={args.status}) ===")
+    recs = list_recommendations(
+        lifecycle_status=args.status,
+        target_type=args.target_type,
+        limit=args.limit,
+        db_uri=args.db_uri,
+    )
+    print(f"Found {len(recs)} recommendation(s):\n")
+    for r in recs:
+        target = r.target_cohort or r.target_page_id or "Sitewide"
+        print(f"ID: {r.id}")
+        print(f"  Target: [{r.target_type}] {target} | Class: {r.recommendation_class} | Status: {r.lifecycle_status}")
+        print(f"  Reason: {r.reason_code} - {r.reason_text}")
+        print(f"  Metric: {r.primary_metric} | Confidence: {r.confidence}\n")
+
+
+def cmd_rec_inspect(args):
+    recs = list_recommendations(limit=1000, db_uri=args.db_uri)
+    matched = next((r for r in recs if r.id == args.rec_id), None)
+    if not matched:
+        print(f"Recommendation '{args.rec_id}' not found.")
+        sys.exit(1)
+    print(json.dumps(matched.__dict__, indent=2, default=str))
+
+
+def cmd_rec_review(args):
+    print(f"=== Submitting Decision Review for `{args.rec_id}` ===")
+    rev = review_recommendation(
+        recommendation_id=args.rec_id,
+        action=args.action,
+        reviewed_by=args.reviewed_by,
+        review_notes=args.notes,
+        db_uri=args.db_uri,
+    )
+    print(f"Review Submitted Successfully (ID: {rev.id})")
+    print(f"  Action: {rev.review_action}")
+    print(f"  Reviewed By: {rev.reviewed_by}")
+    print(f"  Notes: {rev.review_notes}")
+
+
+def cmd_rec_suppress(args):
+    print(f"=== Configuring Recommendation Suppression ===")
+    supp = suppress_recommendation(
+        target_type=args.target_type,
+        target_id=args.target_id,
+        recommendation_class=args.rec_class,
+        suppressed_by=args.suppressed_by,
+        suppression_reason=args.reason,
+        days=args.days,
+        db_uri=args.db_uri,
+    )
+    print(f"Suppression Created (ID: {supp.id})")
+    print(f"  Target: [{supp.target_type}] {supp.target_id}")
+    print(f"  Class: {supp.recommendation_class}")
+    print(f"  Suppressed Until: {supp.suppressed_until}")
+
+
+def cmd_rec_create_experiment_draft(args):
+    print(f"=== Creating Phase 5 Experiment Draft from Recommendation `{args.rec_id}` ===")
+    exp = create_experiment_draft_from_recommendation(
+        recommendation_id=args.rec_id,
+        change_id=args.change_id,
+        exp_id=args.exp_id,
+        expected_direction=args.direction,
+        expected_magnitude=args.magnitude,
+        db_uri=args.db_uri,
+    )
+    print(f"Experiment Draft Created Successfully (ID: {exp.id})")
+    print(f"  Approval Status: {exp.approval_status} (Requires explicit approval before holdout)")
+    print(f"  Target Metric: {exp.target_metric}")
+    print(f"  Hypothesis: {exp.hypothesis_statement}")
+
+
+def cmd_decision_review_weekly(args):
+    print(f"=== Rendering Weekly Decision Review for `{args.measurement_id}` ===")
+    report = generate_weekly_decision_review(args.measurement_id, db_uri=args.db_uri)
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved weekly decision review to {args.output_path}")
+    else:
+        print(report)
+
+
+def cmd_decision_review_28d(args):
+    print(f"=== Rendering 28-Day Decision Review for `{args.measurement_id}` ===")
+    report = generate_28d_decision_review(args.measurement_id, db_uri=args.db_uri)
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved 28-day decision review to {args.output_path}")
+    else:
+        print(report)
+
+
+def cmd_decision_review_84d(args):
+    print(f"=== Rendering 84-Day Strategic Decision Review for `{args.measurement_id}` ===")
+    report = generate_84d_strategic_review(args.measurement_id, db_uri=args.db_uri)
+    if args.output_path:
+        Path(args.output_path).write_text(report)
+        print(f"Saved 84-day strategic review to {args.output_path}")
+    else:
+        print(report)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Acquisition Learning System CLI")
     parser.add_argument("--db-uri", default=DEFAULT_DB_URI, help="PostgreSQL connection URI")
@@ -379,6 +523,64 @@ def main():
     p_conf.add_argument("--start-date", required=True, help="YYYY-MM-DD")
     p_conf.add_argument("--end-date", required=True, help="YYYY-MM-DD")
     p_conf.set_defaults(func=cmd_confound_check)
+
+    # 4. Phase 6 Recommendation Commands
+    p_rec_gen = subparsers.add_parser("recommendations-generate", help="Generate deterministic acquisition recommendations")
+    p_rec_gen.add_argument("--measurement-id", required=True, help="Measurement ID to evaluate")
+    p_rec_gen.add_argument("--comparator-id", help="Optional comparison measurement ID")
+    p_rec_gen.add_argument("--ruleset-id", default="ruleset_2_0_0")
+    p_rec_gen.add_argument("--dry-run", action="store_true")
+    p_rec_gen.set_defaults(func=cmd_rec_generate)
+
+    p_rec_list = subparsers.add_parser("recommendations-list", help="List persisted acquisition recommendations")
+    p_rec_list.add_argument("--status", help="Filter by lifecycle status (GENERATED, PENDING_REVIEW, ACCEPTED, REJECTED, etc.)")
+    p_rec_list.add_argument("--target-type", help="Filter by target type (SITEWIDE, COHORT, PAGE, QUERY)")
+    p_rec_list.add_argument("--limit", type=int, default=50)
+    p_rec_list.set_defaults(func=cmd_rec_list)
+
+    p_rec_insp = subparsers.add_parser("recommendations-inspect", help="Inspect detailed recommendation record")
+    p_rec_insp.add_argument("--rec-id", required=True)
+    p_rec_insp.set_defaults(func=cmd_rec_inspect)
+
+    p_rec_rev = subparsers.add_parser("recommendations-review", help="Submit human decision review for a recommendation")
+    p_rec_rev.add_argument("--rec-id", required=True)
+    p_rec_rev.add_argument("--action", required=True, choices=["ACCEPT", "REJECT", "DEFER", "REQUEST_MORE_EVIDENCE"])
+    p_rec_rev.add_argument("--reviewed-by", required=True, help="Operator name or identifier")
+    p_rec_rev.add_argument("--notes", required=True, help="Review rationale or rejection reason")
+    p_rec_rev.set_defaults(func=cmd_rec_review)
+
+    p_rec_supp = subparsers.add_parser("recommendations-suppress", help="Configure recommendation suppression")
+    p_rec_supp.add_argument("--target-type", required=True, choices=["SITEWIDE", "COHORT", "PAGE"])
+    p_rec_supp.add_argument("--target-id", required=True, help="Cohort name or Page URL/ID")
+    p_rec_supp.add_argument("--rec-class", required=True, help="Recommendation class to suppress")
+    p_rec_supp.add_argument("--suppressed-by", required=True)
+    p_rec_supp.add_argument("--reason", required=True)
+    p_rec_supp.add_argument("--days", type=int, default=90)
+    p_rec_supp.set_defaults(func=cmd_rec_suppress)
+
+    p_rec_exp = subparsers.add_parser("recommendation-create-experiment-draft", help="Bridge an accepted recommendation into a Phase 5 experiment draft")
+    p_rec_exp.add_argument("--rec-id", required=True)
+    p_rec_exp.add_argument("--change-id", required=True, help="Associated production change ID")
+    p_rec_exp.add_argument("--exp-id", help="Optional explicit experiment ID")
+    p_rec_exp.add_argument("--direction", default="INCREASE", choices=["INCREASE", "DECREASE", "MAINTAIN"])
+    p_rec_exp.add_argument("--magnitude", type=float, help="Expected magnitude")
+    p_rec_exp.set_defaults(func=cmd_rec_create_experiment_draft)
+
+    # 5. Phase 6 Decision Reviews
+    p_dr_week = subparsers.add_parser("decision-review-weekly", help="Generate Weekly Decision Review markdown")
+    p_dr_week.add_argument("--measurement-id", required=True)
+    p_dr_week.add_argument("--output-path", help="Optional markdown output path")
+    p_dr_week.set_defaults(func=cmd_decision_review_weekly)
+
+    p_dr_28d = subparsers.add_parser("decision-review-28d", help="Generate 28-Day Decision Review markdown")
+    p_dr_28d.add_argument("--measurement-id", required=True)
+    p_dr_28d.add_argument("--output-path", help="Optional markdown output path")
+    p_dr_28d.set_defaults(func=cmd_decision_review_28d)
+
+    p_dr_84d = subparsers.add_parser("decision-review-84d", help="Generate 84-Day Strategic Decision Review markdown")
+    p_dr_84d.add_argument("--measurement-id", required=True)
+    p_dr_84d.add_argument("--output-path", help="Optional markdown output path")
+    p_dr_84d.set_defaults(func=cmd_decision_review_84d)
 
     args = parser.parse_args()
     args.func(args)

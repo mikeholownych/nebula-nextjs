@@ -31,11 +31,20 @@ uv run python scripts/acquisition_cli.py sync-routes
 # 4. Validate external and internal source connectivity (GSC, GA4, PostgreSQL)
 uv run python scripts/acquisition_cli.py validate-sources
 
-# 5. Render ACQUISITION_BASELINE.md from PostgreSQL
-uv run python scripts/acquisition_cli.py render-baseline
+# 7. Controlled Experiment Lifecycle (Phase 5)
+uv run python scripts/acquisition_cli.py exp-create --exp-id exp_20260902_sample --change-id chg_20260902_001 --hypothesis "Test hypothesis" --metric gsc_total_impressions --direction INCREASE --pre-meas-id meas_20260830_canonical_w28
+uv run python scripts/acquisition_cli.py exp-approve --exp-id exp_20260902_sample --approved-by "mike"
+uv run python scripts/acquisition_cli.py exp-activate --exp-id exp_20260902_sample --holdout-days 28
+uv run python scripts/acquisition_cli.py exp-eval --exp-id exp_20260902_sample --post-meas-id meas_20260930_canonical_w28
 
-# 6. Render Weekly Observation Report
-uv run python scripts/acquisition_cli.py render-weekly meas_20260902_baseline_v2
+# 8. Deterministic Recommendations & Decision Reviews (Phase 6)
+uv run python scripts/acquisition_cli.py recommendations-generate --measurement-id meas_20260830_canonical_w28
+uv run python scripts/acquisition_cli.py recommendations-list
+uv run python scripts/acquisition_cli.py recommendations-review --rec-id <REC_ID> --action ACCEPT --reviewed-by "mike" --notes "Approved for experiment"
+uv run python scripts/acquisition_cli.py recommendation-create-experiment-draft --rec-id <REC_ID> --change-id <CHG_ID>
+uv run python scripts/acquisition_cli.py decision-review-weekly --measurement-id meas_20260830_canonical_w28
+uv run python scripts/acquisition_cli.py decision-review-28d --measurement-id meas_20260830_canonical_w28
+uv run python scripts/acquisition_cli.py decision-review-84d --measurement-id meas_20260830_canonical_w28
 ```
 
 ---
@@ -65,21 +74,20 @@ ORDER BY generated_at DESC
 LIMIT 5;
 ```
 
-### 4.2 Check Source Execution Latency & Quotas
+### 4.2 Check Active Recommendations & Lifecycle
 ```sql
-SELECT measurement_id, source_system, source_property, response_status,
-       status, records_received, execution_duration_ms, requested_at
-FROM acquisition_source_runs
-ORDER BY requested_at DESC
-LIMIT 10;
+SELECT id, target_type, target_cohort, target_page_id, recommendation_class,
+       evidence_status, reason_code, confidence, lifecycle_status, created_at
+FROM acquisition_recommendations
+ORDER BY created_at DESC
+LIMIT 20;
 ```
 
-### 4.3 Check Recent Search Visibility State Transitions
+### 4.3 Check Active Experiment Holdouts & Approvals
 ```sql
-SELECT pr.canonical_url, ast.dimension, ast.from_state, ast.to_state,
-       ast.transition_type, ast.transition_reason, ast.occurred_at
-FROM acquisition_state_transitions ast
-JOIN page_registry pr ON ast.page_id = pr.id
-ORDER BY ast.occurred_at DESC
-LIMIT 20;
+SELECT id, change_id, approval_status, target_metric, expected_direction,
+       holdout_period_days, approved_by, activated_at
+FROM acquisition_experiments
+ORDER BY created_at DESC
+LIMIT 10;
 ```

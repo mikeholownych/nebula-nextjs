@@ -319,3 +319,132 @@ class EvaluationRecord:
     synthesis_notes: str = ""
     learning_accumulated: Dict[str, Any] = field(default_factory=dict)
     evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+# ---------------------------------------------------------------------------
+# Phase 6 Constants & Dataclasses
+# ---------------------------------------------------------------------------
+
+RECOMMENDATION_CLASSES: List[str] = [
+    "NO_CHANGE",
+    "OBSERVE",
+    "INVESTIGATE",
+    "REVIEW_QUERY_ALIGNMENT",
+    "REVIEW_CONTENT_ALIGNMENT",
+    "REVIEW_INTERNAL_LINKING",
+    "REVIEW_SERP_PRESENTATION",
+    "REVIEW_TECHNICAL_INDEXABILITY",
+    "REVIEW_CANNIBALIZATION",
+    "CONSOLIDATE",
+    "RETIRE",
+    "EXPAND_ADJACENCY",
+    "RUN_CONTROLLED_EXPERIMENT",
+]
+
+EVIDENCE_STATUSES: List[str] = [
+    "SUFFICIENT",
+    "INSUFFICIENT",
+    "INCOMPLETE",
+    "BLOCKED",
+]
+
+RECOMMENDATION_LIFECYCLE_STATUSES: List[str] = [
+    "GENERATED",
+    "PENDING_REVIEW",
+    "ACCEPTED",
+    "REJECTED",
+    "DEFERRED",
+    "SUPERSEDED",
+    "EXPIRED",
+]
+
+REVIEW_ACTIONS: List[str] = [
+    "ACCEPT",
+    "REJECT",
+    "DEFER",
+    "REQUEST_MORE_EVIDENCE",
+]
+
+METRIC_DIRECTIONS: List[str] = [
+    "HIGHER_IS_BETTER",
+    "LOWER_IS_BETTER",
+    "TARGET_RANGE",
+    "NON_DIRECTIONAL",
+]
+
+
+@dataclass
+class MetricSemantics:
+    metric_name: str
+    metric_family: str
+    preferred_direction: str
+    comparison_method: str
+    materiality_rule: Dict[str, Any]
+    low_volume_rule: str = "NONE"
+    low_volume_threshold: int = 5
+    null_semantics: str = "ZERO_PRESENCE_NULL"
+    eligibility_requirements: Dict[str, Any] = field(default_factory=dict)
+    description: str = ""
+
+
+@dataclass
+class QueryIntent:
+    id: str
+    page_id: str
+    primary_topic: str
+    secondary_topics: List[str]
+    target_query_patterns: List[str]
+    intended_intent: str = "COMMERCIAL"
+    version: int = 1
+
+
+@dataclass
+class RecommendationRecord:
+    id: str
+    measurement_id: str
+    decision_rule_set_id: str
+    target_type: str  # SITEWIDE, COHORT, PAGE, QUERY
+    detected_condition: str
+    trend_classification: str
+    evidence_status: str  # SUFFICIENT, INSUFFICIENT, INCOMPLETE, BLOCKED
+    recommendation_class: str
+    reason_code: str
+    reason_text: str
+    primary_metric: str
+    supporting_metrics: Dict[str, Any]
+    confidence: str  # NONE, LOW, MEDIUM, HIGH
+    comparison_measurement_id: Optional[str] = None
+    target_page_id: Optional[str] = None
+    target_cohort: Optional[str] = None
+    search_state: Optional[str] = None
+    product_state: Optional[str] = None
+    uncertainties: List[str] = field(default_factory=list)
+    minimum_observation_period: int = 28
+    do_not_change_conditions: List[str] = field(default_factory=list)
+    lifecycle_status: str = "GENERATED"
+    experiment_candidate_id: Optional[str] = None
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class RecommendationReviewRecord:
+    id: str
+    recommendation_id: str
+    reviewed_by: str
+    review_action: str
+    review_notes: str
+    reviewed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class RecommendationSuppressionRecord:
+    id: str
+    target_type: str
+    target_id: str
+    recommendation_class: str
+    suppressed_by: str
+    suppression_reason: str
+    suppressed_until: datetime
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
