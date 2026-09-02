@@ -55,8 +55,8 @@ class ComparisonVector:
     delta_impressions: int
     delta_impressions_pct: Optional[float]
     delta_clicks: int
-    delta_macro_position: float
-    delta_dimensioned_position: float
+    delta_macro_position: Optional[float]
+    delta_dimensioned_position: Optional[float]
     delta_unique_pages: int
     delta_unique_queries: int
     delta_organic_sessions: int
@@ -312,10 +312,14 @@ def compare_measurements(
     )
 
     d_imps = curr["gsc_total_impressions"] - comp["gsc_total_impressions"]
-    d_imps_pct = (d_imps / comp["gsc_total_impressions"] * 100.0) if comp["gsc_total_impressions"] > 0 else None
-    d_clicks = curr["gsc_total_clicks"] - comp["gsc_total_clicks"]
-    d_macro_pos = curr["gsc_aggregate_position"] - comp["gsc_aggregate_position"]
-    d_dim_pos = curr["dimensioned_impression_weighted_position"] - comp["dimensioned_impression_weighted_position"]
+    curr_pos = float(curr["gsc_aggregate_position"]) if (curr["gsc_aggregate_position"] is not None and curr["gsc_total_impressions"] > 0) else None
+    comp_pos = float(comp["gsc_aggregate_position"]) if (comp["gsc_aggregate_position"] is not None and comp["gsc_total_impressions"] > 0) else None
+    d_macro_pos = (curr_pos - comp_pos) if (curr_pos is not None and comp_pos is not None) else None
+
+    curr_dim = float(curr["dimensioned_impression_weighted_position"]) if (curr["dimensioned_impression_weighted_position"] is not None and curr["gsc_total_impressions"] > 0) else None
+    comp_dim = float(comp["dimensioned_impression_weighted_position"]) if (comp["dimensioned_impression_weighted_position"] is not None and comp["gsc_total_impressions"] > 0) else None
+    d_dim_pos = (curr_dim - comp_dim) if (curr_dim is not None and comp_dim is not None) else None
+
     d_pages = curr["unique_visible_pages"] - comp["unique_visible_pages"]
     d_queries = curr["unique_visible_queries"] - comp["unique_visible_queries"]
     d_sessions = curr["ga4_organic_sessions"] - comp["ga4_organic_sessions"]

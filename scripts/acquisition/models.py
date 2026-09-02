@@ -2,7 +2,7 @@
 
 import os
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Any, Dict, List, Optional, Set
 
 BASE_URL = "https://nebulacomponents.com"
@@ -85,6 +85,64 @@ TREND_CLASSES = [
     "TREND_NOT_ESTABLISHED",
 ]
 
+# Change Types
+CHANGE_TYPES = [
+    "CONTENT",
+    "TITLE_META",
+    "INTERNAL_LINKING",
+    "STRUCTURED_DATA",
+    "ROUTE",
+    "CANONICAL",
+    "INDEXABILITY",
+    "NAVIGATION",
+    "CTA",
+    "LAYOUT",
+    "TEARDOWN_CONTENT",
+    "CASE_STUDY_CONTENT",
+    "TECHNICAL_SEO",
+    "EXPERIMENTAL",
+    "OTHER",
+]
+
+# Actor Types
+ACTOR_TYPES = [
+    "HUMAN",
+    "TERMINAL_AGENT",
+    "AUTOMATION",
+    "SYSTEM",
+]
+
+# Experiment Approval States
+EXPERIMENT_STATUSES = [
+    "DRAFT",
+    "PENDING_APPROVAL",
+    "APPROVED",
+    "RUNNING",
+    "HOLDOUT",
+    "ELIGIBLE_FOR_EVALUATION",
+    "EVALUATED",
+    "CANCELLED",
+    "REJECTED",
+]
+
+# Evaluation Outcomes (Phase 2 & 5 canonical 6 outcomes)
+EVALUATION_OUTCOMES = [
+    "SUPPORTED",
+    "PARTIALLY_SUPPORTED",
+    "NOT_SUPPORTED",
+    "INCONCLUSIVE",
+    "CONFOUNDED",
+    "REGRESSED",
+]
+
+# Confounding Severity Levels
+CONFOUNDING_LEVELS = [
+    "NONE",
+    "LOW",
+    "MATERIAL",
+    "CRITICAL",
+]
+
 
 @dataclass
 class PageRecord:
@@ -104,7 +162,7 @@ class GSCRawTotals:
     impressions: int
     clicks: int
     ctr: float
-    position: float
+    position: Optional[float]
     source: str = "dimensionless_aggregate"
     is_complete: bool = True
 
@@ -158,8 +216,8 @@ class NormalizedMeasurement:
     # Search Visibility
     gsc_total_impressions: int
     gsc_total_clicks: int
-    gsc_aggregate_position: float
-    dimensioned_impression_weighted_position: float
+    gsc_aggregate_position: Optional[float]
+    dimensioned_impression_weighted_position: Optional[float]
     unique_visible_pages: int
     unique_visible_queries: int
     
@@ -191,3 +249,73 @@ class NormalizedMeasurement:
     known_blockers: List[str] = field(default_factory=list)
     measurement_code_commit: str = ""
     application_commit: Optional[str] = None
+
+
+@dataclass
+class ChangeRecord:
+    id: str
+    change_type: str
+    summary: str
+    affected_page_ids: List[str]
+    affected_cohorts: List[str]
+    deployed_commit: str
+    deployed_at: datetime
+    expected_impact: str
+    actor_type: str = "SYSTEM"
+    execution_status: str = "DEPLOYED"
+    pre_change_measurement_id: Optional[str] = None
+    min_observation_days: int = 28
+    evaluation_due_date: Optional[date] = None
+    logged_by: str = "system"
+    rollback_change_id: Optional[str] = None
+    rollback_reason: Optional[str] = None
+    rollback_at: Optional[datetime] = None
+
+
+@dataclass
+class ExperimentRecord:
+    id: str
+    change_id: str
+    hypothesis_statement: str
+    target_metric: str
+    expected_direction: str  # INCREASE, DECREASE, MAINTAIN
+    pre_metric_value: float
+    pre_change_measurement_id: str
+    expected_magnitude: Optional[float] = None
+    decision_rule_set_id: str = "ruleset_2_0_0"
+    measurement_version_id: str = "mver_2_0_0"
+    approval_status: str = "DRAFT"
+    approved_by: Optional[str] = None
+    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    effective_change_at: Optional[datetime] = None
+    scheduled_evaluation_at: Optional[datetime] = None
+    do_not_change_until: Optional[datetime] = None
+    minimum_holdout_days: int = 28
+    override_reason: Optional[str] = None
+    override_actor: Optional[str] = None
+    override_at: Optional[datetime] = None
+    cancelled_at: Optional[datetime] = None
+    cancelled_by: Optional[str] = None
+    cancellation_reason: Optional[str] = None
+
+
+@dataclass
+class EvaluationRecord:
+    id: Optional[str]
+    experiment_id: str
+    post_measurement_id: str
+    decision_rule_set_id: str
+    outcome: str  # SUPPORTED, PARTIALLY_SUPPORTED, NOT_SUPPORTED, INCONCLUSIVE, CONFOUNDED, REGRESSED
+    pre_value: float
+    post_value: float
+    delta_value: float
+    delta_percentage: Optional[float]
+    confidence_level: str  # HIGH, MEDIUM, LOW, NONE
+    confounding_level: str = "NONE"
+    confounding_details: Dict[str, Any] = field(default_factory=dict)
+    wall_clock_elapsed_days: int = 0
+    finalized_source_days: int = 0
+    is_clean_window: bool = True
+    synthesis_notes: str = ""
+    learning_accumulated: Dict[str, Any] = field(default_factory=dict)
+    evaluated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))

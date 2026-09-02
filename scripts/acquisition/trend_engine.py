@@ -119,10 +119,40 @@ def classify_sitewide_trend(
             },
         )
 
+    # 4. Search Visibility Newly Established / Unobserved Ranking Check
+    if vector.delta_macro_position is None:
+        if vector.delta_impressions > 0:
+            return TrendResult(
+                classification="TREND_NOT_ESTABLISHED",
+                target_scope="sitewide",
+                target_identifier="sitewide_macro",
+                confidence="NONE",
+                primary_reason=(
+                    f"Search visibility was newly established (0 -> {vector.delta_impressions} impressions). "
+                    f"No prior ranking baseline exists for longitudinal trend calculation."
+                ),
+                evidence_gate_passed=True,
+                comparison_class=vector.comparison_class,
+                overlap_days=vector.overlap_days,
+                metrics_summary={"delta_imps": vector.delta_impressions, "macro_pos": "ESTABLISHED"},
+            )
+        else:
+            return TrendResult(
+                classification="INSUFFICIENT_EVIDENCE",
+                target_scope="sitewide",
+                target_identifier="sitewide_macro",
+                confidence="NONE",
+                primary_reason="No search impressions observed in either current or comparator period.",
+                evidence_gate_passed=False,
+                comparison_class=vector.comparison_class,
+                overlap_days=vector.overlap_days,
+                metrics_summary={"delta_imps": 0, "macro_pos": "NOT_OBSERVED"},
+            )
+
     d_pct = vector.delta_impressions_pct if vector.delta_impressions_pct is not None else 0.0
     d_pos = vector.delta_macro_position  # Note: negative delta means rank improved (e.g. 65.6 -> 50.0 is -15.6)
 
-    # 4. Volatility Check
+    # 5. Volatility Check
     if abs(d_pos) >= 15.0 and abs(d_pct) < 10.0:
         return TrendResult(
             classification="VOLATILE",

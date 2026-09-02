@@ -142,6 +142,37 @@ def fetch_internal_ledger_totals(
     return totals
 
 
+def validate_source_health(db_uri: str = DEFAULT_DB_URI) -> Dict[str, Any]:
+    """Validate external API and database health for acquisition ingestion."""
+    results: Dict[str, Any] = {}
+
+    # 1. Database
+    try:
+        with psycopg.connect(db_uri, connect_timeout=3) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT count(*) FROM page_registry;")
+                cnt = cur.fetchone()[0]
+                results["database"] = {"status": "OK", "page_count": cnt}
+    except Exception as e:
+        results["database"] = {"status": "ERROR", "error": str(e)}
+
+    # 2. GSC
+    try:
+        gsc_test = run_claude_seo("gsc", "summary", timeout=15)
+        results["gsc"] = {"status": "OK" if "error" not in gsc_test else "ERROR", "details": gsc_test.get("status", "available")}
+    except Exception as e:
+        results["gsc"] = {"status": "ERROR", "error": str(e)}
+
+    # 3. GA4
+    try:
+        ga4_test = run_claude_seo("ga4", "summary", timeout=15)
+        results["ga4"] = {"status": "OK" if "error" not in ga4_test else "ERROR", "details": ga4_test.get("status", "available")}
+    except Exception as e:
+        results["ga4"] = {"status": "ERROR", "error": str(e)}
+
+    return results
+
+
 def compute_position_buckets(page_best_positions: Dict[str, Optional[float]]) -> Dict[str, int]:
     """
     Compute distribution of best observed page positions into half-open intervals [min, max).
@@ -210,7 +241,8 @@ def normalize_measurement_envelope(
     totals = gsc_raw.get("totals", {})
     gsc_total_imps = int(totals.get("impressions", 0))
     gsc_total_clicks = int(totals.get("clicks", 0))
-    gsc_macro_pos = float(totals.get("position", 0.0))
+    raw_pos = totals.get("position")
+    gsc_macro_pos = float(raw_pos) if (raw_pos is not None and gsc_total_imps > 0) else None
 
     # Process GSC dimensioned rows
     raw_rows = gsc_raw.get("rows", [])
@@ -244,7 +276,7 @@ def normalize_measurement_envelope(
     # Calculate dimensioned weighted avg position
     total_dim_imps = sum(p["impressions"] for p in page_stats.values())
     total_dim_weighted_sum = sum(p["weighted_sum"] for p in page_stats.values())
-    dimensioned_pos = (total_dim_weighted_sum / total_dim_imps) if total_dim_imps > 0 else 0.0
+    dimensioned_pos = (total_dim_weighted_sum / total_dim_imps) if total_dim_imps > 0 else None
 
     # Calculate position buckets
     page_best_positions = {p: s["best_pos"] for p, s in page_stats.items() if s["best_pos"] != float("inf")}
