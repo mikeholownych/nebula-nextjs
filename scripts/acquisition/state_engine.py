@@ -19,7 +19,16 @@ SEARCH_STATE_RANK = {
 
 
 def evaluate_page_search_state(impressions: int, clicks: int, best_pos: Optional[float]) -> str:
-    """Evaluate search visibility state for a single page in an observation window."""
+    """
+    Evaluate search visibility state for a single page in an observation window.
+    
+    Uses exact half-open intervals [min, max):
+    - TOP_10: [1.0, 11.0)
+    - TOP_20: [11.0, 21.0)
+    - TOP_30: [21.0, 31.0)
+    - TOP_50: [31.0, 51.0)
+    - POS_51_PLUS: [51.0, inf)
+    """
     if impressions == 0:
         return "UNSEEN"
     if clicks > 0:
@@ -27,13 +36,13 @@ def evaluate_page_search_state(impressions: int, clicks: int, best_pos: Optional
     if best_pos is None:
         return "SERP_IMPRESSION"
     
-    if best_pos <= 10.4:
+    if best_pos < 11.0:
         return "TOP_10"
-    if best_pos <= 20.4:
+    if best_pos < 21.0:
         return "TOP_20"
-    if best_pos <= 30.4:
+    if best_pos < 31.0:
         return "TOP_30"
-    if best_pos <= 50.4:
+    if best_pos < 51.0:
         return "TOP_50"
     return "POS_51_PLUS"
 
@@ -69,7 +78,8 @@ def evaluate_and_persist_state_transitions(
     Evaluate search visibility and product journey states for all pages and log transitions.
     
     Guarantees:
-    - Missing pages in unfinalized data do not trigger false regressions.
+    - First observation of a page is recorded as INITIAL, never false PROGRESSION.
+    - Genuine PROGRESSION or REGRESSION requires verified presence in prev_meas_id.
     - Transitions are persisted immutably to acquisition_state_transitions.
     """
     transitions: List[Dict[str, Any]] = []
@@ -91,7 +101,7 @@ def evaluate_and_persist_state_transitions(
 
             # 2. Fetch previous page measurements if prev_meas_id provided
             prev_pages: Dict[str, Dict[str, Any]] = {}
-            if prev_meas_id:
+            if prev_meas_id and prev_meas_id != current_meas_id:
                 cur.execute(
                     """
                     SELECT page_id, impressions, clicks, best_position,
@@ -109,27 +119,24 @@ def evaluate_and_persist_state_transitions(
                     curr_r["impressions"], curr_r["clicks"], curr_r["best_position"]
                 )
                 
-                prev_search_state = "UNSEEN"
                 if page_id in prev_pages:
                     prev_r = prev_pages[page_id]
                     prev_search_state = evaluate_page_search_state(
                         prev_r["impressions"], prev_r["clicks"], prev_r["best_position"]
                     )
-                elif not prev_meas_id:
-                    prev_search_state = "INITIAL"
-
-                if prev_search_state == "INITIAL":
-                    t_type = "INITIAL"
-                    reason = f"Initial baseline state: {curr_search_state}"
-                elif SEARCH_STATE_RANK.get(curr_search_state, 0) > SEARCH_STATE_RANK.get(prev_search_state, 0):
-                    t_type = "PROGRESSION"
-                    reason = f"Search rank/visibility improved from {prev_search_state} to {curr_search_state}"
-                elif SEARCH_STATE_RANK.get(curr_search_state, 0) < SEARCH_STATE_RANK.get(prev_search_state, 0):
-                    t_type = "REGRESSION"
-                    reason = f"Search rank/visibility regressed from {prev_search_state} to {curr_search_state}"
+                    if SEARCH_STATE_RANK.get(curr_search_state, 0) > SEARCH_STATE_RANK.get(prev_search_state, 0):
+                        t_type = "PROGRESSION"
+                        reason = f"Search rank/visibility improved from {prev_search_state} to {curr_search_state}"
+                    elif SEARCH_STATE_RANK.get(curr_search_state, 0) < SEARCH_STATE_RANK.get(prev_search_state, 0):
+                        t_type = "REGRESSION"
+                        reason = f"Search rank/visibility regressed from {prev_search_state} to {curr_search_state}"
+                    else:
+                        t_type = "MAINTAINED"
+                        reason = f"Search visibility maintained at {curr_search_state}"
                 else:
-                    t_type = "MAINTAINED"
-                    reason = f"Search visibility maintained at {curr_search_state}"
+                    prev_search_state = "INITIAL"
+                    t_type = "INITIAL"
+                    reason = f"Initial observed state: {curr_search_state}"
 
                 transition_record = {
                     "page_id": page_id,

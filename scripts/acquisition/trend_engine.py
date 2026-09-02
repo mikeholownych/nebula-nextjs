@@ -1,4 +1,4 @@
-"""Deterministic Trend Classification Engine."""
+"""Deterministic Trend Classification Engine with Temporal & Comparison Validation."""
 
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
@@ -17,6 +17,8 @@ class TrendResult:
     confidence: str    # 'HIGH', 'MEDIUM', 'LOW', 'NONE'
     primary_reason: str
     evidence_gate_passed: bool
+    comparison_class: str
+    overlap_days: int
     metrics_summary: Dict[str, Any]
 
 
@@ -30,14 +32,11 @@ def classify_sitewide_trend(
     """
     Classify sitewide acquisition trend deterministically based on rule-set criteria.
     
-    Rules:
-    1. BLOCKED if source failure, unfinalized lag, or critical blocker.
-    2. INSUFFICIENT_EVIDENCE if impressions < 100 or window < 28 days.
-    3. VOLATILE if position changes by > 15 ranks between finalized periods.
-    4. IMPROVING if impressions up >= 10% and rank improves/maintains.
-    5. DECLINING if impressions down >= 10% and rank worsens.
-    6. STABLE if changes within statistical noise band (+/- 5% imps, +/- 2 ranks).
-    7. STALLED if high impressions without clicks/conversions over consecutive periods.
+    Invariants & Eligibility Gates:
+    1. BLOCKED if pipeline failure or unfinalized data lag.
+    2. INSUFFICIENT_EVIDENCE if effective observation days < 28 or impressions < 100.
+    3. TREND_NOT_ESTABLISHED / INSUFFICIENT_EVIDENCE if comparison has overlap > 0 or is a methodology reconciliation.
+    4. IMPROVING / DECLINING / STABLE / VOLATILE only permitted on validated ADJACENT_PERIOD comparisons.
     """
     # 1. Gate: Pipeline Health & Finalization
     if current_completeness == "BLOCKED" or current_finalization != "FINAL":
@@ -48,25 +47,82 @@ def classify_sitewide_trend(
             confidence="HIGH",
             primary_reason="Measurement pipeline has active blocker or unfinalized data lag.",
             evidence_gate_passed=False,
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
             metrics_summary={"status": current_completeness, "finalization": current_finalization},
         )
 
-    # 2. Gate: Evidence Eligibility Gate
-    if vector.window_days < min_holdout_days:
+    # 2. Gate: Comparison Eligibility & Overlap
+    if vector.comparison_class != "ADJACENT_PERIOD" or vector.overlap_days > 0:
+        if vector.comparison_class == "OVERLAPPING_PERIOD":
+            reason = (
+                f"Comparison has {vector.overlap_days} overlapping source dates ({vector.overlap_ratio * 100:.1f}%). "
+                f"Longitudinal trend classification requires a non-overlapping ADJACENT_PERIOD (0% overlap)."
+            )
+            return TrendResult(
+                classification="INSUFFICIENT_EVIDENCE",
+                target_scope="sitewide",
+                target_identifier="sitewide_macro",
+                confidence="NONE",
+                primary_reason=reason,
+                evidence_gate_passed=False,
+                comparison_class=vector.comparison_class,
+                overlap_days=vector.overlap_days,
+                metrics_summary={"overlap_days": vector.overlap_days, "overlap_ratio": vector.overlap_ratio},
+            )
+        elif vector.comparison_class == "METHODOLOGY_RECONCILIATION":
+            reason = (
+                f"Comparison between {vector.current_meas_id} and {vector.comparison_meas_id} is a "
+                f"METHODOLOGY_RECONCILIATION, not longitudinal progress."
+            )
+            return TrendResult(
+                classification="TREND_NOT_ESTABLISHED",
+                target_scope="sitewide",
+                target_identifier="sitewide_macro",
+                confidence="NONE",
+                primary_reason=reason,
+                evidence_gate_passed=False,
+                comparison_class=vector.comparison_class,
+                overlap_days=vector.overlap_days,
+                metrics_summary={"comparison_class": vector.comparison_class},
+            )
+        else:
+            return TrendResult(
+                classification="INSUFFICIENT_EVIDENCE",
+                target_scope="sitewide",
+                target_identifier="sitewide_macro",
+                confidence="NONE",
+                primary_reason=f"Comparison class '{vector.comparison_class}' is not eligible for longitudinal trend classification.",
+                evidence_gate_passed=False,
+                comparison_class=vector.comparison_class,
+                overlap_days=vector.overlap_days,
+                metrics_summary={"comparison_class": vector.comparison_class},
+            )
+
+    # 3. Gate: Effective Observation Duration Gate
+    if vector.current_effective_days < min_holdout_days or vector.comparison_effective_days < min_holdout_days:
         return TrendResult(
             classification="INSUFFICIENT_EVIDENCE",
             target_scope="sitewide",
             target_identifier="sitewide_macro",
             confidence="NONE",
-            primary_reason=f"Observation window ({vector.window_days}d) is below evidence eligibility gate ({min_holdout_days}d).",
+            primary_reason=(
+                f"Effective finalized window ({vector.current_effective_days}d current, "
+                f"{vector.comparison_effective_days}d comp) is below evidence eligibility gate ({min_holdout_days}d)."
+            ),
             evidence_gate_passed=False,
-            metrics_summary={"window_days": vector.window_days},
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
+            metrics_summary={
+                "current_effective_days": vector.current_effective_days,
+                "comp_effective_days": vector.comparison_effective_days,
+            },
         )
 
     d_pct = vector.delta_impressions_pct if vector.delta_impressions_pct is not None else 0.0
     d_pos = vector.delta_macro_position  # Note: negative delta means rank improved (e.g. 65.6 -> 50.0 is -15.6)
 
-    # 3. Volatility Check
+    # 4. Volatility Check
     if abs(d_pos) >= 15.0 and abs(d_pct) < 10.0:
         return TrendResult(
             classification="VOLATILE",
@@ -75,34 +131,40 @@ def classify_sitewide_trend(
             confidence="MEDIUM",
             primary_reason=f"Extreme position fluctuation ({d_pos:+.1f} ranks) without proportional impression growth.",
             evidence_gate_passed=True,
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
             metrics_summary={"delta_pos": d_pos, "delta_imps_pct": d_pct},
         )
 
-    # 4. Improving Trend
+    # 5. Improving Trend
     if (d_pct >= 10.0 and d_pos <= 1.0) or (d_pos <= -5.0 and d_pct >= -5.0):
         return TrendResult(
             classification="IMPROVING",
             target_scope="sitewide",
             target_identifier="sitewide_macro",
             confidence="HIGH",
-            primary_reason=f"Impressions grew by {d_pct:+.1f}% and ranking position moved by {d_pos:+.1f} ranks.",
+            primary_reason=f"Impressions grew by {d_pct:+.1f}% and ranking position moved by {d_pos:+.1f} ranks over adjacent periods.",
             evidence_gate_passed=True,
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
             metrics_summary={"delta_imps": vector.delta_impressions, "delta_pos": d_pos},
         )
 
-    # 5. Declining Trend
+    # 6. Declining Trend
     if d_pct <= -10.0 and d_pos > 2.0:
         return TrendResult(
             classification="DECLINING",
             target_scope="sitewide",
             target_identifier="sitewide_macro",
             confidence="HIGH",
-            primary_reason=f"Impressions dropped by {d_pct:+.1f}% and ranking position regressed by {d_pos:+.1f} ranks.",
+            primary_reason=f"Impressions dropped by {d_pct:+.1f}% and ranking position regressed by {d_pos:+.1f} ranks over adjacent periods.",
             evidence_gate_passed=True,
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
             metrics_summary={"delta_imps": vector.delta_impressions, "delta_pos": d_pos},
         )
 
-    # 6. Stable Trend
+    # 7. Stable Trend
     if abs(d_pct) <= 5.0 and abs(d_pos) <= 2.5:
         return TrendResult(
             classification="STABLE",
@@ -111,10 +173,12 @@ def classify_sitewide_trend(
             confidence="HIGH",
             primary_reason=f"Metrics remained within statistical noise band (imps: {d_pct:+.1f}%, pos: {d_pos:+.1f}).",
             evidence_gate_passed=True,
+            comparison_class=vector.comparison_class,
+            overlap_days=vector.overlap_days,
             metrics_summary={"delta_imps_pct": d_pct, "delta_pos": d_pos},
         )
 
-    # 7. Stalled or Default
+    # 8. Stalled or Default
     return TrendResult(
         classification="STALLED",
         target_scope="sitewide",
@@ -122,5 +186,7 @@ def classify_sitewide_trend(
         confidence="MEDIUM",
         primary_reason=f"Acquisition metrics show mixed signals (imps: {d_pct:+.1f}%, pos: {d_pos:+.1f}).",
         evidence_gate_passed=True,
+        comparison_class=vector.comparison_class,
+        overlap_days=vector.overlap_days,
         metrics_summary={"delta_imps_pct": d_pct, "delta_pos": d_pos},
     )

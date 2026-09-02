@@ -27,13 +27,13 @@ COHORTS: Set[str] = {
     "other",
 }
 
-# Position Bucket Boundaries (Inclusive)
+# Position Bucket Boundaries: Half-Open Intervals [min, max)
 POSITION_BUCKETS = {
-    "POS_1_10": (1.0, 10.4),
-    "POS_11_20": (10.5, 20.4),
-    "POS_21_30": (20.5, 30.4),
-    "POS_31_50": (30.5, 50.4),
-    "POS_51_PLUS": (50.5, float("inf")),
+    "POS_1_10": (1.0, 11.0),
+    "POS_11_20": (11.0, 21.0),
+    "POS_21_30": (21.0, 31.0),
+    "POS_31_50": (31.0, 51.0),
+    "POS_51_PLUS": (51.0, float("inf")),
 }
 
 # Search Visibility States
@@ -50,6 +50,7 @@ SEARCH_STATES = [
 
 # Product Journey States
 PRODUCT_STATES = [
+    "NO_QUALIFIED_SESSION",
     "LANDING_VIEWED",
     "ENGAGED_CTA",
     "AUDIT_SUBMITTED",
@@ -61,6 +62,17 @@ PRODUCT_STATES = [
     "PURCHASE_COMPLETED",
 ]
 
+# Comparison Classes
+COMPARISON_CLASSES = [
+    "ADJACENT_PERIOD",
+    "OVERLAPPING_PERIOD",
+    "BASELINE_ANCHORED",
+    "SAME_PERIOD_REMEASUREMENT",
+    "SOURCE_REVISION",
+    "METHODOLOGY_RECONCILIATION",
+    "NON_COMPARABLE",
+]
+
 # Deterministic Trend Classifications
 TREND_CLASSES = [
     "IMPROVING",
@@ -70,6 +82,7 @@ TREND_CLASSES = [
     "VOLATILE",
     "INSUFFICIENT_EVIDENCE",
     "BLOCKED",
+    "TREND_NOT_ESTABLISHED",
 ]
 
 
@@ -138,7 +151,9 @@ class NormalizedMeasurement:
     source_native_end: date
     source_native_timezone: str
     canonical_timezone: str
-    window_days: int
+    requested_window_days: int
+    effective_window_days: int
+    window_days: int  # Canonical alias for effective_window_days
     
     # Search Visibility
     gsc_total_impressions: int

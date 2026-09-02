@@ -1,17 +1,19 @@
-"""Phase 4 Acquisition Learning System Pipeline, Ingestion, States & Trend Tests.
+"""Phase 4 & 4B Acquisition Learning System Pipeline, Ingestion, States & Trend Tests.
 
 Validates:
 - GSC dimensionless vs dimensioned query ingestion.
 - GA4 organic search-entry vs downstream attribution (/checkout).
 - Route & cohort declarative synchronization without shadowing.
-- Position bucket boundaries and golden fixture replay.
+- Position bucket half-open boundaries and golden fixture replay.
 - Two-dimensional state machine evaluations & transition persistence.
 - Deterministic trend classifications.
 - Metric-level anomaly propagation.
 """
 
-import pytest
+from datetime import date
 from typing import Any, Dict, List, Optional, Set, Tuple
+import pytest
+
 from acquisition.ingestion import (
     compute_position_buckets,
     normalize_measurement_envelope,
@@ -86,23 +88,23 @@ def test_teardown_shadowing_defect_prevention():
         (1.0, "pos_bucket_1_10"),
         (5.5, "pos_bucket_1_10"),
         (10.0, "pos_bucket_1_10"),
-        (10.4, "pos_bucket_1_10"),
-        (10.5, "pos_bucket_11_20"),
+        (10.9, "pos_bucket_1_10"),
+        (11.0, "pos_bucket_11_20"),
         (15.0, "pos_bucket_11_20"),
-        (20.4, "pos_bucket_11_20"),
-        (20.5, "pos_bucket_21_30"),
+        (20.9, "pos_bucket_11_20"),
+        (21.0, "pos_bucket_21_30"),
         (25.0, "pos_bucket_21_30"),
-        (30.4, "pos_bucket_21_30"),
-        (30.5, "pos_bucket_31_50"),
+        (30.9, "pos_bucket_21_30"),
+        (31.0, "pos_bucket_31_50"),
         (40.0, "pos_bucket_31_50"),
-        (50.4, "pos_bucket_31_50"),
-        (50.5, "pos_bucket_51_plus"),
+        (50.9, "pos_bucket_31_50"),
+        (51.0, "pos_bucket_51_plus"),
         (75.0, "pos_bucket_51_plus"),
         (100.0, "pos_bucket_51_plus"),
     ],
 )
 def test_position_bucket_boundary_semantics(best_pos, expected_bucket):
-    """Test exact inclusive/exclusive boundaries for position buckets."""
+    """Test half-open interval boundaries [min, max) for position buckets."""
     buckets = compute_position_buckets({"https://nebulacomponents.com/page": best_pos})
     assert buckets[expected_bucket] == 1
     # Verify mutual exclusivity
@@ -174,7 +176,7 @@ def test_normalization_separates_gsc_macro_and_dimensioned_position():
 # ---------------------------------------------------------------------------
 
 def test_search_visibility_state_progression_and_regression():
-    """Test search visibility state evaluations across ranking tiers."""
+    """Test search visibility state evaluations across half-open ranking tiers."""
     assert evaluate_page_search_state(0, 0, None) == "UNSEEN"
     assert evaluate_page_search_state(10, 0, 75.0) == "POS_51_PLUS"
     assert evaluate_page_search_state(10, 0, 45.0) == "TOP_50"
@@ -217,7 +219,19 @@ def _build_test_vector(
     return ComparisonVector(
         current_meas_id="curr",
         comparison_meas_id="comp",
+        current_effective_start=date(2026, 8, 3),
+        current_effective_end=date(2026, 8, 30),
+        comparison_effective_start=date(2026, 7, 6),
+        comparison_effective_end=date(2026, 8, 2),
+        current_effective_days=window_days,
+        comparison_effective_days=window_days,
         window_days=window_days,
+        comparison_class="ADJACENT_PERIOD",
+        overlap_start=None,
+        overlap_end=None,
+        overlap_days=0,
+        overlap_ratio=0.0,
+        is_comparable_for_trend=True,
         delta_impressions=d_imps,
         delta_impressions_pct=d_imps_pct,
         delta_clicks=0,
