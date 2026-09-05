@@ -125,6 +125,45 @@ def _record(path: Path, source_class: str, data: Any) -> dict[str, Any]:
 def _provenance(record):
     p = record.get("provenance"); return p if isinstance(p, str) else p.get("source_class") if isinstance(p, dict) else None
 
+def _canonical_path(path: Path, name: str) -> bool:
+    relative = path.relative_to(REPOSITORY_ROOT).as_posix()
+    return any(Path(relative).match(pattern) for pattern in SOURCE_SPECS[name][1])
+
+def _artifact_identity(name: str, artifact: Any) -> tuple[Any, ...] | None:
+    if not isinstance(artifact, dict):
+        return None
+    if name == "site_audit":
+        values = (artifact.get("site"), artifact.get("generated_at"), artifact.get("total_pages"))
+    elif name == "gsc":
+        values = (artifact.get("property"), tuple(sorted((artifact.get("date_range") or {}).items())))
+    elif name == "ga4":
+        values = (artifact.get("property"), artifact.get("report"), tuple(sorted((artifact.get("date_range") or {}).items())))
+    elif name == "bing":
+        values = (artifact.get("site_url"),)
+    elif name == "posthog":
+        query = artifact.get("query")
+        if not isinstance(query, dict): return None
+        values = (query.get("kind"), tuple(sorted(s.get("event") for s in query.get("series", []) if isinstance(s, dict))))
+    elif name == "keyword":
+        values = (artifact.get("site"),)
+    elif name == "competitor_serp":
+        values = (artifact.get("retrieved_at"), tuple(sorted((r.get("query"), r.get("domain"), r.get("position")) for r in artifact.get("rankings", []) if isinstance(r, dict))))
+    else:
+        return None
+    return values if all(value not in (None, "", (), {}) for value in values) else None
+
+def _same_artifact_content(name: str, evidence: dict[str, Any], artifact: Any) -> bool:
+    if not isinstance(artifact, dict) or not isinstance(evidence, dict):
+        return False
+    # Evidence is accepted only when it is the parsed canonical artifact, not a caller-shaped copy.
+    expected = dict(artifact)
+    for key in ("artifact_id", "retrieved_at"):
+        expected.pop(key, None)
+    actual = dict(evidence)
+    for key in ("artifact_id", "retrieved_at"):
+        actual.pop(key, None)
+    return actual == expected and _artifact_identity(name, actual) is not None
+
 def _valid_record(record, name, expected):
     if not isinstance(record, dict) or not isinstance(record.get("id"), str) or not record["id"].strip(): return "missing_id"
     if not _url(record.get("url")): return "invalid_url"
@@ -137,11 +176,15 @@ def _valid_record(record, name, expected):
         artifact.relative_to(REPOSITORY_ROOT)
     except (OSError, ValueError): return "invalid_canonical_artifact"
     if not artifact.is_file(): return "missing_canonical_artifact"
+    if not _canonical_path(artifact, name): return "noncanonical_artifact_path"
+    canonical = _read(artifact)
+    if not isinstance(canonical, dict) or not EVIDENCE_VALIDATORS[name](canonical): return "invalid_canonical_artifact"
     try:
         datetime.fromisoformat(str(record.get("retrieved_at")))
     except (TypeError, ValueError): return "missing_retrieval_metadata"
     evidence = record.get("evidence")
     if not isinstance(evidence, dict) or not EVIDENCE_VALIDATORS[name](evidence): return "invalid_evidence_schema"
+    if not _same_artifact_content(name, evidence, canonical): return "evidence_artifact_mismatch"
     return None
 
 def validate_source_bundle(sources):

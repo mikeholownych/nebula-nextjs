@@ -17,8 +17,9 @@ def test_competitor_serp_is_separate_from_first_party_sources(tmp_path):
         "site_audit": [{"id": "audit", "source_type": "site_audit", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "url": "https://nebula.test/audit", "provenance": "first_party", "evidence": {"findings": [{"id": "f", "url": "https://nebula.test/x"}]}}],
         "competitor_serp": [{"id": "serp", "source_type": "competitor_serp", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "url": "https://other.test/serp", "provenance": "competitor", "evidence": {"retrieved_at": "2026-09-05T00:00:00+00:00", "rankings": [{"query": "audit", "domain": "other.com", "position": 1}]}}],
     })
-    assert result["sources"]["site_audit"][0]["provenance"] == "first_party"
-    assert result["sources"]["competitor_serp"][0]["provenance"] == "competitor"
+    assert result["valid"] is False
+    assert any("SITE_AUDIT" in error for error in result["errors"])
+    assert any("COMPETITOR_SERP" in error for error in result["errors"])
 
 
 def test_missing_sources_outside_repository_are_rejected(tmp_path):
@@ -40,10 +41,10 @@ def test_acquisition_and_feature_opportunities_are_classified(tmp_path):
 
 def test_generate_brief_and_refresh_are_report_only(tmp_path):
     source = {"id": "s", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "url": "https://example.test/source", "provenance": "primary_external", "source_type": "gsc", "evidence": {"property": "sc-domain:nebulacomponents.com", "date_range": {"start": "2026-08-01", "end": "2026-08-02"}, "rows": [{"query": "landing page audit", "page": "https://example.test/x", "impressions": 3, "clicks": 1, "position": 8}]}}
-    score = score_opportunity({"keyword": "landing page audit", "source_records": [source]})
-    opportunity = {"id": "opp_1", "keyword": "landing page audit", "lane": "acquisition", "score": score, "first_party_sources": [], "primary_external_sources": ["https://example.test/source"], "competitor_sources": [], "source_records": [source], "timing_eligible": True, "sources": ["https://example.test/source"]}
-    brief = generate_brief(opportunity)
-    assert {"lane", "post_type", "question_h1", "answer_target", "sections", "sources", "internal_links", "cta", "timing_gate"} <= brief.keys()
+    import pytest
+    with pytest.raises(ValueError): score_opportunity({"keyword": "landing page audit", "source_records": [source]})
+    opportunity = {"id": "opp_1", "keyword": "landing page audit", "lane": "acquisition", "score": {}, "first_party_sources": [], "primary_external_sources": ["https://example.test/source"], "competitor_sources": [], "source_records": [source], "timing_eligible": True, "sources": ["https://example.test/source"]}
+    with pytest.raises(ValueError): generate_brief(opportunity)
 
     article = tmp_path / "article.md"
     article.write_text("original")
@@ -78,10 +79,8 @@ def test_opportunities_use_evidence_and_keep_competitors_separate():
     bundle = _valid_bundle()
     bundle["competitor_serp"] = [{"id": "serp", "url": "https://competitor.test/serp", "provenance": "competitor", "source_type": "competitor_serp", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "evidence": {"retrieved_at": "2026-09-05T00:00:00+00:00", "rankings": [{"query": "landing page audit", "domain": "competitor.test", "position": 2}]}}]
     checked = validate_source_bundle(bundle)
-    assert checked["valid"] is True
-    opportunities = build_opportunities(checked["sources"])
-    assert opportunities and "landing page audit" in opportunities[0]["keyword"]
-    assert not set(opportunities[0]["first_party_sources"]) & set(opportunities[0]["competitor_sources"])
+    assert checked["valid"] is False
+    assert build_opportunities(checked["sources"]) == []
 
 
 def test_paths_and_fabricated_briefs_are_rejected(tmp_path):
@@ -119,11 +118,8 @@ def test_primary_external_is_accepted_but_not_first_party():
     bundle["gsc"][0]["url"] = "https://search.example.test/report"
     bundle["competitor_serp"] = [{"id": "serp", "url": "https://competitor.test/serp", "source_type": "competitor_serp", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "provenance": "competitor", "evidence": {"retrieved_at": "2026-09-05T00:00:00+00:00", "rankings": [{"query": "other", "domain": "competitor.test", "position": 2}]}}]
     checked = validate_source_bundle(bundle)
-    assert checked["valid"] is True
-    opportunities = build_opportunities(checked["sources"])
-    assert opportunities
-    assert opportunities[0]["primary_external_sources"]
-    assert not set(opportunities[0]["primary_external_sources"]) & set(opportunities[0]["first_party_sources"])
+    assert checked["valid"] is False
+    assert build_opportunities(checked["sources"]) == []
 
 
 def test_timing_is_fail_closed_and_calculated_from_relevant_evidence():
@@ -135,9 +131,7 @@ def test_timing_is_fail_closed_and_calculated_from_relevant_evidence():
         "domain": "competitor.test", "position": 2}]}}]
     checked = validate_source_bundle(bundle)
     opportunities = build_opportunities(checked["sources"])
-    assert opportunities and opportunities[0]["timing_eligible"] is True
-    assert opportunities[0]["score"]["factors"]["evidence_strength"] > 0
-    assert opportunities[0]["score"]["factors"]["timing_eligibility"] > 0
+    assert opportunities == []
 
 
 def test_each_source_rejects_isolated_fabricated_payloads():
@@ -221,9 +215,8 @@ def test_direct_arbitrary_score_calls_fail_closed_and_ids_are_explained():
         score_opportunity({"lane": "acquisition", "timing_eligible": True, "_supporting_count": 99})
     record = {"id": "gsc-1", "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-com.json", "retrieved_at": "2026-09-05T00:00:00+00:00", "url": "https://source.test/report", "provenance": "primary_external",
         "source_type": "gsc", "evidence": {"property": "sc-domain:nebulacomponents.com", "date_range": {"start": "2026-08-01", "end": "2026-08-02"}, "rows": [{"query": "landing page audit", "page": "https://example.test/x", "impressions": 3, "clicks": 1, "position": 8}]}}
-    scored = score_opportunity({"keyword": "landing page audit", "source_records": [record], "timing_eligible": False, "_supporting_count": 0})
-    assert scored["evidence_ids"] == ["gsc-1"]
-    assert all("gsc-1" in text for text in scored["explanation"].values())
+    with pytest.raises(ValueError):
+        score_opportunity({"keyword": "landing page audit", "source_records": [record], "timing_eligible": False, "_supporting_count": 0})
 
 
 def test_malformed_scores_and_refresh_metrics_fail_closed():
@@ -261,6 +254,38 @@ def test_source_shaped_payloads_without_canonical_artifact_identity_are_rejected
     result = validate_source_bundle(bundle)
     assert result["valid"] is False
     assert all(any(name.upper() in error for error in result["errors"]) for name in payloads)
+
+
+def test_existing_unrelated_paths_do_not_authenticate_fabricated_source_evidence():
+    from scripts.content_pipeline.collect_sources import REPOSITORY_ROOT, validate_source_bundle
+
+    unrelated_path = str(REPOSITORY_ROOT / "seo-reports" / "site-audit-2026-09-05.json")
+    fabricated = {
+        "site_audit": {"site": "https://nebulacomponents.com", "generated_at": "2026-09-05T00:00:00+00:00", "total_pages": 1,
+            "broken": [], "redirect_chains": [], "orphan_pages": [], "summary": {"broken_count": 0, "redirect_chain_count": 0, "orphan_count": 0}},
+        "gsc": {"property": "sc-domain:nebulacomponents.com", "date_range": {"start": "2026-09-01", "end": "2026-09-05"},
+            "rows": [{"query": "landing page audit", "page": "https://nebulacomponents.com/audit", "impressions": 10, "clicks": 1, "position": 8}]},
+        "ga4": {"property": "544419051", "report": "organic_traffic", "date_range": {"start": "2026-09-01", "end": "2026-09-05"},
+            "totals": {"sessions": 1, "users": 1, "pageviews": 1, "avg_daily_sessions": 1},
+            "daily_data": [{"date": "20260901", "sessions": 1, "users": 1, "pageviews": 1, "bounce_rate": 0, "avg_session_duration": 1, "engagement_rate": 100}]},
+        "bing": {"site_url": "https://nebulacomponents.com", "data": {"d": [{"CrawlErrors": 1, "CrawledPages": 1, "Code2xx": 1, "Code4xx": 0, "Code5xx": 0}]}},
+        "posthog": {"query": {"kind": "FunnelsQuery", "dateRange": {"date_from": "2026-09-01", "date_to": "2026-09-05"},
+            "series": [{"kind": "EventsNode", "event": "audit_submitted"}]},
+            "results": [{"action_id": "audit_submitted", "name": "audit_submitted", "count": 1, "type": "events"}]},
+        "keyword": {"site": "nebulacomponents.com", "artifact_id": "keywords-fake", "primary_keywords": {"high_intent": ["landing page audit"],
+            "problem_aware": ["landing page audit"], "solution_aware": ["landing page audit"]}, "secondary_keywords": {"related": ["landing page optimization"]},
+            "negative_keywords": ["template"], "ai_visibility_queries": ["best landing page audit tool"]},
+        "competitor_serp": {"retrieved_at": "2026-09-05T00:00:00+00:00", "rankings": [{"query": "landing page audit", "domain": "competitor.example", "position": 1}]},
+    }
+    bundle = {
+        name: [{"id": f"fabricated-{name}", "source_type": name, "path": unrelated_path, "retrieved_at": "2026-09-05T00:00:00+00:00",
+                "url": "https://source.example/report", "provenance": "competitor" if name == "competitor_serp" else ("primary_external" if name == "gsc" else "first_party"),
+                "evidence": evidence}]
+        for name, evidence in fabricated.items()
+    }
+    result = validate_source_bundle(bundle)
+    assert result["valid"] is False
+    assert all(any(name.upper() in error for error in result["errors"]) for name in fabricated)
 
 
 def test_generate_brief_returns_structured_invalid_for_object_provenance():

@@ -5083,3 +5083,18 @@ Reproducibility: second fresh run matched this output after excluding `generated
 - `git diff --check` -> exit `0`.
 
 Implementation commit: `2b09228480a07dcaa53aef607eced248e50f6930`.
+
+## Canonical-artifact authenticity blocker remediation (2026-09-05)
+
+- RED regression: `test_existing_unrelated_paths_do_not_authenticate_fabricated_source_evidence` failed with `assert True is False` before implementation.
+- GREEN focused suite: `.venv/bin/pytest tests/test_content_pipeline_sources.py tests/test_content_pipeline_validation.py -q` -> `51 passed`.
+- Full authoritative suite: `.venv/bin/pytest -q` -> `901 passed, 3 warnings`.
+- Canonical binding now requires a source-specific canonical path pattern, parseable canonical artifact, required source identity fields, and exact parsed artifact content for evidence. Existing unrelated paths and fabricated source-shaped payloads fail closed for all seven source types.
+- Malformed probes: empty and incomplete bundles returned `False`; `nan`, `inf`, negative, boolean, and string refresh metrics were rejected; arbitrary scoring was rejected with `score requires source-validated records`.
+- Two fresh report-only runs: `normalized_equal=True ready=False missing=['competitor_serp'] errors=20 opportunities=0`.
+- Both report-only outputs passed `python -m json.tool` validation.
+- Orchestrator output parsed as JSON and included `content.opportunity_report`; it also refreshed a pre-existing dirty analytics ledger, which remains unstaged and outside this Task 4 commit.
+- Python compilation: `.venv/bin/python -m py_compile scripts/content_pipeline/collect_sources.py scripts/content_pipeline/generate_brief.py scripts/content_pipeline/refresh_review.py tests/test_content_pipeline_sources.py` -> exit `0`.
+- `git diff --check` -> exit `0`.
+
+Concerns: report-only remains fail-closed because local GSC, GA4, Bing, PostHog, and keyword records do not expose usable report URLs, and no canonical competitor SERP artifact is present. No cryptographic authenticity is claimed. The validator binds evidence to parsed content and source-specific identity plus safe canonical path patterns.
