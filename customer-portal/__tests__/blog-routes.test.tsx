@@ -151,4 +151,17 @@ describe('local two-lane blog routes', () => {
       expect(document).toContain('sitemap_opinly_markers_absent=true')
     }
   })
+
+  it('names the evidence correction and separates it from implementation rollback', () => {
+    const root = path.resolve(__dirname, '..', '..')
+    const report = readFileSync(path.join(root, '.superpowers/sdd/task-6-report.md'), 'utf8')
+    const release = readFileSync(path.join(root, 'docs/releases/2026-09-05-local-blog-migration.md'), 'utf8')
+    for (const document of [report, release]) {
+      expect(document).toContain('Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059`')
+      expect(document).toContain('Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6`')
+      expect(document).toContain('Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`')
+      expect(document).toContain('Evidence correction commit is documentation and test traceability only, not a rollback target.')
+      expect(document.indexOf('606c49f9e4bf0c9213baa409e73f67c95ee39059')).toBeLessThan(document.indexOf('c6d18a53422a4b157c8456fd4c39de5ea6f417f6'))
+    }
+  })
 })

@@ -4,16 +4,11 @@
 
 Local blog migration committed. No production deploy or restart performed.
 
-## Commit
+## Traceability
 
-Code and release document commit:
+Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059` (`chore(blog): remove temporary Opinly blog dependency`).
 
-```text
-606c49f9e4bf0c9213baa409e73f67c95ee39059
-chore(blog): remove temporary Opinly blog dependency
-```
-
-The report is intentionally committed separately because its exact final commit SHA cannot be known until the report exists.
+Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6` (`docs(blog): separate preserved analytics evidence`). This commit corrects the evidence classification and traceability in this report, the release document, and the regression test. The implementation commit and evidence correction commit are distinct.
 
 ## Commands and outputs
 
@@ -90,6 +85,44 @@ git diff --cached --check
 clean
 ```
 
+Traceability regression RED and GREEN:
+
+```text
+RED command: deterministic check against HEAD^ report and release document
+AssertionError: .superpowers/sdd/task-6-report.md: missing Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059`
+EXIT 1
+
+GREEN command: deterministic check against corrected report and release document
+traceability and preserved-evidence check: PASS (2 documents)
+EXIT 0
+```
+
+Fresh focused checks after the correction:
+
+```text
+npx jest __tests__/blog-routes.test.tsx __tests__/blog-loader.test.ts __tests__/metadata/sitemap-inventory.test.ts --runInBand --no-cache
+Test Suites: 3 passed, 3 total
+Tests: 43 passed, 43 total
+EXIT 0
+
+npm run typecheck
+EXIT 0
+
+npm run lint
+EXIT 0
+
+npm run build
+Compiled successfully
+Finished TypeScript
+Generating static pages using 11 workers (358/358)
+EXIT 0
+
+git diff --check
+clean
+```
+
+The source and evidence scan retains `analytics_pixel_preserved=true` and `blog_runtime_opinly_delivery=false`; remaining Opinly matches are limited to preserved analytics instrumentation, checkout metadata, Stripe purchase tracking, and `@opinly/backend` support. No production deployment, restart, publish, URL submission, payment, lead mutation, credential, external-service, or analytics mutation was performed.
+
 ## Route probes
 
 Command: `npx next start --port 3101`, local built artifact only. The probe classified the preserved global pixel separately from blog-runtime delivery.
@@ -156,7 +189,7 @@ Pre-existing unrelated dirty paths were not staged or modified.
 
 Current production release reference observed before this commit: `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`, also present in `customer-portal/app/lib/build-info.json`. `nebula-nextjs.service` was observed active/running. Its production process was not restarted.
 
-Rollback reference: revert commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`, then rebuild from `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`. Production deployment requires explicit operator authorization after review. This worker had no deployment, restart, publish, URL submission, payment, lead mutation, credential, external-service, or analytics mutation authority.
+Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`, then rebuild from `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`. Evidence correction commit is documentation and test traceability only, not a rollback target. Production deployment requires explicit operator authorization after review. This worker had no deployment, restart, publish, URL submission, payment, lead mutation, credential, external-service, or analytics mutation authority.
 
 ## Concerns
 

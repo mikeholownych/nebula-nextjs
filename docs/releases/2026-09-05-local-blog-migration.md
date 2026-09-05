@@ -7,6 +7,12 @@ Scope: Task 6 only, local blog delivery and sitemap parity
 
 The canonical `/blog` and `/blog/[slug]` routes now use the repository loader and local Markdown articles. The temporary Opinly catch-all blog route and Opinly webhook route were removed. The sitemap now emits local article URLs only. The Opinly analytics pixel and unrelated analytics and purchase tracking remain in place.
 
+## Traceability
+
+Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059` (`chore(blog): remove temporary Opinly blog dependency`).
+
+Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6` (`docs(blog): separate preserved analytics evidence`). The implementation commit and evidence correction commit are distinct.
+
 ## Exact evidence
 
 Source inventory command:
@@ -91,6 +97,6 @@ revision in customer-portal/app/lib/build-info.json
 service state observed: nebula-nextjs.service active/running
 ```
 
-Rollback reference: reset or revert the Task 6 commit listed in the task report, then rebuild from `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`. Do not use this document as deployment authorization.
+Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`, then rebuild from `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`. Evidence correction commit is documentation and test traceability only, not a rollback target. Do not use this document as deployment authorization.
 
 Deployment authorization boundary: this worker performed no deploy, restart, publish, URL submission, external CMS operation, payment, lead mutation, credential operation, or analytics mutation. Production deployment requires explicit operator authorization after review of this record and the Task 6 report.
