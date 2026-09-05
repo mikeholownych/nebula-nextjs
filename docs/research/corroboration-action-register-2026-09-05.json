@@ -24,6 +24,36 @@
         "original_dataset": false,
         "notes": "The article attributes individual statistics to Unbounce, MarketingProfs, First Page Sage, Ruler Analytics, and other named sources. Primary-source validation is still required before citing any statistic as evidence."
       },
+      "primary_source_review": [
+        {
+          "source": "https://unbounce.com/average-conversion-rates-landing-pages/",
+          "status": "validated_as_publisher_primary_dataset",
+          "observed_basis": "Unbounce reports Q4 2024 internal data from 41,000 landing pages, 464 million visitors, and 57 million conversions.",
+          "use": "Potential citation for the exact Unbounce benchmark with its stated population and definition.",
+          "restriction": "Do not generalize this benchmark to Nebula buyers or claim causal effects."
+        },
+        {
+          "source": "https://www.marketingprofs.com/charts/2024/52374/landing-page-conversion-benchmarks",
+          "status": "validated_as_secondary_republication",
+          "observed_basis": "MarketingProfs republishes Unbounce findings and identifies Unbounce as the research source.",
+          "use": "Discovery and corroborating publication only.",
+          "restriction": "Do not count this as an independent dataset from Unbounce."
+        },
+        {
+          "source": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/",
+          "status": "validated_as_separate_publisher_dataset",
+          "observed_basis": "Ruler reports 2026 data from 110 million plus sessions, 5 million plus conversions, and tracked spend across 13 industries.",
+          "use": "Potential comparison source if definitions, date, industry categories, and conversion scope are documented.",
+          "restriction": "Do not combine its averages with Unbounce medians or treat the datasets as interchangeable."
+        },
+        {
+          "source": "https://backlinko.com/landing-page-stats",
+          "status": "validated_as_compilation",
+          "observed_basis": "Backlinko republishes statistics attributed to Unbounce, GetResponse, HubSpot, Gartner, and other sources.",
+          "use": "Discovery source for tracing claims to originals.",
+          "restriction": "Not independent corroboration for the statistics it compiles."
+        }
+      ],
       "supported_nebula_topic": "landing page conversion benchmarks and diagnostic context",
       "candidate_nebula_surfaces": [
         "/landing-page-performance-analysis",

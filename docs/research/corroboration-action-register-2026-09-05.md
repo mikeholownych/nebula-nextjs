@@ -22,6 +22,15 @@ The known row is registered as a **research-only citation lead and possible outr
 - **Observed attribution:** Unbounce, MarketingProfs, First Page Sage, Ruler Analytics, and other named sources
 - **Independence:** Not established
 
+### Primary-source review
+
+- **Unbounce:** `validated_as_publisher_primary_dataset`. Reports Q4 2024 internal data from 41,000 landing pages, 464 million visitors, and 57 million conversions. Potential citation for that exact dataset only.
+- **MarketingProfs:** `validated_as_secondary_republication`. Republishes Unbounce findings and is not an independent dataset.
+- **Ruler Analytics:** `validated_as_separate_publisher_dataset`. Reports a separate 2026 dataset covering 110 million plus sessions, 5 million plus conversions, and 13 industries. It must not be combined with Unbounce medians without aligning definitions.
+- **Backlinko:** `validated_as_compilation`. Useful for tracing claims to original sources, not independent corroboration.
+
+These sources support provenance work. They do not validate a universal landing-page benchmark or any Nebula commercial claim.
+
 ## Action sequence
 
 1. Build a claim-to-primary-source map.
