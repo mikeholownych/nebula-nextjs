@@ -93,6 +93,7 @@ def test_apply_edits_preserves_immutable_revision_and_records_edit(tmp_path):
 
 def test_publish_requires_exact_approval_and_dry_run_does_not_mutate(tmp_path):
     draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}}))
     readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest()}))
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness), "approved": True}))
     target = tmp_path / "published"; before = sorted(tmp_path.rglob("*"))
@@ -108,3 +109,73 @@ def test_publish_blocks_missing_or_mismatched_approval(tmp_path):
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"approved": True, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "draft_hash": "wrong"}))
     p = run("publish_article.py", "--draft", draft, "--approval", approval, "--dry-run")
     assert p.returncode != 0 and "APPROVAL_HASH_MISMATCH" in p.stdout
+
+
+def test_version_allocation_skips_gaps_without_overwrite(tmp_path):
+    out = tmp_path / "drafts" / "safe"
+    out.mkdir(parents=True)
+    (out / "v001.md").write_text("old")
+    (out / "v003.md").write_text("reserved")
+    brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="safe")))
+    p = run("create_draft.py", "--brief", brief_path, "--output-root", tmp_path / "drafts")
+    assert p.returncode == 0 and Path(p.stdout.strip()).name == "v004.md"
+    assert (out / "v003.md").read_text() == "reserved"
+
+
+def test_slug_traversal_is_rejected(tmp_path):
+    brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="../escape")))
+    p = run("create_draft.py", "--brief", brief_path, "--output-root", tmp_path / "drafts")
+    assert p.returncode != 0 and "INVALID_SLUG" in p.stdout
+    assert not (tmp_path / "escape").exists()
+
+
+def test_review_blocks_invalid_provenance_through_claim_validator(tmp_path):
+    draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    sidecar = draft.with_suffix(".json")
+    sidecar.write_text(json.dumps({"provenance": {"records": [{"id": "source-1", "kind": "primary", "provenance": "forged", "verified": True}]}, "article": {"source_refs": ["source-1"], "claims": []}}))
+    p = run("review_draft.py", "--draft", draft)
+    assert p.returncode != 0 and "INVALID_SOURCE_PROVENANCE" in p.stdout
+
+
+def test_publish_rejects_malformed_draft_and_unbound_readiness(tmp_path):
+    draft = tmp_path / "v001.md"; draft.write_text("not markdown")
+    digest = hashlib.sha256(draft.read_bytes()).hexdigest()
+    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS"}))
+    approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z"}))
+    p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--dry-run")
+    assert p.returncode != 0 and "MALFORMED_DRAFT" in p.stdout
+    readiness.write_text(json.dumps({"status": "PASS", "draft_hash": "stale"}))
+    p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--dry-run")
+    assert p.returncode != 0 and "READINESS_HASH_MISMATCH" in p.stdout
+
+
+def test_publish_writes_receipt_only_to_explicit_local_root(tmp_path):
+    draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}}))
+    digest = hashlib.sha256(draft.read_bytes()).hexdigest()
+    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": digest, "full_readiness": True}))
+    approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness)}))
+    target = tmp_path / "published"
+    p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--output-root", target)
+    assert p.returncode == 0 and json.loads((target / "v001.publication.json").read_text())["status"] == "PUBLISHED"
+    assert (target / "v001.md").read_text() == draft.read_text()
+
+
+def test_complete_create_review_edit_approval_publish_lifecycle(tmp_path):
+    brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="lifecycle")))
+    draft_root = tmp_path / "drafts"
+    created = run("create_draft.py", "--brief", brief_path, "--output-root", draft_root)
+    assert created.returncode == 0
+    first = Path(created.stdout.strip())
+    reviewed = run("review_draft.py", "--draft", first)
+    assert reviewed.returncode == 0 and json.loads(reviewed.stdout)["status"] == "PASS"
+    edits_path = tmp_path / "edits.json"; edits_path.write_text(json.dumps({"editor": "mike", "replacements": [{"old": "What should I check first?", "new": "What should I check first today?"}]}))
+    edited = run("apply_edits.py", "--draft", first, "--edits", edits_path)
+    assert edited.returncode == 0
+    second = Path(edited.stdout.strip())
+    review_path = tmp_path / "readiness.json"
+    review_path.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "full_readiness": True}))
+    approval_path = tmp_path / "approval.json"
+    approval_path.write_text(json.dumps({"approved": True, "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(review_path)}))
+    published = run("publish_article.py", "--draft", second, "--approval", approval_path, "--readiness", review_path, "--output-root", tmp_path / "published")
+    assert published.returncode == 0 and "PUBLISHED" in published.stdout
