@@ -13,10 +13,12 @@ try:
     from ._validation import validate_draft
     from ._workflow import atomic, emit, now, sha256
     from ._readiness_contract import validate as validate_readiness
+    from .review_draft import review
 except ImportError:  # pragma: no cover
     from _validation import validate_draft
     from _workflow import atomic, emit, now, sha256
     from _readiness_contract import validate as validate_readiness
+    from review_draft import review
 
 
 def _local_root(path: Path) -> Path:
@@ -74,7 +76,12 @@ def publish(draft: Path, approval: Path, readiness: Path | None, output_root: Pa
         except ValueError as exc:
             reasons.append(str(exc))
         else:
-            reasons.extend(validate_readiness(report, digest))
+            reasons.extend(validate_readiness(report, digest, validation.get("metadata", {}).get("canonical_url")))
+            if not reasons:
+                expected = review(draft)
+                comparable = lambda value: {key: item for key, item in value.items() if key not in {"generated_at", "workflow_signature"}}
+                if comparable(report) != comparable(expected):
+                    reasons.append("VALIDATOR_OUTPUT_NOT_AUTHENTICATED")
             if approval_data.get("requirements") != report.get("requirements"):
                 reasons.append("APPROVAL_REQUIREMENTS_MISMATCH")
             if approval_data.get("findings") != report.get("findings"):

@@ -20,6 +20,7 @@ _REQUIRED_READINESS = {
     "status", "blocked_reasons", "claim_results", "claim_reasons", "timing_gate",
     "canonical_url", "source_refs", "provenance", "recommendation", "opportunity",
 }
+_ALLOWED_RECOMMENDATIONS = {"OBSERVE", "REVIEW_CONTENT_ALIGNMENT", "BLOCKED"}
 
 def _canonical(report: dict[str, Any]) -> bytes:
     unsigned = {k: v for k, v in report.items() if k != "workflow_signature"}
@@ -36,7 +37,9 @@ def workflow_report(report: dict[str, Any]) -> dict[str, Any]:
 
 def _timestamp(value: Any) -> bool:
     if not isinstance(value, str) or not value.strip(): return False
-    try: datetime.fromisoformat(value.replace("Z", "+00:00")); return True
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return parsed.tzinfo is not None
     except ValueError: return False
 
 def _complete_requirements(value: Any) -> bool:
@@ -44,7 +47,7 @@ def _complete_requirements(value: Any) -> bool:
             and all(isinstance(item, str) and item for item in value)
             and set(value) == _REQUIRED_REQUIREMENTS)
 
-def validate(report: Any, draft_hash: str) -> list[str]:
+def validate(report: Any, draft_hash: str, draft_canonical_url: str | None = None) -> list[str]:
     if not isinstance(report, dict): return ["INVALID_READINESS_REPORT_SCHEMA"]
     reasons = []
     if set(report) != _REQUIRED: reasons.append("INVALID_READINESS_REPORT_SCHEMA")
@@ -76,6 +79,39 @@ def validate(report: Any, draft_hash: str) -> list[str]:
             or not isinstance(readiness.get("canonical_url"), str)
             or not readiness["canonical_url"].strip()):
         reasons.append("MISSING_VALIDATOR_OUTPUTS")
+    if isinstance(readiness, dict):
+        if readiness.get("recommendation") not in _ALLOWED_RECOMMENDATIONS:
+            reasons.append("INVALID_RECOMMENDATION")
+        opportunity = readiness.get("opportunity")
+        if isinstance(opportunity, dict) and opportunity.get("recommendation") not in _ALLOWED_RECOMMENDATIONS:
+            reasons.append("INVALID_RECOMMENDATION")
+        if draft_canonical_url and readiness.get("canonical_url") != draft_canonical_url:
+            reasons.append("CANONICAL_URL_MISMATCH")
+        claims = readiness.get("claim_results")
+        claim_reasons = readiness.get("claim_reasons")
+        refs = readiness.get("source_refs")
+        provenance = readiness.get("provenance")
+        if not isinstance(claims, list) or not claims:
+            reasons.append("EMPTY_CLAIM_RESULTS")
+        elif any(not isinstance(item, dict) or set(item) != {"claim", "source_ref", "provenance", "status", "reason"}
+                 or not isinstance(item["claim"], str) or not item["claim"].strip()
+                 or not isinstance(item["source_ref"], str) or not item["source_ref"].strip()
+                 or item["status"] not in {"SUPPORTED", "BLOCKED"}
+                 or not isinstance(item["reason"], str) or not item["reason"].strip()
+                 or not isinstance(item["provenance"], dict) for item in claims):
+            reasons.append("INVALID_CLAIM_RESULTS")
+        if not isinstance(claim_reasons, list) or not claim_reasons:
+            reasons.append("EMPTY_CLAIM_REASONS")
+        elif any(not isinstance(item, dict) or set(item) != {"claim", "reason"}
+                 or not isinstance(item["claim"], str) or not item["claim"].strip()
+                 or not isinstance(item["reason"], str) or not item["reason"].strip() for item in claim_reasons):
+            reasons.append("INVALID_CLAIM_REASONS")
+        if not isinstance(refs, list) or not refs or any(not isinstance(item, str) or not item.strip() for item in refs):
+            reasons.append("INVALID_SOURCE_REFS")
+        if not isinstance(provenance, dict) or not provenance or any(not isinstance(k, str) or not isinstance(v, dict) or not v for k, v in provenance.items()):
+            reasons.append("INVALID_PROVENANCE")
+        if not isinstance(opportunity, dict) or not opportunity:
+            reasons.append("INVALID_OPPORTUNITY")
     signature = report.get("workflow_signature")
     if not isinstance(signature, str) or not hmac.compare_digest(signature, sign(report)): reasons.append("READINESS_SIGNATURE_INVALID")
     return list(dict.fromkeys(reasons))

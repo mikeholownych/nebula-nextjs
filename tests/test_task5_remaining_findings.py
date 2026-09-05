@@ -56,6 +56,79 @@ def test_signed_readiness_with_empty_validator_output_is_rejected(tmp_path):
     assert "MISSING_VALIDATOR_OUTPUTS" in validate_readiness(report, digest)
 
 
+def test_signed_readiness_rejects_forged_nonempty_outputs_and_execute(tmp_path):
+    digest = "a" * 64
+    readiness = {
+        "status": "PASS", "blocked_reasons": [], "claim_results": [{"claim": "forged", "status": "SUPPORTED"}],
+        "claim_reasons": [{"claim": "forged", "reason": "VERIFIED_FIRST_PARTY"}],
+        "timing_gate": "PASS", "canonical_url": "https://evil.example/unrelated", "source_refs": ["forged"],
+        "provenance": {"forged": {"id": "forged", "verified": True}},
+        "recommendation": "EXECUTE", "opportunity": {"recommendation": "EXECUTE"},
+    }
+    report = workflow_report({
+        "generated_at": "2026-09-05T12:00:00Z", "draft": "v001.md", "draft_hash": digest,
+        "status": "PASS", "validated": True, "full_readiness": True,
+        "requirements": [
+            "H1_QUESTION", "BYLINE", "DATELINE", "ANSWER_BLOCK", "QUESTION_H2S", "SELF_CONTAINED_SECTIONS",
+            "EXTRACTABLE_SENTENCES", "ORIGINAL_DATA_PROVENANCE", "SOURCE_LINKS", "COMPARISON_TABLE", "FAQ_BLOCK",
+            "SCHEMA", "SERVER_RENDERING", "NEXT_STEP",
+        ], "findings": [], "readiness": readiness,
+    })
+    reasons = validate_readiness(report, digest, "https://nebulacomponents.com/blog/v001")
+    assert "INVALID_RECOMMENDATION" in reasons
+    assert "CANONICAL_URL_MISMATCH" in reasons
+
+
+def test_signed_readiness_rejects_altered_validator_output_even_when_resigned(tmp_path):
+    digest = "b" * 64
+    readiness = {
+        "status": "PASS", "blocked_reasons": [], "claim_results": [{"claim": "forged", "status": "SUPPORTED", "reason": "VERIFIED_FIRST_PARTY", "source_ref": "s1", "provenance": {"id": "s1"}}],
+        "claim_reasons": [{"claim": "forged", "reason": "VERIFIED_FIRST_PARTY"}],
+        "timing_gate": "PASS", "canonical_url": "https://nebulacomponents.com/blog/v001", "source_refs": ["s1"],
+        "provenance": {"s1": {"id": "s1", "verified": True}}, "recommendation": "OBSERVE",
+        "opportunity": {"recommendation": "OBSERVE"},
+    }
+    readiness["claim_results"][0]["extra"] = "altered"
+    report = workflow_report({
+        "generated_at": "2026-09-05T12:00:00Z", "draft": "v001.md", "draft_hash": digest,
+        "status": "PASS", "validated": True, "full_readiness": True,
+        "requirements": [
+            "H1_QUESTION", "BYLINE", "DATELINE", "ANSWER_BLOCK", "QUESTION_H2S", "SELF_CONTAINED_SECTIONS",
+            "EXTRACTABLE_SENTENCES", "ORIGINAL_DATA_PROVENANCE", "SOURCE_LINKS", "COMPARISON_TABLE", "FAQ_BLOCK",
+            "SCHEMA", "SERVER_RENDERING", "NEXT_STEP",
+        ], "findings": [], "readiness": readiness,
+    })
+    assert "INVALID_CLAIM_RESULTS" in validate_readiness(report, digest)
+
+
+def test_publish_recomputes_validator_output_after_a_report_is_resigned(tmp_path, monkeypatch):
+    from scripts.content_pipeline import publish_article
+    draft = tmp_path / "v001.md"
+    draft.write_text("draft")
+    digest = hashlib.sha256(draft.read_bytes()).hexdigest()
+    readiness = {
+        "status": "PASS", "blocked_reasons": [], "claim_results": [{"claim": "signed", "source_ref": "s1", "provenance": {"id": "s1"}, "status": "SUPPORTED", "reason": "VERIFIED_FIRST_PARTY"}],
+        "claim_reasons": [{"claim": "signed", "reason": "VERIFIED_FIRST_PARTY"}], "timing_gate": "PASS",
+        "canonical_url": "https://nebulacomponents.com/blog/v001", "source_refs": ["s1"],
+        "provenance": {"s1": {"id": "s1", "verified": True}}, "recommendation": "OBSERVE",
+        "opportunity": {"recommendation": "OBSERVE"},
+    }
+    report = workflow_report({"generated_at": "2026-09-05T12:00:00Z", "draft": str(draft), "draft_hash": digest,
+        "status": "PASS", "validated": True, "full_readiness": True,
+        "requirements": ["H1_QUESTION", "BYLINE", "DATELINE", "ANSWER_BLOCK", "QUESTION_H2S", "SELF_CONTAINED_SECTIONS", "EXTRACTABLE_SENTENCES", "ORIGINAL_DATA_PROVENANCE", "SOURCE_LINKS", "COMPARISON_TABLE", "FAQ_BLOCK", "SCHEMA", "SERVER_RENDERING", "NEXT_STEP"], "findings": [], "readiness": readiness})
+    approval = tmp_path / "approval.json"
+    approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "requirements": report["requirements"], "findings": []}))
+    readiness_path = tmp_path / "readiness.json"
+    readiness_path.write_text(json.dumps(report))
+    monkeypatch.setattr(publish_article, "validate_draft", lambda path: {"failures": [], "metadata": {"canonical_url": readiness["canonical_url"]}})
+    altered = json.loads(json.dumps(report))
+    altered["readiness"]["claim_results"][0]["claim"] = "re-signed forged output"
+    monkeypatch.setattr(publish_article, "review", lambda path: altered)
+    result = publish_article.publish(draft, approval, tmp_path / "readiness.json", tmp_path / "published", dry_run=True)
+    assert result["status"] == "BLOCKED"
+    assert "VALIDATOR_OUTPUT_NOT_AUTHENTICATED" in result["reasons"]
+
+
 def test_review_rejects_every_non_object_provenance_record(tmp_path):
     from scripts.content_pipeline.review_draft import review
     for malformed in ("text", None, [], {"source_type": "future_source"}):

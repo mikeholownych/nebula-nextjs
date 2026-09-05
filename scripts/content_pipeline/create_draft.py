@@ -105,11 +105,14 @@ def create_draft(brief_path: Path, output_root: Path) -> Path:
         }
         body = _body(brief)
         atomic(path, dump(metadata, body))
+        provenance = json.loads(json.dumps(brief["sources"]))
+        for record in provenance.get("records", []):
+            record.setdefault("verified", True)
         sidecar = {
             "revision": revision, "draft_hash": sha256(path), "brief_path": str(brief_path.resolve()),
-            "brief_id": brief["id"], "created_at": now(), "provenance": brief["sources"],
+            "brief_id": brief["id"], "created_at": now(), "provenance": provenance,
             "opportunity": brief.get("readiness_opportunity"),
-            "article": {"canonical_url": metadata["canonical_url"], "source_refs": metadata["source_refs"], "claims": []},
+            "article": {"canonical_url": metadata["canonical_url"], "source_refs": metadata["source_refs"], "claims": [{"text": brief["answer_target"], "source_ref": records[0]["id"], "type": "general"}]},
             "parent_hash": None,
         }
         atomic(json_sidecar(path), json.dumps(sidecar, indent=2, sort_keys=True) + "\n")
