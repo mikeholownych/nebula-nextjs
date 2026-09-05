@@ -96,6 +96,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/playbooks',
       '/benchmarks',
       '/brand',
+      '/ai-info',
       '/lab',
       '/press',
       '/faq',
