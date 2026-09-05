@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Collect strictly typed local evidence and build a report-only queue."""
 from __future__ import annotations
-import argparse, json, math, sys
+import argparse, fnmatch, json, math, sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -9,13 +9,13 @@ from urllib.parse import urlparse
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 SOURCE_SPECS = {
-    "site_audit": ("first_party", ("site-audit-*.json", "seo-reports/site-audit-*.json")),
-    "gsc": ("primary_external", ("gsc-*.json", "seo-reports/gsc-*.json", "agency-audit-*/gsc-*.json")),
-    "ga4": ("first_party", ("ga4-*.json", "seo-reports/ga4-*.json", "agency-audit-*/ga4-*.json")),
-    "bing": ("first_party", ("seo-reports/bing-crawl-*.json", "bing-*.json")),
-    "posthog": ("first_party", ("posthog-*.json", "seo-reports/posthog-*.json", "agency-audit-*/posthog-*.json")),
-    "keyword": ("first_party", ("memory/sites/nebulacomponents.com/keywords.json", "keywords.json")),
-    "competitor_serp": ("competitor", ("seo-reports/competitor-serp-*.json", "competitor-serp-*.json")),
+    "site_audit": ("first_party", ("seo-reports/site-audit-*.json",)),
+    "gsc": ("primary_external", ("agency-audit-2026-08-03/gsc-*.json",)),
+    "ga4": ("first_party", ("agency-audit-2026-08-03/ga4-*.json",)),
+    "bing": ("first_party", ("seo-reports/bing-crawl-*.json",)),
+    "posthog": ("first_party", ("agency-audit-2026-08-03/posthog-*.json",)),
+    "keyword": ("first_party", ("memory/sites/nebulacomponents.com/keywords.json",)),
+    "competitor_serp": ("competitor", ("seo-reports/competitor-serp-*.json",)),
 }
 REQUIRED = tuple(SOURCE_SPECS)
 
@@ -96,7 +96,7 @@ class PrimaryExternalAdapter:
         if name not in SOURCE_SPECS or SOURCE_SPECS[name][0] != "primary_external": raise ValueError("not a primary-external source")
         self.name = name
     def matches(self, filename: str) -> bool:
-        return any(Path(filename).match(pattern) for pattern in SOURCE_SPECS[self.name][1])
+        return any(_relative_pattern_matches(filename, pattern) for pattern in SOURCE_SPECS[self.name][1])
 
 def _read(path: Path) -> Any:
     try: return json.loads(path.read_text())
@@ -114,7 +114,7 @@ def _record(path: Path, source_class: str, data: Any) -> dict[str, Any]:
     url = next((x for x in (payload.get("url"), payload.get("site"), payload.get("source_url")) if _url(x)), None)
     if source_class == "competitor" and not url and _url("https://" + str(payload.get("domain", ""))): url = "https://" + str(payload["domain"])
     retrieved = datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat()
-    source_type = next((n for n, (_, patterns) in SOURCE_SPECS.items() if any(path.match(p) for p in patterns)), path.stem.split("-")[0])
+    source_type = next((n for n in SOURCE_SPECS if _canonical_path(path.resolve(), n)), path.stem.split("-")[0])
     evidence = dict(payload) if payload else None
     if evidence is not None:
         evidence.setdefault("artifact_id", f"keywords-{path.stem}" if source_type == "keyword" else path.stem)
@@ -125,9 +125,27 @@ def _record(path: Path, source_class: str, data: Any) -> dict[str, Any]:
 def _provenance(record):
     p = record.get("provenance"); return p if isinstance(p, str) else p.get("source_class") if isinstance(p, dict) else None
 
+def _relative_pattern_matches(relative: str, pattern: str) -> bool:
+    """Match an exact repository directory plus a filename glob.
+
+    ``Path.match`` treats a pattern without a directory as basename-only,
+    allowing a canonical-looking file at any nesting depth.  Source patterns
+    are intentionally split so the directory is always an exact match.
+    """
+    candidate = Path(relative).as_posix()
+    if Path(relative).is_absolute() or any(part in {"", ".", ".."} for part in candidate.split("/")):
+        return False
+    parent, filename = candidate.rsplit("/", 1) if "/" in candidate else ("", candidate)
+    expected_parent, expected_filename = pattern.rsplit("/", 1) if "/" in pattern else ("", pattern)
+    return parent == expected_parent and fnmatch.fnmatchcase(filename, expected_filename)
+
+
 def _canonical_path(path: Path, name: str) -> bool:
-    relative = path.relative_to(REPOSITORY_ROOT).as_posix()
-    return any(Path(relative).match(pattern) for pattern in SOURCE_SPECS[name][1])
+    try:
+        relative = path.resolve().relative_to(REPOSITORY_ROOT).as_posix()
+    except (OSError, ValueError):
+        return False
+    return any(_relative_pattern_matches(relative, pattern) for pattern in SOURCE_SPECS[name][1])
 
 def _artifact_identity(name: str, artifact: Any) -> tuple[Any, ...] | None:
     if not isinstance(artifact, dict):

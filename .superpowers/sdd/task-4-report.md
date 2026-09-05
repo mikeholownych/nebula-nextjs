@@ -5098,3 +5098,21 @@ Implementation commit: `2b09228480a07dcaa53aef607eced248e50f6930`.
 - `git diff --check` -> exit `0`.
 
 Concerns: report-only remains fail-closed because local GSC, GA4, Bing, PostHog, and keyword records do not expose usable report URLs, and no canonical competitor SERP artifact is present. No cryptographic authenticity is claimed. The validator binds evidence to parsed content and source-specific identity plus safe canonical path patterns.
+
+## Canonical Path Bypass Remediation
+
+- RED: `.venv/bin/pytest tests/test_content_pipeline_sources.py::test_nested_source_filenames_do_not_match_canonical_paths -q` -> `1 failed`; `site_audit` nested `site-audit-fake.json` returned `True` before the fix.
+- GREEN focused: `.venv/bin/pytest tests/test_content_pipeline_sources.py -q` -> `25 passed`.
+- GREEN relevant: `.venv/bin/pytest tests/test_content_pipeline_sources.py tests/test_content_pipeline_validation.py tests/test_funnel_orchestrator.py -q` -> `76 passed`.
+- Full `.venv` suite: `.venv/bin/pytest -q` -> `902 passed, 3 warnings`.
+- Compilation: `.venv/bin/python3 -m py_compile scripts/content_pipeline/collect_sources.py scripts/content_pipeline/generate_brief.py scripts/content_pipeline/refresh_review.py scripts/weekly_marketing_orchestrator.py` -> exit `0`.
+- Path fix: all seven `SOURCE_SPECS` entries now name one exact canonical repository-relative directory and filename glob. Matching compares the exact parent directory and filename with `fnmatchcase`; it no longer uses basename-capable `Path.match`. `_record` uses the same canonical validator. `PrimaryExternalAdapter.matches` uses the same strict matcher.
+- Regression coverage rejects nested canonical-looking paths for every source class, including `nested/gsc-fake.json`, `nested/ga4-fake.json`, `nested/competitor-serp-fake.json`, and nested equivalents for site audit, Bing, PostHog, and keyword artifacts. GSC adapter coverage rejects both nested root and nested canonical-directory paths.
+- Fresh report-only run A: `ready=False missing=['competitor_serp'] opportunities=0 errors=20`.
+- Fresh report-only run B: `ready=False missing=['competitor_serp'] opportunities=0 errors=20`.
+- Normalized report comparison after removing only `generated_at`: `NORMALIZED_REPORTS_EQUAL True`.
+- JSON validation: both report-only outputs and orchestrator output parsed successfully with `json.loads`.
+- Orchestrator: `.venv/bin/python3 scripts/weekly_marketing_orchestrator.py` -> exit `0`; output JSON valid.
+- `git diff --check` -> exit `0`.
+
+Remaining concerns: the report-only queue is intentionally fail-closed due to the existing missing competitor SERP artifact and source URL/schema errors. The full suite retains three pre-existing warnings. Unrelated dirty worktree paths were not staged or modified.

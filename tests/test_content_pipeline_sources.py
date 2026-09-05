@@ -155,8 +155,20 @@ def test_primary_external_adapter_classifies_real_source():
     from scripts.content_pipeline.collect_sources import PrimaryExternalAdapter, SOURCE_SPECS
     adapter = PrimaryExternalAdapter("gsc")
     assert adapter.source_class == "primary_external"
-    assert adapter.matches("gsc-2026-09-05.json")
+    assert adapter.matches("agency-audit-2026-08-03/gsc-com.json")
     assert SOURCE_SPECS["gsc"][0] == "primary_external"
+
+
+def test_nested_source_filenames_do_not_match_canonical_paths():
+    from scripts.content_pipeline.collect_sources import PrimaryExternalAdapter, REPOSITORY_ROOT, SOURCE_SPECS, _canonical_path
+
+    for name, (_, patterns) in SOURCE_SPECS.items():
+        for pattern in patterns:
+            filename = pattern.replace("*", "fake")
+            assert not _canonical_path(REPOSITORY_ROOT / "nested" / Path(filename), name), (name, filename)
+
+    assert not PrimaryExternalAdapter("gsc").matches("nested/gsc-fake.json")
+    assert not PrimaryExternalAdapter("gsc").matches("nested/agency-audit-2026-08-03/gsc-fake.json")
 
 
 def test_source_specific_canonical_fields_reject_source_shaped_fakes():
