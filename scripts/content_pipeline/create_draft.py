@@ -34,6 +34,9 @@ def _load_brief(path: Path) -> dict[str, Any]:
     records = data.get("sources", {}).get("records") if isinstance(data.get("sources"), dict) else None
     if not isinstance(records, list) or not records:
         raise ValueError("INVALID_SOURCE_BUNDLE:missing_source_records")
+    malformed = [row for row in records if not isinstance(row, dict)]
+    if malformed:
+        raise ValueError("INVALID_SOURCE_BUNDLE:MALFORMED_SOURCE_RECORD")
     source_check = validate_source_bundle(_source_bundle(records))
     errors = list(source_check["errors"])
     if any(not isinstance(row, dict) or not isinstance(row.get("source_type"), str) for row in records):

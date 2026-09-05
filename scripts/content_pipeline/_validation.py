@@ -22,13 +22,13 @@ def _failure(code: str, message: str) -> dict[str, str]:
     return {"code": code, "message": message}
 
 
-def _records(sidecar: dict[str, Any]) -> list[dict[str, Any]]:
+def _records(sidecar: dict[str, Any]) -> list[Any]:
     provenance = sidecar.get("provenance", {})
     if isinstance(provenance, dict):
         provenance = provenance.get("records", [])
     if not isinstance(provenance, list):
         return []
-    return [row for row in provenance if isinstance(row, dict)]
+    return provenance
 
 
 def _claim_sources(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -89,15 +89,21 @@ def validate_draft(path: Path) -> dict[str, Any]:
         failures.append(_failure("MISSING_PROVENANCE", "draft provenance sidecar is required"))
 
     records = _records(sidecar)
+    malformed_records = [row for row in records if not isinstance(row, dict)]
+    if malformed_records:
+        failures.extend(_failure("MALFORMED_SOURCE_RECORD", "provenance records must be objects") for _ in malformed_records)
+    typed_records = [row for row in records if isinstance(row, dict)]
     article = sidecar.get("article")
     if not isinstance(article, dict):
         article = {"canonical_url": canonical, "source_refs": metadata.get("source_refs", []), "claims": []}
-    claim_result = validate_article_claims(article, _claim_sources(records))
+    if isinstance(article, dict) and article.get("canonical_url") != canonical:
+        failures.append(_failure("CANONICAL_MISMATCH", "sidecar canonical_url must match draft frontmatter"))
+    claim_result = validate_article_claims(article, _claim_sources(typed_records))
     failures.extend(_failure(reason, "claim and provenance validation failed") for reason in claim_result["blocked_reasons"])
 
-    source_result = validate_source_bundle(_source_bundle(records))
+    source_result = validate_source_bundle(_source_bundle(typed_records))
     source_errors = source_result["errors"]
-    untyped_records = [row for row in records if not isinstance(row.get("source_type"), str)]
+    untyped_records = [row for row in typed_records if not isinstance(row.get("source_type"), str)]
     if untyped_records:
         source_errors.append("SOURCE_ERROR_UNTYPED_RECORD")
     failures.extend(_failure(reason, "source artifact validation failed") for reason in source_errors)
