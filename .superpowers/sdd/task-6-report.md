@@ -10,6 +10,8 @@ Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059` (`chore(blog):
 
 Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6` (`docs(blog): separate preserved analytics evidence`). This commit corrects the evidence classification and traceability in this report, the release document, and the regression test. The implementation commit and evidence correction commit are distinct.
 
+Traceability follow-up commit: `805ad1942` (`docs(blog): correct Task 6 traceability`). This documentation-only follow-up adds the commit chain to the Task 6 evidence. It is not a rollback target.
+
 ## Commands and outputs
 
 Baseline focused tests before the change:
@@ -33,7 +35,7 @@ Focused green tests:
 ```text
 npx jest __tests__/blog-routes.test.tsx __tests__/blog-loader.test.ts __tests__/metadata/sitemap-inventory.test.ts --runInBand --no-cache
 Test Suites: 3 passed, 3 total
-Tests: 42 passed, 42 total
+43 focused tests passed, 43 total
 ```
 
 Typecheck and lint:
@@ -64,7 +66,7 @@ Full Jest:
 ```text
 npm test -- --runInBand
 Test Suites: 102 passed, 102 total
-Tests: 8 skipped, 843 passed, 851 total
+Tests: 8 skipped, 844 passed, 852 total
 EXIT 0
 ```
 

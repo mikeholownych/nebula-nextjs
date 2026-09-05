@@ -119,6 +119,7 @@ describe('local two-lane blog routes', () => {
       'https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting',
     ]))
     expect(urls).not.toContain(expect.stringContaining('/blog/draft'))
+    expect(urls).not.toContain('https://nebulacomponents.com/blog/why-your-landing-page-loses-the-click-seven-observable-friction-points-canadian-founders-miss')
   })
 
   it('contains no Opinly delivery in local blog and sitemap sources', () => {
@@ -159,9 +160,14 @@ describe('local two-lane blog routes', () => {
     for (const document of [report, release]) {
       expect(document).toContain('Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059`')
       expect(document).toContain('Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6`')
+      expect(document).toContain('Traceability follow-up commit: `805ad1942')
+      expect(document).toContain('43 focused tests')
       expect(document).toContain('Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`')
       expect(document).toContain('Evidence correction commit is documentation and test traceability only, not a rollback target.')
       expect(document.indexOf('606c49f9e4bf0c9213baa409e73f67c95ee39059')).toBeLessThan(document.indexOf('c6d18a53422a4b157c8456fd4c39de5ea6f417f6'))
     }
+    const testSource = readFileSync(__filename, 'utf8')
+    expect(testSource).toContain('805ad1942')
+    expect(testSource).toContain('43 focused tests')
   })
 })

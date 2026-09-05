@@ -13,6 +13,8 @@ Implementation commit: `606c49f9e4bf0c9213baa409e73f67c95ee39059` (`chore(blog):
 
 Evidence correction commit: `c6d18a53422a4b157c8456fd4c39de5ea6f417f6` (`docs(blog): separate preserved analytics evidence`). The implementation commit and evidence correction commit are distinct.
 
+Traceability follow-up commit: `805ad1942` (`docs(blog): correct Task 6 traceability`). This documentation-only follow-up records the complete Task 6 commit chain. It is not a rollback target.
+
 ## Exact evidence
 
 Source inventory command:
@@ -60,8 +62,8 @@ package Opinly deps: [ '@opinly/backend' ]
 
 ## Verification
 
-- Focused Jest: `3 suites passed, 42 tests passed`.
-- Full Jest: `102 suites passed, 843 passed, 8 skipped, 851 total`.
+- Focused Jest: `3 suites passed, 43 focused tests passed`.
+- Full Jest: `102 suites passed, 844 passed, 8 skipped, 852 total`.
 - Playwright: `54 passed`.
 - TypeScript: `npm run typecheck`, exit 0.
 - ESLint: `npm run lint`, exit 0.
