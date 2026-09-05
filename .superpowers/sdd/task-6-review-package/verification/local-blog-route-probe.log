@@ -1,0 +1,36 @@
+[
+  {
+    "path": "/blog",
+    "status": 200,
+    "nonempty": true,
+    "canonical": true,
+    "jsonLd": true,
+    "cta": true
+  },
+  {
+    "path": "/blog/paid-traffic-not-converting",
+    "status": 200,
+    "nonempty": true,
+    "canonical": true,
+    "jsonLd": true,
+    "cta": true
+  },
+  {
+    "path": "/blog/what-we-got-wrong-about-filter-based-targeting",
+    "status": 200,
+    "nonempty": true,
+    "canonical": true,
+    "jsonLd": true,
+    "cta": true
+  },
+  {
+    "path": "/blog/does-not-exist-task6",
+    "status": 404,
+    "nonempty": true,
+    "canonical": false,
+    "jsonLd": true,
+    "cta": true,
+    "notFound": true
+  }
+]
+EXIT_CODE=0

@@ -102,3 +102,23 @@ service state observed: nebula-nextjs.service active/running
 Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67c95ee39059`, then rebuild from `e81c6f830ee60397d783df2abdf4e31ec6aff4b6`. Evidence correction commit is documentation and test traceability only, not a rollback target. Do not use this document as deployment authorization.
 
 Deployment authorization boundary: this worker performed no deploy, restart, publish, URL submission, external CMS operation, payment, lead mutation, credential operation, or analytics mutation. Production deployment requires explicit operator authorization after review of this record and the Task 6 report.
+
+## Fresh local verification rerun
+
+Working directory: `/home/mike/nebula/customer-portal`. The original blocker was an incomplete dependency tree: `npm test -- --runInBand` failed with `Error: Cannot find module 'slash'` from `@jest/reporters`. `npm ci --ignore-scripts` was rerun after removing the untracked `node_modules` tree and installed 1,464 packages with exit 0. No production or canonical-domain call was made.
+
+Fresh results:
+
+```text
+npm run typecheck                         EXIT 0
+npm run lint                              EXIT 0
+npm run check:blog-content                47 passed; EXIT 0
+focused blog Jest                         3 suites; 38 passed; EXIT 0
+npm run build                             compiled; 358/358 static pages; EXIT 0
+npm test -- --runInBand                   102 suites; 844 passed; 8 skipped; 852 total; EXIT 0
+npm run test:e2e                          54 passed; EXIT 0
+```
+
+The eight skipped tests are unchanged, unrelated planned topic-guide assertions in `customer-portal/__tests__/topic-guides-editorial.test.tsx` (`it.skip.each(topicArticles)` across four planned articles). No Task 6 test was skipped or bypassed.
+
+Local server: `next start` at `http://127.0.0.1:4173`. The local sitemap route probe returned HTTP 200 for the sitemap and all 186 unique sitemap paths, each with a nonempty body. Local `/blog`, two published article routes, and a missing article returned `200`, `200`, `200`, and `404`; the three published routes had canonical metadata, JSON-LD, and CTA markers. The first probe attempt correctly failed with connection refused because the local server was not yet running, then the local-only rerun passed. Exact logs are packaged under `.superpowers/sdd/task-6-review-package/verification/`.

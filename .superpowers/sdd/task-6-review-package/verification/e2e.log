@@ -1,0 +1,65 @@
+npm notice run nebula-customer-portal@2.0.0 test:e2e
+npm notice run playwright test
+[WebServer] npm notice run nebula-customer-portal@2.0.0 npx
+
+[WebServer] npm notice run 'next' start -p 4173
+
+
+Running 54 tests using 6 workers
+
+[1/54] [desktop] › e2e/audit-report-responsive.spec.ts:31:5 › audit report contains horizontal navigation and long evidence on mobile
+[2/54] [desktop] › e2e/audit-report-responsive.spec.ts:53:7 › audit landing page has no horizontal overflow at 320px
+[3/54] [desktop] › e2e/audit-report-responsive.spec.ts:70:7 › audit results page has no horizontal overflow at 320px
+[4/54] [desktop] › e2e/checkout-cta.spec.ts:13:5 › checkout CTA hydrates and issues POST /api/checkout
+[5/54] [desktop] › e2e/audit-report-responsive.spec.ts:53:7 › audit landing page has no horizontal overflow at 375px
+[6/54] [desktop] › e2e/audit-report-responsive.spec.ts:70:7 › audit results page has no horizontal overflow at 375px
+[7/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable renders one canonical answer-first page
+[8/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/quick-start renders one canonical answer-first page
+[9/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/technical-retrieval-audit renders one canonical answer-first page
+[10/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/claim-evidence-governance renders one canonical answer-first page
+[11/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/answer-extractability-audit renders one canonical answer-first page
+[12/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/entity-narrative-audit renders one canonical answer-first page
+[13/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/release-deployment-verification renders one canonical answer-first page
+[14/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/compare renders one canonical answer-first page
+[15/54] [desktop] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/releases renders one canonical answer-first page
+[16/54] [desktop] › e2e/citable-information-architecture.spec.ts:70:5 › overview links every published supporting page
+[17/54] [desktop] › e2e/citable-information-architecture.spec.ts:79:5 › comparison and release pages preserve their explicit evidence boundaries
+[18/54] [desktop] › e2e/citable-information-architecture.spec.ts:100:5 › unknown Citable job slugs return 404
+[19/54] [desktop] › e2e/citable-information-architecture.spec.ts:105:5 › case-study routes reflect the empty governed projection
+[20/54] [desktop] › e2e/landing-page-intelligence-stack.spec.ts:14:5 › renders the inspectable stack and direct conversion path
+[21/54] [desktop] › e2e/learning-centre-contextual-links.spec.ts:28:5 › maps every article from the hub and only serves contextual Learning Centre links to real articles
+[22/54] [desktop] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /
+[23/54] [desktop] › e2e/learning-centre-crawlability.spec.ts:21:5 › serves every Learning Centre article link in the hub response before client JavaScript
+[24/54] [desktop] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /learning-centre
+[25/54] [desktop] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /audit
+[26/54] [desktop] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /resources
+[27/54] [desktop] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /thank-you
+[28/54] [mobile] › e2e/audit-report-responsive.spec.ts:31:5 › audit report contains horizontal navigation and long evidence on mobile
+[29/54] [mobile] › e2e/audit-report-responsive.spec.ts:53:7 › audit landing page has no horizontal overflow at 320px
+[30/54] [mobile] › e2e/audit-report-responsive.spec.ts:70:7 › audit results page has no horizontal overflow at 320px
+[31/54] [mobile] › e2e/audit-report-responsive.spec.ts:53:7 › audit landing page has no horizontal overflow at 375px
+[32/54] [mobile] › e2e/audit-report-responsive.spec.ts:70:7 › audit results page has no horizontal overflow at 375px
+[33/54] [mobile] › e2e/checkout-cta.spec.ts:13:5 › checkout CTA hydrates and issues POST /api/checkout
+[34/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable renders one canonical answer-first page
+[35/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/quick-start renders one canonical answer-first page
+[36/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/technical-retrieval-audit renders one canonical answer-first page
+[37/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/claim-evidence-governance renders one canonical answer-first page
+[38/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/answer-extractability-audit renders one canonical answer-first page
+[39/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/entity-narrative-audit renders one canonical answer-first page
+[40/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/jobs/release-deployment-verification renders one canonical answer-first page
+[41/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/compare renders one canonical answer-first page
+[42/54] [mobile] › e2e/citable-information-architecture.spec.ts:43:7 › /resources/citable/releases renders one canonical answer-first page
+[43/54] [mobile] › e2e/citable-information-architecture.spec.ts:70:5 › overview links every published supporting page
+[44/54] [mobile] › e2e/citable-information-architecture.spec.ts:79:5 › comparison and release pages preserve their explicit evidence boundaries
+[45/54] [mobile] › e2e/citable-information-architecture.spec.ts:100:5 › unknown Citable job slugs return 404
+[46/54] [mobile] › e2e/citable-information-architecture.spec.ts:105:5 › case-study routes reflect the empty governed projection
+[47/54] [mobile] › e2e/landing-page-intelligence-stack.spec.ts:14:5 › renders the inspectable stack and direct conversion path
+[48/54] [mobile] › e2e/learning-centre-contextual-links.spec.ts:28:5 › maps every article from the hub and only serves contextual Learning Centre links to real articles
+[49/54] [mobile] › e2e/learning-centre-crawlability.spec.ts:21:5 › serves every Learning Centre article link in the hub response before client JavaScript
+[50/54] [mobile] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /
+[51/54] [mobile] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /learning-centre
+[52/54] [mobile] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /audit
+[53/54] [mobile] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /resources
+[54/54] [mobile] › e2e/nav-overlap.spec.ts:12:7 › header does not overlap main content on /thank-you
+  54 passed (28.4s)
+EXIT_CODE=0

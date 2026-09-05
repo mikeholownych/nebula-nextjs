@@ -1,0 +1,20 @@
+
+===== check-blog-content =====
+$ npm run check:blog-content
+npm notice run nebula-customer-portal@2.0.0 check:blog-content
+npm notice run npm run check:content-pipeline
+npm notice run nebula-customer-portal@2.0.0 check:content-pipeline
+npm notice run node scripts/run-content-pipeline-validation.mjs
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/mike/nebula
+configfile: pytest.ini
+plugins: asyncio-1.4.0, anyio-4.14.2
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 47 items
+
+tests/test_content_pipeline_validation.py ...........................    [ 57%]
+tests/test_content_pipeline_workflow.py ....................             [100%]
+
+============================== 47 passed in 5.56s ==============================
+EXIT_CODE=0

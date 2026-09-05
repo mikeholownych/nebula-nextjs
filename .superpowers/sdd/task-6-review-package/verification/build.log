@@ -1,0 +1,449 @@
+npm notice run nebula-customer-portal@2.0.0 prebuild
+npm notice run npm test -- --runInBand __tests__/teardown-screenshot-integrity.test.ts
+npm notice run nebula-customer-portal@2.0.0 test
+npm notice run NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand __tests__/teardown-screenshot-integrity.test.ts
+Test Suites: 1 passed, 1 total
+Tests:       38 passed, 38 total
+Snapshots:   0 total
+Time:        1.83 s
+Ran all test suites matching __tests__/teardown-screenshot-integrity.test.ts.
+npm notice run nebula-customer-portal@2.0.0 build
+npm notice run node scripts/generate-build-info.mjs && node scripts/generate-learning-centre-md.mjs && next build
+[build-info] Generated immutable build-info.json: d2825ab24fce4486f0c7a17c22f8e832631a56aa (production) at 2026-09-05T22:11:32.580Z
+Generated 51 learning-centre markdown mirrors -> data/learning-centre-md.json
+▲ Next.js 16.3.2 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 74ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 28.6s
+  Running TypeScript ...
+  Finished TypeScript in 65s ...
+  Collecting page data using 11 workers ...
+[PostgreSQL] Connected to nebula_audit
+[PostgreSQL] Connected to nebula_audit
+[PostgreSQL] Connected to nebula_audit
+[PostgreSQL] Connected to nebula_audit
+[PostgreSQL] Connected to nebula_audit
+  Generating static pages using 11 workers (0/358) ...
+[PostgreSQL] Connected to nebula_audit
+[PostgreSQL] Connected to nebula_audit
+  Generating static pages using 11 workers (89/358)
+  Generating static pages using 11 workers (178/358)
+  Generating static pages using 11 workers (268/358)
+✓ Generating static pages using 11 workers (358/358) in 6.9s
+  Finalizing page optimization ...
+
+Route (app)                                                                         Revalidate  Expire
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /[...path]
+├ ○ /7-systems
+├ ○ /about
+├ ○ /about/team
+├ ○ /accessible-nebula
+├ ○ /ad-burn-leaderboard
+├ ○ /ads-getting-clicks-but-no-sales
+├ ○ /ads-not-converting-two-percent
+├ ○ /agency-partner
+├ ○ /ai-info
+├ ○ /ai-ops-retainer
+├ ○ /ai-readiness-landing-page
+├ ○ /ai-readiness-landing-page-check
+├ ○ /ai-sdr-vs-audit
+├ ƒ /api/ab-tests
+├ ƒ /api/ab-tests/[testId]
+├ ƒ /api/ab-tests/[testId]/results
+├ ƒ /api/agent/register
+├ ƒ /api/ai-recommendations
+├ ƒ /api/ai/insights/[auditId]
+├ ƒ /api/ai/insights/[auditId]/[signalKey]
+├ ƒ /api/analytics
+├ ƒ /api/analytics/benchmarks/me
+├ ƒ /api/analytics/funnel
+├ ƒ /api/analytics/funnel-report
+├ ƒ /api/analytics/program
+├ ƒ /api/analytics/program/dismiss
+├ ƒ /api/audit/[id]
+├ ƒ /api/audit/[id]/page-intent
+├ ƒ /api/audit/[id]/pdf
+├ ƒ /api/audit/[id]/share-token
+├ ƒ /api/audit/[id]/status
+├ ƒ /api/audit/claim
+├ ƒ /api/audit/compare
+├ ƒ /api/audit/diff
+├ ƒ /api/audit/email
+├ ƒ /api/audit/lab
+├ ƒ /api/audit/rewrites
+├ ƒ /api/audit/rewrites/generate
+├ ƒ /api/audit/run
+├ ƒ /api/audit/schedules
+├ ƒ /api/audit/schedules/[id]
+├ ƒ /api/audit/start
+├ ƒ /api/audit/stats
+├ ƒ /api/audit/stats/benchmarks
+├ ƒ /api/audit/stats/recent-finding
+├ ƒ /api/audit/unlock
+├ ƒ /api/audits/by-domain
+├ ƒ /api/audits/by-email
+├ ƒ /api/auth/github
+├ ƒ /api/auth/github/callback
+├ ƒ /api/auth/google
+├ ƒ /api/auth/google/callback
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/magic-link
+├ ƒ /api/auth/me
+├ ƒ /api/auth/verify
+├ ƒ /api/badge/[id]
+├ ƒ /api/badges
+├ ƒ /api/benchmarks/compare
+├ ƒ /api/benchmarks/industries
+├ ƒ /api/benchmarks/industries/[industry]
+├ ƒ /api/benchmarks/summary
+├ ƒ /api/billing-portal
+├ ƒ /api/billing/summary
+├ ○ /api/bimi
+├ ƒ /api/bing/oauth
+├ ƒ /api/bing/oauth/callback
+├ ƒ /api/build-info
+├ ƒ /api/builder-integration
+├ ƒ /api/builder-integration/[builder]
+├ ƒ /api/checkout
+├ ƒ /api/churn
+├ ƒ /api/churn/at-risk
+├ ƒ /api/churn/retention
+├ ƒ /api/competitor
+├ ƒ /api/competitor/[competitorId]
+├ ƒ /api/competitor/[competitorId]/compare
+├ ƒ /api/competitor/[competitorId]/history
+├ ƒ /api/competitor/[competitorId]/intelligence
+├ ƒ /api/competitor/intelligence
+├ ƒ /api/competitor/metrics
+├ ƒ /api/competitors
+├ ƒ /api/competitors/[id]
+├ ƒ /api/competitors/comparison
+├ ƒ /api/competitors/comparison/[trackingId]
+├ ƒ /api/conversion
+├ ƒ /api/conversion/audit/start
+├ ƒ /api/conversion/email
+├ ƒ /api/conversion/purchase
+├ ƒ /api/customer-success
+├ ƒ /api/customer-success/overview
+├ ƒ /api/dashboard
+├ ƒ /api/data-rights/export
+├ ƒ /api/email-automation
+├ ƒ /api/email/process
+├ ƒ /api/exit-intent
+├ ƒ /api/experiments
+├ ƒ /api/experiments/[id]
+├ ƒ /api/experiments/[id]/refresh
+├ ƒ /api/fix-library
+├ ƒ /api/funnel/runs
+├ ƒ /api/funnel/runs/status
+├ ƒ /api/ga4/callback
+├ ƒ /api/ga4/connect
+├ ƒ /api/ga4/correlation/[auditId]
+├ ƒ /api/ga4/disconnect
+├ ƒ /api/ga4/properties
+├ ƒ /api/ga4/select
+├ ƒ /api/ga4/status
+├ ƒ /api/growth/config
+├ ƒ /api/growth/track
+├ ƒ /api/growth/triggers/[auditId]
+├ ƒ /api/gsc/callback
+├ ƒ /api/gsc/connect
+├ ƒ /api/gsc/disconnect
+├ ƒ /api/gsc/inspect
+├ ƒ /api/gsc/metrics
+├ ƒ /api/gsc/select
+├ ƒ /api/gsc/sitemap
+├ ƒ /api/gsc/sites
+├ ƒ /api/gsc/status
+├ ƒ /api/gsc/submit-index
+├ ƒ /api/healthz
+├ ƒ /api/hooks/[...path]
+├ ƒ /api/integrations
+├ ƒ /api/lab-experiments
+├ ƒ /api/lab-experiments/[id]
+├ ƒ /api/lead-gen/rb2b-event
+├ ƒ /api/lead-nurturer
+├ ƒ /api/leads/[leadId]
+├ ƒ /api/leads/metrics
+├ ƒ /api/leads/score
+├ ƒ /api/leads/tier/[tier]
+├ ƒ /api/leads/top
+├ ƒ /api/metrics
+├ ƒ /api/monetization
+├ ƒ /api/monetization/audit/[shareToken]
+├ ƒ /api/monetization/key
+├ ƒ /api/monitors-engine
+├ ƒ /api/monitors-engine/[id]
+├ ƒ /api/monitors-engine/create
+├ ƒ /api/mpp/audit
+├ ƒ /api/mpp/audit-compat
+├ ƒ /api/newsletter/confirm
+├ ƒ /api/newsletter/subscribe
+├ ƒ /api/onboarding
+├ ƒ /api/onboarding/advance
+├ ƒ /api/readyz
+├ ƒ /api/recommendations
+├ ƒ /api/recommendations/[id]
+├ ƒ /api/referral
+├ ƒ /api/referral/[code]
+├ ƒ /api/referral/summary/[code]
+├ ƒ /api/referral/validate/[code]
+├ ƒ /api/report-automation
+├ ƒ /api/report/pdf
+├ ƒ /api/revenue
+├ ƒ /api/revenue/funnel
+├ ƒ /api/revenue/pipeline
+├ ƒ /api/revenue/source
+├ ƒ /api/revenue/trend
+├ ƒ /api/share/audit/[auditId]
+├ ƒ /api/share/iframe/[auditId]
+├ ƒ /api/share/widget/[auditId]
+├ ƒ /api/shared
+├ ƒ /api/subscribe
+├ ƒ /api/team
+├ ƒ /api/teardowns
+├ ƒ /api/teardowns/[slug]
+├ ƒ /api/teardowns/[slug]/claim/dns-check
+├ ƒ /api/teardowns/[slug]/claim/dns-start
+├ ƒ /api/teardowns/[slug]/claim/email-request
+├ ƒ /api/teardowns/[slug]/claim/email-verify
+├ ƒ /api/teardowns/[slug]/claim/gsc-check
+├ ƒ /api/teardowns/[slug]/response
+├ ƒ /api/teardowns/claims
+├ ƒ /api/tenant/comparison
+├ ƒ /api/tenant/report
+├ ƒ /api/tenant/summary
+├ ƒ /api/tenant/weak-spots
+├ ƒ /api/timeline
+├ ƒ /api/v1
+├ ƒ /api/v1/fixes
+├ ƒ /api/v1/fixes/[auditId]
+├ ƒ /api/webhooks/rb2b
+├ ƒ /api/webhooks/stripe
+├ ƒ /api/whitelabel
+├ ƒ /api/widget/audit
+├ ƒ /api/workspace/api-keys
+├ ƒ /api/workspace/api-keys/[keyId]
+├ ƒ /api/workspace/assistant
+├ ƒ /api/workspace/delete-account
+├ ƒ /api/workspace/dispatch
+├ ƒ /api/workspace/export
+├ ƒ /api/workspace/preferences
+├ ƒ /api/workspace/team
+├ ƒ /api/workspace/team/accept
+├ ƒ /api/workspace/verify
+├ ○ /audit                                                                                  5m      1y
+├ ○ /audit-dashboard
+├ ○ /audit-lander
+├ ƒ /audit/[id]/processing
+├ ƒ /audit/[id]/results
+├ ○ /audit/compare
+├ ○ /audit/results
+├ ○ /audit/sample
+├ ○ /audits
+├ ○ /benchmarks                                                                             5m      1y
+├ ○ /best-landing-page-audit-tools
+├ ○ /beta-tester
+├ ○ /blog
+├ ƒ /blog/[slug]
+├ ○ /brand
+├ ƒ /case-studies
+├ ● /case-studies/[slug]
+├ ƒ /checkout
+├ ○ /checkout-impulse
+├ ○ /checkout-v2
+├ ○ /company/about
+├ ○ /company/team
+├ ○ /compare
+├   /compare/[slug]
+│ ├ ● /compare/unbounce
+│ ├ ● /compare/instapage
+│ ├ ● /compare/pagespeed-insights
+│ └ ● [+4 more paths]
+├ ○ /component-showcase
+├ ○ /concepts
+├ ○ /conversion-rate-optimization-audit
+├ ○ /crawler-policy
+├ ○ /create-97-checkout
+├ ○ /cro-agency-alternative
+├ ○ /cta-optimization
+├ ○ /dashboard
+├ ○ /data-rights
+├ ○ /demo
+├ ○ /ecommerce-landing-page-audit
+├ ○ /editorial-standards
+├ ○ /faq
+├ ○ /fix-conversion-leak-before-campaign
+├ ƒ /fix-library
+├   /for/[vertical]
+│ ├ ● /for/saas
+│ ├ ● /for/ecommerce
+│ ├ ● /for/agencies
+│ └ ● [+5 more paths]
+├ ○ /free-landing-page-audit-tools-startups
+├ ○ /funnel-audit
+├ ○ /generator
+├ ƒ /gone
+├ ○ /growth-launch
+├ ○ /growth-launch-confirmation
+├ ○ /headline-optimization
+├ ○ /how-nebula-audits
+├ ○ /index-old
+├ ○ /lab
+├ ○ /landing-page-audit-tools-pricing
+├ ○ /landing-page-code-fixes
+├ ○ /landing-page-cta-audit
+├ ○ /landing-page-message-match
+├ ○ /landing-page-mistakes
+├ ○ /landing-page-performance-analysis
+├ ○ /landing-page-trust-signals
+├ ○ /launch-page-97
+├ ○ /lead-dashboard
+├ ○ /lead-generation-landing-page-audit
+├ ○ /leak-index
+├ ○ /learning-centre
+├ ○ /learning-centre/above-fold-landing-page
+├ ○ /learning-centre/ad-says-one-thing-page-says-another
+├ ○ /learning-centre/agency-handoff-debt
+├ ○ /learning-centre/b2b-saas-landing-page-not-converting
+├ ○ /learning-centre/before-you-raise-ad-budget
+├ ○ /learning-centre/coach-consultant-landing-page
+├ ○ /learning-centre/confessions
+├ ○ /learning-centre/cpc-break-even-landing-page
+├ ○ /learning-centre/cta-below-fold-mobile
+├ ○ /learning-centre/cta-not-working
+├ ○ /learning-centre/cta-not-working-7-fixes
+├ ○ /learning-centre/ecommerce-landing-page-not-converting
+├ ○ /learning-centre/facebook-ads-no-leads
+├ ○ /learning-centre/form-has-zero-friction
+├ ○ /learning-centre/ghost-variant-ab-test
+├ ○ /learning-centre/google-ads-clicks-no-sales
+├ ○ /learning-centre/google-ads-disapproved-ads-still-spending
+├ ○ /learning-centre/google-ads-high-ctr-low-conversion
+├ ○ /learning-centre/google-ads-quality-score-low
+├ ○ /learning-centre/headline-cta-mismatch
+├ ○ /learning-centre/headline-fails-message-match
+├ ○ /learning-centre/high-cpc-low-conversion
+├ ○ /learning-centre/landing-page-bounce-rate-high
+├ ○ /learning-centre/landing-page-conversion-rate-benchmark
+├ ○ /learning-centre/landing-page-headline-formula
+├ ○ /learning-centre/landing-page-intelligence-stack
+├ ○ /learning-centre/landing-page-lcp
+├ ○ /learning-centre/landing-page-load-time-slow
+├ ○ /learning-centre/landing-page-not-converting
+├ ○ /learning-centre/landing-page-speed-test
+├ ○ /learning-centre/linkedin-ad-copy-landing-page-mismatch
+├ ○ /learning-centre/linkedin-ads-not-converting
+├ ○ /learning-centre/linkedin-authority-gap
+├ ○ /learning-centre/message-match-checklist
+├ ○ /learning-centre/meta-ads-high-frequency-not-converting
+├ ○ /learning-centre/mobile-landing-page-leaks
+├ ○ /learning-centre/paid-traffic-leak-map
+├ ○ /learning-centre/pricing-page-not-converting
+├ ○ /learning-centre/proof-before-cta
+├ ○ /learning-centre/retargeting-ads-not-converting
+├ ○ /learning-centre/slow-landing-page-causes
+├ ○ /learning-centre/social-proof-above-fold
+├ ○ /learning-centre/social-proof-backfire
+├ ○ /learning-centre/the-11pm-founder-spiral
+├ ○ /learning-centre/tiktok-ads-not-converting
+├ ○ /learning-centre/tiktok-landing-page-scroll-speed-gap
+├ ○ /learning-centre/tiktok-trust-collapse
+├ ○ /learning-centre/topic-guides
+├ ○ /learning-centre/topic-guides/ad-spend-roi-improvement
+├ ○ /learning-centre/topic-guides/ai-traffic-optimization-vs-landing-page-builders
+├ ○ /learning-centre/topic-guides/conversion-rate-optimization-tools
+├ ○ /learning-centre/topic-guides/landing-page-conversion-leaks
+├ ○ /learning-centre/traffic-but-no-form-fills
+├ ○ /learning-centre/types-of-social-proof
+├ ○ /learning-centre/what-is-message-match
+├ ○ /learning-centre/what-is-social-proof-landing-page
+├ ○ /login
+├ ○ /manifest.webmanifest
+├ ○ /marketing-ops
+├ ƒ /md/learning-centre/[slug]
+├ ƒ /md/teardowns/[slug]
+├ ○ /mobile-landing-page-audit
+├ ○ /mobile-landing-page-optimization
+├ ○ /mobile-viewport-conversion-rates
+├ ○ /newsletter
+├ ○ /newsletter/confirmed
+├ ○ /no-retainer-cro-tools
+├ ○ /observatory                                                                            1h      1y
+├ ○ /og-card-source
+├ ○ /opengraph-image
+├ ○ /organization
+├ ○ /page-intent-aware-audit
+├ ○ /page-speed-conversion
+├ ○ /paid-traffic-leak-scorecard
+├ ○ /part-after
+├ ○ /part-before
+├ ○ /playbooks
+├ ○ /playbooks/founder-second-brain
+├ ○ /playbooks/linkedin-skill-engine
+├ ○ /playbooks/specialist-ai-agent-library
+├ ○ /press
+├ ○ /pricing
+├   /pricing-guides/[slug]
+│ ├ ● /pricing-guides/crazy-egg-pricing
+│ ├ ● /pricing-guides/hotjar-pricing
+│ ├ ● /pricing-guides/semrush-pricing
+│ └ ● /pricing-guides/unbounce-pricing
+├ ○ /privacy-policy
+├ ○ /proof                                                                                  5m      1y
+├ ○ /repair-sprint
+├ ○ /repair-sprint/example
+├ ○ /research/landing-page-performance-q3-2026
+├ ○ /resources
+├ ƒ /resources/citable
+├ ƒ /resources/citable/compare
+├ ○ /resources/citable/generator
+├ ƒ /resources/citable/jobs/[slug]
+├ ƒ /resources/citable/quick-start
+├ ƒ /resources/citable/releases
+├ ○ /roas-cliff
+├ ○ /roi-calculator
+├ ○ /saas-landing-page-audit
+├ ○ /score
+├ ƒ /shared/[token]
+├ ○ /signals
+├   /signals/[slug]
+│ ├ ● /signals/message-match
+│ ├ ● /signals/trust-signals
+│ ├ ● /signals/mobile-cta
+│ └ ● [+6 more paths]
+├ ƒ /sitemap.xml
+├ ○ /social-proof-landing-page
+├ ○ /spec/landing-page-diagnostic-v1
+├ ○ /status
+├ ○ /subscription
+├ ○ /teardowns                                                                              5m      1y
+├ ƒ /teardowns/[slug]
+├ ƒ /teardowns/[slug]/claim
+├ ○ /terms
+├ ○ /thank-you
+├ ○ /unsubscribe
+├ ○ /vs
+├   /vs/[slug]
+│ ├ ● /vs/pagespeed-insights
+│ ├ ● /vs/hubspot-website-grader
+│ ├ ● /vs/silktide
+│ └ ● [+8 more paths]
+├ ○ /what-is-landing-page-audit
+├ ○ /what-is-nebula-components
+├ ○ /why-cro-agencies-dont-work
+├ ○ /why-is-my-landing-page-not-converting
+└ ƒ /workspace
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+EXIT_CODE=0

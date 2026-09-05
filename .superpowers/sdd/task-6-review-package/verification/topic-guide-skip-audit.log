@@ -1,0 +1,24 @@
+__tests__/topic-guides-editorial.test.tsx:19:const topicGuideRoot = path.join(process.cwd(), 'app', 'learning-centre', 'topic-guides')
+__tests__/topic-guides-editorial.test.tsx:56:    const mod = await import('@/app/learning-centre/topic-guides/page')
+__tests__/topic-guides-editorial.test.tsx:72:      guideSection!.querySelector<HTMLAnchorElement>(`a[href="/learning-centre/topic-guides/${slug}"]`),
+__tests__/topic-guides-editorial.test.tsx:76:    expect(guideSection!.querySelectorAll('a[href^="/learning-centre/topic-guides/"]').length).toBe(4)
+__tests__/topic-guides-editorial.test.tsx:88:      'a[href="/audit?utm_source=topic-guides&utm_medium=organic-content"]',
+__tests__/topic-guides-editorial.test.tsx:105:            topicArticles.map((slug) => `https://nebulacomponents.com/learning-centre/topic-guides/${slug}`),
+__tests__/topic-guides-editorial.test.tsx:114:  it.skip.each(topicArticles)('publishes metadata for the planned route: %s', (slug) => {
+__tests__/topic-guides-editorial.test.tsx:118:  it.skip.each(topicArticles)('has governed answer-first coverage: %s', async (slug) => {
+__tests__/topic-guides-editorial.test.tsx:119:    const mod = await import(`@/app/learning-centre/topic-guides/${slug}/page`)
+__tests__/topic-guides-editorial.test.tsx:141:    expect(main!.innerHTML).toContain('/learning-centre/topic-guides')
+__tests__/topic-guides-editorial.test.tsx:143:      new RegExp(`/audit\\?utm_source=topic-guide-${slug}[^"']*utm_medium=organic-content`),
+__tests__/topic-guides-editorial.test.tsx:147:      answer!.querySelectorAll<HTMLAnchorElement>('a[href^="/learning-centre/topic-guides/"]'),
+__tests__/topic-guides-editorial.test.tsx:152:      const match = href.match(/^\/learning-centre\/topic-guides\/([^/?#]+)$/)
+__tests__/metadata/sitemap-inventory.test.ts:10:const HUB_DIRS = new Set(['topic-guides'])
+__tests__/metadata/sitemap-inventory.test.ts:56:    const expectedNested = expected.filter((url: string) => url.includes('/learning-centre/topic-guides/'))
+__tests__/metadata/sitemap-inventory.test.ts:57:    const actualNested = actual.filter((url: string) => url.includes('/learning-centre/topic-guides/'))
+__tests__/metadata/sitemap-inventory.test.ts:62:    expect(learningCentreArticleUrl('topic-guides/landing-page-conversion-leaks')).toBe(
+__tests__/metadata/sitemap-inventory.test.ts:63:      `${ORIGIN}/learning-centre/topic-guides/landing-page-conversion-leaks`,
+__tests__/learning-centre-article-loader.test.ts:33:      writeArticleFixture(fixtureRoot, 'topic-guides')
+__tests__/learning-centre-article-loader.test.ts:34:      for (const slug of nestedSlugs) writeArticleFixture(fixtureRoot, `topic-guides/${slug}`)
+__tests__/learning-centre-article-loader.test.ts:38:        new Set(nestedSlugs.map((slug) => `topic-guides/${slug}`)),
+__tests__/learning-centre-article-loader.test.ts:40:      expect(fixtureSlugs).not.toContain('topic-guides')
+e2e/learning-centre-contextual-links.spec.ts:31:  const allowedContextualHrefs = new Set([...validHrefs, `${learningCentrePrefix}topic-guides`])
+EXIT_CODE=0

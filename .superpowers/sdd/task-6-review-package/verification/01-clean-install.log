@@ -1,0 +1,9 @@
+Working directory: /home/mike/nebula/customer-portal
+$ rm -rf node_modules
+$ npm ci --ignore-scripts
+added 1464 packages, and audited 1465 packages in 1m
+263 packages are looking for funding
+23 vulnerabilities (7 low, 7 moderate, 9 high)
+EXIT_CODE=0
+
+The install used the existing package-lock.json and --ignore-scripts. No production service or canonical URL was contacted.

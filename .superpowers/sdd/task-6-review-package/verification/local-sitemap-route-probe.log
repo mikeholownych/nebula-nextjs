@@ -1,0 +1,8 @@
+{
+  "sitemapUrl": "http://127.0.0.1:4173/sitemap.xml",
+  "sitemapStatus": 200,
+  "routeCount": 186,
+  "failures": []
+}
+Local sitemap route probe passed: 186 canonical sitemap paths returned HTTP 200 with nonempty bodies.
+EXIT_CODE=0

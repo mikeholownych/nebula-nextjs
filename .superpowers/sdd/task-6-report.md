@@ -197,3 +197,83 @@ Rollback reference: revert implementation commit `606c49f9e4bf0c9213baa409e73f67
 
 - `npm install --package-lock-only --ignore-scripts` reported 23 pre-existing dependency vulnerabilities: 7 low, 7 moderate, 9 high. Dependency remediation was outside Task 6 scope.
 - Local HTTP probes used port 3101 because port 3100 was already occupied. No production port or service was touched.
+
+## Fresh local verification rerun
+
+Working directory for every command below: `/home/mike/nebula/customer-portal`.
+
+Initial failure captured before reinstall:
+
+```text
+npm test -- --runInBand
+Error: Cannot find module 'slash'
+Require stack: @jest/reporters/build/index.js ...
+```
+
+The first clean-install attempt also hit `ENOTEMPTY` while removing the old incomplete `node_modules` tree. After removing that untracked dependency tree and rerunning the lockfile install, the install completed:
+
+```text
+rm -rf node_modules
+npm ci --ignore-scripts
+added 1464 packages, and audited 1465 packages in 1m
+EXIT 0
+```
+
+Fresh commands and exact results:
+
+```text
+npm run typecheck
+EXIT 0
+
+npm run lint
+EXIT 0
+
+npm run check:blog-content
+47 passed in 5.56s
+EXIT 0
+
+npm test -- --runInBand __tests__/blog-loader.test.ts __tests__/blog-publish-readiness.test.tsx __tests__/blog-routes.test.tsx
+Test Suites: 3 passed, 3 total
+Tests: 38 passed, 38 total
+EXIT 0
+
+npm run build
+Compiled successfully
+Finished TypeScript
+Generating static pages: 358/358
+EXIT 0
+
+npm test -- --runInBand
+Test Suites: 102 passed, 102 total
+Tests: 8 skipped, 844 passed, 852 total
+EXIT 0
+
+npm run test:e2e
+54 passed (28.4s)
+EXIT 0
+```
+
+The eight skips are the two `it.skip.each(topicArticles)` assertions in `customer-portal/__tests__/topic-guides-editorial.test.tsx`, expanded across four planned topic-guide articles. `git diff -- customer-portal/__tests__/topic-guides-editorial.test.tsx` was empty, and no Task 6 test was skipped or bypassed.
+
+The first sitemap attempt against `http://127.0.0.1:4173` failed because no local server was running (`curl` exit 7). A local `next start` server was then started on `127.0.0.1:4173`; no production process or canonical domain was contacted. The equivalent local route probe fetched the local sitemap, rewrote each canonical sitemap path to the local origin, and checked each local route:
+
+```text
+sitemapUrl=http://127.0.0.1:4173/sitemap.xml
+sitemapStatus=200
+routeCount=186
+failures=[]
+Local sitemap route probe passed: 186 canonical sitemap paths returned HTTP 200 with nonempty bodies.
+EXIT 0
+```
+
+Local blog route probe:
+
+```text
+/blog: 200, nonempty=true, canonical=true, jsonLd=true, cta=true
+/blog/paid-traffic-not-converting: 200, nonempty=true, canonical=true, jsonLd=true, cta=true
+/blog/what-we-got-wrong-about-filter-based-targeting: 200, nonempty=true, canonical=true, jsonLd=true, cta=true
+/blog/does-not-exist-task6: 404, notFound=true
+EXIT 0
+```
+
+Fresh command logs are in `.superpowers/sdd/task-6-review-package/verification/`; the local-only raw logs remain in `customer-portal/.task6-verification/` until packaging cleanup.

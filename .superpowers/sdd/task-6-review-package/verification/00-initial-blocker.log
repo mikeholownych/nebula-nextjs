@@ -1,0 +1,12 @@
+Working directory: /home/mike/nebula/customer-portal
+$ npm test -- --runInBand
+npm notice run nebula-customer-portal@2.0.0 test
+npm notice run NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand
+Error: Cannot find module 'slash'
+Require stack:
+- /home/mike/nebula/customer-portal/node_modules/@jest/reporters/build/index.js
+- /home/mike/nebula/customer-portal/node_modules/@jest/core/build/index.js
+- /home/mike/nebula/customer-portal/node_modules/jest-cli/build/index.js
+- /home/mike/nebula/customer-portal/node_modules/jest-cli/bin/jest.js
+- /home/mike/nebula/customer-portal/node_modules/jest/bin/jest.js
+Command wrapper exit: 0 (Jest startup failed before test execution)

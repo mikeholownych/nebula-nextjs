@@ -1,0 +1,3 @@
+npm notice run nebula-customer-portal@2.0.0 lint
+npm notice run eslint .
+EXIT_CODE=0
