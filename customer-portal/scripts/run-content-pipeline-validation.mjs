@@ -8,7 +8,10 @@ import { spawnSync } from "node:child_process"
 const portalRoot = resolve(fileURLToPath(new URL("..", import.meta.url)))
 const repositoryRoot = resolve(portalRoot, "..")
 const python = resolve(repositoryRoot, ".venv", "bin", "python")
-const testFile = resolve(repositoryRoot, "tests", "test_content_pipeline_validation.py")
+const testFiles = [
+  resolve(repositoryRoot, "tests", "test_content_pipeline_validation.py"),
+  resolve(repositoryRoot, "tests", "test_content_pipeline_workflow.py"),
+]
 
 try {
   accessSync(python, constants.X_OK)
@@ -20,7 +23,7 @@ try {
   process.exit(1)
 }
 
-const result = spawnSync(python, ["-m", "pytest", testFile, "-q"], {
+const result = spawnSync(python, ["-m", "pytest", ...testFiles, "-q"], {
   cwd: repositoryRoot,
   stdio: "inherit",
 })
