@@ -79,7 +79,16 @@ def review(path: Path) -> dict:
     if "style=" in body:
         findings.append(_finding("NO_INLINE_STYLES", "content rule failed"))
     unique = {(item["code"], item["message"]): item for item in findings}
-    return {"status": "PASS" if not unique else "BLOCKED", "draft": str(path), "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(), "findings": list(unique.values()), "requirements": list(REQUIREMENTS)}
+    return {
+        "status": "PASS" if not unique else "BLOCKED",
+        "draft": str(path),
+        "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "findings": list(unique.values()),
+        "requirements": list(REQUIREMENTS),
+        "validated": not unique,
+        "full_readiness": validation.get("readiness", {}).get("status") == "PASS" and not unique,
+        "readiness": validation.get("readiness", {}),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:

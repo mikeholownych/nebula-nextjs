@@ -81,6 +81,7 @@ Run the audit and review the result. This is a recommendation, not a guarantee.
 
 def test_apply_edits_preserves_immutable_revision_and_records_edit(tmp_path):
     draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "revision": 1, "provenance": {"records": [source()]}, "article": {"source_refs": ["source-1"], "claims": []}}))
     edits = tmp_path / "edits.json"; edits.write_text(json.dumps({"replacements": [{"old": "What should I check first?", "new": "What should I check first today?"}], "editor": "mike"}))
     p = run("apply_edits.py", "--draft", draft, "--edits", edits)
     assert p.returncode == 0, p.stderr
@@ -94,7 +95,7 @@ def test_apply_edits_preserves_immutable_revision_and_records_edit(tmp_path):
 def test_publish_requires_exact_approval_and_dry_run_does_not_mutate(tmp_path):
     draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
     draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}}))
-    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest()}))
+    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "full_readiness": True, "validated": True}))
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness), "approved": True}))
     target = tmp_path / "published"; before = sorted(tmp_path.rglob("*"))
     p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--dry-run", "--output-root", target)
@@ -153,12 +154,74 @@ def test_publish_writes_receipt_only_to_explicit_local_root(tmp_path):
     draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
     draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}}))
     digest = hashlib.sha256(draft.read_bytes()).hexdigest()
-    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": digest, "full_readiness": True}))
+    readiness = tmp_path / "readiness.json"; readiness.write_text(json.dumps({"status": "PASS", "draft_hash": digest, "full_readiness": True, "validated": True}))
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness)}))
     target = tmp_path / "published"
     p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--output-root", target)
     assert p.returncode == 0 and json.loads((target / "v001.publication.json").read_text())["status"] == "PUBLISHED"
     assert (target / "v001.md").read_text() == draft.read_text()
+
+
+def test_publish_requires_validated_full_readiness_report(tmp_path):
+    draft = tmp_path / "v001.md"
+    draft.write_text("not markdown")
+    digest = hashlib.sha256(draft.read_bytes()).hexdigest()
+    readiness = tmp_path / "readiness.json"
+    readiness.write_text(json.dumps({"status": "PASS", "draft_hash": digest}))
+    approval = tmp_path / "approval.json"
+    approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z"}))
+    p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--dry-run", "--output-root", tmp_path / "published")
+    assert p.returncode != 0 and "FULL_READINESS_NOT_PASSED" in p.stdout and "READINESS_NOT_VALIDATED" in p.stdout
+
+
+def test_apply_edits_rejects_tampered_parent_without_mutation(tmp_path):
+    draft = tmp_path / "v001.md"
+    draft.write_text(valid_markdown())
+    sidecar = draft.with_suffix(".json")
+    sidecar.write_text(json.dumps({"draft_hash": "stale", "revision": 1, "provenance": {"records": [source()]}}))
+    edits = tmp_path / "edits.json"
+    edits.write_text(json.dumps({"replacements": [{"old": "source", "new": "record"}]}))
+    before = sorted(p.name for p in tmp_path.iterdir())
+    p = run("apply_edits.py", "--draft", draft, "--edits", edits)
+    assert p.returncode != 0 and "INVALID_PARENT" in p.stdout
+    assert sorted(x.name for x in tmp_path.iterdir()) == before
+
+
+def test_create_rejects_empty_source_records(tmp_path):
+    item = brief()
+    item["sources"]["records"] = []
+    path = tmp_path / "brief.json"
+    path.write_text(json.dumps(item))
+    p = run("create_draft.py", "--brief", path, "--output-root", tmp_path / "drafts")
+    assert p.returncode != 0 and "INVALID_SOURCE_BUNDLE" in p.stdout
+
+
+def test_review_invokes_source_validator_when_source_type_absent(tmp_path, monkeypatch):
+    from scripts.content_pipeline import _validation
+    from scripts.content_pipeline.review_draft import review
+    draft = tmp_path / "v001.md"
+    draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}, "article": {"source_refs": ["source-1"], "claims": []}}))
+    calls = []
+    original = _validation.validate_source_bundle
+    monkeypatch.setattr(_validation, "validate_source_bundle", lambda bundle: (calls.append(bundle) or original(bundle)))
+    review(draft)
+    assert len(calls) == 1
+    assert calls[0]["__untyped__"][0]["id"] == "source-1"
+
+
+def test_concurrent_creators_allocate_unique_revisions(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    path = tmp_path / "brief.json"
+    path.write_text(json.dumps(brief(slug="concurrent")))
+    output = tmp_path / "drafts"
+    def create():
+        result = run("create_draft.py", "--brief", path, "--output-root", output)
+        return result.returncode, Path(result.stdout.strip()).name if result.returncode == 0 else result.stdout
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        results = list(pool.map(lambda _: create(), range(6)))
+    assert [code for code, _ in results] == [0] * 6
+    assert sorted(name for _, name in results) == [f"v{i:03d}.md" for i in range(1, 7)]
 
 
 def test_complete_create_review_edit_approval_publish_lifecycle(tmp_path):
@@ -174,7 +237,7 @@ def test_complete_create_review_edit_approval_publish_lifecycle(tmp_path):
     assert edited.returncode == 0
     second = Path(edited.stdout.strip())
     review_path = tmp_path / "readiness.json"
-    review_path.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "full_readiness": True}))
+    review_path.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "full_readiness": True, "validated": True}))
     approval_path = tmp_path / "approval.json"
     approval_path.write_text(json.dumps({"approved": True, "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(review_path)}))
     published = run("publish_article.py", "--draft", second, "--approval", approval_path, "--readiness", review_path, "--output-root", tmp_path / "published")

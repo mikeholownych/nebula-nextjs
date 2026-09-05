@@ -3,37 +3,47 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
 from typing import Any
 
 try:
-    from ._workflow import atomic, dump, emit, json_sidecar, now, parse, sha256
-except ImportError:
-    from _workflow import atomic, dump, emit, json_sidecar, now, parse, sha256
+    from ._validation import validate_draft
+    from ._workflow import atomic_pair, dump, emit, json_sidecar, now, revision_lock, sha256, parse
+except ImportError:  # pragma: no cover
+    from _validation import validate_draft
+    from _workflow import atomic_pair, dump, emit, json_sidecar, now, revision_lock, sha256, parse
 
 
 def _next_revision(folder: Path) -> int:
-    revisions = []
+    numbers = []
     for candidate in folder.glob("v*.md"):
-        try:
-            revisions.append(int(candidate.stem[1:]))
-        except ValueError:
-            continue
-    revision = max(revisions, default=0) + 1
-    while (folder / f"v{revision:03d}.md").exists():
-        revision += 1
-    return revision
+        if candidate.stem[1:].isdigit():
+            numbers.append(int(candidate.stem[1:]))
+    return max(numbers, default=0) + 1
+
+
+def _validate_parent(draft: Path) -> tuple[dict, str, dict[str, Any], str]:
+    result = validate_draft(draft)
+    if not result["valid"]:
+        raise ValueError("INVALID_PARENT:" + ",".join(item["code"] for item in result["failures"]))
+    metadata, body, _ = parse(draft)
+    sidecar = result["sidecar"]
+    if sidecar.get("draft_hash") != sha256(draft):
+        raise ValueError("INVALID_PARENT:PARENT_HASH_MISMATCH")
+    if sidecar.get("revision") != int(draft.stem[1:]):
+        raise ValueError("INVALID_PARENT:PARENT_REVISION_MISMATCH")
+    return metadata, body, sidecar, sha256(draft)
 
 
 def apply_edits(draft: Path, edits_path: Path) -> Path:
-    data, body, _ = parse(draft)
+    metadata, body, sidecar, old_hash = _validate_parent(draft)
     edits = json.loads(edits_path.read_text(encoding="utf-8"))
     rows = edits.get("replacements") if isinstance(edits, dict) else None
     if not isinstance(rows, list) or not rows:
         raise ValueError("INVALID_EDITS")
-    old_hash = sha256(draft)
     new_body = body
     records: list[dict[str, Any]] = []
     for row in rows:
@@ -45,16 +55,20 @@ def apply_edits(draft: Path, edits_path: Path) -> Path:
         records.append({"old": row["old"], "new": row["new"], "editor": edits.get("editor", "unknown"), "at": now()})
     for key in ("published_at", "updated_at", "reviewed_by"):
         if key in edits:
-            data[key] = edits[key]
-    revision = _next_revision(draft.parent)
-    target = draft.parent / f"v{revision:03d}.md"
-    atomic(target, dump(data, new_body))
-    sidecar = {}
-    if json_sidecar(draft).is_file():
-        sidecar = json.loads(json_sidecar(draft).read_text(encoding="utf-8"))
-    sidecar.update({"revision": revision, "draft_hash": sha256(target), "parent": str(draft), "parent_hash": old_hash, "edits": records, "created_at": now()})
-    atomic(json_sidecar(target), json.dumps(sidecar, indent=2, sort_keys=True) + "\n")
+            metadata[key] = edits[key]
+    with revision_lock(draft.parent):
+        revision = _next_revision(draft.parent)
+        target = draft.parent / f"v{revision:03d}.md"
+        new_text = dump(metadata, new_body)
+        new_sidecar = dict(sidecar)
+        new_sidecar.update({"revision": revision, "draft_hash": sha256_bytes(new_text.encode()), "parent": str(draft), "parent_hash": old_hash, "edits": records, "created_at": now()})
+        sidecar_text = json.dumps(new_sidecar, indent=2, sort_keys=True) + "\n"
+        atomic_pair((target, new_text), (json_sidecar(target), sidecar_text))
     return target
+
+
+def sha256_bytes(content: bytes) -> str:
+    return hashlib.sha256(content).hexdigest()
 
 
 def main(argv: list[str] | None = None) -> int:

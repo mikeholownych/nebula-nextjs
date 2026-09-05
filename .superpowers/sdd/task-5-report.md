@@ -671,7 +671,7 @@ Ran all test suites.
 
 - RED first: `pytest tests/test_content_pipeline_workflow.py -q` -> exit 1, 5 failed because the four requested executors did not exist.
 - Focused green: `pytest tests/test_content_pipeline_workflow.py tests/test_content_pipeline_validation.py -q` -> exit 0, 32 passed.
-- Full relevant green: `.venv/bin/python -m pytest -q` -> exit 0, 907 passed, 3 warnings.
+- Full relevant green: `.venv/bin/python -m pytest -q` -> exit 0, 918 passed, 3 warnings.
 - Python compile: `python -m py_compile scripts/content_pipeline/*.py` -> exit 0.
 - Malformed probes: missing draft and approval -> exit 1, named `INPUT_ERROR`, `MISSING_APPROVAL`, `MISSING_DRAFT`.
 - Customer portal: `npm run typecheck` -> exit 0; `npm run lint` -> exit 0; `npm run build` -> exit 0; `npm run check:blog-content` -> exit 0, 32 passed; `npm test -- --runInBand __tests__/blog-publish-readiness.test.tsx` -> exit 0, 2 passed.
@@ -683,4 +683,22 @@ Local temporary fixture lifecycle completed: create -> `v001.md` plus provenance
 
 ### Scope and concerns
 
-Changed only Task 5 implementation, tests, CI wiring, and runbook. Pre-existing dirty paths were not staged. The system-wide pytest run with `/usr/bin/python3` was attempted and failed during collection from missing ambient dependencies; the repository `.venv` run passed all 907 tests. The build generated existing customer-portal build artifacts that remain outside the Task 5 commit scope.
+Changed only Task 5 implementation, tests, CI wiring, and runbook. Pre-existing dirty paths were not staged.
+
+### Consolidated review correction evidence (2026-09-05)
+
+- Focused workflow: `./.venv/bin/pytest tests/test_content_pipeline_workflow.py -q` -> exit 0, 16 passed.
+- Focused validation plus workflow: `./.venv/bin/pytest tests/test_content_pipeline_validation.py tests/test_content_pipeline_workflow.py -q` -> exit 0, 43 passed.
+- Content CI: `cd customer-portal && npm run check:blog-content` -> exit 0, 43 passed.
+- Typecheck: `npm run typecheck` -> exit 0.
+- Lint: `npm run lint` -> exit 0.
+- Build: `npm run build` -> exit 0, Next.js compiled and generated 358 routes.
+- Python compile: `./.venv/bin/python -m py_compile scripts/content_pipeline/*.py` -> exit 0.
+- `git diff --check` -> exit 0.
+- Added coverage for source-validator invocation with absent `source_type`, strict readiness fields, parent-sidecar/hash rejection without mutation, empty-source rejection, concurrent v001-v006 allocation, and complete local publish receipt lifecycle.
+- Publication remains explicit approval only and rejects `RECOMMEND`, `APPROVE` without `EXECUTE`; output roots containing `customer-portal`, `production`, or `public` are blocked.
+
+### Current concerns
+
+- The repository contains unrelated pre-existing dirty paths. They were not staged.
+- The full `npm run ci` aggregate was not rerun after this correction; its component gates above passed individually. No production publication or deployment was attempted.

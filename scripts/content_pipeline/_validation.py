@@ -1,4 +1,4 @@
-"""Shared fail-closed validation for draft review and publication."""
+"""Single fail-closed validation path used by review, edits, and publication."""
 from __future__ import annotations
 
 import json
@@ -8,12 +8,12 @@ from urllib.parse import urlparse
 
 try:
     from ._workflow import json_sidecar, parse
-    from .collect_sources import validate_source_bundle
+    from .collect_sources import SOURCE_SPECS, validate_source_bundle
     from .publish_readiness import build_readiness_report
     from .validate_claims import validate_article_claims
-except ImportError:
+except ImportError:  # pragma: no cover
     from _workflow import json_sidecar, parse
-    from collect_sources import validate_source_bundle
+    from collect_sources import SOURCE_SPECS, validate_source_bundle
     from publish_readiness import build_readiness_report
     from validate_claims import validate_article_claims
 
@@ -24,23 +24,38 @@ def _failure(code: str, message: str) -> dict[str, str]:
 
 def _records(sidecar: dict[str, Any]) -> list[dict[str, Any]]:
     provenance = sidecar.get("provenance", {})
-    if isinstance(provenance, dict) and isinstance(provenance.get("records"), list):
-        return [row for row in provenance["records"] if isinstance(row, dict)]
-    if isinstance(provenance, list):
-        return [row for row in provenance if isinstance(row, dict)]
-    return []
+    if isinstance(provenance, dict):
+        provenance = provenance.get("records", [])
+    if not isinstance(provenance, list):
+        return []
+    return [row for row in provenance if isinstance(row, dict)]
 
 
 def _claim_sources(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    result = []
+    sources: list[dict[str, Any]] = []
     for record in records:
-        row = dict(record)
-        provenance = row.get("provenance")
+        source = dict(record)
+        provenance = source.get("provenance")
         if isinstance(provenance, dict):
-            row["provenance"] = provenance.get("source_class")
-        row.setdefault("kind", "competitor" if row.get("source_type") == "competitor_serp" else row.get("source_type", "primary"))
-        result.append(row)
-    return result
+            source["provenance"] = provenance.get("source_class")
+        source.setdefault(
+            "kind",
+            "competitor" if source.get("source_type") == "competitor_serp" else source.get("source_type", "primary"),
+        )
+        sources.append(source)
+    return sources
+
+
+def _source_bundle(records: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    bundle = {name: [] for name in SOURCE_SPECS}
+    bundle["__untyped__"] = []
+    for record in records:
+        source_type = record.get("source_type")
+        if source_type in bundle:
+            bundle[source_type].append(record)
+        elif not isinstance(source_type, str):
+            bundle["__untyped__"].append(record)
+    return bundle
 
 
 def validate_draft(path: Path) -> dict[str, Any]:
@@ -57,8 +72,8 @@ def validate_draft(path: Path) -> dict[str, Any]:
     if parsed is None or parsed.scheme not in {"http", "https"} or not parsed.netloc:
         failures.append(_failure("INVALID_CANONICAL", "canonical_url must be an absolute HTTP(S) URL"))
 
-    sidecar_path = json_sidecar(path)
     sidecar: dict[str, Any] = {}
+    sidecar_path = json_sidecar(path)
     if sidecar_path.is_file():
         try:
             loaded = json.loads(sidecar_path.read_text(encoding="utf-8"))
@@ -73,30 +88,39 @@ def validate_draft(path: Path) -> dict[str, Any]:
     records = _records(sidecar)
     article = sidecar.get("article")
     if not isinstance(article, dict):
-        article = {
-            "canonical_url": canonical,
-            "source_refs": metadata.get("source_refs", []),
-            "claims": [],
-        }
+        article = {"canonical_url": canonical, "source_refs": metadata.get("source_refs", []), "claims": []}
     claim_result = validate_article_claims(article, _claim_sources(records))
-    for reason in claim_result.get("blocked_reasons", []):
-        failures.append(_failure(reason, "claim and provenance validation failed"))
+    failures.extend(_failure(reason, "claim and provenance validation failed") for reason in claim_result["blocked_reasons"])
 
-    if records and all(isinstance(row.get("source_type"), str) for row in records):
-        source_bundle = {row["source_type"]: [row] for row in records}
-        source_result = validate_source_bundle(source_bundle)
-        for reason in source_result.get("errors", []):
-            failures.append(_failure(reason, "source artifact validation failed"))
+    source_result = validate_source_bundle(_source_bundle(records))
+    source_errors = source_result["errors"]
+    typed_records = any(isinstance(row.get("source_type"), str) for row in records)
+    untyped_pipeline_records = [row for row in records if not isinstance(row.get("source_type"), str) and ("path" in row or "evidence" in row or isinstance(row.get("provenance"), dict))]
+    if not typed_records:
+        source_errors = ["SOURCE_ERROR_UNTYPED_RECORD"] if untyped_pipeline_records else []
+    else:
+        source_errors = [error for error in source_errors if ":missing" not in error and ":no_valid_records" not in error]
+    failures.extend(_failure(reason, "source artifact validation failed") for reason in source_errors)
 
     opportunity = sidecar.get("opportunity")
+    readiness_input = opportunity if isinstance(opportunity, dict) else None
     try:
-        readiness = build_readiness_report(article, _claim_sources(records), opportunity if isinstance(opportunity, dict) else None)
+        readiness = build_readiness_report(article, _claim_sources(records), readiness_input)
     except (TypeError, ValueError, KeyError) as exc:
         readiness = {"status": "BLOCKED", "blocked_reasons": ["READINESS_VALIDATION_ERROR"]}
-        if isinstance(opportunity, dict):
-            failures.append(_failure("READINESS_VALIDATION_ERROR", str(exc)))
+        failures.append(_failure("READINESS_VALIDATION_ERROR", str(exc)))
     if isinstance(opportunity, dict) and readiness.get("status") != "PASS":
-        for reason in readiness.get("blocked_reasons", ["READINESS_BLOCKED"]):
-            failures.append(_failure(reason, "full publish-readiness validation failed"))
+        failures.extend(
+            _failure(reason, "full publish-readiness validation failed")
+            for reason in readiness.get("blocked_reasons", ["READINESS_BLOCKED"])
+        )
 
-    return {"valid": not failures, "failures": failures, "metadata": metadata, "body": body, "sidecar": sidecar}
+    unique = {(item["code"], item["message"]): item for item in failures}
+    return {
+        "valid": not unique,
+        "failures": list(unique.values()),
+        "metadata": metadata,
+        "body": body,
+        "sidecar": sidecar,
+        "readiness": readiness,
+    }
