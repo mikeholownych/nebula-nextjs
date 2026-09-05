@@ -27,7 +27,7 @@ Missing approval, malformed records, hash mismatch, missing reviewer or timestam
 
 ## Rollback
 
-Publication is a copy into the local published root and writes a publication receipt. Roll back by removing the published copy and receipt, or restore the prior published artifact from version control. Draft revisions are immutable and must not be overwritten. No production rollback is performed by these scripts.
+Publication is a copy into the local published root and writes a publication receipt. Roll back by removing the published copy and receipt, or restore the prior published artifact from version control. Draft revisions are immutable and must not be overwritten. Revision allocation retains a lock-only `.revision.lock` file because unlinking after unlock can split concurrent creators across lock inodes. Failed validation occurs before the lock directory is created, and the workflow regression test covers that cleanup boundary. No production rollback is performed by these scripts.
 
 ## Scheduled/report-only operation
 

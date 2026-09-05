@@ -32,7 +32,7 @@ def review(path: Path) -> dict:
     validation = validate_draft(path)
     if not validation["valid"] and any(item["code"] == "MALFORMED_DRAFT" for item in validation["failures"]):
         findings = validation["failures"]
-        return {"status": "BLOCKED", "draft": str(path), "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(), "findings": findings, "requirements": list(REQUIREMENTS)}
+        return {"status": "BLOCKED", "draft": str(path), "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(), "findings": findings, "requirements": list(REQUIREMENTS), "validated": False, "full_readiness": False, "readiness": {"status": "BLOCKED", "blocked_reasons": ["MALFORMED_DRAFT"]}}
     data, body, _ = parse(path)
     findings = list(validation["failures"])
     h1 = re.findall(r"^# (.+)$", body, re.M)
@@ -78,16 +78,21 @@ def review(path: Path) -> dict:
         findings.append(_finding("NO_DUPLICATE_NAV", "content rule failed"))
     if "style=" in body:
         findings.append(_finding("NO_INLINE_STYLES", "content rule failed"))
+    readiness = validation.get("readiness", {})
+    readiness_blocked = readiness.get("status") != "PASS" or readiness.get("blocked_reasons") or readiness.get("timing_gate") == "BLOCKED"
+    if readiness_blocked:
+        findings.extend(_finding(reason, "full publish-readiness validation failed") for reason in readiness.get("blocked_reasons", ["READINESS_BLOCKED"]))
     unique = {(item["code"], item["message"]): item for item in findings}
+    full_readiness = not readiness_blocked
     return {
-        "status": "PASS" if not unique else "BLOCKED",
+        "status": "PASS" if not unique and full_readiness else "BLOCKED",
         "draft": str(path),
         "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(),
         "findings": list(unique.values()),
         "requirements": list(REQUIREMENTS),
-        "validated": not unique,
-        "full_readiness": validation.get("readiness", {}).get("status") == "PASS" and not unique,
-        "readiness": validation.get("readiness", {}),
+        "validated": not unique and full_readiness,
+        "full_readiness": full_readiness and not unique,
+        "readiness": readiness,
     }
 
 

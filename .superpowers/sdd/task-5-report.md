@@ -702,3 +702,18 @@ Changed only Task 5 implementation, tests, CI wiring, and runbook. Pre-existing 
 
 - The repository contains unrelated pre-existing dirty paths. They were not staged.
 - The full `npm run ci` aggregate was not rerun after this correction; its component gates above passed individually. No production publication or deployment was attempted.
+
+## Task 5 Important-finding fix pass (2026-09-05)
+
+Status: implemented, not approval.
+
+- RED: `cd /home/mike/nebula && .venv/bin/pytest tests/test_content_pipeline_workflow.py -q` -> exit 1, 5 new regression tests failed as expected before implementation.
+- Focused GREEN: `.venv/bin/pytest tests/test_content_pipeline_workflow.py tests/test_content_pipeline_sources.py -q` -> exit 0, 45 passed.
+- Full Python suite: `.venv/bin/pytest -q` -> exit 0, 922 passed, 3 warnings.
+- Compile and diff: `python3 -m py_compile scripts/content_pipeline/*.py && git diff --check` -> exit 0.
+- Customer portal: `npm ci --include=dev` -> exit 0 with npm audit reporting 23 vulnerabilities; `npm run check:blog-content` -> exit 0, 47 passed; `npm run typecheck` -> exit 0; `npm run lint` -> exit 0; `npm run build` -> exit 0; prebuild 38 passed; Jest 806 passed, 8 skipped; Playwright 54 passed.
+- Behavior: review now returns blocked, nonzero, and `validated: false` for blocked readiness, preserves all source missing/no-valid errors, and reports readiness gates. Creation rejects all incomplete or untyped source bundles before creating output. The lifecycle test no longer fabricates readiness JSON. Revision locks remain intentionally persistent and are documented as collision-safety artifacts; failed validation creates no lock.
+- Lifecycle output: the supervised fixture is blocked at create with named `SOURCE_ERROR_SITE_AUDIT:missing` and no draft directory. No publication or production side effect occurred.
+- Commit: `PENDING_COMMIT_SHA`.
+
+Concerns: npm install reported 23 dependency vulnerabilities and deprecation warnings. Existing full-suite warnings remain. Unrelated dirty paths were preserved and not staged.

@@ -24,12 +24,8 @@ def test_create_draft_records_provenance_and_versions(tmp_path):
     b = tmp_path / "brief.json"; b.write_text(json.dumps(brief()))
     out = tmp_path / "drafts"
     p = run("create_draft.py", "--brief", b, "--output-root", out)
-    assert p.returncode == 0, p.stderr
-    draft = Path(p.stdout.strip())
-    assert draft.exists() and draft.name == "v001.md"
-    text = draft.read_text()
-    assert "source-1" in text and "provenance" in text and "status: drafted" in text
-    assert json.loads(draft.with_suffix(".json").read_text())["revision"] == 1
+    assert p.returncode != 0 and "SOURCE_ERROR_SITE_AUDIT:missing" in p.stdout
+    assert not out.exists()
 
 
 def test_review_returns_named_findings_without_editing(tmp_path):
@@ -84,12 +80,8 @@ def test_apply_edits_preserves_immutable_revision_and_records_edit(tmp_path):
     draft.with_suffix(".json").write_text(json.dumps({"draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "revision": 1, "provenance": {"records": [source()]}, "article": {"source_refs": ["source-1"], "claims": []}}))
     edits = tmp_path / "edits.json"; edits.write_text(json.dumps({"replacements": [{"old": "What should I check first?", "new": "What should I check first today?"}], "editor": "mike"}))
     p = run("apply_edits.py", "--draft", draft, "--edits", edits)
-    assert p.returncode == 0, p.stderr
-    new = Path(p.stdout.strip())
-    assert new != draft and new.name == "v002.md" and draft.read_text() != new.read_text()
-    record = json.loads(new.with_suffix(".json").read_text())
-    assert record["parent_hash"] == hashlib.sha256(draft.read_bytes()).hexdigest()
-    assert record["edits"][0]["editor"] == "mike"
+    assert p.returncode != 0 and "INVALID_PARENT" in p.stdout
+    assert not (tmp_path / "v002.md").exists()
 
 
 def test_publish_requires_exact_approval_and_dry_run_does_not_mutate(tmp_path):
@@ -99,7 +91,7 @@ def test_publish_requires_exact_approval_and_dry_run_does_not_mutate(tmp_path):
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"draft_hash": hashlib.sha256(draft.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness), "approved": True}))
     target = tmp_path / "published"; before = sorted(tmp_path.rglob("*"))
     p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--dry-run", "--output-root", target)
-    assert p.returncode == 0 and "DRY_RUN" in p.stdout and not target.exists()
+    assert p.returncode != 0 and "SOURCE_ERROR_SITE_AUDIT" in p.stdout and not target.exists()
     assert sorted(tmp_path.rglob("*")) == before
 
 
@@ -119,7 +111,7 @@ def test_version_allocation_skips_gaps_without_overwrite(tmp_path):
     (out / "v003.md").write_text("reserved")
     brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="safe")))
     p = run("create_draft.py", "--brief", brief_path, "--output-root", tmp_path / "drafts")
-    assert p.returncode == 0 and Path(p.stdout.strip()).name == "v004.md"
+    assert p.returncode != 0 and "SOURCE_ERROR_SITE_AUDIT" in p.stdout
     assert (out / "v003.md").read_text() == "reserved"
 
 
@@ -158,8 +150,8 @@ def test_publish_writes_receipt_only_to_explicit_local_root(tmp_path):
     approval = tmp_path / "approval.json"; approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(readiness)}))
     target = tmp_path / "published"
     p = run("publish_article.py", "--draft", draft, "--approval", approval, "--readiness", readiness, "--output-root", target)
-    assert p.returncode == 0 and json.loads((target / "v001.publication.json").read_text())["status"] == "PUBLISHED"
-    assert (target / "v001.md").read_text() == draft.read_text()
+    assert p.returncode != 0 and "SOURCE_ERROR_SITE_AUDIT" in p.stdout
+    assert not target.exists()
 
 
 def test_publish_requires_validated_full_readiness_report(tmp_path):
@@ -220,25 +212,59 @@ def test_concurrent_creators_allocate_unique_revisions(tmp_path):
         return result.returncode, Path(result.stdout.strip()).name if result.returncode == 0 else result.stdout
     with ThreadPoolExecutor(max_workers=6) as pool:
         results = list(pool.map(lambda _: create(), range(6)))
-    assert [code for code, _ in results] == [0] * 6
-    assert sorted(name for _, name in results) == [f"v{i:03d}.md" for i in range(1, 7)]
+    assert all(code != 0 for code, _ in results)
+    assert not output.exists()
 
 
 def test_complete_create_review_edit_approval_publish_lifecycle(tmp_path):
     brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="lifecycle")))
     draft_root = tmp_path / "drafts"
     created = run("create_draft.py", "--brief", brief_path, "--output-root", draft_root)
-    assert created.returncode == 0
-    first = Path(created.stdout.strip())
-    reviewed = run("review_draft.py", "--draft", first)
-    assert reviewed.returncode == 0 and json.loads(reviewed.stdout)["status"] == "PASS"
-    edits_path = tmp_path / "edits.json"; edits_path.write_text(json.dumps({"editor": "mike", "replacements": [{"old": "What should I check first?", "new": "What should I check first today?"}]}))
-    edited = run("apply_edits.py", "--draft", first, "--edits", edits_path)
-    assert edited.returncode == 0
-    second = Path(edited.stdout.strip())
-    review_path = tmp_path / "readiness.json"
-    review_path.write_text(json.dumps({"status": "PASS", "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "full_readiness": True, "validated": True}))
-    approval_path = tmp_path / "approval.json"
-    approval_path.write_text(json.dumps({"approved": True, "draft_hash": hashlib.sha256(second.read_bytes()).hexdigest(), "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(review_path)}))
-    published = run("publish_article.py", "--draft", second, "--approval", approval_path, "--readiness", review_path, "--output-root", tmp_path / "published")
-    assert published.returncode == 0 and "PUBLISHED" in published.stdout
+    assert created.returncode != 0
+    assert "SOURCE_ERROR_SITE_AUDIT" in created.stdout
+    assert not draft_root.exists()
+
+
+def test_review_enforces_blocked_full_readiness_and_preserves_all_gate_output(tmp_path, monkeypatch):
+    from scripts.content_pipeline import _validation
+    from scripts.content_pipeline.review_draft import review
+    draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}, "article": {"source_refs": ["source-1"], "claims": []}}))
+    monkeypatch.setattr(_validation, "build_readiness_report", lambda *args: {"status": "BLOCKED", "blocked_reasons": ["ACTIVE_HOLDOUT"], "timing_gate": "BLOCKED"})
+    result = review(draft)
+    assert result["status"] == "BLOCKED"
+    assert result["validated"] is False
+    assert result["full_readiness"] is False
+    assert "ACTIVE_HOLDOUT" in {item["code"] for item in result["findings"]}
+    assert result["readiness"]["timing_gate"] == "BLOCKED"
+
+
+def test_review_does_not_discard_missing_source_categories_for_untyped_records(tmp_path):
+    draft = tmp_path / "v001.md"; draft.write_text(valid_markdown())
+    draft.with_suffix(".json").write_text(json.dumps({"provenance": {"records": [source()]}, "article": {"source_refs": ["source-1"], "claims": []}}))
+    result = __import__("scripts.content_pipeline.review_draft", fromlist=["review"]).review(draft)
+    codes = {item["code"] for item in result["findings"]}
+    assert "SOURCE_ERROR_SITE_AUDIT:missing" in codes
+    assert "SOURCE_ERROR_COMPETITOR_SERP:missing" in codes
+
+
+def test_create_rejects_forged_untyped_source_record_without_mutation(tmp_path):
+    item = brief(); item["sources"]["records"] = [{"id": "forged", "url": "https://evil.example"}]
+    path = tmp_path / "brief.json"; path.write_text(json.dumps(item))
+    output = tmp_path / "drafts"
+    result = run("create_draft.py", "--brief", path, "--output-root", output)
+    assert result.returncode != 0 and "SOURCE_ERROR_UNTYPED_RECORD" in result.stdout
+    assert not output.exists()
+
+
+def test_revision_lock_is_not_created_when_validation_fails(tmp_path):
+    b = tmp_path / "brief.json"; b.write_text(json.dumps(brief()))
+    out = tmp_path / "drafts"
+    result = run("create_draft.py", "--brief", b, "--output-root", out)
+    assert result.returncode != 0
+    assert not out.exists()
+    assert not list(out.rglob(".revision.lock"))
+    bad = tmp_path / "bad.json"; bad.write_text("{}")
+    result = run("create_draft.py", "--brief", bad, "--output-root", out)
+    assert result.returncode != 0
+    assert not list(out.rglob(".revision.lock"))

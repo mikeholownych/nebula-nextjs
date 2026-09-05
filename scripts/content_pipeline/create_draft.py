@@ -30,14 +30,16 @@ def _load_brief(path: Path) -> dict[str, Any]:
     required = ("id", "lane", "post_type", "question_h1", "sources", "timing_gate")
     if any(not data.get(key) for key in required):
         raise ValueError("INVALID_BRIEF")
+    slug = _slug(data)
     records = data.get("sources", {}).get("records") if isinstance(data.get("sources"), dict) else None
     if not isinstance(records, list) or not records:
         raise ValueError("INVALID_SOURCE_BUNDLE:missing_source_records")
-    if any(isinstance(row, dict) and isinstance(row.get("source_type"), str) for row in records):
-        source_check = validate_source_bundle(_source_bundle(records))
-        errors = [error for error in source_check["errors"] if ":missing" not in error and ":no_valid_records" not in error]
-        if errors:
-            raise ValueError("INVALID_SOURCE_BUNDLE:" + ",".join(errors))
+    source_check = validate_source_bundle(_source_bundle(records))
+    errors = list(source_check["errors"])
+    if any(not isinstance(row, dict) or not isinstance(row.get("source_type"), str) for row in records):
+        errors.append("SOURCE_ERROR_UNTYPED_RECORD")
+    if errors:
+        raise ValueError("INVALID_SOURCE_BUNDLE:" + ",".join(dict.fromkeys(errors)))
     if data.get("timing_gate", {}).get("status") != "ELIGIBLE":
         raise ValueError("BRIEF_NOT_VALIDATED")
     return data

@@ -94,12 +94,9 @@ def validate_draft(path: Path) -> dict[str, Any]:
 
     source_result = validate_source_bundle(_source_bundle(records))
     source_errors = source_result["errors"]
-    typed_records = any(isinstance(row.get("source_type"), str) for row in records)
-    untyped_pipeline_records = [row for row in records if not isinstance(row.get("source_type"), str) and ("path" in row or "evidence" in row or isinstance(row.get("provenance"), dict))]
-    if not typed_records:
-        source_errors = ["SOURCE_ERROR_UNTYPED_RECORD"] if untyped_pipeline_records else []
-    else:
-        source_errors = [error for error in source_errors if ":missing" not in error and ":no_valid_records" not in error]
+    untyped_records = [row for row in records if not isinstance(row.get("source_type"), str)]
+    if untyped_records:
+        source_errors.append("SOURCE_ERROR_UNTYPED_RECORD")
     failures.extend(_failure(reason, "source artifact validation failed") for reason in source_errors)
 
     opportunity = sidecar.get("opportunity")
@@ -109,7 +106,7 @@ def validate_draft(path: Path) -> dict[str, Any]:
     except (TypeError, ValueError, KeyError) as exc:
         readiness = {"status": "BLOCKED", "blocked_reasons": ["READINESS_VALIDATION_ERROR"]}
         failures.append(_failure("READINESS_VALIDATION_ERROR", str(exc)))
-    if isinstance(opportunity, dict) and readiness.get("status") != "PASS":
+    if readiness.get("status") != "PASS" or readiness.get("blocked_reasons") or readiness.get("timing_gate") == "BLOCKED":
         failures.extend(
             _failure(reason, "full publish-readiness validation failed")
             for reason in readiness.get("blocked_reasons", ["READINESS_BLOCKED"])
