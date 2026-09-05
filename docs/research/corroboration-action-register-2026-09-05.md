@@ -51,7 +51,14 @@ These sources support provenance work. They do not validate a universal landing-
 5. Do not send the note without a separate approval event.
 6. Record a published citation or qualified reply against this row if one occurs.
 
-## Decision rules
+## Delivery outcomes
+
+- **corr-20260905-014:** Provider readback returned the expected recipient, subject, body asset, and message ID, but labels included `bounced`. Local lead state is `stage=bounced`, `bounce_type=hard`. Delivery is not counted.
+- **corr-20260905-016:** Provider readback returned the expected recipient, subject, body asset, and message ID with `sent` and no `bounced` label observed. Provider acceptance is verified; physical inbox delivery is not proven.
+- **corr-20260905-015:** No email sent. The verified route is Web Tonic's official contact form and requires a manual operator action.
+
+Provider receipts, readback, and local ledger state are recorded separately from actual delivery, reply, citation, or revenue outcomes.
+
 
 - A publisher record is not customer proof.
 - A compiled benchmark article does not independently corroborate every statistic it repeats.

@@ -149,6 +149,34 @@
       "send_authorized": false
     }
   ],
+  "outreach_results": [
+    {
+      "row_id": "corr-20260905-014",
+      "recipient": "hello@42agency.com",
+      "client_id": "campaign:corr-20260905-014:value-first",
+      "provider_message_id": "<010001a072b4bbc4-87cf8baf-dc32-4808-bd9b-f0208415c8d5-000000@email.amazonses.com>",
+      "provider_readback": "sent plus bounced labels",
+      "outcome": "hard_bounce",
+      "local_state": "bounced",
+      "delivered": false
+    },
+    {
+      "row_id": "corr-20260905-016",
+      "recipient": "sales@conversionwise.com",
+      "client_id": "campaign:corr-20260905-016:value-first",
+      "provider_message_id": "<010001a072b9663b-f118e0bf-c79c-4a93-91e0-2b62d2511826-000000@email.amazonses.com>",
+      "provider_readback": "sent label, no bounced label observed",
+      "outcome": "provider_accepted_readback_verified",
+      "delivered": "not_proven"
+    },
+    {
+      "row_id": "corr-20260905-015",
+      "recipient": "Web Tonic official contact route",
+      "outcome": "manual_contact_form_required",
+      "sent": false,
+      "delivered": false
+    }
+  ],
   "decision_rules": [
     "A publisher record is not customer proof.",
     "A compiled benchmark article does not independently corroborate every statistic it repeats.",
