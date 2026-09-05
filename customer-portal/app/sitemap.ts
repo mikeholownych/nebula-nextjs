@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { buildSitemapEntries } from '@opinly/shared'
-import { getOpinlyClient, opinlyRenderConfig } from '@/app/lib/opinly'
+
 import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
 import { listArticles as listLocalBlogArticles } from './lib/blog/loader'
@@ -193,20 +192,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  const opinlyEntries: MetadataRoute.Sitemap = []
-
-  try {
-    const routes = await getOpinlyClient().routes()
-    const entries = buildSitemapEntries(routes, opinlyRenderConfig)
-    opinlyEntries.push(...entries.map((entry) => ({
-      url: entry.url,
-      lastModified: entry.lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: entry.url.endsWith('/blog') ? 0.8 : 0.6,
-    })))
-  } catch (error) {
-    console.error('Failed to load Opinly routes for sitemap:', error)
-  }
-
-  return [homeEntry, ...coreEntries, ...articleEntries, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries, ...opinlyEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
 }

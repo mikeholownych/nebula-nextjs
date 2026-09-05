@@ -1,11 +1,6 @@
 import { createOpinlyClient, type OpinlyClient } from '@opinly/backend'
 
-export const OPINLY_BLOG_PATH = '/blog'
-export const OPINLY_IMAGES_PATH = '/opinly-images'
 export const OPINLY_CDN_NAMESPACE = '_NlFRT6KwFUIYgYHEbUVL'
-export const OPINLY_SITE_URL = 'https://nebulacomponents.com'
-export const OPINLY_COMPANY_NAME = 'Nebula Components'
-export const OPINLY_IMAGES_PREFIX = `https://cdn.opinly.ai/${OPINLY_CDN_NAMESPACE}`
 
 /**
  * Every Opinly content request carries the shared invalidation tag. This is
@@ -28,14 +23,4 @@ export function getOpinlyClient(): OpinlyClient {
       },
     }),
   })
-}
-
-export const opinlyRenderConfig = {
-  imagesPrefix: OPINLY_IMAGES_PREFIX,
-  siteUrl: OPINLY_SITE_URL,
-  blogPrefix: OPINLY_BLOG_PATH,
-  siteName: OPINLY_COMPANY_NAME,
-  categoryPrefix: 'category',
-  authorPrefix: 'authors',
-  tagPrefix: 'tag',
 }

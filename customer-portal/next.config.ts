@@ -1,4 +1,4 @@
-import { withOpinlyConfig } from '@opinly/next'
+
 import type { NextConfig } from 'next'
 import { createHash } from 'node:crypto'
 import { LEGACY_HTML_ROUTES } from './app/lib/legacy-routes'
@@ -526,10 +526,4 @@ const nextConfig: NextConfig = {
 // Until the key is rotated with that scope, bypass withPostHogConfig to keep
 // production builds working. Re-enable once the key is updated.
 // const posthogApiKey = process.env.POSTHOG_PERSONAL_API_KEY
-export default withOpinlyConfig({
-  blogPath: '/blog',
-  imagesPath: '/opinly-images',
-  companyName: 'Nebula Components',
-  cdnNamespace: '_NlFRT6KwFUIYgYHEbUVL',
-  siteUrl: 'https://nebulacomponents.com',
-})(nextConfig)
+export default nextConfig

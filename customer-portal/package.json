@@ -37,9 +37,6 @@
   "dependencies": {
     "@heycatch/sdk": "^0.7.0",
     "@opinly/backend": "^1.4.0",
-    "@opinly/next": "^1.4.0",
-    "@opinly/react": "^1.4.0",
-    "@opinly/shared": "^1.4.0",
     "@posthog/nextjs-config": "^1.9.70",
     "@react-oauth/google": "^0.13.5",
     "@types/pdfkit": "^0.17.6",

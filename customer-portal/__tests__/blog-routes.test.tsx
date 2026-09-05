@@ -6,6 +6,8 @@ import BlogArticlePage, { generateMetadata } from '@/app/blog/[slug]/page'
 import sitemap from '@/app/sitemap'
 import { listArticles } from '@/app/lib/blog/loader'
 import { renderMarkdown, safeMarkdownHref } from '@/app/blog/lib/render-markdown'
+import { readFileSync, existsSync } from 'node:fs'
+import path from 'node:path'
 
 function articleSchemas(): Record<string, unknown>[] {
   const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')]
@@ -117,5 +119,23 @@ describe('local two-lane blog routes', () => {
       'https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting',
     ]))
     expect(urls).not.toContain(expect.stringContaining('/blog/draft'))
+  })
+
+  it('contains no Opinly delivery in local blog and sitemap sources', () => {
+    const root = path.resolve(__dirname, '..')
+    const sources = [
+      'app/blog/page.tsx',
+      'app/blog/[slug]/page.tsx',
+      'app/lib/blog/loader.ts',
+      'app/sitemap.ts',
+    ].map((file) => readFileSync(path.join(root, file), 'utf8')).join('\\n')
+    expect(sources).not.toMatch(/opinly/i)
+  })
+
+  it('removes the unused Opinly webhook route while retaining analytics pixel', () => {
+    expect(existsSync(path.resolve(__dirname, '../app/api/opinly/route.ts'))).toBe(false)
+    const layout = readFileSync(path.resolve(__dirname, '../app/layout.tsx'), 'utf8')
+    expect(layout).toContain('id="opinly-pixel"')
+    expect(layout).toContain('https://static.opinly.ai/p.js')
   })
 })
