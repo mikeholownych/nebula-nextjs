@@ -120,6 +120,21 @@ export default function SiteFooter() {
               style={{ display: 'block' }}
             />
           </a>
+          {/* Maidensail listing badge */}
+          <a
+            href="https://maidensail.com/startup/nebula-components"
+            target="_blank"
+            rel="dofollow noopener noreferrer"
+            aria-label="Featured on Maidensail"
+          >
+            <img
+              src="https://maidensail.com/badge/nebula-components.svg?theme=dark"
+              alt="Featured on Maidensail"
+              width={160}
+              height={44}
+              style={{ display: 'block' }}
+            />
+          </a>
           <nav aria-label="Legal" className="flex gap-4">
             <Link href="/privacy-policy" className="hover:text-fg-muted transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-fg-muted transition-colors">Terms</Link>
