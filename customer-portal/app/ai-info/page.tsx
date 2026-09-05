@@ -161,7 +161,7 @@ export default function AiInfoPage() {
             <div className="rounded-xl border border-border bg-bg-panel p-6">
               <h3 className="font-semibold">Nebula does not claim</h3>
               <ul className="mt-3 space-y-2 text-fg-muted">
-                <li>Guaranteed conversion or revenue improvement.</li>
+                <li>Promises of conversion or revenue improvement.</li>
                 <li>Traffic quality or offer-market fit.</li>
                 <li>Customer outcomes without attributable evidence.</li>
                 <li>Statistical conclusions from an audit alone.</li>
