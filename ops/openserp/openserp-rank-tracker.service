@@ -1,0 +1,8 @@
+[Unit]
+Description=Nebula OpenSERP project SERP collection
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/mike/nebula
+ExecStart=/usr/bin/python3 /home/mike/nebula/scripts/openserp_rank_tracker.py --config /home/mike/nebula/config/openserp_tracking.json

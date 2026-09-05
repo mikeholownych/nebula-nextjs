@@ -6,17 +6,19 @@ const learningCentreDir = join(process.cwd(), 'app', 'learning-centre')
 const learningCentrePrefix = '/learning-centre/'
 
 function articleSlugs() {
-  return readdirSync(learningCentreDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('['))
-    .flatMap((entry) => {
-      try {
-        const meta = JSON.parse(readFileSync(join(learningCentreDir, entry.name, 'meta.json'), 'utf8')) as { slug?: unknown }
-        return typeof meta.slug === 'string' ? [meta.slug] : []
-      } catch {
-        return []
-      }
-    })
-    .sort()
+  const collect = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    if (!entry.isDirectory() || entry.name.startsWith('[')) return []
+
+    const articleDirectory = join(directory, entry.name)
+    try {
+      const meta = JSON.parse(readFileSync(join(articleDirectory, 'meta.json'), 'utf8')) as { slug?: unknown }
+      return typeof meta.slug === 'string' ? [meta.slug] : collect(articleDirectory)
+    } catch {
+      return collect(articleDirectory)
+    }
+  })
+
+  return collect(learningCentreDir).sort()
 }
 
 function learningCentreHrefs(html: string) {
@@ -26,6 +28,7 @@ function learningCentreHrefs(html: string) {
 test('maps every article from the hub and only serves contextual Learning Centre links to real articles', async ({ request }) => {
   const slugs = articleSlugs()
   const validHrefs = new Set(slugs.map((slug) => `${learningCentrePrefix}${slug}`))
+  const allowedContextualHrefs = new Set([...validHrefs, `${learningCentrePrefix}topic-guides`])
   const hub = await request.get('/learning-centre')
   const hubHtml = await hub.text()
 
@@ -40,5 +43,5 @@ test('maps every article from the hub and only serves contextual Learning Centre
   }
 
   expect(contextualHrefs.size).toBeGreaterThan(0)
-  expect([...contextualHrefs].every((href) => validHrefs.has(href))).toBe(true)
+  expect([...contextualHrefs].every((href) => allowedContextualHrefs.has(href))).toBe(true)
 })

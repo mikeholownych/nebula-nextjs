@@ -11,6 +11,37 @@ from .trend_engine import classify_sitewide_trend
 from .window_computation import compare_measurements
 
 
+def render_search_semantics(
+    *,
+    sitewide_impressions: int,
+    sitewide_clicks: int,
+    macro_position: Optional[float],
+    dimensioned_impressions: int,
+    dimensioned_page_rows: int,
+    query_page_rows: int,
+    unique_queries: int,
+) -> str:
+    """Render GSC aggregate and dimensioned metrics as separate evidence classes."""
+    macro = f"{macro_position:.1f}" if macro_position is not None else "N/A"
+    return "\n".join([
+        "## Sitewide GSC Aggregate",
+        "",
+        f"- {sitewide_impressions:,} impressions, {sitewide_clicks:,} clicks, macro position {macro}",
+        "- Source: dimensionless GSC aggregate, including anonymized/suppressed data",
+        "",
+        "## Observable Dimensioned Search Evidence",
+        "",
+        f"- {dimensioned_impressions:,} impressions across {dimensioned_page_rows:,} visible page rows",
+        "- Source: GSC-returned page/query-dimensioned rows; this is a drill-down subset",
+        "",
+        "## Query/Page Rows",
+        "",
+        f"- Observable query/page rows: {query_page_rows:,}",
+        f"- Unique Observable Queries: {unique_queries:,}",
+        "- Query sample may be incomplete because Google suppresses portions of dimensional data",
+    ])
+
+
 def render_baseline_report(
     measurement_id: str = "meas_20260902_baseline_v2",
     db_uri: str = DEFAULT_DB_URI,
@@ -114,6 +145,28 @@ def render_weekly_observation_report(
 
             cur.execute("SELECT * FROM acquisition_source_runs WHERE measurement_id = %s;", (current_meas_id,))
             source_runs = cur.fetchall()
+            cur.execute(
+                """
+                SELECT
+                    COALESCE(SUM(impressions), 0) AS dimensioned_impressions,
+                    COUNT(*) FILTER (WHERE impressions > 0) AS dimensioned_page_rows
+                FROM page_measurements
+                WHERE measurement_id = %s;
+                """,
+                (current_meas_id,),
+            )
+            dimensioned = cur.fetchone()
+            cur.execute(
+                """
+                SELECT
+                    COUNT(*) AS query_page_rows,
+                    COUNT(DISTINCT query_text) AS unique_queries
+                FROM query_measurements
+                WHERE measurement_id = %s;
+                """,
+                (current_meas_id,),
+            )
+            query_counts = cur.fetchone()
 
     curr_eff_days = (curr["effective_period_end"] - curr["effective_period_start"]).days + 1
 
@@ -158,8 +211,18 @@ def render_weekly_observation_report(
         md.append(f"- **Eligible for Longitudinal Trend:** `{vector.is_comparable_for_trend}`")
         md.append("")
 
-    # 3. Key Metrics & Comparison
-    md.append("## 3. Quantitative Search Visibility & Traffic Observations")
+    # 3. Explicit GSC evidence classes
+    md.append("## 3. Search Evidence Semantics")
+    md.append("")
+    md.append(render_search_semantics(
+        sitewide_impressions=curr["gsc_total_impressions"],
+        sitewide_clicks=curr["gsc_total_clicks"],
+        macro_position=curr["gsc_aggregate_position"],
+        dimensioned_impressions=dimensioned["dimensioned_impressions"],
+        dimensioned_page_rows=dimensioned["dimensioned_page_rows"],
+        query_page_rows=query_counts["query_page_rows"],
+        unique_queries=query_counts["unique_queries"],
+    ))
     md.append("")
     md.append("| Metric | Current Value | Comparator Delta | Description |")
     md.append("|--------|---------------|------------------|-------------|")
@@ -167,11 +230,11 @@ def render_weekly_observation_report(
     d_clk_str = f"{vector.delta_clicks:+d}" if vector else "N/A"
     d_pos_str = f"{vector.delta_macro_position:+.1f}" if vector else "N/A"
     d_sess_str = f"{vector.delta_organic_sessions:+d}" if vector else "N/A"
-    
-    md.append(f"| GSC Total Impressions | {curr['gsc_total_impressions']} | {d_imp_str} | Sitewide aggregate query |")
-    md.append(f"| GSC Total Clicks | {curr['gsc_total_clicks']} | {d_clk_str} | Sitewide aggregate query |")
-    md.append(f"| Sitewide Macro Position (`gsc_aggregate_position`) | {curr['gsc_aggregate_position']:.1f} | {d_pos_str} | Aggregate rank across all searches |")
-    md.append(f"| Drill-Down Weighted Position | {curr['dimensioned_impression_weighted_position']:.1f} | N/A | Weighted across visible dimensioned rows |")
+
+    md.append(f"| Sitewide GSC Impressions | {curr['gsc_total_impressions']} | {d_imp_str} | Dimensionless aggregate |")
+    md.append(f"| Sitewide GSC Clicks | {curr['gsc_total_clicks']} | {d_clk_str} | Dimensionless aggregate |")
+    md.append(f"| Sitewide Macro Position (`gsc_aggregate_position`) | {curr['gsc_aggregate_position']:.1f} | {d_pos_str} | Dimensionless aggregate rank |")
+    md.append(f"| Dimensioned Impression-Weighted Position | {curr['dimensioned_impression_weighted_position']:.1f} | N/A | Returned page/query rows only |")
     md.append(f"| GA4 Organic Sessions | {curr['ga4_organic_sessions']} | {d_sess_str} | Total organic search traffic |")
     md.append(f"| GA4 Search Entry Sessions | {curr['ga4_search_entry_sessions']} | N/A | Landing on indexable content routes |")
     md.append(f"| Internal Audit Starts | {curr['internal_audit_started']} | N/A | Authoritative platform ledger |")

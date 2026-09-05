@@ -66,6 +66,16 @@ export default function ProcessingPage() {
 
     const auditAttemptId = auditAttemptIdFor(auditId)
 
+    try {
+      window.opinly?.identify({ email: email.trim() })
+      window.opinly?.track('generate_lead', {
+        lead_type: 'audit_email_submitted',
+        audit_id: auditId,
+      })
+    } catch {
+      // Audit unlock must not depend on client analytics.
+    }
+
     posthog.capture('audit_email_submitted', {
       audit_id: auditId,
       audit_attempt_id: auditAttemptId,

@@ -385,4 +385,16 @@ git checkout HEAD~1 -- lead_manager.py
 
 ---
 
-**End of operational guide.**
+---
+
+## Local blog evidence and publish-readiness gates
+
+Blog articles are validated locally before publication. Run from the repository root:
+
+```bash
+python scripts/content_pipeline/validate_claims.py --article <article.json> --claims <sources.json>
+python scripts/content_pipeline/publish_readiness.py --article <article.json> --sources <sources.json> --output <report.json> --opportunity <opportunity.json>
+python scripts/content_pipeline/score_opportunities.py --input <opportunity.json>
+```
+
+The gates reject fabricated testimonials, unsupported numeric claims, unsourced general claims, and competitor-backed Nebula claims. Every source is explicitly typed as `first_party`, `primary_external`, or `competitor`; article claim references must also be declared in the article source list. Opportunity scoring fails closed unless the keyword registry, audit findings, first-party exports, and separate competitor SERP reports are present and valid. Reports use rollback-safe staged replacement for the JSON and Markdown pair. Fewer than 100 impressions blocks 28-day readiness unless a verified indexability defect exists. These local checks replace blog-specific external-service assumptions and do not write analytics data. Customer portal CI runs `npm run check:content-pipeline` for the focused validation suite.

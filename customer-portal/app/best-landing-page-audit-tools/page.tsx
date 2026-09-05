@@ -219,6 +219,16 @@ export default function BestLandingPageAuditToolsPage() {
           </p>
         </section>
 
+        <section aria-labelledby="decision-path" className="mt-8 rounded-2xl border border-border bg-bg-muted/20 p-6">
+          <h2 id="decision-path" className="mb-3 text-xl font-bold text-fg">Start with the question, not the tool</h2>
+          <div className="grid gap-3 text-sm leading-relaxed text-fg-muted md:grid-cols-2">
+            <p><strong className="text-fg">Page gets clicks but no conversions:</strong> <Link href="/why-is-my-landing-page-not-converting" className="text-accent hover:underline">work through the diagnosis order</Link>, then <Link href="/audit" className="text-accent hover:underline">run the free audit</Link>.</p>
+            <p><strong className="text-fg">Need the audit definition:</strong> read <Link href="/what-is-landing-page-audit" className="text-accent hover:underline">what a landing page audit includes</Link>.</p>
+            <p><strong className="text-fg">Need visitor behavior:</strong> use analytics, heatmaps, or recordings after enough traffic exists.</p>
+            <p><strong className="text-fg">Need page structure:</strong> use a public URL audit before changing the campaign or rebuilding the page.</p>
+          </div>
+        </section>
+
         {/* How we compared */}
         <section className="mt-12">
           <h2 className="mb-4 text-2xl font-bold text-fg">How we compared</h2>

@@ -365,6 +365,27 @@ class GscConnection(Base):
         return f"<GscConnection user={self.user_id} site={self.gsc_site_url}>"
 
 
+class ProjectIntegration(Base):
+    """Per-project Google property selections using the user's OAuth grants."""
+
+    __tablename__ = "project_integrations"
+    __table_args__ = (
+        UniqueConstraint("user_id", "project_domain", name="uq_project_integrations_user_domain"),
+        Index("ix_project_integrations_user_id", "user_id"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
+    project_domain: Mapped[str] = mapped_column(String(255), nullable=False)
+    gsc_site_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    ga4_property_id: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    ga4_property_display_name: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow, onupdate=utcnow)
+
+
 class Invoice(Base):
     """Invoice record from Stripe."""
 

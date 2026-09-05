@@ -267,6 +267,26 @@
       ]
     },
     {
+      "name": "audit_results_unlocked",
+      "version": 1,
+      "stage": "result_view",
+      "source_of_truth": "server_api",
+      "description": "Server successfully grants access to a completed audit result",
+      "funnel_critical": true,
+      "ga4_projectable": true,
+      "ga4_event_name": "audit_results_unlocked",
+      "persisted_internally": true,
+      "privacy_classification": "PSEUDONYMOUS",
+      "cardinality": "bounded",
+      "deduplication_rule": "unlock_per_audit_and_email",
+      "required_properties": ["audit_id"],
+      "allowed_properties": [
+        "audit_id",
+        "audit_attempt_id",
+        "email_sent"
+      ]
+    },
+    {
       "name": "audit_result_load_failed",
       "version": 1,
       "stage": "result_view",

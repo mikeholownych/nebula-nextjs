@@ -7,6 +7,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 
 # Import models to register them with Base.metadata
+import os
 import sys
 from pathlib import Path
 
@@ -25,6 +26,10 @@ if config.config_file_name is not None:
 
 # Add your model's MetaData object here for 'autogenerate' support.
 target_metadata = Base.metadata
+
+# Allow CI and local tooling to override the workstation-only default URL.
+if os.environ.get("DATABASE_URL"):
+    config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
 # Other values from the config, defined by the needs of env.py,
 # can be acquired:

@@ -1,0 +1,411 @@
+{
+  "started": "2026-09-01",
+  "updated_at": "2026-09-03T07:00:14.684686",
+  "days": {
+    "2026-09-01": {
+      "bot_summary": {
+        "human": 2612,
+        "curl": 418,
+        "Bingbot": 38,
+        "PerplexityBot": 36,
+        "Semrush": 24,
+        "OpenAI": 24,
+        "Googlebot": 17,
+        "Ahrefs": 16,
+        "ClaudeBot": 16,
+        "GPTBot": 5,
+        "unknown": 3,
+        "YandexBot": 2,
+        "Applebot": 2,
+        "Nebula-internal": 1,
+        "Facebook": 1
+      },
+      "raw_record_count": 3215,
+      "sitemap_path_count": 178,
+      "googlebot_crawled_count": 9,
+      "bingbot_crawled_count": 31,
+      "ai_paths": {
+        "PerplexityBot": [
+          [
+            "/",
+            1
+          ],
+          [
+            "/about",
+            1
+          ],
+          [
+            "/press",
+            1
+          ],
+          [
+            "/resources/citable",
+            1
+          ],
+          [
+            "/research/landing-page-performance-q3-2026",
+            1
+          ],
+          [
+            "/audit",
+            1
+          ],
+          [
+            "/teardowns/basecamp",
+            1
+          ],
+          [
+            "/repair-sprint",
+            1
+          ],
+          [
+            "/learning-centre/social-proof-above-fold",
+            1
+          ],
+          [
+            "/robots.txt",
+            1
+          ]
+        ],
+        "OpenAI": [
+          [
+            "/",
+            10
+          ],
+          [
+            "/robots.txt",
+            7
+          ],
+          [
+            "/audit",
+            2
+          ],
+          [
+            "/case-studies",
+            1
+          ],
+          [
+            "/learning-centre/ecommerce-landing-page-not-converting",
+            1
+          ],
+          [
+            "/about/team",
+            1
+          ],
+          [
+            "/how-nebula-audits",
+            1
+          ],
+          [
+            "/login",
+            1
+          ]
+        ],
+        "GPTBot": [
+          [
+            "/api/checkout",
+            1
+          ],
+          [
+            "/api/v1",
+            1
+          ],
+          [
+            "/api/audit/run",
+            1
+          ],
+          [
+            "/",
+            1
+          ],
+          [
+            "/login",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            8
+          ],
+          [
+            "/sitemap.xml",
+            8
+          ]
+        ],
+        "Applebot": [
+          [
+            "/robots.txt",
+            1
+          ],
+          [
+            "/ads-getting-clicks-but-no-sales",
+            1
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "PerplexityBot": 10,
+        "OpenAI": 8,
+        "GPTBot": 5,
+        "ClaudeBot": 2,
+        "Applebot": 2
+      }
+    },
+    "2026-09-02": {
+      "bot_summary": {
+        "human": 2168,
+        "curl": 243,
+        "OpenAI": 30,
+        "Googlebot": 26,
+        "Bingbot": 24,
+        "Ahrefs": 21,
+        "ClaudeBot": 12,
+        "GoogleOther": 7,
+        "Baidu": 6,
+        "PerplexityBot": 6,
+        "GPTBot": 4,
+        "Semrush": 3,
+        "Applebot": 2,
+        "Facebook": 2,
+        "AdsBot-Google": 2,
+        "YandexBot": 2,
+        "Nebula-internal": 1,
+        "DuckDuckBot": 1
+      },
+      "raw_record_count": 2560,
+      "sitemap_path_count": 179,
+      "googlebot_crawled_count": 18,
+      "bingbot_crawled_count": 22,
+      "ai_paths": {
+        "PerplexityBot": [
+          [
+            "/.env.local",
+            1
+          ],
+          [
+            "/docker-compose.yml",
+            1
+          ],
+          [
+            "/research/landing-page-performance-q3-2026",
+            1
+          ],
+          [
+            "/robots.txt",
+            1
+          ],
+          [
+            "/learning-centre/landing-page-conversion-rate-benchmark",
+            1
+          ],
+          [
+            "/learning-centre/message-match-checklist",
+            1
+          ]
+        ],
+        "OpenAI": [
+          [
+            "/",
+            5
+          ],
+          [
+            "/robots.txt",
+            3
+          ],
+          [
+            "/saas-landing-page-audit",
+            2
+          ],
+          [
+            "/spec/landing-page-diagnostic-v1",
+            1
+          ],
+          [
+            "/signals",
+            1
+          ],
+          [
+            "/signals/above-fold-clarity",
+            1
+          ],
+          [
+            "/signals/ai-readiness",
+            1
+          ],
+          [
+            "/signals/mobile-cta",
+            1
+          ],
+          [
+            "/signals/load-speed",
+            1
+          ],
+          [
+            "/signals/ad-signal-continuity",
+            1
+          ]
+        ],
+        "GPTBot": [
+          [
+            "/terraform.tfvars",
+            1
+          ],
+          [
+            "/serverless.yml",
+            1
+          ],
+          [
+            "/teardowns",
+            1
+          ],
+          [
+            "/compare",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            4
+          ],
+          [
+            "/sitemap.xml",
+            4
+          ],
+          [
+            "/public/.env",
+            1
+          ],
+          [
+            "/actuator/env",
+            1
+          ],
+          [
+            "/.env.bak",
+            1
+          ],
+          [
+            "/teardowns/knallhart",
+            1
+          ]
+        ],
+        "Applebot": [
+          [
+            "/robots.txt",
+            1
+          ],
+          [
+            "/teardowns/basecamp",
+            1
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "PerplexityBot": 6,
+        "OpenAI": 23,
+        "GPTBot": 4,
+        "ClaudeBot": 6,
+        "Applebot": 2
+      }
+    },
+    "2026-09-03": {
+      "bot_summary": {
+        "human": 2444,
+        "curl": 356,
+        "Bingbot": 27,
+        "Semrush": 25,
+        "OpenAI": 17,
+        "Googlebot": 15,
+        "ClaudeBot": 10,
+        "Ahrefs": 8,
+        "Applebot": 5,
+        "Facebook": 2,
+        "Twitter": 1,
+        "GPTBot": 1,
+        "Nebula-internal": 1,
+        "Python-script": 1
+      },
+      "raw_record_count": 2913,
+      "sitemap_path_count": 179,
+      "googlebot_crawled_count": 9,
+      "bingbot_crawled_count": 25,
+      "ai_paths": {
+        "OpenAI": [
+          [
+            "/robots.txt",
+            8
+          ],
+          [
+            "/",
+            3
+          ],
+          [
+            "/learning-centre/ecommerce-landing-page-not-converting",
+            1
+          ],
+          [
+            "/learning-centre/high-cpc-low-conversion",
+            1
+          ],
+          [
+            "/learning-centre/google-ads-high-ctr-low-conversion",
+            1
+          ],
+          [
+            "/resources/citable",
+            1
+          ],
+          [
+            "/teardowns",
+            1
+          ],
+          [
+            "/login",
+            1
+          ]
+        ],
+        "GPTBot": [
+          [
+            "/",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            5
+          ],
+          [
+            "/sitemap.xml",
+            5
+          ]
+        ],
+        "Applebot": [
+          [
+            "/login",
+            2
+          ],
+          [
+            "/teardowns/postmint",
+            1
+          ],
+          [
+            "/robots.txt",
+            1
+          ],
+          [
+            "/privacy-policy",
+            1
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "OpenAI": 8,
+        "GPTBot": 1,
+        "ClaudeBot": 2,
+        "Applebot": 4
+      }
+    }
+  }
+}

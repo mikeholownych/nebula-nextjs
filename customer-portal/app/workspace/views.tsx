@@ -194,8 +194,8 @@ export function DashboardView({ audits, latestDetail, email, selectedProject }: 
         </section>
       </div>
 
-      {email && <Ga4Widget email={email} latestCompletedAuditId={audits.find((a) => a.status === 'completed')?.id ?? null} />}
-      {email && <GscWidget email={email} />}
+      {email && <Ga4Widget email={email} selectedProject={selectedProject} latestCompletedAuditId={audits.find((a) => a.status === 'completed')?.id ?? null} />}
+      {email && <GscWidget email={email} selectedProject={selectedProject} />}
     </div>
   )
 }

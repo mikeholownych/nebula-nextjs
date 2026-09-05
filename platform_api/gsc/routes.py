@@ -21,7 +21,7 @@ from sqlalchemy.orm import Session
 
 from platform_api.auth.routes import get_current_user
 from platform_api.config import settings
-from platform_api.db.models import GscConnection
+from platform_api.db.models import GscConnection, ProjectIntegration
 from platform_api.db.session import get_session
 from platform_api.redis_client import get_redis
 from platform_api.infra.secret_box import decrypt as sb_decrypt, encrypt as sb_encrypt
@@ -57,6 +57,7 @@ def _gsc_redirect_uri() -> str:
 class GscStatusResponse(BaseModel):
     connected: bool
     site_url: Optional[str] = None
+    project_domain: Optional[str] = None
     connected_at: Optional[str] = None
 
 
@@ -236,6 +237,72 @@ async def gsc_callback(
     return RedirectResponse(url=_PORTAL_SUCCESS_URL, status_code=302)
 
 
+class GscSiteSelect(BaseModel):
+    site_url: str
+    project_domain: Optional[str] = None
+
+
+@router.get("/sites")
+async def gsc_sites(
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+):
+    """List GSC properties visible to the user's OAuth grant."""
+    user_uuid = UUID(auth["user_id"])
+    conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
+    if not conn:
+        raise HTTPException(status_code=404, detail="GSC not connected")
+    token = _get_or_refresh_token(conn, db)
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(
+                "https://www.googleapis.com/webmasters/v3/sites",
+                headers={"Authorization": f"Bearer {token}"},
+            )
+        if response.status_code != 200:
+            raise HTTPException(status_code=502, detail="Google Search Console unavailable")
+        sites = response.json().get("siteEntry", [])
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="Google Search Console unavailable") from exc
+    project_domain = None
+    return {"sites": [{"site_url": s.get("siteUrl"), "permission_level": s.get("permissionLevel")} for s in sites if s.get("siteUrl")]}
+
+
+@router.post("/select")
+async def gsc_select_site(
+    body: GscSiteSelect,
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+):
+    user_uuid = UUID(auth["user_id"])
+    conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
+    if not conn:
+        raise HTTPException(status_code=404, detail="GSC not connected")
+    token = _get_or_refresh_token(conn, db)
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(
+                "https://www.googleapis.com/webmasters/v3/sites",
+                headers={"Authorization": f"Bearer {token}"},
+            )
+        sites = response.json().get("siteEntry", []) if response.status_code == 200 else []
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="Google Search Console unavailable") from exc
+    if not any(s.get("siteUrl") == body.site_url for s in sites):
+        raise HTTPException(status_code=403, detail="Site not available for this account")
+    project_domain = body.project_domain.strip().lower() if body.project_domain else None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(user_id=user_uuid, project_domain=project_domain).first()
+        if not mapping:
+            mapping = ProjectIntegration(user_id=user_uuid, project_domain=project_domain)
+            db.add(mapping)
+        mapping.gsc_site_url = body.site_url
+    else:
+        conn.gsc_site_url = body.site_url
+    db.commit()
+    return {"site_url": body.site_url, "project_domain": project_domain}
+
+
 @router.delete("/disconnect")
 async def gsc_disconnect(
     auth=Depends(get_current_user),
@@ -252,14 +319,20 @@ async def gsc_disconnect(
 
 @router.get("/status", response_model=GscStatusResponse)
 async def gsc_status(
+    project_domain: Optional[str] = Query(None),
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
 ):
-    """Return whether the user has a GSC connection and which site."""
+    """Return the GSC site mapped to the requested project."""
     user_uuid = UUID(auth["user_id"])
     conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
     if not conn:
-        return GscStatusResponse(connected=False)
+        return GscStatusResponse(connected=False, project_domain=project_domain)
+    mapping = None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=user_uuid, project_domain=project_domain.strip().lower()
+        ).first()
 
     connected_at_str = None
     if conn.connected_at:
@@ -270,7 +343,8 @@ async def gsc_status(
 
     return GscStatusResponse(
         connected=True,
-        site_url=conn.gsc_site_url,
+        site_url=(mapping.gsc_site_url if mapping else None) if project_domain else conn.gsc_site_url,
+        project_domain=project_domain.strip().lower() if project_domain else None,
         connected_at=connected_at_str,
     )
 
@@ -278,6 +352,7 @@ async def gsc_status(
 @router.get("/metrics", response_model=GscMetricsResponse)
 async def gsc_metrics(
     site_url: str = Query(..., description="GSC site URL e.g. sc-domain:example.com"),
+    project_domain: Optional[str] = Query(None),
     days: int = Query(28, ge=1, le=90, description="Days of data to fetch"),
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
@@ -290,6 +365,13 @@ async def gsc_metrics(
     conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
     if not conn:
         raise HTTPException(status_code=404, detail="GSC not connected")
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=user_uuid, project_domain=project_domain.strip().lower()
+        ).first()
+        if not mapping or not mapping.gsc_site_url:
+            raise HTTPException(status_code=409, detail="Select a Search Console site for this project")
+        site_url = mapping.gsc_site_url
 
     access_token = _get_or_refresh_token(conn, db)
 

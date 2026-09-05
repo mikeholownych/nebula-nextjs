@@ -347,8 +347,8 @@ function ImmediateRepairOffer({
             </p>
           </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-          <Card variant="bordered" className="border-danger/30">
+        <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+          <Card variant="bordered" className="min-w-0 border-danger/30">
             <div className="mb-4 flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-danger" aria-hidden="true" />
               <span className="text-xs font-semibold uppercase tracking-widest text-danger">Priority #1 finding</span>
@@ -381,7 +381,7 @@ function ImmediateRepairOffer({
                   <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">
                     {isExactArtifact(worst.fix) ? 'Exact artifact' : 'Recommended change'}
                   </p>
-                  <div className="mt-2 rounded-lg border border-border bg-danger/5 p-4 font-mono text-xs leading-relaxed text-fg">
+                  <div className="mt-2 min-w-0 break-words rounded-lg border border-border bg-danger/5 p-4 font-mono text-xs leading-relaxed text-fg">
                     {worst.fix.slice(0, 180)}
                     {worst.fix.length > 180 ? '...' : ''}
                   </div>
@@ -394,13 +394,52 @@ function ImmediateRepairOffer({
           </Card>
 
           <div className="flex flex-col justify-center">
+            <div className="mb-6 rounded-lg border border-accent/20 bg-accent/5 p-5">
+              <p className="text-sm font-semibold text-accent">What you receive</p>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                A bounded repair package for this page, focused on the selected condition.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-fg-muted">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 text-accent" aria-hidden="true">+</span>
+                  <span>One scoped repair for this condition.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 text-accent" aria-hidden="true">+</span>
+                  <span>{(() => {
+                    const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0]
+                    return worst && isExactArtifact(worst.fix)
+                      ? 'A page-specific copy, code, or configuration artifact.'
+                      : 'A page-specific recommended change for this condition.'
+                  })()}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 text-accent" aria-hidden="true">+</span>
+                  <span>One same-condition re-audit within 30 days.</span>
+                </li>
+              </ul>
+            </div>
+            <ol className="mb-6 grid gap-3 border-y border-border py-4 text-sm sm:grid-cols-3">
+              <li>
+                <span className="block font-semibold text-fg">Observed on your page</span>
+                <span className="mt-1 block text-xs leading-5 text-fg-muted">The finding and its evidence are recorded first.</span>
+              </li>
+              <li>
+                <span className="block font-semibold text-fg">One scoped repair artifact</span>
+                <span className="mt-1 block text-xs leading-5 text-fg-muted">The package addresses one selected condition.</span>
+              </li>
+              <li>
+                <span className="block font-semibold text-fg">Same-condition re-audit</span>
+                <span className="mt-1 block text-xs leading-5 text-fg-muted">The later check shows whether that condition changed.</span>
+              </li>
+            </ol>
             {unlocked && !sharedView ? (
               <form
                 action="/api/checkout"
                 method="POST"
                 className="space-y-3"
               >
-                {/* Trust badges and guarantee above checkout button */}
+                {/* Trust badges above checkout button */}
                 <div className="mb-2 flex flex-wrap items-center justify-center gap-3 text-xs text-fg-muted">
                   <span className="flex items-center gap-1 rounded px-2 py-1 bg-accent/10 text-accent">
                     <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -413,12 +452,6 @@ function ImmediateRepairOffer({
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Secure Stripe checkout
-                  </span>
-                  <span className="flex items-center gap-1 rounded px-2 py-1 bg-accent/10 text-accent">
-                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    30-day guarantee
                   </span>
                 </div>
                 <input type="hidden" name="auditId" value={auditId} />
@@ -1087,11 +1120,11 @@ export default function ResultsClient({
 
   if (loading) {
     return (
-      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
+      <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-5xl">
           {/* Skeleton nav - matches ReportNavigation height */}
-          <nav aria-label="Loading" className="sticky top-14 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
-            <div className="mx-auto flex w-full max-w-5xl gap-2 sm:justify-center">
+          <nav aria-label="Loading" className="sticky top-14 z-20 -mx-6 mb-12 overflow-x-hidden border-y border-border bg-bg/95 px-6 py-4">
+            <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center">
               {['Overview', 'Fix first', 'Signals', 'Evidence', 'Repair'].map((label) => (
                 <span key={label} className="min-h-11 shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-fg-muted/30">
                   {label}
@@ -1143,7 +1176,7 @@ export default function ResultsClient({
 
   if (error || !results) {
     return (
-      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
+      <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-2xl text-center">
           <Card variant="elevated">
             <h1 className="mb-4 text-2xl font-extrabold text-fg">Error Loading Results</h1>
@@ -1155,9 +1188,9 @@ export default function ResultsClient({
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
+    <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
+        <div className="mb-4 flex min-w-0 w-full flex-wrap items-center justify-end gap-3">
           <AiAgentFixPromptModal results={results} />
           {unlocked && !sharedView && (
             <a

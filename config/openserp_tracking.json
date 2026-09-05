@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "provider": "openserp",
+  "base_url": "http://127.0.0.1:7000",
+  "site": "nebulacomponents.com",
+  "engines": ["bing"],
+  "optional_engines": ["google"],
+  "region": "US",
+  "language": "EN",
+  "device": "desktop",
+  "limit": 50,
+  "retries": 2,
+  "keywords_source": "memory/sites/nebulacomponents.com/keywords.json",
+  "competitors_source": "memory/sites/nebulacomponents.com/site-config.json",
+  "output_dir": "seo-reports/openserp",
+  "retention_days": 400,
+  "schedule": "daily 06:00 UTC",
+  "attribution": {
+    "theory_id": null,
+    "cohort_id": null,
+    "experiment_id": null
+  },
+  "proof_boundary": {
+    "proves": [
+      "OpenSERP-observed result positions for the configured query, market, device, and engine",
+      "whether the configured domain appeared within the requested result limit"
+    ],
+    "does_not_prove": [
+      "search demand",
+      "clicks or impressions",
+      "conversion rate",
+      "revenue",
+      "causal impact of a content or product change",
+      "AI visibility"
+    ]
+  }
+}

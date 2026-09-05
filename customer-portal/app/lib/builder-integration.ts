@@ -4,8 +4,6 @@
  * Note: Requires builder-specific API keys (configured by user)
  */
 
-import { auditPool } from '@/app/lib/audit-db'
-
 /**
  * Get supported builders
  */
@@ -130,14 +128,3 @@ export async function connectBuilderToken(
   }
 }
 
-// Initialize table on load
-await auditPool.query(`
-  CREATE TABLE IF NOT EXISTS builder_connections (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
-    builder VARCHAR(50) NOT NULL,
-    api_key TEXT,
-    connected_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    UNIQUE(customer_id, builder)
-  )
-`)

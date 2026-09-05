@@ -1,6 +1,9 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
+import { buildSitemapEntries } from '@opinly/shared'
+import { getOpinlyClient, opinlyRenderConfig } from '@/app/lib/opinly'
 import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
+import { listArticles as listLocalBlogArticles } from './lib/blog/loader'
 import { getArticles } from './learning-centre/lib/getArticles'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { COMPARISONS } from './vs/[slug]/data'
@@ -15,6 +18,10 @@ const BASE_URL = 'https://nebulacomponents.com'
 // sitemap was generated, not when the content was last edited, and
 // satisfies sitemap validators that require lastModified to be present.
 const BUILD_DATE = new Date().toISOString().split('T')[0] // YYYY-MM-DD
+
+export function learningCentreArticleUrl(slug: string): string {
+  return `${BASE_URL}/learning-centre/${slug}`
+}
 
 // Priority reflects actual page importance, not a uniform default - legal/
 // utility pages sit well below commercial and hub pages so the signal means
@@ -102,7 +109,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
   { paths: ['/privacy-policy', '/data-rights', '/terms'], priority: 0.2 },
 ]
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const homeEntry: MetadataRoute.Sitemap[number] = {
     url: BASE_URL,
     lastModified: BUILD_DATE,
@@ -122,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articleEntries: MetadataRoute.Sitemap = getArticles()
     .sort((a, b) => a.slug.localeCompare(b.slug))
     .map(({ slug }) => ({
-      url: `${BASE_URL}/learning-centre/${slug}`,
+      url: learningCentreArticleUrl(slug),
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -178,7 +185,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  // lastModified is intentionally omitted until each content object has a
-  // truthful, durable publication/update timestamp. Build time is not freshness.
-  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
+  const localBlogEntries: MetadataRoute.Sitemap = (await listLocalBlogArticles()).map(({ slug, published_at, updated_at }) => ({
+    url: `${BASE_URL}/blog/${slug}`,
+    lastModified: updated_at || published_at || BUILD_DATE,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  const opinlyEntries: MetadataRoute.Sitemap = []
+
+  try {
+    const routes = await getOpinlyClient().routes()
+    const entries = buildSitemapEntries(routes, opinlyRenderConfig)
+    opinlyEntries.push(...entries.map((entry) => ({
+      url: entry.url,
+      lastModified: entry.lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: entry.url.endsWith('/blog') ? 0.8 : 0.6,
+    })))
+  } catch (error) {
+    console.error('Failed to load Opinly routes for sitemap:', error)
+  }
+
+  return [homeEntry, ...coreEntries, ...articleEntries, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries, ...opinlyEntries]
 }

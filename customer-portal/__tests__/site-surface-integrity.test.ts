@@ -46,6 +46,12 @@ describe('site surface integrity', () => {
     expect(footer).toMatch(/Client Workspace/)
   })
 
+  it('exposes the PeerPush verification link in the site footer', () => {
+    const footer = readFileSync(path.join(repo, 'app/components/SiteFooter.tsx'), 'utf8')
+    expect(footer).toContain('href="https://peerpush.com/p/nebula"')
+    expect(footer).toMatch(/Nebula on PeerPush/)
+  })
+
   it('does not assign retired teal as a live accent token', () => {
     const styles = readFileSync(path.join(repo, 'app/styles.css'), 'utf8')
     const publicDs = readFileSync(path.join(repo, 'public/styles/nebula-design-system.css'), 'utf8')

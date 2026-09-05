@@ -215,6 +215,7 @@ export async function getCustomerSuccessOverview(days: number = 30): Promise<{
   recommendationsAccepted: number
 }> {
   try {
+    await ensureCustomerHealthTables()
     const totalResult = await auditPool.query(`
       SELECT COUNT(DISTINCT customer_id) as total FROM audits
     `)
@@ -252,14 +253,20 @@ export async function getCustomerSuccessOverview(days: number = 30): Promise<{
   }
 }
 
-// Initialize tables on load
-await auditPool.query(`
-  CREATE TABLE IF NOT EXISTS customer_health_scores (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
-    health_score INTEGER NOT NULL,
-    grade VARCHAR(20) NOT NULL,
-    calculated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    UNIQUE(customer_id, calculated_at)
-  )
-`)
+let customerHealthTablesReady: Promise<void> | undefined
+
+async function ensureCustomerHealthTables(): Promise<void> {
+  if (!customerHealthTablesReady) {
+    customerHealthTablesReady = auditPool.query(`
+      CREATE TABLE IF NOT EXISTS customer_health_scores (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
+        health_score INTEGER NOT NULL,
+        grade VARCHAR(20) NOT NULL,
+        calculated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        UNIQUE(customer_id, calculated_at)
+      )
+    `).then(() => undefined)
+  }
+  await customerHealthTablesReady
+}

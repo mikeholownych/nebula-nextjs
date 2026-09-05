@@ -211,7 +211,7 @@ export async function getEmailStats(_campaignId?: string): Promise<{
 }
 
 // Initialize tables on load
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS drip_campaigns (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
@@ -223,7 +223,7 @@ await auditPool.query(`
   )
 `)
 
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS drip_campaign_executions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,

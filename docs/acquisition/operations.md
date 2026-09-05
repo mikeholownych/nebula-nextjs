@@ -49,7 +49,25 @@ uv run python scripts/acquisition_cli.py decision-review-84d --measurement-id me
 
 ---
 
-## 3. Automated Scheduling Setup (Cron + Flock)
+## 3. Decision Cadence and Scheduling
+
+Use separate clocks so urgent failures are not delayed and noisy SEO movement does not trigger premature changes:
+
+- **Daily:** run funnel/source health checks. Emit `INVESTIGATE` for operational failures only.
+- **Weekly:** run the completed-window acquisition review. Ranking and competitor movement defaults to `OBSERVE` until evidence repeats.
+- **Every 28 days:** run the 28-day decision review. Only accepted recommendations with clean lineage may become controlled experiment drafts.
+- **Every 84 days:** run the strategic review. Only this gate may recommend consolidation, retirement, or adjacency expansion.
+
+No scheduled job may deploy a content or product change. It may create a deterministic recommendation for human review.
+
+```cron
+# Daily health, weekly ingestion, and monthly decision review are intentionally separate.
+# Install only after verifying each command's real output and destination.
+```
+
+---
+
+## 4. Automated Scheduling Setup (Cron + Flock)
 
 Automated weekly ingestion runs via standard cron with file-locking (`flock`) to prevent overlapping executions:
 
@@ -59,11 +77,20 @@ Automated weekly ingestion runs via standard cron with file-locking (`flock`) to
 0 4 * * 0 /usr/bin/flock -n /tmp/acquisition_ingest.lock /home/mike/.local/bin/uv run --project /home/mike/nebula python /home/mike/nebula/scripts/update_acquisition_baseline.py >> /home/mike/nebula/logs/acquisition_cron.log 2>&1
 ```
 
----
+## 5. Local Content Opportunity Collection (report-only)
 
-## 4. Operational Telemetry Queries
+Weekly marketing now includes `scripts/content_pipeline/collect_sources.py`. It reads local audit, GSC, GA4, Bing, PostHog, keyword, and separate competitor SERP artifacts. Missing or stale source classes are reported explicitly and fail closed to an empty opportunity queue. Competitor observations never become first-party evidence.
 
-### 4.1 Check Latest Ingestion Status & Completeness
+```bash
+/home/mike/nebula/.venv/bin/python3 scripts/content_pipeline/collect_sources.py --days 7 --report-only
+```
+
+The fixed score exposes trigger fit, evidence strength, intent ownership, commercial role, and timing eligibility. `generate_brief.py` creates a local brief only, while `refresh_review.py` emits a review state without editing articles or publishing.
+
+
+## 6. Operational Telemetry Queries
+
+### 6.1 Check Latest Ingestion Status & Completeness
 ```sql
 SELECT id, generated_at, requested_period_start, requested_period_end,
        effective_period_start, effective_period_end, gsc_total_impressions,

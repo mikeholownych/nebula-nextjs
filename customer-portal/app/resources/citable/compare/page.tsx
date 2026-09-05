@@ -60,7 +60,7 @@ export default function CitableComparisonPage() {
               external source.
             </p>
 
-            <div className="mt-7 overflow-x-auto rounded-md border border-border">
+            <div className="mt-7 min-w-0 max-w-full overflow-x-auto rounded-md border border-border">
               <table className="min-w-[760px] w-full border-collapse text-left text-sm">
                 <thead className="bg-bg-elevated text-fg">
                   <tr>

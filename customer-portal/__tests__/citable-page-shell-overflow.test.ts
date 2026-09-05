@@ -7,7 +7,7 @@ describe('CitablePageShell mobile overflow', () => {
       path.join(process.cwd(), 'components/citable/CitablePageShell.tsx'),
       'utf8',
     )
-    expect(source).toMatch(/<main[^>]*overflow-x-clip/)
+    expect(source).toMatch(/<main[^>]*overflow-x-hidden/)
     expect(source).toMatch(/min-w-0/)
   })
 })

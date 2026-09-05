@@ -210,7 +210,7 @@ export default function SettingsView({ email, projectDomains, selectedProject }:
 
   return (
     <div className="space-y-10 max-w-2xl">
-      <IntegrationsSection email={email} />
+      <IntegrationsSection email={email} projectDomain={selectedProject} />
       <BrandSettings />
       <DomainSettings />
 

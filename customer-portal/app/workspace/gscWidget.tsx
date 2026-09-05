@@ -83,7 +83,10 @@ function StatCard({ label, value }: { label: string; value: string }) {
 
 // ── Main component ─────────────────────────────────────────────────────
 
-export default function GscWidget({ email }: { email: string }) {
+export default function GscWidget({ email, selectedProject }: { email: string; selectedProject?: string }) {
+  const projectQuery = selectedProject && selectedProject !== 'all'
+    ? `?project_domain=${encodeURIComponent(selectedProject)}`
+    : ''
   const [status, setStatus] = useState<GscStatus | null>(null)
   const [metrics, setMetrics] = useState<GscMetrics | null>(null)
   const [loading, setLoading] = useState(true)
@@ -95,7 +98,7 @@ export default function GscWidget({ email }: { email: string }) {
     setLoading(true)
     setError(null)
 
-    fetch('/api/gsc/status')
+    fetch(`/api/gsc/status${projectQuery}`)
       .then(async (res) => {
         if (!res.ok) throw new Error('Failed to check GSC status')
         const data: GscStatus = await res.json()
@@ -104,7 +107,7 @@ export default function GscWidget({ email }: { email: string }) {
         if (data.connected) {
           const siteUrl = data.site_url
           if (siteUrl) {
-            const mRes = await fetch(`/api/gsc/metrics?days=28&site_url=${encodeURIComponent(siteUrl)}`)
+            const mRes = await fetch(`/api/gsc/metrics?days=28&site_url=${encodeURIComponent(siteUrl)}${selectedProject && selectedProject !== 'all' ? `&project_domain=${encodeURIComponent(selectedProject)}` : ''}`)
             if (!cancelled && mRes.ok) {
               const m: GscMetrics = await mRes.json()
               setMetrics(m)
@@ -120,7 +123,7 @@ export default function GscWidget({ email }: { email: string }) {
       })
 
     return () => { cancelled = true }
-  }, [email])
+  }, [email, selectedProject, projectQuery])
 
   const handleDisconnect = async () => {
     setDisconnecting(true)

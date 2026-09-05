@@ -8,6 +8,7 @@ import { planFromStripePrice } from '@/app/lib/subscription-plans'
 import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
 import { provisionOrgForEmail } from '@/app/lib/provision-org'
 import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
+import { getOpinlyClient } from '@/app/lib/opinly'
 import { analytics as heycatch } from '@heycatch/sdk'
 import {
   enqueueKitSend,
@@ -327,6 +328,23 @@ export async function POST(request: NextRequest) {
       })
     } catch (ledgerErr) {
       console.error('Failed to record purchase in analytics ledger:', ledgerErr)
+    }
+
+    // Opinly receives the authoritative server-side revenue signal. Stripe may
+    // retry this webhook, so the stable session ID is the deduplication key.
+    if (isLive && process.env.OPINLY_API_KEY) {
+      try {
+        await getOpinlyClient().track('purchase', {
+          value: (session.amount_total ?? 0) / 100,
+          currency: (session.currency || 'usd').toUpperCase(),
+        }, {
+          externalEventId: session.id,
+          email: customerEmail || undefined,
+          anonId: session.metadata?.opinly_anon_id || session.metadata?.analytics_person_id || undefined,
+        })
+      } catch (opinlyErr) {
+        console.error('Failed to record purchase in Opinly:', opinlyErr)
+      }
     }
 
     // GA4 Measurement Protocol Forwarding (Server-Side Commercial Truth)

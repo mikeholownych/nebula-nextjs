@@ -1,0 +1,30 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { createArticleSchema } from '../../../lib/schema'
+
+export const metadata: Metadata = {
+  title: 'Ad Spend ROI Improvement Starts With Page Diagnosis | Nebula',
+  description: 'A cautious sequence for connecting paid traffic promises, landing-page diagnosis, scoped repair, re-audit, and controlled measurement.',
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/topic-guides/ad-spend-roi-improvement' },
+}
+
+const articleSchema = createArticleSchema({
+  headline: 'Ad Spend ROI Improvement Starts With Page Diagnosis',
+  description: 'Use page-level evidence to make the next paid traffic test more specific without assuming a fixed return.',
+  url: 'https://nebulacomponents.com/learning-centre/topic-guides/ad-spend-roi-improvement',
+  publishedDate: '2026-09-03',
+})
+
+export default function AdSpendRoiImprovementPage() {
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+    <main id="main-content" className="min-h-screen bg-bg pt-24"><div className="mx-auto max-w-3xl px-6 py-14">
+      <Link href="/learning-centre/topic-guides" className="text-sm font-semibold text-accent hover:text-fg">Back to Topic Guides</Link>
+      <header className="mt-8 rounded-md border border-border bg-bg-panel p-8 md:p-10"><p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Paid Acquisition · Diagnostic Sequence</p><h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Ad Spend ROI Improvement Starts With Page Diagnosis</h1><p className="mt-5 text-lg leading-relaxed text-fg-muted">Before raising budget or rewriting every ad, check whether the landing page is preserving the promise that earned the click. A narrower diagnosis makes the next test easier to interpret.</p></header>
+      <section data-editorial="answer-first" className="mt-6 rounded-md border border-border bg-bg-panel p-8"><p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Direct answer</p><h2 className="mb-4 text-2xl font-bold text-fg">Direct answer: improve the next test, not the promise of a return</h2><p className="leading-relaxed text-fg-muted">Use this sequence: document the paid traffic promise, inspect the landing-page condition, scope one repair, run a same-condition re-audit, and measure a defined action with campaign context held as steady as practical. The purpose is a clearer next test, not a promised ROI improvement.</p><aside role="note" aria-label="Evidence boundary" className="mt-5 rounded-xl border border-border px-5 py-4 text-sm leading-relaxed text-fg-muted"><strong className="text-fg">Evidence boundary:</strong> page-level diagnosis can identify an actionable condition and a causality hypothesis. It cannot prove that a page repair caused ROI, ROAS, conversion, or revenue movement without controlled measurement. No repair predicts an outcome.</aside><div className="mt-5 flex flex-col gap-2 text-sm"><Link href="/learning-centre/topic-guides/landing-page-conversion-leaks" className="font-semibold text-accent hover:text-fg">Find the first paid-traffic landing page leak</Link><Link href="/learning-centre/topic-guides/conversion-rate-optimization-tools" className="font-semibold text-accent hover:text-fg">Match CRO tools to the evidence question</Link></div></section>
+      <section className="mt-6 rounded-md border border-border bg-bg-panel p-8"><h2 className="mb-5 text-2xl font-bold text-fg">The five-step decision sequence</h2><div className="space-y-5">{[['1. Paid traffic promise','Save the ad headline, offer, audience cue, keyword or creative context, and destination URL. A click is evidence of interest in that promise, not proof of page fit.'],['2. Landing-page condition','Inspect the first viewport, message match, proof, CTA, mobile layout, speed, and form path. Write the exact observation and the visitor action it might interrupt.'],['3. Scoped repair','Choose one change that directly addresses the first high-confidence finding. Avoid changing audience, bid, creative, page, and offer at the same time.'],['4. Same-condition re-audit','Confirm the intended page condition changed on the exact URL and device context. If it did not, do not interpret the measurement as a repair test.'],['5. Controlled measurement','Predefine the event, segment, comparison window, and decision rule. Record spend and downstream actions, then distinguish an observed result from a causal conclusion.']].map(([title, body]) => <article key={title} className="rounded-xl border border-border p-5"><h3 className="text-lg font-bold text-fg">{title}</h3><p className="mt-3 leading-relaxed text-fg-muted">{body}</p></article>)}</div></section>
+      <section className="mt-6 rounded-md border border-border bg-bg-panel p-8"><h2 className="mb-4 text-2xl font-bold text-fg">What to stop doing</h2><ul className="space-y-3 text-fg-muted"><li>Do not treat a blended account metric as a page diagnosis.</li><li>Do not infer causality from one busy day or from a changed campaign and changed page together.</li><li>Do not use an industry benchmark as a target for an individual landing page.</li><li>Do not increase budget while an obvious promise, access, or form problem remains undocumented.</li></ul></section>
+      <section className="mt-6 rounded-md border border-accent/30 bg-accent/5 p-8"><h2 className="text-2xl font-bold text-fg">Make one repair testable</h2><p className="mt-3 leading-relaxed text-fg-muted">The free audit returns observable page findings. Where one issue is specific enough to act on, the $97 One-Leak Repair Sprint provides a scoped repair direction for you or your developer, followed by measurement you control.</p><Link href="/audit?utm_source=topic-guide-ad-spend-roi-improvement&utm_medium=organic-content" className="mt-6 inline-flex min-h-[44px] items-center rounded bg-accent px-6 py-3 font-semibold text-bg">Audit the page behind your ad spend <span aria-hidden="true">→</span></Link></section>
+    </div></main>
+  </>
+}

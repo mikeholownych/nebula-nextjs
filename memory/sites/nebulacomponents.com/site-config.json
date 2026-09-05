@@ -3,12 +3,24 @@
   "brand_name": "Nebula Components",
   "brand_short": "Nebula",
   "competitors": [
-    "Unbounce",
-    "Instapage",
-    "Leadpages",
+    "HubSpot",
+    "Crazy Egg",
     "Hotjar",
     "VWO",
-    "Crazy Egg"
+    "Unbounce",
+    "Instapage",
+    "Landingi",
+    "PageSpeed Insights"
+  ],
+  "competitor_domains": [
+    "hubspot.com",
+    "crazyegg.com",
+    "hotjar.com",
+    "vwo.com",
+    "unbounce.com",
+    "instapage.com",
+    "landingi.com",
+    "pagespeed.web.dev"
   ],
   "primary_cta": "Run Free Audit",
   "offer_price": 97,

@@ -135,10 +135,10 @@ Instructions: Implement the exact fixes specified above and verify that the page
       {controlledIsOpen === undefined && (
         <button
           onClick={() => setInternalIsOpen(true)}
-          className={`inline-flex items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-3.5 py-2 text-xs font-bold text-accent hover:bg-accent hover:text-bg transition-colors ${className}`}
+          className={`inline-flex min-w-0 max-w-full w-full sm:w-auto items-center gap-2 whitespace-normal break-words rounded-lg border border-accent/40 bg-accent/10 px-3.5 py-2 text-left text-xs font-bold text-accent hover:bg-accent hover:text-bg transition-colors ${className}`}
         >
           <span>⚡</span>
-          <span>AI Agent Fix API / Prompt</span>
+          <span className="min-w-0 break-words">AI Agent Fix API / Prompt</span>
         </button>
       )}
 

@@ -63,6 +63,17 @@ export default function WhatIsLandingPageAudit() {
             The Nebula audit runs automatically and returns results in under 2 minutes.
           </p>
         </div>
+        <section aria-labelledby="audit-framework" className="mx-auto mb-8 max-w-3xl rounded-md border border-border bg-bg-muted/20 px-5 py-4">
+          <h2 id="audit-framework" className="mb-3 text-lg font-bold text-fg">What a useful landing page audit includes</h2>
+          <p className="mb-3 text-sm leading-relaxed text-fg-muted">A useful audit does four things: names the page condition, shows the evidence, scopes one repair, and does not promise what visitors will do next.</p>
+          <ol className="list-decimal space-y-1 pl-5 text-sm leading-relaxed text-fg-muted">
+            <li>Inspect the page and its mobile rendering.</li>
+            <li>Check message match, CTA clarity, trust, speed, structure, SEO, and AI readiness.</li>
+            <li>Record the observed condition, threshold, selector, and evidence.</li>
+            <li>Re-audit the same condition after the repair.</li>
+          </ol>
+          <p className="mt-3 text-sm text-fg-muted">For the full diagnostic, <Link href="/audit" className="font-semibold text-accent hover:underline">run a free landing page audit</Link>. For the problem-first path, read <Link href="/why-is-my-landing-page-not-converting" className="font-semibold text-accent hover:underline">why landing pages get clicks but no conversions</Link>.</p>
+        </section>
       <header className="bg-[#0d1117] pt-28 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent text-xs font-bold mb-4">

@@ -195,8 +195,8 @@ describe('Citable information architecture', () => {
     }
   })
 
-  test('sitemaps every published route', () => {
-    const urls = sitemap().map(({ url }) => url)
+  test('sitemaps every published route', async () => {
+    const urls = (await sitemap()).map(({ url }) => url)
 
     for (const routePath of publishedPaths) {
       expect(urls).toContain(`${ORIGIN}${routePath}`)

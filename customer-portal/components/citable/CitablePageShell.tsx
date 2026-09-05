@@ -40,12 +40,12 @@ export function CitablePageShell({
   )
 
   return (
-    <main id="main-content" className="min-h-screen min-w-0 overflow-x-clip bg-bg pt-24 text-fg">
+    <main id="main-content" className="min-h-screen min-w-0 overflow-x-hidden bg-bg pt-24 text-fg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
+      <div className="mx-auto min-w-0 max-w-5xl px-6 py-12 md:py-16">
         <nav aria-label="Breadcrumb" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-fg-muted">
           <Link href="/resources" className="transition-colors hover:text-fg">
             Resources

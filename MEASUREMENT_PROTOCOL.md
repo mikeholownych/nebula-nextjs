@@ -120,7 +120,38 @@ python3 /home/mike/nebula/scripts/log_change.py --change "Update Service schema"
 5. GSC impressions increased but position got worse (content quality / relevancy issue)
 6. Observation window includes data < 3 days old (unfinalized GSC data lag)
 
-## Export Commands
+## Competitor SERP Reconciliation
+
+Competitor visibility is measured in a separate local layer. GSC, GA4, Bing, and PostHog remain first-party sources for Nebula and never receive competitor rows.
+
+The canonical target set is loaded from `memory/sites/nebulacomponents.com/keywords.json` and `site-config.json`. Import provider SERP exports with:
+
+```bash
+/home/mike/nebula/.venv/bin/python3 /home/mike/nebula/scripts/competitor_serp_reconcile.py --input /path/to/serp-export.json
+```
+
+The importer writes `seo-reports/competitor-serp-YYYY-MM-DD.json` and `.md`, with positions, ranking URLs, top-3/top-10 visibility, rank gaps, and an explicit proof boundary. The weekly marketing orchestrator consumes the latest report under `seo.competitor_serp`.
+
+Required input fields: `keyword`, `market`, `device`, `domain`, and `position`. Competitor traffic, conversions, and revenue remain unobserved and must not be inferred.
+
+## Local Content Opportunity Collection (report-only)
+
+The weekly orchestrator also reads the local content evidence collector. Run it directly with:
+
+```bash
+/home/mike/nebula/.venv/bin/python3 scripts/content_pipeline/collect_sources.py --days 7 --report-only
+```
+
+The collector requires all configured source classes before producing opportunities. It reports missing sources and returns no opportunities when incomplete. First-party audit, GSC, GA4, Bing, PostHog, and keyword evidence is kept separate from competitor SERP observations. It never mutates analytics, article files, or publication state.
+
+Brief generation and refresh review are local and report-only:
+
+```bash
+/home/mike/nebula/.venv/bin/python3 scripts/content_pipeline/generate_brief.py --opportunity <id> --input <opportunities.jsonl>
+/home/mike/nebula/.venv/bin/python3 scripts/content_pipeline/refresh_review.py --days 28 --input <metrics.json>
+```
+
+Refresh review may return `NO_CHANGE`, `OBSERVE`, `REVIEW`, `CONSOLIDATE`, or `RETIRE`; it does not edit article files.
 
 ### GSC Export (manual verification)
 ```bash

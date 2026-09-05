@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
 export const metadata: Metadata = {
@@ -191,6 +192,18 @@ export default function LandingPagePerformanceAnalysisPage() {
             sessions of data.
           </p>
         </div>
+
+        <section aria-labelledby="tool-scope" className="mb-8 rounded-xl border border-accent/20 bg-accent/5 p-6">
+          <h2 id="tool-scope" className="mb-3 text-xl font-bold text-fg">Which tool answers which question?</h2>
+          <p className="mb-4 text-sm leading-relaxed text-fg-muted">Choose the tool by the evidence you need. A behavior tool cannot replace a page inspection, and a technical crawl cannot explain every conversion condition.</p>
+          <div className="grid gap-3 text-sm md:grid-cols-2">
+            <p><strong className="text-fg">Page condition:</strong> <Link href="/audit" className="text-accent hover:underline">Run the free Nebula audit</Link> for message match, CTA, trust, mobile, structure, SEO, and AI readiness.</p>
+            <p><strong className="text-fg">Visitor behavior:</strong> use GA4, heatmaps, or recordings when you need to see what visitors did.</p>
+            <p><strong className="text-fg">Page speed:</strong> use PageSpeed Insights for Core Web Vitals and loading diagnostics.</p>
+            <p><strong className="text-fg">Site-wide SEO:</strong> use a crawler when the question covers many URLs, redirects, or technical metadata.</p>
+          </div>
+          <p className="mt-4 text-sm text-fg-muted">Start with the page when paid traffic is already arriving and the failure is still unexplained. Then add behavioral data where it can answer a different question.</p>
+        </section>
 
         {/* Section 2: The 9 signals */}
         <h2 className="text-2xl font-bold text-fg mt-12 mb-4">

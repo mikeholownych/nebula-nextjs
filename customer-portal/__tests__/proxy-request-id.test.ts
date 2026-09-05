@@ -10,6 +10,11 @@ function apiRequest(headers: Record<string, string> = {}) {
 }
 
 describe('proxy X-Request-ID', () => {
+  it('does not redirect the canonical apex host to itself', () => {
+    const response = proxy(apiRequest())
+    expect(response.status).toBe(200)
+    expect(response.headers.get('location')).toBeNull()
+  })
   it('mints a UUID when X-Request-ID is missing', () => {
     const response = proxy(apiRequest())
     const id = response.headers.get('x-request-id')

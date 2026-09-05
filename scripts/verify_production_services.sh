@@ -60,14 +60,18 @@ code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "$READYZ_URL")
 printf 'PASS: %s returned HTTP 200\n' "$READYZ_URL"
 
 for target in "$LOCAL_URL" "$PUBLIC_URL"; do
-  code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "$target")
+  if [[ "$target" == "$PUBLIC_URL" ]]; then
+    code=$(curl -fsSL -o /dev/null -w '%{http_code}' --max-time 15 "$target")
+  else
+    code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "$target")
+  fi
   [[ "$code" == 200 ]] || { printf 'FAIL: %s returned %s\n' "$target" "$code" >&2; exit 1; }
   printf 'PASS: %s returned HTTP 200\n' "$target"
 done
 
 # Verify stylesheet assets resolve on origin and edge
 for target in "$LOCAL_URL" "$PUBLIC_URL"; do
-  html=$(curl -fsS --max-time 15 "$target")
+  html=$(curl -fsSL --max-time 15 "$target")
   css_path=$(printf '%s' "$html" | grep -oE 'href="/_next/static/chunks/[a-zA-Z0-9._-]*\.css"' | head -1 | sed -E 's/href="(.*)"/\1/')
   [[ -n "$css_path" ]] || { printf 'FAIL: %s has no /_next/static/*.css stylesheet link in its HTML\n' "$target" >&2; exit 1; }
   origin="${target%/}"
@@ -100,7 +104,7 @@ if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
 
   # Public edge check across user agents
   for agent in 'Mozilla/5.0' 'Googlebot' 'bingbot' 'curl/8.0'; do
-    edge_sha=$(curl -fsS -A "$agent" -H 'Cache-Control: no-cache' --max-time 10 "https://nebulacomponents.com/api/build-info" | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
+    edge_sha=$(curl -fsSL -A "$agent" -H 'Cache-Control: no-cache' --max-time 10 "https://nebulacomponents.com/api/build-info" | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
     [[ "$edge_sha" == "$expected_sha" ]] || {
       printf 'FAIL: public edge SHA %s for UA "%s" does not match expected SHA %s\n' "${edge_sha:-<none>}" "$agent" "$expected_sha" >&2
       exit 1

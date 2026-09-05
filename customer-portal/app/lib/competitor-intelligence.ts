@@ -34,6 +34,7 @@ export async function getCompetitorIntelligence(
   }
 }> {
   try {
+    await ensureCompetitorTables()
     // Get competitor info
     const competitorResult = await auditPool.query(`
       SELECT id, name, url FROM competitor_pricing
@@ -155,6 +156,7 @@ export async function getCompetitorDashboardOverview(): Promise<{
   }>
 }> {
   try {
+    await ensureCompetitorTables()
     // Get total competitors
     const competitorsResult = await auditPool.query(`
       SELECT COUNT(*) as count FROM competitor_pricing
@@ -185,13 +187,22 @@ export async function getCompetitorDashboardOverview(): Promise<{
   }
 }
 
-// Initialize tables on load
-await auditPool.query(`
-  CREATE TABLE IF NOT EXISTS competitor_intelligence (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    competitor_id UUID REFERENCES competitor_pricing(id) ON DELETE CASCADE,
-    metric_key VARCHAR(100) NOT NULL,
-    metric_value TEXT,
-    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-  )
-`)
+let competitorTablesReady: Promise<void> | undefined
+
+async function ensureCompetitorTables(): Promise<void> {
+  if (!competitorTablesReady) {
+    competitorTablesReady = auditPool.query(`
+      CREATE TABLE IF NOT EXISTS competitor_intelligence (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        competitor_id UUID REFERENCES competitor_pricing(id) ON DELETE CASCADE,
+        metric_key VARCHAR(100) NOT NULL,
+        metric_value TEXT,
+        timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      )
+    `).then(() => undefined).catch((error) => {
+      competitorTablesReady = undefined
+      throw error
+    })
+  }
+  await competitorTablesReady
+}

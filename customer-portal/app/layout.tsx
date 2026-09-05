@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { GeistSans } from 'geist/font/sans'
@@ -129,6 +130,12 @@ export default function RootLayout({
         </Suspense>
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
         <Suspense fallback={null}><FunnelChrome /></Suspense>
+        <Script
+          id="opinly-pixel"
+          strategy="afterInteractive"
+          src="https://static.opinly.ai/p.js"
+          data-key="pk-BQ0TGRCyQ66Xip8ouuTtPA2yACH3GEAzTDXrkE4"
+        />
         <WebMCP />
       </body>
     </html>

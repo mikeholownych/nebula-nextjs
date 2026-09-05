@@ -9,6 +9,11 @@ import { trackClientFunnelEvent } from '@/app/lib/client-funnel'
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void
+    opinly?: {
+      anonId?: string
+      identify: (input: { email: string; userId?: string }) => void
+      track: (event: string, properties?: Record<string, unknown>, options?: { externalEventId?: string; anonId?: string; email?: string }) => void
+    }
   }
 }
 
@@ -16,6 +21,31 @@ export default function AnalyticsRuntime() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const search = searchParams.toString()
+
+  useEffect(() => {
+    let cancelled = false
+    const identifySignedInUser = async () => {
+      try {
+        const response = await fetch('/api/auth/me', { cache: 'no-store' })
+        if (!response.ok || cancelled) return
+        const user = await response.json() as { email?: unknown; id?: unknown }
+        if (typeof user.email !== 'string' || !user.email.trim() || !window.opinly) return
+        window.opinly.identify({
+          email: user.email.trim(),
+          ...(user.id != null ? { userId: String(user.id) } : {}),
+        })
+      } catch {
+        // Identity enrichment must never block navigation.
+      }
+    }
+
+    void identifySignedInUser()
+    window.addEventListener('opinly:ready', identifySignedInUser)
+    return () => {
+      cancelled = true
+      window.removeEventListener('opinly:ready', identifySignedInUser)
+    }
+  }, [pathname])
 
   useEffect(() => {
     const pagePath = `${pathname}${search ? `?${search}` : ''}`

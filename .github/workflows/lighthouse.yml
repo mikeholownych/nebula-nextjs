@@ -12,12 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Lighthouse audit
-        uses: treosh/lighthouse-ci-action@v4
+        uses: treosh/lighthouse-ci-action@12.6.2
         with:
           urls: |
             https://nebulacomponents.com
             https://nebulacomponents.com/audit
-            https://nebulacomponents.com/customer-portal
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: ./lighthouse.config.js

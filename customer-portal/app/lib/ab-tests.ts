@@ -24,6 +24,7 @@ export async function createABTest(data: {
   createdAt: string
 }> {
   try {
+    await ensureABTestTables()
     const result = await auditPool.query(`
       INSERT INTO ab_tests (
         name, description, url, original_content, variant_content,
@@ -63,6 +64,7 @@ export async function activateABTest(testId: string): Promise<{
   activatedAt: string
 }> {
   try {
+    await ensureABTestTables()
     await auditPool.query(`
       UPDATE ab_tests
       SET status = 'active', started_at = NOW()
@@ -89,6 +91,7 @@ export async function stopABTest(testId: string): Promise<{
   stoppedAt: string
 }> {
   try {
+    await ensureABTestTables()
     await auditPool.query(`
       UPDATE ab_tests
       SET status = 'completed', completed_at = NOW()
@@ -132,6 +135,7 @@ export async function getABTestResults(testId: string): Promise<{
   estimatedLaunchTime: string
 }> {
   try {
+    await ensureABTestTables()
     const testResult = await auditPool.query(`
       SELECT id, name, status, started_at, completed_at
       FROM ab_tests
@@ -233,20 +237,29 @@ function calculatePValue(
   return Math.min(Math.max(pValue, 0), 1)
 }
 
-// Initialize tables on load
-await auditPool.query(`
-  CREATE TABLE IF NOT EXISTS ab_tests (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    url TEXT NOT NULL,
-    original_content TEXT NOT NULL,
-    variant_content TEXT NOT NULL,
-    target_metric VARCHAR(50) NOT NULL DEFAULT 'conversion_rate',
-    traffic_split FLOAT DEFAULT 0.5,
-    status VARCHAR(20) DEFAULT 'draft',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    started_at TIMESTAMP WITH TIME ZONE,
-    completed_at TIMESTAMP WITH TIME ZONE
-  )
-`)
+let tablesReady: Promise<void> | undefined
+
+async function ensureABTestTables(): Promise<void> {
+  if (!tablesReady) {
+    tablesReady = auditPool.query(`
+      CREATE TABLE IF NOT EXISTS ab_tests (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        url TEXT NOT NULL,
+        original_content TEXT NOT NULL,
+        variant_content TEXT NOT NULL,
+        target_metric VARCHAR(50) NOT NULL DEFAULT 'conversion_rate',
+        traffic_split FLOAT DEFAULT 0.5,
+        status VARCHAR(20) DEFAULT 'draft',
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        started_at TIMESTAMP WITH TIME ZONE,
+        completed_at TIMESTAMP WITH TIME ZONE
+      )
+    `).then(() => undefined).catch((error) => {
+      tablesReady = undefined
+      throw error
+    })
+  }
+  await tablesReady
+}

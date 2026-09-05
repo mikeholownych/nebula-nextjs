@@ -56,6 +56,20 @@ export default function MistakesChecklistPage() {
           </p>
         </section>
 
+        <section aria-labelledby="common-leaks" className="mb-16 rounded border border-accent/20 bg-accent/5 p-6">
+          <h2 id="common-leaks" className="mb-3 text-2xl font-extrabold text-fg">The most common landing page conversion leaks</h2>
+          <p className="mb-4 leading-relaxed text-fg-muted">The recurring leaks are not mysterious: the page promise does not match the ad, the first viewport does not explain the offer, the primary CTA is hard to find, or the page gives a stranger no nearby reason to trust it.</p>
+          <ul className="grid gap-2 text-sm leading-relaxed text-fg-muted md:grid-cols-2">
+            <li><strong className="text-fg">Message match:</strong> the ad and H1 promise different things.</li>
+            <li><strong className="text-fg">First viewport:</strong> the offer, audience, or next action is unclear.</li>
+            <li><strong className="text-fg">CTA clarity:</strong> the button names an action but not the outcome.</li>
+            <li><strong className="text-fg">Trust proximity:</strong> proof is absent or too far from the action.</li>
+            <li><strong className="text-fg">Mobile access:</strong> overflow, small targets, or a covered CTA blocks action.</li>
+            <li><strong className="text-fg">Page speed:</strong> the offer arrives after the visitor has left.</li>
+          </ul>
+          <p className="mt-4 text-sm text-fg-muted">Use this as a screen, not a conversion promise. <Link href="/audit" className="font-semibold text-accent hover:underline">Run the free audit</Link> to see which conditions are observable on your page.</p>
+        </section>
+
         {/* What You Get */}
         <section className="mb-16">
           <h2 className="text-2xl font-extrabold text-fg mb-8">{"What's Inside The Checklist"}</h2>

@@ -13,6 +13,24 @@ jobs:
   pytest-platform-api:
     name: Platform API pytest
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: nebula_platform
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nebula_platform"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,10 +40,21 @@ jobs:
           python-version: '3.12'
       - name: Install test dependencies
         run: pip install -r requirements-dev.txt
+      - name: Prepare acquisition database
+        env:
+          DATABASE_URL: postgresql+psycopg://postgres@localhost:5433/nebula_platform
+          ACQUISITION_DB_URI: postgresql://postgres@localhost:5433/nebula_platform
+        run: alembic upgrade head
+      - name: Seed acquisition test database
+        env:
+          ACQUISITION_DB_URI: postgresql://postgres@localhost:5433/nebula_platform
+        run: psql "$ACQUISITION_DB_URI" -v ON_ERROR_STOP=1 -c "SET session_replication_role = replica;" -f tests/fixtures/acquisition_snapshot.sql
       - name: Pytest platform_api
         run: PYTHONPATH=. pytest tests/platform_api -q
         env:
           ENVIRONMENT: development
+          SECRET_KEY: ci-only-session-signing-key
+          ACQUISITION_DB_URI: postgresql://postgres@localhost:5433/nebula_platform
 
   pytest-root-suite:
     name: Root ops suite pytest
@@ -34,6 +63,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+      - name: Provide legacy repository path for portable tests
+        run: |
+          sudo mkdir -p /home/mike
+          sudo ln -s "$GITHUB_WORKSPACE" /home/mike/nebula
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -148,6 +181,8 @@ jobs:
   build:
     name: Production Build
     runs-on: ubuntu-latest
+    env:
+      NEBULA_SKIP_DB_INIT: '1'
     defaults:
       run:
         working-directory: customer-portal
@@ -174,6 +209,8 @@ jobs:
   lighthouse:
     name: Lighthouse CI Lab Performance Budgets
     runs-on: ubuntu-latest
+    env:
+      NEBULA_SKIP_DB_INIT: '1'
     defaults:
       run:
         working-directory: customer-portal
@@ -219,7 +256,13 @@ jobs:
       - run: npm ci
       - name: npm audit (production deps only)
         # CI-1: blocking since remediation drove prod vulnerabilities to 0.
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          for attempt in 1 2 3; do
+            npm audit --omit=dev --audit-level=high && exit 0
+            status=$?
+            if [ "$attempt" -eq 3 ]; then exit "$status"; fi
+            sleep $((attempt * 15))
+          done
 
   # Job 7: Playwright e2e (installs browsers in GH; do not skip with || true)
   e2e:

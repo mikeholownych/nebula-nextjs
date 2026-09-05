@@ -4,6 +4,7 @@ import { getPostHogClient, captureServerException } from '@/app/lib/posthog-serv
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { setAuditUnlockCookie } from '@/app/lib/audit-access'
 import { analyticsPersonId, clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
+import { recordFunnelEvent } from '@/app/lib/funnel-ledger'
 
 /**
  * Unlock audit results by providing an email address.
@@ -141,6 +142,21 @@ export async function POST(request: NextRequest) {
     } catch {
       // Non-fatal
     }
+
+    await recordFunnelEvent({
+      eventName: 'audit_results_unlocked',
+      stage: 'result_view',
+      sourceSystem: 'server_api',
+      auditAttemptId,
+      auditId: audit_id,
+      dedupKey: `unlock_${audit_id}`,
+      analyticsConsent,
+      properties: {
+        audit_id,
+        audit_attempt_id: auditAttemptId,
+        email_sent: emailSent,
+      },
+    })
 
     // 3. Set an HMAC-signed unlock cookie scoped to this audit_id. The results
     //    page verifies the signature server-side, so a visitor can't unlock

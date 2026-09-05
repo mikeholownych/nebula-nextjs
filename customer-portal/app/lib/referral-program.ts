@@ -181,6 +181,8 @@ export async function getReferralMetrics(customerId: string): Promise<{
  * Create referral code table (run once)
  */
 export async function createReferralTables(): Promise<void> {
+  if (process.env.NEBULA_SKIP_DB_INIT === '1') return
+
   await auditPool.query(`
     CREATE TABLE IF NOT EXISTS referral_codes (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

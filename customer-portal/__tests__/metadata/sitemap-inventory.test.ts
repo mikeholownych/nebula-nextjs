@@ -1,31 +1,39 @@
 import fs from 'fs'
 import path from 'path'
 import sitemap from '@/app/sitemap'
+import { learningCentreArticleUrl } from '@/app/sitemap'
 import { getArticles } from '@/app/learning-centre/lib/getArticles'
 
 const ORIGIN = 'https://nebulacomponents.com'
 const LC_DIR = path.join(process.cwd(), 'app', 'learning-centre')
 const SKIP_DIRS = new Set(['lib', 'citable'])
+const HUB_DIRS = new Set(['topic-guides'])
 
-function getArticleDirectories(): string[] {
-  return fs
-    .readdirSync(LC_DIR, { withFileTypes: true })
-    .filter(
-      (entry) =>
-        entry.isDirectory() &&
-        !SKIP_DIRS.has(entry.name) &&
-        !entry.name.startsWith('[') &&
-        fs.existsSync(path.join(LC_DIR, entry.name, 'page.tsx'))
-    )
-    .map((entry) => entry.name)
+function getArticleDirectories(directory = LC_DIR, prefix = ''): string[] {
+  const articleDirectories: string[] = []
+
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    if (SKIP_DIRS.has(entry.name) || entry.name.startsWith('[')) continue
+
+    const relativeSlug = prefix ? `${prefix}/${entry.name}` : entry.name
+    const articleDirectory = path.join(directory, entry.name)
+    const hasPage = fs.existsSync(path.join(articleDirectory, 'page.tsx'))
+
+    // Hubs are containers, even when they carry page and metadata sidecars.
+    if (hasPage && !HUB_DIRS.has(relativeSlug)) articleDirectories.push(relativeSlug)
+    articleDirectories.push(...getArticleDirectories(articleDirectory, relativeSlug))
+  }
+
+  return articleDirectories
 }
 
 describe('sitemap canonical inventory', () => {
-  it('never includes gated or robots-disallowed paths', () => {
+  it('never includes gated or robots-disallowed paths', async () => {
     // Gated/robots-Disallowed paths (workspace, checkout, api, audit results,
     // dashboards) must never be submitted. A 307-to-login URL in the sitemap
     // wastes crawl budget and can be read as a soft-404 by Google.
-    const urlList = sitemap().map(({ url }) => url)
+    const urlList = (await sitemap()).map(({ url }) => url)
     const gatedSubstrings = ['/workspace', '/checkout', '/api/', '/dashboard', '/audit/', '/login']
     const offenders = urlList.filter((url) =>
       gatedSubstrings.some((g) => url.includes(g))
@@ -33,26 +41,36 @@ describe('sitemap canonical inventory', () => {
     expect(offenders).toEqual([])
   })
 
-  it('projects every and only learning-centre article metadata record', () => {
+  it('projects every and only learning-centre article metadata record', async () => {
     const expected = getArticles()
-      .map(({ slug }) => `${ORIGIN}/learning-centre/${slug}`)
+      .map(({ slug }: { slug: string }) => learningCentreArticleUrl(slug))
       .sort()
 
-    const actual = sitemap()
+    const actual = (await sitemap())
       .map(({ url }) => url)
       .filter((url) => url.startsWith(`${ORIGIN}/learning-centre/`) && url !== `${ORIGIN}/learning-centre/citable`)
       .sort()
 
     expect(actual).toEqual(expected)
+
+    const expectedNested = expected.filter((url: string) => url.includes('/learning-centre/topic-guides/'))
+    const actualNested = actual.filter((url: string) => url.includes('/learning-centre/topic-guides/'))
+    expect(actualNested).toEqual(expectedNested)
   })
 
-  it('does not claim build-time freshness for every URL', () => {
+  it('generates route-relative nested article URLs', () => {
+    expect(learningCentreArticleUrl('topic-guides/landing-page-conversion-leaks')).toBe(
+      `${ORIGIN}/learning-centre/topic-guides/landing-page-conversion-leaks`,
+    )
+  })
+
+  it('does not claim build-time freshness for every URL', async () => {
     // lastModified is intentionally set to the build date on all entries
     // (added 2026-08-17 to satisfy sitemap validators that require lastmod).
     // When content objects gain real per-page update timestamps, this test
     // can be tightened to assert per-entry accuracy instead.
     // For now: assert that every entry that HAS lastModified uses a valid date string.
-    const entries = sitemap()
+    const entries = await sitemap()
     for (const entry of entries) {
       if (entry.lastModified !== undefined) {
         expect(typeof entry.lastModified === 'string' || entry.lastModified instanceof Date).toBe(true)

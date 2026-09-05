@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 
-SITES_ROOT = Path("/home/mike/nebula/memory/sites")
+SITES_ROOT = Path(__file__).resolve().parents[1] / "memory" / "sites"
 REQUIRED_FILES = ["brand-voice.md", "keywords.json", "target-pages.json"]
 
 

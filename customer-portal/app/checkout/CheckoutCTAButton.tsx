@@ -35,6 +35,15 @@ export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props
     setSubmitting(true)
     setError(undefined)
     try {
+      window.opinly?.track('begin_checkout', {
+        offer_key: offerKey,
+        audit_id: auditId,
+      })
+    } catch {
+      // Checkout must not depend on client analytics.
+    }
+
+    try {
       posthog.capture('checkout_initiated', {
         offer: offerKey,
         destination: endpoint,
@@ -47,7 +56,11 @@ export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
-        body: JSON.stringify({ auditId, offerKey }),
+        body: JSON.stringify({
+          auditId,
+          offerKey,
+          anonId: window.opinly?.anonId,
+        }),
       })
       const result: unknown = await response.json()
       const url = (

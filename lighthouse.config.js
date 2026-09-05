@@ -1,4 +1,4 @@
-# Lighthouse performance budget
+// Lighthouse performance budget
 module.exports = {
   ci: {
     collect: {

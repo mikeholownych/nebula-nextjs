@@ -26,14 +26,20 @@
     "check:claims": "node scripts/check-claims.mjs",
     "check:opportunity-governance": "node scripts/check-opportunity-governance.mjs",
     "check:content": "node scripts/check-banned-strings.mjs",
+    "check:content-pipeline": "node scripts/run-content-pipeline-validation.mjs",
+    "check:blog-content": "npm run check:content-pipeline",
     "check:brand": "node scripts/check-brand-projections.mjs",
     "check:analytics-governance": "node scripts/check-analytics-governance.mjs",
-    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:brand && npm run check:analytics-governance && npm run check:signal-canon && npm run check:claims && npm run check:opportunity-governance && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
+    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:content-pipeline && npm run check:brand && npm run check:analytics-governance && npm run check:signal-canon && npm run check:claims && npm run check:opportunity-governance && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@heycatch/sdk": "^0.7.0",
+    "@opinly/backend": "^1.4.0",
+    "@opinly/next": "^1.4.0",
+    "@opinly/react": "^1.4.0",
+    "@opinly/shared": "^1.4.0",
     "@posthog/nextjs-config": "^1.9.70",
     "@react-oauth/google": "^0.13.5",
     "@types/pdfkit": "^0.17.6",
@@ -56,6 +62,7 @@
     "react-dom": "^19.2.8",
     "recharts": "^3.10.1",
     "stripe": "^22.5.0",
+    "svix": "^2.3.0",
     "viem": "^2.55.19"
   },
   "devDependencies": {
@@ -98,7 +105,7 @@
     "yaml": "^2.9.0"
   },
   "overrides": {
-    "fast-uri": "^4.1.2",
+    "fast-uri": "^4.1.3",
     "sharp": "0.35.0",
     "next": {
       "postcss": "^8.5.26"

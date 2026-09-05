@@ -214,7 +214,7 @@ export async function triggerScheduledReports(): Promise<{
 }
 
 // Initialize tables on load
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS report_schedules (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
@@ -226,10 +226,10 @@ await auditPool.query(`
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   )
 `)
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_report_schedules_customer ON report_schedules(customer_id)
 `)
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS report_deliveries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,

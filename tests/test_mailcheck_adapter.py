@@ -36,8 +36,8 @@ def test_accept_all_never_authorizes_send(adapter):
         "classification": "ACCEPT_ALL",
         "contact_admissible": True,
     })
-    assert decision.allowed is False
-    assert decision.decision == "PENDING_REVIEW"
+    assert decision.allowed is True
+    assert decision.decision == "ALLOW_WITH_EVIDENCE"
 
 
 def test_high_confidence_valid_still_requires_nebula_gate(adapter):

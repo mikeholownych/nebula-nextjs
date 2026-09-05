@@ -242,7 +242,7 @@ export async function getAgencyClients(): Promise<{
 }
 
 // Initialize tables on load
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS client_brands (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     client_id UUID REFERENCES customers(id) ON DELETE CASCADE,
@@ -257,6 +257,6 @@ await auditPool.query(`
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   )
 `)
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_client_brands_client ON client_brands(client_id)
 `)

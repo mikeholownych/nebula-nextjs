@@ -32,11 +32,30 @@ from acquisition.state_engine import (
 )
 from acquisition.trend_engine import TrendResult, classify_sitewide_trend
 from acquisition.window_computation import ComparisonVector, ConcentrationMetrics, QueryIntelligence
+from acquisition.reporting import render_search_semantics
 
 
-# ---------------------------------------------------------------------------
-# 1. Route & Cohort Classification Tests
-# ---------------------------------------------------------------------------
+def test_reporting_names_gsc_aggregate_and_dimensioned_evidence_separately():
+    """Prevent 429-vs-sitewide aggregate confusion in generated reports."""
+    report = render_search_semantics(
+        sitewide_impressions=1072,
+        sitewide_clicks=3,
+        macro_position=44.4,
+        dimensioned_impressions=429,
+        dimensioned_page_rows=41,
+        query_page_rows=90,
+        unique_queries=79,
+    )
+
+    assert "## Sitewide GSC Aggregate" in report
+    assert "1,072 impressions" in report
+    assert "## Observable Dimensioned Search Evidence" in report
+    assert "429 impressions" in report
+    assert "## Query/Page Rows" in report
+    assert "90" in report
+    assert "Unique Observable Queries: 79" in report
+    assert "unclassified" not in report.lower()
+
 
 def test_cohort_resolution_exact_and_dynamic():
     """Verify deterministic cohort classification without substring shadowing."""

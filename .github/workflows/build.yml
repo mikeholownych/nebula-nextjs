@@ -24,6 +24,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    env:
+      NEBULA_SKIP_DB_INIT: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

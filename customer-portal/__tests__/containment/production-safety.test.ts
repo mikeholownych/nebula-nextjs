@@ -450,8 +450,6 @@ describe('production safety containment', () => {
 
   it('redirects every non-canonical Nebula host directly to the .com apex', () => {
     for (const host of [
-      'nebulacomponents.com',
-      'www.nebulacomponents.com',
       'www.nebulacomponents.com',
     ]) {
       const response = proxy(

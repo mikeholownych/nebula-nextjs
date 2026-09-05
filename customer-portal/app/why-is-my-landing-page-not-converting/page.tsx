@@ -320,7 +320,19 @@ export default function WhyNotConvertingPage() {
             </p>
           </section>
 
-          <section className="mb-12 rounded-md border border-border bg-bg-muted/30 p-8 text-center">
+          <section aria-labelledby="diagnostic-sequence" className="mb-12 rounded-md border border-accent/20 bg-accent/5 p-6 md:p-8">
+            <h2 id="diagnostic-sequence" className="mb-3 text-xl font-bold text-fg">A practical diagnosis sequence for paid traffic</h2>
+            <p className="mb-4 text-sm leading-relaxed text-fg-muted">Start with the page conditions you can observe before changing the campaign. This keeps the diagnosis falsifiable and prevents a page rewrite from masking the real defect.</p>
+            <ol className="grid gap-3 text-sm leading-relaxed text-fg-muted md:grid-cols-2">
+              <li><strong className="text-fg">1. Confirm the promise:</strong> compare the active ad with the page H1 and offer.</li>
+              <li><strong className="text-fg">2. Check the first viewport:</strong> verify offer, audience, proof, and CTA are clear.</li>
+              <li><strong className="text-fg">3. Test mobile:</strong> inspect overflow, tap targets, banners, and CTA visibility.</li>
+              <li><strong className="text-fg">4. Record evidence:</strong> capture the selector, threshold, observed state, and repair.</li>
+            </ol>
+            <p className="mt-4 text-sm text-fg-muted">Run the page through the <Link href="/audit" className="font-semibold text-accent hover:underline">free Nebula audit</Link>, then use <Link href="/landing-page-performance-analysis" className="font-semibold text-accent hover:underline">the performance analysis guide</Link> to separate structural checks from behavioral tools.</p>
+          </section>
+
+          <section className="mb-12 rounded-md border border-border bg-bg-muted/20 p-6 md:p-8">
             <h2 className="text-2xl font-bold text-fg mb-3">
               Skip the Guessing - Run the 9-Signal Audit
             </h2>

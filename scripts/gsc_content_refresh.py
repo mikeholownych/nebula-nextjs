@@ -38,8 +38,8 @@ INDEXNOW_SCRIPT = str(NEBULA_ROOT / "scripts" / "submit_indexnow.py")
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
 
 HOST = "nebulacomponents.com"
-INDEXNOW_KEY = "c8f12a94d30b4e8597f519623e59b671"
-INDEXNOW_KEY_LOCATION = f"https://{HOST}/{INDEXNOW_KEY}.txt"
+INDEXNOW_KEY = (NEBULA_ROOT / "nebula2026indexnow.txt").read_text().strip()
+INDEXNOW_KEY_LOCATION = f"https://{HOST}/nebula-indexnow-key.txt"
 
 # Minimum impressions to qualify for refresh
 MIN_IMPRESSIONS = 1

@@ -81,8 +81,6 @@ export function proxy(request: NextRequest) {
 
   // ── 1. Domain migration: every variant → .com apex ──────────────────────────
   if (
-    host === 'nebulacomponents.com' ||
-    host === 'www.nebulacomponents.com' ||
     host === 'www.nebulacomponents.com'
   ) {
     const url = request.nextUrl.clone()

@@ -258,7 +258,7 @@ export async function testWebhook(
 }
 
 // Initialize tables on load
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS integrations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
@@ -270,7 +270,7 @@ await auditPool.query(`
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   )
 `)
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS zapier_integrations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     zapier_hook_url TEXT NOT NULL,
@@ -279,7 +279,7 @@ await auditPool.query(`
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   )
 `)
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS integration_logs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     integration_id UUID REFERENCES integrations(id) ON DELETE SET NULL,

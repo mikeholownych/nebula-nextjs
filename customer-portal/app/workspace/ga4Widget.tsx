@@ -32,18 +32,23 @@ const card = 'rounded-lg border border-border bg-bg-panel p-5'
 export default function Ga4Widget({
   email,
   latestCompletedAuditId,
+  selectedProject,
 }: {
   email?: string
   latestCompletedAuditId?: string | null
+  selectedProject?: string
 }) {
+  const projectQuery = selectedProject && selectedProject !== 'all'
+    ? `?project_domain=${encodeURIComponent(selectedProject)}`
+    : ''
   const [status, setStatus] = useState<Ga4Status | null>(null)
   const [correlation, setCorrelation] = useState<Correlation | null>(null)
   const [busy, setBusy] = useState(false)
 
   const loadStatus = useCallback(async () => {
-    const r = await fetch('/api/ga4/status', { cache: 'no-store' })
+    const r = await fetch(`/api/ga4/status${projectQuery}`, { cache: 'no-store' })
     if (r.ok) setStatus(await r.json())
-  }, [])
+  }, [projectQuery])
 
   useEffect(() => {
     if (!email) return
@@ -54,7 +59,7 @@ export default function Ga4Widget({
     if (!status?.connected || !status.property_id || !latestCompletedAuditId) return
     void (async () => {
       setBusy(true)
-      const r = await fetch(`/api/ga4/correlation/${latestCompletedAuditId}`, {
+      const r = await fetch(`/api/ga4/correlation/${latestCompletedAuditId}${selectedProject && selectedProject !== 'all' ? `?project_domain=${encodeURIComponent(selectedProject)}` : ''}`, {
         cache: 'no-store',
       })
       if (r.ok) setCorrelation(await r.json())

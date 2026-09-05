@@ -16,6 +16,11 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+try:
+    from scripts.content_pipeline.collect_sources import collect_sources
+except ModuleNotFoundError:
+    from content_pipeline.collect_sources import collect_sources
+
 NEBULA = Path('/home/mike/nebula')
 SEO_REPORTS = NEBULA / 'seo-reports'
 LEAD_STATE_DB = NEBULA / 'lead_gen' / 'lead_state.db'
@@ -129,7 +134,17 @@ if il_files and il_files[0].stat().st_mtime > (datetime.now().timestamp() - 7 * 
     except Exception:
         pass
 
-# Competitor differentiation notes
+# Competitor SERP reconciliation and differentiation notes
+competitor_serp = latest_report('competitor-serp')
+if competitor_serp:
+    out['seo']['competitor_serp'] = {
+        'observed_at': competitor_serp.get('observed_at'),
+        'target_keyword_count': competitor_serp.get('target_keyword_count', 0),
+        'target_competitor_count': competitor_serp.get('target_competitor_count', 0),
+        'observed_combinations': competitor_serp.get('observed_keyword_market_device_combinations', 0),
+        'domain_stats': competitor_serp.get('domain_stats', {}),
+        'unobserved_target_count': competitor_serp.get('unobserved_target_count'),
+    }
 comp_files = sorted(SEO_REPORTS.glob('competitor-differentiation-*.md'), reverse=True)
 if comp_files:
     out['seo']['competitor_notes'] = comp_files[0].read_text()[:800]
@@ -277,6 +292,15 @@ try:
         out['content']['queue'] = result.stdout.strip()
 except Exception:
     pass
+
+
+# ── Local content opportunity queue (report-only) ────────────────────────────
+try:
+    out['content']['opportunity_report'] = collect_sources(NEBULA, days=7)
+except Exception as exc:
+    out['content']['opportunity_report'] = {
+        'ready': False, 'missing_sources': ['collector_error'], 'error': str(exc), 'opportunities': []
+    }
 
 
 # ── Actions pending (surface blockers) ───────────────────────────────────────

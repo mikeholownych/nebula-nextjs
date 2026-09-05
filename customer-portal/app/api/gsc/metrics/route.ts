@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const siteUrl = searchParams.get('site_url')
   const days = searchParams.get('days') || '28'
+  const projectDomain = searchParams.get('project_domain')
 
   if (!siteUrl) {
     return NextResponse.json({ error: 'site_url is required' }, { status: 400 })
@@ -14,6 +15,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const params = new URLSearchParams({ site_url: siteUrl, days })
+    if (projectDomain) params.set('project_domain', projectDomain)
     const res = await fetch(`${PLATFORM_API}/api/gsc/metrics?${params}`, {
       headers: authHeaders(req),
       cache: 'no-store',

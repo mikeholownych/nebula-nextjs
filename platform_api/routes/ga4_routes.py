@@ -14,13 +14,13 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 
 from platform_api.db import get_session
-from platform_api.db.models import Ga4Connection
+from platform_api.db.models import Ga4Connection, ProjectIntegration
 from platform_api.ga4.oauth import (
     GA4OAuthError,
     exchange_ga4_code,
@@ -125,6 +125,7 @@ async def ga4_connect(
 
 class PropertySelect(BaseModel):
     property_id: str
+    project_domain: Optional[str] = None
 
     @field_validator("property_id")
     @classmethod
@@ -190,6 +191,7 @@ async def ga4_callback(
 
 @router.get("/properties")
 async def ga4_properties(
+    project_domain: Optional[str] = Query(None),
     auth=Depends(get_current_user),
     redis=Depends(get_redis),
     db: Session = Depends(get_session),
@@ -202,8 +204,13 @@ async def ga4_properties(
     token = await _valid_access_token(conn, db)
     summaries = await _summaries_or_clean_error(token)
 
-    # Filter to the stored selection when one exists.
-    selected = conn.property_id
+    # Project mappings override the legacy account-level selection.
+    mapping = None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=auth["user_id"], project_domain=project_domain.strip().lower()
+        ).first()
+    selected = (mapping.ga4_property_id if mapping else None) if project_domain else conn.property_id
     return {
         "properties": [
             {
@@ -234,25 +241,44 @@ async def ga4_select_property(
         # Existence-hiding: do not reveal whether the property exists elsewhere.
         raise HTTPException(status_code=403, detail="Property not available for this account")
 
-    conn.property_id = body.property_id
-    conn.property_display_name = match.get("display_name")
+    project_domain = body.project_domain.strip().lower() if body.project_domain else None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=auth["user_id"], project_domain=project_domain
+        ).first()
+        if not mapping:
+            mapping = ProjectIntegration(user_id=auth["user_id"], project_domain=project_domain)
+            db.add(mapping)
+        mapping.ga4_property_id = body.property_id
+        mapping.ga4_property_display_name = match.get("display_name")
+    else:
+        conn.property_id = body.property_id
+        conn.property_display_name = match.get("display_name")
     db.commit()
     return {
-        "property_id": conn.property_id,
-        "display_name": conn.property_display_name,
+        "property_id": body.property_id,
+        "display_name": match.get("display_name"),
+        "project_domain": project_domain,
     }
 
 
 @router.get("/status")
 async def ga4_status(
+    project_domain: Optional[str] = Query(None),
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
 ):
     conn = _current_connection(db, auth["user_id"])
+    mapping = None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=auth["user_id"], project_domain=project_domain.strip().lower()
+        ).first()
     return {
         "connected": bool(conn and conn.refresh_token),
-        "property_id": conn.property_id if conn else None,
-        "property_display_name": conn.property_display_name if conn else None,
+        "property_id": (mapping.ga4_property_id if mapping else None) if project_domain else (conn.property_id if conn else None),
+        "property_display_name": (mapping.ga4_property_display_name if mapping else None) if project_domain else (conn.property_display_name if conn else None),
+        "project_domain": project_domain.strip().lower() if project_domain else None,
         "connected_at": conn.connected_at.isoformat() if conn else None,
     }
 
@@ -276,6 +302,7 @@ async def ga4_disconnect(
 @router.get("/correlation/{audit_id}")
 async def ga4_correlation(
     audit_id: str,
+    project_domain: Optional[str] = Query(None),
     auth=Depends(get_current_user),
     db: Session = Depends(get_session),
     redis=Depends(get_redis),
@@ -347,8 +374,18 @@ async def ga4_correlation(
         path += "?" + parsed.query
 
     ga4 = _current_connection(db, auth["user_id"])
-    if not ga4 or not ga4.property_id:
-        raise HTTPException(status_code=409, detail="Connect a GA4 property first")
+    mapping = None
+    if project_domain:
+        mapping = db.query(ProjectIntegration).filter_by(
+            user_id=auth["user_id"], project_domain=project_domain.strip().lower()
+        ).first()
+    property_id = (
+        (mapping.ga4_property_id if mapping else None)
+        if project_domain
+        else (ga4.property_id if ga4 else None)
+    )
+    if not ga4 or not property_id:
+        raise HTTPException(status_code=409, detail="Select a GA4 property for this project")
 
     anchor_date = anchor_dt.date()
     (pre_s, pre_e), (post_s, post_e) = window_dates(anchor_date)
@@ -359,16 +396,16 @@ async def ga4_correlation(
 
     try:
         baseline = normalize_window(
-            await run_landing_page_report(redis, token, ga4.property_id, path, pre_s, pre_e)
+            await run_landing_page_report(redis, token, property_id, path, pre_s, pre_e)
         )
         post = normalize_window(
-            await run_landing_page_report(redis, token, ga4.property_id, path, post_s, post_end)
+            await run_landing_page_report(redis, token, property_id, path, post_s, post_end)
         )
         control_b = normalize_window(
-            await run_landing_page_report(redis, token, ga4.property_id, "/", pre_s, pre_e)
+            await run_landing_page_report(redis, token, property_id, "/", pre_s, pre_e)
         )
         control_p = normalize_window(
-            await run_landing_page_report(redis, token, ga4.property_id, "/", post_s, post_end)
+            await run_landing_page_report(redis, token, property_id, "/", post_s, post_end)
         )
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

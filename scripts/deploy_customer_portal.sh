@@ -50,7 +50,7 @@ cd "$PORTAL_DIR"
 rm -rf .next-incoming
 export NEXT_DIST_DIR=.next-incoming
 npm ci --include=dev
-npm run ci
+CI=1 npm run ci
 unset NEXT_DIST_DIR
 
 # ── Tracked migrations (DATA-2/FM-11) ────────────────────────────────────────

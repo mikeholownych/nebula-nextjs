@@ -170,13 +170,13 @@ function compileFixture(
 }
 
 describe('evidence-gated public proof projection', () => {
-  test('keeps the committed case and benchmark inventories empty', () => {
+  test('keeps the committed case and benchmark inventories empty', async () => {
     expect(proofProjection.cases).toEqual([])
     expect(proofProjection.benchmarks).toEqual([])
     expect(getPublishedCaseStudies()).toEqual([])
     expect(getPublishedBenchmarks()).toEqual([])
     expect(generateStaticParams()).toEqual([])
-    expect(sitemap().filter(({ url }) => url.includes('/case-studies/'))).toEqual([])
+    expect((await sitemap()).filter(({ url }) => url.includes('/case-studies/'))).toEqual([])
   })
 
   test('publishes fully governed cases and benchmarks in deterministic slug order', () => {

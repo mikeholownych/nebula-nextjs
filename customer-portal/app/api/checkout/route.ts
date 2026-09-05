@@ -61,10 +61,15 @@ export async function POST(request: NextRequest) {
   }
 
   const keys = Object.keys(body)
+  const hasValidAnonId = !('anonId' in body) || (
+    typeof body.anonId === 'string' && body.anonId.trim().length > 0 && body.anonId.length <= 200
+  )
   if (
-    keys.length !== 2 ||
+    (keys.length !== 2 && keys.length !== 3) ||
+    keys.some((key) => !['offerKey', 'auditId', 'anonId'].includes(key)) ||
     !keys.includes('offerKey') ||
     !keys.includes('auditId') ||
+    !hasValidAnonId ||
     body.offerKey !== fixPack.checkout.offerKey ||
     typeof body.auditId !== 'string' ||
     !UUID_RE.test(body.auditId)
@@ -72,6 +77,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
   }
   const auditId = body.auditId
+  const opinlyAnonId = typeof body.anonId === 'string' ? body.anonId.trim() : null
   const auditIdentity = readAuditUnlock(
     auditId,
     request.cookies.get(`audit_unlock_${auditId}`)?.value,
@@ -174,6 +180,7 @@ export async function POST(request: NextRequest) {
   })
   if (journeyId) stripeParams.set('metadata[journey_id]', journeyId)
   if (personId) stripeParams.set('metadata[analytics_person_id]', personId)
+  if (opinlyAnonId) stripeParams.set('metadata[opinly_anon_id]', opinlyAnonId)
   for (const [key, value] of Object.entries(attribution)) {
     stripeParams.set(`metadata[${key}]`, value.slice(0, 500))
   }

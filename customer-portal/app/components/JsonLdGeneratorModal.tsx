@@ -118,7 +118,7 @@ export default function JsonLdGeneratorModal({
   }
 
   return (
-    <div className={`rounded-2xl border border-border bg-bg-panel p-6 sm:p-8 ${className}`}>
+    <div className={`min-w-0 max-w-full overflow-hidden rounded-2xl border border-border bg-bg-panel p-6 sm:p-8 ${className}`}>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-1">
@@ -128,7 +128,7 @@ export default function JsonLdGeneratorModal({
             Instant AEO &amp; GEO Structured Data
           </h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {(['FAQPage', 'SoftwareApplication', 'Organization', 'HowTo'] as SchemaType[]).map((t) => (
             <button
               key={t}

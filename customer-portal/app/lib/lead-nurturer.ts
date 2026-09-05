@@ -174,7 +174,7 @@ export async function getLeadNurtureStatus(customerId: string): Promise<{
 /**
  * Create nurture sequences on load
  */
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS nurture_sequences (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
@@ -186,7 +186,7 @@ await auditPool.query(`
   )
 `)
 
-await auditPool.query(`
+if (process.env.NEBULA_SKIP_DB_INIT !== '1') await auditPool.query(`
   CREATE TABLE IF NOT EXISTS nurture_executions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,

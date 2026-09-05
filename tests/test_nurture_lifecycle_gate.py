@@ -2,6 +2,7 @@
 
 import json
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import nurture_engine
 
@@ -49,11 +50,7 @@ def test_pick_audit_nurture_fails_closed_without_lifecycle_authority(tmp_path, m
     import importlib.util as _ilu, sys as _sys
     spec = _ilu.spec_from_file_location(
         "nurture_engine_wt",
-        str(tmp_path.parent.parent / "nurture_engine.py")
-        if False else
-        str(tmp_path.parent / "nurture_engine.py")
-        if False else
-        "/home/mike/nebula/.worktrees/research-pattern-hardening/nurture_engine.py",
+        str(Path(__file__).resolve().parents[1] / "nurture_engine.py"),
     )
     _ne = _ilu.module_from_spec(spec)
     spec.loader.exec_module(_ne)
@@ -73,7 +70,7 @@ def test_pick_audit_nurture_uses_delivery_recovery_path(tmp_path, monkeypatch):
     import importlib.util as _ilu
     spec = _ilu.spec_from_file_location(
         "nurture_engine_wt2",
-        "/home/mike/nebula/.worktrees/research-pattern-hardening/nurture_engine.py",
+        str(Path(__file__).resolve().parents[1] / "nurture_engine.py"),
     )
     _ne = _ilu.module_from_spec(spec)
     spec.loader.exec_module(_ne)

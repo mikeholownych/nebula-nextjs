@@ -5,10 +5,12 @@ IndexNow Submission Helper - Submits core site URLs to IndexNow API (Bing / Yand
 
 import sys
 import subprocess
+from pathlib import Path
 
-KEY = "c8f12a94d30b4e8597f519623e59b671"
+ROOT = Path("/home/mike/nebula")
+KEY = (ROOT / "nebula2026indexnow.txt").read_text().strip()
 HOST = "nebulacomponents.com"
-KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
+KEY_LOCATION = f"https://{HOST}/nebula-indexnow-key.txt"
 
 URLS = [
     f"https://{HOST}/",
@@ -23,6 +25,7 @@ URLS = [
     f"https://{HOST}/learning-centre/above-fold-landing-page",
     f"https://{HOST}/learning-centre/landing-page-bounce-rate-high",
     f"https://{HOST}/resources/citable",
+    f"https://{HOST}/what-is-nebula-components",
 ]
 
 def main():

@@ -70,9 +70,45 @@ CANONICAL MEASUREMENT RECORD
 [ GATE 6: DOMAIN SPECIFIC RULES ] ──> EMIT SPECIFIC RECOMMENDATION ('REVIEW_SERP_PRESENTATION', etc.)
 ```
 
+## 5. Timing and Action Gates
+
+Timing is part of the recommendation, not an operator preference. The engine must separate urgent operational investigation from slower search decisions.
+
+### Immediate operational gate
+
+Run daily or on alert. Any checkout failure, webhook failure, unlock drop to zero, 5xx spike, or source-ingestion failure emits `INVESTIGATE`. It must not emit a content or competitor action.
+
+### Weekly observation gate
+
+Weekly reviews use the last completed window and respect the GSC finalization lag. A competitor advantage observed once is `OBSERVE`. A competitor advantage must appear in at least two completed snapshots before it can emit a content-alignment review.
+
+### 28-day approval gate
+
+A production SEO change requires a complete 28-day comparison, complete source lineage, no active holdout, no suppression, no unresolved cannibalization, and either at least 100 impressions or a verified indexability defect. The change remains a recommendation until a human review accepts it and creates a controlled experiment draft.
+
+### 84-day lifecycle gate
+
+Retire or consolidate only after three completed 28-day cycles. Expand only when ranking strength and commercial pull are both observed. Rankings, impressions, clicks, replies, and audits remain diagnostic; an attributable purchase is the commercial success signal.
+
+### Canonical action matrix
+
+| Evidence | Timing | Result |
+|---|---|---|
+| Operational failure | Immediate | `INVESTIGATE` |
+| <100 impressions | Weekly | `OBSERVE` |
+| Position >20 with zero clicks | Weekly | `OBSERVE` |
+| Position 11-20 with sufficient impressions | 28-day | `REVIEW_CONTENT_ALIGNMENT` |
+| Position 1-10, CTR <1%, >=100 impressions | 28-day | `REVIEW_SERP_PRESENTATION` |
+| Competitor wins once | Weekly | `OBSERVE` |
+| Competitor wins twice | 28-day | `REVIEW_CONTENT_ALIGNMENT` or `REVIEW_QUERY_ALIGNMENT` |
+| Overlapping Nebula intent | Before any new page | `REVIEW_CANNIBALIZATION` |
+| Persistent weak page after 84 days | 84-day | `CONSOLIDATE` or `RETIRE` |
+
+`RECOMMEND != APPROVE != EXECUTE` remains mandatory. A timing gate can delay an action; it cannot authorize a production mutation.
+
 ---
 
-## 4. Current Nebula Context & Baseline Behavior
+## 6. Current Nebula Context & Baseline Behavior
 
 Under current Nebula production facts (Measurement `meas_20260830_canonical_w28`):
 - Sitewide Search Presence: Newly established (0 to 1,072 impressions, average position 44.4).

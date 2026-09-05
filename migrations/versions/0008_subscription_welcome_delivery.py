@@ -47,7 +47,7 @@ def upgrade() -> None:
         "subscriptions",
         ["created_at"],
         postgresql_where=sa.text(
-            "livemode = TRUE AND welcome_email_enqueued_at IS NULL "
+            "welcome_email_enqueued_at IS NULL "
             "AND welcome_email_attempts < 5"
         ),
     )
