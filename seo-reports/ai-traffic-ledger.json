@@ -1,6 +1,6 @@
 {
   "started": "2026-09-01",
-  "updated_at": "2026-09-03T07:00:14.684686",
+  "updated_at": "2026-09-05T07:00:58.815037",
   "days": {
     "2026-09-01": {
       "bot_summary": {
@@ -405,6 +405,358 @@
         "GPTBot": 1,
         "ClaudeBot": 2,
         "Applebot": 4
+      }
+    },
+    "2026-09-04": {
+      "bot_summary": {
+        "human": 1992,
+        "curl": 242,
+        "GoogleOther": 83,
+        "OpenAI": 56,
+        "ClaudeBot": 38,
+        "PerplexityBot": 35,
+        "Googlebot": 18,
+        "Bingbot": 18,
+        "GPTBot": 18,
+        "Facebook": 18,
+        "Applebot": 17,
+        "Twitter": 16,
+        "LinkedIn": 13,
+        "Nebula-internal": 7,
+        "Ahrefs": 6,
+        "Semrush": 2
+      },
+      "raw_record_count": 2579,
+      "sitemap_path_count": 183,
+      "googlebot_crawled_count": 13,
+      "bingbot_crawled_count": 17,
+      "ai_paths": {
+        "PerplexityBot": [
+          [
+            "/@fs/root/.aws/config",
+            1
+          ],
+          [
+            "/@fs/var/www/.env",
+            1
+          ],
+          [
+            "/@fs/usr/src/app/.env",
+            1
+          ],
+          [
+            "/@fs/root/.ssh/id_ed25519",
+            1
+          ],
+          [
+            "/web/.env",
+            1
+          ],
+          [
+            "/root/.aws/credentials",
+            1
+          ],
+          [
+            "/.ssh/id_rsa",
+            1
+          ],
+          [
+            "/.kube/config",
+            1
+          ],
+          [
+            "/api/v1/config",
+            1
+          ],
+          [
+            "/privatekey.key",
+            1
+          ]
+        ],
+        "OpenAI": [
+          [
+            "/robots.txt",
+            8
+          ],
+          [
+            "/",
+            4
+          ],
+          [
+            "/login",
+            3
+          ],
+          [
+            "/api/v1/settings",
+            2
+          ],
+          [
+            "/lead-generation-landing-page-audit",
+            1
+          ],
+          [
+            "/how-nebula-audits",
+            1
+          ],
+          [
+            "/faq",
+            1
+          ],
+          [
+            "/resources/citable/quick-start",
+            1
+          ],
+          [
+            "/benchmarks",
+            1
+          ],
+          [
+            "/@fs/home/node/.aws/config",
+            1
+          ]
+        ],
+        "GPTBot": [
+          [
+            "/",
+            2
+          ],
+          [
+            "/@fs/.env.production",
+            1
+          ],
+          [
+            "/@fs/home/node/.aws/credentials",
+            1
+          ],
+          [
+            "/@fs/.env",
+            1
+          ],
+          [
+            "/@fs/app/.env.local",
+            1
+          ],
+          [
+            "/@fs/var/www/html/.env",
+            1
+          ],
+          [
+            "/assets../.env",
+            1
+          ],
+          [
+            "/.github/.env",
+            1
+          ],
+          [
+            "/aws.env",
+            1
+          ],
+          [
+            "/api/graphql",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            4
+          ],
+          [
+            "/sitemap.xml",
+            4
+          ],
+          [
+            "/@vite/env",
+            1
+          ],
+          [
+            "/.env",
+            1
+          ],
+          [
+            "/docker/.env",
+            1
+          ],
+          [
+            "/.git/HEAD",
+            1
+          ],
+          [
+            "/.ssh/config",
+            1
+          ],
+          [
+            "/docker-compose.yml",
+            1
+          ],
+          [
+            "/docker-compose.yaml",
+            1
+          ],
+          [
+            "/.htpasswd",
+            1
+          ]
+        ],
+        "Applebot": [
+          [
+            "/@fs/.env.local",
+            1
+          ],
+          [
+            "/@fs/app/.env.production",
+            1
+          ],
+          [
+            "/@fs/app/terraform.tfstate",
+            1
+          ],
+          [
+            "/@fs/root/.ssh/id_rsa",
+            1
+          ],
+          [
+            "/.env.bak",
+            1
+          ],
+          [
+            "/app/.env",
+            1
+          ],
+          [
+            "/img../.env",
+            1
+          ],
+          [
+            "/.azure/credentials",
+            1
+          ],
+          [
+            "/.bash_history",
+            1
+          ],
+          [
+            "/media../.azure/credentials",
+            1
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "PerplexityBot": 35,
+        "OpenAI": 43,
+        "GPTBot": 17,
+        "ClaudeBot": 32,
+        "Applebot": 17
+      }
+    },
+    "2026-09-05": {
+      "bot_summary": {
+        "human": 2607,
+        "curl": 445,
+        "Bingbot": 75,
+        "Googlebot": 49,
+        "Semrush": 40,
+        "OpenAI": 26,
+        "ClaudeBot": 18,
+        "Twitter": 8,
+        "Python-script": 7,
+        "YandexBot": 7,
+        "Ahrefs": 4,
+        "GPTBot": 3,
+        "Facebook": 2,
+        "PerplexityBot": 2,
+        "Baidu": 2,
+        "unknown": 2,
+        "Nebula-internal": 1
+      },
+      "raw_record_count": 3298,
+      "sitemap_path_count": 184,
+      "googlebot_crawled_count": 29,
+      "bingbot_crawled_count": 39,
+      "ai_paths": {
+        "PerplexityBot": [
+          [
+            "/about",
+            1
+          ],
+          [
+            "/llms.txt",
+            1
+          ]
+        ],
+        "OpenAI": [
+          [
+            "/",
+            10
+          ],
+          [
+            "/robots.txt",
+            8
+          ],
+          [
+            "/case-studies",
+            2
+          ],
+          [
+            "/saas-landing-page-audit",
+            2
+          ],
+          [
+            "/proof",
+            1
+          ],
+          [
+            "/learning-centre/ecommerce-landing-page-not-converting",
+            1
+          ],
+          [
+            "/login",
+            1
+          ],
+          [
+            "/teardowns",
+            1
+          ]
+        ],
+        "GPTBot": [
+          [
+            "/graphql",
+            1
+          ],
+          [
+            "/pricing",
+            1
+          ],
+          [
+            "/sitemap.xml",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            8
+          ],
+          [
+            "/sitemap.xml",
+            8
+          ],
+          [
+            "/manifest.webmanifest",
+            1
+          ],
+          [
+            "/repair-sprint",
+            1
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "PerplexityBot": 2,
+        "OpenAI": 8,
+        "GPTBot": 3,
+        "ClaudeBot": 4
       }
     }
   }

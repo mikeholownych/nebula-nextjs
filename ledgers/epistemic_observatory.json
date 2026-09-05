@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T08:00:38.824161+00:00",
+  "generated_at": "2026-09-05T08:00:43.645458+00:00",
   "activation_at": "2026-08-31T22:00:00+00:00",
   "completed_audits_since_activation": 28,
   "stamped_audits": 28,
@@ -20,7 +20,7 @@
     "need_stamped_audits": 500,
     "need_days": 14,
     "stamped_audits": 28,
-    "days_open": 1,
+    "days_open": 4,
     "ready_to_revisit_scoring": false,
     "next_decision": "do_not_change_scoring"
   }
