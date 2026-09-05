@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "register_id": "corroboration-20260905",
+  "status": "incomplete_input",
+  "created_at": "2026-09-05T17:12:00Z",
+  "source_rows_reported_by_scout": 3,
+  "source_rows_recovered_and_validated": 1,
+  "missing_rows": 2,
+  "rows": [
+    {
+      "id": "corr-20260905-001",
+      "name": "Matteo Tittarelli",
+      "organization": "Genesys Growth",
+      "publisher_surface": "Genesys Growth blog and newsletter",
+      "canonical_url": "https://genesysgrowth.com/blog/landing-page-conversion-stats-for-marketing-leaders",
+      "published_at": "2026-02-07",
+      "source_type": "compiled_third_party_benchmark_article",
+      "validation": {
+        "page_retrieved": true,
+        "author_observed": "Matteo Tittarelli",
+        "title_observed": "Landing Page Conversion Rates - 40 Statistics Every Marketing Leader Should Know in 2026",
+        "date_observed": "Feb 7, 2026",
+        "independence": "not_established",
+        "original_dataset": false,
+        "notes": "The article attributes individual statistics to Unbounce, MarketingProfs, First Page Sage, Ruler Analytics, and other named sources. Primary-source validation is still required before citing any statistic as evidence."
+      },
+      "supported_nebula_topic": "landing page conversion benchmarks and diagnostic context",
+      "candidate_nebula_surfaces": [
+        "/landing-page-performance-analysis",
+        "/why-is-my-landing-page-not-converting",
+        "/learning-centre/high-cpc-low-conversion"
+      ],
+      "proposed_action": "Build a claim-to-primary-source map. Use only claims whose original methodology and population can be inspected. Do not copy benchmark numbers into buyer-facing copy yet.",
+      "outreach_action": "Draft a value-first note offering original, provenance-backed audit observations or a methodology discussion. Do not send without review.",
+      "success_signal": "Published citation or qualified reply attributable to corr-20260905-001",
+      "status": "research_only",
+      "owner": "market",
+      "send_authorized": false
+    }
+  ],
+  "decision_rules": [
+    "A publisher record is not customer proof.",
+    "A compiled benchmark article does not independently corroborate every statistic it repeats.",
+    "No Nebula claim is promoted solely because a scout found a publisher.",
+    "No outreach is sent from this register without a separate approval event.",
+    "The missing two scout rows must be recovered or revalidated before the batch is marked complete."
+  ],
+  "proof_boundary": {
+    "proves": [
+      "one publicly accessible publisher article exists and identifies its author and date",
+      "the article cites multiple external benchmark sources",
+      "one candidate exists for primary-source mapping and possible value-first outreach"
+    ],
+    "does_not_prove": [
+      "the reported benchmark values are accurate",
+      "the benchmarks apply to Nebula's buyers",
+      "the publisher will respond or publish anything",
+      "AI visibility improvement",
+      "traffic, conversion, or revenue impact"
+    ]
+  }
+}
