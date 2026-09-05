@@ -276,4 +276,4 @@ Local blog route probe:
 EXIT 0
 ```
 
-Fresh command logs are in `.superpowers/sdd/task-6-review-package/verification/`; the local-only raw logs remain in `customer-portal/.task6-verification/` until packaging cleanup.
+Fresh command logs are committed in `.superpowers/sdd/task-6-review-package/verification/`; the temporary `customer-portal/.task6-verification/` directory was removed after packaging.
