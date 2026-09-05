@@ -11,10 +11,12 @@ from pathlib import Path
 
 try:
     from ._validation import validate_draft
-    from ._workflow import emit, json_sidecar, parse
+    from ._workflow import emit, json_sidecar, parse, now
+    from ._readiness_contract import workflow_report
 except ImportError:
     from _validation import validate_draft
-    from _workflow import emit, json_sidecar, parse
+    from _workflow import emit, json_sidecar, parse, now
+    from _readiness_contract import workflow_report
 
 REQUIREMENTS = (
     "H1_QUESTION", "BYLINE", "DATELINE", "ANSWER_BLOCK", "QUESTION_H2S",
@@ -84,7 +86,7 @@ def review(path: Path) -> dict:
         findings.extend(_finding(reason, "full publish-readiness validation failed") for reason in readiness.get("blocked_reasons", ["READINESS_BLOCKED"]))
     unique = {(item["code"], item["message"]): item for item in findings}
     full_readiness = not readiness_blocked
-    return {
+    return workflow_report({
         "status": "PASS" if not unique and full_readiness else "BLOCKED",
         "draft": str(path),
         "draft_hash": hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -93,7 +95,8 @@ def review(path: Path) -> dict:
         "validated": not unique and full_readiness,
         "full_readiness": full_readiness and not unique,
         "readiness": readiness,
-    }
+        "generated_at": now(),
+    })
 
 
 def main(argv: list[str] | None = None) -> int:

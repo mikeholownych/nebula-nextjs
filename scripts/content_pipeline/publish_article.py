@@ -5,15 +5,18 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 try:
     from ._validation import validate_draft
     from ._workflow import atomic, emit, now, sha256
+    from ._readiness_contract import validate as validate_readiness
 except ImportError:  # pragma: no cover
     from _validation import validate_draft
     from _workflow import atomic, emit, now, sha256
+    from _readiness_contract import validate as validate_readiness
 
 
 def _local_root(path: Path) -> Path:
@@ -56,6 +59,11 @@ def publish(draft: Path, approval: Path, readiness: Path | None, output_root: Pa
         reasons.append("MISSING_REVIEWER")
     if not isinstance(approval_data.get("timestamp"), str) or not approval_data["timestamp"].strip():
         reasons.append("MISSING_TIMESTAMP")
+    else:
+        try:
+            datetime.fromisoformat(approval_data["timestamp"].replace("Z", "+00:00"))
+        except ValueError:
+            reasons.append("INVALID_TIMESTAMP")
 
     report_path = readiness or Path(str(approval_data.get("readiness_report", "")))
     if not report_path.is_file():
@@ -66,16 +74,11 @@ def publish(draft: Path, approval: Path, readiness: Path | None, output_root: Pa
         except ValueError as exc:
             reasons.append(str(exc))
         else:
-            if report.get("status") != "PASS":
-                reasons.append("READINESS_NOT_PASSED")
-            if report.get("validated") is not True:
-                reasons.append("READINESS_NOT_VALIDATED")
-            if report.get("full_readiness") is not True:
-                reasons.append("FULL_READINESS_NOT_PASSED")
-            if not isinstance(report.get("draft_hash"), str) or not report["draft_hash"]:
-                reasons.append("MISSING_READINESS_HASH")
-            elif report["draft_hash"] != digest:
-                reasons.append("READINESS_HASH_MISMATCH")
+            reasons.extend(validate_readiness(report, digest))
+            if approval_data.get("requirements") != report.get("requirements"):
+                reasons.append("APPROVAL_REQUIREMENTS_MISMATCH")
+            if approval_data.get("findings") != report.get("findings"):
+                reasons.append("APPROVAL_FINDINGS_MISMATCH")
     if reasons:
         return {"status": "BLOCKED", "reasons": list(dict.fromkeys(reasons)), "draft_hash": digest}
 

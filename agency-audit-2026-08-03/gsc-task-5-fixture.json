@@ -1,0 +1,17 @@
+{
+  "property": "sc-domain:nebulacomponents.com",
+  "date_range": {
+    "start": "2026-08-01",
+    "end": "2026-09-05"
+  },
+  "rows": [
+    {
+      "query": "landing page audit",
+      "page": "https://nebulacomponents.com/audit",
+      "impressions": 10,
+      "clicks": 1,
+      "position": 2
+    }
+  ],
+  "url": "https://search.google.com/"
+}

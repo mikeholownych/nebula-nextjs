@@ -1,0 +1,27 @@
+{
+  "site": "nebulacomponents.com",
+  "artifact_id": "keywords-task-5-fixture",
+  "primary_keywords": {
+    "high_intent": [
+      "landing page audit"
+    ],
+    "problem_aware": [
+      "landing page audit"
+    ],
+    "solution_aware": [
+      "landing page audit"
+    ]
+  },
+  "secondary_keywords": {
+    "related": [
+      "conversion audit"
+    ]
+  },
+  "negative_keywords": [
+    "free"
+  ],
+  "ai_visibility_queries": [
+    "what is a landing page audit"
+  ],
+  "url": "https://nebulacomponents.com/"
+}

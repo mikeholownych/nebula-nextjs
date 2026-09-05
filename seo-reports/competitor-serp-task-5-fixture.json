@@ -1,0 +1,11 @@
+{
+  "retrieved_at": "2026-09-05T12:00:00Z",
+  "rankings": [
+    {
+      "query": "landing page audit",
+      "domain": "example.com",
+      "position": 1
+    }
+  ],
+  "url": "https://example.com/"
+}

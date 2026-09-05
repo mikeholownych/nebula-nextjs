@@ -1,0 +1,25 @@
+{
+  "approved": true,
+  "draft_hash": "84ba9cc989518db6da81433608ebd3fb798684964c9d966f8259402beba9d966",
+  "reviewer": "mike",
+  "timestamp": "2026-09-05T12:00:00Z",
+  "readiness_report": "/home/mike/nebula/.superpowers/sdd/task-5-evidence/v002-readiness.json",
+  "requirements": [
+    "H1_QUESTION",
+    "BYLINE",
+    "DATELINE",
+    "ANSWER_BLOCK",
+    "QUESTION_H2S",
+    "SELF_CONTAINED_SECTIONS",
+    "EXTRACTABLE_SENTENCES",
+    "ORIGINAL_DATA_PROVENANCE",
+    "SOURCE_LINKS",
+    "COMPARISON_TABLE",
+    "FAQ_BLOCK",
+    "SCHEMA",
+    "SERVER_RENDERING",
+    "NEXT_STEP"
+  ],
+  "findings": [],
+  "approval_scope": "task-5"
+}

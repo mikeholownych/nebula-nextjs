@@ -1,0 +1,568 @@
+{
+  "article": {
+    "canonical_url": "https://nebulacomponents.com/blog/task-5-evidence",
+    "claims": [],
+    "source_refs": [
+      "site-audit-task-5-fixture",
+      "gsc-task-5-fixture",
+      "ga4-task-5-fixture",
+      "bing-crawl-task-5-fixture",
+      "posthog-task-5-fixture",
+      "task-5-keywords",
+      "competitor-serp-task-5-fixture"
+    ]
+  },
+  "brief_id": "task5-evidence",
+  "brief_path": "/home/mike/nebula/.superpowers/sdd/task-5-evidence/brief.json",
+  "created_at": "2026-09-05T18:59:21.446024Z",
+  "draft_hash": "84ba9cc989518db6da81433608ebd3fb798684964c9d966f8259402beba9d966",
+  "edits": [
+    {
+      "at": "2026-09-05T18:59:21.443942Z",
+      "editor": "mike",
+      "new": "without inventing a result",
+      "old": "without inventing a customer result"
+    }
+  ],
+  "opportunity": {
+    "active_holdout": false,
+    "audit_findings": [
+      {
+        "evidence": {
+          "artifact_id": "site-audit-task-5-fixture",
+          "broken": [],
+          "generated_at": "2026-09-05T12:00:00Z",
+          "orphan_pages": [],
+          "redirect_chains": [],
+          "retrieved_at": "2026-09-05T18:53:49.005425+00:00",
+          "site": "https://nebulacomponents.com",
+          "summary": {
+            "broken_count": 0,
+            "orphan_count": 0,
+            "redirect_chain_count": 0
+          },
+          "total_pages": 1
+        },
+        "id": "site-audit-task-5-fixture",
+        "provenance": "first_party",
+        "query": "landing page audit",
+        "url": "https://nebulacomponents.com",
+        "verified": true
+      }
+    ],
+    "canonical_query": "landing page audit",
+    "clicks": 1,
+    "competitor_serp_reports": [
+      {
+        "evidence": {
+          "artifact_id": "competitor-serp-task-5-fixture",
+          "rankings": [
+            {
+              "domain": "example.com",
+              "position": 1,
+              "query": "landing page audit"
+            }
+          ],
+          "retrieved_at": "2026-09-05T12:00:00Z",
+          "url": "https://example.com/"
+        },
+        "id": "competitor-serp-task-5-fixture",
+        "provenance": "competitor",
+        "url": "https://example.com/",
+        "verified": true
+      }
+    ],
+    "competitor_wins": 0,
+    "days": 28,
+    "existing_page_ownership": [],
+    "first_party_exports": [
+      {
+        "evidence": {
+          "artifact_id": "ga4-task-5-fixture",
+          "daily_data": [
+            {
+              "avg_session_duration": 20,
+              "bounce_rate": 10,
+              "date": "20260905",
+              "engagement_rate": 90,
+              "pageviews": 1,
+              "sessions": 1,
+              "users": 1
+            }
+          ],
+          "date_range": {
+            "end": "2026-09-05",
+            "start": "2026-08-01"
+          },
+          "property": "544419051",
+          "report": "organic_traffic",
+          "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+          "totals": {
+            "avg_daily_sessions": 1,
+            "pageviews": 1,
+            "sessions": 1,
+            "users": 1
+          },
+          "url": "https://analytics.google.com/"
+        },
+        "id": "ga4-task-5-fixture",
+        "provenance": "first_party",
+        "url": "https://analytics.google.com/",
+        "verified": true
+      },
+      {
+        "evidence": {
+          "artifact_id": "bing-crawl-task-5-fixture",
+          "data": {
+            "d": [
+              {
+                "Code2xx": 1,
+                "Code4xx": 0,
+                "Code5xx": 0,
+                "CrawlErrors": 0,
+                "CrawledPages": 1
+              }
+            ]
+          },
+          "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+          "site_url": "https://nebulacomponents.com",
+          "url": "https://bing.com/"
+        },
+        "id": "bing-crawl-task-5-fixture",
+        "provenance": "first_party",
+        "url": "https://bing.com/",
+        "verified": true
+      }
+    ],
+    "impressions": 100,
+    "indexable": true,
+    "keyword_registry": [
+      {
+        "evidence": {
+          "ai_visibility_queries": [
+            "what is a landing page audit"
+          ],
+          "artifact_id": "keywords-task-5-fixture",
+          "negative_keywords": [
+            "free"
+          ],
+          "primary_keywords": {
+            "high_intent": [
+              "landing page audit"
+            ],
+            "problem_aware": [
+              "landing page audit"
+            ],
+            "solution_aware": [
+              "landing page audit"
+            ]
+          },
+          "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+          "secondary_keywords": {
+            "related": [
+              "conversion audit"
+            ]
+          },
+          "site": "nebulacomponents.com",
+          "url": "https://nebulacomponents.com/"
+        },
+        "id": "task-5-keywords",
+        "provenance": "first_party",
+        "query": "landing page audit",
+        "url": "https://nebulacomponents.com/",
+        "verified": true
+      }
+    ],
+    "position": 10,
+    "query_registry": [
+      "landing page audit"
+    ],
+    "source_lineage_complete": true,
+    "suppressed": false,
+    "unresolved_cannibalization": false,
+    "verified_indexable": true,
+    "verified_unresolved_cannibalization": true
+  },
+  "parent": "/home/mike/nebula/.superpowers/sdd/task-5-evidence/drafts/task-5-evidence/v001.md",
+  "parent_hash": "9a1618eeca42fca75a05705ac766a7195e1470244867e5b4b6cc3c9ab8bf0404",
+  "provenance": {
+    "competitor_sources": [
+      "https://example.com/"
+    ],
+    "first_party_sources": [
+      "https://nebulacomponents.com",
+      "https://analytics.google.com/",
+      "https://bing.com/",
+      "https://posthog.com/",
+      "https://nebulacomponents.com/"
+    ],
+    "primary_external_sources": [
+      "https://search.google.com/"
+    ],
+    "records": [
+      {
+        "data": {
+          "broken": [],
+          "generated_at": "2026-09-05T12:00:00Z",
+          "orphan_pages": [],
+          "redirect_chains": [],
+          "site": "https://nebulacomponents.com",
+          "summary": {
+            "broken_count": 0,
+            "orphan_count": 0,
+            "redirect_chain_count": 0
+          },
+          "total_pages": 1
+        },
+        "evidence": {
+          "artifact_id": "site-audit-task-5-fixture",
+          "broken": [],
+          "generated_at": "2026-09-05T12:00:00Z",
+          "orphan_pages": [],
+          "redirect_chains": [],
+          "retrieved_at": "2026-09-05T18:53:49.005425+00:00",
+          "site": "https://nebulacomponents.com",
+          "summary": {
+            "broken_count": 0,
+            "orphan_count": 0,
+            "redirect_chain_count": 0
+          },
+          "total_pages": 1
+        },
+        "id": "site-audit-task-5-fixture",
+        "path": "/home/mike/nebula/seo-reports/site-audit-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:53:49.005425+00:00",
+          "source_class": "first_party"
+        },
+        "retrieved_at": "2026-09-05T18:53:49.005425+00:00",
+        "source_type": "site_audit",
+        "url": "https://nebulacomponents.com"
+      },
+      {
+        "data": {
+          "date_range": {
+            "end": "2026-09-05",
+            "start": "2026-08-01"
+          },
+          "property": "sc-domain:nebulacomponents.com",
+          "rows": [
+            {
+              "clicks": 1,
+              "impressions": 10,
+              "page": "https://nebulacomponents.com/audit",
+              "position": 2,
+              "query": "landing page audit"
+            }
+          ],
+          "url": "https://search.google.com/"
+        },
+        "evidence": {
+          "artifact_id": "gsc-task-5-fixture",
+          "date_range": {
+            "end": "2026-09-05",
+            "start": "2026-08-01"
+          },
+          "property": "sc-domain:nebulacomponents.com",
+          "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+          "rows": [
+            {
+              "clicks": 1,
+              "impressions": 10,
+              "page": "https://nebulacomponents.com/audit",
+              "position": 2,
+              "query": "landing page audit"
+            }
+          ],
+          "url": "https://search.google.com/"
+        },
+        "id": "gsc-task-5-fixture",
+        "path": "/home/mike/nebula/agency-audit-2026-08-03/gsc-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+          "source_class": "primary_external"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+        "source_type": "gsc",
+        "url": "https://search.google.com/"
+      },
+      {
+        "data": {
+          "daily_data": [
+            {
+              "avg_session_duration": 20,
+              "bounce_rate": 10,
+              "date": "20260905",
+              "engagement_rate": 90,
+              "pageviews": 1,
+              "sessions": 1,
+              "users": 1
+            }
+          ],
+          "date_range": {
+            "end": "2026-09-05",
+            "start": "2026-08-01"
+          },
+          "property": "544419051",
+          "report": "organic_traffic",
+          "totals": {
+            "avg_daily_sessions": 1,
+            "pageviews": 1,
+            "sessions": 1,
+            "users": 1
+          },
+          "url": "https://analytics.google.com/"
+        },
+        "evidence": {
+          "artifact_id": "ga4-task-5-fixture",
+          "daily_data": [
+            {
+              "avg_session_duration": 20,
+              "bounce_rate": 10,
+              "date": "20260905",
+              "engagement_rate": 90,
+              "pageviews": 1,
+              "sessions": 1,
+              "users": 1
+            }
+          ],
+          "date_range": {
+            "end": "2026-09-05",
+            "start": "2026-08-01"
+          },
+          "property": "544419051",
+          "report": "organic_traffic",
+          "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+          "totals": {
+            "avg_daily_sessions": 1,
+            "pageviews": 1,
+            "sessions": 1,
+            "users": 1
+          },
+          "url": "https://analytics.google.com/"
+        },
+        "id": "ga4-task-5-fixture",
+        "path": "/home/mike/nebula/agency-audit-2026-08-03/ga4-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+          "source_class": "first_party"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.577177+00:00",
+        "source_type": "ga4",
+        "url": "https://analytics.google.com/"
+      },
+      {
+        "data": {
+          "data": {
+            "d": [
+              {
+                "Code2xx": 1,
+                "Code4xx": 0,
+                "Code5xx": 0,
+                "CrawlErrors": 0,
+                "CrawledPages": 1
+              }
+            ]
+          },
+          "site_url": "https://nebulacomponents.com",
+          "url": "https://bing.com/"
+        },
+        "evidence": {
+          "artifact_id": "bing-crawl-task-5-fixture",
+          "data": {
+            "d": [
+              {
+                "Code2xx": 1,
+                "Code4xx": 0,
+                "Code5xx": 0,
+                "CrawlErrors": 0,
+                "CrawledPages": 1
+              }
+            ]
+          },
+          "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+          "site_url": "https://nebulacomponents.com",
+          "url": "https://bing.com/"
+        },
+        "id": "bing-crawl-task-5-fixture",
+        "path": "/home/mike/nebula/seo-reports/bing-crawl-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+          "source_class": "first_party"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+        "source_type": "bing",
+        "url": "https://bing.com/"
+      },
+      {
+        "data": {
+          "query": {
+            "dateRange": {
+              "date_from": "2026-08-01",
+              "date_to": "2026-09-05"
+            },
+            "kind": "FunnelsQuery",
+            "series": [
+              {
+                "event": "audit_submitted",
+                "kind": "EventsNode"
+              }
+            ]
+          },
+          "results": [
+            {
+              "action_id": "audit_submitted",
+              "count": 1,
+              "name": "audit_submitted",
+              "type": "events"
+            }
+          ],
+          "url": "https://posthog.com/"
+        },
+        "evidence": {
+          "artifact_id": "posthog-task-5-fixture",
+          "query": {
+            "dateRange": {
+              "date_from": "2026-08-01",
+              "date_to": "2026-09-05"
+            },
+            "kind": "FunnelsQuery",
+            "series": [
+              {
+                "event": "audit_submitted",
+                "kind": "EventsNode"
+              }
+            ]
+          },
+          "results": [
+            {
+              "action_id": "audit_submitted",
+              "count": 1,
+              "name": "audit_submitted",
+              "type": "events"
+            }
+          ],
+          "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+          "url": "https://posthog.com/"
+        },
+        "id": "posthog-task-5-fixture",
+        "path": "/home/mike/nebula/agency-audit-2026-08-03/posthog-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+          "source_class": "first_party"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.578177+00:00",
+        "source_type": "posthog",
+        "url": "https://posthog.com/"
+      },
+      {
+        "data": {
+          "ai_visibility_queries": [
+            "what is a landing page audit"
+          ],
+          "artifact_id": "keywords-task-5-fixture",
+          "negative_keywords": [
+            "free"
+          ],
+          "primary_keywords": {
+            "high_intent": [
+              "landing page audit"
+            ],
+            "problem_aware": [
+              "landing page audit"
+            ],
+            "solution_aware": [
+              "landing page audit"
+            ]
+          },
+          "secondary_keywords": {
+            "related": [
+              "conversion audit"
+            ]
+          },
+          "site": "nebulacomponents.com",
+          "url": "https://nebulacomponents.com/"
+        },
+        "evidence": {
+          "ai_visibility_queries": [
+            "what is a landing page audit"
+          ],
+          "artifact_id": "keywords-task-5-fixture",
+          "negative_keywords": [
+            "free"
+          ],
+          "primary_keywords": {
+            "high_intent": [
+              "landing page audit"
+            ],
+            "problem_aware": [
+              "landing page audit"
+            ],
+            "solution_aware": [
+              "landing page audit"
+            ]
+          },
+          "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+          "secondary_keywords": {
+            "related": [
+              "conversion audit"
+            ]
+          },
+          "site": "nebulacomponents.com",
+          "url": "https://nebulacomponents.com/"
+        },
+        "id": "task-5-keywords",
+        "path": "/home/mike/nebula/memory/sites/nebulacomponents.com/task-5-keywords.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+          "source_class": "first_party"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+        "source_type": "keyword",
+        "url": "https://nebulacomponents.com/"
+      },
+      {
+        "data": {
+          "rankings": [
+            {
+              "domain": "example.com",
+              "position": 1,
+              "query": "landing page audit"
+            }
+          ],
+          "retrieved_at": "2026-09-05T12:00:00Z",
+          "url": "https://example.com/"
+        },
+        "evidence": {
+          "artifact_id": "competitor-serp-task-5-fixture",
+          "rankings": [
+            {
+              "domain": "example.com",
+              "position": 1,
+              "query": "landing page audit"
+            }
+          ],
+          "retrieved_at": "2026-09-05T12:00:00Z",
+          "url": "https://example.com/"
+        },
+        "id": "competitor-serp-task-5-fixture",
+        "path": "/home/mike/nebula/seo-reports/competitor-serp-task-5-fixture.json",
+        "provenance": {
+          "method": "local_file",
+          "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+          "source_class": "competitor"
+        },
+        "retrieved_at": "2026-09-05T18:54:33.579177+00:00",
+        "source_type": "competitor_serp",
+        "url": "https://example.com/"
+      }
+    ]
+  },
+  "revision": 2
+}

@@ -9,7 +9,9 @@ The pipeline is local and fail-closed. It does not call an external content serv
 3. **Review**: `review_draft.py --draft <path> --output <readiness.json>` emits named findings. It never edits the draft. Only a PASS report is eligible for approval.
 4. **Edit**: `apply_edits.py --draft <path> --edits <edits.json>` writes `v002.md`, preserving v001 and recording parent hash and each replacement.
 5. **Approval**: a human writes a separate JSON record. Approval is not a recommendation and is not execution.
-6. **Execution**: `publish_article.py --draft <path> --approval <approval.json> --readiness <readiness.json>` requires `approved: true`, the exact SHA-256 draft hash, non-empty reviewer and timestamp, and a PASS readiness report. Use `--dry-run` or `--report-only` for a no-write proof.
+6. **Execution**: `publish_article.py --draft <path> --approval <approval.json> --readiness <readiness.json>` requires `approved: true`, the exact SHA-256 draft hash, non-empty reviewer and an ISO-8601 timestamp, and a PASS readiness report. Use `--dry-run` or `--report-only` for a no-write proof.
+
+Readiness reports are not caller-shaped authorization JSON. They must have the exact `nebula.local.review-readiness.v1` schema, the fixed local review producer marker, all 14 declared requirements, the complete validator output and empty findings, the exact draft hash, a parseable `generated_at`, and the workflow HMAC signature emitted by `review_draft.py`. Publication verifies every field and the signature. A copied or minimally forged report, an invalid timestamp, a stale hash, or a report from another producer is blocked.
 
 ## Approval record
 

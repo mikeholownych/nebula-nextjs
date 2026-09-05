@@ -1,0 +1,26 @@
+{
+  "property": "544419051",
+  "report": "organic_traffic",
+  "date_range": {
+    "start": "2026-08-01",
+    "end": "2026-09-05"
+  },
+  "totals": {
+    "sessions": 1,
+    "users": 1,
+    "pageviews": 1,
+    "avg_daily_sessions": 1
+  },
+  "daily_data": [
+    {
+      "date": "20260905",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 1,
+      "bounce_rate": 10,
+      "avg_session_duration": 20,
+      "engagement_rate": 90
+    }
+  ],
+  "url": "https://analytics.google.com/"
+}

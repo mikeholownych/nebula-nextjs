@@ -14,7 +14,7 @@ SOURCE_SPECS = {
     "ga4": ("first_party", ("agency-audit-2026-08-03/ga4-*.json",)),
     "bing": ("first_party", ("seo-reports/bing-crawl-*.json",)),
     "posthog": ("first_party", ("agency-audit-2026-08-03/posthog-*.json",)),
-    "keyword": ("first_party", ("memory/sites/nebulacomponents.com/keywords.json",)),
+    "keyword": ("first_party", ("memory/sites/nebulacomponents.com/keywords.json", "memory/sites/nebulacomponents.com/task-5-keywords.json",)),
     "competitor_serp": ("competitor", ("seo-reports/competitor-serp-*.json",)),
 }
 REQUIRED = tuple(SOURCE_SPECS)
@@ -180,7 +180,7 @@ def _same_artifact_content(name: str, evidence: dict[str, Any], artifact: Any) -
     actual = dict(evidence)
     for key in ("artifact_id", "retrieved_at"):
         actual.pop(key, None)
-    return actual == expected and _artifact_identity(name, actual) is not None
+    return actual == expected and _artifact_identity(name, artifact) is not None
 
 def _valid_record(record, name, expected):
     if not isinstance(record, dict) or not isinstance(record.get("id"), str) or not record["id"].strip(): return "missing_id"
@@ -207,6 +207,8 @@ def _valid_record(record, name, expected):
 
 def validate_source_bundle(sources):
     errors, checked = [], {}
+    for record in sources.get("__unknown_typed__", []) + sources.get("__untyped__", []):
+        errors.append("SOURCE_ERROR_UNKNOWN_SOURCE_TYPE" if isinstance(record.get("source_type"), str) else "SOURCE_ERROR_UNTYPED_RECORD")
     for name, (expected, _) in SOURCE_SPECS.items():
         checked[name] = []; rows = sources.get(name)
         if not isinstance(rows, list) or not rows: errors.append(f"SOURCE_ERROR_{name.upper()}:missing"); continue

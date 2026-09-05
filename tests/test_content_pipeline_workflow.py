@@ -217,12 +217,47 @@ def test_concurrent_creators_allocate_unique_revisions(tmp_path):
 
 
 def test_complete_create_review_edit_approval_publish_lifecycle(tmp_path):
-    brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(brief(slug="lifecycle")))
+    from scripts.content_pipeline.collect_sources import _record, SOURCE_SPECS
+    records = []
+    for source_type, filename in [('site_audit','seo-reports/site-audit-task-5-fixture.json'), ('gsc','agency-audit-2026-08-03/gsc-task-5-fixture.json'), ('ga4','agency-audit-2026-08-03/ga4-task-5-fixture.json'), ('bing','seo-reports/bing-crawl-task-5-fixture.json'), ('posthog','agency-audit-2026-08-03/posthog-task-5-fixture.json'), ('keyword','memory/sites/nebulacomponents.com/task-5-keywords.json'), ('competitor_serp','seo-reports/competitor-serp-task-5-fixture.json')]:
+        path = ROOT / filename
+        records.append(_record(path, SOURCE_SPECS[source_type][0], json.loads(path.read_text())))
+    lifecycle_brief = brief(slug="lifecycle")
+    lifecycle_brief["sources"]["records"] = records
+    lifecycle_brief["sources"]["first_party_sources"] = [r["url"] for r in records if r["provenance"]["source_class"] == "first_party"]
+    lifecycle_brief["sources"]["primary_external_sources"] = [r["url"] for r in records if r["provenance"]["source_class"] == "primary_external"]
+    lifecycle_brief["sources"]["competitor_sources"] = [r["url"] for r in records if r["provenance"]["source_class"] == "competitor"]
+    def gate_record(r, query=False):
+        return {"id": r["id"], "url": r["url"], "provenance": r["provenance"]["source_class"], "verified": True, "evidence": r["evidence"], **({"query": "landing page audit"} if query else {})}
+    lifecycle_brief["readiness_opportunity"] = {"canonical_query": "landing page audit", "impressions": 100, "clicks": 1, "position": 10, "days": 28, "competitor_wins": 0, "source_lineage_complete": True, "active_holdout": False, "suppressed": False, "indexable": True, "verified_indexable": True, "unresolved_cannibalization": False, "verified_unresolved_cannibalization": True, "keyword_registry": [gate_record(records[5], True)], "audit_findings": [gate_record(records[0], True)], "first_party_exports": [gate_record(records[2]), gate_record(records[3])], "competitor_serp_reports": [gate_record(records[6])], "query_registry": ["landing page audit"], "existing_page_ownership": []}
+    brief_path = tmp_path / "brief.json"; brief_path.write_text(json.dumps(lifecycle_brief))
     draft_root = tmp_path / "drafts"
     created = run("create_draft.py", "--brief", brief_path, "--output-root", draft_root)
-    assert created.returncode != 0
-    assert "SOURCE_ERROR_SITE_AUDIT" in created.stdout
-    assert not draft_root.exists()
+    assert created.returncode == 0, created.stdout
+    v001 = Path(created.stdout.strip())
+    first_review = tmp_path / "v001-readiness.json"
+    reviewed = run("review_draft.py", "--draft", v001, "--output", first_review)
+    assert reviewed.returncode == 0, reviewed.stdout
+    edits = tmp_path / "edits.json"
+    edits.write_text(json.dumps({"replacements": [{"old": "without inventing a customer result", "new": "without inventing a result"}], "editor": "mike"}))
+    edited = run("apply_edits.py", "--draft", v001, "--edits", edits)
+    assert edited.returncode == 0, edited.stdout
+    v002 = Path(edited.stdout.strip())
+    second_review = tmp_path / "v002-readiness.json"
+    reviewed = run("review_draft.py", "--draft", v002, "--output", second_review)
+    assert reviewed.returncode == 0, reviewed.stdout
+    digest = hashlib.sha256(v002.read_bytes()).hexdigest()
+    approval = tmp_path / "approval.json"
+    approval.write_text(json.dumps({"approved": True, "draft_hash": digest, "reviewer": "mike", "timestamp": "2026-09-05T12:00:00Z", "readiness_report": str(second_review), "requirements": list(json.loads(second_review.read_text())["requirements"]), "findings": [], "approval_scope": "task-5"}))
+    dry = run("publish_article.py", "--draft", v002, "--approval", approval, "--readiness", second_review, "--dry-run", "--output-root", tmp_path / "dry-run")
+    assert dry.returncode == 0, dry.stdout
+    assert not (tmp_path / "dry-run").exists()
+    published = tmp_path / "published"
+    live = run("publish_article.py", "--draft", v002, "--approval", approval, "--readiness", second_review, "--output-root", published)
+    assert live.returncode == 0, live.stdout
+    receipt = published / "v002.publication.json"
+    assert receipt.is_file()
+    assert json.loads(receipt.read_text())["draft_hash"] == digest
 
 
 def test_review_enforces_blocked_full_readiness_and_preserves_all_gate_output(tmp_path, monkeypatch):

@@ -40,7 +40,7 @@ def _claim_sources(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
             source["provenance"] = provenance.get("source_class")
         source.setdefault(
             "kind",
-            "competitor" if source.get("source_type") == "competitor_serp" else source.get("source_type", "primary"),
+            "competitor" if source.get("source_type") == "competitor_serp" else (provenance.get("source_class") if isinstance(provenance, dict) else provenance) or "primary",
         )
         sources.append(source)
     return sources
@@ -49,11 +49,14 @@ def _claim_sources(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _source_bundle(records: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
     bundle = {name: [] for name in SOURCE_SPECS}
     bundle["__untyped__"] = []
+    bundle["__unknown_typed__"] = []
     for record in records:
         source_type = record.get("source_type")
         if source_type in bundle:
             bundle[source_type].append(record)
-        elif not isinstance(source_type, str):
+        elif isinstance(source_type, str):
+            bundle["__unknown_typed__"].append(record)
+        else:
             bundle["__untyped__"].append(record)
     return bundle
 
