@@ -68,6 +68,8 @@ describe('consent-gated analytics loading', () => {
     expect(config).not.toContain("key: 'Content-Security-Policy-Report-Only'")
     expect(config).toContain('https://static.cloudflareinsights.com')
     expect(config).toContain('https://cloudflareinsights.com')
+    expect(config).toContain('https://static.opinly.ai')
+    expect(config).toContain('https://maidensail.com')
   })
 
   it('allows GA4 image beacons in img-src', () => {

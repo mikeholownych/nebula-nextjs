@@ -239,9 +239,9 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai https://news.google.com",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai https://news.google.com https://static.opinly.ai",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://getvisibai.com https://static.peerpush.com",
+              "img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://getvisibai.com https://static.peerpush.com https://maidensail.com",
               "font-src 'self' data:",
               "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai https://news.google.com",
               "frame-src https://news.google.com",
