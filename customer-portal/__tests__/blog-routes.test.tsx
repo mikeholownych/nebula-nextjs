@@ -138,4 +138,17 @@ describe('local two-lane blog routes', () => {
     expect(layout).toContain('id="opinly-pixel"')
     expect(layout).toContain('https://static.opinly.ai/p.js')
   })
+
+  it('separates preserved analytics instrumentation from blog-runtime delivery evidence', () => {
+    const root = path.resolve(__dirname, '..', '..')
+    const report = readFileSync(path.join(root, '.superpowers/sdd/task-6-report.md'), 'utf8')
+    const release = readFileSync(path.join(root, 'docs/releases/2026-09-05-local-blog-migration.md'), 'utf8')
+    for (const document of [report, release]) {
+      expect(document).toContain('analytics_pixel_preserved=true')
+      expect(document).toContain('blog_runtime_opinly_delivery=false')
+      expect(document).toContain('blog_route_opinly_markers_absent=true')
+      expect(document).toContain('blog_api_request_markers_absent=true')
+      expect(document).toContain('sitemap_opinly_markers_absent=true')
+    }
+  })
 })

@@ -38,7 +38,7 @@ Focused green tests:
 ```text
 npx jest __tests__/blog-routes.test.tsx __tests__/blog-loader.test.ts __tests__/metadata/sitemap-inventory.test.ts --runInBand --no-cache
 Test Suites: 3 passed, 3 total
-Tests: 41 passed, 41 total
+Tests: 42 passed, 42 total
 ```
 
 Typecheck and lint:
@@ -69,7 +69,7 @@ Full Jest:
 ```text
 npm test -- --runInBand
 Test Suites: 102 passed, 102 total
-Tests: 8 skipped, 842 passed, 850 total
+Tests: 8 skipped, 843 passed, 851 total
 EXIT 0
 ```
 
@@ -92,17 +92,23 @@ clean
 
 ## Route probes
 
-Command: `npx next start --port 3101`, local built artifact only.
+Command: `npx next start --port 3101`, local built artifact only. The probe classified the preserved global pixel separately from blog-runtime delivery.
 
 ```text
-/blog: status=200; h1=1; canonical=https://nebulacomponents.com/blog; jsonld=true; cta=false; local_opinly_delivery=true
-/blog/paid-traffic-not-converting: status=200; h1=1; canonical=https://nebulacomponents.com/blog/paid-traffic-not-converting; jsonld=true; cta=true; local_opinly_delivery=true
-/blog/what-we-got-wrong-about-filter-based-targeting: status=200; h1=1; canonical=https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting; jsonld=true; cta=false; local_opinly_delivery=true
+analytics_pixel_preserved=true; source=customer-portal/app/layout.tsx; id=opinly-pixel; src=https://static.opinly.ai/p.js
+blog_runtime_opinly_delivery=false
+blog_route_opinly_markers_absent=true
+blog_api_request_markers_absent=true
+sitemap_opinly_markers_absent=true
+/blog: status=200; h1=1; canonical=https://nebulacomponents.com/blog; jsonld=true; cta=false; opinly_request_marker=false
+/blog/paid-traffic-not-converting: status=200; h1=1; canonical=https://nebulacomponents.com/blog/paid-traffic-not-converting; jsonld=true; cta=true; cta_text=Run the free audit; opinly_request_marker=false
+/blog/what-we-got-wrong-about-filter-based-targeting: status=200; h1=1; canonical=https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting; jsonld=true; cta=false; opinly_request_marker=false
 /blog/not-a-local-article: status=404
-/sitemap.xml: status=200; local_sitemap_urls=2; local_opinly_delivery=true
+/sitemap.xml: status=200; local_sitemap_urls=2; opinly_request_marker=false
+/api/opinly: status=404; request_marker=false
 ```
 
-The acquisition article probe also confirmed the rendered CTA `Run the free audit`. Both article probes confirmed one rendered H1, canonical metadata, JSON-LD, and no Opinly delivery marker. The sitemap contains two local blog URLs.
+The acquisition article probe confirmed the rendered CTA `Run the free audit`. Both article probes confirmed one rendered H1, canonical metadata, and JSON-LD. No blog route, request, API, or sitemap Opinly delivery marker was present. The sitemap contains two local blog URLs.
 
 ## Opinly inventory
 
@@ -118,6 +124,15 @@ Post-change source scan:
 
 ```text
 git grep -n -i -E '@opinly|OPINLY_|opinly|withOpinlyConfig|buildSitemapEntries' -- customer-portal ':!customer-portal/.next*'
+```
+
+```text
+git grep exit=0
+blog route source matches: none
+blog loader source matches: none
+sitemap source matches: none
+API route source: customer-portal/app/api/opinly/route.ts absent
+preserved matches: app/layout.tsx:134-136 pixel; analytics runtime/checkout/thank-you; stripe webhook purchase tracking; app/lib/opinly.ts support; package.json/package-lock.json @opinly/backend
 ```
 
 Remaining matches are limited to the preserved analytics pixel, browser analytics, checkout metadata, Stripe purchase tracking, and `@opinly/backend` support. No local blog route, loader, or sitemap source matches. Legacy blog route and webhook route are absent.
