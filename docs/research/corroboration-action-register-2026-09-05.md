@@ -1,14 +1,22 @@
 # Corroboration action register
 
 **Register:** `corroboration-20260905`  
-**Status:** `incomplete_input`  
+**Status:** `complete`  
 **Scout-reported rows:** 3  
-**Recovered and directly validated:** 1  
-**Missing:** 2
+**Recovered and directly validated:** 4  
+**Missing:** 0
 
 ## Current action
 
-The known row is registered as a **research-only citation lead and possible outreach candidate**. It is not being used as customer proof, conversion evidence, or an automatic content source.
+The register contains four research-only citation leads and possible outreach candidates. None is being used as customer proof, conversion evidence, or an automatic content source.
+
+### Newly validated rows
+
+- **corr-20260905-014, Kamil Rextin / 42 Agency:** [B2B Google Ads Benchmarks 2026](https://intel.42agency.com/b2b-benchmarks/google-ads-benchmarks/). Artifact and `hello@42agency.com` contact route verified. Publisher methodology remains unindependently verified.
+- **corr-20260905-015, Cedric Pharand / Web Tonic:** [Google Ads Benchmarks 2026](https://www.webtonic.io/blog/google-ads-benchmarks). Author, August 6, 2026 publication date, September 4 update, and site contact route verified. Direct email was not accepted without verification.
+- **corr-20260905-016, Oliver Kenyon / ConversionWise:** [Landing Pages in 2026](https://www.youtube.com/watch?v=VSL7oTNRQvU). Public workshop uploaded August 4, 2026 and contact routes at [ConversionWise contact](https://conversionwise.com/contact) verified.
+
+All three remain `research_only`; publisher claims and client experience are not Nebula evidence.
 
 ### corr-20260905-001
 
@@ -49,7 +57,7 @@ These sources support provenance work. They do not validate a universal landing-
 - A compiled benchmark article does not independently corroborate every statistic it repeats.
 - No Nebula claim is promoted solely because a scout found a publisher.
 - No outreach is sent from this register without separate approval.
-- The missing two rows must be recovered or revalidated before the scout batch is complete.
+- The scout batch is complete only after each reported row has a retrieved artifact and a findable contact route.
 
 ## Proof boundary
 
