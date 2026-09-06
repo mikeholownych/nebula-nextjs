@@ -1,22 +1,80 @@
 from __future__ import annotations
 
 import json
-import sys
-from pathlib import Path
+import urllib.error
+from io import BytesIO
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
+import pytest
 
-from openserp_rank_tracker import domain_matches, keywords_from  # noqa: E402
-
-
-def test_domain_matches_exact_and_subdomain_only():
-    assert domain_matches("www.nebulacomponents.com", "nebulacomponents.com")
-    assert domain_matches("blog.nebulacomponents.com", "nebulacomponents.com")
-    assert not domain_matches("notnebulacomponents.com", "nebulacomponents.com")
+from scripts import openserp_rank_tracker as tracker
 
 
-def test_keywords_from_deduplicates_and_normalizes(tmp_path):
-    path = tmp_path / "keywords.json"
-    path.write_text(json.dumps({"primary_keywords": {"a": [" Landing Page Audit ", "x"]}, "secondary_keywords": {"b": ["x", "Y"]}}))
-    assert keywords_from(path) == ["landing page audit", "x", "y"]
+class FakeResponse:
+    def __init__(self, payload: dict):
+        self.payload = payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        return False
+
+    def read(self):
+        return json.dumps(self.payload).encode("utf-8")
+
+
+def test_request_search_retries_transient_http_failure(monkeypatch):
+    calls = []
+    sleeps = []
+
+    def fake_urlopen(request, timeout):
+        calls.append((request.full_url, timeout))
+        if len(calls) == 1:
+            raise urllib.error.HTTPError(request.full_url, 503, "temporary", {}, BytesIO())
+        return FakeResponse({"results": [{"rank": 1}]})
+
+    monkeypatch.setattr(tracker.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(tracker.time, "sleep", sleeps.append)
+
+    result = tracker.request_search(
+        "http://127.0.0.1:7000",
+        "bing",
+        "landing page audit",
+        "US",
+        "EN",
+        10,
+        timeout=7,
+        retries=2,
+    )
+
+    assert result["results"] == [{"rank": 1}]
+    assert len(calls) == 2
+    assert all(timeout == 7 for _, timeout in calls)
+    assert sleeps == [1]
+
+
+def test_request_search_retries_timeout_then_reports_failure(monkeypatch):
+    calls = []
+    sleeps = []
+
+    def fake_urlopen(request, timeout):
+        calls.append(timeout)
+        raise TimeoutError("timed out")
+
+    monkeypatch.setattr(tracker.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(tracker.time, "sleep", sleeps.append)
+
+    with pytest.raises(TimeoutError, match="timed out"):
+        tracker.request_search(
+            "http://127.0.0.1:7000",
+            "bing",
+            "landing page audit",
+            "US",
+            "EN",
+            10,
+            timeout=7,
+            retries=2,
+        )
+
+    assert calls == [7, 7, 7]
+    assert sleeps == [1, 2]

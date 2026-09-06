@@ -6,6 +6,7 @@ import argparse
 import json
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -40,14 +41,25 @@ def request_search(base_url: str, engine: str, keyword: str, region: str, langua
     url = f"{base_url.rstrip('/')}/{urllib.parse.quote(engine)}/search?{query}"
     req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": "NebulaOpenSERPTracker/1.0"})
     for attempt in range(retries + 1):
-        with urllib.request.urlopen(req, timeout=timeout) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-        if not isinstance(payload, dict) or not isinstance(payload.get("results"), list):
-            raise ValueError("OpenSERP response lacks a results array")
-        last_count = len(payload["results"])
-        if last_count > 0:
-            return payload
-        if attempt < retries:
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            if not isinstance(payload, dict) or not isinstance(payload.get("results"), list):
+                raise ValueError("OpenSERP response lacks a results array")
+            last_count = len(payload["results"])
+            if last_count > 0:
+                return payload
+            if attempt < retries:
+                time.sleep(2 ** attempt)
+        except urllib.error.HTTPError as exc:
+            if exc.code != 429 and not 500 <= exc.code < 600:
+                raise
+            if attempt >= retries:
+                raise
+            time.sleep(2 ** attempt)
+        except (urllib.error.URLError, TimeoutError):
+            if attempt >= retries:
+                raise
             time.sleep(2 ** attempt)
     raise ValueError(f"OpenSERP returned an empty SERP after {retries + 1} attempts")
 
