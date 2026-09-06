@@ -5,6 +5,7 @@ import { REPAIR_GUARANTEE, EARLY_STAGE_DISCLOSURE } from '@/config/repair-guaran
 import { PRIORITY_SCORE_SHORT } from '@/config/priority-score'
 import { SIGNAL_COUNT } from '@/config/signals'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
+import DifferentiationBlock from '@/components/DifferentiationBlock'
 export const metadata: Metadata = {
   title: 'Repair Sprint - One Page, One Condition, One Fix | Nebula',
   description:
@@ -107,6 +108,8 @@ export default function RepairSprintPage() {
           </p>
         </section>
         </VisibilityBeacon>
+
+        <DifferentiationBlock />
 
         {/* What you get */}
         <section className="mb-14">

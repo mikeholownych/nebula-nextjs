@@ -1,7 +1,7 @@
 {
   "serverInfo": {
     "name": "Nebula Audit Engine",
-    "version": "1.28.1"
+    "version": "1.29.0"
   },
   "description": "Evidence-grade landing-page audit service for founders running paid traffic.",
   "transport": {
@@ -25,12 +25,16 @@
       "description": "Audit and compare two public landing pages."
     },
     {
+      "name": "recent_audits",
+      "description": "List recent audit records."
+    },
+    {
       "name": "get_audit",
       "description": "Retrieve a completed audit by ID."
     },
     {
-      "name": "recent_audits",
-      "description": "List recent audit records."
+      "name": "get_fix_instructions",
+      "description": "Retrieve evidence-backed fix instructions for a public URL or audit ID."
     }
   ],
   "authentication": {

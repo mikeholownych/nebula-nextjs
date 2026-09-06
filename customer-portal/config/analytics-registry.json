@@ -346,6 +346,8 @@
         "audit_id",
         "offer_key",
         "placement",
+        "variant_id",
+        "source",
         "device_class"
       ]
     },
@@ -367,6 +369,8 @@
         "audit_id",
         "offer_key",
         "placement",
+        "variant_id",
+        "source",
         "device_class"
       ]
     },

@@ -26,6 +26,7 @@ import {
   rankFirstReason,
   QUADRANT_DEFINITIONS,
 } from './conditionLineage'
+import { classifyFreePreview } from './freePreview'
 
 const REPAIR_CTA = `Get the repair: $${REPAIR_SPRINT_OFFER.priceUsd}`
 
@@ -176,6 +177,38 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
  * Uses only data already present in finding.evidence.measured.
  * Left: their actual page (blank/truncated). Right: what a good page looks like.
  */
+function FreeFindingPreview({ finding }: { finding: Finding }) {
+  const decision = classifyFreePreview(finding)
+
+  if (decision.kind === 'safe_preview') {
+    return (
+      <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.1em] text-accent">Safe change preview</p>
+        <p className="text-sm leading-6 text-fg-muted">
+          <span className="font-semibold text-fg">Observed:</span> {decision.observed}
+        </p>
+        <p className="mt-2 text-sm leading-6 text-fg-muted">
+          <span className="font-semibold text-fg">Change:</span> {decision.change}
+        </p>
+        <p className="mt-2 text-xs text-fg-dim">This preview describes a page change. It does not establish conversion or revenue impact.</p>
+      </div>
+    )
+  }
+
+  if (decision.kind === 'paid_artifact') {
+    return (
+      <div className="mt-4 rounded-lg border border-border bg-bg/50 p-4">
+        <p className="text-sm font-semibold text-fg">Specific change available after unlock</p>
+        <p className="mt-1 text-xs text-fg-muted">The free result shows the condition. The exact implementation artifact remains paid-gated.</p>
+      </div>
+    )
+  }
+
+  return (
+    <p className="mt-4 text-xs text-fg-muted">No specific change preview is available for this finding.</p>
+  )
+}
+
 function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
   if (finding.key !== 'seo_foundations') return null
   const measured = finding.evidence?.measured
@@ -1473,8 +1506,8 @@ export default function ResultsClient({
                       </p>
                       <span className="text-xs text-accent shrink-0 ml-2">Share email to unlock</span>
                     </div>
-                    {/* Teaser fix preview - always visible, drives unlock desire */}
-                    <FixPreview finding={finding} unlocked={false} />
+                    {/* Finding-specific preview: exact artifacts are bounded, generic fixes stay paid-gated */}
+                    <FreeFindingPreview finding={finding} />
                   </div>
                 )}
               </div>

@@ -5,6 +5,8 @@ import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card, PageShell } from '@/components/ui'
 import MembershipGrid from './MembershipGrid'
 import PricingComparisonTable from './PricingComparisonTable'
+import DifferentiationBlock from '@/components/DifferentiationBlock'
+import OfferCardVariant from '@/components/OfferCardVariant'
 
 
 export const metadata: Metadata = {
@@ -165,6 +167,10 @@ export default function PricingPage() {
           >
             <p className="text-sm leading-relaxed text-fg-muted">Nebula audits a landing page for conversion leaks across 9 signals and returns findings ranked by priority. The free audit runs in under 2 minutes. The $97 Repair Sprint fixes one prioritized finding within 48 hours.</p>
           </div>
+
+          <DifferentiationBlock />
+
+          <OfferCardVariant source="pricing" placement="pricing-offer-card" />
 
           <MembershipGrid />
 

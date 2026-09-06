@@ -15,6 +15,7 @@ Designed to run on a cron schedule (e.g. daily):
     30 4 * * * /home/mike/nebula/venv/bin/python /home/mike/nebula/scripts/cron_competitor_audit.py >> /var/log/nebula/cron_competitor_audit.log 2>&1
 """
 
+import argparse
 import asyncio
 import logging
 import sys
@@ -35,7 +36,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def main():
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description="Re-audit stale competitor URLs")
+    parser.add_argument(
+        '--dry-run',
+        action='store_true',
+        help='List stale competitor candidates without submitting audits or updating the database',
+    )
+    return parser.parse_args(argv)
+
+
+def should_submit_audit(*, dry_run: bool) -> bool:
+    return not dry_run
+
+
+async def main(*, dry_run: bool = False):
     """Re-audit stale competitor URLs."""
     logger.info("Starting competitor audit cron run")
     processed = 0
@@ -59,6 +74,16 @@ async def main():
             return
 
         logger.info(f"Found {len(rows)} competitor(s) due for audit")
+
+        if dry_run:
+            for tracking_id, user_id, url in rows:
+                logger.info(
+                    f"DRY RUN candidate: tracking={tracking_id} user={user_id} url={url}"
+                )
+            logger.info(
+                f"Competitor audit dry run complete: {len(rows)} candidate(s), 0 submitted, 0 updated"
+            )
+            return
 
         async with httpx.AsyncClient(timeout=150.0) as client:
             for tracking_id, user_id, url in rows:
@@ -131,4 +156,5 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    args = parse_args()
+    asyncio.run(main(dry_run=args.dry_run))
