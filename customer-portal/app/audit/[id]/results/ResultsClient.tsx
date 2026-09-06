@@ -27,6 +27,7 @@ import {
   QUADRANT_DEFINITIONS,
 } from './conditionLineage'
 import { classifyFreePreview } from './freePreview'
+import ResultsFeedback from '@/components/ResultsFeedback'
 
 const REPAIR_CTA = `Get the repair: $${REPAIR_SPRINT_OFFER.priceUsd}`
 
@@ -1716,7 +1717,7 @@ export default function ResultsClient({
           </Card>
         )}
 
-        {/* Priority Matrix Legend */}
+        <ResultsFeedback auditId={auditId} />
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <span className="text-xs text-fg-muted">Priority quadrants (severity x implementation effort, not conversion impact):</span>
           {Object.entries(QUADRANT_LABELS).map(([key, value]) => (

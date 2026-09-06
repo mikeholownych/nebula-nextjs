@@ -421,6 +421,26 @@
       ]
     },
     {
+      "name": "audit_feedback_submitted",
+      "version": 1,
+      "stage": "result_engagement",
+      "source_of_truth": "client",
+      "description": "User submits a usefulness rating and optional feedback on an audit results report",
+      "funnel_critical": false,
+      "ga4_projectable": true,
+      "ga4_event_name": "audit_feedback_submitted",
+      "persisted_internally": true,
+      "privacy_classification": "PSEUDONYMOUS",
+      "cardinality": "low",
+      "deduplication_rule": "audit_id_per_session",
+      "required_properties": ["audit_id", "rating", "feedback_length"],
+      "allowed_properties": [
+        "audit_id",
+        "rating",
+        "feedback_length"
+      ]
+    },
+    {
       "name": "payment_failed",
       "version": 1,
       "stage": "purchase",
