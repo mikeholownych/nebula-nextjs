@@ -244,7 +244,7 @@ export default async function AuditPage() {
               {SAMPLE_FINDINGS.map((f, i) => (
                 <div
                   key={f.key}
-                  className={`grid gap-4 p-4 md:grid-cols-[140px_60px_1fr] md:items-start ${
+                  className={`grid gap-4 p-4 md:grid-cols-[minmax(0,220px)_minmax(0,1fr)] md:items-start ${
                     i < SAMPLE_FINDINGS.length - 1 ? 'border-b border-border' : ''
                   }`}
                 >
@@ -256,7 +256,7 @@ export default async function AuditPage() {
                     />
                     <span className="text-sm font-semibold text-fg">{f.label}</span>
                   </div>
-                  <p className="text-xs leading-5 text-fg-muted">{f.finding}</p>
+                  <p className="min-w-0 text-xs leading-5 text-fg-muted">{f.finding}</p>
                 </div>
               ))}
             </div>
