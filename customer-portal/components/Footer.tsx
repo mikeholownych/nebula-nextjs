@@ -39,6 +39,7 @@ export default function Footer() {
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Learn</p>
             <ul className="space-y-3">
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
+              <li><a href="/blog" className="text-sm text-fg-muted hover:text-fg transition-colors">Field Notes</a></li>
               <li><a href="/playbooks" className="text-sm text-fg-muted hover:text-fg transition-colors">Playbooks</a></li>
               <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Leak Index</a></li>
               <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>

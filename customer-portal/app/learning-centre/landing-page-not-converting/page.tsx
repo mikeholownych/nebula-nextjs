@@ -151,6 +151,12 @@ export default function LandingPageNotConvertingPage() {
             </aside>
             <div className="mt-5 flex flex-col gap-2 text-sm">
               <Link
+                href="/blog/paid-traffic-not-converting"
+                className="font-semibold text-accent hover:text-fg"
+              >
+                Read the paid traffic diagnostic field note
+              </Link>
+              <Link
                 href="/learning-centre/message-match-checklist"
                 className="font-semibold text-accent hover:text-fg"
               >

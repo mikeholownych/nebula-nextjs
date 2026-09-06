@@ -38,6 +38,7 @@ Record the ad language, landing-page headline, first call to action, visible tru
 
 - [How Nebula audits](/how-nebula-audits)
 - [What is a landing page audit?](/what-is-landing-page-audit)
+- [Filter-based targeting field note](/blog/what-we-got-wrong-about-filter-based-targeting)
 
 ## What questions does this FAQ answer?
 

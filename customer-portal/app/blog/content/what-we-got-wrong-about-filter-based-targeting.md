@@ -35,6 +35,7 @@ This note does not claim a measured lift, customer result, or completed experime
 
 - [How Nebula audits](/how-nebula-audits)
 - [Nebula about page](/about)
+- [Paid traffic diagnostic field note](/blog/paid-traffic-not-converting)
 
 ## What questions does this FAQ answer?
 

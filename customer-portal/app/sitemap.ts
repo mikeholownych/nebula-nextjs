@@ -185,6 +185,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
+  const blogHubEntry: MetadataRoute.Sitemap = [{
+    url: `${BASE_URL}/blog`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }]
+
   const localBlogEntries: MetadataRoute.Sitemap = (await listLocalBlogArticles()).map(({ slug, published_at, updated_at }) => ({
     url: `${BASE_URL}/blog/${slug}`,
     lastModified: updated_at || published_at || BUILD_DATE,
@@ -192,5 +199,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [homeEntry, ...coreEntries, ...articleEntries, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...blogHubEntry, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
 }

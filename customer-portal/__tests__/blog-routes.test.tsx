@@ -3,6 +3,8 @@ import { jest } from '@jest/globals'
 
 import BlogIndex from '@/app/blog/page'
 import BlogArticlePage, { generateMetadata } from '@/app/blog/[slug]/page'
+import SiteNav from '@/components/SiteNav'
+import Footer from '@/components/Footer'
 import sitemap from '@/app/sitemap'
 import { listArticles } from '@/app/lib/blog/loader'
 import { renderMarkdown, safeMarkdownHref } from '@/app/blog/lib/render-markdown'
@@ -30,6 +32,21 @@ describe('local two-lane blog routes', () => {
     expect(screen.getByRole('link', { name: /paid traffic not converting/i })).toHaveAttribute('href', '/blog/paid-traffic-not-converting')
     expect(screen.getByRole('link', { name: /what did we get wrong about filter-based targeting/i })).toHaveAttribute('href', '/blog/what-we-got-wrong-about-filter-based-targeting')
     expect(document.body.textContent).not.toMatch(/opinly/i)
+  })
+
+  it('links the blog hub from global discovery surfaces and connects both lanes', async () => {
+    render(<><SiteNav /><Footer /></>)
+    expect(screen.getAllByRole('link', { name: /field notes/i }).length).toBeGreaterThanOrEqual(2)
+    expect(screen.getAllByRole('link', { name: /field notes/i }).every((link) => link.getAttribute('href') === '/blog')).toBe(true)
+
+    render(await BlogArticlePage({ params: Promise.resolve({ slug: 'paid-traffic-not-converting' }) }))
+    expect(screen.getByRole('link', { name: /filter-based targeting field note/i })).toHaveAttribute('href', '/blog/what-we-got-wrong-about-filter-based-targeting')
+
+    render(await BlogArticlePage({ params: Promise.resolve({ slug: 'what-we-got-wrong-about-filter-based-targeting' }) }))
+    expect(screen.getByRole('link', { name: /paid traffic diagnostic field note/i })).toHaveAttribute('href', '/blog/paid-traffic-not-converting')
+
+    const urls = (await sitemap()).map((entry) => String(entry.url))
+    expect(urls).toContain('https://nebulacomponents.com/blog')
   })
 
   it('renders acquisition content, CTA, metadata, valid schemas, and visible attribution', async () => {
