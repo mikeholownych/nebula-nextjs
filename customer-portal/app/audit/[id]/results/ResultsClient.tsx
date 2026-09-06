@@ -1692,6 +1692,18 @@ export default function ResultsClient({
               </div>
             </Card>
           </VisibilityBeacon>
+
+          <Card variant="bordered" className="mx-auto max-w-md border-border bg-bg-muted/10">
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">After the repair</p>
+            <h3 className="mt-2 text-lg font-extrabold text-fg">Need ongoing visibility after the repair?</h3>
+            <p className="mt-2 text-sm leading-6 text-fg-muted">
+              Pro adds recurring audits, score-drop alerts, historical tracking, and before/after comparisons.
+              It does not replace the focused repair decision.
+            </p>
+            <a href="/pricing" className="mt-4 inline-flex text-sm font-semibold text-accent hover:underline">
+              See monitoring plans →
+            </a>
+          </Card>
           </div>
         </section>
 

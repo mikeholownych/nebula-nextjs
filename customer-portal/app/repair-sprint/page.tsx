@@ -6,6 +6,7 @@ import { PRIORITY_SCORE_SHORT } from '@/config/priority-score'
 import { SIGNAL_COUNT } from '@/config/signals'
 import VisibilityBeacon from '@/components/VisibilityBeacon'
 import DifferentiationBlock from '@/components/DifferentiationBlock'
+import RepairEvidencePanel from '@/components/RepairEvidencePanel'
 export const metadata: Metadata = {
   title: 'Repair Sprint - One Page, One Condition, One Fix | Nebula',
   description:
@@ -47,7 +48,7 @@ export default function RepairSprintPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(repairSprintServiceSchema) }}
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
-        <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
 
         {/* Hero */}
         <VisibilityBeacon
@@ -55,7 +56,8 @@ export default function RepairSprintPage() {
           eventName="repair_sprint_exposed"
           properties={{ offer_key: 'fix_pack', placement: 'repair_sprint_page' }}
         >
-        <section className="mb-16">
+        <section className="mb-16 grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-start">
+          <div>
           <h1 className="heading-1 text-fg md:text-5xl">Get One Verified Repair Sprint to Fix Your Highest-Priority Leak</h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-muted leading-relaxed">
             The free audit identifies observable failed conditions on your page. The Repair Sprint
@@ -106,6 +108,8 @@ export default function RepairSprintPage() {
               Read guarantee →
             </a>
           </p>
+          </div>
+          <RepairEvidencePanel />
         </section>
         </VisibilityBeacon>
 
