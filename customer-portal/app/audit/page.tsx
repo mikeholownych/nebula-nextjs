@@ -202,22 +202,22 @@ export default async function AuditPage() {
                   See the Leak Index →
                 </Link>
               </p>
-            </div>
 
-            {/* Quantity proof - only shown when the live stat is available */}
+              {/* Quantity proof - only shown when the live stat is available */}
               {stats && (
-              <div className="mt-6 rounded-lg border border-border bg-bg-panel/60 p-4">
-                <p className="text-xs text-fg-muted">
-                  <span className="font-semibold text-fg">{stats.audit_count} landing pages analyzed</span>
-                  {stats.avg_failures_per_page != null ? (
-                    <> - average {stats.avg_failures_per_page} conversion leaks per page. Live data from the <Link href="/benchmarks" className="text-accent hover:underline">Landing Page Leak Index</Link>.</>
-                  ) : (
-                    <> - Live benchmarks from recent audits.</>
-                  )}
-                </p>
-              </div>
+                <div className="mt-6 rounded-lg border border-border bg-bg-panel/60 p-4">
+                  <p className="text-xs text-fg-muted">
+                    <span className="font-semibold text-fg">{stats.audit_count} landing pages analyzed</span>
+                    {stats.avg_failures_per_page != null ? (
+                      <> - average {stats.avg_failures_per_page} conversion leaks per page. Live data from the <Link href="/benchmarks" className="text-accent hover:underline">Landing Page Leak Index</Link>.</>
+                    ) : (
+                      <> - Live benchmarks from recent audits.</>
+                    )}
+                  </p>
+                </div>
               )}
             </div>
+          </div>
 
         </section>
 
