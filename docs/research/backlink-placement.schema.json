@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebulacomponents.com/schemas/backlink-placement.v1.json",
+  "title": "Nebula Backlink Placement Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["placement_id", "status", "target_domain", "placement_url", "canonical_destination", "acquisition_method", "source_tag", "utm", "outcomes", "review_window"],
+  "properties": {
+    "placement_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["candidate", "contacted", "accepted", "live_verified", "rejected", "excluded"]},
+    "target_domain": {"type": "string", "minLength": 1, "not": {"const": "sofrankings.com"}},
+    "placement_url": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "canonical_destination": {"type": "string", "format": "uri", "pattern": "^https://nebulacomponents\\.com(?:/|$)"},
+    "acquisition_method": {"enum": ["editorial_submission", "directory_listing", "earned_mention", "partner_referral", "other"]},
+    "source_tag": {"type": "string", "minLength": 1},
+    "utm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "medium", "campaign"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "medium": {"type": "string", "minLength": 1},
+        "campaign": {"type": "string", "minLength": 1}
+      }
+    },
+    "outcomes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["referral_sessions", "qualified_sessions", "audit_starts", "payments"],
+      "properties": {
+        "referral_sessions": {"type": "integer", "minimum": 0},
+        "qualified_sessions": {"type": "integer", "minimum": 0},
+        "audit_starts": {"type": "integer", "minimum": 0},
+        "payments": {"type": "integer", "minimum": 0}
+      }
+    },
+    "review_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["placement_count", "qualified_session_threshold"],
+      "properties": {
+        "placement_count": {"const": 3},
+        "qualified_session_threshold": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}
