@@ -1,0 +1,70 @@
+{
+  "brief_id": "landing-page-audit-2026-09-07",
+  "created_at": "2026-09-07T06:00:00Z",
+  "plan_ref": "content-ledger/content-plan.json",
+  "plan_generated_at": "2026-09-07T05:00:38.425624+00:00",
+  "topic": "landing page audit",
+  "slug": "landing-page-audit",
+  "decision": "new",
+  "intent": "high_intent",
+  "content_lane": "acquisition",
+  "post_type": "diagnostic-guide",
+  "primary_query": "landing page audit",
+  "supporting_queries": [
+    "how does a landing page audit work",
+    "what does a landing page audit check",
+    "free landing page audit",
+    "landing page audit tool",
+    "landing page grader"
+  ],
+  "publish_date": "2026-09-14",
+  "slot": 1,
+  "target_word_count": 1900,
+  "opportunity": "High-intent searchers looking for a landing page audit service or tool. Direct commercial entry point for Nebula. The article must explain what an audit covers, how Nebula's process works, and bridge the reader to the free audit CTA. No competitor brand mentions needed; the content should be the strongest available answer to the query.",
+  "evidence_sources": [
+    {
+      "ref": "nebula-audit-db-2026-09",
+      "description": "892 completed audits. Signal frequency distribution: above-the-fold layout 21.3% (severity 3.6), ad signal alignment 19.9% (3.6), SEO foundations 16.5% (2.6), load speed 12.4% (2.5), headline 8.6% (3.0), social proof 7.1% (4.3), CTA 6.7% (3.3). First-party, verified.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "nebula-audit-method",
+      "description": "Citable v1.14.0, 123 detectors, 18 namespaces. Free audit, no account required, under 2 minutes to run.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "wordstream-cvr-benchmarks",
+      "description": "Median Google Ads CVR 3.75%, top 25% above 5.31%.",
+      "status": "third_party_public",
+      "url": "https://www.wordstream.com/blog/ws/2019/08/19/conversion-rate-benchmarks"
+    },
+    {
+      "ref": "google-mobile-speed",
+      "description": "53% of mobile visits abandoned when load time exceeds 3 seconds. Bounce probability increases 32% from 1s to 3s.",
+      "status": "third_party_public",
+      "url": "https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/"
+    }
+  ],
+  "angle": "Explain what a landing page audit is (not a score, a diagnostic), what signal categories it checks, how Nebula runs one, and what actionable output looks like. Contrast with generic graders that produce letter grades without prioritized findings.",
+  "outline": [
+    "What a landing page audit is and what it is not",
+    "What signal categories a landing page audit checks",
+    "How frequency and severity data combine to set prioritization",
+    "How Nebula runs a landing page audit (process, no account required)",
+    "What the audit output contains and how to act on findings",
+    "How a landing page audit differs from an SEO audit",
+    "When to run an audit and how often",
+    "FAQ: how long does it take, what is needed, what format are findings"
+  ],
+  "constraints": [
+    "No invented statistics beyond verified sources listed above",
+    "No em-dashes",
+    "No fabricated customer outcomes or case studies",
+    "CTA links to /audit",
+    "status in frontmatter: draft",
+    "No publishing or deployment by this job"
+  ],
+  "status": "ready_for_draft",
+  "review_required": true,
+  "review_type": "ctw"
+}

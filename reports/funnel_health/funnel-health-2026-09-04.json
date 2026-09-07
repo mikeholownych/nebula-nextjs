@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-09-04T11:50:51.915579+00:00",
+  "timezone": "UTC",
+  "source": "analytics_event_ledger with PostHog unlock reconciliation",
+  "periods": {
+    "daily": {
+      "start": "2026-09-03",
+      "end_exclusive": "2026-09-04",
+      "previous_start": "2026-09-02",
+      "previous_end_exclusive": "2026-09-03",
+      "ledger": {
+        "audit_started": 0,
+        "audit_completed": 3,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 122,
+        "checkout_creation_failed": 33,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "previous_ledger": {
+        "audit_started": 0,
+        "audit_completed": 1,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 12,
+        "checkout_creation_failed": 5,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "unlock_reconciliation": {
+        "ledger": 0,
+        "previous_ledger": 0,
+        "posthog": 0,
+        "previous_posthog": 0
+      }
+    },
+    "weekly": {
+      "start": "2026-08-24",
+      "end_exclusive": "2026-08-31",
+      "previous_start": "2026-08-17",
+      "previous_end_exclusive": "2026-08-24",
+      "ledger": {
+        "audit_started": 4,
+        "audit_completed": 72,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 6,
+        "checkout_creation_failed": 60,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "previous_ledger": {
+        "audit_started": 257,
+        "audit_completed": 668,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 284,
+        "checkout_creation_failed": 529,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "unlock_reconciliation": {
+        "ledger": 0,
+        "previous_ledger": 0,
+        "posthog": 0,
+        "previous_posthog": 2
+      }
+    },
+    "monthly": {
+      "start": "2026-08-01",
+      "end_exclusive": "2026-09-01",
+      "previous_start": "2026-07-01",
+      "previous_end_exclusive": "2026-08-01",
+      "ledger": {
+        "audit_started": 261,
+        "audit_completed": 766,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 291,
+        "checkout_creation_failed": 623,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "previous_ledger": {
+        "audit_started": 0,
+        "audit_completed": 0,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 0,
+        "checkout_creation_failed": 0,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "unlock_reconciliation": {
+        "ledger": 0,
+        "previous_ledger": 0,
+        "posthog": 17,
+        "previous_posthog": 6
+      }
+    }
+  },
+  "attention": {
+    "daily": [
+      "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
+      "NO_PURCHASE_SIGNAL"
+    ],
+    "weekly": [
+      "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
+      "NO_PURCHASE_SIGNAL"
+    ],
+    "monthly": [
+      "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
+      "UNLOCK_LEDGER_BACKFILL_PENDING",
+      "NO_PURCHASE_SIGNAL"
+    ]
+  }
+}

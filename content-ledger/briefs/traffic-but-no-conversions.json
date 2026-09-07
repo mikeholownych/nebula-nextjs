@@ -1,0 +1,71 @@
+{
+  "brief_id": "traffic-but-no-conversions-2026-09-07",
+  "created_at": "2026-09-07T06:00:00Z",
+  "plan_ref": "content-ledger/content-plan.json",
+  "plan_generated_at": "2026-09-07T05:00:38.425624+00:00",
+  "topic": "traffic but no conversions",
+  "slug": "traffic-but-no-conversions",
+  "decision": "new",
+  "intent": "problem_aware",
+  "content_lane": "acquisition",
+  "post_type": "diagnostic-guide",
+  "primary_query": "traffic but no conversions",
+  "supporting_queries": [
+    "website getting traffic but no conversions",
+    "lots of visitors no sales",
+    "traffic not converting to leads",
+    "high traffic low conversion rate"
+  ],
+  "publish_date": "2026-09-18",
+  "slot": 5,
+  "target_word_count": 1900,
+  "opportunity": "Problem-aware searchers who have successfully driven traffic (organic or paid) but are seeing near-zero conversion. This is channel-agnostic, unlike the Google Ads or paid traffic articles. Broader audience: includes SEO traffic that is not converting, social traffic, direct. The key angle is that the diagnostic framework is the same regardless of channel: the landing experience is where the failure is occurring.",
+  "evidence_sources": [
+    {
+      "ref": "nebula-audit-db-2026-09",
+      "description": "892 completed audits. Full signal table: above-the-fold layout 21.3% (severity 3.6), ad signal alignment 19.9% (3.6), SEO foundations 16.5% (2.6), load speed 12.4% (2.5), headline 8.6% (3.0), social proof 7.1% (4.3), CTA 6.7% (3.3).",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "nebula-audit-method",
+      "description": "Citable v1.14.0, 123 detectors, 18 namespaces.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "wordstream-cvr-benchmarks",
+      "description": "Median Google Ads CVR 3.75%, top 25% above 5.31%.",
+      "status": "third_party_public",
+      "url": "https://www.wordstream.com/blog/ws/2019/08/19/conversion-rate-benchmarks"
+    },
+    {
+      "ref": "google-mobile-speed",
+      "description": "53% of mobile visits abandoned when load time exceeds 3 seconds.",
+      "status": "third_party_public",
+      "url": "https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/"
+    }
+  ],
+  "angle": "Traffic without conversions is almost always a landing experience problem, but there are three different types: immediate-leave (first-impression failure), read-but-no-click (trust or offer problem), and marginal-converter (optimization problem). The article walks through how to identify which type applies, then maps the diagnostic checklist to each. Avoids overlap with paid-traffic-not-converting by being channel-agnostic and focusing on the three failure mode framework.",
+  "outline": [
+    "The three types of traffic-without-conversion and why the fix differs",
+    "How to identify which type you have using observable signals",
+    "First-impression failures: what above-fold data reveals",
+    "Trust and offer failures: what heatmaps and scroll data reveal",
+    "Marginal-converter failures: what benchmark comparison reveals",
+    "The diagnostic sequence that applies regardless of traffic channel",
+    "What tools generate observable evidence (no-account options)",
+    "How to prioritize when multiple signals fire",
+    "FAQ: does channel matter for diagnosis, how to read bounce rate correctly, organic vs. paid thresholds"
+  ],
+  "constraints": [
+    "No invented statistics beyond verified sources listed above",
+    "No em-dashes",
+    "No fabricated customer outcomes",
+    "Do not duplicate the three failure mode framework from paid-traffic-not-converting verbatim -- reference and extend it",
+    "CTA links to /audit",
+    "status in frontmatter: draft",
+    "No publishing or deployment by this job"
+  ],
+  "status": "ready_for_draft",
+  "review_required": true,
+  "review_type": "ctw"
+}

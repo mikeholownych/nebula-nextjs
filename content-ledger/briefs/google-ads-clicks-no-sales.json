@@ -1,0 +1,70 @@
+{
+  "brief_id": "google-ads-clicks-no-sales-2026-09-07",
+  "created_at": "2026-09-07T06:00:00Z",
+  "plan_ref": "content-ledger/content-plan.json",
+  "plan_generated_at": "2026-09-07T05:00:38.425624+00:00",
+  "topic": "google ads clicks no sales",
+  "slug": "google-ads-clicks-no-sales",
+  "decision": "new",
+  "intent": "problem_aware",
+  "content_lane": "acquisition",
+  "post_type": "diagnostic-guide",
+  "primary_query": "google ads clicks no sales",
+  "supporting_queries": [
+    "google ads getting clicks but not converting",
+    "google ads high click rate no conversions",
+    "google ads traffic not converting to sales",
+    "google ads landing page not converting"
+  ],
+  "publish_date": "2026-09-17",
+  "slot": 4,
+  "target_word_count": 1900,
+  "opportunity": "Problem-aware searchers who are already spending on Google Ads but seeing clicks with no revenue. Pain is acute and real. Article must be honest: some problems are campaign-side, most are page-side. The differentiation between campaign and page problems is the primary diagnostic value. Bridge to free audit for page diagnosis.",
+  "evidence_sources": [
+    {
+      "ref": "nebula-audit-db-2026-09",
+      "description": "892 completed audits. Ad signal alignment is the second most common finding at 19.9% of all issues, severity 3.6. This directly maps to Google Ads traffic that clicks but does not convert due to post-click message mismatch.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "nebula-audit-method",
+      "description": "Citable v1.14.0, 123 detectors, 18 namespaces.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "wordstream-cvr-benchmarks",
+      "description": "Median Google Ads CVR 3.75%, top 25% above 5.31%. Search network median by industry varies 2-6%.",
+      "status": "third_party_public",
+      "url": "https://www.wordstream.com/blog/ws/2019/08/19/conversion-rate-benchmarks"
+    },
+    {
+      "ref": "google-mobile-speed",
+      "description": "53% of mobile visits abandoned when load time exceeds 3 seconds.",
+      "status": "third_party_public",
+      "url": "https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/"
+    }
+  ],
+  "angle": "Separate the diagnosis into two branches: campaign-side problems (keywords, bidding, audience, match type) vs. page-side problems (message match, above-fold layout, trust signals, speed). Most guides conflate them. The article establishes that in Nebula's audit data, page-side problems dominate when founders describe this symptom, but does not dismiss campaign-side issues. Covers how to tell which branch is the actual cause using observable signals.",
+  "outline": [
+    "Why Google Ads clicks without sales is one of two different problems",
+    "Campaign-side causes: match type, intent, bidding, audience",
+    "Page-side causes: message mismatch, layout, trust, speed",
+    "How to determine which branch is causing your specific problem",
+    "Diagnostic checklist for the landing page (specific observable conditions)",
+    "Diagnostic checklist for the campaign (specific observable conditions)",
+    "In what order to fix findings",
+    "When to pause spend and when to keep the campaign running while debugging",
+    "FAQ: should I pause ads, how long to wait for data, what benchmark to aim for"
+  ],
+  "constraints": [
+    "No invented statistics beyond verified sources listed above",
+    "No em-dashes",
+    "No fabricated customer outcomes",
+    "CTA links to /audit",
+    "status in frontmatter: draft",
+    "No publishing or deployment by this job"
+  ],
+  "status": "ready_for_draft",
+  "review_required": true,
+  "review_type": "ctw"
+}

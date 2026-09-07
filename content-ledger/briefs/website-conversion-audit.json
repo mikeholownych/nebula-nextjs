@@ -1,0 +1,63 @@
+{
+  "brief_id": "website-conversion-audit-2026-09-07",
+  "created_at": "2026-09-07T06:00:00Z",
+  "plan_ref": "content-ledger/content-plan.json",
+  "plan_generated_at": "2026-09-07T05:00:38.425624+00:00",
+  "topic": "website conversion audit",
+  "slug": "website-conversion-audit",
+  "decision": "new",
+  "intent": "high_intent",
+  "content_lane": "acquisition",
+  "post_type": "diagnostic-guide",
+  "primary_query": "website conversion audit",
+  "supporting_queries": [
+    "conversion audit what does it include",
+    "website not converting visitors",
+    "how to audit website conversions",
+    "conversion rate audit tool"
+  ],
+  "publish_date": "2026-09-15",
+  "slot": 2,
+  "target_word_count": 1900,
+  "opportunity": "High-intent searchers looking for a systematic review of why a website is not converting. Slightly broader than landing page audit but shares the same commercial entry point. Needs to carve its own angle: a conversion audit differs from a landing page audit in that it considers the full visitor journey, not just a single destination page. Bridge to free audit CTA.",
+  "evidence_sources": [
+    {
+      "ref": "nebula-audit-db-2026-09",
+      "description": "892 completed audits. Signal frequency and severity table as above.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "nebula-audit-method",
+      "description": "Citable v1.14.0, 123 detectors, 18 namespaces.",
+      "status": "first_party_verified"
+    },
+    {
+      "ref": "wordstream-cvr-benchmarks",
+      "description": "Median Google Ads CVR 3.75%, top 25% above 5.31%.",
+      "status": "third_party_public",
+      "url": "https://www.wordstream.com/blog/ws/2019/08/19/conversion-rate-benchmarks"
+    }
+  ],
+  "angle": "Position a conversion audit as a structured diagnostic, not an opinion list. Differentiate from analytics reviews (GA4 data reading) and from UX reviews (heuristic opinions). The audit is about measurable signal conditions versus high-converting reference pages. Walk through what an analyst would check, in what order, and why.",
+  "outline": [
+    "What a website conversion audit checks and what it does not",
+    "How a conversion audit differs from a traffic analytics review",
+    "The diagnostic checklist: signal categories in order of impact",
+    "How to gather evidence before interpreting results",
+    "What a conversion audit output should contain (findings vs. recommendations)",
+    "How to prioritize findings when there are multiple problems",
+    "When a conversion audit is not enough and what to do next",
+    "FAQ: how often to run an audit, what tools are needed, DIY vs. paid audit"
+  ],
+  "constraints": [
+    "No invented statistics beyond verified sources listed above",
+    "No em-dashes",
+    "No fabricated customer outcomes",
+    "CTA links to /audit",
+    "status in frontmatter: draft",
+    "No publishing or deployment by this job"
+  ],
+  "status": "ready_for_draft",
+  "review_required": true,
+  "review_type": "ctw"
+}

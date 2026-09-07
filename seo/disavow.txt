@@ -1,0 +1,23 @@
+# Google Search Console Disavow File
+# Domain: nebulacomponents.com
+# Generated: 2026-09-06
+# Reason: Toxic/spam referring domains with spam scores 16-70
+# These domains provided zero legitimate link value and risk algorithmic penalty
+
+# Spam score 70 — betting/gambling mirror site
+domain:betwinnermirror.com
+
+# Spam score 70 — unrelated real estate, no clear link reason
+domain:homesforsaleoldgreenwichct.com
+
+# Spam score 60 — unrelated crime/click-farm content
+domain:betulcrime.com
+
+# Spam score 60 — quote spam site
+domain:quotesblom.com
+
+# Spam score 60 — fake news / Forbes impersonator
+domain:theforbestimes.com
+
+# Spam score 60 — geo/maps spam (.us.com TLD, no legitimate context)
+domain:ggmap.us.com

@@ -1,0 +1,186 @@
+{
+  "captured_at": "2026-09-07T13:41:25Z",
+  "model": "perplexity/sonar",
+  "registry": "customer-portal/public/query_registry.json",
+  "selection": {
+    "zero_only": true,
+    "priority_only": true,
+    "limit": 15
+  },
+  "tested": 15,
+  "observed": 15,
+  "cited": 0,
+  "citation_rate": 0.0,
+  "results": [
+    {
+      "query_id": "Q-001",
+      "question": "What is a landing page audit?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A **landing page audit** is a structured review of a landing page to find the specific reasons visitors do or do not convert. It focuses on conversion factors like **message clarity, value proposition, CTA, trust, proof, friction, mobile experience, and page speed** rather than design preferences.[1][2][7]\n\nIn practice, an audit checks whether the page:\n- Clearly explains the offer and outcome.[2][3][11]\n- Makes the next step obvious with a strong **call to action**.[1][11][16]\n- Builds trust with proof, testimonials, and trust signals.[1][2][16]\n- Removes friction in forms and the conversion path.[1][4][10]\n- Works well on mobile and loads quickly.[1][5][15]\n\nThe result is usually a **prioritized list of issues and fixes** showing what is hurting conversions most and what to change first.[1][2][9][10]",
+      "answer_sha256": "22004fd475aa8553777432366122a517ed34bd355cfac88b3f263406bcc40a27",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788485-YV83Qj35cQYHn8Caeh7i"
+    },
+    {
+      "query_id": "Q-002",
+      "question": "How do I fix a landing page that is not converting?",
+      "status": "observed",
+      "mention": false,
+      "answer": "If a landing page is **not converting**, the fastest fix is usually to diagnose the biggest friction point first: **message mismatch, weak CTA clarity, slow load speed, form friction, or poor mobile experience**.[1][2][11][15]\n\nA practical way to fix it:\n\n- **Check message match first**: make sure the headline, offer, and copy exactly match the ad, keyword, or source that brought the visitor there.[10][15][17]\n- **Clarify the value proposition above the fold**: visitors should understand what you offer, who it\u2019s for, and why it matters within seconds.[10][5]\n- **Make the CTA obvious and singular**: use one primary call to action and remove competing actions that dilute focus.[2][10][3]\n- **Shorten or simplify forms**: reduce fields, break long forms into steps, or remove unnecessary friction.[1][15][3]\n- **Improve page speed**: pages under 3 seconds tend to perform better, and slow pages increase bounce and abandonment.[2][4][10]\n- **Optimize for mobile**: ensure the page is fast, readable, and easy to use on smaller screens.[2][8][10]\n- **Add relevant social proof**: use testimonials, case studies, reviews, logos, or other proof that fits the audience and offer.[2][16][15]\n- **Test one change at a time**: run A/B tests on headlines, CTA copy, hero sections, forms, or layouts so you know what actually improved conversions.[1][11][18][7]\n\nA simple troubleshooting sequence:\n\n1. **Inspect analytics** to find where users drop off: bounce rate, CTA clicks, or form abandonment.[1][11][6]\n2. **Fix the biggest UX issue** first: speed, broken elements, mobile problems, or unclear page flow.[1][17][11]\n3. **Align the page to visitor intent**: use the same language, promise, and level of specificity as the traffic source.[10][15][17]\n4. **Reduce friction**: fewer fields, shorter copy, one CTA, clearer button text, and stronger trust signals.[2][5][8]\n5. **A/B test** the highest-impact elements until you find a better-performing version.[1][11][18]\n\nThe changes most consistently associated with better conversion are **faster load time, single CTA",
+      "answer_sha256": "ec72bdd7c87e7892307dd120194951ff940ff99bfb9d66e33caafa44c8388262",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788489-WAREvDczENQJl3ji2aly"
+    },
+    {
+      "query_id": "Q-003",
+      "question": "Why is my landing page bounce rate so high?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A high landing page bounce rate usually means visitors are **not getting what they expected quickly enough**\u2014most often because of **message mismatch, slow load time, poor mobile experience, weak above-the-fold content, or low traffic quality**.[2][3][16]\n\nThe most common causes are:\n\n- **Message mismatch**: the ad, search result, or link promised one thing, but the landing page delivers something else.[2][5][20]\n- **Slow page speed**: loading delays are strongly associated with higher bounce rates, and multiple sources identify speed as a top driver.[1][2][16][17]\n- **Poor mobile UX**: tiny text, broken layouts, hard-to-tap buttons, or CTAs below the fold can push mobile visitors away.[2][3][12]\n- **Weak first screen / unclear value**: if visitors cannot tell what the page offers within a few seconds, they leave.[2][3]\n- **Irrelevant or low-quality traffic**: broad targeting or mismatched keywords can bring in visitors who were never likely to convert.[2][6][14]\n- **Low trust**: missing social proof, unclear branding, or a page that feels unsafe can increase exits.[10][11][13]\n- **Intrusive popups or too many form fields**: aggressive prompts and long forms add friction and can trigger immediate bounces.[2][5][12][16]\n- **Technical problems**: blank pages, broken forms, JS errors, redirects, or server issues can make the page effectively unusable.[6][7][16][18]\n\nIf you want to diagnose it quickly, check these in order:\n- Compare the **ad/keyword/query** with your landing page headline and hero copy.[2][20]\n- Test **page speed** on mobile and desktop.[1][2][16]\n- Review the page on a **phone** for readability, CTA visibility, and layout issues.[2][3][12]\n- Look at **traffic sources** to find low-intent or mismatched visitors.[2][6][14]\n- Inspect for **errors, broken forms, redirects, and popup friction**.[6][7][16]\n\nIf you want, I can help you build a **10-minute bounce-rate diagnosis checklist** for your specific landing page.",
+      "answer_sha256": "69972fa2c546ee5d58d7ebfac83759133789f36532eef8ac6db6bb886830857a",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788495-6md8Q5NCSTJQEpcnKhPR"
+    },
+    {
+      "query_id": "Q-004",
+      "question": "Landing page audit vs heatmap analysis, what is the difference?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A **landing page audit** is a broad review of the page to find anything hurting conversions, while **heatmap analysis** is a specific behavioral method that shows where users click, scroll, pause, or stop engaging on the page.[12][16][20]\n\nIn practice, the difference is:\n\n- A **landing page audit** looks at the whole system: messaging, CTA clarity, layout, page speed, mobile responsiveness, trust signals, technical issues, and conversion flow.[12][16]\n- **Heatmap analysis** looks at user interaction patterns on the page, such as click maps, scroll depth, rage clicks, dead clicks, and attention zones.[1][5][20]\n- An audit asks, **\u201cWhat is preventing conversion?\u201d** while heatmaps ask, **\u201cWhere is attention going, and where does friction appear?\u201d**[12][6][1]\n- Heatmaps usually support an audit rather than replace it, because they show behavior but not the full reason behind it.[2][6][10]\n\nA simple way to think about it:\n\n| Aspect | Landing page audit | Heatmap analysis |\n|---|---|---|\n| Scope | Broad page review | Narrow behavioral view |\n| Main goal | Find conversion blockers | Find interaction patterns |\n| Data used | UX, copy, speed, mobile, tracking, funnel logic | Clicks, scrolls, cursor movement, attention patterns |\n| Best for | Prioritizing overall improvements | Spotting friction areas on a specific page |\n| Limitation | Can miss real user behavior without analytics | Shows *what* happened, not *why* |\n\nSo, if you want a full diagnosis of a landing page, you do an **audit**; if you want visual evidence of how users interact with that page, you run **heatmap analysis**.[12][2][20]\n\n",
+      "answer_sha256": "72e8b475ab2e261d6b939464d97b32bcf7af906e0fed06f14900eaa18028d0b1",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788501-cJqU1QHpghsUGZkhL6mz"
+    },
+    {
+      "query_id": "Q-005",
+      "question": "What is the best landing page audit tool?",
+      "status": "observed",
+      "mention": false,
+      "answer": "There is **no single best landing page audit tool** for every use case; the best choice depends on what you need to diagnose\u2014*message match, behavior, speed, SEO, or CRO*. A practical recommendation from the results is to use a **stack**: analytics to confirm the problem, session tools to see behavior, speed tools for performance, and an AI audit tool for conversion feedback.[1]\n\nIf you want a **single tool** for quick, actionable conversion diagnosis, the results most strongly favor **Nebula** for paid-traffic landing pages because it audits a public URL quickly, requires no signup, and checks multiple conversion signals such as headline-message match, CTA clarity, trust, and above-the-fold structure.[2]\n\nIf your priority is **free tools**, the strongest options mentioned are **LandingScore AI Analyzer** or **Unbounce Landing Page Analyzer**.[3] For a broader free stack, **Google PageSpeed Insights**, **Microsoft Clarity**, **VWO\u2019s free AI audit**, and **PageLint** are recommended for different audit categories.[4]\n\nA simple way to choose:\n- **Best overall for diagnosis:** **Nebula**[2]\n- **Best free option:** **LandingScore AI Analyzer** or **Unbounce Landing Page Analyzer**[3]\n- **Best for behavior analysis:** **Microsoft Clarity**[4]\n- **Best for speed:** **Google PageSpeed Insights**[4]\n- **Best approach overall:** use multiple tools rather than relying on one.[1]\n\nIf you want, I can also give you a **best tool by use case** list for SaaS, e-commerce, paid ads, or SEO.",
+      "answer_sha256": "ddf4d7836c7d914410a9cb9a6731c9532c891ccac064335e2c77fc9e52ce95c8",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788507-lvMmYLjqkHsfikPaywLC"
+    },
+    {
+      "query_id": "Q-006",
+      "question": "How do I audit a landing page?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A good landing page audit checks one thing first: **does anything stop a stranger from converting?** Start by reviewing the page for clarity, message match, CTA strength, trust, friction, mobile usability, and speed, then rank the issues by impact and effort to fix.[15][1]\n\nA practical audit process is:\n\n- **Define the goal and audience first**: write down the single action you want visitors to take and who the page is for.[2][4]\n- **Test the first screen in 4\u20135 seconds**: can someone quickly tell what the page offers, who it is for, and what to do next?[1][3][10]\n- **Check message match**: compare the headline and offer to the ad, keyword, or source that brought the visitor.[1][10][13]\n- **Inspect the CTA**: make sure there is a single primary call to action that is easy to find and clearly promises the next step or reward.[1][5][10]\n- **Verify trust signals**: look for proof such as client names, results, badges, testimonials, or reassurance near the decision point.[1][10][11]\n- **Reduce friction**: count form fields, extra clicks, distracting links, and anything that slows the path to conversion.[1][12][19]\n- **Test mobile behavior**: open the page on a real phone and check readability, tap targets, layout, and whether the page still makes sense on mobile.[1][12][16]\n- **Check performance and Core Web Vitals**: review load speed and key metrics like LCP, INP, and CLS, especially on mobile.[5][8][10][12]\n- **Review analytics and recordings if available**: use heatmaps or session recordings to see where users hesitate or drop off.[10][16][19]\n- **Prioritize fixes**: score each issue by impact and effort, then start with the highest-leverage problems such as headline clarity, message match, CTA placement, mobile issues, and trust signals.[2][6][13][16][19]\n\nA simple audit template is:\n\n| Area | What to check | Pass/Fail question |\n|---|---|---|\n| **Clarity** | Headline, subheadline, offer | Can a cold visitor understand the page in a few seconds?[1][3][15] |\n| **Message match** | Ad/keyword/source",
+      "answer_sha256": "101fa36574c7b4906f5877d43c9e138b1b0b015a1cf390c668cb50f646b3089a",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788510-JYs3Y6sJqfKo1BHxm16v"
+    },
+    {
+      "query_id": "Q-007",
+      "question": "What does a landing page audit check?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A **landing page audit** checks whether a page is set up to convert visitors effectively by reviewing things like **headline/message clarity**, **value proposition**, **CTA visibility**, **trust signals/proof**, **form friction**, **mobile usability**, and **page speed**.[1][4][8]\n\nIn practice, it looks for the main conversion blockers, such as:\n- **Message match**: does the page match the ad, email, or search intent that brought the visitor there?[3][6][14]\n- **Offer clarity**: is it immediately obvious what is being offered and why it matters?[2][7][9]\n- **CTA quality**: is the next step obvious, specific, and easy to take?[2][6][18]\n- **Trust and proof**: are there testimonials, logos, security cues, or other evidence that reduce doubt?[1][2][6][18]\n- **Objection handling**: does the page answer common concerns before they stop the user?[1][7][9]\n- **Form friction**: are forms too long or asking for unnecessary information?[1][5][18]\n- **Layout and hierarchy**: is the page easy to scan, with the important elements surfaced quickly?[4][8][19]\n- **Mobile and speed**: does it work well on mobile, and does it load fast enough?[1][4][8][16]\n\nSome audits also check **tracking**, **SEO basics**, and whether the page has a single clear goal instead of competing actions.[4][11][15]\n\nIf you want, I can turn this into a **simple landing page audit checklist** you can use on any page.",
+      "answer_sha256": "61226396ec34ff7d24f39e203f8325de2fc4688b68ab4b9dc9114fde8a1a3eb8",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788517-hj5jo1Z3mV2QS7WtSpXv"
+    },
+    {
+      "query_id": "Q-009",
+      "question": "Is there a free landing page audit tool?",
+      "status": "observed",
+      "mention": false,
+      "answer": "Yes \u2014 there are several **free landing page audit tools**, though many are *freemium* and limit deeper reporting, scans, or exports.[1][2]\n\nA few genuinely free options include:\n\n- **Google PageSpeed Insights** for speed and Core Web Vitals; it is completely free and needs only a URL.[1][2]\n- **Microsoft Clarity** for behavior analytics and session recordings; it is listed among the truly free tools in the comparison.[1][13]\n- **Google Search Console** for search performance and indexing diagnostics; it is also listed as truly free.[1]\n- **Screaming Frog** for technical SEO audits, free up to **500 URLs**.[1][12]\n- **PageFlight** for a free landing page audit with no sign-up, though it limits users to **3 free scans**.[6]\n- **Aibrify Landing Page Audit** for SEO, Open Graph, performance, security, and CTA checks without uploading data to a server.[5]\n- **AIclicks Landing Page Analyzer** for free, unlimited audits with no signup, focused on SEO, UX, conversion, and AI-visibility issues.[10]\n- **Phico Page Audit** for a free AI-powered audit of SEO, content, UI/UX, and conversion optimization.[13]\n\nIf you want the **best free starting point**, use **Google PageSpeed Insights** for performance issues and a dedicated **landing page analyzer** like **AIclicks**, **PageFlight**, or **Phico** for conversion-focused feedback.[1][6][10][13]\n\nIf you'd like, I can also give you a **shortlist by use case** \u2014 for example, **best for speed**, **best for CRO**, or **best no-signup tool**.",
+      "answer_sha256": "61ef8e081def41bdb117a5059caeafe319d7082aec1afae0d280c5d8916a3607",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788522-SxJiMseHVHlS4up3XrFO"
+    },
+    {
+      "query_id": "Q-010",
+      "question": "How to audit a landing page for conversion",
+      "status": "observed",
+      "mention": false,
+      "answer": "To audit a landing page for conversion, check whether the page is **clear**, **relevant**, **credible**, **friction-free**, and **fast**, then rank every issue by how much it likely hurts conversions.[1][11][16]\n\nA practical audit process is:\n\n- **Start with data**: review conversion rate, bounce rate, scroll depth, session recordings, and form/drop-off data before changing anything.[2][12]\n- **Test the first 5\u201310 seconds**: ask a fresh viewer what the page is about and what they should do next; if they can\u2019t answer quickly, the hero section is not clear enough.[6][20]\n- **Check message match**: compare the ad or traffic source with the landing page headline, subheadline, and offer; the page should reflect the user\u2019s intent immediately.[1][5][18]\n- **Verify the primary CTA**: make sure there is one dominant action, it is visible above the fold, and its wording is specific rather than generic.[1][13]\n- **Inspect the value proposition**: the offer should be specific, benefit-led, and easy to understand without extra interpretation.[1][11]\n- **Review trust signals**: look for testimonials, logos, reviews, guarantees, security cues, and privacy reassurance near key decision points and forms.[1][12][13]\n- **Measure form friction**: count required fields, test the form yourself, and remove unnecessary steps, confusion, or validation issues.[2][12]\n- **Check mobile usability**: view the page on a real phone and confirm that the CTA, form, text, and tap targets are easy to use on small screens.[1][9][12]\n- **Audit speed and technical performance**: test load time and Core Web Vitals, because slow pages reduce conversion and increase abandonment.[8][9][12][20]\n- **Review the full conversion path**: verify that the CTA, form submission, confirmation page, follow-up email, and tracking all work correctly.[12]\n- **Score and prioritize fixes**: mark each item as pass/fail or by severity, then fix the highest-impact issues first, usually headline clarity, CTA visibility, offer clarity, mobile issues, and trust signals.[1][3][4][17]\n\nIf you want, I can turn this into a **1-page landing page audit checklist** or a **scoring template** you can use",
+      "answer_sha256": "62e91a2b3e20892cea91f6e99bcfa6422c5db945a1cda7edb0170af844446917",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788526-bKidWny48Zjm2TyZBbO8"
+    },
+    {
+      "query_id": "Q-011",
+      "question": "What makes a good landing page audit?",
+      "status": "observed",
+      "mention": false,
+      "answer": "A good landing page audit is **systematic, conversion-focused, and prioritized by impact**: it checks whether the page clearly communicates its offer, drives a single action, builds trust, reduces friction, and performs well on mobile and speed, then ranks the problems by how much they are costing conversions.[1][11][13]\n\nWhat makes an audit *good* is less about finding a long list of issues and more about producing **actionable findings**. The strongest audits do all of the following:[1][2][7][13]\n\n- Define the page\u2019s **single goal** and intended audience before reviewing anything.[7][14]\n- Evaluate **clarity** quickly, especially the hero section and headline, to see whether a new visitor understands the page within a few seconds.[1][5]\n- Check the **value proposition** for specificity, relevance, and evidence, not just marketing language.[1][2][11]\n- Verify the **CTA** is obvious, specific, and easy to act on.[1][2][10]\n- Assess **trust signals** and **social proof** near decision points, where doubt is most likely to stop conversion.[1][2][11]\n- Look for **friction** in forms, links, and the conversion path, including unnecessary fields or confusing next steps.[1][8][13]\n- Test **mobile experience** and **page speed**, since technical issues can silently suppress conversions.[1][8][13]\n- Include a **specific recommendation** for each issue, not just a diagnosis.[1][13]\n\nA practical audit is usually strongest when it combines three layers:[15][2]\n\n- **Message review**: Does the page explain the offer clearly?\n- **UX review**: Can users understand, trust, and complete the action?\n- **Behavior review**: Do analytics, heatmaps, or session recordings show where users hesitate?\n\nA weak audit typically just lists surface-level problems. A good one identifies the **highest-leverage fixes first**, ties each issue to a conversion risk, and uses evidence from the page, analytics, or testing rather than opinion alone.[1][7][13]\n\nIf you want, I can turn this into a **one-page landing page audit checklist** or a **scoring rubric** you can use on any page.",
+      "answer_sha256": "a7a402dc19b5940a2db027830780340d2111b02d42d78edebf9979d8d0038f5d",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788537-Kw5mRCezgfdtraNVTvzX"
+    },
+    {
+      "query_id": "Q-012",
+      "question": "What is message match?",
+      "status": "observed",
+      "mention": false,
+      "answer": "**Message match** is the alignment between a marketing message and the landing page or destination content that follows it, so the wording, offer, tone, and visuals feel consistent to the visitor.[1][2][3]\n\nIn practice, it means that if someone clicks an ad, email, or link, the page they land on should echo the same promise and key language they just saw.[2][5][7]\n\nWhy it matters:\n- It reassures visitors they are in the **right place**.[2][5]\n- It helps keep attention and can improve **conversion rates**.[2][3][8]\n- It reduces the feeling of mismatch when the ad and page tell different stories.[13][16]\n\nA simple example: if an ad promotes \u201c50% off running shoes,\u201d the landing page should immediately reflect that same deal, not a generic store homepage.[14][15]\n\n",
+      "answer_sha256": "12ca0b0111a4ebf196a7d60119c6e161d79284d4a4edbdb676d84d35cbaa4c22",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788543-GrVHyF5uIRJxscMxkY5x"
+    },
+    {
+      "query_id": "Q-013",
+      "question": "What is message match on a landing page?",
+      "status": "observed",
+      "mention": false,
+      "answer": "**Message match** on a landing page is the degree to which the page\u2019s **headline, offer, wording, and visuals** align with the ad, email, search result, or other message that brought the visitor there.[1][2][3]\n\nIn practice, strong message match means the landing page quickly confirms, \u201cYou\u2019re in the right place\u201d by echoing the same promise and intent the visitor clicked on, rather than feeling generic or unrelated.[2][3][17]\n\nA simple example:\n- If an ad says **\u201cFree 14-day CRM trial\u201d**, the landing page should prominently repeat that same offer and related language.[3][4]\n- If the ad targets a specific problem or keyword, the landing page should address that same problem or keyword clearly.[3][8]\n\nWhy it matters:\n- It reduces confusion and bounce rates by meeting visitor expectations.[2][19]\n- It can improve conversions because visitors are more likely to trust the page and keep reading.[2][17]\n\n",
+      "answer_sha256": "630d354d8b0dd58059009f55102193126378bac6d0f70a88fcf8760f3a75e0af",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788547-hOM5HYI2w00S4npv23qR"
+    },
+    {
+      "query_id": "Q-014",
+      "question": "Why does message match matter for paid ads?",
+      "status": "observed",
+      "mention": false,
+      "answer": "**Message match matters because paid clicks are expectation-driven: if the landing page does not clearly continue the promise made in the ad, people get confused and leave before converting.** That wastes ad spend and can also hurt campaign performance through lower relevance signals and higher costs.[2][7][8]\n\nIn practice, strong **message match** means the ad and landing page share the same core offer, headline, tone, and visual cues so visitors immediately feel they are in the right place.[1][10][17] When that continuity is missing, users are more likely to bounce without taking action.[2][3][4]\n\nWhy it matters for paid ads specifically:\n- **Higher conversions:** matching the ad message to the landing page reassures visitors and reduces friction at the point of click.[11][13][17]\n- **Less wasted spend:** every mismatched click is traffic you paid for but did not convert.[7][12][14]\n- **Better ad efficiency:** some sources note that landing-page relevance affects Quality Score and can increase or reduce cost per click.[8][12][20]\n- **Stronger trust:** a consistent promise from ad to page makes the experience feel more credible and less confusing.[3][19]\n\nA simple way to think about it: the ad earns the click by making a promise, and message match is what proves that the promise is being kept once the visitor arrives.[1][3][14]",
+      "answer_sha256": "b7897595d63e18ee6f13fb56e91dddd051bbf61c525d56ad8d5b3e7f7845c636",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788551-JKCfIxN4z7njwMAtpGDc"
+    },
+    {
+      "query_id": "Q-015",
+      "question": "How do I fix message match on my landing page?",
+      "status": "observed",
+      "mention": false,
+      "answer": "To fix **message match** on your landing page, make the page immediately confirm the same **promise, audience, offer, and CTA** that the ad or source message created before the click.[2][4][5]\n\n- **Match the headline first.** Rewrite the landing page H1 so it repeats or closely reflects the ad\u2019s main promise, ideally using the same core phrase or close variant.[2][4][8][15]\n- **Keep the offer above the fold.** If the ad promised a free trial, demo, checklist, discount, or specific product, show that exact offer on the first screen instead of burying it lower on the page.[2][4][6][17]\n- **Align the audience language.** Use the same role-, industry-, or pain-point-specific wording from the ad on the page, and swap generic benefits for relevant ones.[2][5][9][15]\n- **Match the CTA.** The landing page button should continue the same action the ad implied, such as \u201cDownload checklist\u201d rather than \u201cBook a demo\u201d when the ad offered a download.[9][10][16]\n- **Fix visual drift.** If the ad uses a certain creative style, color palette, or image type, mirror that visual treatment in the hero section so the transition feels continuous.[2][9][13]\n- **Remove competing messages.** Eliminate distractions and secondary offers that conflict with the original click expectation.[5][8][13]\n- **Use dedicated pages for major ad groups.** For higher-spend or distinct campaigns, build separate landing pages by theme or intent instead of sending all traffic to one generic page.[3][11][15]\n\nA practical way to audit it is to open the ad and landing page side by side, then check whether the page\u2019s headline, offer, visuals, and CTA all answer the same expectation created by the ad in the first one to two seconds.[1][4][17]\n\nIf you want, I can turn this into a **message-match checklist** you can use on your own landing page.",
+      "answer_sha256": "40cd2dc98e365fc3afe0630856cc5c01abc7a2eda836f59bd7eef97cbae1a5ae",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788556-n5E5aejQSvstBMXOfEoa"
+    },
+    {
+      "query_id": "Q-016",
+      "question": "My landing page headline does not match my ad",
+      "status": "observed",
+      "mention": false,
+      "answer": "Your **landing page headline should echo the ad\u2019s main promise**, not just the product or a broader benefit. If the page sounds like a different message, that\u2019s a **message-match mismatch**, which can hurt relevance and conversions.[1][3][6]\n\nWhat to fix first:\n- **Use the exact noun phrase and offer** from your top-spending ad in the H1 or first subheadline.[1]\n- Make sure the **core promise** is the same, even if the wording is not identical word-for-word.[3][13]\n- Keep the **offer visible above the fold** and reinforce it in the first sentence of body copy.[1][4][8]\n- Align the **CTA language** too, so the page continues the same action implied by the ad.[4][11][17]\n\nA quick test:\n- Read the ad, then the landing page headline.\n- If they do not feel like the **same sentence** or the same promise, rewrite the headline to match the ad more closely.[3][11]\n- If the ad targets a specific audience or offer, the landing page should speak to that same audience and offer rather than broadening it.[1][8]\n\nIf you want, paste your **ad headline** and **landing page headline**, and I\u2019ll rewrite the page headline for better message match.",
+      "answer_sha256": "d1ed7949cd9ed1a6768747eb0327c8cdfab94f044da8506e4c504d3943b2fa0e",
+      "model": "perplexity/sonar",
+      "captured_at": "2026-09-07T13:41:25Z",
+      "provider_id": "gen-1788788561-MifeLd2sUP7kIHS7vRWa"
+    }
+  ],
+  "limitations": [
+    "A failed or empty provider response is no_data, not zero visibility.",
+    "This is a spot check, not a census.",
+    "Mention detection is lexical and does not judge citation quality."
+  ]
+}

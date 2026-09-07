@@ -1,0 +1,15 @@
+{
+  "status": "ok",
+  "rows": 1,
+  "engines": {
+    "perplexity": {
+      "responses": 1,
+      "mention_rate": 0.0,
+      "citation_rate": 0.0,
+      "canonical_citation_precision": null,
+      "canonical_citations": 0,
+      "mean_citation_position": null,
+      "canonical_paths": {}
+    }
+  }
+}
