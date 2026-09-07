@@ -5,33 +5,33 @@
 ### Direct Competitors
 
 #### SeoLoupe
-**Positioning:** Landing page audit tool focused on conversion diagnostics  
-**Evidence:** Mentioned in Nebula's documentation as a known competitor  
-**Free Offer:** Likely similar free audit tier (to be verified)  
-**Paid Offer:** Unknown pricing model  
-**Price:** INDETERMINATE  
-**Audit Dimensions:** Likely similar conversion-focused audit (to be verified)  
-**SEO:** INDETERMINATE  
-**CRO:** INDETERMINATE  
-**AI readiness:** INDETERMINATE  
-**GEO/AEO:** INDETERMINATE  
-**UX:** INDETERMINATE  
-**Report depth:** INDETERMINATE  
-**Evidence model:** INDETERMINATE  
-**Historical comparison:** INDETERMINATE  
-**Re-audit capability:** INDETERMINATE  
-**Integrations:** INDETERMINATE  
-**API:** INDETERMINATE  
-**MCP:** INDETERMINATE  
-**White-label:** INDETERMINATE  
-**Agency features:** INDETERMINATE  
-**Lead generation mechanics:** INDETERMINATE  
-**Trust signals:** INDETERMINATE  
-**Search visibility:** INDETERMINATE  
-**Content strategy:** INDETERMINATE  
-**Distribution:** INDETERMINATE  
-**Unique capability:** INDETERMINATE  
-**Weakness:** INDETERMINATE  
+**Positioning:** Landing page audit tool focused on conversion diagnostics
+**Evidence:** Mentioned in Nebula's documentation as a known competitor
+**Free Offer:** Likely similar free audit tier (to be verified)
+**Paid Offer:** Unknown pricing model
+**Price:** INDETERMINATE
+**Audit Dimensions:** Likely similar conversion-focused audit (to be verified)
+**SEO:** INDETERMINATE
+**CRO:** INDETERMINATE
+**AI readiness:** INDETERMINATE
+**GEO/AEO:** INDETERMINATE
+**UX:** INDETERMINATE
+**Report depth:** INDETERMINATE
+**Evidence model:** INDETERMINATE
+**Historical comparison:** INDETERMINATE
+**Re-audit capability:** INDETERMINATE
+**Integrations:** INDETERMINATE
+**API:** INDETERMINATE
+**MCP:** INDETERMINATE
+**White-label:** INDETERMINATE
+**Agency features:** INDETERMINATE
+**Lead generation mechanics:** INDETERMINATE
+**Trust signals:** INDETERMINATE
+**Search visibility:** INDETERMINATE
+**Content strategy:** INDETERMINATE
+**Distribution:** INDETERMINATE
+**Unique capability:** INDETERMINATE
+**Weakness:** INDETERMINATE
 
 *Note: Due to content delivery issues on Nebula's site preventing access to detailed competitor analysis pages and external research limitations in this environment, comprehensive competitor verification could not be completed. Further investigation using external tools would be required.*
 

@@ -104,4 +104,3 @@ No placement record is evidence of a backlink until its live URL and canonical d
 ## Evidence boundary
 
 Search results used for initial target discovery are untrusted external observations. They establish candidate status only. They do not prove authority, traffic, dofollow status, acceptance, or conversion value. Those fields require direct verification from the target source or first-party analytics.
-

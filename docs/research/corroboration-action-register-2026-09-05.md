@@ -1,9 +1,9 @@
 # Corroboration action register
 
-**Register:** `corroboration-20260905`  
-**Status:** `complete`  
-**Scout-reported rows:** 3  
-**Recovered and directly validated:** 4  
+**Register:** `corroboration-20260905`
+**Status:** `complete`
+**Scout-reported rows:** 3
+**Recovered and directly validated:** 4
 **Missing:** 0
 
 ## Current action

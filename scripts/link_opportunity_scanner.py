@@ -30,21 +30,21 @@ SEARCH_QUERIES = [
     '"guest post" "landing page" marketing blog',
     '"contribute" "CRO" "submit article" marketing',
     '"write for us" "paid traffic" OR "landing pages" marketing',
-    
+
     # Roundup/tool list pages
     '"best CRO tools" 2025 OR 2026',
     '"landing page optimization tools" list',
     '"best landing page" "audit tool" OR "checker"',
     '"conversion rate optimization tools" roundup',
-    
+
     # Resource pages
     '"resources" "landing page" "conversion" site:*.com',
     '"tools we recommend" "CRO" OR "landing page"',
-    
+
     # Podcast/media opportunities
     '"CRO podcast" "guest" OR "appear"',
     '"landing page" "podcast" "conversion" founder',
-    
+
     # HARO/PR opportunities
     '"expert quote" "conversion rate" journalist',
     '"looking for experts" "landing page" "conversion"',

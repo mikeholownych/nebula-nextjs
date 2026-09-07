@@ -45,7 +45,7 @@ def dataforseo_search(query: str) -> list[dict]:
                     password = line.split('=', 1)[1].strip().strip('"\'')
     if not username or not password:
         return []
-    
+
     creds = base64.b64encode(f"{username}:{password}".encode()).decode()
     payload = json.dumps([{"keyword": query, "location_code": 2840, "language_code": "en", "depth": 10}]).encode()
     req = urllib.request.Request(

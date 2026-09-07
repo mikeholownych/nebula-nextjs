@@ -4,7 +4,7 @@
 
 **Goal:** Fix the content delivery/routing issue causing multiple public pages (/about, /pricing, /learning-centre, etc.) to return identical documentation content instead of page-specific information.
 
-**Architecture:** 
+**Architecture:**
 1. Audit current routing configuration and page rendering logic in the Next.js application
 2. Identify why specific routes are falling back to a default documentation template
 3. Implement proper route handling to serve unique content for each page
@@ -27,7 +27,7 @@
 ---
 ### Task 0: Check for CONTEXT.md and Understand Codebase Structure
 
-**Blocks:** none (can start immediately)  
+**Blocks:** none (can start immediately)
 **Demoable:** Confirm existence of CONTEXT.md or identify need to create domain language reference
 
 **Files:**
@@ -86,7 +86,7 @@ git commit -m "docs: add implementation plan for content delivery/routing fix"
 
 ### Task 1: Identify Root Cause of Content Delivery Issue
 
-**Blocks:** Task 0  
+**Blocks:** Task 0
 **Demoable:** Determine why specific routes return identical documentation content
 
 **Files:**
@@ -153,7 +153,7 @@ git commit -m "docs: record findings about routing structure for content deliver
 
 ### Task 2: Fix Individual Page Routes
 
-**Blocks:** Task 1  
+**Blocks:** Task 1
 **Demoable:** Ensure /about, /pricing, /learning-centre, /blog, /teardowns routes render unique content
 
 **Files:**
@@ -392,7 +392,7 @@ git commit -m "feat: create individual page components for about, pricing, learn
 
 ### Task 3: Fix Sitemap Endpoint
 
-**Blocks:** Task 2  
+**Blocks:** Task 2
 **Demoable:** Ensure /sitemap.xml returns valid XML sitemap instead of documentation content
 
 **Files:**
@@ -418,17 +418,17 @@ import { getSortedRoutes } from 'next-sitemap'
 export const getServerSideProps = async ({ res }) => {
   // Get all routes from Next.js
   const routes = await getSortedRoutes()
-  
+
   // Filter out API routes and private routes
-  const publicRoutes = routes.filter(route => 
-    !route.startsWith('/api') && 
-    !route.startsWith('/_next') && 
+  const publicRoutes = routes.filter(route =>
+    !route.startsWith('/api') &&
+    !route.startsWith('/_next') &&
     !route.includes('[...slug]') &&
     !route.includes('/workspace') &&
     !route.includes('/checkout') &&
     !route.includes('/dashboard')
   )
-  
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${publicRoutes.map(route => `
@@ -468,15 +468,15 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata() {
   const routes = await getSortedRoutes()
-  const publicRoutes = routes.filter(route => 
-    !route.startsWith('/api') && 
-    !route.startsWith('/_next') && 
+  const publicRoutes = routes.filter(route =>
+    !route.startsWith('/api') &&
+    !route.startsWith('/_next') &&
     !route.includes('[...slug]') &&
     !route.includes('/workspace') &&
     !route.includes('/checkout') &&
     !route.includes('/dashboard')
   )
-  
+
   return {
     alternate: {
       link: '/sitemap.xml',
@@ -491,15 +491,15 @@ export default function SitemapRoute() {
 
 export async function GET(request) {
   const routes = await getSortedRoutes()
-  const publicRoutes = routes.filter(route => 
-    !route.startsWith('/api') && 
-    !route.startsWith('/_next') && 
+  const publicRoutes = routes.filter(route =>
+    !route.startsWith('/api') &&
+    !route.startsWith('/_next') &&
     !route.includes('[...slug]') &&
     !route.includes('/workspace') &&
     !route.includes('/checkout') &&
     !route.includes('/dashboard')
   )
-  
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${publicRoutes.map(route => `
@@ -536,7 +536,7 @@ git commit -m "feat: add sitemap.xml endpoint returning valid XML"
 
 ### Task 4: Implement Rate Limiting for Free Audit Endpoint
 
-**Blocks:** Task 3  
+**Blocks:** Task 3
 **Demoable:** Add rate limiting to prevent abuse of free audit endpoint
 
 **Files:**
@@ -562,24 +562,24 @@ const MAX_REQUESTS = 10 // max requests per window
 export function rateLimit(ip) {
   const now = Date.now()
   const windowStart = now - WINDOW_MS
-  
+
   // Clean old entries
   for (const [timestamp] of rateLimitMap.keys()) {
     if (timestamp < windowStart) {
       rateLimitMap.delete(timestamp)
     }
   }
-  
+
   // Get current count for this IP
   const ipEntries = Array.from(rateLimitMap.entries())
-    .filter(([timestamp, entryIp]) => 
+    .filter(([timestamp, entryIp]) =>
       timestamp >= windowStart && entryIp === ip
     )
-  
+
   if (ipEntries.length >= MAX_REQUESTS) {
     return false // Rate limit exceeded
   }
-  
+
   // Add current request
   rateLimitMap.set(now, ip)
   return true
@@ -605,14 +605,14 @@ export async function middleware(request) {
     if (!rateLimit(ip)) {
       return new NextResponse(
         JSON.stringify({ error: 'Too many requests. Please try again later.' }),
-        { 
+        {
           status: 429,
           headers: { 'Content-Type': 'application/json' }
         }
       )
     }
   }
-  
+
   return NextResponse.next()
 }
 
@@ -635,10 +635,10 @@ export default async function handler(req, res) {
   if (!rateLimit(ip)) {
     return res.status(429).json({ error: 'Too many requests. Please try again later.' })
   }
-  
+
   // Existing audit logic would go here
   // For now, return a placeholder
-  res.status(200).json({ 
+  res.status(200).json({
     audit_id: 'placeholder',
     url: req.body.url,
     score: 0,
@@ -663,26 +663,26 @@ export async function POST(request) {
   if (!rateLimit(ip)) {
     return new Response(
       JSON.stringify({ error: 'Too many requests. Please try again later.' }),
-      { 
+      {
         status: 429,
         headers: { 'Content-Type': 'application/json' }
       }
     )
   }
-  
+
   // Existing audit logic would go here
   // For now, return a placeholder
   const { url } = await request.json()
-  
+
   return new Response(
-    JSON.stringify({ 
+    JSON.stringify({
       audit_id: 'placeholder',
       url,
       score: 0,
       findings: [],
       message: 'Audit endpoint with rate limiting'
     }),
-    { 
+    {
       headers: { 'Content-Type': 'application/json' }
     }
   )
@@ -700,7 +700,7 @@ git commit -m "feat: add rate limiting to free audit endpoint"
 
 ### Task 5: Add Structured Data (Schema.org) for SEO
 
-**Blocks:** Task 4  
+**Blocks:** Task 4
 **Demoable:** Implement Schema.org markup for Organization, Service, and WebApplication
 
 **Files:**
@@ -761,7 +761,7 @@ const getServiceSchema = (pageType) => {
       "serviceUrl": "https://nebulacomponents.com"
     }
   }
-  
+
   switch (pageType) {
     case 'home':
       return {
@@ -812,21 +812,21 @@ const getServiceSchema = (pageType) => {
 
 export default function SchemaOrg({ pageType = 'home' }) {
   const router = useRouter()
-  
+
   useEffect(() => {
     // Remove existing schema script if any
     const existingScript = document.getElementById('schema-org-script')
     if (existingScript) {
       existingScript.remove()
     }
-    
+
     // Add organization schema
     const orgScript = document.createElement('script')
     orgScript.id = 'schema-org-script'
     orgScript.type = 'application/ld+json'
     orgScript.textContent = JSON.stringify(organizationSchema)
     document.head.appendChild(orgScript)
-    
+
     // Add service schema for specific page types
     if (pageType !== 'home') {
       const serviceScript = document.createElement('script')
@@ -836,7 +836,7 @@ export default function SchemaOrg({ pageType = 'home' }) {
       document.head.appendChild(serviceScript)
     }
   }, [router.asPath, pageType])
-  
+
   return null
 }
 EOF
@@ -878,24 +878,24 @@ import { useEffect } from 'react'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
-  
+
   useEffect(() => {
     // Determine page type from pathname
     const pathname = router.asPath.split('?')[0] // Remove query params
     let pageType = 'home'
-    
+
     if (pathname.includes('/about')) pageType = 'about'
     else if (pathname.includes('/pricing')) pageType = 'pricing'
     else if (pathname.includes('/learning-centre')) pageType = 'learning-centre'
     else if (pathname.includes('/blog')) pageType = 'blog'
     else if (pathname.includes('/teardowns')) pageType = 'teardowns'
-    
+
     // Store pageType in context or pass to children
     // For simplicity, we're using a global variable approach
     // In a real app, you'd use React Context or similar
     window.__PAGE_TYPE__ = pageType
   }, [router.asPath])
-  
+
   return (
     <>
       <Component {...pageProps} />
@@ -921,11 +921,11 @@ import { useEffect } from 'react'
 
 export default function About() {
   const router = useRouter()
-  
+
   useEffect(() => {
     window.__PAGE_TYPE__ = 'about'
   }, [router.asPath])
-  
+
   return (
     <>
       <AboutPage />
@@ -944,11 +944,11 @@ import { useEffect } from 'react'
 
 export default function Pricing() {
   const router = useRouter()
-  
+
   useEffect(() => {
     window.__PAGE_TYPE__ = 'pricing'
   }, [router.asPath])
-  
+
   return (
     <>
       <PricingPage />
@@ -967,11 +967,11 @@ import { useEffect } from 'react'
 
 export default function LearningCentre() {
   const router = useRouter()
-  
+
   useEffect(() => {
     window.__PAGE_TYPE__ = 'learning-centre'
   }, [router.asPath])
-  
+
   return (
     <>
       <LearningCentrePage />
@@ -990,11 +990,11 @@ import { useEffect } from 'react'
 
 export default function Blog() {
   const router = useRouter()
-  
+
   useEffect(() => {
     window.__PAGE_TYPE__ = 'blog'
   }, [router.asPath])
-  
+
   return (
     <>
       <BlogPage />
@@ -1013,11 +1013,11 @@ import { useEffect } from 'react'
 
 export default function Teardowns() {
   const router = useRouter()
-  
+
   useEffect(() => {
     window.__PAGE_TYPE__ = 'teardowns'
   }, [router.asPath])
-  
+
   return (
     <>
       <TeardownsPage />
@@ -1061,7 +1061,7 @@ git commit -m "feat: add Schema.org structured data for SEO"
 
 ### Task 6: Create llms.txt for LLM Context
 
-**Blocks:** Task 5  
+**Blocks:** Task 5
 **Demoable:** Create llms.txt file to provide context for LLMs about the service
 
 **Files:**
@@ -1094,7 +1094,7 @@ Nebula Components is a landing page conversion diagnostic platform designed for 
   - Ad tracking (recognized ad-tracking artifact present)
   - AI readiness (structured signals support machine-readable interpretation)
 
-- **One-Leak Repair Sprint ($97)**: 
+- **One-Leak Repair Sprint ($97)**:
   - One scoped repair package for the highest-priority failing signal
   - Exact copy, code snippet, or configuration change
   - Delivery within 48 hours of payment
@@ -1159,7 +1159,7 @@ git commit -m "feat: add llms.txt for LLM context"
 
 ### Task 7: Implement Comprehensive Tests
 
-**Blocks:** Task 6  
+**Blocks:** Task 6
 **Demoable:** Add tests to verify page routing, sitemap, and schema functionality
 
 **Files:**
@@ -1195,7 +1195,7 @@ describe('About Page', () => {
     const headingElement = screen.getByRole('heading', { level: 1 })
     expect(headingElement).toHaveTextContent('About Nebula Components')
   })
-  
+
   test('renders description', () => {
     render(<AboutPage />)
     const descriptionElement = screen.getByText(/nebulac components provides landing page conversion diagnostics/i)
@@ -1218,7 +1218,7 @@ describe('Pricing Page', () => {
     const headingElement = screen.getByRole('heading', { level: 1 })
     expect(headingElement).toHaveTextContent('Pricing')
   })
-  
+
   test('renders price', () => {
     render(<PricingPage />)
     const priceElement = screen.getByText(/\$97/)
@@ -1291,7 +1291,7 @@ describe('Sitemap Endpoint', () => {
     // For demonstration, we're showing the test structure
     expect(true).toBe(true) // Placeholder
   })
-  
+
   test('includes homepage URL', async () => {
     expect(true).toBe(true) // Placeholder
   })
@@ -1311,18 +1311,18 @@ describe('SchemaOrg Component', () => {
     render(<SchemaOrg pageType="home" />)
     const scriptElement = screen.getByRole('document').querySelector('script[type="application/ld+json"]#schema-org-script')
     expect(scriptElement).toBeInTheDocument()
-    
+
     // Check content
     const schemaContent = scriptElement.textContent
     expect(schemaContent).toContain('"@type":"Organization"')
     expect(schemaContent).toContain('"name":"Nebula Components"')
   })
-  
+
   test('adds service schema for specific page types', () => {
     render(<SchemaOrg pageType="pricing" />)
     const serviceScript = screen.getByRole('document').querySelector('script[type="application/ld+json"]#schema-org-service-script')
     expect(serviceScript).toBeInTheDocument()
-    
+
     const schemaContent = serviceScript.textContent
     expect(schemaContent).toContain('"@type":"Service"')
     expect(schemaContent).toContain('"name":"One-Leak Repair Sprint"')
@@ -1342,7 +1342,7 @@ git commit -m "feat: add tests for page routing, sitemap, and schema functionali
 
 ### Task 8: Verify Fixes in Development Environment
 
-**Blocks:** Task 7  
+**Blocks:** Task 7
 **Demoable:** Confirm that all fixes work correctly in local development
 
 **Files:**
@@ -1441,7 +1441,7 @@ git commit --allow-empty -m "test: verify fixes work in development environment"
 
 ### Task 9: Prepare for Production Deployment
 
-**Blocks:** Task 8  
+**Blocks:** Task 8
 **Demoable:** Ensure solution is ready for production deployment with zero downtime
 
 **Files:**
@@ -1490,7 +1490,7 @@ git commit --allow-empty -m "test: verify production readiness"
 
 ### Task 10: Deploy and Monitor
 
-**Blocks:** Task 9  
+**Blocks:** Task 9
 **Demoable:** Solution deployed to production and monitored for issues
 
 **Files:**

@@ -235,7 +235,7 @@ def main():
     parser.add_argument("--type", help="Filter by opportunity type", default=None)
     parser.add_argument("--min-score", type=int, default=6)
     parser.add_argument("--limit", type=int, default=5)
-    parser.add_argument("--output", help="Output file for drafts", 
+    parser.add_argument("--output", help="Output file for drafts",
                         default="/home/mike/nebula/seo/pitch_drafts.jsonl")
     args = parser.parse_args()
 
