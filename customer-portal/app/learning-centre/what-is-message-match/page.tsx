@@ -47,6 +47,30 @@ const faqSchema = {
         text: 'Read your ad copy, then read your landing page H1 and first paragraph without any prior context. Ask whether a first-time visitor who saw only the ad would feel they arrived at the right place. If there is any hesitation, there is a message match gap.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'What are common examples of message match fail?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ad says \'Free Trial\' but landing page requires credit card. Ad mentions \'SaaS pricing calculator\' but page shows only demo booking. Ad targets \'Enterprise solutions\' but page displays small business features. Ad promises \'Instant results\' but page emphasizes 30-day implementation. These mismatches cause visitors to bounce before converting, treating the landing page as irrelevant.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much do message match failures cost in wasted ad spend?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'When message match breaks, conversion rates typically drop 30-50% despite perfect targeting and audience match. In Nebula\'s audits, pages failing headline alignment waste approximately 40% of paid traffic budget. A $5,000/month campaign with message match gaps effectively burns $2,000 monthly on traffic that leaves immediately after arrival.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does message match differ across Google Ads, Facebook, and LinkedIn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The core principle is identical: ad promise must match landing page delivery. However, execution varies. Google Ads require exact keyword alignment in headlines. Facebook\'s image-based ads need visual consistency on landing pages. LinkedIn\'s narrative-focused ads demand tone matching. Regardless of channel, visitors expect immediate confirmation of the ad\'s specific claim.',
+      },
+    },
   ],
 }
 

@@ -149,30 +149,42 @@
 
 ---
 
-## Task 5: Add publish-readiness CI and supervised workflow
+## Task 5: Add the active create, review, edit, and approval workflow
 
 **Blocks:** Task 3, Task 4
-**Demoable:** CI blocks an invalid article and passes a valid article batch without publishing anything.
+**Demoable:** A validated opportunity produces a local draft, automated review returns named findings, approved edits produce a new draft revision, and publication remains blocked until an explicit human approval record exists.
 
 **Files:**
 - Modify: `customer-portal/package.json`
 - Modify: `customer-portal/package.json` to add the publish-readiness check to the existing `ci` script
+- Create: `scripts/content_pipeline/create_draft.py`
+- Create: `scripts/content_pipeline/review_draft.py`
+- Create: `scripts/content_pipeline/apply_edits.py`
+- Create: `scripts/content_pipeline/publish_article.py`
 - Create: `customer-portal/__tests__/blog-publish-readiness.test.tsx`
+- Create: `tests/test_content_pipeline_workflow.py`
 - Create: `docs/content-pipeline-runbook.md`
 - Modify: `docs/superpowers/specs/2026-09-04-local-blog-content-pipeline-design.md` only if implementation clarifies an interface
 
 **Interfaces:**
+- `create_draft.py --opportunity <id>` creates a versioned local draft from a validated brief and records provenance without calling an external content service.
+- `review_draft.py --draft <path>` runs the 14 requirement checks, claim/provenance checks, link/schema checks, and returns named findings without silently editing the draft.
+- `apply_edits.py --draft <path> --edits <path>` creates a new immutable draft revision, preserving the prior revision and recording each edit.
+- `publish_article.py --draft <path> --approval <path>` publishes only when the approval record names the exact draft hash, reviewer, timestamp, and passed readiness report. It must fail closed otherwise.
 - `npm run check:blog-content` returns nonzero for blocked content and zero for valid content.
 - CI checks content before build.
 - Report-only scheduled runs write artifacts but never deploy.
+- Publication is a guarded execution step, not an automatic consequence of recommendation or review.
 
 - [ ] Add tests for all 14 attached requirements that can be checked statically.
 - [ ] Add tests for no em dash, no banned claims, no duplicate navigation/footer, no inline styles, valid internal links, and sitemap parity.
+- [ ] Add tests for draft creation provenance, review findings, immutable edit revisions, approval hash matching, missing approval rejection, and publish report-only behavior.
 - [ ] Run the invalid fixture and verify nonzero exit with named reasons.
 - [ ] Run the valid fixture and verify zero exit with a PASS report.
 - [ ] Add the command to the existing CI sequence without weakening current checks.
+- [ ] Demonstrate one complete local create, review, edit, approval-gate, and publish dry run without deploying.
 - [ ] Document supervised proof, failure behavior, rollback, and approval records.
-- [ ] Commit: `test(blog): enforce local publish-readiness gate`.
+- [ ] Commit: `test(blog): enforce local publish-readiness and supervised workflow`.
 
 ---
 

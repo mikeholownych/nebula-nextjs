@@ -81,6 +81,7 @@ export function parseArticle(source: string, sourcePath = 'article.md'): BlogArt
   assertNullableString(data.published_at, 'published_at')
   assertNullableString(data.updated_at, 'updated_at')
   assertNullableString(data.reviewed_by, 'reviewed_by')
+  assertNullableString(data.header_image, 'header_image')
   if (!Array.isArray(data.source_refs) || data.source_refs.length === 0 || !data.source_refs.every((ref) => typeof ref === 'string' && ref.trim())) {
     throw new Error('Invalid source_refs: at least one source reference is required')
   }
@@ -104,6 +105,7 @@ export function parseArticle(source: string, sourcePath = 'article.md'): BlogArt
     published_at: data.published_at ?? null,
     updated_at: data.updated_at ?? null,
     reviewed_by: data.reviewed_by ?? null,
+    header_image: (data.header_image as string | null | undefined) ?? null,
     body,
     sourcePath,
   }

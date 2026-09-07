@@ -44,18 +44,33 @@ export function safeMarkdownHref(destination: string): string | null {
 
 function inline(text: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = []
-  const pattern = /\[([^\]]+)\]\(([^)]+)\)/g
+  // Pattern handles bold (**text**) and links ([text](url)) interleaved
+  const pattern = /(\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)]+)\))/g
   let last = 0
   let match: RegExpExecArray | null
   while ((match = pattern.exec(text))) {
     if (match.index > last) nodes.push(text.slice(last, match.index))
-    const href = safeMarkdownHref(match[2])
-    if (href) nodes.push(<a key={`${match.index}-${href}`} href={href} className="text-accent underline underline-offset-4">{match[1]}</a>)
-    else nodes.push(match[1])
+    if (match[0].startsWith('**')) {
+      nodes.push(<strong key={`b-${match.index}`}>{match[2]}</strong>)
+    } else {
+      const href = safeMarkdownHref(match[4])
+      if (href) nodes.push(<a key={`a-${match.index}`} href={href} className="text-accent underline underline-offset-4">{match[3]}</a>)
+      else nodes.push(match[3])
+    }
     last = match.index + match[0].length
   }
   if (last < text.length) nodes.push(text.slice(last))
   return nodes
+}
+
+function renderTableRow(row: string, isHeader: boolean): React.ReactNode {
+  const cells = row.split('|').map(c => c.trim()).filter(Boolean)
+  const Tag = isHeader ? 'th' : 'td'
+  return cells.map((cell, i) => (
+    <Tag key={i} className={isHeader ? 'font-semibold text-left px-4 py-2 border-b border-border' : 'px-4 py-2 border-b border-border/50'}>
+      {inline(cell)}
+    </Tag>
+  ))
 }
 
 export function renderMarkdown(body: string): React.ReactNode {
@@ -63,31 +78,99 @@ export function renderMarkdown(body: string): React.ReactNode {
   const blocks: React.ReactNode[] = []
   let paragraph: string[] = []
   let list: string[] = []
+  let orderedList: string[] = []
+  let tableLines: string[] = []
+
+  const flushTable = () => {
+    if (!tableLines.length) return
+    const [headerLine, , ...bodyLines] = tableLines
+    const headerCells = headerLine.split('|').map(c => c.trim()).filter(Boolean)
+    blocks.push(
+      <div key={`table-${blocks.length}`} className="overflow-x-auto my-6">
+        <table className="w-full text-sm">
+          <thead className="bg-surface/50">
+            <tr>{headerCells.map((cell, i) => <th key={i} className="font-semibold text-left px-4 py-2 border-b border-border">{inline(cell)}</th>)}</tr>
+          </thead>
+          <tbody>
+            {bodyLines.filter(l => l.trim() && !l.match(/^[\s|:-]+$/)).map((row, ri) => (
+              <tr key={ri} className="even:bg-surface/20">{renderTableRow(row, false)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+    tableLines = []
+  }
+
   const flush = () => {
+    flushTable()
     if (paragraph.length) {
-      blocks.push(<p key={`p-${blocks.length}`}>{inline(paragraph.join(' '))}</p>)
+      blocks.push(<p key={`p-${blocks.length}`} className="mb-4 leading-relaxed">{inline(paragraph.join(' '))}</p>)
       paragraph = []
     }
     if (list.length) {
-      blocks.push(<ul key={`ul-${blocks.length}`}>{list.map((item) => <li key={item}>{inline(item)}</li>)}</ul>)
+      blocks.push(<ul key={`ul-${blocks.length}`} className="my-4 list-disc pl-6 space-y-1">{list.map((item, i) => <li key={i}>{inline(item)}</li>)}</ul>)
       list = []
     }
+    if (orderedList.length) {
+      blocks.push(<ol key={`ol-${blocks.length}`} className="my-4 list-decimal pl-6 space-y-1">{orderedList.map((item, i) => <li key={i}>{inline(item)}</li>)}</ol>)
+      orderedList = []
+    }
   }
+
   lines.forEach((line) => {
-    if (!line.trim()) return flush()
+    // Blank line
+    if (!line.trim()) {
+      if (!tableLines.length) flush()
+      return
+    }
+
+    // Table row
+    if (line.trim().startsWith('|')) {
+      if (paragraph.length || list.length || orderedList.length) flush()
+      tableLines.push(line)
+      return
+    }
+
+    // If we were in a table and hit a non-table line, flush it
+    if (tableLines.length) flushTable()
+
+    // Headings
     const heading = line.match(/^(#{1,3})\s+(.+)$/)
     if (heading) {
       flush()
       const level = heading[1].length
       const Tag = `h${level}` as 'h1' | 'h2' | 'h3'
-      blocks.push(<Tag key={`h-${blocks.length}`}>{inline(heading[2])}</Tag>)
-    } else if (/^[-*]\s+/.test(line)) {
-      if (paragraph.length) flush()
-      list.push(line.replace(/^[-*]\s+/, ''))
-    } else {
-      paragraph.push(line.trim())
+      const classes = level === 2
+        ? 'mt-10 mb-4 text-2xl font-semibold tracking-tight'
+        : level === 3
+        ? 'mt-6 mb-2 text-lg font-semibold'
+        : 'mt-8 mb-4 text-3xl font-semibold'
+      blocks.push(<Tag key={`h-${blocks.length}`} className={classes}>{inline(heading[2])}</Tag>)
+      return
     }
+
+    // Unordered list
+    if (/^[-*]\s+/.test(line)) {
+      if (paragraph.length) flush()
+      if (orderedList.length) flush()
+      list.push(line.replace(/^[-*]\s+/, ''))
+      return
+    }
+
+    // Ordered list
+    if (/^\d+\.\s+/.test(line)) {
+      if (paragraph.length) flush()
+      if (list.length) flush()
+      orderedList.push(line.replace(/^\d+\.\s+/, ''))
+      return
+    }
+
+    // Paragraph continuation
+    if (list.length || orderedList.length) flush()
+    paragraph.push(line.trim())
   })
+
   flush()
   return <div className="blog-prose">{blocks}</div>
 }

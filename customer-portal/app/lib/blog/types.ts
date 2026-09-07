@@ -48,6 +48,7 @@ export interface ArticleFrontmatter {
   published_at?: string | null
   updated_at?: string | null
   reviewed_by?: string | null
+  header_image?: string | null
 }
 
 export interface BlogArticle extends ArticleFrontmatter {
