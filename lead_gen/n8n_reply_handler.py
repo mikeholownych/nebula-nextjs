@@ -22,7 +22,7 @@ Webhook payload:
 import json
 import sqlite3
 from pathlib import Path
-from datetime import datetime
+from datetime import UTC, datetime
 
 
 DB_PATH = Path(__file__).parent / "lead_state.db"
@@ -123,7 +123,7 @@ def handle_reply_webhook(payload: dict) -> dict:
     prospect_id = payload.get("prospect_id", "")
     email = payload.get("email", "")
     reply_text = payload.get("reply_text", "")
-    reply_timestamp = payload.get("reply_timestamp", datetime.utcnow().isoformat())
+    reply_timestamp = payload.get("reply_timestamp", datetime.now(UTC).replace(tzinfo=None).isoformat())
 
     if not prospect_id or not email:
         return {"success": False, "error": "missing prospect_id or email"}

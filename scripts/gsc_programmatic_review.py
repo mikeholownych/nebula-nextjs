@@ -8,7 +8,7 @@ import os
 import sys
 import json
 import subprocess
-from datetime import datetime
+from datetime import UTC, datetime
 
 PYTHON_BIN = sys.executable
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
@@ -42,7 +42,7 @@ def inspect_urls(url_list):
     return json.loads(stdout)
 
 def generate_report():
-    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
 
     # 1. Analytics
     analytics = get_search_analytics(days=28)

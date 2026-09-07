@@ -10,6 +10,7 @@ Fallback chain (Illingworth "How to Find Anyone's Email Address"):
      - only if domain passes MX check
   3. LinkedIn DM queue (log_linkedin_fallback) for zero-email leads
 """
+import datetime
 import json, time, re, sys
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
@@ -245,7 +246,7 @@ def main():
                 print(f"  ⛔ BLOCKED → {email}: {result.get('_reason') or result.get('_error')}")
                 continue
             thread_id = result.get('thread_id', '') if isinstance(result, dict) else ''
-            ts = __import__('datetime').datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+            ts = datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
             contacted[email] = {
                 'email': email, 'thread_id': thread_id,
                 'subject': subject, 'sent_at': ts,

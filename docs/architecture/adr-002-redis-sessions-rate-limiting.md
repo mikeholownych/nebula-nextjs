@@ -113,7 +113,7 @@ async def create_session(user_id: str, request: Request) -> str:
     jwt_token = create_jwt({
         "user_id": user_id,
         "jti": session_id,  # JWT ID for revocation
-        "exp": datetime.utcnow() + timedelta(days=7)
+        "exp": datetime.now(UTC) + timedelta(days=7)
     })
     
     # Store in Redis
@@ -123,7 +123,7 @@ async def create_session(user_id: str, request: Request) -> str:
         json.dumps({
             "ip": request.client.host,
             "user_agent": request.headers.get("user-agent"),
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": datetime.now(UTC).isoformat()
         })
     )
     await redis.expire(f"user:{user_id}:sessions", 7 * 24 * 3600)

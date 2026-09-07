@@ -289,7 +289,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     report = scan_all()
-    print(f"AI Citation Score Report - {datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"AI Citation Score Report - {datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"={'='*60}")
     print(f"Total pages: {report['summary']['total_pages_scored']}")
     print(f"Average score: {report['summary']['average_score']}/100")

@@ -74,7 +74,7 @@ def save_metrics(m):
 
 
 def run_check():
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z")
     metrics = load_metrics()
 
     # --- Local checks ---

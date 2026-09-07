@@ -478,7 +478,7 @@ def enroll_in_sequence(email, seq_id, stage=None):
         return False
 
     sequences[seq_id] = {
-        "enrolled_at": datetime.datetime.utcnow().isoformat() + "Z",
+        "enrolled_at": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
         "sent_steps": [],
         "completed": False,
     }
@@ -497,7 +497,7 @@ def complete_sequence(email, seq_id):
     sequences = lead.setdefault("email_sequences", {})
     if seq_id in sequences:
         sequences[seq_id]["completed"] = True
-        sequences[seq_id]["completed_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+        sequences[seq_id]["completed_at"] = datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z")
 
     # Promote to the completion stage
     seq_config = SEQUENCES.get(seq_id, {})
@@ -645,7 +645,7 @@ def process_sequences(dry_run=True):
         pass
 
     return {
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
         "enrolled": total_enrolled,
         "sent": total_sent,
         "skipped": total_skipped,

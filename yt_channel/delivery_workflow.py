@@ -14,7 +14,7 @@ Flow:
 
 import json
 import asyncio
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 import sys
 
@@ -22,6 +22,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from platform_api.db.purchases import PurchaseRecord
 from lead_gen.outbound import send_email_agentmail
 from deliver_audit import scrape_page, score_audit
+
+
+def _naive_utc_now() -> datetime:
+    """Preserve the workflow's existing naive-UTC persistence contract."""
+    return datetime.now(UTC).replace(tzinfo=None)
 
 
 class DeliveryWorkflow:
@@ -72,7 +77,7 @@ class DeliveryWorkflow:
             founder_name=founder_name,
             stripe_charge_id=charge.get("id"),
             amount_cents=charge.get("amount", 9700),
-            purchased_at=datetime.utcnow().isoformat(),
+            purchased_at=_naive_utc_now().isoformat(),
             emails_sent={},
             re_audit_scheduled_at=None,
             re_audit_completed_at=None,
@@ -98,7 +103,7 @@ class DeliveryWorkflow:
         )
 
         if sent:
-            purchase.emails_sent["email_1"] = datetime.utcnow().isoformat()
+            purchase.emails_sent["email_1"] = _naive_utc_now().isoformat()
             await self._save_purchase(purchase)
 
             # Schedule remaining emails
@@ -114,19 +119,19 @@ class DeliveryWorkflow:
         """Schedule Email 2 for 1 day later."""
         # In production, use Celery/APScheduler for delayed sends
         # For now, store scheduled time in DB
-        scheduled_for = datetime.utcnow() + timedelta(days=1)
+        scheduled_for = _naive_utc_now() + timedelta(days=1)
         purchase.emails_sent["email_2_scheduled_for"] = scheduled_for.isoformat()
         await self._save_purchase(purchase)
 
     async def _schedule_email_3(self, purchase):
         """Schedule Email 3 for 7 days later."""
-        scheduled_for = datetime.utcnow() + timedelta(days=7)
+        scheduled_for = _naive_utc_now() + timedelta(days=7)
         purchase.emails_sent["email_3_scheduled_for"] = scheduled_for.isoformat()
         await self._save_purchase(purchase)
 
     async def _schedule_re_audit_30days(self, purchase, audit_id):
         """Schedule automatic re-audit for 30 days later."""
-        scheduled_for = datetime.utcnow() + timedelta(days=30)
+        scheduled_for = _naive_utc_now() + timedelta(days=30)
         purchase.re_audit_scheduled_at = scheduled_for.isoformat()
         await self._save_purchase(purchase)
 
@@ -136,7 +141,7 @@ class DeliveryWorkflow:
         Run this every 15 minutes (or more frequently).
         """
         purchases = await self._load_all_purchases()
-        now = datetime.utcnow()
+        now = _naive_utc_now()
 
         for purchase in purchases:
             # Email 2 (1 day)
@@ -157,7 +162,7 @@ class DeliveryWorkflow:
         Run this every 30 minutes.
         """
         purchases = await self._load_all_purchases()
-        now = datetime.utcnow()
+        now = _naive_utc_now()
 
         for purchase in purchases:
             if not purchase.re_audit_scheduled_at:
@@ -177,7 +182,7 @@ class DeliveryWorkflow:
                 score_before = audit_before.get("composite", audit_before.get("score", 0))
 
                 # Store results
-                purchase.re_audit_completed_at = datetime.utcnow().isoformat()
+                purchase.re_audit_completed_at = _naive_utc_now().isoformat()
                 purchase.re_audit_score_after = score_after
                 await self._save_purchase(purchase)
 
@@ -209,7 +214,7 @@ class DeliveryWorkflow:
         )
 
         if sent:
-            purchase.emails_sent["email_2"] = datetime.utcnow().isoformat()
+            purchase.emails_sent["email_2"] = _naive_utc_now().isoformat()
             await self._save_purchase(purchase)
 
     async def _send_email_3(self, purchase):
@@ -228,7 +233,7 @@ class DeliveryWorkflow:
         )
 
         if sent:
-            purchase.emails_sent["email_3"] = datetime.utcnow().isoformat()
+            purchase.emails_sent["email_3"] = _naive_utc_now().isoformat()
             await self._save_purchase(purchase)
 
     async def _send_email_4(self, purchase, score_before, score_after):
@@ -266,7 +271,7 @@ class DeliveryWorkflow:
         )
 
         if sent:
-            purchase.emails_sent["email_4"] = datetime.utcnow().isoformat()
+            purchase.emails_sent["email_4"] = _naive_utc_now().isoformat()
             await self._save_purchase(purchase)
 
     async def _trigger_testimonial_capture(self, purchase):

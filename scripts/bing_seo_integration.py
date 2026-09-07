@@ -19,7 +19,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 SITE_URL    = 'https://nebulacomponents.com/'
@@ -146,7 +146,7 @@ def pull_crawl_errors(access_token: str) -> list[str]:
         return alerts
 
     report_file = REPORT_DIR / f'bing-crawl-{TODAY}.json'
-    report_file.write_text(json.dumps({'fetched_at': datetime.utcnow().isoformat(), 'data': data}, indent=2))
+    report_file.write_text(json.dumps({'fetched_at': datetime.now(UTC).replace(tzinfo=None).isoformat(), 'data': data}, indent=2))
 
     # Surface errors worth flagging
     if isinstance(data, dict):
@@ -178,7 +178,7 @@ def pull_keyword_data(access_token: str) -> list[str]:
         return alerts
 
     report_file = REPORT_DIR / f'bing-keywords-{TODAY}.json'
-    report_file.write_text(json.dumps({'fetched_at': datetime.utcnow().isoformat(), 'data': data}, indent=2))
+    report_file.write_text(json.dumps({'fetched_at': datetime.now(UTC).replace(tzinfo=None).isoformat(), 'data': data}, indent=2))
 
     kws = data.get('d', []) if isinstance(data, dict) else []
     if kws:

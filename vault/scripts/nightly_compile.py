@@ -170,7 +170,7 @@ def git_commit(msg):
     return r2.stdout.strip() + r2.stderr.strip()
 
 def main():
-    now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M UTC")
     print(f"=== Vault nightly compile - {now} ===\n")
 
     raw_files = get_raw_files()

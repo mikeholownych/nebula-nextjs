@@ -8,7 +8,7 @@ import sys
 import os
 import json
 import subprocess
-from datetime import datetime
+from datetime import UTC, datetime
 
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
 PROPERTY = "sc-domain:nebulacomponents.com"
@@ -28,7 +28,7 @@ def get_search_analytics():
     return json.loads(res.stdout)
 
 def main():
-    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     analytics = get_search_analytics()
     rows = analytics.get("rows", [])
 

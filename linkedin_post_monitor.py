@@ -285,7 +285,7 @@ def load_cached_results(kind):
 def check_for_new_engagers():
     """Main function - check for new engagers and report."""
     state = load_state()
-    state["last_run"] = datetime.datetime.utcnow().isoformat() + "Z"
+    state["last_run"] = datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z")
     new_engagers = []
 
     # ── Check commenters ──────────────────────────────────────────
@@ -460,7 +460,7 @@ if __name__ == "__main__":
     results = check_for_new_engagers()
     # Output JSON for cron consumption
     summary = {
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
         "new_engagers": len(results),
         "actionable": len([e for e in results if e["actionable"]]),
         "high_value": len([e for e in results if e["score"] >= 7]),

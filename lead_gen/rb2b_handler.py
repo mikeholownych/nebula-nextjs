@@ -20,7 +20,7 @@ Gate: Only process if company_size >= 50 (filter out freelancers/solopreneurs).
 import json
 import sqlite3
 from pathlib import Path
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Optional
 
 
@@ -45,7 +45,7 @@ def handle_rb2b_event(payload: dict) -> dict:
     visitor_ip = payload.get("visitor_ip", "")
     pages_visited = payload.get("pages_visited", [])
     total_dwell_s = payload.get("total_dwell_s", 0)
-    last_visit = payload.get("last_visit", datetime.utcnow().isoformat())
+    last_visit = payload.get("last_visit", datetime.now(UTC).replace(tzinfo=None).isoformat())
 
     if not company_name:
         return {"success": False, "error": "no company name in payload"}

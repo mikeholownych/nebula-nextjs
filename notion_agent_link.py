@@ -24,7 +24,7 @@ def queue_audit(url: str, source: str = "notion", notion_db_id: str = "") -> dic
         "url": url,
         "source": source,
         "notion_db_id": notion_db_id,
-        "created_at": datetime.datetime.utcnow().isoformat() + "Z",
+        "created_at": datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z"),
         "status": "queued",
     }
     AUDIT_QUEUE.parent.mkdir(parents=True, exist_ok=True)

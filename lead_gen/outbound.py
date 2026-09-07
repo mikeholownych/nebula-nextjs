@@ -15,7 +15,7 @@ import sqlite3
 import json
 import time
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 
 DB_PATH = Path(__file__).parent / "lead_state.db"
@@ -66,7 +66,7 @@ def check_cooldown(prospect_id: str, email: str) -> bool:
         return True  # Never sent before, safe to send
 
     last_sent = datetime.fromisoformat(row[0])
-    elapsed = (datetime.utcnow() - last_sent).total_seconds()
+    elapsed = (datetime.now(UTC).replace(tzinfo=None) - last_sent).total_seconds()
 
     return elapsed >= COOLDOWN_S
 
