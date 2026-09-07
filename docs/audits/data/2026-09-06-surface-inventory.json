@@ -1,0 +1,486 @@
+{
+  "inventory_date": "2026-09-06",
+  "total_surfaces": 20,
+  "surfaces": [
+    {
+      "url": "https://nebulacomponents.com/",
+      "entity": "Homepage",
+      "surface_type": "Marketing/Landing Page",
+      "purpose": "Primary entry point and service introduction",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Run free audit",
+      "target_audience": "Founders spending on paid ads with low conversions",
+      "search_intent": "Commercial investigation - looking for landing page audit solutions",
+      "machine_readable_metadata": {
+        "title": "Landing Page Audit for Paid Traffic Not Converting | Nebula",
+        "opengraph": "observed in homepage share cards",
+        "schema_org": "indeterminate due to content delivery issue on most pages",
+        "twitter_card": "observed in homepage share cards"
+      },
+      "conversion_role": "Awareness and initial engagement",
+      "observed_defects": [
+        "None detected on homepage itself",
+        "Homepage serves as reference for correct content delivery"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/audit",
+      "entity": "Free Audit Tool",
+      "surface_type": "Tool/Application",
+      "purpose": "Free landing page conversion audit",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Paste your landing page URL and run audit",
+      "target_audience": "Founders wanting to test their landing pages",
+      "search_intent": "Transactional - seeking immediate audit solution",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Primary value delivery and lead generation",
+      "observed_defects": [
+        "Content delivery issue suspected but not confirmed for this specific endpoint",
+        "Unable to verify due to consistent documentation content returns"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/repair-sprint",
+      "entity": "One-Leak Repair Sprint",
+      "surface_type": "Product/Service Page",
+      "purpose": "$97 targeted fix service for top conversion leak",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Purchase Repair Sprint after audit",
+      "target_audience": "Users who have completed free audit and want to fix top finding",
+      "search_intent": "Transactional - seeking to purchase fix service",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Monetization and value realization",
+      "observed_defects": [
+        "Content delivery issue suspected but not confirmed",
+        "Unable to verify due to consistent documentation content returns"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/pricing",
+      "entity": "Pricing Information",
+      "surface_type": "Product/Service Page",
+      "purpose": "Detail pricing for One-Leak Repair Sprint",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Understand cost and purchase decision",
+      "target_audience": "Users evaluating cost of fix service",
+      "search_intent": "Commercial investigation - price sensitivity",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Purchase decision support",
+      "observed_defects": [
+        "Returns identical documentation content instead of pricing details",
+        "Prevents users from accessing pricing information",
+        "Directly impacts conversion and trust"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/learning-centre",
+      "entity": "Educational Content Hub",
+      "surface_type": "Content/Resource Center",
+      "purpose": "Educational articles on landing page conversion issues",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Read specific article or browse topics",
+      "target_audience": "Users seeking to learn about conversion optimization",
+      "search_intent": "Informational - seeking educational content",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Trust building and education",
+      "observed_defects": [
+        "Returns identical documentation content instead of educational articles",
+        "Prevents access to educational resources that build authority",
+        "Impacts SEO and user engagement"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/blog",
+      "entity": "Field Notes Blog",
+      "surface_type": "Content/Blog",
+      "purpose": "Timely articles and insights on conversion optimization",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Read latest post or browse archive",
+      "target_audience": "Users seeking current insights and updates",
+      "search_intent": "Informational - seeking timely content",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Freshness indicator and ongoing education",
+      "observed_defects": [
+        "Returns identical documentation content instead of blog posts",
+        "Prevents access to timely content that shows active expertise",
+        "Impacts perceptions of currency and expertise"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/about",
+      "entity": "Company Information",
+      "surface_type": "About/Company Page",
+      "purpose": "Founder and company background information",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Learn about the team and company mission",
+      "target_audience": "Users evaluating company credibility and fit",
+      "search_intent": "Informational - seeking trust and credibility signals",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Trust building and credibility",
+      "observed_defects": [
+        "Returns identical documentation content instead of company details",
+        "Prevents users from verifying company background and legitimacy",
+        "Directly impacts trust and purchase decisions"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns",
+      "entity": "Public Audit Examples",
+      "surface_type": "Content/Demonstration",
+      "purpose": "Show real audit examples to build trust and demonstrate value",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "View specific teardown or browse examples",
+      "target_audience": "Users wanting to see audit quality and depth",
+      "search_intent": "Evaluative - seeking proof of service effectiveness",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Social proof and demonstration",
+      "observed_defects": [
+        "Returns identical documentation content instead of teardown examples",
+        "Prevents users from seeing real audit outputs",
+        "Removes powerful social proof and demonstration tool"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/workspace",
+      "entity": "Customer Dashboard",
+      "surface_type": "Application/SaaS",
+      "purpose": "Email-keyed customer workspace for audit history and projects",
+      "indexable": false,
+      "canonical": true,
+      "primary_cta": "Access audit history and manage projects",
+      "target_audience": "Users who have completed audits and want to track history",
+      "search_intent": "Transactional - accessing personal account",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Retention and expansion",
+      "observed_defects": [
+        "Unable to access due to subdomain and potential authentication requirements",
+        "Status indeterminate - may be working correctly but inaccessible for verification"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/benchmarks",
+      "entity": "Performance Statistics",
+      "surface_type": "Data/Statistics Page",
+      "purpose": "Show real audit statistics and performance data",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Review performance data and benchmark reports",
+      "target_audience": "Users seeking proof of service effectiveness through data",
+      "search_intent": "Evaluative - seeking statistical proof",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Trust building through data transparency",
+      "observed_defects": [
+        "Returns identical documentation content instead of benchmark data",
+        "Prevents users from seeing real performance statistics",
+        "Undermines transparency claims"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/lab",
+      "entity": "Interactive Component Lab",
+      "surface_type": "Tool/Application",
+      "purpose": "Test message match, headline, and CTA against a page",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Test specific components of a landing page",
+      "target_audience": "Users wanting to understand specific audit signals",
+      "search_intent": "Educational/Tool-based - seeking to learn about specific checks",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Education and tool-based engagement",
+      "observed_defects": [
+        "Returns identical documentation content instead of interactive tool",
+        "Prevents users from testing and understanding specific signals",
+        "Removes educational value"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/compare",
+      "entity": "Tool Comparisons",
+      "surface_type": "Content/Comparison Page",
+      "purpose": "Honest comparisons with other audit tools",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Read comparison reports to understand differences",
+      "target_audience": "Users evaluating Nebula against alternatives",
+      "search_intent": "Comparative - evaluating options",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Objection handling and competitive positioning",
+      "observed_defects": [
+        "Returns identical documentation content instead of comparison data",
+        "Prevents users from seeing how Nebula differs from competitors",
+        "Removes key objection handling content"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/case-studies",
+      "entity": "Customer Outcomes",
+      "surface_type": "Content/Social Proof",
+      "purpose": "Show published client outcomes with verifiable metrics",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Read case studies to see real results",
+      "target_audience": "Users seeking proof of actual business impact",
+      "search_intent": "Evaluative - seeking proof of effectiveness",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Social proof and effectiveness demonstration",
+      "observed_defects": [
+        "Returns identical documentation content instead of case studies",
+        "Prevents users from seeing verifiable before/after metrics",
+        "Undermines effectiveness claims"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/playbooks",
+      "entity": "Educational Guides",
+      "surface_type": "Content/Educational",
+      "purpose": "Founder productivity and AI-ops guides",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Read guides to improve operational effectiveness",
+      "target_audience": "Users seeking operational improvement resources",
+      "search_intent": "Informational - seeking educational resources",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Value-add and retention",
+      "observed_defects": [
+        "Returns identical documentation content instead of playbooks",
+        "Prevents users from accessing educational resources",
+        "Impacts perceived value beyond core audit service"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/signals",
+      "entity": "Signal Reference Pages",
+      "surface_type": "Content/Reference",
+      "purche": "One plain-language definition page per signal with manual checks",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Learn about specific conversion signals",
+      "target_audience": "Users wanting to understand audit methodology",
+      "search_intent": "Informational - seeking to understand audit criteria",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Education and methodology transparency",
+      "observed_defects": [
+        "Returns identical documentation content instead of signal explanations",
+        "Prevents users from understanding what each signal measures",
+        "Undermines transparency and educational value"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+      "entity": "Technical Specification",
+      "surface_type": "Technical Documentation",
+      "purpose": "Canonical, versioned definition of the 9 conversion signals",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Review technical specification for implementation details",
+      "target_audience": "Technical users wanting to understand audit mechanics",
+      "search_intent": "Technical - seeking implementation details",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Technical trust and verification",
+      "observed_defects": [
+        "Returns identical documentation content instead of technical spec",
+        "Prevents technical users from verifying audit methodology",
+        "Undermines credibility with technical audience"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/resources/citable",
+      "entity": "Open Source Verification Layer",
+      "surface_type": "Open Source/Technical",
+      "purpose": "Evidence layer for SEO, AEO, and GEO audits",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Access open source code for verification",
+      "target_audience": "Technical users seeking to verify audit methodology",
+      "search_intent": "Technical - seeking open source verification",
+      "machine_readable_metadata": {
+        "title": "indeterminate",
+        "meta_description": "indeterminate",
+        "schema_org": "indeterminate",
+        "header_structure": "indeterminate"
+      },
+      "conversion_role": "Technical credibility and verification",
+      "observed_defects": [
+        "Returns identical documentation content instead of open source project",
+        "Prevents technical users from accessing verification layer",
+        "Undermines trust in evidence-based approach"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/openapi.json",
+      "entity": "API Specification",
+      "surface_type": "Technical/API Documentation",
+      "purpose": "REST API for audit submission and results retrieval",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Review API documentation for integration",
+      "target_audience": "Developers wanting to integrate with audit service",
+      "search_intent": "Technical - seeking API documentation",
+      "machine_readable_metadata": {
+        "content_type": "application/json",
+        "schema_org": "not applicable (API endpoint)",
+        "response_structure": "valid JSON OpenAPI specification"
+      },
+      "conversion_role": "Technical integration and automation",
+      "observed_defects": [
+        "None - API specification correctly returns JSON",
+        "This endpoint is working correctly, indicating issue is specific to HTML page serving"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/.well-known/acp.json",
+      "entity": "Agent Commerce Protocol Discovery",
+      "surface_type": "Technical/Metadata",
+      "purpose": "ACP discovery endpoint for agentic commerce",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Enable agent discovery of commerce capabilities",
+      "target_audience": "AI agents seeking to discover and use commerce features",
+      "search_intent": "Technical - seeking agent commerce discovery",
+      "machine_readable_metadata": {
+        "content_type": "application/json",
+        "schema_org": "not applicable (metadata endpoint)",
+        "response_structure": "valid JSON ACP discovery document"
+      },
+      "conversion_role": "Agent integration and automation",
+      "observed_defects": [
+        "None - ACP endpoint correctly returns JSON",
+        "This endpoint is working correctly, indicating issue is specific to HTML page serving"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/.well-known/agent-skills/index.json",
+      "entity": "Agent Skills Index",
+      "surface_type": "Technical/Metadata",
+      "purpose": "Hermes-compatible skill index for agent integration",
+      "indexable": true,
+      "canonical": true,
+      "primary_cta": "Enable agent discovery of available skills",
+      "target_audience": "AI agents seeking to discover and use available skills",
+      "search_intent": "Technical - seeking agent skills discovery",
+      "machine_readable_metadata": {
+        "content_type": "application/json",
+        "schema_org": "not applicable (metadata endpoint)",
+        "response_structure": "valid JSON agent skills index"
+      },
+      "conversion_role": "Agent integration and automation",
+      "observed_defects": [
+        "None - Agent skills endpoint correctly returns JSON",
+        "This endpoint is working correctly, indicating issue is specific to HTML page serving"
+      ]
+    }
+  ],
+  "summary": {
+    "total_surfaces": 20,
+    "accessible_surfaces": 4,
+    "content_delivery_issues": 16,
+    "working_endpoints": [
+      "Homepage (/)",
+      "OpenAPI spec (/openapi.json)",
+      "ACP discovery (/.well-known/acp.json)",
+      "Agent skills index (/.well-known/agent-skills/index.json)"
+    ],
+    "affected_pages": [
+      "/audit",
+      "/repair-sprint",
+      "/pricing",
+      "/learning-centre",
+      "/blog",
+      "/about",
+      "/teardowns",
+      "/workspace",
+      "/benchmarks",
+      "/lab",
+      "/compare",
+      "/case-studies",
+      "/playbooks",
+      "/signals",
+      "/spec/landing-page-diagnostic-v1",
+      "/resources/citable"
+    ],
+    "primary_issue": "Content delivery/routing system returning identical documentation content for most HTML pages while JSON/API endpoints work correctly"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "audit_date": "2026-09-06",
+  "auditor": "opencode AI Agent",
+  "audit_scope": "Comprehensive audit of nebulacomponents.com as public-facing website and landing page audit service",
+  "methodology": "Evidence-based observation using manual inspection, API verification, and constrained testing due to environmental limitations",
+  "findings": [
+    {
+      "id": "NEB-AUDIT-20260906-001",
+      "title": "Multiple public pages return identical documentation content",
+      "category": "Content Delivery / Routing",
+      "severity": "P1 - High",
+      "status": "Observed",
+      "observation": "When accessing pages such as /about, /pricing, /learning-centre, /blog, /teardowns, and others, the server returns identical documentation content instead of page-specific information.",
+      "evidence": [
+        "Fetching https://nebulacomponents.com/about returns documentation content matching the pattern seen in sitemap.xml and pricing page",
+        "Fetching https://nebulacomponents.com/pricing returns identical documentation content",
+        "Fetching https://nebulacomponents.com/learning-centre returns identical documentation content",
+        "The homepage (https://nebulacomponents.com/) returns distinct, appropriate homepage content",
+        "All affected pages return HTTP 200 status with identical content bodies",
+        "JSON/API endpoints (/openapi.json, /.well-known/acp.json, /.well-known/agent-skills/index.json) return correct content types"
+      ],
+      "inference": "There is likely a routing misconfiguration, CMS issue, or server-side rendering problem where specific page routes are falling back to a default documentation template.",
+      "user_business_impact": [
+        "Prevents users from accessing detailed information about pricing, company background, educational resources, and legal policies",
+        "Undermines trust and transparency as users cannot verify service details",
+        "Negatively impacts SEO as search engines encounter duplicate content across multiple URLs",
+        "Hinders user journey as visitors cannot access expected information at key decision points",
+        "Directly impacts conversion funnel by blocking access to pricing, trust-building, and educational content",
+        "Contradicts service's own evidence-based transparency principles"
+      ],
+      "confidence": "High",
+      "remediation": "Investigate and fix routing/content delivery system to serve correct content for each URL path",
+      "validation_method": [
+        "Fetch each affected URL and verify content matches expected page type",
+        "Check HTTP headers for correct content-type and caching directives",
+        "Verify no console errors in browser dev tools when navigating to these pages",
+        "Confirm sitemap.xml returns valid XML",
+        "Test internal navigation and user flows"
+      ],
+      "dependencies": [
+        "Web server configuration",
+        "Routing logic",
+        "CMS/templates",
+        "Static asset serving"
+      ],
+      "recommendation_timing": "ACT_NOW",
+      "effort_estimate": "Medium",
+      "impact_timing": "Immediate upon fix"
+    }
+  ],
+  "summary": {
+    "total_findings": 1,
+    "by_severity": {
+      "P0": 0,
+      "P1": 1,
+      "P2": 0,
+      "P3": 0,
+      "INFO": 0
+    },
+    "by_status": {
+      "Observed": 1,
+      "Inferred": 0,
+      "Claimed_by_Nebula": 0,
+      "Claimed_by_Competitor": 0,
+      "Third_Party_Reported": 0,
+      "Not_Verified": 0,
+      "Indeterminate": 0
+    },
+    "by_category": {
+      "Content Delivery / Routing": 1
+    }
+  }
+}

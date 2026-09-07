@@ -152,6 +152,7 @@ export function proxy(request: NextRequest) {
       res.headers.set('Content-Type', 'text/markdown; charset=utf-8')
       res.headers.set('X-Markdown-Source', 'llms.txt')
       res.headers.set('Vary', 'Accept')
+      res.headers.set('X-Robots-Tag', 'noindex, nofollow')
       return res
     }
 

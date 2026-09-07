@@ -1,0 +1,62 @@
+{
+  "audit_date": "2026-09-06",
+  "auditor": "opencode AI Agent",
+  "audit_scope": "Competitor analysis for Nebula Components landing page audit service",
+  "methodology": "Limited to information available in Nebula's own documentation and public statements due to content delivery issues preventing access to competitive research tools and external data sources",
+  "competitors": [
+    {
+      "name": "SeoLoupe",
+      "status": "known_competitor",
+      "evidence_level": "mentioned_in_documentation",
+      "positioning": "INDETERMINATE",
+      "evidence": [
+        "Referenced as a known competitor in Nebula's documentation"
+      ],
+      "icp": "INDETERMINATE",
+      "free_offer": "INDETERMINATE",
+      "paid_offer": "INDETERMINATE",
+      "price": "INDETERMINATE",
+      "audit_dimensions": "INDETERMINATE",
+      "seo": "INDETERMINATE",
+      "cro": "INDETERMINATE",
+      "ai_readiness": "INDETERMINATE",
+      "geo_aeo": "INDETERMINATE",
+      "ux": "INDETERMINATE",
+      "report_depth": "INDETERMINATE",
+      "evidence_model": "INDETERMINATE",
+      "historical_comparison": "INDETERMINATE",
+      "re_audit_capability": "INDETERMINATE",
+      "integrations": "INDETERMINATE",
+      "api": "INDETERMINATE",
+      "mcp": "INDETERMINATE",
+      "white_label": "INDETERMINATE",
+      "agency_features": "INDETERMINATE",
+      "lead_generation_mechanics": "INDETERMINATE",
+      "trust_signals": "INDETERMINATE",
+      "search_visibility": "INDETERMINATE",
+      "content_strategy": "INDETERMINATE",
+      "distribution": "INDETERMINATE",
+      "unique_capability": "INDETERMINATE",
+      "weakness": "INDETERMINATE",
+      "notes": "Due to content delivery issues on Nebula's site preventing access to detailed competitor analysis pages and lack of external research tools in this environment, comprehensive competitor verification could not be completed. Further investigation using external SEO/tools would be required for accurate competitive analysis."
+    }
+  ],
+  "competitor_analysis_limitations": [
+    "Content delivery issues prevent access to Nebula's own comparison pages (/compare)",
+    "No access to blog/learning centre content that might discuss competitors",
+    "Environment lacks external SEO/research tools for independent competitor discovery",
+    "Cannot verify competitor claims or features through direct observation",
+    "Unable to assess search visibility, backlink profiles, or content strategies"
+  ],
+  "known_from_documentation": [
+    "SeoLoupe is explicitly mentioned as a known competitor"
+  ],
+  "recommended_next_steps": [
+    "Resolve content delivery issues to restore access to Nebula's comparison and research content",
+    "Use external SEO tools (Ahrefs, SEMrush, Moz) to discover actual competitors in search results",
+    "Analyze SERPs for target keywords to identify ranking competitors",
+    "Review public reviews and comparisons on sites like G2, Capterra, TrustRadius",
+    "Examine advertising and content strategies of suspected competitors",
+    "Conduct customer research to understand alternatives considered and chosen"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "audit_date": "2026-09-06",
+  "auditor": "opencode AI Agent",
+  "audit_scope": "SERP analysis for Nebula Components service",
+  "methodology": "Limited to inference from service description due to content delivery issues preventing access to Nebula's own content that might inform keyword targeting, and lack of external SERP research tools in this environment",
+  "serp_observations": [],
+  "target_keyword_families": [
+    {
+      "query": "landing page audit",
+      "intent": "Commercial investigation",
+      "serp_type": "Likely mixed: service pages, tool comparisons, educational content",
+      "nebula_ranking": "INDETERMINATE",
+      "competitors_present": [
+        "SeoLoupe (known from documentation)",
+        "INDETERMINATE - requires external research"
+      ],
+      "featured_snippet": "INDETERMINATE",
+      "ai_overview": "INDETERMINATE",
+      "paa_present": "Likely - questions like 'What is a landing page audit?', 'How much does a landing page audit cost?'",
+      "video_image_local": "INDETERMINATE",
+      "commercial_density": "Likely medium-high",
+      "difficulty_proxy": "INDETERMINATE",
+      "content_format_winning": "INDETERMINATE",
+      "gap_for_nebula": "INDETERMINATE"
+    },
+    {
+      "query": "landing page analyzer",
+      "intent": "Commercial investigation",
+      "serp_type": "Likely similar to 'landing page audit'",
+      "nebula_ranking": "INDETERMINATE",
+      "competitors_present": [
+        "SeoLoupe (known from documentation)",
+        "INDETERMINATE - requires external research"
+      ],
+      "featured_snippet": "INDETERMINATE",
+      "ai_overview": "INDETERMINATE",
+      "paa_present": "Likely - questions about how analyzers work, what they check",
+      "video_image_local": "INDETERMINATE",
+      "commercial_density": "Likely medium-high",
+      "difficulty_proxy": "INDETERMINATE",
+      "content_format_winning": "INDETERMINATE",
+      "gap_for_nebula": "INDETERMINATE"
+    },
+    {
+      "query": "landing page teardown",
+      "intent": "Evaluative/comparison",
+      "serp_type": "Likely mixed: service pages, examples, educational content",
+      "nebula_ranking": "INDETERMINATE",
+      "competitors_present": [
+        "SeoLoupe (known from documentation)",
+        "INDETERMINATE - requires external research"
+      ],
+      "featured_snippet": "INDETERMINATE",
+      "ai_overview": "INDETERMINATE",
+      "paa_present": "Likely - questions about what teardowns include, how they differ from audits",
+      "video_image_local": "INDETERMINATE",
+      "commercial_density": "Likely medium",
+      "difficulty_proxy": "INDETERMINATE",
+      "content_format_winning": "INDETERMINATE",
+      "gap_for_nebula": "INDETERMINATE"
+    },
+    {
+      "query": "conversion audit",
+      "intent": "Commercial investigation",
+      "serp_type": "Likely broader: may include site-wide conversion audits, not just landing pages",
+      "nebula_ranking": "INDETERMINATE",
+      "competitors_present": [
+        "INDETERMINATE - requires external research (likely wider competitive set than landing page specific)"
+      ],
+      "featured_snippet": "INDETERMINATE",
+      "ai_overview": "INDETERMINATE",
+      "paa_present": "Likely - questions about scope, cost, process",
+      "video_image_local": "INDETERMINATE",
+      "commercial_density": "Likely medium",
+      "difficulty_proxy": "INDETERMINATE",
+      "content_format_winning": "INDETERMINATE",
+      "gap_for_nebula": "INDETERMINATE"
+    }
+  ],
+  "ai_geo_queries": [
+    {
+      "query": "What is a landing page audit?",
+      "intent": "Definitional",
+      "expected_nebulа_response": "Clear, evidence-based definition focusing on observable conversion signals",
+      "citability_opportunity": "High - service provides clear definition with evidence standards",
+      "current_performance": "INDETERMINATE"
+    },
+    {
+      "query": "How do I know why my landing page is not converting?",
+      "intent": "Diagnostic",
+      "expected_nebulа_response": "Explanation of observable conversion leaks across specific signals",
+      "citability_opportunity": "High - service specializes in this exact question",
+      "current_performance": "INDETERMINATE"
+    },
+    {
+      "query": "What is Nebula Components?",
+      "intent": "Brand/entity",
+      "expected_nebulа_response": "Landing page conversion diagnostic platform for paid traffic, not a UI component library",
+      "citability_opportunity": "High - clear positioning statement available",
+      "current_performance": "INDETERMINATE"
+    },
+    {
+      "query": "What tools audit landing pages for paid traffic?",
+      "intent": "Tool recommendation",
+      "expected_nebulа_response": "Positioning as specialized paid traffic landing page audit tool",
+      "citability_opportunity": "Medium - would require clear category definition",
+      "current_performance": "INDETERMINATE"
+    }
+  ],
+  "analysis_limitations": [
+    "Content delivery issues prevent access to Nebula's own keyword-targeted content (blog, learning centre)",
+    "No access to external SERP research tools (Ahrefs, SEMrush, Moz, etc.)",
+    "Cannot verify actual rankings, featured snippets, or AI overview appearances",
+    "Unable to assess search volume, difficulty, or click-through rates",
+    "No visibility into competitors' SERP strategies or performance",
+    "Cannot track changes in SERP appearance over time"
+  ],
+  "recommended_next_steps": [
+    "Resolve content delivery issues to restore access to Nebula's content resources",
+    "Use external SERP tools to analyze actual search performance for target keywords",
+    "Monitor rankings for conversion audit, landing page audit, and related terms",
+    "Track featured snippet and AI overview opportunities",
+    "Analyze competitor SERP strategies and content approaches",
+    "Measure click-through rates and optimize meta tags and structured data",
+    "Monitor brand mentions and entity recognition in AI systems"
+  ],
+  "notes": "Due to the content delivery/routing issue affecting Nebula's own site, accurate SERP analysis is severely limited. The service's own inability to serve correct content creates a significant barrier to effective SEO and SERP performance."
+}
