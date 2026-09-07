@@ -78,6 +78,7 @@ async def test_process_one_respects_in_flight_cap(monkeypatch):
     monkeypatch.setattr(audit_runner.audit_db, "mark_audit_failed", AsyncMock(return_value=True))
     monkeypatch.setattr(audit_runner, "_complete", AsyncMock())
     monkeypatch.setattr(audit_runner, "_track_failed", AsyncMock())
+    monkeypatch.setattr(audit_runner, "_load_historical", AsyncMock())
 
     async def call_in_place(fn, *args):
         result = fn(*args)
@@ -120,6 +121,7 @@ async def test_process_one_wall_clock_timeout_marks_failed_and_ledgers(monkeypat
     monkeypatch.setattr(audit_runner.audit_db, "mark_audit_failed", mark_failed)
     monkeypatch.setattr(audit_runner, "_complete", AsyncMock())
     monkeypatch.setattr(audit_runner, "_track_failed", track)
+    monkeypatch.setattr(audit_runner, "_load_historical", AsyncMock())
     monkeypatch.setattr(audit_runner, "score_job", hung_score)
     monkeypatch.setattr(audit_runner, "SCORE_TIMEOUT", 0.01)
 

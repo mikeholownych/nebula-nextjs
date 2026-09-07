@@ -13,7 +13,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 def asyncio_run(coro):
     import asyncio
-    return asyncio.new_event_loop().run_until_complete(coro)
+    return asyncio.run(coro)
 
 
 def _principal(email):

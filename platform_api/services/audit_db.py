@@ -92,7 +92,9 @@ class AuditDB:
     async def close(self):
         """Close connection pool"""
         if self.pool:
-            await self.pool.close()
+            pool = self.pool
+            self.pool = None
+            await pool.close()
 
     async def get_or_create_customer(self, email: str, name: Optional[str] = None) -> UUID:
         """Get or create customer by email."""
@@ -688,9 +690,8 @@ class AuditDB:
                 # Fire-and-forget screenshot
                 try:
                     url_row = await conn.fetchrow("SELECT url FROM audits WHERE id = $1", audit_id)
-                    if url_row:
+                    if url_row and isinstance(url_row['url'], str):
                         import asyncio as _asyncio
-                        from platform_api.services.screenshot_service import capture_audit_screenshot
                         _asyncio.create_task(
                             self._capture_and_store_screenshot(audit_id, url_row['url'])
                         )

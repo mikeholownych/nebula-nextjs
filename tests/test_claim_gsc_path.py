@@ -108,7 +108,7 @@ class ClaimGscPathTests(unittest.TestCase):
 
 
 def asyncio_run(coro):
-    return asyncio.new_event_loop().run_until_complete(coro)
+    return asyncio.run(coro)
 
 
 if __name__ == "__main__":

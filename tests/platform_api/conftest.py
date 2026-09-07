@@ -7,6 +7,8 @@ import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 
 from platform_api.main import app
+from platform_api.redis_client import redis_client
+from platform_api.services.audit_db import audit_db
 from platform_api.services import audit_runner
 
 
@@ -33,10 +35,21 @@ def reset_audit_runner_loop_primitives():
     audit_runner._wakeup = asyncio.Event()
 
 
-@pytest_asyncio.fixture(loop_scope="session")
+@pytest_asyncio.fixture
 async def client():
     """Async test client."""
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as client:
         yield client
+
+
+@pytest_asyncio.fixture(autouse=True)
+async def close_global_services():
+    """Mirror application lifespan cleanup for ASGITransport-based tests."""
+    yield
+    await audit_db.close()
+    await redis_client.disconnect()
+    # Let asyncpg/redis transport close callbacks run before pytest closes
+    # this function-scoped event loop.
+    await asyncio.sleep(0.05)

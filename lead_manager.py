@@ -17,6 +17,11 @@ A customer_97 who later buys Growth Launch upgrades to customer_997.
 
 import json, os, datetime
 
+
+def _utc_now_iso():
+    """Return the current UTC timestamp in the existing trailing-Z format."""
+    return datetime.datetime.now(datetime.UTC).isoformat().replace("+00:00", "Z")
+
 # ─── CAN-SPAM Compliance ────────────────────────────────────────────
 # Business physical address - update this to your actual business address
 BUSINESS_NAME = "Nebula Components"
@@ -151,7 +156,7 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
         return None
 
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
     existing = db.get(email)
 
     if existing:
@@ -344,7 +349,7 @@ def list_recircle_candidates(min_age_days=30, max_count=50):
     with fresh audit findings or new content every 30-60 days.
     """
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
     candidates = []
     for email, lead in db.items():
         if lead.get("opted_out"):
@@ -474,7 +479,7 @@ def beta_signup(email, url=None, name=None, company=None, role=None, source=None
         return {"status": "error", "message": "Valid email required."}
 
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
 
     # Check if already a beta tester or customer
     lead = db.get(email)
@@ -518,7 +523,7 @@ def log_checkout_visit(email):
         return False
 
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
     lead = db.get(email)
     if not lead:
         return False
@@ -561,7 +566,7 @@ def set_sequence_step_sent(email, sequence_id, step_id):
     sequences = lead.setdefault("email_sequences", {})
     seq = sequences.setdefault(sequence_id, {"sent_steps": [], "completed": False})
     if "enrolled_at" not in seq:
-        seq["enrolled_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+        seq["enrolled_at"] = _utc_now_iso()
     if step_id not in seq["sent_steps"]:
         seq["sent_steps"].append(step_id)
     _save(db)
@@ -588,7 +593,7 @@ def complete_sequence(email, sequence_id, completes_at=None):
         return False
     seq = sequences[sequence_id]
     seq["completed"] = True
-    seq["completed_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+    seq["completed_at"] = _utc_now_iso()
     # Promote stage if requested
     if completes_at:
         current = lead.get("current_stage", "")
@@ -609,7 +614,7 @@ def opt_out(email):
     if not email or "@" not in email:
         return False
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
     lead = db.get(email)
     if not lead:
         return False
@@ -636,7 +641,7 @@ def migrate_from_jsonl():
     """One-time migration: read existing intake-journal.jsonl and audit_leads.jsonl
     into the new leads DB. Safe to re-run (dedup by email)."""
     db = _load()
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = _utc_now_iso()
     changed = False
 
     # Migrate from intake-journal.jsonl
@@ -936,7 +941,7 @@ def update_competitor_messaging(name, data):
     db = _load_competitors()
     db[name.lower()] = {
         **data,
-        "last_updated": datetime.datetime.utcnow().isoformat() + "Z",
+        "last_updated": _utc_now_iso(),
     }
     _save_competitors(db)
     return {"status": "updated", "competitor": name, "total_competitors": len(db)}

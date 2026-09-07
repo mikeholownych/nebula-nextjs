@@ -45,6 +45,16 @@ describe('consent-gated analytics loading', () => {
     ).not.toBeNull()
   })
 
+  it('requires explicit consent when visitor country is unavailable', () => {
+    render(<CookieConsent />)
+    window.eval(CONSENT_RUNTIME)
+
+    expect(
+      document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+    ).toBeNull()
+    expect(document.documentElement.getAttribute('data-analytics-default')).toBe('required')
+  })
+
   it('announces consent and PostHog readiness so the landing page is attributed immediately', () => {
     render(<CookieConsent />)
     window.eval(CONSENT_RUNTIME)

@@ -13,10 +13,12 @@ be joined on the audit rather than on a person identity that is still anonymous
 when the flow starts.
 """
 
-from unittest.mock import AsyncMock
+import asyncio
+from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
+import pytest_asyncio
 
 from platform_api.routes import audit_api
 from platform_api.services import audit_runner
@@ -38,15 +40,27 @@ class FakePostHog:
         return next(props for name, props in self.captured if name == event)
 
 
-@pytest.fixture
-def posthog(monkeypatch):
+@pytest_asyncio.fixture
+async def posthog(monkeypatch):
+    from platform_api.infra.outbox import outbox
+    from platform_api.services import findings_sync
+
     client = FakePostHog()
+    content_client = AsyncMock()
+    content_client.__aenter__.return_value.post = AsyncMock()
     monkeypatch.setattr(audit_api.analytics, "track_audit_started", AsyncMock())
     monkeypatch.setattr(audit_api.analytics, "track_audit_completed", AsyncMock())
     monkeypatch.setattr(audit_api.analytics, "track_audit_failed", AsyncMock())
     monkeypatch.setattr(audit_api, "get_posthog", lambda: client)
     monkeypatch.setattr(audit_api, "_crm_audit_completed", AsyncMock())
-    return client
+    monkeypatch.setattr(outbox, "enqueue", AsyncMock(return_value="outbox-id"))
+    monkeypatch.setattr(outbox, "drain", AsyncMock(return_value=0))
+    monkeypatch.setattr(findings_sync, "sync_findings_for_audit", MagicMock(return_value={}))
+    monkeypatch.setattr(
+        audit_api.httpx, "AsyncClient", MagicMock(return_value=content_client)
+    )
+    yield client
+    await asyncio.sleep(0)
 
 
 def _job(**overrides):
@@ -104,4 +118,3 @@ async def test_no_audit_events_without_analytics_consent(monkeypatch, posthog):
     await audit_api.finalize_completed_audit(_job(analytics_consent=False), data)
 
     assert posthog.captured == []
-

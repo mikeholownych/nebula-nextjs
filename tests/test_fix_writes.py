@@ -26,7 +26,7 @@ class MarkImplementedRouteTests(unittest.TestCase):
         from platform_api.routes import audit_api as r
 
         def run(coro):
-            return asyncio.new_event_loop().run_until_complete(coro)
+            return asyncio.run(coro)
 
         return r, run
 

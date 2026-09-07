@@ -95,6 +95,11 @@ async def lifespan(_app: FastAPI):
             await stop_runner()
         except Exception:
             pass
+        try:
+            from platform_api.services.audit_db import audit_db
+            await audit_db.close()
+        except Exception:
+            pass
         await redis_client.disconnect()
         print("✅ Redis disconnected")
         shutdown_posthog()

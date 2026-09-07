@@ -6,7 +6,10 @@ export function getConsentRuntime(country: string | null = null) {
     var measurementId = 'G-KJ9S3450LH';
     var visitorCountry = ${JSON.stringify(country)};
     var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB'];
-    var euVisitor = euCountries.indexOf(visitorCountry) !== -1;
+    // Missing geo data must fail closed. GeoConsent deliberately passes null
+    // for statically rendered pages, so only a known non-EU country may use
+    // the opt-out default.
+    var consentRequired = !visitorCountry || euCountries.indexOf(visitorCountry) !== -1;
     var posthogKey = ${JSON.stringify(process.env.NEXT_PUBLIC_POSTHOG_KEY || '')};
     var banner = document.getElementById('cookie-consent-banner');
     if (!banner) return;
@@ -24,7 +27,7 @@ export function getConsentRuntime(country: string | null = null) {
       window.dataLayer = window.dataLayer || [];
       window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
       window.gtag('consent', 'default', {
-        analytics_storage: euVisitor ? 'denied' : 'granted',
+        analytics_storage: consentRequired ? 'denied' : 'granted',
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
@@ -190,8 +193,8 @@ export function getConsentRuntime(country: string | null = null) {
         if (stored.level === 'all') loadAnalytics();
         else disableAnalytics();
       } else {
-        document.documentElement.setAttribute('data-analytics-default', euVisitor ? 'required' : 'accepted');
-        if (!euVisitor) loadAnalytics();
+        document.documentElement.setAttribute('data-analytics-default', consentRequired ? 'required' : 'accepted');
+        if (!consentRequired) loadAnalytics();
         focusFirst();
       }
     } catch (error) {}

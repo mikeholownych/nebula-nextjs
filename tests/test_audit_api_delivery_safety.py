@@ -1,21 +1,37 @@
 from types import SimpleNamespace
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
+import asyncio
 
 import pytest
+import pytest_asyncio
 from fastapi import HTTPException
 
 from platform_api.routes import audit_api
 
 
-@pytest.fixture(autouse=True)
-def hermetic_admission(monkeypatch):
+@pytest_asyncio.fixture(autouse=True)
+async def hermetic_admission(monkeypatch):
     """DATA-6: queue admission must never touch a real DB from unit tests."""
-    from unittest.mock import AsyncMock
+    from platform_api.infra.outbox import outbox
+    from platform_api.services import findings_sync
+
+    content_client = AsyncMock()
+    content_client.__aenter__.return_value.post = AsyncMock()
+
     monkeypatch.setattr(
         "platform_api.routes.audit_api.audit_db.check_admission",
         AsyncMock(return_value=(True, "test-open")),
     )
+    monkeypatch.setattr(outbox, "enqueue", AsyncMock(return_value="outbox-id"))
+    monkeypatch.setattr(outbox, "drain", AsyncMock(return_value=0))
+    monkeypatch.setattr(findings_sync, "sync_findings_for_audit", MagicMock(return_value={}))
+    monkeypatch.setattr(
+        audit_api.httpx, "AsyncClient", MagicMock(return_value=content_client)
+    )
+    monkeypatch.setattr(audit_api, "_crm_audit_completed", AsyncMock())
+    yield
+    await asyncio.sleep(0)
 from platform_api.services import audit_engine, audit_runner
 
 
@@ -133,4 +149,3 @@ async def test_unexpected_audit_exception_has_stable_public_error(monkeypatch):
     assert excinfo.value.status_code == 500
     assert excinfo.value.detail == "Audit processing unavailable"
     assert secret not in str(excinfo.value.detail)
-

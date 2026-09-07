@@ -135,6 +135,7 @@ async def test_update_audit_badge_check_failure_does_not_break_completion():
     db.pool = MagicMock()
     conn = AsyncMock()
     conn.execute.return_value = 'UPDATE 1'
+    conn.fetchrow.return_value = None
     db.pool.acquire.return_value.__aenter__.return_value = conn
     db.connect = AsyncMock()
 
