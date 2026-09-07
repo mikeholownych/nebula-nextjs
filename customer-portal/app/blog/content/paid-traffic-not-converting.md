@@ -19,14 +19,14 @@ source_refs:
   - nebula-audit-method
   - nebula-audit-db-2026-09
 published_at: 2026-09-04
-updated_at: 2026-09-06
+updated_at: 2026-09-04
 reviewed_by: mike-holownych
 header_image: /blog/paid-traffic-not-converting-header.png
 ---
 
 # Why is paid traffic not converting?
 
-Paid traffic fails after the click when the landing page does not continue the promise that earned the click. Before touching your campaign settings, inspect your above-the-fold layout, message match, trust signals, and primary action. In Nebula's database of 892 completed audits, above-the-fold layout failures are the most common finding at 21.3% of all issues, more common than weak headlines (8.6%) or CTA problems (6.7%). The campaign is usually working. The page is usually the problem.
+Paid traffic fails after the click when the landing page does not continue the promise that earned the click. Before touching your campaign settings, inspect your above-the-fold layout, message match, trust signals, and primary action. Across 892 audits, above-the-fold layout failures are the most common finding. The campaign is usually working. The page is usually the problem.
 
 ## What does "not converting" actually mean?
 
@@ -148,7 +148,7 @@ If your page is below 1% on targeted paid traffic, start with the signals at the
 
 Run the same evidence-backed check on your own landing page: [free audit at Nebula Components](/audit). Takes under two minutes, no account required.
 
-Related: [What did we get wrong about filter-based targeting?](/blog/what-we-got-wrong-about-filter-based-targeting), a field note on why demographic ICP matching fails and what trigger-based targeting looks like instead.
+Related: [the filter-based targeting field note](/blog/what-we-got-wrong-about-filter-based-targeting) covers why demographic ICP matching fails and what trigger-based targeting looks like instead.
 
 ## What questions does this FAQ answer?
 
