@@ -71,19 +71,19 @@
 
 | Route | File | Owner | Canonical | Index | Notes |
 |-------|------|-------|-----------|-------|-------|
-| `/7-systems` | `app/7-systems/page.tsx` | **UNASSIGNED** | Yes | Yes | Educational landing page |
-| `/ai-sdr-vs-audit` | `app/ai-sdr-vs-audit/page.tsx` | **UNASSIGNED** | Yes | Yes | Comparison page |
-| `/concepts` | `app/concepts/page.tsx` | **UNASSIGNED** | Yes | Yes | Concepts landing |
-| `/editorial-standards` | `app/editorial-standards/page.tsx` | **UNASSIGNED** | Yes | Yes | Editorial policy |
-| `/headline-optimization` | `app/headline-optimization/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
+| `/7-systems` | `app/7-systems/page.tsx` | Mike (founder) | Yes | Yes | Educational landing page |
+| `/ai-sdr-vs-audit` | `app/ai-sdr-vs-audit/page.tsx` | Mike (founder) | Yes | Yes | Comparison page |
+| `/concepts` | `app/concepts/page.tsx` | Mike (founder) | Yes | Yes | Concepts landing |
+| `/editorial-standards` | `app/editorial-standards/page.tsx` | Mike (founder) | Yes | Yes | Editorial policy |
+| `/headline-optimization` | `app/headline-optimization/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
 | `/message-match-checklist` | `app/learning-centre/message-match-checklist/page.tsx` | Mike (founder) | Yes | Yes | Duplicate of learning-centre |
-| `/mobile-landing-page-optimization` | `app/mobile-landing-page-optimization/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
-| `/og-card-source` | `app/og-card-source/page.tsx` | **UNASSIGNED** | Yes | Yes | OG card resource |
-| `/page-speed-conversion` | `app/page-speed-conversion/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
-| `/roas-cliff` | `app/roas-cliff/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
-| `/social-proof-landing-page` | `app/social-proof-landing-page/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
-| `/what-is-landing-page-audit` | `app/what-is-landing-page-audit/page.tsx` | **UNASSIGNED** | Yes | Yes | Educational page |
-| `/cta-optimization` | `app/cta-optimization/page.tsx` | **UNASSIGNED** | Yes | Yes | SEO article |
+| `/mobile-landing-page-optimization` | `app/mobile-landing-page-optimization/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
+| `/og-card-source` | `app/og-card-source/page.tsx` | Mike (founder) | Yes | Yes | OG card resource |
+| `/page-speed-conversion` | `app/page-speed-conversion/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
+| `/roas-cliff` | `app/roas-cliff/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
+| `/social-proof-landing-page` | `app/social-proof-landing-page/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
+| `/what-is-landing-page-audit` | `app/what-is-landing-page-audit/page.tsx` | Mike (founder) | Yes | Yes | Educational page |
+| `/cta-optimization` | `app/cta-optimization/page.tsx` | Mike (founder) | Yes | Yes | SEO article |
 
 ### Archive Routes (Task 1 Quarantined)
 
@@ -129,7 +129,7 @@
 | `/api/checkout` | `app/api/checkout/route.ts` | Mike (founder) | production | POST | None required | Require `offer_key`, fail closed without |
 | `/api/email/process` | `app/api/email/process/route.ts` | Mike (founder) | production | POST | Bearer token required | Queue email processing |
 | `/api/webhooks/rb2b` | `app/api/webhooks/rb2b/route.ts` | Mike (founder) | production | POST | HMAC signature required | RB2B inbound events |
-| `/api/analytics` | `app/api/analytics/route.ts` | **UNASSIGNED** | production | GET/POST | TBD | Analytics proxy |
+| `/api/analytics` | `app/api/analytics/route.ts` | Mike (founder) | production | GET/POST | TBD | Analytics proxy |
 
 ---
 
