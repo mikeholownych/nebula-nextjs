@@ -7,7 +7,6 @@ import SiteNav from '@/components/SiteNav'
 import SiteFooter from './components/SiteFooter'
 import WebMCP from '@/components/WebMCP'
 import GeoConsent from './components/GeoConsent'
-import OgUrl from './components/OgUrl'
 import AnalyticsRuntime from './components/AnalyticsRuntime'
 import FunnelChrome from './components/FunnelChrome'
 import './globals.css'
@@ -38,6 +37,7 @@ export const metadata: Metadata = {
     siteName: brand.name,
     locale: 'en_US',
     type: 'website',
+    url: 'https://nebulacomponents.com/',
     images: [
       {
         url: brand.assets.ogDefault,
@@ -73,10 +73,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        {/* OG URL: isolated dynamic component so layout stays statically renderable */}
-        <Suspense fallback={<meta property="og:url" content="https://nebulacomponents.com/" />}>
-          <OgUrl />
-        </Suspense>
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
 
