@@ -18,7 +18,7 @@ const articleSchema = createArticleSchema({
     'The most common speed testing mistake is testing the wrong page. How to test your actual ad landing page with three tools, what to look at first, and how to act on the results.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-speed-test',
   publishedDate: '2026-08-28',
-  modifiedDate: '2026-08-28',
+  modifiedDate: '2026-09-07',
 })
 
 const faqSchema = {
@@ -47,6 +47,30 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'PageSpeed Insights measures real load performance by actually loading the page. The Nebula audit checks structural signals in the page HTML, such as render-blocking scripts, image compression, and font loading strategy. Both are useful: PageSpeed gives the measured outcome, Nebula identifies the structural causes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are Core Web Vitals and why do they matter for landing pages?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Core Web Vitals are three metrics Google uses to measure user experience: LCP (loading speed), INP (responsiveness), and CLS (visual stability). For landing pages, all three impact both rankings and conversion rates. A page can have fast LCP but fail on INP if interactions lag, directly affecting user engagement and sales.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I test my landing page speed under different network conditions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PageSpeed Insights and Chrome DevTools both allow throttling simulation. Test on 4G and 3G to see how your page performs for users on slower connections, commonly where mobile ad traffic originates. Real-world performance often differs significantly from unthrottled desktop results.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does landing page speed actually affect conversion rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Studies consistently show 100ms delays correlate with conversion drops. For paid campaigns, speed directly impacts ad ROI: slower pages have higher bounce rates and lower ROAS. Testing speed and monitoring it post-launch is essential for profitable campaigns.',
       },
     },
   ],

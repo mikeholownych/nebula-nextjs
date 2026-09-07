@@ -47,6 +47,30 @@ const faqSchema = {
         text: 'Not word-for-word, but in promise and intent. The ad creates an expectation; the landing page headline must fulfill that expectation immediately. Copying the ad headline verbatim can feel mechanical. Rephrasing the same promise in slightly different language is fine as long as the core offer and audience match.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'What are the most common landing page headline mistakes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The two most common failures are generic benefit claims that apply to anyone and brand-name-only headlines that create no expectation. Other mistakes include headlines longer than 15 words that sacrifice scannability, vague outcomes that don\'t specify what the visitor gets, and headlines that fail message match by not echoing the ad\'s promise. Any of these undermine conversion before visitors engage with body copy.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you test and optimize landing page headlines for higher conversions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A/B test one variable at a time: swap the ICP, the outcome, or the mechanism while keeping the structure constant. Run tests for statistical significance (typically 100+ conversions per variant minimum). Track not just conversion rate but also time-on-page and scroll depth: a better headline holds attention longer. Test variants against the three-component formula to identify which element is underperforming.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should you write different headlines for organic search versus paid traffic?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Paid traffic visitors have a specific expectation from the ad they clicked; your headline must mirror that promise immediately. Organic search visitors arrive with looser intent and benefit from headlines that address broader search intent. Paid headlines should match ad copy closely in promise. Organic headlines can be slightly broader while still maintaining specificity around outcome and audience.',
+      },
+    },
   ],
 }
 
