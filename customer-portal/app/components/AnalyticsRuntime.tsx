@@ -49,13 +49,6 @@ export default function AnalyticsRuntime() {
 
   useEffect(() => {
     const pagePath = `${pathname}${search ? `?${search}` : ''}`
-    const gaPageView = () => {
-      window.gtag?.('event', 'page_view', {
-        page_location: window.location.href,
-        page_path: pagePath,
-        page_title: document.title,
-      })
-    }
     const postHogPageView = () => {
       posthog.capture('$pageview', {
         $current_url: window.location.href,
@@ -63,8 +56,15 @@ export default function AnalyticsRuntime() {
       })
     }
     const funnelPageView = () => {
+      // Single source of truth for GA4 page_view. The registry maps
+      // landing_page_view -> ga4_event_name "page_view", so this one call
+      // projects to GA4, PostHog, and the internal ledger. A separate raw
+      // gtag('event','page_view') here would double-count every page view
+      // (Mimetic audit finding: sessions inflated ~2x, CVR understated ~2x).
       trackClientFunnelEvent('landing_page_view', {
         landing_path: pagePath,
+        page_location: window.location.href,
+        page_title: document.title,
         referrer_class: document.referrer ? (document.referrer.includes('google') ? 'search' : 'referral') : 'direct',
       })
     }
@@ -72,7 +72,6 @@ export default function AnalyticsRuntime() {
       funnelPageView()
       if (!hasAnalyticsConsent()) return
       persistAttribution()
-      gaPageView()
       postHogPageView()
     }
     const onPostHogReady = () => {

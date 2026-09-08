@@ -53,6 +53,8 @@
       "required_properties": ["landing_path"],
       "allowed_properties": [
         "landing_path",
+        "page_location",
+        "page_title",
         "referrer_class",
         "utm_source",
         "utm_medium",
