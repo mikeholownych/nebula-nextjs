@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "product": "Citable",
-  "version": "1.14.0",
-  "commit": "18d5a3c96d8b491640515859354e549785d77060",
+  "version": "1.15.1",
+  "commit": "54e910c01badd12bc5618ce43b963fa01a781966",
   "facts": {
-    "detectors": 123,
+    "detectors": 124,
     "namespaces": 18,
     "registries": 27,
     "providers": 12,
-    "distribution_files_per_provider": 95
+    "distribution_files_per_provider": 96
   },
   "boundary": "Citable does not guarantee crawling, indexing, ranking, citation, recommendation, or conversion.",
   "canonical_repository": "https://github.com/mikeholownych/citable",

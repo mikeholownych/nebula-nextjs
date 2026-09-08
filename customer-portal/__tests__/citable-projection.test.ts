@@ -43,14 +43,29 @@ describe('Citable public projection', () => {
     // Byte-exact copies of the citable GitHub release assets. The deployed
     // /resources/citable header and /resources/citable/llms.txt body are
     // verified against the release manifest by deployment receipts.
-    const resourceData = JSON.parse(read('public/resources/citable/resource-data.json'))
+    const resourceDataRaw = read('public/resources/citable/resource-data.json')
+    const resourceDataHash = require('node:crypto').createHash('sha256').update(resourceDataRaw).digest('hex')
+    expect(resourceDataHash).toBe('c60c9bdb1a1cb989ca991ed9e8c393f680fd2983a1058e0cea55252c1b421bf6')
+
+    const resourceData = JSON.parse(resourceDataRaw)
     expect(resourceData.product).toBe('Citable')
-    expect(resourceData.version).toMatch(/^\d+\.\d+\.\d+$/)
-    expect(resourceData.commit).toMatch(/^[0-9a-f]{40}$/)
+    expect(resourceData.version).toBe('1.15.1')
+    expect(resourceData.commit).toBe('54e910c01badd12bc5618ce43b963fa01a781966')
+    expect(resourceData.facts).toEqual({
+      detectors: 124,
+      namespaces: 18,
+      registries: 27,
+      providers: 12,
+      distribution_files_per_provider: 96,
+    })
 
     const llms = read('public/resources/citable/llms.txt')
+    const llmsHash = require('node:crypto').createHash('sha256').update(llms).digest('hex')
+    expect(llmsHash).toBe('bff5fec98b8c530b4e153c15ab0b44e3f3a27f24e818d4d26afb9657ac104d50')
+
     expect(llms.startsWith('# Citable\n')).toBe(true)
     expect(llms).toContain(`- Version: ${resourceData.version}`)
     expect(llms).toContain(`- Release commit: ${resourceData.commit}`)
   })
 })
+
