@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Facebook Ads Clicks But No Leads: Fix The Page | Nebula',
@@ -217,6 +218,31 @@ export default function FacebookAdsNoLeadsPage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'How do I tell whether the ad or the landing page is the leak?',
+              answer:
+                'Compare click-through rate against conversion rate. A CTR above roughly one percent with a CVR below one percent suggests the ad is generating interest and the page is failing to hold it. A CTR below about half a percent points to the ad creative or audience before the page.',
+            },
+            {
+              question: 'What is message match and why does it matter for Meta traffic?',
+              answer:
+                'Message match is the continuity between the ad and the page, in tone, visual style, and the specific promise made. Meta visitors arrive from a passive scroll with no prior relationship, so a page that resets the tone or promise creates immediate dissonance and the trust the ad built evaporates.',
+            },
+            {
+              question: 'How much proof should a Meta landing page show before the form?',
+              answer:
+                'At minimum, one or two testimonials with a name, photo, and specific result should appear above or next to the form, plus a real face in the first screen. Generic star ratings without context do not carry the same weight for cold traffic.',
+            },
+            {
+              question: 'Should I use Meta Lead Forms or a dedicated landing page?',
+              answer:
+                'Neither is universally correct. Lead Forms pre-fill profile data and reduce steps, while a landing page adds load and reading time that may filter intent or add abandonment. Compare both paths on the same definitions for qualified lead, response, and sale, then choose the friction level your follow-up process can support.',
+            },
+          ]}
+        />
 
         {/* Related Links */}
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Proof Before CTA: Social Proof Placement Guide | Nebula',
@@ -311,6 +312,31 @@ export default function ProofBeforeCTAPage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why does asking before proving fail?',
+              answer:
+                'Visitors evaluate an ask using the information they have already seen. A CTA that appears before any relevant evidence gives them less context for that judgment, so they may bounce not because the offer is wrong but because the page gave no reason to trust it first.',
+            },
+            {
+              question: 'What actually counts as proof?',
+              answer:
+                'Proof earns trust in proportion to its specificity and verifiability. Outcome statistics with an inspectable source and method, two-sentence case study snippets, named testimonials with role and company, and recognisable logos all carry more weight than generic praise.',
+            },
+            {
+              question: 'Where should proof go relative to the CTA?',
+              answer:
+                'Place one relevant proof element before the first meaningful CTA, meaning any button asking for contact details, a purchase, a demo, or a trial. Proof earns its value at the moment of hesitation, not as decoration at the bottom of the page.',
+            },
+            {
+              question: 'What if I have no testimonials yet?',
+              answer:
+                'Substitute a different verifiable form of proof. A specific process claim, a plain statement of founder or operator credibility, or transparent scarcity all read as more trustworthy than an invented number or an empty proof slot.',
+            },
+          ]}
+        />
 
         {/* Related articles grid */}
         <section className="mt-10">

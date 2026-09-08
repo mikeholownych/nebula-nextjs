@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer',
@@ -173,6 +174,31 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
             After fixing the H1, apply the continuity test again. After that edit, check whether the remaining friction - usually in the subheadline or the primary CTA - is now easier to identify and fix because the continuity from the ad is established. Work sequentially from the top of the page, fixing the gaps the test reveals, until reading the ad and then reading the page feels like a single continuous experience.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is message match?',
+              answer:
+                'Message match is the continuity between what your ad promises and what your landing page delivers. It covers tone, offer, and audience, not just repeating keywords. When the ad and page feel like one continuous experience, the visitor does not have to reorient after clicking.',
+            },
+            {
+              question: 'How do I know if my ad and page are mismatched?',
+              answer:
+                'Run the continuity test. Read your ad, write down what you expect to see on the page, then look at the page. Name the specific gap, such as an urgent ad landing on a formal page or a free-audit ad landing on a pricing page.',
+            },
+            {
+              question: 'What is the first fix to try?',
+              answer:
+                'Rewrite the H1 to echo the specific promise of the ad. The H1 is the handoff point where the visitor decides they are in the right place. Fix it first, then re-run the continuity test and work down the page.',
+            },
+            {
+              question: 'Do different ad platforms fail differently?',
+              answer:
+                'Yes. Google Search visitors arrive with active intent, Meta visitors arrive in an emotional state, LinkedIn visitors expect a peer register, and TikTok visitors expect content-like energy. Each platform has a characteristic way the page can break continuity.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

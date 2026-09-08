@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'The LinkedIn-to-Page Authority Gap | Nebula Learning Centre',
@@ -402,6 +403,27 @@ export default function LinkedInAuthorityGapPage() {
             </li>
           </ul>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is the LinkedIn authority gap?',
+              answer: 'It is the mismatch between a high-credential LinkedIn audience and a page built for impulse-driven traffic. The visitor arrives as a vendor evaluator and runs a credibility audit the page was never built to pass.',
+            },
+            {
+              question: 'What do LinkedIn visitors scrutinise first?',
+              answer: 'Founder and company credentials, specific attributable results, professional register, and peer-group relevance. If any of these four signals is weak, the visitor bounces within the first 15 seconds.',
+            },
+            {
+              question: 'Why is my cost per lead so much higher on LinkedIn?',
+              answer: 'LinkedIn CPCs run higher than Facebook, and if the page was not built for a credibility-first audience, the conversion rate drops at the same time. The combined effect inflates cost per lead, but the page, not the channel, is usually the problem.',
+            },
+            {
+              question: 'Does a shorter form always convert better?',
+              answer: 'Not for LinkedIn audiences. Sequence matters more than field count. A visitor who has been convinced of your credibility will complete a longer form, while an unconvinced visitor will resist even a single field.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

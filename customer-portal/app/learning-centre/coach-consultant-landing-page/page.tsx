@@ -126,6 +126,19 @@ export default function CoachConsultantLandingPagePage() {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+          <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
+          <div className="space-y-6">
+            {faqSchema.mainEntity.map((item, i) => (
+              <div key={i} className="border-b border-border pb-6 last:border-0 last:pb-0">
+                <h3 className="mb-2 font-semibold text-fg">{item.name}</h3>
+                <p className="leading-relaxed text-fg-muted">{item.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">

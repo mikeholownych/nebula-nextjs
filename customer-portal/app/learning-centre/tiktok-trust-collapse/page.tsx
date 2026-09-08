@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: "The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019 | Nebula",
@@ -185,6 +186,27 @@ export default function TiktokTrustCollapsePage() {
             If you answer yes to all six, your page is ready for TikTok traffic. If you answer no to three or more, fixing the page before running ads will return more value than any bid strategy optimisation you could apply.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why do Gen Z buyers bounce from my landing page?',
+              answer: 'TikTok trains buyers to detect inauthenticity in under two seconds. A page built from a generic SaaS template, with stock photos and corporate language, registers as not real. The ad felt authentic but the page did not, so the buyer leaves the moment the two worlds clash.',
+            },
+            {
+              question: 'What trust elements does TikTok traffic specifically require?',
+              answer: 'A real founder face, named customers with specific outcomes, human language, and dated proof. An actual photograph of the person who built the product matters more than any headline test for TikTok-sourced traffic, and specific results like a named customer with a concrete number outperform anonymous testimonials.',
+            },
+            {
+              question: 'Should I show pricing on my landing page?',
+              answer: 'Yes. Hidden or form-gated pricing kills the momentum of an impulse-adjacent TikTok buyer. If your pricing is complex, show a starting point such as a from price with a link to the full pricing page, rather than asking the visitor to fill out a form to learn whether they can afford it.',
+            },
+            {
+              question: 'What social proof format works for TikTok buyers?',
+              answer: 'Peer validation beats institutional validation. Short-form video testimonials, screenshots of real Slack messages or emails, and first-name proof outperform formal case studies and award badges. The rough edges are features because they signal the proof is real.',
+            },
+          ]}
+        />
 
         {/* Related Articles */}
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

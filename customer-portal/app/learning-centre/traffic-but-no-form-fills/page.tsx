@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Traffic But No Form Fills: Fix The Leak | Nebula',
@@ -110,6 +111,27 @@ export default function TrafficButNoFormFillsPage() {
             </div>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why is my form not the first thing I should fix?',
+              answer: 'The form is the last gate in the conversion chain, not the first. If trust, clarity, or credibility broke down in the first 10 seconds, the visitor left long before they scrolled far enough to see the form. No amount of form optimisation recovers a conversion that was already lost.',
+            },
+            {
+              question: 'How many fields should my form have?',
+              answer: 'For most B2B lead generation, the minimum viable form is name and email. Every additional field costs completions, and a form asking for phone, company, and company size becomes a multi-decision obstacle. Ask for extra information after the initial conversion, once a relationship exists.',
+            },
+            {
+              question: 'What should my submit button say?',
+              answer: 'The button should name the outcome the visitor receives, not the action being done to them. Use copy like get my free audit or send my leak report instead of submit. If the answer to what do I get when I click this is not in the button, the button is working against you.',
+            },
+            {
+              question: 'How do I tell whether the form or the page above it is the problem?',
+              answer: 'Check scroll depth. If fewer than 30% of sessions reach the form, the problem is everything above it. If 70% reach the form but only a small fraction fill it, the form and its surrounding context are the issue. Heatmaps and session recordings help you see where visitors actually drop off.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
@@ -230,6 +231,27 @@ export default function TiktokLandingPageScrollSpeedGapPage() {
             The scroll-speed gap is solvable. It does not require a complete rebuild - it requires understanding that TikTok traffic and Google traffic are different psychological contracts, and designing the above-fold experience accordingly. Fix the structural mismatch, validate with real mobile scroll-depth data, then scale with confidence.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is the TikTok scroll-speed gap?',
+              answer: 'TikTok trains users to make pass or fail decisions in under a second, while most landing pages were built for Google traffic that arrives with declared intent. When a TikTok click lands on a slow, text-heavy page, the visitor is still in rapid-rejection mode and leaves before the page can make its case.',
+            },
+            {
+              question: 'What should be above the fold for TikTok traffic?',
+              answer: 'Three things must be true: visual continuity with the ad, movement or implied momentum, and an emotional hook before logic. The above-fold section has one job for TikTok traffic, which is to earn the first scroll, not to convert or explain.',
+            },
+            {
+              question: 'Why does a text-heavy above-fold block conversions?',
+              answer: 'Scroll-depth data on TikTok-sourced traffic consistently shows most exits happen before the first scroll on text-heavy layouts. The visitor reads a few words of the headline, does not feel the continuation of the ad, and leaves before ever seeing the testimonials or offer.',
+            },
+            {
+              question: 'How do I test whether my page matches my ad?',
+              answer: 'Run the offer continuity test. Watch the last 3 seconds of your ad on your phone, then open your landing page on the same phone and ask whether the first screen feels like a continuation of that energy. A perceptible drop in energy is a continuity gap where budget burns.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

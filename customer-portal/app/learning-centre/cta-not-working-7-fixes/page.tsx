@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'CTA Not Working? 7 Fixes That Actually Convert | Nebula Components',
@@ -267,6 +268,31 @@ export default function CTANotWorkingSevenFixes() {
             <p>
               Score 3 or fewer "Y"? Your CTA is structurally broken,not just a copy tweak. Run a full conversion leak audit before shipping changes.
             </p>
+
+            <ArticleFaq
+              faqItems={[
+                {
+                  question: 'How do I know whether my CTA is the problem or something else?',
+                  answer:
+                    'Check the surrounding signals first. If the CTA is below the fold, the same color as body text, or smaller than the headline, the issue is likely placement and contrast rather than the offer itself. Run the audit checklist in this article and score each signal; three or fewer passes suggests the CTA is structurally buried.',
+                },
+                {
+                  question: 'Where should my CTA sit on the page?',
+                  answer:
+                    'The CTA should be visually dominant on the first scan, not tucked after a paragraph and bullet list. Place it in its own column, aligned with the headline, with isolated whitespace on all sides so it reads as the single next action.',
+                },
+                {
+                  question: 'What makes CTA copy clear?',
+                  answer:
+                    'The copy should mirror the headline promise. If the headline says fix your CTA, the button should say fix my CTA, not a generic label like learn more. A three-second glance should make the expected action obvious.',
+                },
+                {
+                  question: 'How do I test whether a CTA change actually helps?',
+                  answer:
+                    'Run a test with at least three variants and hold it until you reach statistical significance, around 95 percent confidence with enough conversions per variant. If no winner emerges after a meaningful number of conversions, the issue is more likely the surrounding signals than the CTA itself.',
+                },
+              ]}
+            />
 
             <div className="my-12 rounded-xl bg-bg-muted p-8 text-center">
               <h3 className="heading-3 mb-4">Tired of Guessing?</h3>

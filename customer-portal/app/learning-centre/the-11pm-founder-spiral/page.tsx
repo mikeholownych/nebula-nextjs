@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'The 11pm Founder Spiral | Nebula Learning Centre',
@@ -142,6 +143,27 @@ export default function The11pmFounderSpiralPage() {
             The spiral doesn't end because you found reassurance. It ends because you replaced the vague dread with a specific list. Specific problems have solutions. Vague dread just compounds.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why do I keep refreshing Ads Manager at night instead of fixing my page?',
+              answer: 'The midnight refresh loop is a compulsion dressed up as diligence. You are sitting with uncertainty and doing something, anything, to feel in control. The dashboard only shows upstream metrics like impressions and CTR, so it cannot tell you what is actually wrong with the page your ads send people to.',
+            },
+            {
+              question: 'What does Ads Manager miss about my landing page?',
+              answer: 'Ads Manager measures delivery, reach, and click volume. It has no visibility into what happens after the click, such as whether your H1 loaded before the visitor left, whether page weight caused a blank screen on mobile, or whether trust signals now point to broken links.',
+            },
+            {
+              question: 'Why do late-night edits make my results worse?',
+              answer: 'Anxiety-driven edits introduce variables you cannot isolate later. When the numbers change in a few days, you will not know what caused it. Acting on anxiety instead of evidence corrupts your own data and can pause campaigns that were actually performing.',
+            },
+            {
+              question: 'What is the one thing I should do instead of spiraling?',
+              answer: 'Find the specific, enumerated list of issues silently degrading your page. A truncated H1, oversized page weight, and broken trust signals are concrete problems with concrete fixes. Replacing vague dread with a specific list is what ends the spiral.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

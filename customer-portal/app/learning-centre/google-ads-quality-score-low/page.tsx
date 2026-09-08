@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Google Ads Quality Score Low: Fix The Page | Nebula',
@@ -217,6 +218,27 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What does a low Quality Score actually tell me?',
+              answer: "Quality Score is Google's prediction of how relevant your ad and landing page are to the person searching. It is not a judgment of your business. A low score usually means the page does not match what the searcher expected after clicking the ad.",
+            },
+            {
+              question: 'Should I fix the ad or the landing page first?',
+              answer: 'Check the component breakdown before acting. If landing page experience is below average while relevance and CTR are fine, the leak is on the page. If all three components are below average, the keyword itself may be mismatched to your offer.',
+            },
+            {
+              question: 'What page factors most affect Quality Score?',
+              answer: "Load speed, content match, and click-through behavior. If the page takes more than three seconds, or the first screen does not repeat the ad's promise, searchers bounce and Google lowers the score for that keyword-page pair.",
+            },
+            {
+              question: 'When should I stop trying to fix a keyword?',
+              answer: 'Consider pausing or negative-matching when Quality Score stays below 3 for 30 days despite fixes, bounce rate stays over 70 percent, or the page converts for other keywords but not this one. The leak may be targeting the wrong intent.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>

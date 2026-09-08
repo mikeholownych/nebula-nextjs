@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Retargeting Ads Not Converting: The Landing Page Is Still The Issue | Nebula Components',
@@ -168,6 +169,31 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why do retargeting ads fail to convert?',
+              answer:
+                'Retargeting reminds rather than creates demand. If the first visit did not move the visitor toward action, the tenth visit will not either. The problem is usually the page, not the ads, because retargeting amplifies what already exists.',
+            },
+            {
+              question: 'Should I segment retargeting by drop-off point?',
+              answer:
+                'Yes. A visitor who bounced in under ten seconds has a different problem than one who reached checkout and abandoned. Segment by where they left and retarget each group to a page or section that addresses that specific leak.',
+            },
+            {
+              question: 'How do I diagnose whether the page or the retargeting is the leak?',
+              answer:
+                'Compare cold traffic and returning traffic conversion rates. If cold traffic converts below 1 percent, the landing page is the leak. If cold traffic converts well but returning traffic is flat, the retargeting message may be misaligned.',
+            },
+            {
+              question: 'What should I check before adjusting retargeting budgets?',
+              answer:
+                'Read the landing page as a first-time visitor and confirm the headline matches the ad promise. Check the mobile experience, since most retargeting impressions happen on mobile. Reduce form friction and add social proof above the fold.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>

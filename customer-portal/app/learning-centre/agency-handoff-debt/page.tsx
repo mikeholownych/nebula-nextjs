@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Agency Handoff Debt: 7 Regressions That Hurt Conversions',
@@ -231,6 +232,31 @@ export default function AgencyHandoffDebtPage() {
             ways that compounded each other silently.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is agency handoff debt?',
+              answer:
+                'It is the compounding damage that accumulates when a landing page moves from the people who optimised it to the people who maintain it. Small, individually defensible changes such as a shortened meta description or a softened CTA add up to a page that converts far below its original level.',
+            },
+            {
+              question: 'What are the most common regressions after a handoff?',
+              answer:
+                'The article lists seven: a shortened meta description, social proof moved below the fold, a deleted conversion pixel, a rewritten H1, slower page load, broken trust logos, and a CTA that lost its action verb.',
+            },
+            {
+              question: 'How do I check if my page has regressed?',
+              answer:
+                'Compare the live page against the agency handoff document or a Wayback Machine snapshot. Check meta description length, H1 keyword alignment, CTA wording, social proof placement, page speed, and whether any logo images return 404.',
+            },
+            {
+              question: 'Why does a single small change matter?',
+              answer:
+                'No single change craters a page on its own, but several together compound. A page running at reduced efficiency across every layer of the funnel can convert at half its original rate while still looking fine on a casual review.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

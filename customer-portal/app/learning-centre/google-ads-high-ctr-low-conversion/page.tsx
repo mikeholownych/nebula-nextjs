@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit | Nebula',
@@ -162,6 +163,31 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             The 10x gap in conversion rate rarely requires 10x more work to close. Most CTR–CVR disconnects are resolved by fixing the H1, surfacing a price signal, moving one trust element above the fold, and simplifying the form. These are four discrete changes - not a rebuild.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What does a high CTR with a low conversion rate tell me?',
+              answer:
+                'It suggests the ad is generating interest and the conversion gap sits between the click and the action. The query intent, ad copy, and audience are matching well enough to earn the click, which makes the landing page the next logical place to investigate.',
+            },
+            {
+              question: 'Why does my page fail high-intent visitors even when it loads fast?',
+              answer:
+                'High-intent visitors arrive expecting a direct answer to their query. If the H1 talks about the brand mission instead of mirroring the search term, pricing is hidden behind a contact us CTA, and trust signals sit below the fold, the page fails to confirm the visitor is in the right place within the first few seconds.',
+            },
+            {
+              question: 'Does a good Quality Score mean my landing page is fine?',
+              answer:
+                'Not necessarily. Quality Score measures expected CTR and landing page experience signals like load speed and mobile usability, not whether a visitor actually converts. A page can have a high Quality Score and still convert poorly because the H1 does not match query intent and there is no price signal above the fold.',
+            },
+            {
+              question: 'What should I check first when diagnosing a CTR to CVR gap?',
+              answer:
+                'Check the H1 against the exact keyword driving the most clicks, screenshot the above-fold mobile view to confirm it contains a query-matching H1, a price or offer signal, a trust marker, and a visible CTA, then count the fields in your primary form. Each missing element is a candidate leak.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="rounded-2xl bg-accent/10 border border-accent/20 px-8 py-10 mb-12">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Why Your LinkedIn Ad Does the Job and Your Landing Page Undoes It | Nebula',
@@ -322,6 +323,27 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
             everyone in the evaluation phase - which on LinkedIn is the majority of your audience.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why does my LinkedIn ad get clicks but the page loses the conversion?',
+              answer: 'The gap is usually between the professional register of the ad and the generic marketing language on the page. The ad makes an implicit contract that the page then breaks, and the visitor leaves without explaining why.',
+            },
+            {
+              question: 'What is register collapse?',
+              answer: 'It is when a precise, peer-level ad leads to a page full of consumer-grade language like amazing or game-changer. The visitor notices the drop in register and stops trusting that the product delivers what the ad implied.',
+            },
+            {
+              question: 'What are the most common credibility leaks on a LinkedIn landing page?',
+              answer: 'Stock photos that contradict the ad tone, casual consumer language, generic pricing tiers, B2B proof buried below the fold, and forms that ask for a personal email on a professional offer.',
+            },
+            {
+              question: 'How do I adapt an existing page for LinkedIn traffic without a redesign?',
+              answer: 'Rewrite the headline to mirror the ad, add a professional-context qualifier to the subheadline, move credible B2B proof above the fold, replace the stock photo, require a work email, and soften the CTA to match evaluation intent.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

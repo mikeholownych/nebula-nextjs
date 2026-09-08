@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Founder Confessions: When We Found Our Page Was Broken',
@@ -156,6 +157,31 @@ export default function ConfessionsPage() {
             Submit anonymously →
           </a>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is this article about?',
+              answer:
+                'It collects anonymous stories from founders whose landing pages were silently broken for weeks or months. Each story shows what they spent, how long the problem lasted, and what they blamed instead of the real cause.',
+            },
+            {
+              question: 'What is the common thread in these stories?',
+              answer:
+                'In every case the founder did not know the page was broken. They blamed keywords, algorithms, targeting, or their sales process, while the real problem was a technical or structural issue on the page itself.',
+            },
+            {
+              question: 'What kinds of problems did the audits find?',
+              answer:
+                'A truncated H1, a page with an autoplaying video that slowed load time, testimonials that 404ed, a meta description cut off mid-sentence, and a CTA hidden behind a hamburger menu on mobile.',
+            },
+            {
+              question: 'How can I find out if my page is broken?',
+              answer:
+                'Run a free audit. It checks the structural elements that most often fail silently, such as headline rendering, page weight, broken assets, and mobile CTA visibility, in under two minutes.',
+            },
+          ]}
+        />
 
         {/* Audit CTA */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

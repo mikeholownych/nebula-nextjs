@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Fix Headline & CTA Mismatch on Landing Pages | Nebula',
@@ -155,6 +156,27 @@ export default function HeadlineCtaMismatchPage() {
             <strong className="text-fg">Pattern 3 - Rewrite the headline to match the CTA you can&apos;t change.</strong> Sometimes the funnel is fixed and the CTA cannot move. If you must say &ldquo;Book a call,&rdquo; write a headline that makes a call feel like the logical next step - not a departure from it. &ldquo;See exactly where your trial conversion is breaking&rdquo; → &ldquo;Book a call&rdquo; works. The headline sets up a diagnostic; the call is where the diagnosis happens.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is a headline-CTA mismatch?',
+              answer: 'It is when your headline creates one expectation and your CTA asks for a different action. The visitor experiences a bait-and-switch they cannot articulate, so they leave without telling you why.',
+            },
+            {
+              question: 'How do I spot a mismatch on my own page?',
+              answer: 'Use the cover-the-page test. Read the headline, cover the rest of the page, and write down what you expect to be able to do next. If your CTA does not match that expectation, the verb gap is the problem.',
+            },
+            {
+              question: 'What is the verb gap?',
+              answer: 'Headlines tend to use outcome verbs like stop, close, or fix, while CTAs use process verbs like read, learn, or explore. When a visitor comes for an outcome and is handed a process, the page has broken its promise.',
+            },
+            {
+              question: 'How do I fix a mismatch without changing my offer?',
+              answer: 'Mirror the outcome verb in the CTA, name the next step as the outcome rather than the process, or rewrite the headline to make the existing CTA feel like the logical next step.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

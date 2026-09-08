@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'TikTok Ads Getting Views But No Sales: Fix The Landing Page | Nebula Components',
@@ -119,6 +120,27 @@ export default function TiktokAdsNotConvertingPage() {
             For TikTok traffic specifically, the risk reversal is often the single highest-leverage addition you can make to a page. A genuine, clearly-worded guarantee eliminates the primary objection for impulse-adjacent buyers who don't have existing trust in your brand.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why do my TikTok ads get views but no sales?',
+              answer: 'The gap is usually on the landing page, not in the creative or targeting. TikTok creative spikes emotional engagement, and when the click lands on a page that feels like a jarring gear-change, the sale dies before the visitor reads a line of copy.',
+            },
+            {
+              question: 'How fast does my landing page need to be for TikTok traffic?',
+              answer: 'TikTok is effectively 100% mobile, so your page should render meaningfully in under 2.5 seconds. Check your LCP in Google PageSpeed Insights on mobile. An LCP above 3 seconds is a conversion leak disguised as a targeting problem.',
+            },
+            {
+              question: 'What kind of social proof works for TikTok traffic?',
+              answer: 'TikTok users are calibrated to distrust polished testimonials. Short embedded video testimonials, screenshots of real DMs or comments, and specific numbers with context all outperform staged headshot grids. The first proof should validate the exact claim your ad made.',
+            },
+            {
+              question: 'How do I close the trust gap for an unknown brand?',
+              answer: 'Show a money-back guarantee or risk reversal above the fold, reveal the real person behind the brand, and add third-party trust signals. For TikTok traffic, a clearly-worded guarantee is often the single highest-leverage addition because it removes the primary objection for impulse-adjacent buyers.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even | Nebula',
@@ -248,6 +249,31 @@ export default function CpcBreakEvenLandingPagePage() {
             when it should have been the first.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'How do I calculate my break-even conversion rate?',
+              answer:
+                'Divide your CPC by your average order value. For example, a $50 CPC and $200 AOV means 50 divided by 200, or 25%, just to recover ad spend before any margin or overhead.',
+            },
+            {
+              question: 'Why is a 25% conversion rate unrealistic?',
+              answer:
+                'Median ecommerce conversion rates are around 1 to 3 percent, and a well-optimised page might reach 5 to 8 percent. A 25% target is a unit economics mismatch, meaning the CPC is too high for the AOV, not a page optimisation problem.',
+            },
+            {
+              question: 'What levers can I pull if the math does not work?',
+              answer:
+                'Bring the CPC down through tighter targeting or better Quality Score, raise the AOV through bundles or upsells, or accept a first-purchase loss and justify it through lifetime value.',
+            },
+            {
+              question: 'How does lifetime value change the calculation?',
+              answer:
+                'If a customer pays $200 upfront but generates $800 over time, your break-even CVR becomes 50 divided by 800, or 6.25%. The constraint then becomes whether your LTV data is reliable enough to justify the initial loss.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="mb-12 rounded-2xl border border-accent/20 bg-accent/5 px-8 py-10">

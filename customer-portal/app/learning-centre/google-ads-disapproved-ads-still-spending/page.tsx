@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Google Ads Disapproved But Still Spending: What To Do | Nebula Components',
@@ -195,6 +196,31 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why is my disapproved ad still spending money?',
+              answer:
+                'Disapproval and delivery are not always the same switch. Google may not re-crawl a live page on every impression, so a page that passed review and then broke can keep serving until the next crawl. A limited policy status can also keep serving in some contexts while under review.',
+            },
+            {
+              question: 'What landing page issues trigger a Google Ads disapproval?',
+              answer:
+                'Common hidden triggers include redirects that mask the final destination, bridge pages with little original content, pages overloaded with ads, and malware or unwanted software from third-party scripts or expired certificates. These are often invisible to the advertiser because the page still loads and looks fine.',
+            },
+            {
+              question: 'How do I check whether my page is the cause of the disapproval?',
+              answer:
+                'Run through the landing page checklist: confirm the destination URL loads without intermediate redirects, the content is original and substantial, affiliate links are disclosed, SSL is valid with no mixed content, third-party scripts come from reputable sources, and contact and privacy information is visible.',
+            },
+            {
+              question: 'Does fixing the page instantly restore my ad?',
+              answer:
+                'No. Fixing the page does not automatically restore delivery. Each disapproved ad must be resubmitted for review, which can add days to the timeline. Preventing the violation before it triggers review is more reliable and less disruptive than recovering after the fact.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>

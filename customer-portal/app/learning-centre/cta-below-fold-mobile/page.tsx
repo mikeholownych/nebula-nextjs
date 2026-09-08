@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Your CTA May Be Below the Fold on Smaller Phones | Nebula',
@@ -243,6 +244,31 @@ export default function CtaBelowFoldMobilePage() {
             hero section, because padding and wrapping text will erode it faster than you expect.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why does my CTA look fine on my phone but not on others?',
+              answer:
+                'You are likely testing on a recent flagship with a tall screen. On a 375px-wide device like an iPhone SE, the same layout reflows and pushes the CTA below the fold, where visitors who never scroll will not see it.',
+            },
+            {
+              question: 'What is the 375px problem?',
+              answer:
+                '375px is the CSS viewport width of the iPhone SE and many budget Android phones, one of the most common widths in mobile analytics. Layouts that work at 390px or 414px often break at 375px because text wraps and padding consumes more of the viewport.',
+            },
+            {
+              question: 'How do I check my page right now?',
+              answer:
+                'Open Chrome DevTools, enable device mode, and select iPhone SE at 375 by 667 pixels. Without scrolling, check whether your CTA is fully visible. Also test at 360 by 740 and a custom 375 by 667 size.',
+            },
+            {
+              question: 'What is the fastest fix?',
+              answer:
+                'A sticky CTA bar fixed to the bottom of the mobile viewport keeps the call to action visible regardless of scroll position. For new builds, budget the above-fold area so the CTA is the third element a visitor sees after the headline and supporting line.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

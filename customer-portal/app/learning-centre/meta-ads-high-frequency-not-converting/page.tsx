@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Meta Ads High Frequency Not Converting: Check the Landing Page | Nebula Components',
@@ -193,6 +194,31 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'How do I know if the ad or the page is the problem?',
+              answer:
+                'Look at the relationship between frequency, CTR, and conversions. If frequency is high but CTR is stable and clicks are still coming while conversions stall, the page is worth investigating. If CTR is dropping, the ad itself is likely fatigued.',
+            },
+            {
+              question: 'Does frequency above 5 always mean ad fatigue?',
+              answer:
+                'No. The threshold moves with placement. Feed placements tend to erode past a frequency of 6 to 7, while Stories and Reels often erode by 3 to 4 because they are skippable in under a second. Break your frequency report out by placement before deciding.',
+            },
+            {
+              question: 'Why does the page fail first at high frequency?',
+              answer:
+                'Repeat viewers have already formed an expectation from seeing the ad several times. A static page that never changes its headline stops matching the specific angle that got them to click, and a page with no new information gives a repeat visitor no reason to convert where earlier visits did not.',
+            },
+            {
+              question: 'What test should I run before pausing the ad?',
+              answer:
+                'Keep the ad running if CTR is above benchmark, build a landing page variant that matches the ad hook precisely, and send a portion of traffic to it. Measure conversions, not just clicks. If the new page converts at a higher rate while frequency stays stable, the page was the leak.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>

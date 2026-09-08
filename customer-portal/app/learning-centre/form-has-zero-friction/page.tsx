@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: "Your Form Has Zero Friction - and That May Be Why Nobody Fills It Out | Nebula",
@@ -215,6 +216,31 @@ export default function FormHasZeroFrictionPage() {
             that contains the form.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why would a form with no friction still get no submissions?',
+              answer:
+                'A bare name-and-email form communicates very little about how seriously the company takes inbound enquiries. Visitors read the form as evidence of the response they will get, so a four-second form can signal a low-effort, automated reply rather than a considered one.',
+            },
+            {
+              question: 'Which types of friction should I remove and which should I keep?',
+              answer:
+                'Remove anxiety friction such as phone numbers before trust, required company size fields, and CAPTCHA on low-traffic forms. Keep confidence friction, like a specific open-ended question about the visitor situation, because it signals that real attention follows without raising the cost of submitting.',
+            },
+            {
+              question: 'What should sit around my form to build trust?',
+              answer:
+                'Answer four questions before the submit button: who responds, how quickly, what happens next, and who else has done this. A name or role, a specific response time, a one-sentence next step, and a single client name next to the button all reduce hesitation.',
+            },
+            {
+              question: 'What happens after someone submits the form?',
+              answer:
+                'The post-submit experience is part of the conversion. A generic thanks message with no confirmation email or response time gives the visitor no reason to believe the submission went anywhere. A confirmation that sets expectations, plus an automated email that repeats what was submitted, makes the form feel like it worked.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

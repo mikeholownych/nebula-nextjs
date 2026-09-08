@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'LinkedIn Ads Getting Clicks But No Conversions: Fix The Page First | Nebula Components',
@@ -197,6 +198,27 @@ export default function LinkedinAdsNotConvertingPage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What should I check first when LinkedIn ads get clicks but no conversions?',
+              answer: 'Separate campaign delivery from post-click behavior. Confirm conversion events are tracked, then segment traffic by campaign, audience, device, and page to see how visitors behave on the page they actually receive.',
+            },
+            {
+              question: 'Is a demo request the right CTA for cold LinkedIn traffic?',
+              answer: "Not always. A demo is a high-commitment first step for someone seeing your brand for the first time. Test whether a specific guide or relevant tool better matches the ad's promised next step.",
+            },
+            {
+              question: 'What kind of proof do B2B decision makers need?',
+              answer: 'Peer proof, not feature lists. Named testimonials with title and outcome, logos of recognisable companies in their peer group, and case study metrics that are visible before the CTA.',
+            },
+            {
+              question: 'How do I diagnose message match between my ad and page?',
+              answer: "Read the ad headline, then the page headline, and ask whether the page feels like the logical continuation of the ad's promise. The specific outcome named in the ad should be reflected, not paraphrased, above the fold.",
+            },
+          ]}
+        />
 
         {/* Related links */}
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

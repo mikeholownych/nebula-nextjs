@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'CTA Not Working? Fix Commitment, Clarity, And Timing | Nebula',
@@ -167,6 +168,31 @@ export default function CtaNotWorkingPage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Why is my CTA not working?',
+              answer:
+                'Most CTA failures are a commitment mismatch, where the page asks for more trust than it has built. The button itself is usually fine; the sequence of proof before the ask is broken.',
+            },
+            {
+              question: 'What are the four CTA failure modes?',
+              answer:
+                'Wrong timing, where the CTA appears before proof; wrong copy, where generic verbs hide the outcome; wrong commitment level, where the ask is too high for a cold visitor; and wrong visual contrast, where the button does not stand out.',
+            },
+            {
+              question: 'What is the commitment ladder?',
+              answer:
+                'It matches your ask to traffic temperature. Cold traffic gets a low-friction, value-first ask like a free report. Warm traffic can handle a short call or low-price entry. Hot traffic is ready for a direct buy or start CTA.',
+            },
+            {
+              question: 'What copy formula should I use?',
+              answer:
+                'Action verb plus specific outcome plus risk reducer. For example, "Get my free leak report" instead of "Submit", or "Book a 15-min audit call, no pitch" instead of "Book a call".',
+            },
+          ]}
+        />
 
         {/* Related Links */}
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">

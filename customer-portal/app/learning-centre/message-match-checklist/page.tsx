@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Message Match Checklist: Improve Ad-to-Page Conversion | Nebula',
@@ -208,6 +209,31 @@ export default function MessageMatchChecklistPage() {
               ))}
             </ul>
           </section>
+
+          <ArticleFaq
+            faqItems={[
+              {
+                question: 'What is message match?',
+                answer:
+                  'Message match is the degree of continuity between the specific words and offer in your ad and the words and offer on the page that ad points to. It is a direct comparison of two pieces of copy, not a vague concept of alignment.',
+              },
+              {
+                question: 'How do I check message match quickly?',
+                answer:
+                  'Open your top-spending ad in one tab and its destination URL in another. Compare the headline to the H1, the CTA verb to the primary CTA, and the emotional register of the ad to the hero paragraph. If any comparison fails, you have a confirmed break.',
+              },
+              {
+                question: 'What are the three ways message match breaks?',
+                answer:
+                  'Keyword mismatch, where the ad targets a specific term but the page uses a broad category. Offer mismatch, where the ad promises a low-commitment entry point but the page asks for more. Tone mismatch, where the ad speaks to pain but the page speaks to aspiration.',
+              },
+              {
+                question: 'Should I fix the page or the ad?',
+                answer:
+                  'Fix the page before spending more on the ad. The ad already earned the click. The page is where the promise must be honoured, so align the page to the ad rather than rewriting the ad to match a generic page.',
+              },
+            ]}
+          />
 
           {/* CTA block */}
           <div className="mt-6 rounded-2xl border border-accent/30 bg-accent/5 p-8">

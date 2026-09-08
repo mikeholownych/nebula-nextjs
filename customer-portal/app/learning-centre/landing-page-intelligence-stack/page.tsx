@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema, createBreadcrumbSchema } from '@/app/lib/schema'
 import { Card } from '@/components/ui/Card'
 import { LinkButton } from '@/components/ui/LinkButton'
+import ArticleFaq from '../ArticleFaq'
 
 const title = 'Landing Page Intelligence Stack: 6 Evidence-Grade Workflows'
 const description = 'Download six inspectable workflows for message match, trust, mobile layout, CTA friction, prioritization, and fix verification.'
@@ -198,6 +199,27 @@ export default function LandingPageIntelligenceStackPage() {
             </ul>
           </Card>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is the landing page intelligence stack?',
+              answer: 'It is a free bundle of six evidence-grade workflows that turn a landing page into inspectable records. Each workflow produces a named artifact covering message match, trust, mobile layout, CTA friction, prioritization, and fix verification.',
+            },
+            {
+              question: 'Do I need to provide an email to download it?',
+              answer: 'No. The stack downloads as a ZIP with Markdown and JSON files, and no email is required.',
+            },
+            {
+              question: 'What does evidence-grade mean?',
+              answer: 'It means observations and interpretations are kept separate, unknowns are marked not testable rather than invented, and no revenue or conversion result is inferred from a page observation.',
+            },
+            {
+              question: 'How do I use the six workflows?',
+              answer: 'Collect the ad, page, viewport, and journey inputs, run workflows one through four, rank supported defects with workflow five, then verify changed conditions with workflow six.',
+            },
+          ]}
+        />
 
         <section aria-labelledby="audit-heading" className="rounded-3xl border border-accent/40 bg-accent-dim p-8 sm:p-12">
           <h2 id="audit-heading" className="text-3xl font-bold text-fg">Want the page inspected now?</h2>

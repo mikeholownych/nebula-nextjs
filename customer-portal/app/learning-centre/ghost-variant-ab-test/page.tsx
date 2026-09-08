@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Ghost Variant: When A/B Test Winners Are False Positives',
@@ -272,6 +273,31 @@ export default function GhostVariantAbTestPage() {
             both URLs, before any result is called.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'What is a ghost variant in an A/B test?',
+              answer:
+                'A ghost variant is a control that has silently degraded during the test window, such as a missing pixel, a truncated H1, or a social proof block that 404s on mobile. It looks fine at a glance, but the failure suppresses conversions for that variant, so the challenger appears to win by default.',
+            },
+            {
+              question: 'Why do standard analytics tools miss a ghost variant?',
+              answer:
+                'A/B testing platforms and analytics tools record whether a conversion event fired, not whether the page rendered correctly at that moment. A session where the social proof section 404ed looks identical to one where it loaded, so the cause of the bounce is invisible.',
+            },
+            {
+              question: 'How do I detect a ghost variant before declaring a winner?',
+              answer:
+                'Audit both variants, not just the winner. Compare payload sizes between variants, render both on mobile Safari and Chrome, verify tracking pixel parity, and check metadata and H1 render fidelity. A payload or visual diff is often the first signal of a silent rendering failure.',
+            },
+            {
+              question: 'What should I do if I think my test has a ghost variant?',
+              answer:
+                'Do not ship the winner. Stop the test, audit the control against a known-clean version from the day the test started, and fix any defect you find. Then restart from a clean baseline with both variants freshly deployed and audited, rather than trying to salvage the contaminated data.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

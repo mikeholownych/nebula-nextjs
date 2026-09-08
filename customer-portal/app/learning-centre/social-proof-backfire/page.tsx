@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion | Nebula',
@@ -190,6 +191,31 @@ export default function SocialProofBackfirePage() {
             If the honest answer is no, it doesn't belong on the page yet.
           </p>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'Can testimonials actually hurt conversion?',
+              answer:
+                'Yes. Certain configurations lower trust below the baseline of having no testimonials at all. Stock-photo avatars, undated or stale reviews, testimonials from the wrong persona, and generic outcome claims each plant doubt that contaminates the rest of the page.',
+            },
+            {
+              question: 'Why do stock-photo avatars backfire?',
+              answer:
+                'Buyers have seen thousands of AI-generated and purchased stock faces and flag them as artificial within milliseconds. The visitor does not consciously think the person is fake, but feels vaguely suspicious of the whole section, which discounts the quote beneath it.',
+            },
+            {
+              question: 'Should I remove broken testimonials or keep them?',
+              answer:
+                'Removing them tends to beat keeping them. Something that triggers the uncanny valley, signals abandonment, excludes the visitor, or reads as fabricated is worse than nothing. Nothing is neutral, while broken social proof is negative.',
+            },
+            {
+              question: 'How do I know if a testimonial is strong enough to publish?',
+              answer:
+                'Ask whether it contains a specific outcome, a before and after state, or a named problem. If not, go back to the customer and ask what specific result they saw and over what time frame. If they cannot provide specifics, the testimonial is not strong enough.',
+            },
+          ]}
+        />
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">

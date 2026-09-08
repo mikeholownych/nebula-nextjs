@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
+import ArticleFaq from '../ArticleFaq'
 
 export const metadata: Metadata = {
   title: 'Pricing Page Not Converting: The Real Reason Visitors Do Not Buy | Nebula Components',
@@ -167,6 +168,31 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <ArticleFaq
+          faqItems={[
+            {
+              question: 'How many pricing tiers should I show?',
+              answer:
+                'Three is a strong default. Three gives enough choice without overwhelming, and it creates a natural good, better, best comparison. Five or six tiers tend to trigger decision fatigue.',
+            },
+            {
+              question: 'Why do visitors leave before seeing the price?',
+              answer:
+                'Confusion comes first, then comparison paralysis, then fear. Tier names that mean nothing, feature lists that blur together, and no clear recommended option each leak visitors who might otherwise buy.',
+            },
+            {
+              question: 'How do I fix usage-based or per-seat pricing anxiety?',
+              answer:
+                'Make the math visible. Add a calculator or a typical customer anchor so the visitor can answer what they will actually pay without doing the multiplication themselves. State a ceiling or overage mechanism so the cost does not read as open-ended risk.',
+            },
+            {
+              question: 'Should proof come before or after the price?',
+              answer:
+                'Before. Move testimonials, case results, or trust signals above the pricing table so the visitor wants the outcome before they see the cost. Showing the price first reverses the correct sequence.',
+            },
+          ]}
+        />
 
         <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
