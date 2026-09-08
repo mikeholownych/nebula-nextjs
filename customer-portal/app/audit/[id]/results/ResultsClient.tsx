@@ -626,7 +626,9 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
         >
           <span className="block text-sm font-semibold text-fg">Evidence</span>
           <span className="mt-1 block text-sm leading-6 text-fg-muted">
-            {findingCount} failed signal{findingCount === 1 ? '' : 's'} with measured deltas and selectors
+            {findingCount > 0
+              ? `${findingCount} failed signal${findingCount === 1 ? '' : 's'} with measured deltas and selectors`
+              : 'All conversion signals passed with verified evidence'}
           </span>
         </button>
         <button
@@ -644,7 +646,9 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
         >
           <span className="block text-sm font-semibold text-fg">Repair plan</span>
           <span className="mt-1 block text-sm leading-6 text-fg-muted">
-            {unlocked ? 'Select your $97 repair' : 'Unlock every finding to see the full plan'}
+            {findingCount > 0
+              ? (unlocked ? 'Select your $97 repair' : 'Unlock every finding to see the full plan')
+              : 'No failed conditions to repair'}
           </span>
         </button>
       </div>
@@ -655,7 +659,7 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
 function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: ReportTabId) => void }) {
   return (
     <nav aria-label="Audit report sections" className="sticky top-14 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4 backdrop-blur-sm">
-      <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center" role="tablist">
+      <div className="mx-auto flex w-full max-w-6xl gap-2 overflow-x-auto pb-1 sm:justify-center" role="tablist">
         {REPORT_NAVIGATION.map((item) => {
           const selected = item.id === active
           return (
@@ -745,7 +749,7 @@ function ReportOverview({
                 </div>
                 <div className="border-l border-border pl-6">
                   <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Failed conditions</p>
-                  <p className="mt-1 font-mono text-[96px] font-extrabold leading-none text-danger tracking-tighter">{summary.total}</p>
+                  <p className={`mt-1 font-mono text-[96px] font-extrabold leading-none tracking-tighter ${summary.total > 0 ? 'text-danger' : 'text-accent'}`}>{summary.total}</p>
                 </div>
               </div>
               <p className="mt-3 text-sm text-fg-muted">
@@ -762,11 +766,11 @@ function ReportOverview({
             <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
               <div>
                 <dt className="text-xs text-fg-muted">Critical</dt>
-                <dd className="mt-1 text-2xl font-extrabold tabular-nums text-danger">{summary.critical}</dd>
+                <dd className={`mt-1 text-2xl font-extrabold tabular-nums ${summary.critical > 0 ? 'text-danger' : 'text-fg'}`}>{summary.critical}</dd>
               </div>
               <div>
                 <dt className="text-xs text-fg-muted">Warnings</dt>
-                <dd className="mt-1 text-2xl font-extrabold tabular-nums text-signal-fail">{summary.warning}</dd>
+                <dd className={`mt-1 text-2xl font-extrabold tabular-nums ${summary.warning > 0 ? 'text-signal-fail' : 'text-fg'}`}>{summary.warning}</dd>
               </div>
               <div>
                 <dt className="text-xs text-fg-muted">Advisory</dt>
@@ -806,28 +810,32 @@ function FixFirstQueue({
         <div>
           <h2 className="text-2xl font-extrabold text-fg">Fix first</h2>
           <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
-            The first failed condition worth changing. Rank uses severity and effort, not predicted conversion loss.
+            {queue.length > 0
+              ? 'The first failed condition worth changing. Rank uses severity and effort, not predicted conversion loss.'
+              : 'No failed conversion signals were returned for this audit.'}
           </p>
         </div>
-        {onGoToRemediation ? (
-          <button
-            onClick={() => {
-              posthog.capture('audit_cta_clicked', { audit_id: auditId, cta: 'fix_first_queue' })
-              onGoToRemediation()
-            }}
-            className="min-h-11 shrink-0 rounded-lg bg-danger px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-danger-light"
-          >
-            {/* Psychology: Loss frame CTA */}
-            {REPAIR_CTA}
-          </button>
-        ) : (
-          <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
-            {REPAIR_CTA}
-          </span>
+        {queue.length > 0 && (
+          onGoToRemediation ? (
+            <button
+              onClick={() => {
+                posthog.capture('audit_cta_clicked', { audit_id: auditId, cta: 'fix_first_queue' })
+                onGoToRemediation()
+              }}
+              className="min-h-11 shrink-0 rounded-lg bg-danger px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-danger-light"
+            >
+              {/* Psychology: Loss frame CTA */}
+              {REPAIR_CTA}
+            </button>
+          ) : (
+            <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
+              {REPAIR_CTA}
+            </span>
+          )
         )}
       </div>
 
-      {queue.length > 0 ? (
+      {queue.length > 0 && (
         <ol className="mt-8 divide-y divide-border border-y border-border">
           {queue.map((finding, index) => (
             <li key={finding.key} className="grid gap-4 py-6 md:grid-cols-[3rem_minmax(0,1fr)_auto] md:items-center">
@@ -859,8 +867,6 @@ function FixFirstQueue({
             </li>
           ))}
         </ol>
-      ) : (
-        <p className="mt-8 border-y border-border py-6 text-fg-muted">No failed conversion signals were returned for this audit.</p>
       )}
     </section>
   )
@@ -1142,11 +1148,11 @@ export default function ResultsClient({
 
   if (loading) {
     return (
-      <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
-        <div className="mx-auto max-w-5xl">
+      <main id="main-content" className="min-h-screen min-w-0 w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
+        <div className="mx-auto max-w-6xl">
           {/* Skeleton nav - matches ReportNavigation height */}
           <nav aria-label="Loading" className="sticky top-14 z-20 -mx-6 mb-12 overflow-x-hidden border-y border-border bg-bg/95 px-6 py-4">
-            <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center">
+            <div className="mx-auto flex w-full max-w-6xl gap-2 overflow-x-auto pb-1 sm:justify-center">
               {['Overview', 'Fix first', 'Signals', 'Evidence', 'Repair'].map((label) => (
                 <span key={label} className="min-h-11 shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-fg-muted/30">
                   {label}
@@ -1198,7 +1204,7 @@ export default function ResultsClient({
 
   if (error || !results) {
     return (
-      <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
+      <main id="main-content" className="min-h-screen min-w-0 w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-2xl text-center">
           <Card variant="elevated">
             <h1 className="mb-4 text-2xl font-extrabold text-fg">Error Loading Results</h1>
@@ -1210,8 +1216,8 @@ export default function ResultsClient({
   }
 
   return (
-    <main id="main-content" className="min-h-screen min-w-0 w-full max-w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
-      <div className="mx-auto max-w-5xl">
+    <main id="main-content" className="min-h-screen min-w-0 w-full overflow-x-hidden bg-bg px-6 py-12 pt-24">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-4 flex min-w-0 w-full flex-wrap items-center justify-end gap-3">
           <AiAgentFixPromptModal results={results} />
           {unlocked && !sharedView && (
@@ -1242,12 +1248,14 @@ export default function ResultsClient({
               sharedView={sharedView}
               results={results}
             />
-            <FixFirstQueue
-              findings={results.findings}
-              auditId={auditId}
-              onGoToRemediation={() => setActiveTab('remediation')}
-              onViewEvidence={navigateToFinding}
-            />
+            {results.findings.length > 0 && (
+              <FixFirstQueue
+                findings={results.findings}
+                auditId={auditId}
+                onGoToRemediation={() => setActiveTab('remediation')}
+                onViewEvidence={navigateToFinding}
+              />
+            )}
             {/* Inline email gate - shown on Overview for unlocked visitors and non-shared locked views */}
             {!unlocked && !sharedView && !emailSent && (
               <section className="border-y border-border py-12 my-4">
