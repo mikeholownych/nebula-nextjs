@@ -100,8 +100,11 @@ A measured answer from Nebula.`
     let contentRoot: string
     let originalCwd: string
     let originalContentRoot: string | undefined
-    let reviewFixtureFiles: string[]
+    let reviewFixtureFiles: string[] = []
 
+    // mkdtemp + mkdir + writeFile can exceed the 5000ms default under
+    // --runInBand load; a timeout here leaks process.chdir() and poisons every
+    // downstream suite that reads files by relative path. Give the hook room.
     beforeAll(async () => {
       originalCwd = process.cwd()
       originalContentRoot = process.env.NEBULA_CONTENT_ROOT
@@ -124,15 +127,22 @@ A measured answer from Nebula.`
           .replace('slug: landing-page-not-converting', 'slug: draft-review-article')
           .replace('status: approved', 'status: drafted'), 'utf8'),
       ])
-    })
+    }, 30000)
 
     afterAll(async () => {
-      await Promise.all(reviewFixtureFiles.map((file) => rm(file, { force: true })))
-      await rm(contentRoot, { recursive: true, force: true })
+      // Defensive: if beforeAll timed out, reviewFixtureFiles is still [] and
+      // contentRoot is undefined. Always restore cwd and env so a partial
+      // setup can never leak process.chdir() into downstream suites.
+      if (reviewFixtureFiles.length) {
+        await Promise.all(reviewFixtureFiles.map((file) => rm(file, { force: true })))
+      }
+      if (contentRoot) {
+        await rm(contentRoot, { recursive: true, force: true })
+      }
       process.chdir(originalCwd)
       if (originalContentRoot === undefined) delete process.env.NEBULA_CONTENT_ROOT
       else process.env.NEBULA_CONTENT_ROOT = originalContentRoot
-    })
+    }, 30000)
 
     it('loads and discovers articles outside the customer-portal working directory', async () => {
       await expect(loadArticle('landing-page-not-converting')).resolves.toEqual(
