@@ -16,7 +16,7 @@ Full expanded context: [llms-full.txt](https://nebulacomponents.com/llms-full.tx
 - [Pricing](https://nebulacomponents.com/pricing): One-Leak Repair Sprint $97 (locked through 2026-12-31)
 - [Learning Centre](https://nebulacomponents.com/learning-centre): 41 articles on landing page conversion issues, paid traffic leaks, and ad-to-page diagnosis (each also available as markdown at /learning-centre/<slug>.md)
 - [About](https://nebulacomponents.com/about): Founder and company background
-- [Citable (open source)](https://nebulacomponents.com/resources/citable): Citable v1.14.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic - each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
+- [Citable (open source)](https://nebulacomponents.com/resources/citable): Citable v1.15.1: Evidence layer for SEO, AEO, and GEO audits. 124 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic - each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
 
 ## API
 

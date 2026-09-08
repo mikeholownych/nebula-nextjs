@@ -1,17 +1,15 @@
 {
   "package": "@nebulacomponents/citable",
-  "version": "1.14.0",
-  "releasedAt": "2026-07-26",
-  "detectorCount": 123,
+  "version": "1.15.1",
+  "releasedAt": "2026-09-08",
+  "detectorCount": 124,
   "namespaceCount": 18,
   "registryCount": 27,
   "nodeRequirement": ">=24.0.0",
   "license": "Apache-2.0",
-  "source": "npm:@nebulacomponents/citable@1.14.0",
+  "source": "npm:@nebulacomponents/citable@1.15.1",
   "highlights": [
-    "Added canonical `citable-auditor` and `citable-semantic-reviewer` profiles. The auditor may run guarded Citable collection commands but cannot edit the target; the reviewer is read-only and cannot collect evidence, approve publication, or upgrade claims.",
-    "Claude Code installs generate and manage the profiles under its recursively discovered agent directory with a separate hash manifest. Dry-run, check, collision refusal, idempotent update, and uninstall preserve the profile boundary independently from the skill.",
-    "Other agent hosts continue to receive the canonical skill but report native profiles as unsupported until their discovery and permission contracts are verified.",
-    "Added task-oriented command, integration, troubleshooting, and migration guides with a documentation index."
+    "Updated controlled deployment surface URLs, citation URL, and contact addresses from deprecated `nebulacomponents.shop` to `nebulacomponents.com`.",
+    "Updated documented distribution file count in `docs/ROADMAP.md` to 96 packaged files per provider."
   ]
 }
