@@ -375,17 +375,19 @@ function ImmediateRepairOffer({
   sharedView?: boolean
   results: AuditResult
 }) {
+  if (!results.findings.length) return null
+
   return (
     <section id="immediate-repair" className="scroll-mt-40 border-b border-border py-12">
       <div className="mx-auto max-w-4xl">
-          <div className="mb-6 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Highest-priority failed condition</p>
-            <h2 className="mt-2 text-2xl font-extrabold text-fg">One scoped repair for the first failed condition</h2>
-            <p className="mt-2 max-w-[65ch] text-base text-fg-muted">
-              If the artifact is exact, you get copy, code, or configuration for that condition.
-              <span className="font-semibold text-fg"> 30-day re-audit verifies whether that condition changed.</span>
-            </p>
-          </div>
+        <div className="mb-6 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-accent">Highest-priority failed condition</p>
+          <h2 className="mt-2 text-2xl font-extrabold text-fg">One scoped repair for the first failed condition</h2>
+          <p className="mt-2 mx-auto max-w-[65ch] text-base text-fg-muted">
+            If the artifact is exact, you get copy, code, or configuration for that condition.
+            <span className="font-semibold text-fg"> 30-day re-audit verifies whether that condition changed.</span>
+          </p>
+        </div>
 
         <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <Card variant="bordered" className="min-w-0 border-danger/30">
@@ -680,15 +682,9 @@ function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: 
 function ReportOverview({
   results,
   onGoToRemediation,
-  auditId,
-  unlocked,
-  sharedView,
 }: {
   results: AuditResult
   onGoToRemediation?: () => void
-  auditId: string
-  unlocked: boolean
-  sharedView?: boolean
 }) {
   const summary = summarizeFindings(results.findings)
   const hostname = new URL(results.url).hostname
@@ -707,7 +703,7 @@ function ReportOverview({
           </h1>
 
           <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted">
-            {summary.critical + summary.warning} conditions failed this run. An effect on conversion outcomes is not established.
+            {summary.total} conditions failed this run. An effect on conversion outcomes is not established.
           </p>
 
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
@@ -749,7 +745,7 @@ function ReportOverview({
                 </div>
                 <div className="border-l border-border pl-6">
                   <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Failed conditions</p>
-                  <p className="mt-1 font-mono text-[96px] font-extrabold leading-none text-danger tracking-tighter">{summary.critical}</p>
+                  <p className="mt-1 font-mono text-[96px] font-extrabold leading-none text-danger tracking-tighter">{summary.total}</p>
                 </div>
               </div>
               <p className="mt-3 text-sm text-fg-muted">
@@ -786,14 +782,6 @@ function ReportOverview({
             </p>
           </div>
         </Card>
-
-        {/* Immediate Repair Offer preview */}
-        <ImmediateRepairOffer
-          auditId={auditId}
-          unlocked={unlocked}
-          sharedView={sharedView}
-          results={results}
-        />
       </div>
     </section>
   )
@@ -1247,9 +1235,12 @@ export default function ResultsClient({
             <ReportOverview
               results={results}
               onGoToRemediation={() => setActiveTab('remediation')}
+            />
+            <ImmediateRepairOffer
               auditId={auditId}
               unlocked={unlocked}
               sharedView={sharedView}
+              results={results}
             />
             <FixFirstQueue
               findings={results.findings}
