@@ -18,9 +18,11 @@ describe('Mimetic-derived conversion improvements', () => {
   })
 
   it('adds monitoring as a secondary path after the repair offer', () => {
-    expect(resultsPage).toContain('Need ongoing visibility after the repair?')
+    expect(resultsPage).toContain('Keep watching after the fix ships')
     expect(resultsPage).toContain('href="/pricing"')
-    expect(resultsPage).toContain('does not replace the focused repair decision')
+    expect(resultsPage).toContain('The $97 repair fixes one condition')
+    // Monitoring is secondary, not a replacement for the focused repair.
+    expect(resultsPage).toContain('Get the repair: $${REPAIR_SPRINT_OFFER.priceUsd}')
   })
 
   it('does not introduce unsupported outcome or lift claims', () => {
