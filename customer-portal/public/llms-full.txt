@@ -92,7 +92,7 @@ Nebula currently has zero evidenced customer case studies approved for publicati
 
 Citable is an open-source CLI for search and AI discoverability governance. It was built to address a specific internal need: auditing whether a site was actually retrievable by search engines and AI systems, with evidence rather than opinions.
 
-- Version: 1.17.0
+- Version: 1.18.0
 - License: Apache 2.0
 - npm: @nebulacomponents/citable
 - GitHub: https://github.com/mikeholownych/citable

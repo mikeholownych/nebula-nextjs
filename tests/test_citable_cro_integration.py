@@ -16,10 +16,10 @@ from platform_api.routes.report_routes import router
 
 
 class TestCitableCroIntegration(unittest.TestCase):
-    def test_citable_requires_v117_or_newer(self):
-        self.assertEqual(MIN_CITABLE_VERSION, (1, 17, 0))
-        self.assertTrue(citable_version('1.17.0') >= MIN_CITABLE_VERSION)
-        self.assertFalse(citable_version('1.16.0') >= MIN_CITABLE_VERSION)
+    def test_citable_requires_v118_or_newer(self):
+        self.assertEqual(MIN_CITABLE_VERSION, (1, 18, 0))
+        self.assertTrue(citable_version('1.18.0') >= MIN_CITABLE_VERSION)
+        self.assertFalse(citable_version('1.17.0') >= MIN_CITABLE_VERSION)
 
     def test_citable_bin_resolution(self):
         binary = resolve_citable_bin()
@@ -30,18 +30,18 @@ class TestCitableCroIntegration(unittest.TestCase):
         self.assertIn("/api/report/citable", routes, "GET /api/report/citable must be registered")
 
     @patch("subprocess.run")
-    def test_v117_result_envelope_is_unwrapped_with_release_metadata(self, mock_subproc):
+    def test_v118_result_envelope_is_unwrapped_with_release_metadata(self, mock_subproc):
         mock_subproc.side_effect = [
-            MagicMock(returncode=0, stdout='1.17.0', stderr=''),
+            MagicMock(returncode=0, stdout='1.18.0', stderr=''),
             MagicMock(
                 returncode=0,
-                stdout='{"citable_output_schema":"1.0","tool_version":"1.17.0","generated_at":"2026-09-08T00:00:00Z","result":{"conversion_status":"needs_attention","findings":[{"detector_id":"CRO-021","severity":"high","summary":"Wallet readiness gap","detector_version":1,"methodology":"deterministic"}]}}',
+                stdout='{"citable_output_schema":"1.0","tool_version":"1.18.0","generated_at":"2026-09-08T00:00:00Z","result":{"conversion_status":"needs_attention","findings":[{"detector_id":"CRO-021","severity":"high","summary":"Wallet readiness gap","detector_version":1,"methodology":"deterministic"}]}}',
             ),
         ]
 
         result = run_citable_analysis("https://example.com", client_name="Acme Corp")
 
-        self.assertEqual(result["citable_version"], "1.17.0")
+        self.assertEqual(result["citable_version"], "1.18.0")
         self.assertEqual(result["cro"]["conversion_status"], "needs_attention")
         self.assertEqual(result["findings"][0]["condition_id"], "CRO-021")
         self.assertEqual(result["findings"][0]["detector_version"], 1)
@@ -53,7 +53,7 @@ class TestCitableCroIntegration(unittest.TestCase):
         mock_cro.returncode = 0
         mock_cro.stdout = '{"status": 200, "conversion_status": "ready", "ctas": [{"text": "Free Audit", "isPrimary": true}], "findings": [{"detector_id": "CRO-005", "severity": "medium", "summary": "Headline scent gap"}, {"detector_id": "CRO-006", "severity": "high", "summary": "Message scent gap"}]}'
 
-        mock_version = MagicMock(returncode=0, stdout='1.17.0', stderr='')
+        mock_version = MagicMock(returncode=0, stdout='1.18.0', stderr='')
         mock_subproc.side_effect = [mock_version, mock_cro]
 
         result = run_citable_analysis("https://example.com", client_name="Acme Corp")
@@ -61,27 +61,27 @@ class TestCitableCroIntegration(unittest.TestCase):
         self.assertGreaterEqual(len(result["findings"]), 2)
         self.assertIn("<!DOCTYPE html>", result["executive_brief_html"])
         self.assertIn("# Executive", result["executive_deck_md"])
-        self.assertIn("Citable v1.17.0", result["executive_brief_html"])
+        self.assertIn("Citable v1.18.0", result["executive_brief_html"])
 
     @patch("subprocess.run")
     def test_installed_citable_version_rejects_stale(self, mock_subproc):
-        mock_subproc.return_value = MagicMock(returncode=0, stdout='1.16.0', stderr='')
+        mock_subproc.return_value = MagicMock(returncode=0, stdout='1.17.0', stderr='')
         with self.assertRaises(RuntimeError) as ctx:
             installed_citable_version("/mock/citable")
         self.assertIn("below the required", str(ctx.exception))
 
     @patch("subprocess.run")
     def test_run_citable_analysis_provenance_and_integrity_hash(self, mock_subproc):
-        mock_version = MagicMock(returncode=0, stdout='1.17.0', stderr='')
+        mock_version = MagicMock(returncode=0, stdout='1.18.0', stderr='')
         mock_cro = MagicMock(
             returncode=0,
-            stdout='{"citable_output_schema":"1.0","tool_version":"1.17.0","generated_at":"2026-09-08T00:00:00Z","result":{"conversion_status":"needs_attention","findings":[{"detector_id":"CRO-021","severity":"high","summary":"Wallet readiness gap","detector_version":1,"methodology":"deterministic","revalidation_requirement":"same_condition_inspection"}]}}',
+            stdout='{"citable_output_schema":"1.0","tool_version":"1.18.0","generated_at":"2026-09-08T00:00:00Z","result":{"conversion_status":"needs_attention","findings":[{"detector_id":"CRO-021","severity":"high","summary":"Wallet readiness gap","detector_version":1,"methodology":"deterministic","revalidation_requirement":"same_condition_inspection"}]}}',
         )
         mock_subproc.side_effect = [mock_version, mock_cro]
 
         result = run_citable_analysis("https://example.com", client_name="Acme Corp")
 
-        self.assertEqual(result["citable_version"], "1.17.0")
+        self.assertEqual(result["citable_version"], "1.18.0")
         self.assertEqual(result["citable_release_commit"], CITABLE_RELEASE_COMMIT)
         self.assertEqual(len(result["citable_release_commit"]), 40)
         self.assertIn("integrity_hash", result)
@@ -91,7 +91,7 @@ class TestCitableCroIntegration(unittest.TestCase):
         finding = result["findings"][0]
         self.assertEqual(finding["condition_id"], "CRO-021")
         self.assertEqual(finding["detector_version"], 1)
-        self.assertEqual(finding["tool_version"], "1.17.0")
+        self.assertEqual(finding["tool_version"], "1.18.0")
         self.assertEqual(finding["methodology"], "deterministic")
         self.assertEqual(finding["revalidation_requirement"], "same_condition_inspection")
 
@@ -104,7 +104,7 @@ class TestCitableCroIntegration(unittest.TestCase):
         manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
         self.assertEqual(manifest_data["run_id"], run_id)
         self.assertEqual(manifest_data["integrity_hash"], result["integrity_hash"])
-        self.assertEqual(manifest_data["citable_version"], "1.17.0")
+        self.assertEqual(manifest_data["citable_version"], "1.18.0")
         self.assertEqual(manifest_data["citable_release_commit"], CITABLE_RELEASE_COMMIT)
 
     def test_implementation_kit_generation(self):

@@ -21,9 +21,9 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger("nebula.citable_service")
 
-MIN_CITABLE_VERSION = (1, 17, 0)
-DEFAULT_CITABLE_VERSION = "1.17.0"
-DEFAULT_CITABLE_COMMIT = "5c7beecdadce9c3b55ba5f947cf8c685c7017205"
+MIN_CITABLE_VERSION = (1, 18, 0)
+DEFAULT_CITABLE_VERSION = "1.18.0"
+DEFAULT_CITABLE_COMMIT = "9b01dcd4ce43482e3c82883088689c908a94fb7d"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CITABLE_RUNS_DIR = REPO_ROOT / ".citable" / "runs"

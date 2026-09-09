@@ -27,6 +27,7 @@ try {
     cwd: repoRoot,
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env, CITABLE_USER_AGENT: process.env.CITABLE_USER_AGENT || 'NebulaSEOBot' },
   })
   process.stdout.write(output)
   if (output.includes('Status: FAIL')) {
