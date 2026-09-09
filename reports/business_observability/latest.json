@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-09-09T19:46:43.486579+00:00",
+  "period": "daily",
+  "period_window": {
+    "start": "2026-09-08",
+    "end_exclusive": "2026-09-09"
+  },
+  "chain": [
+    "search_visibility",
+    "acquisition",
+    "landing_experience",
+    "audit_journey",
+    "determination",
+    "repair_intent",
+    "checkout",
+    "revenue",
+    "reobservation"
+  ],
+  "classification": {
+    "active_states": [
+      "system_prevents_conversion"
+    ],
+    "primary_state": "system_prevents_conversion",
+    "conversion_failure_class": "couldnt_convert",
+    "search_status": "OBSERVED"
+  },
+  "metrics": {
+    "impressions": {
+      "value": 1063,
+      "source": "gsc",
+      "classification": "OBSERVED"
+    },
+    "clicks": {
+      "value": 3,
+      "source": "gsc",
+      "classification": "OBSERVED"
+    },
+    "organic_sessions": {
+      "value": 16,
+      "source": "ga4",
+      "classification": "OBSERVED"
+    },
+    "ctr": {
+      "value": 0.002822,
+      "source": "derived_ctr",
+      "classification": "DERIVED"
+    },
+    "audit_completed": {
+      "value": 14,
+      "source": "analytics_event_ledger",
+      "classification": "OBSERVED"
+    },
+    "audit_result_viewed": {
+      "value": 105,
+      "source": "analytics_event_ledger",
+      "classification": "OBSERVED"
+    },
+    "checkout_started": {
+      "value": 0,
+      "source": "analytics_event_ledger",
+      "classification": "OBSERVED"
+    },
+    "checkout_creation_failed": {
+      "value": 33,
+      "source": "analytics_event_ledger",
+      "classification": "OBSERVED"
+    },
+    "purchase_completed": {
+      "value": 0,
+      "source": "analytics_event_ledger",
+      "classification": "OBSERVED"
+    }
+  },
+  "funnel_attention": [
+    "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
+    "RESULT_UNLOCKS_DROPPED_TO_ZERO",
+    "NO_PURCHASE_SIGNAL"
+  ],
+  "attachments": {
+    "technical_health": {
+      "healthy": false,
+      "failed": 1,
+      "passed": 13,
+      "timestamp": "2026-08-13T23:14:27.135004+00:00"
+    },
+    "consent_state": "consent_gated_analytics_undercounts",
+    "evidence_provenance": "OBSERVED ledger and GSC/GA4 baseline; ESTIMATED AEO excluded"
+  },
+  "layer_coverage": [
+    {
+      "id": 1,
+      "name": "external_availability",
+      "status": "partial",
+      "evidence": "scripts/health-check.sh, scripts/notify_production_health.py, /api/readyz",
+      "gap": "HTTP 200 is not a synthetic landing-to-checkout journey"
+    },
+    {
+      "id": 2,
+      "name": "real_user_monitoring",
+      "status": "partial",
+      "evidence": "PostHog, scripts/cwv_monitor.py, analytics_event_ledger device_class",
+      "gap": "no p95 segmentation by browser/geo on checkout"
+    },
+    {
+      "id": 3,
+      "name": "application_performance",
+      "status": "partial",
+      "evidence": "journalctl nebula-nextjs/platform-api, error enricher, ops logs",
+      "gap": "RED histograms not first-class for every service"
+    },
+    {
+      "id": 4,
+      "name": "distributed_tracing",
+      "status": "partial",
+      "evidence": "journey_id, request_id, build_revision on analytics_event_ledger",
+      "gap": "no OpenTelemetry span graph across CDN, API, Stripe, email"
+    },
+    {
+      "id": 5,
+      "name": "logging",
+      "status": "partial",
+      "evidence": "structured ops logs, systemd journals, cloudflared logs/",
+      "gap": "not every worker/CDN/WAF stream is joined on trace_id"
+    },
+    {
+      "id": 6,
+      "name": "metrics",
+      "status": "partial",
+      "evidence": "pipeline_health.json, funnel_health_monitor.py, ledger counts",
+      "gap": "latency uses averages/counts more than histograms"
+    },
+    {
+      "id": 7,
+      "name": "network_and_edge",
+      "status": "partial",
+      "evidence": "logs/cloudflared/, Cloudflare cache purge on deploy",
+      "gap": "no regional IPv4/IPv6 synthetic split"
+    },
+    {
+      "id": 8,
+      "name": "dependency_observability",
+      "status": "partial",
+      "evidence": "checkout_creation_failed failure_reason, MailCheck evidence, Stripe webhook",
+      "gap": "provider vs own-failure not complete for email/SMS/model APIs"
+    },
+    {
+      "id": 9,
+      "name": "deployment_and_change",
+      "status": "partial",
+      "evidence": "CHANGE_LOG.md, ledger.build_revision, deploy scripts",
+      "gap": "error-rate overlays on deploy SHA are not automatic"
+    },
+    {
+      "id": 10,
+      "name": "product_analytics",
+      "status": "in_place",
+      "evidence": "customer-portal/config/analytics-registry.json, analytics_event_ledger",
+      "gap": ""
+    },
+    {
+      "id": 11,
+      "name": "acquisition_observability",
+      "status": "partial",
+      "evidence": "ACQUISITION_BASELINE.md, GSC/GA4 scripts, utm_* on ledger",
+      "gap": "no persistent GSC/GA4 time-series table; browser attribution incomplete"
+    },
+    {
+      "id": 12,
+      "name": "search_observability",
+      "status": "partial",
+      "evidence": "GSC baselines, query_registry.json, nebula_citation_tracker.py",
+      "gap": "keep OBSERVED GSC/GA4 separate from ESTIMATED AEO/GEO scores"
+    },
+    {
+      "id": 13,
+      "name": "conversion_observability",
+      "status": "in_place",
+      "evidence": "scripts/funnel_health_monitor.py, scripts/funnel_diagnostics.py, scripts/business_observability.py",
+      "gap": "classifier is period-aggregate; per-journey didn't vs couldn't still lives in funnel_diagnostics"
+    },
+    {
+      "id": 14,
+      "name": "revenue_and_financial",
+      "status": "partial",
+      "evidence": "purchase_completed on ledger, Stripe live mode, ops/company_brain.json",
+      "gap": "company_brain can go stale vs ledger; no Stripe vs ledger auto-reconcile job"
+    },
+    {
+      "id": 15,
+      "name": "customer_lifecycle_and_support",
+      "status": "partial",
+      "evidence": "scripts/post_purchase_drip.py, inbox triage, lead_store stages",
+      "gap": "no post-purchase health score joined to journey_id"
+    },
+    {
+      "id": 16,
+      "name": "security_observability",
+      "status": "partial",
+      "evidence": "WAF/Cloudflare, failed auth logs, secret-scan in review",
+      "gap": "no dedicated SIEM; security events not joined to journey_id"
+    },
+    {
+      "id": 17,
+      "name": "privacy_and_consent",
+      "status": "partial",
+      "evidence": "consent-gated analytics, prohibited_properties in event registry",
+      "gap": "unknown jurisdiction must not silently become consent; not yet a first-class signal"
+    },
+    {
+      "id": 18,
+      "name": "data_pipeline_observability",
+      "status": "partial",
+      "evidence": "funnel health unlock reconciliation ledger vs PostHog",
+      "gap": "ingestion lag/duplicates/schema violations are not SLI'd"
+    },
+    {
+      "id": 19,
+      "name": "data_quality_and_provenance",
+      "status": "in_place",
+      "evidence": "OBSERVED/INFERRED/UNKNOWN in acquisition docs; classify_metric here",
+      "gap": ""
+    },
+    {
+      "id": 20,
+      "name": "slos_slis_error_budgets",
+      "status": "partial",
+      "evidence": "docs/operations/slos/error-budget.md, 99.9% uptime notes",
+      "gap": "Grafana tracking not implemented; no payment-success SLO on live data"
+    },
+    {
+      "id": 21,
+      "name": "alerting_and_anomaly_detection",
+      "status": "partial",
+      "evidence": "sre_responder.py 3-strike, funnel_health attention flags, Telegram",
+      "gap": "not every alert has owner+runbook; funnel flags are reports not incidents"
+    },
+    {
+      "id": 22,
+      "name": "incident_problem_change_correlation",
+      "status": "partial",
+      "evidence": "governance/INCIDENTS/, CHANGE_LOG.md, alert-to-incident receipts",
+      "gap": "deploy SHA is not auto-joined to checkout_creation_failed spikes"
+    },
+    {
+      "id": 23,
+      "name": "cost_and_capacity",
+      "status": "missing",
+      "evidence": "",
+      "gap": "no cost-per-audit or token/API spend attribution"
+    },
+    {
+      "id": 24,
+      "name": "business_kpi",
+      "status": "partial",
+      "evidence": "ops/company_brain.json, funnel_health latest.json",
+      "gap": "executive numbers must derive from this correlator, not a separate dashboard"
+    }
+  ],
+  "interventions": {
+    "primary_state": "system_prevents_conversion",
+    "action": "Buyers attempted checkout and the system blocked them. Fix the pay path before more traffic."
+  },
+  "sources": {
+    "funnel_health_generated_at": "2026-09-09T02:30:01.569293+00:00",
+    "acquisition_baseline": "ACQUISITION_BASELINE.md"
+  }
+}
