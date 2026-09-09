@@ -12,7 +12,7 @@ import httpx
 
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
-from platform_api.services.offer import offer_price_display
+from platform_api.services.offer import TIMING_CLAIM_EMAIL, offer_price_display
 
 
 class FollowUpSequence:
@@ -21,7 +21,7 @@ class FollowUpSequence:
     SEQUENCE = [
         {
             "delay_hours": 24,
-            "subject": "Your audit is ready (don't lose this)",
+            "subject": "You already ran the audit",
             "template": "audit_followup_24h"
         },
         {
@@ -135,26 +135,23 @@ class FollowUpSequence:
         checkout_url = f"https://nebulacomponents.com/checkout?audit_id={audit_id}" if audit_id else "https://nebulacomponents.com/audit"
 
         if template == "audit_followup_24h":
+            finding = self._format_finding(quick_win) if quick_win else ""
+            finding_block = f"\n{finding}\n" if finding.strip() else ""
             return f"""
 Hi {audit.get('name', 'there')},
 
-I noticed you ran an audit on {audit['url']} yesterday.
+You ran an audit on {audit['url']} yesterday.
 
-Your score: {audit['score']/10}/10 (Grade: {audit['grade']})
+I built Nebula because I was tired of watching ads do their job while the page quietly killed the sale.
 
-{"Here's your top quick win:" if quick_win else "You have several fixes that could boost conversions."}
+Agencies wanted a retainer. Tools dumped another score. My own landing page didn't convert.
 
-{self._format_finding(quick_win) if quick_win else ""}
+You already have the diagnosis.{finding_block}
+If you want me to fix the first leak, reply YES. {offer_price_display()}. {TIMING_CLAIM_EMAIL}. No call.
 
-Ready to fix it?
+Your audit: https://nebulacomponents.com/audit
 
-→ {offer_price_display()} One-Leak Repair Sprint — we handle one selected finding in 48h, no call, no retainer:
-{checkout_url}
-
-Or review your audit: https://nebulacomponents.com/audit
-
-Best,
-Mike from Nebula Components
+Mike
 """
         
         elif template == "audit_followup_3d":
