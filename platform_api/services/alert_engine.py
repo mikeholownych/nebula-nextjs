@@ -74,7 +74,13 @@ async def get_pool() -> asyncpg.Pool:
 
 
 async def check_cvr(pool: asyncpg.Pool) -> list[str]:
-    """Compare today's CVR vs 7-day rolling average. Alert if drop > threshold."""
+    """Compare today's CVR vs 7-day rolling average. Alert if drop > threshold.
+
+    Conversion signal is audits.paid_at (set by the purchase path). The old
+    `purchases` table was archived out of the audit DB; the authoritative
+    purchases table lives in the platform DB with a different schema, so CVR
+    is computed from the audit DB's own paid_at column instead.
+    """
     alerts = []
     async with pool.acquire() as conn:
         row = await conn.fetchrow("""
@@ -82,12 +88,8 @@ async def check_cvr(pool: asyncpg.Pool) -> list[str]:
                 SELECT
                     DATE(a.created_at) AS day,
                     COUNT(DISTINCT a.id)    AS audits,
-                    COUNT(DISTINCT p.id)    AS purchases
+                    COUNT(DISTINCT a.id) FILTER (WHERE a.paid_at IS NOT NULL) AS purchases
                 FROM audits a
-                LEFT JOIN customers c ON c.email = a.email
-                LEFT JOIN purchases p ON p.customer_id = c.id
-                    AND p.status = 'completed'
-                    AND DATE(p.created_at) = DATE(a.created_at)
                 WHERE a.created_at >= now() - INTERVAL '8 days'
                 GROUP BY DATE(a.created_at)
             )
@@ -211,15 +213,10 @@ async def check_daily_summary(pool: asyncpg.Pool) -> list[str]:
         row = await conn.fetchrow("""
             SELECT
                 COUNT(DISTINCT a.id)    AS audits_today,
-                COUNT(DISTINCT p.id)    AS purchases_today,
-                COALESCE(SUM(p.amount_cents), 0) AS revenue_today,
+                COUNT(DISTINCT a.id) FILTER (WHERE a.paid_at IS NOT NULL) AS purchases_today,
                 (SELECT COUNT(*) FROM newsletter_subscribers
                  WHERE subscribed_at >= CURRENT_DATE) AS nl_signups_today
             FROM audits a
-            LEFT JOIN customers c ON c.email = a.email
-            LEFT JOIN purchases p ON p.customer_id = c.id
-                AND p.status = 'completed'
-                AND DATE(p.created_at) = CURRENT_DATE
             WHERE DATE(a.created_at) = CURRENT_DATE
         """)
 
@@ -231,7 +228,7 @@ async def check_daily_summary(pool: asyncpg.Pool) -> list[str]:
     summary = [
         f"📊 *Daily Marketing Summary - {now_et.strftime('%b %d')}*\n"
         f"Audits: {row['audits_today']}\n"
-        f"Purchases: {row['purchases_today']} (${row['revenue_today'] / 100:.2f})\n"
+        f"Purchases: {row['purchases_today']}\n"
         f"CVR: {cvr:.1f}%\n"
         f"Newsletter signups: {row['nl_signups_today']}"
     ]
