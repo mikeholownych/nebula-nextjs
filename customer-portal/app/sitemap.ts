@@ -94,6 +94,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       // appear in the sitemap (wastes crawl budget, risks soft-404 signals).
       '/playbooks',
       '/benchmarks',
+      '/research',
       '/brand',
       '/ai-info',
       '/lab',

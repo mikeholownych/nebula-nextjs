@@ -53,6 +53,7 @@ export default function Footer() {
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Company</p>
             <ul className="space-y-3">
               <li><a href="/about" className="text-sm text-fg-muted hover:text-fg transition-colors">About</a></li>
+              <li><a href="/ai-info" className="text-sm text-fg-muted hover:text-fg transition-colors">AI info</a></li>
               <li><a href="/press" className="text-sm text-fg-muted hover:text-fg transition-colors">Press</a></li>
               <li><a href="/brand" className="text-sm text-fg-muted hover:text-fg transition-colors">Brand Kit</a></li>
               <li><a href="/editorial-standards" className="text-sm text-fg-muted hover:text-fg transition-colors">Editorial Standards</a></li>
@@ -104,7 +105,9 @@ export default function Footer() {
               ['/resources/citable/quick-start', 'Citable Quick Start'],
               ['/resources/citable/releases', 'Citable Releases'],
               ['/resources/citable/compare', 'Citable Compare'],
+              ['/research', 'Research'],
               ['/research/landing-page-performance-q3-2026', 'Q3 2026 Research'],
+              ['/ai-info', 'AI info'],
               ['/paid-traffic-leak-scorecard', 'Leak Scorecard'],
               ['/ads-getting-clicks-but-no-sales', 'Ads Getting Clicks, No Sales'],
               ['/funnel-audit', 'Funnel Friction Miner'],

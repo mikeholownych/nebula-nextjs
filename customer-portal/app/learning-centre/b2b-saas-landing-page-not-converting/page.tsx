@@ -281,6 +281,13 @@ export default function B2BSaaSLandingPageNotConverting() {
                   <p className="mt-1 text-sm text-fg-muted">{a.desc}</p>
                 </Link>
               ))}
+              <Link
+                href="/blog/paid-traffic-not-converting"
+                className="rounded-xl border border-border p-5 transition-colors hover:border-accent/40 sm:col-span-2"
+              >
+                <p className="font-semibold text-fg">Why is paid traffic not converting?</p>
+                <p className="mt-1 text-sm text-fg-muted">Field note on post-click leaks after the click is already paid for.</p>
+              </Link>
             </div>
           </section>
 

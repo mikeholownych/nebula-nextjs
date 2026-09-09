@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Bounce Rate High: 3 Causes | Nebula',
+  title: 'Landing Page Bounce Rate High: Causes Including Homepage Bounce | Nebula',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Reduce Landing Page Bounce Rate to Save Wasted Ad Spend',
+  headline: 'Landing Page Bounce Rate High: Causes Including Homepage Bounce',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high',
@@ -109,7 +109,7 @@ export default function LandingPageBounceRateHigh() {
               Landing Page Leaks · Bounce Rate
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Reduce Landing Page Bounce Rate to Save Wasted Ad Spend
+            Why is landing page bounce rate high?
           </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               A bounce rate above 70% on paid traffic means the first screen is
@@ -157,6 +157,19 @@ export default function LandingPageBounceRateHigh() {
               diagnostic signal. It means the first screen failed to match what
               the ad promised - and everything you paid to get that click was
               wasted before the visitor saw anything else.
+            </p>
+          </section>
+
+          <section className="mt-6 rounded-md border border-border bg-bg-panel p-8">
+            <h2 className="mb-4 text-2xl font-bold text-fg">
+              Homepage bounce causes vs landing page bounce
+            </h2>
+            <p className="leading-relaxed text-fg-muted">
+              Homepage bounce causes are usually navigation overload, mixed offers, and no
+              single next step. Paid landing page bounce is usually a broken ad-to-page
+              promise. If homepage bounce is high, isolate whether visitors arrived from ads,
+              organic, or direct before changing layout. If they arrived from ads, the
+              homepage is the wrong destination.
             </p>
           </section>
 

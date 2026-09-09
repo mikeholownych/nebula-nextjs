@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Above The Fold: What Paid Traffic Decides First | Nebula',
+  title: 'Above the Fold Landing Page: What Paid Traffic Decides First | Nebula',
   description:
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Improve Above-The-Fold Layout to Boost Paid Traffic Conversions',
+  headline: 'Above the Fold Landing Page: What Paid Traffic Decides First',
   description:
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   url: 'https://nebulacomponents.com/learning-centre/above-fold-landing-page',
@@ -117,7 +117,7 @@ export default function AboveFoldLandingPagePage() {
               Landing Page Leaks · Above The Fold
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            Improve Above-The-Fold Layout to Boost Paid Traffic Conversions
+            What should be above the fold on a landing page
           </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               The fold is not a design concept - it is the boundary between the
@@ -420,6 +420,7 @@ export default function AboveFoldLandingPagePage() {
                 { href: '/learning-centre/message-match-checklist', label: 'Message Match Checklist For Paid Traffic' },
                 { href: '/learning-centre/cta-not-working', label: 'CTA Not Working: 4 Failure Patterns' },
                 { href: '/learning-centre/landing-page-load-time-slow', label: 'Landing Page Load Time Slow: Signal 4 Diagnosis' },
+                { href: '/blog/paid-traffic-not-converting', label: 'Field note: why paid traffic is not converting' },
               ].map(({ href, label }) => (
                 <Link
                   key={href}

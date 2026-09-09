@@ -344,6 +344,7 @@ export default function GoogleAdsClicksNoSales() {
                 { href: '/learning-centre/before-you-raise-ad-budget', label: 'Before You Raise Ad Budget: Fix The Leaks First' },
                 { href: '/learning-centre/message-match-checklist', label: 'Message Match Checklist For Paid Traffic' },
                 { href: '/learning-centre/traffic-but-no-form-fills', label: 'Traffic But No Form Fills: The Form Is Usually Not The First Leak' },
+                { href: '/blog/paid-traffic-not-converting', label: 'Field note: why paid traffic is not converting' },
               ].map(({ href, label }) => (
                 <Link
                   key={href}

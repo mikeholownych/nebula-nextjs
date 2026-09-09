@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'What Is Message Match? Landing Page to Ad Alignment Explained | Nebula',
+  title: 'Message Match (Message Matching): Ad-to-Page Alignment | Nebula',
   description:
     'Message match is the exact degree of continuity between what your ad promises and what your landing page delivers. When it breaks, paid traffic leaks even when targeting is perfect.',
   alternates: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'What Is Message Match? Landing Page to Ad Alignment Explained',
+  headline: 'Message Match (Message Matching): Ad-to-Page Alignment',
   description:
     'Message match is the exact degree of continuity between what your ad promises and what your landing page delivers. When it breaks, paid traffic leaks even when targeting is perfect.',
   url: 'https://nebulacomponents.com/learning-centre/what-is-message-match',
@@ -100,7 +100,7 @@ export default function WhatIsMessageMatchPage() {
             Message Match · Definitions
           </span>
           <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-fg md:text-4xl">
-            What Is Message Match? Landing Page to Ad Alignment Explained
+            What is message match (also called message matching)?
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             Message match is the degree of continuity between the specific words and offer in
@@ -400,6 +400,11 @@ export default function WhatIsMessageMatchPage() {
                 href: '/learning-centre/landing-page-not-converting',
                 title: 'Landing Page Not Converting?',
                 description: 'Diagnose these structural leaks first.',
+              },
+              {
+                href: '/blog/paid-traffic-not-converting',
+                title: 'Why is paid traffic not converting?',
+                description: 'Field note on post-click leaks after the click is already paid for.',
               },
             ].map((article) => (
               <Link

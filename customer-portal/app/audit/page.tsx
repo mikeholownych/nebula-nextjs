@@ -7,11 +7,11 @@ import HonestyGrid from '@/app/components/HonestyGrid'
 import AskAiCitability from '@/app/components/AskAiCitability'
 
 export const metadata: Metadata = {
-  title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
+  title: 'Landing Page Audit: Free Conversion Leak Check | Nebula',
   description: 'Free conversion leak detection for any landing page. Check 9 signals - message match, trust, CTA, mobile, speed. Evidence-backed, no signup.',
   alternates: { canonical: 'https://nebulacomponents.com/audit' },
   openGraph: {
-    title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
+    title: 'Landing Page Audit: Free Conversion Leak Check | Nebula',
     description: 'Free conversion leak detection for any landing page. Check 9 signals - message match, trust, CTA, mobile, speed. Evidence-backed, no signup.',
     url: 'https://nebulacomponents.com/audit',
     siteName: 'Nebula Components',
@@ -142,10 +142,10 @@ export default async function AuditPage() {
 
             {/* Copy first on mobile (order-1 on mobile, order-1 on md+) */}
             <div className="order-1 flex min-w-0 flex-col justify-center">
-              <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Run a Free Landing Page Audit to Fix Conversion Leaks Fast</h1>
+              <h1 className="heading-1 tracking-tight text-fg md:text-5xl">Landing Page Audit: Check 9 Conversion Signals on Your Live Page</h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula checks 9 conversion signals against your actual page HTML.
-                See findings ranked by priority before sharing an email.
+                This landing page audit reads public HTML and scores 9 conversion signals.
+                Paste your URL. See findings ranked by priority before sharing an email.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
