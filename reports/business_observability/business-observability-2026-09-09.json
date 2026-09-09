@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T19:46:43.486579+00:00",
+  "generated_at": "2026-09-09T20:09:59.244001+00:00",
   "period": "daily",
   "period_window": {
     "start": "2026-09-08",
@@ -18,10 +18,10 @@
   ],
   "classification": {
     "active_states": [
-      "system_prevents_conversion"
+      "visits_no_conversion"
     ],
-    "primary_state": "system_prevents_conversion",
-    "conversion_failure_class": "couldnt_convert",
+    "primary_state": "visits_no_conversion",
+    "conversion_failure_class": "didnt_convert",
     "search_status": "OBSERVED"
   },
   "metrics": {
@@ -61,6 +61,11 @@
       "classification": "OBSERVED"
     },
     "checkout_creation_failed": {
+      "value": 0,
+      "source": "analytics_event_ledger_commercial",
+      "classification": "OBSERVED"
+    },
+    "checkout_creation_failed_events": {
       "value": 33,
       "source": "analytics_event_ledger",
       "classification": "OBSERVED"
@@ -72,7 +77,6 @@
     }
   },
   "funnel_attention": [
-    "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
     "RESULT_UNLOCKS_DROPPED_TO_ZERO",
     "NO_PURCHASE_SIGNAL"
   ],
@@ -257,11 +261,11 @@
     }
   ],
   "interventions": {
-    "primary_state": "system_prevents_conversion",
-    "action": "Buyers attempted checkout and the system blocked them. Fix the pay path before more traffic."
+    "primary_state": "visits_no_conversion",
+    "action": "Traffic arrives. Proposition or offer is failing. Do not treat as an outage."
   },
   "sources": {
-    "funnel_health_generated_at": "2026-09-09T02:30:01.569293+00:00",
+    "funnel_health_generated_at": "2026-09-09T20:09:42.675528+00:00",
     "acquisition_baseline": "ACQUISITION_BASELINE.md"
   }
 }

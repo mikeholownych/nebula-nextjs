@@ -1,14 +1,14 @@
 # Nebula Business Observability
 
-Generated: `2026-09-09T19:46:43.486579+00:00`
+Generated: `2026-09-09T20:09:59.244001+00:00`
 Period: `daily` 2026-09-08 to 2026-09-09
 
-**Primary state:** `system_prevents_conversion`
-**Conversion class:** `couldnt_convert`
-**Active states:** system_prevents_conversion
+**Primary state:** `visits_no_conversion`
+**Conversion class:** `didnt_convert`
+**Active states:** visits_no_conversion
 **Search status:** `OBSERVED`
 
-**Intervention:** Buyers attempted checkout and the system blocked them. Fix the pay path before more traffic.
+**Intervention:** Traffic arrives. Proposition or offer is failing. Do not treat as an outage.
 
 ## Chain
 
@@ -25,12 +25,12 @@ search_visibility -> acquisition -> landing_experience -> audit_journey -> deter
 | audit_completed | 14 | OBSERVED | analytics_event_ledger |
 | audit_result_viewed | 105 | OBSERVED | analytics_event_ledger |
 | checkout_started | 0 | OBSERVED | analytics_event_ledger |
-| checkout_creation_failed | 33 | OBSERVED | analytics_event_ledger |
+| checkout_creation_failed | 0 | OBSERVED | analytics_event_ledger_commercial |
+| checkout_creation_failed_events | 33 | OBSERVED | analytics_event_ledger |
 | purchase_completed | 0 | OBSERVED | analytics_event_ledger |
 
 ## Funnel attention
 
-- `CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS`
 - `RESULT_UNLOCKS_DROPPED_TO_ZERO`
 - `NO_PURCHASE_SIGNAL`
 

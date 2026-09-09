@@ -254,7 +254,11 @@ def classify_commercial_states(evidence: dict[str, Any]) -> dict[str, Any]:
     landing_views = visits.get("landing_page_views")
     audit_completed = int(funnel.get("audit_completed") or 0)
     checkout_started = int(funnel.get("checkout_started") or 0)
-    checkout_failed = int(funnel.get("checkout_creation_failed") or 0)
+    checkout_failed_events = int(funnel.get("checkout_creation_failed") or 0)
+    if funnel.get("unique_checkout_creation_failed") is not None:
+        checkout_failed = int(funnel.get("unique_checkout_creation_failed") or 0)
+    else:
+        checkout_failed = checkout_failed_events
     purchases = int(funnel.get("purchase_completed") or 0)
 
     search_status = "UNKNOWN" if impressions is None else "OBSERVED"
@@ -343,6 +347,7 @@ def compile_snapshot(
     baseline = parse_acquisition_baseline(acquisition_baseline_text)
     period_data = funnel_health["periods"][period]
     ledger = period_data["ledger"]
+    commercial = period_data.get("commercial_ledger") or ledger
     evidence = {
         "search": {"impressions": baseline.get("impressions"), "clicks": baseline.get("clicks")},
         "visits": {
@@ -350,10 +355,11 @@ def compile_snapshot(
             "landing_page_views": ledger.get("audit_result_viewed"),
         },
         "funnel": {
-            "audit_completed": ledger.get("audit_completed", 0),
-            "checkout_started": ledger.get("checkout_started", 0),
-            "checkout_creation_failed": ledger.get("checkout_creation_failed", 0),
-            "purchase_completed": ledger.get("purchase_completed", 0),
+            "audit_completed": commercial.get("audit_completed", ledger.get("audit_completed", 0)),
+            "checkout_started": commercial.get("checkout_started", 0),
+            "checkout_creation_failed": commercial.get("checkout_creation_failed", 0),
+            "unique_checkout_creation_failed": commercial.get("checkout_creation_failed", 0),
+            "purchase_completed": commercial.get("purchase_completed", 0),
         },
     }
     classified = classify_commercial_states(evidence)
@@ -392,12 +398,16 @@ def compile_snapshot(
             "audit_result_viewed": classify_metric(
                 source="analytics_event_ledger", value=ledger.get("audit_result_viewed", 0)
             ),
-            "checkout_started": classify_metric(source="analytics_event_ledger", value=ledger.get("checkout_started", 0)),
+            "checkout_started": classify_metric(source="analytics_event_ledger", value=commercial.get("checkout_started", 0)),
             "checkout_creation_failed": classify_metric(
+                source="analytics_event_ledger_commercial",
+                value=commercial.get("checkout_creation_failed", 0),
+            ),
+            "checkout_creation_failed_events": classify_metric(
                 source="analytics_event_ledger", value=ledger.get("checkout_creation_failed", 0)
             ),
             "purchase_completed": classify_metric(
-                source="analytics_event_ledger", value=ledger.get("purchase_completed", 0)
+                source="analytics_event_ledger", value=commercial.get("purchase_completed", 0)
             ),
         },
         "funnel_attention": funnel_health.get("attention", {}).get(period, []),

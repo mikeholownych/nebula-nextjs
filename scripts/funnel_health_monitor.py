@@ -72,14 +72,27 @@ def build_periods(today: date) -> dict[str, Period]:
     }
 
 
+PROBE_AUDIT_IDS = ("123e4567-e89b-12d3-a456-426614174000",)
+
+
 def _empty_counts() -> dict[str, int]:
     return {event: 0 for event in EVENTS}
 
 
-def ledger_counts(conn: psycopg.Connection[Any], period: Period) -> dict[str, int]:
+def ledger_counts(
+    conn: psycopg.Connection[Any],
+    period: Period,
+    *,
+    exclude_probe_audits: bool = False,
+) -> dict[str, int]:
+    probe_clause = ""
+    params: list[Any] = [period.start, period.end, list(EVENTS)]
+    if exclude_probe_audits:
+        probe_clause = "AND (audit_id IS NULL OR audit_id <> ALL(%s))"
+        params.append(list(PROBE_AUDIT_IDS))
     with conn.cursor() as cur:
         cur.execute(
-            """
+            f"""
             SELECT event_name, COUNT(*)
             FROM analytics_event_ledger
             WHERE occurred_at >= %s
@@ -88,9 +101,10 @@ def ledger_counts(conn: psycopg.Connection[Any], period: Period) -> dict[str, in
               AND is_synthetic = FALSE
               AND environment = 'production'
               AND payment_mode = 'live'
+              {probe_clause}
             GROUP BY event_name
             """,
-            (period.start, period.end, list(EVENTS)),
+            params,
         )
         result = _empty_counts()
         for event_name, count in cur.fetchall():
@@ -145,6 +159,7 @@ def period_snapshot(conn: psycopg.Connection[Any], period: Period) -> dict[str, 
         period.previous_end,
     )
     previous = ledger_counts(conn, previous_period)
+    commercial = ledger_counts(conn, period, exclude_probe_audits=True)
     unlocks = current["audit_results_unlocked"]
     previous_unlocks = previous["audit_results_unlocked"]
     posthog_unlocks = posthog_event_count("audit_results_unlocked", period)
@@ -155,6 +170,7 @@ def period_snapshot(conn: psycopg.Connection[Any], period: Period) -> dict[str, 
         "previous_start": period.previous_start.isoformat(),
         "previous_end_exclusive": period.previous_end.isoformat(),
         "ledger": current,
+        "commercial_ledger": commercial,
         "previous_ledger": previous,
         "unlock_reconciliation": {
             "ledger": unlocks,
@@ -173,11 +189,12 @@ def delta(current: int | None, previous: int | None) -> int | None:
 
 def flags(snapshot: dict[str, Any]) -> list[str]:
     ledger = snapshot["ledger"]
+    commercial = snapshot.get("commercial_ledger") or ledger
     unlocks = ledger["audit_results_unlocked"]
     previous_unlocks = snapshot["previous_ledger"]["audit_results_unlocked"]
     reconciliation = snapshot["unlock_reconciliation"]
     alerts: list[str] = []
-    if ledger["checkout_creation_failed"] > 0 and ledger["checkout_started"] == 0:
+    if commercial["checkout_creation_failed"] > 0 and commercial["checkout_started"] == 0:
         alerts.append("CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS")
     if ledger["audit_started"] > ledger["audit_completed"]:
         alerts.append("AUDIT_STARTS_EXCEED_COMPLETIONS")

@@ -53,6 +53,8 @@ Do not add a second monitoring stack. Reuse:
 
 The 24-layer coverage table lives in the snapshot. Most layers are `partial`. Filling them with vendor APM is not the next revenue action.
 
+OpenAPI example UUID `123e4567-e89b-12d3-a456-426614174000` is probe traffic. Event retries against it are not unique buyers and must not flip `system_prevents_conversion`.
+
 ## How to run
 
 ```bash

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T02:30:01.569293+00:00",
+  "generated_at": "2026-09-09T20:09:42.675528+00:00",
   "timezone": "UTC",
   "source": "analytics_event_ledger with PostHog unlock reconciliation",
   "periods": {
@@ -17,6 +17,15 @@
         "checkout_started": 0,
         "purchase_completed": 0
       },
+      "commercial_ledger": {
+        "audit_started": 3,
+        "audit_completed": 14,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 105,
+        "checkout_creation_failed": 0,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
       "previous_ledger": {
         "audit_started": 2,
         "audit_completed": 15,
@@ -29,8 +38,8 @@
       "unlock_reconciliation": {
         "ledger": 0,
         "previous_ledger": 1,
-        "posthog": null,
-        "previous_posthog": null
+        "posthog": 0,
+        "previous_posthog": 0
       }
     },
     "weekly": {
@@ -47,6 +56,15 @@
         "checkout_started": 0,
         "purchase_completed": 0
       },
+      "commercial_ledger": {
+        "audit_started": 2,
+        "audit_completed": 91,
+        "audit_results_unlocked": 1,
+        "audit_result_viewed": 304,
+        "checkout_creation_failed": 7,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
       "previous_ledger": {
         "audit_started": 4,
         "audit_completed": 72,
@@ -59,8 +77,8 @@
       "unlock_reconciliation": {
         "ledger": 1,
         "previous_ledger": 0,
-        "posthog": null,
-        "previous_posthog": null
+        "posthog": 0,
+        "previous_posthog": 0
       }
     },
     "monthly": {
@@ -77,6 +95,15 @@
         "checkout_started": 0,
         "purchase_completed": 0
       },
+      "commercial_ledger": {
+        "audit_started": 261,
+        "audit_completed": 766,
+        "audit_results_unlocked": 0,
+        "audit_result_viewed": 291,
+        "checkout_creation_failed": 159,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
       "previous_ledger": {
         "audit_started": 0,
         "audit_completed": 0,
@@ -89,14 +116,13 @@
       "unlock_reconciliation": {
         "ledger": 0,
         "previous_ledger": 0,
-        "posthog": null,
-        "previous_posthog": null
+        "posthog": 17,
+        "previous_posthog": 6
       }
     }
   },
   "attention": {
     "daily": [
-      "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
       "RESULT_UNLOCKS_DROPPED_TO_ZERO",
       "NO_PURCHASE_SIGNAL"
     ],
@@ -106,6 +132,7 @@
     ],
     "monthly": [
       "CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS",
+      "UNLOCK_LEDGER_BACKFILL_PENDING",
       "NO_PURCHASE_SIGNAL"
     ]
   }

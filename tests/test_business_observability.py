@@ -77,7 +77,7 @@ def test_visits_without_checkout_attempt_or_failure_is_didnt_convert():
     assert conversion_failure_class(result) == "didnt_convert"
 
 
-def test_checkout_failures_with_zero_starts_is_couldnt_convert():
+def test_unique_checkout_failures_with_zero_starts_is_couldnt_convert():
     result = classify_commercial_states(
         {
             "search": {"impressions": 1063, "clicks": 3},
@@ -85,7 +85,8 @@ def test_checkout_failures_with_zero_starts_is_couldnt_convert():
             "funnel": {
                 "audit_completed": 14,
                 "checkout_started": 0,
-                "checkout_creation_failed": 33,
+                "checkout_creation_failed": 4,
+                "unique_checkout_creation_failed": 4,
                 "purchase_completed": 0,
             },
         }
@@ -93,6 +94,25 @@ def test_checkout_failures_with_zero_starts_is_couldnt_convert():
     assert "system_prevents_conversion" in result["active_states"]
     assert conversion_failure_class(result) == "couldnt_convert"
     assert primary_state(result) == "system_prevents_conversion"
+
+
+def test_openapi_example_uuid_retries_are_not_couldnt_convert():
+    result = classify_commercial_states(
+        {
+            "search": {"impressions": 1063, "clicks": 3},
+            "visits": {"sessions": 16, "landing_page_views": 105},
+            "funnel": {
+                "audit_completed": 14,
+                "checkout_started": 0,
+                "checkout_creation_failed": 33,
+                "unique_checkout_creation_failed": 0,
+                "purchase_completed": 0,
+            },
+        }
+    )
+    assert result["active_states"] == ["visits_no_conversion"]
+    assert conversion_failure_class(result) == "didnt_convert"
+    assert primary_state(result) == "visits_no_conversion"
 
 
 def test_primary_state_prefers_system_block_over_weak_discovery():
@@ -103,7 +123,8 @@ def test_primary_state_prefers_system_block_over_weak_discovery():
             "funnel": {
                 "audit_completed": 14,
                 "checkout_started": 0,
-                "checkout_creation_failed": 33,
+                "checkout_creation_failed": 4,
+                "unique_checkout_creation_failed": 2,
                 "purchase_completed": 0,
             },
         }
@@ -161,9 +182,15 @@ def test_compile_snapshot_from_funnel_health_and_baseline(tmp_path):
                     "checkout_started": 0,
                     "purchase_completed": 0,
                 },
+                "commercial_ledger": {
+                    "audit_completed": 14,
+                    "checkout_creation_failed": 0,
+                    "checkout_started": 0,
+                    "purchase_completed": 0,
+                },
             }
         },
-        "attention": {"daily": ["CHECKOUT_FAILURES_WITH_ZERO_SUCCESSFUL_CHECKOUTS"]},
+        "attention": {"daily": ["NO_PURCHASE_SIGNAL"]},
     }
     baseline = tmp_path / "ACQUISITION_BASELINE.md"
     baseline.write_text(
@@ -189,14 +216,14 @@ def test_compile_snapshot_from_funnel_health_and_baseline(tmp_path):
         "revenue",
         "reobservation",
     ]
-    assert snapshot["classification"]["primary_state"] == "system_prevents_conversion"
-    assert snapshot["classification"]["conversion_failure_class"] == "couldnt_convert"
+    assert snapshot["classification"]["primary_state"] == "visits_no_conversion"
+    assert snapshot["classification"]["conversion_failure_class"] == "didnt_convert"
     assert snapshot["metrics"]["impressions"]["classification"] == "OBSERVED"
     assert snapshot["metrics"]["impressions"]["value"] == 1063
     assert snapshot["attachments"]["technical_health"]["healthy"] is False
     text = render_markdown(snapshot)
-    assert "system_prevents_conversion" in text
-    assert "couldnt_convert" in text
+    assert "visits_no_conversion" in text
+    assert "didnt_convert" in text
     assert "OBSERVED" in text
 
 

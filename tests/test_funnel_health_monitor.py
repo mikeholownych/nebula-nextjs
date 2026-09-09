@@ -51,6 +51,43 @@ def test_flags_surface_checkout_and_unlock_risks():
     ]
 
 
+def test_flags_ignore_openapi_example_uuid_checkout_noise():
+    snapshot = {
+        "ledger": {
+            "audit_started": 3,
+            "audit_completed": 14,
+            "audit_results_unlocked": 0,
+            "checkout_creation_failed": 33,
+            "checkout_started": 0,
+            "purchase_completed": 0,
+        },
+        "commercial_ledger": {
+            "audit_started": 3,
+            "audit_completed": 14,
+            "audit_results_unlocked": 0,
+            "checkout_creation_failed": 0,
+            "checkout_started": 0,
+            "purchase_completed": 0,
+        },
+        "previous_ledger": {
+            "audit_started": 2,
+            "audit_completed": 15,
+            "audit_results_unlocked": 0,
+            "checkout_creation_failed": 20,
+            "checkout_started": 0,
+            "purchase_completed": 0,
+        },
+        "unlock_reconciliation": {
+            "ledger": 0,
+            "previous_ledger": 0,
+            "posthog": None,
+            "previous_posthog": None,
+        },
+    }
+
+    assert flags(snapshot) == ["NO_PURCHASE_SIGNAL"]
+
+
 def test_markdown_contains_all_cadences_and_attention_section():
     base = {
         "start": "2026-09-03",
