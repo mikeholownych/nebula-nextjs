@@ -53,6 +53,15 @@ def _intent_overlap(evidence: dict[str, Any]) -> bool:
     return any(query_of(x).strip().casefold() == query for x in registry) and any(query_of(x).strip().casefold() == query for x in ownership)
 
 
+import os as _os
+
+# IMPRESSIONS_FLOOR controls the minimum GSC impressions required before a keyword is eligible
+# for content creation. The default (10) is appropriate for a new site building initial authority.
+# Raise this threshold as the site accumulates traffic (suggested: 50 at 6 months, 100 at 12 months).
+# Override via environment: NEBULA_IMPRESSIONS_FLOOR=50
+IMPRESSIONS_FLOOR = int(_os.environ.get("NEBULA_IMPRESSIONS_FLOOR", "10"))
+
+
 def score_opportunity(evidence: dict[str, Any]) -> dict[str, Any]:
     source_errors = _validate_sources(evidence)
     if source_errors:
@@ -63,7 +72,7 @@ def score_opportunity(evidence: dict[str, Any]) -> dict[str, Any]:
     position = float(evidence.get("position", 999))
     clicks = int(evidence.get("clicks", 0))
     reasons: list[str] = []
-    if impressions < 100 and not (evidence.get("indexable") is False and evidence.get("indexability_defect_verified") is True):
+    if impressions < IMPRESSIONS_FLOOR and not (evidence.get("indexable") is False and evidence.get("indexability_defect_verified") is True):
         reasons.append("INSUFFICIENT_IMPRESSIONS")
     if position > 20 and clicks == 0:
         reasons.append("LOW_EXPOSURE")
