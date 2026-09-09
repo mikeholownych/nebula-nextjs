@@ -84,6 +84,37 @@ def test_sender_requires_explicit_approval_metadata():
     }) is True
 
 
+def test_internal_gmail_self_replies_are_skipped():
+    assert support.is_skip_sender("mike.holownych@gmail.com") is True
+    assert support.is_skip_sender("Sedrick Murphy <sedrick@nebulacomponents.com>") is True
+    assert support.is_skip_sender("buyer@example.com") is False
+
+
+def test_internal_thread_does_not_escalate(tmp_path, monkeypatch):
+    queue = tmp_path / "queued_replies.json"
+    monkeypatch.setattr(support, "APPROVAL_QUEUE", queue)
+    monkeypatch.setattr(support, "telegram", lambda _message: None)
+    monkeypatch.setattr(support, "get_customer_purchase", lambda _email: None)
+    am = FakeAgentMail("YES")
+    am.list_threads = lambda limit=100: [{
+        "thread_id": "thread-internal",
+        "last_message_id": "message-internal",
+        "labels": ["received"],
+        "senders": [
+            "Sedrick Murphy <sedrick@nebulacomponents.com>",
+            "Mike Holownych <mike.holownych@gmail.com>",
+        ],
+        "subject": "Your audit is ready (don't lose this)",
+        "preview": "YES",
+    }]
+
+    support.process(am, dry_run=False)
+
+    assert am.replies == []
+    assert am.labels == []
+    assert not queue.exists()
+
+
 def test_rejected_draft_is_terminal_and_not_retained():
     assert sender.queue_disposition({"status": "rejected"}) == "drop"
     assert sender.queue_disposition({"status": "pending_approval"}) == "retain"

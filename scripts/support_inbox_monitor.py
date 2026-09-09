@@ -49,6 +49,17 @@ SKIP_SENDERS = {
     "notifications@", "agentmail", "nebulashop@",
 }
 
+# Internal / operator addresses. Replies from these are self-tests, not prospects.
+INTERNAL_SENDERS = {
+    "mike.holownych@gmail.com",
+    "mike.holownych@aisyndicate.io",
+    "sedrick@nebulacomponents.com",
+    "mike@nebulacomponents.com",
+    "hello@nebulacomponents.com",
+    "press@nebulacomponents.com",
+    "nebulashop@agentmail.to",
+}
+
 # ── Automated reply templates ─────────────────────────────────────────────────
 
 REPLY_REAUDIT_TRIGGERED = """\
@@ -264,7 +275,12 @@ def extract_email(sender: str) -> str:
 
 
 def is_skip_sender(addr: str) -> bool:
-    return any(s in addr.lower() for s in SKIP_SENDERS)
+    lowered = extract_email(addr)
+    if lowered in INTERNAL_SENDERS:
+        return True
+    if lowered.endswith("@nebulacomponents.com"):
+        return True
+    return any(s in lowered for s in SKIP_SENDERS)
 
 
 def _draft_for_intent(intent: str, is_customer: bool) -> str:
