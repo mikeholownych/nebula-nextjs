@@ -88,6 +88,7 @@ const productSchema = {
   '@id': 'https://nebulacomponents.com/pricing#repair-sprint',
   name: 'Nebula One-Leak Repair Sprint',
   description: 'A bounded single-condition landing page repair. Nebula scopes the highest-priority finding, writes the exact fix, and re-audits after 30 days.',
+  image: 'https://nebulacomponents.com/brand/v2/og-default.png',
   brand: { '@type': 'Brand', name: 'Nebula Components' },
   url: 'https://nebulacomponents.com/pricing',
   offers: {
