@@ -73,6 +73,7 @@ export default function SiteFooter() {
               <li><Link href="https://app.nebulacomponents.com" className="hover:text-accent transition-colors">Client Workspace</Link></li>
               <li><Link href="https://peerpush.com/p/nebula" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Nebula on PeerPush</Link></li>
               <li><Link href="/about" className="hover:text-accent transition-colors">About</Link></li>
+              <li><Link href="/ai-info" className="hover:text-accent transition-colors">AI info</Link></li>
               <li><Link href="/press" className="hover:text-accent transition-colors">Press</Link></li>
               <li><Link href="/brand" className="hover:text-accent transition-colors">Brand Assets</Link></li>
               <li><Link href="/editorial-standards" className="hover:text-accent transition-colors">Editorial Standards</Link></li>

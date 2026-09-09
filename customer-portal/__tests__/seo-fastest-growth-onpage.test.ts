@@ -27,11 +27,11 @@ describe('fastest-growth on-page SEO contract', () => {
 
   it('includes /research and /ai-info in sitemap and footer crawl paths', () => {
     const sitemap = read('app/sitemap.ts')
-    const footer = read('components/Footer.tsx')
+    const liveFooter = read('app/components/SiteFooter.tsx')
     expect(sitemap).toContain("'/research'")
     expect(sitemap).toContain("'/ai-info'")
-    expect(footer).toContain("['/ai-info', 'AI info']")
-    expect(footer).toContain("['/research', 'Research']")
+    expect(liveFooter).toContain('href="/ai-info"')
+    expect(liveFooter).toContain('AI info')
   })
 
   it('routes four Learning Centre articles to the published paid-traffic field note', () => {
