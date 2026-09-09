@@ -19,6 +19,7 @@ export const ACQUISITION_POST_TYPES = [
   'checklist',
   'comparison',
   'evidence-backed-listicle',
+  'problem_guide',
 ] as const
 
 export const FEATURE_POST_TYPES = [
