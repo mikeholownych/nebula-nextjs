@@ -1,0 +1,30 @@
+{
+  "changed": false,
+  "env_var": "NEBULA_IMPRESSIONS_FLOOR",
+  "floor": 5,
+  "generated_at": "2026-09-09T10:04:27.240213+00:00",
+  "next_review": "raise threshold when total_impressions crosses next tier boundary",
+  "previous_floor": 5,
+  "reason": "total_impressions=60 < 500",
+  "schema": "nebula.content-pipeline.impressions-floor.v1",
+  "tiers": [
+    {
+      "floor": 5,
+      "threshold": 500
+    },
+    {
+      "floor": 20,
+      "threshold": 2000
+    },
+    {
+      "floor": 50,
+      "threshold": 10000
+    },
+    {
+      "floor": 100,
+      "label": "established",
+      "threshold": null
+    }
+  ],
+  "total_impressions": 60
+}
