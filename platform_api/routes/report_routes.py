@@ -8,13 +8,15 @@ audit share token. Agency branding (agency_name / agency_logo_url) is read
 from the owner's workspace_preferences JSONB.
 """
 
+import hmac
 import io
 import json
 import logging
+import os
 from typing import Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from fastapi.responses import StreamingResponse
 from sqlalchemy import text
 from sqlalchemy.orm import Session
@@ -70,10 +72,19 @@ async def get_report_pdf(
         raise HTTPException(status_code=400, detail="Invalid audit ID format")
 
     branding_email: Optional[str] = None
+    secret = (os.getenv("INTERNAL_API_SECRET") or "").strip()
+    auth_header = request.headers.get("authorization", "")
+    supplied_bearer = auth_header[7:].strip() if auth_header.lower().startswith("bearer ") else ""
+    is_internal = bool(secret and supplied_bearer and hmac.compare_digest(supplied_bearer, secret))
 
     if share:
         audit = await audit_db.get_audit_by_share_token(share)
         if not audit or audit.get("audit_id") != audit_id:
+            raise HTTPException(status_code=404, detail="Audit not found")
+        branding_email = audit.get("email")
+    elif is_internal:
+        audit = await audit_db.get_audit(audit_uuid)
+        if not audit:
             raise HTTPException(status_code=404, detail="Audit not found")
         branding_email = audit.get("email")
     else:
@@ -109,6 +120,125 @@ async def get_report_pdf(
         media_type="application/pdf",
         headers={
             "Content-Disposition": f'attachment; filename="{filename}"',
+            "Cache-Control": "private, no-cache",
+        },
+    )
+
+
+@router.get("/citable")
+async def get_report_citable(
+    request: Request,
+    audit_id: str = Query(...),
+    share: Optional[str] = Query(default=None),
+    format: str = Query(default="html"),
+    db: Session = Depends(get_session),
+    redis=Depends(get_redis),
+):
+    """Stream the Citable Executive Brief deliverable (HTML or Markdown).
+
+    Two access paths:
+      1. `share` matches the audit's share_token - read-only share link.
+      2. Authenticated session whose email owns the audit (or internal verified proxy).
+    """
+    try:
+        audit_uuid = UUID(audit_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid audit ID format")
+
+    secret = (os.getenv("INTERNAL_API_SECRET") or "").strip()
+    auth_header = request.headers.get("authorization", "")
+    supplied_bearer = auth_header[7:].strip() if auth_header.lower().startswith("bearer ") else ""
+    is_internal = bool(secret and supplied_bearer and hmac.compare_digest(supplied_bearer, secret))
+
+    if share:
+        audit = await audit_db.get_audit_by_share_token(share)
+        if not audit or audit.get("audit_id") != audit_id:
+            raise HTTPException(status_code=404, detail="Audit not found")
+    elif is_internal:
+        audit = await audit_db.get_audit(audit_uuid)
+        if not audit:
+            raise HTTPException(status_code=404, detail="Audit not found")
+    else:
+        try:
+            current = await get_current_user(request, redis, db)
+        except HTTPException:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        audit = await audit_db.get_audit(audit_uuid)
+        if not audit:
+            raise HTTPException(status_code=404, detail="Audit not found")
+        user_email = (current.get("user").email or "").strip().lower()
+        owner_email = (audit.get("email") or "").strip().lower()
+        if not user_email or user_email != owner_email:
+            raise HTTPException(status_code=403, detail="You do not own this audit")
+
+    output = audit.get("engine_output") if isinstance(audit.get("engine_output"), dict) else {}
+    content = ""
+    media_type = "text/html; charset=utf-8"
+    filename = f"citable-executive-brief-{audit_id[:8]}.html"
+
+    fmt = format.lower().strip()
+    if fmt in ("kit", "implementation-kit", "json-kit"):
+        from platform_api.services.citable_service import generate_citable_implementation_kit
+        kit = generate_citable_implementation_kit(audit)
+        return Response(
+            content=json.dumps(kit, indent=2),
+            media_type="application/json; charset=utf-8",
+            headers={
+                "Content-Disposition": f'inline; filename="citable-implementation-kit-{audit_id[:8]}.json"',
+                "Cache-Control": "private, no-cache",
+            },
+        )
+    elif fmt in ("verification", "remediation-verify", "verify"):
+        from platform_api.services.citable_service import generate_citable_remediation_verification
+        verif = generate_citable_remediation_verification(audit)
+        return Response(
+            content=json.dumps(verif, indent=2),
+            media_type="application/json; charset=utf-8",
+            headers={
+                "Content-Disposition": f'inline; filename="citable-remediation-verification-{audit_id[:8]}.json"',
+                "Cache-Control": "private, no-cache",
+            },
+        )
+    elif fmt in ("markdown", "deck", "md"):
+        content = output.get("citable_deck") or ""
+        media_type = "text/markdown; charset=utf-8"
+        filename = f"citable-executive-deck-{audit_id[:8]}.md"
+    else:
+        content = output.get("citable_brief") or ""
+
+    # If content is empty or contains the stale non-CRO brief, regenerate from audit
+    is_stale = (
+        not content
+        or "Executive Search & AEO Governance Briefing" in content
+        or "Search Central structured data" in content
+    )
+
+    if is_stale:
+        try:
+            from platform_api.services.citable_service import generate_cro_executive_brief
+            client_name = audit.get("name") or "Nebula Client"
+            cro_telemetry = None
+            if isinstance(audit.get("citable"), dict):
+                cro_telemetry = audit["citable"].get("cro")
+            elif isinstance(output.get("citable"), dict):
+                cro_telemetry = output["citable"].get("cro")
+            content = generate_cro_executive_brief(
+                audit,
+                cro_telemetry=cro_telemetry,
+                client_name=client_name,
+                format=fmt,
+            )
+        except Exception:
+            logger.exception("On-the-fly Citable CRO report generation failed for %s", audit_id)
+
+    if not content:
+        raise HTTPException(status_code=404, detail="Citable executive report unavailable for this audit")
+
+    return Response(
+        content=content,
+        media_type=media_type,
+        headers={
+            "Content-Disposition": f'inline; filename="{filename}"',
             "Cache-Control": "private, no-cache",
         },
     )

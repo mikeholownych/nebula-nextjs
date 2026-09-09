@@ -1,6 +1,6 @@
 {
   "started": "2026-09-01",
-  "updated_at": "2026-09-05T07:00:58.815037",
+  "updated_at": "2026-09-08T07:01:03.181342",
   "days": {
     "2026-09-01": {
       "bot_summary": {
@@ -757,6 +757,65 @@
         "OpenAI": 8,
         "GPTBot": 3,
         "ClaudeBot": 4
+      }
+    },
+    "2026-09-08": {
+      "bot_summary": {
+        "human": 1824,
+        "curl": 308,
+        "Googlebot": 53,
+        "Bingbot": 51,
+        "Python-script": 26,
+        "YandexBot": 14,
+        "OpenAI": 7,
+        "ClaudeBot": 6,
+        "Semrush": 3,
+        "Ahrefs": 3,
+        "GoogleOther": 2,
+        "Facebook": 1,
+        "Nebula-internal": 1
+      },
+      "raw_record_count": 2299,
+      "sitemap_path_count": 187,
+      "googlebot_crawled_count": 7,
+      "bingbot_crawled_count": 7,
+      "ai_paths": {
+        "OpenAI": [
+          [
+            "/",
+            2
+          ],
+          [
+            "/robots.txt",
+            2
+          ],
+          [
+            "/login",
+            1
+          ],
+          [
+            "/learning-centre/social-proof-above-fold",
+            1
+          ],
+          [
+            "/learning-centre/what-is-social-proof-landing-page",
+            1
+          ]
+        ],
+        "ClaudeBot": [
+          [
+            "/robots.txt",
+            3
+          ],
+          [
+            "/sitemap.xml",
+            3
+          ]
+        ]
+      },
+      "ai_path_reach": {
+        "OpenAI": 5,
+        "ClaudeBot": 2
       }
     }
   }

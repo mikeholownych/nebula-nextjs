@@ -1,0 +1,15 @@
+{
+  "run_id": "20260909T034734Z-citable-cro",
+  "citable_version": "1.17.0",
+  "citable_release_commit": "5c7beecdadce9c3b55ba5f947cf8c685c7017205",
+  "integrity_hash": "394afce5ff14b369bd144864e3bbd85ab7bb4bac4a0b0dda92a7eec23fc1e59b",
+  "generated_at": "2026-09-09T03:47:34.970544+00:00",
+  "url": "https://example.com",
+  "counts": {
+    "critical": 1,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "findings_count": 1
+}

@@ -3,113 +3,188 @@
   "cadence": "daily",
   "do_not_create": [
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
+      "topic": "landing page audit"
+    },
+    {
+      "canonical_article": "landing-page-audit",
+      "decision": "do_not_create",
+      "intent": "high_intent",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page audit service"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "website-conversion-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
+      "topic": "website conversion audit"
+    },
+    {
+      "canonical_article": "website-conversion-audit",
+      "decision": "do_not_create",
+      "intent": "high_intent",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "conversion rate optimization audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page optimization service"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "free landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page audit tool"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
+      "topic": "landing page not converting"
+    },
+    {
+      "canonical_article": "google-ads-clicks-no-sales",
+      "decision": "do_not_create",
+      "intent": "problem_aware",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
+      "topic": "google ads clicks no sales"
+    },
+    {
+      "canonical_article": "google-ads-clicks-no-sales",
+      "decision": "do_not_create",
+      "intent": "problem_aware",
+      "overlap": 0.8,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "ads getting clicks but no conversions"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "traffic-but-no-conversions",
       "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
+      "topic": "traffic but no conversions"
+    },
+    {
+      "canonical_article": "landing-page-audit",
+      "decision": "do_not_create",
+      "intent": "problem_aware",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page conversion problems"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "SaaS landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "ecommerce landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "B2B landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "mobile landing page optimization"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page message match"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page CTA optimization"
     }
   ],
   "duplicate_threshold": 0.45,
-  "generated_at": "2026-09-07T05:00:38.425624+00:00",
+  "generated_at": "2026-09-08T05:36:55.488071+00:00",
   "inventory": [
+    {
+      "content_lane": "acquisition",
+      "path": "customer-portal/app/blog/content/google-ads-clicks-no-sales.md",
+      "post_type": "diagnostic-guide",
+      "slug": "google-ads-clicks-no-sales",
+      "status": "drafted",
+      "title": "Google Ads is getting clicks but generating no sales",
+      "topic_tokens": [
+        "ads",
+        "but",
+        "clicks",
+        "generating",
+        "getting",
+        "google",
+        "sales"
+      ],
+      "words": 861
+    },
+    {
+      "content_lane": "acquisition",
+      "path": "customer-portal/app/blog/content/landing-page-audit.md",
+      "post_type": "diagnostic-guide",
+      "slug": "landing-page-audit",
+      "status": "drafted",
+      "title": "What is a landing page audit and what does it check?",
+      "topic_tokens": [
+        "and",
+        "audit",
+        "check",
+        "does",
+        "landing",
+        "page"
+      ],
+      "words": 633
+    },
     {
       "content_lane": "acquisition",
       "path": "customer-portal/app/blog/content/paid-traffic-not-converting.md",
@@ -123,7 +198,7 @@
         "paid",
         "traffic"
       ],
-      "words": 2156
+      "words": 2128
     },
     {
       "content_lane": "acquisition",
@@ -141,6 +216,38 @@
       "words": 38
     },
     {
+      "content_lane": "acquisition",
+      "path": "customer-portal/app/blog/content/traffic-but-no-conversions.md",
+      "post_type": "diagnostic-guide",
+      "slug": "traffic-but-no-conversions",
+      "status": "drafted",
+      "title": "Website getting traffic but no conversions",
+      "topic_tokens": [
+        "but",
+        "conversions",
+        "getting",
+        "traffic",
+        "website"
+      ],
+      "words": 1022
+    },
+    {
+      "content_lane": "acquisition",
+      "path": "customer-portal/app/blog/content/website-conversion-audit.md",
+      "post_type": "diagnostic-guide",
+      "slug": "website-conversion-audit",
+      "status": "drafted",
+      "title": "What does a website conversion audit check?",
+      "topic_tokens": [
+        "audit",
+        "check",
+        "conversion",
+        "does",
+        "website"
+      ],
+      "words": 711
+    },
+    {
       "content_lane": "feature",
       "path": "customer-portal/app/blog/content/what-we-got-wrong-about-filter-based-targeting.md",
       "post_type": "assumption-report",
@@ -156,94 +263,53 @@
         "targeting",
         "wrong"
       ],
-      "words": 2026
+      "words": 2005
     }
   ],
-  "new_topics": [
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "topic": "landing page audit"
-    },
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "topic": "website conversion audit"
-    },
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "topic": "google ads clicks no sales"
-    },
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "topic": "traffic but no conversions"
-    }
-  ],
+  "new_topics": [],
   "posts_per_week": 7,
   "publication_schedule": [
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "high_intent",
-      "overlap": 0.0,
-      "publish_date": "2026-09-14",
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "slot": 1,
-      "topic": "landing page audit"
-    },
-    {
-      "canonical_article": null,
-      "decision": "new",
-      "intent": "high_intent",
-      "overlap": 0.0,
-      "publish_date": "2026-09-15",
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
-      "slot": 2,
-      "topic": "website conversion audit"
-    },
     {
       "canonical_article": "paid-traffic-not-converting",
       "decision": "repurpose",
       "intent": "problem_aware",
-      "overlap": 0.5,
-      "publish_date": "2026-09-16",
+      "overlap": 1.0,
+      "publish_date": "2026-09-14",
       "reason": "update the canonical article with verified new findings",
+      "slot": 1,
+      "topic": "paid traffic not converting"
+    },
+    {
+      "canonical_article": null,
+      "decision": "blocked",
+      "publish_date": "2026-09-15",
+      "reason": "no additional unique evidence-backed topic is available; do not invent or duplicate content",
+      "slot": 2,
+      "topic": null
+    },
+    {
+      "canonical_article": null,
+      "decision": "blocked",
+      "publish_date": "2026-09-16",
+      "reason": "no additional unique evidence-backed topic is available; do not invent or duplicate content",
       "slot": 3,
-      "topic": "landing page not converting"
+      "topic": null
     },
     {
       "canonical_article": null,
-      "decision": "new",
-      "intent": "problem_aware",
-      "overlap": 0.0,
+      "decision": "blocked",
       "publish_date": "2026-09-17",
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "reason": "no additional unique evidence-backed topic is available; do not invent or duplicate content",
       "slot": 4,
-      "topic": "google ads clicks no sales"
+      "topic": null
     },
     {
       "canonical_article": null,
-      "decision": "new",
-      "intent": "problem_aware",
-      "overlap": 0.0,
+      "decision": "blocked",
       "publish_date": "2026-09-18",
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "reason": "no additional unique evidence-backed topic is available; do not invent or duplicate content",
       "slot": 5,
-      "topic": "traffic but no conversions"
+      "topic": null
     },
     {
       "canonical_article": null,
@@ -267,14 +333,6 @@
       "canonical_article": "paid-traffic-not-converting",
       "decision": "repurpose",
       "intent": "problem_aware",
-      "overlap": 0.5,
-      "reason": "update the canonical article with verified new findings",
-      "topic": "landing page not converting"
-    },
-    {
-      "canonical_article": "paid-traffic-not-converting",
-      "decision": "repurpose",
-      "intent": "problem_aware",
       "overlap": 1.0,
       "reason": "update the canonical article with verified new findings",
       "topic": "paid traffic not converting"
@@ -293,67 +351,67 @@
   "topic_count": 20,
   "topics": [
     {
-      "canonical_article": null,
-      "decision": "new",
+      "canonical_article": "landing-page-audit",
+      "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page audit service"
     },
     {
-      "canonical_article": null,
-      "decision": "new",
+      "canonical_article": "website-conversion-audit",
+      "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "website conversion audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "website-conversion-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "conversion rate optimization audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page optimization service"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "free landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "high_intent",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page audit tool"
     },
     {
-      "canonical_article": "paid-traffic-not-converting",
-      "decision": "repurpose",
+      "canonical_article": "landing-page-audit",
+      "decision": "do_not_create",
       "intent": "problem_aware",
       "overlap": 0.5,
-      "reason": "update the canonical article with verified new findings",
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page not converting"
     },
     {
@@ -365,11 +423,11 @@
       "topic": "paid traffic not converting"
     },
     {
-      "canonical_article": null,
-      "decision": "new",
+      "canonical_article": "google-ads-clicks-no-sales",
+      "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "google ads clicks no sales"
     },
     {
@@ -381,77 +439,77 @@
       "topic": "facebook ads not converting"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "google-ads-clicks-no-sales",
       "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.8,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "ads getting clicks but no conversions"
     },
     {
-      "canonical_article": null,
-      "decision": "new",
+      "canonical_article": "traffic-but-no-conversions",
+      "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "no existing or same-cycle canonical topic exceeds the duplicate threshold",
+      "overlap": 1.0,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "traffic but no conversions"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "problem_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page conversion problems"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "SaaS landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "ecommerce landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.75,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "B2B landing page audit"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "mobile landing page optimization"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page message match"
     },
     {
-      "canonical_article": null,
+      "canonical_article": "landing-page-audit",
       "decision": "do_not_create",
       "intent": "solution_aware",
-      "overlap": 0.0,
-      "reason": "near-duplicate of another new topic in this planning cycle",
+      "overlap": 0.5,
+      "reason": "existing non-public article or fixture; do not create a competing URL",
       "topic": "landing page CTA optimization"
     }
   ],
-  "unfilled_slots": 2
+  "unfilled_slots": 6
 }

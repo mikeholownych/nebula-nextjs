@@ -1,0 +1,26 @@
+version: 1
+kind: funnels
+updated: '2026-09-08T10:00:00.000Z'
+entries:
+  - funnel_id: funnel-free-audit
+    name: Nebula Free Audit Conversion Funnel
+    description: Core evaluation journey from homepage to diagnostic audit request
+    primary_goal: Request free landing page diagnostic audit
+    target_audience: Founders and growth operators burning ad spend
+    owner: Mike Holownych
+    status: active
+    steps:
+      - step_id: step-homepage
+        name: Nebula Homepage
+        url_pattern: /
+        role: entry
+        expected_cta: Free Audit
+        preserve_params:
+          - utm_source
+          - utm_medium
+          - utm_campaign
+      - step_id: step-audit-lander
+        name: Free Audit Intake
+        url_pattern: /audit
+        role: consideration
+        expected_cta: Run Free Audit

@@ -1,0 +1,14 @@
+[
+  {
+    "detector_id": "CRO-006",
+    "severity": "high",
+    "summary": "Message scent gap",
+    "remediation": "Optimize landing page conversion flow"
+  },
+  {
+    "detector_id": "SCHEMA-010",
+    "severity": "high",
+    "summary": "Circular self-reference",
+    "remediation": "Review upstream guidance"
+  }
+]

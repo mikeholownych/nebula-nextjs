@@ -1,0 +1,46 @@
+{
+  "brief_id": "paid-traffic-not-converting-repurpose-2026-09-08",
+  "created_at": "2026-09-08T06:33:33Z",
+  "brief_type": "repurpose",
+  "plan_ref": "content-ledger/content-plan.json",
+  "plan_generated_at": "2026-09-08T05:36:55.488071+00:00",
+  "topic": "paid traffic not converting",
+  "slug": "paid-traffic-not-converting",
+  "canonical_article": "customer-portal/app/blog/content/paid-traffic-not-converting.md",
+  "decision": "repurpose",
+  "intent": "problem_aware",
+  "content_lane": "acquisition",
+  "post_type": "diagnostic-guide",
+  "planned_publish_date": "2026-09-14",
+  "slot": 1,
+  "update_rationale": "Two new signal categories have appeared in the findings DB that were not in the article's published signal table: ai_readiness (5.2% of findings, avg_impact 2.3) and local_gbp (1.5%, avg_impact 2.0). The article's table listed 7 signals covering 92.3% of findings; the DB now shows 11 signal keys covering 100%. The audit corpus has grown from the 892 figure cited in the article to 1,194 total audits (1,154 at publish time on 2026-09-04). Signal proportions for the 7 original signals are unchanged, confirming the pattern holds at larger sample. The ai_readiness signal at 5.2% ranks above the long tail and is absent from the published table, making its omission a factual gap.",
+  "new_evidence": [
+    {
+      "ref": "nebula-audit-db-2026-09-08",
+      "description": "DB query on 2026-09-08: 1,194 total audits (up from 892 cited in article; 1,154 at publish date 2026-09-04). Signal distribution from findings table: above_fold 21.3% (avg_impact 3.6), ad_signals 19.9% (3.6), seo_foundations 16.5% (2.6), load_speed 12.4% (2.5), headline 8.6% (3.0), social_proof 7.1% (4.3), cta 6.7% (3.3), ai_readiness 5.2% (2.3), local_gbp 1.5% (2.0), ai_crawler_access 0.4% (4.5), mobile 0.4% (3.0). Total findings: 267 across 73 audits.",
+      "status": "first_party_verified",
+      "query_run_at": "2026-09-08T06:33:00Z"
+    }
+  ],
+  "required_changes": [
+    "Update audit count reference from '892 completed audits' to '1,194 completed audits' throughout the article",
+    "Extend the signal breakdown table to include ai_readiness (5.2%, avg_impact 2.3) and local_gbp (1.5%, avg_impact 2.0) as new rows",
+    "Add a brief explanatory note that ai_readiness findings reflect whether the page is optimized for AI-driven discovery tools; this is an emerging category that did not appear in the original audit corpus",
+    "Update frontmatter updated_at to 2026-09-14 at time of publication",
+    "Source ref: replace nebula-audit-db-2026-09 with nebula-audit-db-2026-09-08",
+    "Do NOT change the core argument, diagnostic framework, fix prioritization sequence, or any other section; this is a data update only"
+  ],
+  "constraints": [
+    "No new URL -- update canonical article only",
+    "No em-dashes",
+    "No invented statistics beyond verified evidence listed above",
+    "No fabricated customer outcomes",
+    "CTA links to /audit must remain",
+    "Set frontmatter status to: published (it is already published; update preserves status)",
+    "Preserve immutable revision: copy original to customer-portal/app/blog/content/.revisions/paid-traffic-not-converting-2026-09-04.md before applying changes",
+    "No publishing or deployment by this job"
+  ],
+  "status": "ready_for_ctw_review",
+  "review_required": true,
+  "review_type": "ctw"
+}

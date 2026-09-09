@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "critical": 0,
+    "high": 2,
+    "medium": 2,
+    "low": 2
+  },
+  "posture": {
+    "retrieval": "eligible",
+    "support": "suitable",
+    "citation": "observed"
+  },
+  "url": "https://nebulacomponents.com/audit",
+  "generated_at": "2026-09-08T11:15:20.862613+00:00"
+}

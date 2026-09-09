@@ -76,6 +76,24 @@ def score_inprocess(job: dict) -> dict:
         except Exception:
             guided = None
 
+    citable_res = {}
+    try:
+        audit_data_payload = {
+            "audit_id": str(job.get("id", "")),
+            "url": url,
+            "score": audit.get("overall"),
+            "composite": audit.get("composite"),
+            "grade": audit.get("overall_grade", ""),
+            "findings": audit.get("opp_matrix", []),
+            "dimensions": audit.get("dimensions", {}),
+            "strategic_finding": audit.get("strategic_finding"),
+            "guided_implementation": guided or audit.get("guided_implementation"),
+        }
+        citable_res = run_citable_analysis(url, client_name=client_name, audit_data=audit_data_payload)
+    except Exception as _c_exc:
+        import logging as _c_log
+        _c_log.getLogger("nebula.audit_engine").warning("Citable analysis failed for %s: %s", url, _c_exc)
+
     return {
         "url": url,
         "email": job.get("email"),
@@ -95,6 +113,13 @@ def score_inprocess(job: dict) -> dict:
         "observation": audit.get("observation"),
         "case_file": audit.get("case_file"),
         "registry_version": audit.get("registry_version"),
+        "citable": citable_res,
+        "citable_brief": citable_res.get("executive_brief_html"),
+        "citable_deck": citable_res.get("executive_deck_md"),
+        "citable_version": citable_res.get("citable_version"),
+        "citable_release_commit": citable_res.get("citable_release_commit"),
+        "citable_run_id": citable_res.get("run_id"),
+        "citable_integrity_hash": citable_res.get("integrity_hash"),
     }
 
 

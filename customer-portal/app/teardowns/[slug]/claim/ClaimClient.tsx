@@ -60,9 +60,16 @@ export default function ClaimClient({ slug, domain }: { slug: string; domain: st
           if (ok && data.sent) setSentTo(email)
           else setMessage(data.detail || 'Could not send verification')
         }}>
-          <input value={email} onChange={(e) => setEmail(e.target.value)}
+          <input
+            id="claim-email"
+            type="email"
+            autoComplete="email"
+            aria-label="Work email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder={`you@${domain}`}
-            className="w-full bg-white/5 border border-white/15 rounded px-3 py-2 text-sm" />
+            className="w-full bg-white/5 border border-white/15 rounded px-3 py-2 text-sm"
+          />
           <button disabled={busy} className="bg-accent text-black font-semibold text-sm px-4 py-2 rounded">
             {busy ? 'Sending...' : 'Send verification link'}
           </button>

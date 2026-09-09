@@ -1,0 +1,755 @@
+{
+  "isIndex": false,
+  "urls": [
+    {
+      "loc": "https://nebulacomponents.com",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/pricing",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/how-nebula-audits",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/message-match",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/trust-signals",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/mobile-cta",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/load-speed",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/cta-clarity",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/above-fold-clarity",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/ad-signal-continuity",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/seo-foundations",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/signals/ai-readiness",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/observatory",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/case-studies",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/best-landing-page-audit-tools",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/landing-page-audit-tools-pricing",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/landing-page-message-match",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/landing-page-trust-signals",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/landing-page-cta-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/mobile-landing-page-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/saas-landing-page-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/ecommerce-landing-page-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/page-intent-aware-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/ai-readiness-landing-page-check",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/conversion-rate-optimization-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/why-cro-agencies-dont-work",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/7-systems",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/ai-sdr-vs-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/compare",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/compare/unbounce",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/compare/instapage",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/compare/pagespeed-insights",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/compare/leadpages",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/concepts",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/cta-optimization",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/editorial-standards",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/headline-optimization",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/mobile-landing-page-optimization",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/page-speed-conversion",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/roas-cliff",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/social-proof-landing-page",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/what-is-landing-page-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/playbooks",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/benchmarks",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/brand",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/ai-info",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/lab",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/press",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/faq",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/what-is-nebula-components",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/about",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/about/team",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/privacy-policy",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/data-rights",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/terms",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/above-fold-landing-page",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/ad-says-one-thing-page-says-another",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/agency-handoff-debt",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/b2b-saas-landing-page-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/before-you-raise-ad-budget",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/coach-consultant-landing-page",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/confessions",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/cpc-break-even-landing-page",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/cta-below-fold-mobile",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/cta-not-working",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/cta-not-working-7-fixes",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/ecommerce-landing-page-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/facebook-ads-no-leads",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/form-has-zero-friction",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/ghost-variant-ab-test",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/google-ads-clicks-no-sales",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/google-ads-disapproved-ads-still-spending",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/google-ads-quality-score-low",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/headline-cta-mismatch",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/headline-fails-message-match",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/high-cpc-low-conversion",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-headline-formula",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-intelligence-stack",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-lcp",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-load-time-slow",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/landing-page-speed-test",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/linkedin-ad-copy-landing-page-mismatch",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/linkedin-ads-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/linkedin-authority-gap",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/message-match-checklist",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/mobile-landing-page-leaks",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/paid-traffic-leak-map",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/pricing-page-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/proof-before-cta",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/retargeting-ads-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/slow-landing-page-causes",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/social-proof-above-fold",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/social-proof-backfire",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/the-11pm-founder-spiral",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/tiktok-ads-not-converting",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/tiktok-trust-collapse",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/topic-guides/ad-spend-roi-improvement",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/topic-guides/ai-traffic-optimization-vs-landing-page-builders",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/topic-guides/conversion-rate-optimization-tools",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/topic-guides/landing-page-conversion-leaks",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/traffic-but-no-form-fills",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/types-of-social-proof",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/what-is-message-match",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/learning-centre/what-is-social-proof-landing-page",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/blog",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/blog/paid-traffic-not-converting",
+      "lastmod": "2026-09-04"
+    },
+    {
+      "loc": "https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting",
+      "lastmod": "2026-09-04"
+    },
+    {
+      "loc": "https://nebulacomponents.com/playbooks/founder-second-brain",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/playbooks/linkedin-skill-engine",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/playbooks/specialist-ai-agent-library",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/quick-start",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/jobs/technical-retrieval-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/jobs/claim-evidence-governance",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/jobs/answer-extractability-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/jobs/entity-narrative-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/jobs/release-deployment-verification",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/compare",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/resources/citable/releases",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/airtable",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/amplitude",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/asana",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/basecamp",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/beehiiv",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/calendly",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/canva",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/carrd",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/clickup",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/cloudwise",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/drift",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/figma",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/folioverse",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/framer",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/hotjar",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/hubspot",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/intercom",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/kit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/knallhart",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/linear",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/loom",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/mailchimp",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/miro",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/mixpanel",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/monday",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/notion",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/pipedrive",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/postdew",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/postmint",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/shopify",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/slack",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/smartwatermark",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/squarespace",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/typeform",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/unbounce",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/webflow",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/teardowns/zapier",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/crazy-egg",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/fixroast",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/google-analytics",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/google-lighthouse",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/hotjar",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/hubspot-website-grader",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/pagespeed-insights",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/screaming-frog",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/semrush-site-audit",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/silktide",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/vs/unbounce",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/pricing-guides/crazy-egg-pricing",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/pricing-guides/hotjar-pricing",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/pricing-guides/semrush-pricing",
+      "lastmod": "2026-09-08"
+    },
+    {
+      "loc": "https://nebulacomponents.com/pricing-guides/unbounce-pricing",
+      "lastmod": "2026-09-08"
+    }
+  ],
+  "children": [],
+  "errors": []
+}

@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "critical": 1,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "posture": {
+    "cro": "needs_attention",
+    "support": "suitable",
+    "evidence": "measured"
+  },
+  "url": "https://example.com",
+  "generated_at": "2026-09-09T03:28:43.732030+00:00"
+}

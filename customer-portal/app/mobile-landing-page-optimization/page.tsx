@@ -113,7 +113,7 @@ const MOBILE_FAILURES = [
     signal: 'Forms',
     label: 'No autocomplete on forms - email field without type="email" loses mobile keyboard',
     detail:
-      'An <input> element without type="email" renders a standard QWERTY keyboard on iOS, not the email-optimized keyboard with @ and .com keys. An input without autocomplete="email" skips the system\'s stored credential suggestions. Each missing attribute adds friction to form completion on mobile. A three-field form with no autocomplete on any field multiplies the friction across every field.',
+      'An input element without type="email" renders a standard QWERTY keyboard on iOS, not the email-optimized keyboard with @ and .com keys. An input without autocomplete="email" skips the system\'s stored credential suggestions. Each missing attribute adds friction to form completion on mobile. A three-field form with no autocomplete on any field multiplies the friction across every field.',
     fix: 'Set type="email" on every email input. Set autocomplete attributes explicitly: autocomplete="email", autocomplete="name", autocomplete="tel". Verify that the correct keyboard appears on device for each field. On a standard iOS device, type="email" should surface the keyboard with @ visible as a primary key.',
   },
   {

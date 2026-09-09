@@ -33,8 +33,13 @@ def _strings(values: Any) -> bool:
 def _site_audit(e: dict[str, Any]) -> bool:
     keys = ("broken", "redirect_chains", "orphan_pages")
     legacy_findings = isinstance(e.get("findings"), list) and bool(e["findings"]) and all(isinstance(x, dict) and isinstance(x.get("id"), str) and _url(x.get("url")) for x in e["findings"])
+    def _valid_item(x: Any) -> bool:
+        # Items may be URL strings (current cron format) or dicts with a url key (legacy format)
+        if isinstance(x, str):
+            return _url(x)
+        return isinstance(x, dict) and bool(x)
     return (legacy_findings or (_url(e.get("site")) and isinstance(e.get("generated_at"), str) and _number(e.get("total_pages"), integer=True)
-            and all(isinstance(e.get(k), list) and all(isinstance(x, dict) and bool(x) for x in e[k]) for k in keys)
+            and all(isinstance(e.get(k), list) and all(_valid_item(x) for x in e[k]) for k in keys)
             and isinstance(e.get("summary"), dict) and all(e["summary"].get({"broken":"broken_count", "redirect_chains":"redirect_chain_count", "orphan_pages":"orphan_count"}[k]) == len(e[k]) for k in keys)))
 
 def _gsc(e: dict[str, Any]) -> bool:

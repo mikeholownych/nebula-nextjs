@@ -135,6 +135,9 @@ export default function SiteFooter() {
               style={{ display: 'block' }}
             />
           </a>
+          <a href="https://launchnest.io/p/nebula-components" rel="dofollow" title="nebulacomponents.com - Domain Rating by LaunchNest">
+            <img src="https://launchnest.io/api/badge/dr?domain=nebulacomponents.com&style=normal&shape=rect&color=dark" alt="nebulacomponents.com Domain Rating" width={240} />
+          </a>
           <nav aria-label="Legal" className="flex gap-4">
             <Link href="/privacy-policy" className="hover:text-fg-muted transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-fg-muted transition-colors">Terms</Link>

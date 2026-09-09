@@ -118,21 +118,25 @@ export default async function ResultsPage({ params, searchParams }: Props) {
 
   const unlocked = cookieUnlocked || sessionUnlocked || tokenUnlocked || outreachUnlocked
 
-  if (unlocked && !auditPayload) {
+  if (!auditPayload) {
     try {
-      auditPayload = await fetchAuditPayload(id, { cookie })
+      auditPayload = await fetchAuditPayload(id, { share, cookie })
     } catch {
       auditPayload = null
     }
   }
 
-  const initialResults = unlocked && auditPayload ? parsedAudit(auditPayload) : null
+  if (!auditPayload) notFound()
+
+  const initialResults = parsedAudit(auditPayload)
 
   return (
     <ResultsClient
       auditId={id}
       unlocked={unlocked}
       sharedView={sharedView}
+      shareToken={share}
+      unlockToken={unlock}
       initialResults={initialResults}
     />
   )

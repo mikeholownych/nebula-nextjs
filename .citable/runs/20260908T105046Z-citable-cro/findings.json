@@ -1,0 +1,38 @@
+[
+  {
+    "detector_id": "PAGE-006",
+    "severity": "low",
+    "summary": "Heading hierarchy skips from H1 to H3 (\"https://launchcrate.io/pricing\")",
+    "remediation": "Restructure headings to descend one level at a time."
+  },
+  {
+    "detector_id": "ANS-016",
+    "severity": "low",
+    "summary": "Long-form guide (5809 words) lacks an executive summary, key takeaways, or TL;DR section",
+    "remediation": "Add an executive summary or bulleted key takeaways block near the top of the article before detailed section walkthroughs."
+  },
+  {
+    "detector_id": "SCHEMA-002",
+    "severity": "medium",
+    "summary": "Schema headline \"Nebula Components: Free Landing Page Audit\" does not match visible title or H1",
+    "remediation": "Generate the headline from the same authoritative field that renders the visible title."
+  },
+  {
+    "detector_id": "SCHEMA-010",
+    "severity": "high",
+    "summary": "Dangling @id reference \"https://nebulacomponents.com/#founder\" not defined in site graph",
+    "remediation": "Ensure all @id references point to defined entity nodes on the site, and resolve circular reference loops."
+  },
+  {
+    "detector_id": "SCHEMA-015",
+    "severity": "high",
+    "summary": "Circular self-reference detected in schema graph: property \"founder.worksFor\" references parent @id (https://nebulacomponents.com/#organization)",
+    "remediation": "Remove self-referential @id links and ensure parent/child entity relationships form a directed acyclic graph."
+  },
+  {
+    "detector_id": "GEO-011",
+    "severity": "medium",
+    "summary": "Oversized section under \"intro\" (456 words) risks RAG chunk fracture for unanchored claims",
+    "remediation": "Subdivide sections exceeding 400 words with H3 sub-headings or bullet lists, and anchor citations in the same paragraph as the claim."
+  }
+]

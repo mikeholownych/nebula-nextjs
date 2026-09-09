@@ -80,6 +80,7 @@ describe('consent-gated analytics loading', () => {
     expect(config).toContain('https://cloudflareinsights.com')
     expect(config).toContain('https://static.opinly.ai')
     expect(config).toContain('https://maidensail.com')
+    expect(config).toContain('https://launchnest.io')
   })
 
   it('allows GA4 image beacons in img-src', () => {

@@ -57,6 +57,7 @@ export interface AuditResult {
    * synthesized from the full finding set, not just the top signal.
    */
   strategic_finding?: string
+  citable?: Record<string, unknown>
 }
 
 const MAX_FINDINGS = 50
@@ -147,5 +148,6 @@ export function parseAuditResult(value: unknown): AuditResult {
     strategic_finding: typeof value.strategic_finding === 'string'
       ? text(value.strategic_finding, '', 600)
       : undefined,
+    citable: isRecord(value.citable) ? (value.citable as Record<string, unknown>) : undefined,
   }
 }

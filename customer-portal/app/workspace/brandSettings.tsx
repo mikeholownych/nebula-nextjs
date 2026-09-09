@@ -108,14 +108,14 @@ export default function BrandSettings() {
         </div>
         <div>
           <label htmlFor="brand-support-email" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">Support email</label>
-          <input id="brand-support-email" type="email" value={profile.support_email ?? ''} onChange={(e) => setProfile({ ...profile, support_email: e.target.value || null })} placeholder="support@example.com" className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg" />
+          <input id="brand-support-email" type="email" autoComplete="email" value={profile.support_email ?? ''} onChange={(e) => setProfile({ ...profile, support_email: e.target.value || null })} placeholder="support@example.com" className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg" />
         </div>
         <div>
           <label htmlFor="brand-footer-text" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">Footer text</label>
           <input id="brand-footer-text" value={profile.footer_text ?? ''} onChange={(e) => setProfile({ ...profile, footer_text: e.target.value || null })} placeholder="Powered by Acme Growth Studio" className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg" />
         </div>
-        <label className="flex items-center gap-3 text-sm text-fg">
-          <input type="checkbox" checked={profile.published} onChange={(e) => setProfile({ ...profile, published: e.target.checked })} className="h-4 w-4 accent-accent" />
+        <label htmlFor="brand-published-checkbox" className="flex items-center gap-3 text-sm text-fg">
+          <input id="brand-published-checkbox" aria-label="Publish when custom tenant routing is enabled" type="checkbox" checked={profile.published} onChange={(e) => setProfile({ ...profile, published: e.target.checked })} className="h-4 w-4 accent-accent" />
           Publish when custom tenant routing is enabled
         </label>
         <div className="flex flex-wrap items-center gap-3">

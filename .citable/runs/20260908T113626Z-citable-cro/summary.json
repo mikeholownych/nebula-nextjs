@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "posture": {
+    "retrieval": "eligible",
+    "support": "suitable",
+    "citation": "observed"
+  },
+  "url": "https://nebulacomponents.com/benchmarks",
+  "generated_at": "2026-09-08T11:36:26.127850+00:00"
+}

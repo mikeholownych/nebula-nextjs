@@ -1,0 +1,14 @@
+[
+  {
+    "label": "CRO-021",
+    "condition_id": "CRO-021",
+    "issue": "Wallet readiness gap",
+    "fix": "Optimize conversion action",
+    "impact": 8.0,
+    "effort": 3,
+    "quadrant": "quick_win",
+    "determination": "FAIL",
+    "detector_version": 1,
+    "methodology": "deterministic"
+  }
+]

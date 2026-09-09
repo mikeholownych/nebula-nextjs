@@ -1,0 +1,32 @@
+{
+  "status": 200,
+  "headers": {
+    "age": "185",
+    "alt-svc": "h3=\":443\"; ma=86400",
+    "cache-control": "public, max-age=0, s-maxage=300, stale-while-revalidate=60, must-revalidate",
+    "cf-cache-status": "HIT",
+    "cf-ray": "a37d2dcd7f83e5b3-YYZ",
+    "connection": "keep-alive",
+    "content-encoding": "br",
+    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://in.heycatch.ai https://news.google.com https://static.opinly.ai; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://indieascent.com https://nicklaunches.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://getvisibai.com https://static.peerpush.com https://maidensail.com https://launchnest.io; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev https://tracker.searchableanalytics.com https://in.heycatch.ai https://news.google.com https://static.opinly.ai; frame-src https://news.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Tue, 08 Sep 2026 10:13:09 GMT",
+    "last-modified": "Tue, 08 Sep 2026 10:10:04 GMT",
+    "link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\", </_next/static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\", </_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=JDy3xGKBThpekUQdZnPii7QmbLmc%2FJwuPw7GOGjJihsPi4LoEZvT%2FQpAJZ3ghlSt0lQ8ACEigOzxWmI3SMiY%2B%2FvBeMCWS99y6qu56tu9syEZTLiV%2B%2FPQt4ypGUbDFeg%2FTVTGrMwweg%3D%3D\"}]}",
+    "server": "cloudflare",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "transfer-encoding": "chunked",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+    "x-citable-projection-sha256": "95dbe695d58a8e2ab2cc371a0c4d2aafd7febd677cd375c64ef64b0419fb8ba0",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-nebula-country": "CA",
+    "x-nebula-pathname": "/resources/citable",
+    "x-nebula-revision": "2fc71dae2f54dfc1148bf7f78551d8cf31854fa2",
+    "x-request-id": "2202e028-c906-4637-9423-662cf53a2457"
+  }
+}

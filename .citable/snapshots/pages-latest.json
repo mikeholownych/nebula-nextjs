@@ -1,0 +1,251 @@
+{
+  "taken_at": "2026-09-08T10:47:42.978Z",
+  "run_id": "20260908T104742-audit-cro-j5dn",
+  "pages": {
+    "https://nebulacomponents.com/": {
+      "contentHash": "133ea552f171fd278a1f1aa916a249c96f3e2ee645b3450c935a90cc220b7726",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns": {
+      "contentHash": "f6ff2c3a58730938b7adce956b25ab0cca04d794c48000d06b23f4191cb05f56",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/repair-sprint": {
+      "contentHash": "bb9d558fbc1ae6da2a8c92c9fbbbd61385d7ded123819c58a00eb537d7d0d56b",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/pricing": {
+      "contentHash": "68db05d5390ffac0c24112c9585782d9f86b837ff3edab2ae63a031bfb16b2ec",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/learning-centre": {
+      "contentHash": "c7991153594d1a9cf0f1302c4c7b6d8f5d72921613bfc65a13b49d47bd820017",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/blog": {
+      "contentHash": "bacb967d77535df73bc3ced16a6ac830f71d56ef7db1614425c3b5880792d8a9",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/about": {
+      "contentHash": "adf250c6a9d1f5790ca8f82ba0e8b9798ddd8578f99e41ebe1748a64cf318262",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal": {
+      "contentHash": "606de04245e19def32d8afb14609f640e0943e9cf913854a15f8016909ead196",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/research/landing-page-performance-q3-2026": {
+      "contentHash": "2cbe4bc888acac0dc66f62dfc63b9e0b82f4c1ffca4e7709ca228ff87244ffc8",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/resources/citable": {
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/knallhart": {
+      "contentHash": "a37f9752d05cc949f9f90512c6e549461dd8b46cf550735fe2ac4e994bfa828b",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/postmint": {
+      "contentHash": "e719e8133ea6f1bcdaed02f7c13eeccd2743cadcb114d1f3944e94f7ec3d3222",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/basecamp": {
+      "contentHash": "939102f357896a2e91ca064d1a7f80a61e927edcc5784055d57bb9357035f61b",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal": {
+      "contentHash": "bb9d558fbc1ae6da2a8c92c9fbbbd61385d7ded123819c58a00eb537d7d0d56b",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal": {
+      "contentHash": "606de04245e19def32d8afb14609f640e0943e9cf913854a15f8016909ead196",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/audit": {
+      "contentHash": "606de04245e19def32d8afb14609f640e0943e9cf913854a15f8016909ead196",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/benchmarks": {
+      "contentHash": "9c24565d8183e6680801acfb8efa32b605ea73046da86999a82769f8e94e6b17",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/case-studies": {
+      "contentHash": "18fa97f6d18793b945404a7317616240600533cd5495aec7b75db12abaaa9904",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/compare": {
+      "contentHash": "6850b67317d9000d61bc9cee6d330412f47802817ac599a3c02d84c6c3ab480a",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/ecommerce-landing-page-audit": {
+      "contentHash": "5a379da299f1e5dfbf7524eda130d40409d28abd50ac6d33e20fba61b96c6d55",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/saas-landing-page-audit": {
+      "contentHash": "5ea6ef06c9ed296d109398e60718cfc3365b6373d4083192f85fe51a2cb96869",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/mobile-landing-page-audit": {
+      "contentHash": "94efdc8b92168774cc4693331eb0ffbd826ce4d5c52fca7d571c072e5f9e3e6e",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/lead-generation-landing-page-audit": {
+      "contentHash": "3349ce516f3b59cece04f93333ceba75cb91b000263182b6ab14e5dca1612e0d",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/landing-page-cta-audit": {
+      "contentHash": "f7b304bf79c3ec4ee91b916bc8c5c7e8f5db00b4b79e68206fd72149f42686df",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/landing-page-message-match": {
+      "contentHash": "435117873c5f50d9e1d3bd43c35eba9f2ae11eb396acfb60b3a5bcd22a5c6257",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/why-is-my-landing-page-not-converting": {
+      "contentHash": "fd5b43b2e383fcef5d229353b9fbe3462d5550d63763d8b47f02f29aabcf07af",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/ads-getting-clicks-but-no-sales": {
+      "contentHash": "1942c7e42c21a1ce856d72479dacb52247f1d4adf022877921d5a3d48ffa2af5",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/what-is-landing-page-audit": {
+      "contentHash": "49a455ef5c34906fc2c7b9c745d3d66f21313cd5e5ccf169df6a488eb663ab7c",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/best-landing-page-audit-tools": {
+      "contentHash": "e51b607b845a354424f47692d49f059116a0f16a534bca217cc090adf0f8569c",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/playbooks": {
+      "contentHash": "012f1332fb9f1d5efe32888bb08a82500864711ad8239a943d72d3d3f54a8993",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/press": {
+      "contentHash": "c9ec08ec98ba1d47377103f92409c8eaac6f69cfb69cf6c9167677de41f497ed",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/brand": {
+      "contentHash": "66e69d929857acf41d392bf80f5ea6fec1689c83ad399a231c09bbd2e1e07231",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/editorial-standards": {
+      "contentHash": "2f486ff5a7e6a77125b7810ebe65f2511cb4b589270590e0aef0a7b60de02415",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal": {
+      "contentHash": "606de04245e19def32d8afb14609f640e0943e9cf913854a15f8016909ead196",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/privacy-policy": {
+      "contentHash": "5d5baa3b6df80fa046b753330ad5706a8162b50ab069194f793d8c3423e320fe",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/terms": {
+      "contentHash": "919806b461819b785d2b3bf966e849b161afc162418e05103f802aaba19253b3",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/data-rights": {
+      "contentHash": "fee5f64e22e781c3f96e7973a4235ae720e25b4a53cbc5572d33afb05bb7c788",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta": {
+      "contentHash": "606de04245e19def32d8afb14609f640e0943e9cf913854a15f8016909ead196",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/carrd": {
+      "contentHash": "8e929d5f106488374e3acb166feab41fcea1a0bdf81b730a0c97722dd42a6a18",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/hotjar": {
+      "contentHash": "520ead8419549a4e486c525f1da47ebea6573a045f5d57958f13ce5eaeae4f8b",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/kit": {
+      "contentHash": "a8fe3b5fe78ecd9e0246119cbd3acc004ca279573f4e8d112da72f2a13aad989",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/beehiiv": {
+      "contentHash": "ff5e1c70c8235d58a125fe3d670ea959f00e47cbc5babae34204c378194dfe66",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/unbounce": {
+      "contentHash": "95d4d5facb257d98a4057dd4f3d8a10ff125b6187b64e60bb4497664c52166f5",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/webflow": {
+      "contentHash": "0dd3b3f7f8cda045a3f3b2aa502d3cd420b2a7ae286200c022dd41bcf7817508",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/framer": {
+      "contentHash": "dd950b0b9b691b3384f603856654962a15fe4b1d8226f687ee4c1ca2362eeea9",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/notion": {
+      "contentHash": "ec4b732a5a3be8e2051afe59dbfc1ab37342d948e7a4f3d03171d2d8f27767a5",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/calendly": {
+      "contentHash": "70e8513a664549e737ebe5ea0a767ffb86268affe0a2cb38ddc6478d92c7d7ad",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/hubspot": {
+      "contentHash": "e4b1bcd2479ba4849c91e5df1e50eb385a4a180670f0ab109aa1cd756ad98df3",
+      "dateModified": "2026-09-08",
+      "status": 200
+    },
+    "https://nebulacomponents.com/teardowns/mailchimp": {
+      "contentHash": "ce5779afd6c387dd97b9b249622bba456f369bbc65a3f89f81146d7e587c74c1",
+      "dateModified": "2026-09-08",
+      "status": 200
+    }
+  }
+}

@@ -30,7 +30,9 @@
     "check:blog-content": "npm run check:content-pipeline",
     "check:brand": "node scripts/check-brand-projections.mjs",
     "check:analytics-governance": "node scripts/check-analytics-governance.mjs",
-    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:blog-content && npm run check:content-pipeline && npm run check:brand && npm run check:analytics-governance && npm run check:signal-canon && npm run check:claims && npm run check:opportunity-governance && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
+    "check:cro-components": "node scripts/check-cro-components.mjs",
+    "check:funnel": "node scripts/check-conversion-funnel.mjs",
+    "ci": "npm run typecheck && npm run lint && npm run check:content && npm run check:blog-content && npm run check:content-pipeline && npm run check:brand && npm run check:analytics-governance && npm run check:signal-canon && npm run check:claims && npm run check:opportunity-governance && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:cro-components && npm run check:funnel && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

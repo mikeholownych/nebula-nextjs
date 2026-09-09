@@ -129,7 +129,7 @@ export default function SlowLandingPageCausesPage() {
             a Next.js Image component, set the{' '}
             <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">priority</code> prop to
             true on the hero so the browser fetches it before other resources. If you are using a
-            plain <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">{'<img>'}</code> tag,
+            plain <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">&lt;img&gt;</code> tag,
             add <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">fetchpriority="high"</code>{' '}
             and <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">loading="eager"</code>.
           </p>

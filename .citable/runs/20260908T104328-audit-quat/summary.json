@@ -1,0 +1,49 @@
+{
+  "total": 544,
+  "deterministic_observations": 524,
+  "semantic_or_heuristic": 20,
+  "by_severity": {
+    "medium": 324,
+    "low": 70,
+    "high": 150
+  },
+  "by_namespace": {
+    "TECH": 17,
+    "CRAWL": 9,
+    "PAGE": 12,
+    "ANS": 50,
+    "ENTITY": 1,
+    "CLAIM": 7,
+    "SCHEMA": 159,
+    "LINK": 271,
+    "GEO": 17,
+    "AGENT": 1
+  },
+  "by_discipline": {
+    "seo": 468,
+    "aeo": 419,
+    "geo": 201,
+    "agent-readiness": 1
+  },
+  "posture": {
+    "retrieval_eligibility": {
+      "result": "partial",
+      "finding_count": 297,
+      "skipped_checks": []
+    },
+    "source_extraction_and_support": {
+      "result": "not_established",
+      "finding_count": 246,
+      "skipped_checks": [
+        "GEO-013"
+      ]
+    },
+    "observed_citation_behavior": {
+      "result": "not_evidenced",
+      "finding_count": 0,
+      "observations": 0,
+      "property_citations": 0,
+      "citation_presence_rate": null
+    }
+  }
+}

@@ -1,26 +1,40 @@
 {
-  "generated_at": "2026-09-05T08:00:43.645458+00:00",
+  "generated_at": "2026-09-08T08:00:55.248501+00:00",
   "activation_at": "2026-08-31T22:00:00+00:00",
-  "completed_audits_since_activation": 28,
-  "stamped_audits": 28,
-  "audits_with_indeterminate": 0,
+  "completed_audits_since_activation": 66,
+  "stamped_audits": 66,
+  "audits_with_indeterminate": 3,
   "determination_counts": {
     "NOT_APPLICABLE": 65,
-    "PASS": 160,
-    "FAIL": 27
+    "PASS": 290,
+    "FAIL": 212,
+    "INDETERMINATE": 27
   },
-  "indeterminate_reason_codes": {},
-  "indeterminate_by_condition": {},
+  "indeterminate_reason_codes": {
+    "BOT_CHALLENGE": 27
+  },
+  "indeterminate_by_condition": {
+    "HEADLINE_MESSAGE_MATCH/1": 3,
+    "PRIMARY_CTA_CLARITY/1": 3,
+    "ABOVE_FOLD_CLARITY/1": 3,
+    "TRUST_PROOF_PROXIMITY/1": 3,
+    "LOAD_SPEED/1": 3,
+    "MOBILE_VIEWPORT/1": 3,
+    "AD_TRACKING/1": 3,
+    "SEO_FOUNDATIONS/1": 3,
+    "AI_READINESS/1": 3
+  },
   "integrity_states": {
-    "usable": 28
+    "usable": 63,
+    "unusable": 3
   },
   "repeated_indeterminate_urls": {},
   "invariant_hits": {},
   "gate": {
     "need_stamped_audits": 500,
     "need_days": 14,
-    "stamped_audits": 28,
-    "days_open": 4,
+    "stamped_audits": 66,
+    "days_open": 7,
     "ready_to_revisit_scoring": false,
     "next_decision": "do_not_change_scoring"
   }

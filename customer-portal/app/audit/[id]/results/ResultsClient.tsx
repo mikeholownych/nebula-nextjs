@@ -278,13 +278,94 @@ function FailSignal() {
   )
 }
 
+function getReportPdfUrl(auditId: string, shareToken?: string, sharedView?: boolean, unlockToken?: string): string {
+  const params = new URLSearchParams({ audit_id: auditId })
+  const token = shareToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('share') : null)
+  if (token) {
+    params.set('share', token)
+  } else if (sharedView && typeof window !== 'undefined' && window.location.search) {
+    const s = new URLSearchParams(window.location.search).get('share')
+    if (s) params.set('share', s)
+  }
+  const unlock = unlockToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('unlock') : null)
+  if (unlock) {
+    params.set('unlock', unlock)
+  }
+  return `/api/report/pdf?${params.toString()}`
+}
+
+function getCitableBriefUrl(auditId: string, shareToken?: string, sharedView?: boolean, unlockToken?: string): string {
+  const params = new URLSearchParams()
+  const token = shareToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('share') : null)
+  if (token) {
+    params.set('share', token)
+  } else if (sharedView && typeof window !== 'undefined' && window.location.search) {
+    const s = new URLSearchParams(window.location.search).get('share')
+    if (s) params.set('share', s)
+  }
+  const unlock = unlockToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('unlock') : null)
+  if (unlock) {
+    params.set('unlock', unlock)
+  }
+  const extra = params.toString()
+  return `/api/report/citable?audit_id=${encodeURIComponent(auditId)}${extra ? `&${extra}` : ''}`
+}
+
+function getCitableKitUrl(auditId: string, shareToken?: string, sharedView?: boolean, unlockToken?: string): string {
+  const params = new URLSearchParams()
+  const token = shareToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('share') : null)
+  if (token) {
+    params.set('share', token)
+  } else if (sharedView && typeof window !== 'undefined' && window.location.search) {
+    const s = new URLSearchParams(window.location.search).get('share')
+    if (s) params.set('share', s)
+  }
+  const unlock = unlockToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('unlock') : null)
+  if (unlock) {
+    params.set('unlock', unlock)
+  }
+  const extra = params.toString()
+  return `/api/report/citable?audit_id=${encodeURIComponent(auditId)}&format=kit${extra ? `&${extra}` : ''}`
+}
+
+function getCitableVerificationUrl(auditId: string, shareToken?: string, sharedView?: boolean, unlockToken?: string): string {
+  const params = new URLSearchParams()
+  const token = shareToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('share') : null)
+  if (token) {
+    params.set('share', token)
+  } else if (sharedView && typeof window !== 'undefined' && window.location.search) {
+    const s = new URLSearchParams(window.location.search).get('share')
+    if (s) params.set('share', s)
+  }
+  const unlock = unlockToken || (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('unlock') : null)
+  if (unlock) {
+    params.set('unlock', unlock)
+  }
+  const extra = params.toString()
+  return `/api/report/citable?audit_id=${encodeURIComponent(auditId)}&format=verification${extra ? `&${extra}` : ''}`
+}
+
 /**
  * Shown after email gate is cleared. Confirms unlock and offers a one-click
  * magic-link so the user can save/revisit their audit from any device.
  * The magic-link offer is soft - there's no paywall attached and skipping
  * has zero friction.
  */
-function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
+function UnlockConfirmation({
+  emailSent,
+  email,
+  auditId,
+  sharedView,
+  shareToken,
+  unlockToken,
+}: {
+  emailSent: boolean
+  email: string
+  auditId: string
+  sharedView?: boolean
+  shareToken?: string
+  unlockToken?: string
+}) {
   const [magicLinkState, setMagicLinkState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const requestMagicLink = async () => {
@@ -345,9 +426,33 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
         <p className="text-sm text-fg-muted">
           Send this report to your developer or agency
         </p>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <a
-            href={`/api/audit/${auditId}/pdf`}
+            href={getCitableBriefUrl(auditId, shareToken, sharedView, unlockToken)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+          >
+            <span>↗</span> Citable Executive Brief
+          </a>
+          <a
+            href={getCitableKitUrl(auditId, shareToken, sharedView, unlockToken)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+          >
+            <span>📦</span> Implementation Kit
+          </a>
+          <a
+            href={getCitableVerificationUrl(auditId, shareToken, sharedView, unlockToken)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+          >
+            <span>✓</span> Verify Remediation
+          </a>
+          <a
+            href={getReportPdfUrl(auditId, shareToken, sharedView, unlockToken)}
             download
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
           >
@@ -542,14 +647,16 @@ function ImmediateRepairOffer({
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function _UnlockConfirmationWrapper({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
-  return <UnlockConfirmation emailSent={emailSent} email={email} auditId={auditId} />
+function _UnlockConfirmationWrapper({ emailSent, email, auditId, sharedView, shareToken, unlockToken }: { emailSent: boolean; email: string; auditId: string; sharedView?: boolean; shareToken?: string; unlockToken?: string }) {
+  return <UnlockConfirmation emailSent={emailSent} email={email} auditId={auditId} sharedView={sharedView} shareToken={shareToken} unlockToken={unlockToken} />
 }
 
 interface Props {
   auditId: string
   unlocked: boolean
   sharedView?: boolean
+  shareToken?: string
+  unlockToken?: string
   initialResults?: AuditResult | null
 }
 
@@ -988,6 +1095,8 @@ export default function ResultsClient({
   auditId,
   unlocked: initialUnlocked,
   sharedView = false,
+  shareToken,
+  unlockToken,
   initialResults = null,
 }: Props) {
   const [loading, setLoading] = useState(!initialResults)
@@ -1221,14 +1330,40 @@ export default function ResultsClient({
       <div className="mx-auto max-w-6xl">
         <div className="mb-4 flex min-w-0 w-full flex-wrap items-center justify-end gap-3">
           <AiAgentFixPromptModal results={results} />
-          {unlocked && !sharedView && (
-            <a
-              href={`/api/report/pdf?audit_id=${encodeURIComponent(auditId)}`}
-              download
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
-            >
-              <span>↓</span> Download PDF
-            </a>
+          {unlocked && (
+            <>
+              <a
+                href={getCitableBriefUrl(auditId, shareToken, sharedView, unlockToken)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+              >
+                <span>↗</span> Citable Executive Brief
+              </a>
+              <a
+                href={getCitableKitUrl(auditId, shareToken, sharedView, unlockToken)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+              >
+                <span>📦</span> Implementation Kit
+              </a>
+              <a
+                href={getCitableVerificationUrl(auditId, shareToken, sharedView, unlockToken)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+              >
+                <span>✓</span> Verify Remediation
+              </a>
+              <a
+                href={getReportPdfUrl(auditId, shareToken, sharedView, unlockToken)}
+                download
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+              >
+                <span>↓</span> Download PDF
+              </a>
+            </>
           )}
         </div>
         <ReportTabs active={activeTab} onSelect={setActiveTab} />
@@ -1259,7 +1394,7 @@ export default function ResultsClient({
             )}
             {/* Inline email gate - shown on Overview for unlocked visitors and non-shared locked views */}
             {!unlocked && !sharedView && !emailSent && (
-              <section className="border-y border-border py-12 my-4">
+              <section id="unlock" className="border-y border-border py-12 my-4">
                 <div className="mx-auto max-w-xl text-center">
                   <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">Free - takes 10 seconds</p>
                   <h2 className="text-2xl font-extrabold text-fg mb-2">
@@ -1296,7 +1431,14 @@ export default function ResultsClient({
               </section>
             )}
             {(emailSent || unlocked) && !sharedView && (
-              <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
+              <UnlockConfirmation
+                emailSent={emailSent}
+                email={emailForm.email}
+                auditId={auditId}
+                sharedView={sharedView}
+                shareToken={shareToken}
+                unlockToken={unlockToken}
+              />
             )}
             <OverviewNext
               onSelect={setActiveTab}
@@ -1567,7 +1709,14 @@ export default function ResultsClient({
         )}
 
         {(emailSent || unlocked) && (
-          <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
+          <UnlockConfirmation
+            emailSent={emailSent}
+            email={emailForm.email}
+            auditId={auditId}
+            sharedView={sharedView}
+            shareToken={shareToken}
+            unlockToken={unlockToken}
+          />
         )}
 
         {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}

@@ -52,6 +52,13 @@ describe('site surface integrity', () => {
     expect(footer).toMatch(/Nebula on PeerPush/)
   })
 
+  it('exposes the LaunchNest domain rating badge in the site footer', () => {
+    const footer = readFileSync(path.join(repo, 'app/components/SiteFooter.tsx'), 'utf8')
+    expect(footer).toContain('href="https://launchnest.io/p/nebula-components"')
+    expect(footer).toContain('https://launchnest.io/api/badge/dr?domain=nebulacomponents.com&style=normal&shape=rect&color=dark')
+    expect(footer).toContain('alt="nebulacomponents.com Domain Rating"')
+  })
+
   it('does not assign retired teal as a live accent token', () => {
     const styles = readFileSync(path.join(repo, 'app/styles.css'), 'utf8')
     const publicDs = readFileSync(path.join(repo, 'public/styles/nebula-design-system.css'), 'utf8')

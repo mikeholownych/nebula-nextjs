@@ -37,7 +37,7 @@ export default function LearningCentrePage() {
             Fix Landing Page Policy Issues to Stop Google Ads Disapproval
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            When Google Ads disapproves your ad, most advertisers check the ad copy. But the landing page itself can trigger policy violations that not only block the ad-but continue costing you money while the ad runs in a disabled state.
+            When Google Ads disapproves an ad, most advertisers check the ad copy. But the landing page itself can trigger policy violations that block delivery while paid traffic and campaign spend continue.
           </p>
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Link

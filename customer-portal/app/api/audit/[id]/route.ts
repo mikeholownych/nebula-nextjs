@@ -18,15 +18,17 @@ export async function GET(
 ) {
   try {
     const { id } = await params
+    const share = request.nextUrl.searchParams.get('share')
     const cookieUnlocked = hasValidUnlockCookie(request, id)
     let sessionEmail: string | undefined
-    if (!cookieUnlocked) {
+    if (!cookieUnlocked && !share) {
       const access = await requireUnlockCookieOrSession(request, id)
       if ('response' in access) return access.response
       sessionEmail = access.email
     }
 
-    const response = await fetch(`${API_BASE}/audit/${id}`, {
+    const qs = share ? `?share=${encodeURIComponent(share)}` : ''
+    const response = await fetch(`${API_BASE}/audit/${id}${qs}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(10000)
@@ -66,7 +68,10 @@ export async function GET(
       email: data.email,
       name: data.name,
       created_at: data.created_at,
-      completed_at: data.completed_at
+      completed_at: data.completed_at,
+      strategic_finding: data.strategic_finding ?? undefined,
+      guided_implementation: data.guided_implementation ?? undefined,
+      citable: data.citable ?? undefined,
     })
   } catch (error) {
     console.error('Audit fetch error:', error)

@@ -1,0 +1,489 @@
+[
+  {
+    "finding_id": "F-4128c83d6849",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-GOOGLEBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for Googlebot (search_indexing)",
+      "evidence": [
+        "entry CRAWLER-GOOGLEBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-5e8cc12e1f93",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-BINGBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for Bingbot (search_indexing)",
+      "evidence": [
+        "entry CRAWLER-BINGBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-938066382e90",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-OAI-SEARCHBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for OAI-SearchBot (ai_search_discovery)",
+      "evidence": [
+        "entry CRAWLER-OAI-SEARCHBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-a07ea716d432",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-GPTBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for GPTBot (model_training)",
+      "evidence": [
+        "entry CRAWLER-GPTBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-8cd849979246",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-CHATGPT-USER"
+    },
+    "observation": {
+      "summary": "No decision recorded for ChatGPT-User (user_initiated_retrieval)",
+      "evidence": [
+        "entry CRAWLER-CHATGPT-USER: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-dc7468ef2776",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-PERPLEXITYBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for PerplexityBot (ai_search_discovery)",
+      "evidence": [
+        "entry CRAWLER-PERPLEXITYBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-0689b1fd0425",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-PERPLEXITY-USER"
+    },
+    "observation": {
+      "summary": "No decision recorded for Perplexity-User (user_initiated_retrieval)",
+      "evidence": [
+        "entry CRAWLER-PERPLEXITY-USER: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-90075865eb40",
+    "detector_id": "CRAWL-006",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "registry_entry",
+      "identifier": "crawlers/CRAWLER-CLAUDEBOT"
+    },
+    "observation": {
+      "summary": "No decision recorded for ClaudeBot (model_training)",
+      "evidence": [
+        "entry CRAWLER-CLAUDEBOT: decision=undecided"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §2: decision required per crawler and purpose",
+      "explanation": "A crawler policy entry remains \"undecided\" — access is currently whatever robots.txt happens to say, not a governed decision.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision with owner and business and legal rationale.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Registry entry decision is allow or block.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-66f6535dca2c",
+    "detector_id": "AGENT-003",
+    "run_id": "20260908T104455-audit---help-1fca",
+    "timestamp": "2026-09-08T10:44:55.482Z",
+    "discipline": [
+      "agent-readiness",
+      "geo"
+    ],
+    "subject": {
+      "type": "file",
+      "identifier": "/llms.txt"
+    },
+    "observation": {
+      "summary": "llms.txt not discovered during crawl",
+      "evidence": [
+        "No /llms.txt found in crawl results or site metadata"
+      ],
+      "captured_value": "llms.txt absent",
+      "expected_value": "/llms.txt returning 200 with structured Markdown content"
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "low",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {}
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §3 discoverability; isitagentready.com Content Accessibility",
+      "explanation": "llms.txt (https://llmstxt.org/) is a convention for sites to provide a structured Markdown summary of their content for LLM consumption. Its absence means language models cannot quickly orient themselves about your site.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "Create /llms.txt at your site root with: site purpose, key pages list with descriptions, and optionally /llms-full.txt with complete content. See https://llmstxt.org/ for spec.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Fetch /llms.txt and confirm it returns 200 with Markdown content.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "AGENT-003"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-09-08T10:44:55.482Z",
+      "last_seen": "2026-09-08T10:44:55.482Z",
+      "resolved_at": null
+    }
+  }
+]

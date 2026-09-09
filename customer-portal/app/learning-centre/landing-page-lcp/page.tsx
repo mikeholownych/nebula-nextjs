@@ -152,7 +152,7 @@ export default function LandingPageLcpPage() {
           <p className="mt-4 leading-relaxed text-fg-muted">
             <span className="font-semibold text-fg">What to fix:</span> Convert your hero image to
             WebP format and compress it to under 100KB for a 1200px-wide version. Use the{' '}
-            <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">{'<img>'}</code> element with{' '}
+            <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">&lt;img&gt;</code> element with{' '}
             <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">loading="eager"</code> and{' '}
             <code className="rounded bg-bg px-1 py-0.5 text-sm text-fg">fetchpriority="high"</code>{' '}
             so the browser knows to prioritise it. If you are using a Next.js{' '}

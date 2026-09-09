@@ -63,6 +63,51 @@ STALE_HEARTBEAT_SECONDS = 180  # 3 minutes
 STALE_PENDING_MINUTES = 30
 
 
+def _sanitize_and_sync_citable_payload(data: Optional[dict]) -> Optional[dict]:
+    """Ensure strategic findings and citable deliverables strictly match the audit results and contain no em-dashes."""
+    if not data or not isinstance(data, dict):
+        return data
+
+    if data.get("strategic_finding") and isinstance(data["strategic_finding"], str):
+        data["strategic_finding"] = data["strategic_finding"].replace("\u2014", " - ").replace("\u2013", " - ")
+
+    c_brief = data.get("citable_brief") or ""
+    is_stale = (
+        not c_brief
+        or "Executive Search & AEO Governance Briefing" in c_brief
+        or "Search Central structured data" in c_brief
+    )
+
+    if is_stale and data.get("findings") is not None:
+        try:
+            from platform_api.services.citable_service import generate_cro_executive_brief
+            client_name = data.get("name") or "Nebula Client"
+            cro_tel = None
+            if isinstance(data.get("citable"), dict):
+                cro_tel = data["citable"].get("cro")
+            data["citable_brief"] = generate_cro_executive_brief(data, cro_telemetry=cro_tel, client_name=client_name, format="html")
+            data["citable_deck"] = generate_cro_executive_brief(data, cro_telemetry=cro_tel, client_name=client_name, format="markdown-deck")
+            if isinstance(data.get("citable"), dict):
+                data["citable"]["findings"] = data.get("findings") or []
+                data["citable"]["executive_brief_html"] = data["citable_brief"]
+                data["citable"]["executive_deck_md"] = data["citable_deck"]
+        except Exception:
+            pass
+
+    citable_data = data.get("citable")
+    if isinstance(citable_data, dict):
+        if not data.get("citable_version") and citable_data.get("citable_version"):
+            data["citable_version"] = citable_data["citable_version"]
+        if not data.get("citable_release_commit") and citable_data.get("citable_release_commit"):
+            data["citable_release_commit"] = citable_data["citable_release_commit"]
+        if not data.get("citable_run_id") and citable_data.get("run_id"):
+            data["citable_run_id"] = citable_data["run_id"]
+        if not data.get("citable_integrity_hash") and citable_data.get("integrity_hash"):
+            data["citable_integrity_hash"] = citable_data["integrity_hash"]
+
+    return data
+
+
 class AuditDB:
     """PostgreSQL database service for audit records"""
 
@@ -342,7 +387,7 @@ class AuditDB:
         if data.get("engine_output") and isinstance(data["engine_output"], dict):
             for k, v in data["engine_output"].items():
                 data.setdefault(k, v)
-        return data
+        return _sanitize_and_sync_citable_payload(data)
 
     async def claim_audit(self, audit_id: UUID, email: str) -> Optional[dict]:
         """Link an anonymous audit to a real email address."""
@@ -965,8 +1010,10 @@ class AuditDB:
                 """
                 SELECT id, customer_id, url, email, name, status,
                        score, grade, composite, composite_anchor, findings,
-                       created_at, completed_at,
-                       email_sent_at, paid_at, paid_product
+                       engine_input, engine_output, guided_implementation,
+                       strategic_finding, screenshot_url, created_at, completed_at,
+                       email_sent_at, paid_at, paid_product,
+                       page_intent, intent_confidence, intent_signals
                 FROM audits WHERE share_token = $1
                 """,
                 share_token
@@ -975,7 +1022,10 @@ class AuditDB:
                 return None
             data = dict(row)
             if data.get('findings') and isinstance(data['findings'], str):
-                data['findings'] = json.loads(data['findings'])
+                try:
+                    data['findings'] = json.loads(data['findings'])
+                except json.JSONDecodeError:
+                    pass
             if data.get('score') is not None:
                 data['score'] = data['score'] / 10.0
             if data.get('composite') is not None:
@@ -985,7 +1035,17 @@ class AuditDB:
             data['audit_id'] = str(data.pop('id'))
             if data.get('customer_id'):
                 data['customer_id'] = str(data['customer_id'])
-            return data
+
+            for key in ("engine_input", "engine_output"):
+                if data.get(key) and isinstance(data[key], str):
+                    try:
+                        data[key] = json.loads(data[key])
+                    except json.JSONDecodeError:
+                        pass
+            if data.get("engine_output") and isinstance(data["engine_output"], dict):
+                for k, v in data["engine_output"].items():
+                    data.setdefault(k, v)
+            return _sanitize_and_sync_citable_payload(data)
 
     async def get_badge(self, badge_id: UUID) -> Optional[dict]:
         """Real before/after data for the embeddable badge endpoint."""

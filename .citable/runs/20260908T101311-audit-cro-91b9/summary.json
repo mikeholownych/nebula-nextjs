@@ -1,0 +1,31 @@
+{
+  "total": 0,
+  "deterministic_observations": 0,
+  "semantic_or_heuristic": 0,
+  "by_severity": {},
+  "by_namespace": {},
+  "by_discipline": {
+    "seo": 0,
+    "aeo": 0,
+    "geo": 0
+  },
+  "posture": {
+    "retrieval_eligibility": {
+      "result": "not_established",
+      "finding_count": 0,
+      "skipped_checks": []
+    },
+    "source_extraction_and_support": {
+      "result": "not_established",
+      "finding_count": 0,
+      "skipped_checks": []
+    },
+    "observed_citation_behavior": {
+      "result": "not_evidenced",
+      "finding_count": 0,
+      "observations": 0,
+      "property_citations": 0,
+      "citation_presence_rate": null
+    }
+  }
+}

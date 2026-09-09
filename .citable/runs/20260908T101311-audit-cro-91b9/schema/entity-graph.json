@@ -1,0 +1,2205 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "node_id": "https://nebulacomponents.com/#organization",
+      "types": [
+        "Organization"
+      ],
+      "names": [
+        "Nebula Components"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/repair-sprint",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/pricing",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/learning-centre",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/blog",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/about",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/research/landing-page-performance-q3-2026",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/resources/citable",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/knallhart",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/postmint",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/basecamp",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/benchmarks",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/case-studies",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/compare",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/ecommerce-landing-page-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/saas-landing-page-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/mobile-landing-page-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/landing-page-cta-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/landing-page-message-match",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/what-is-landing-page-audit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/best-landing-page-audit-tools",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/playbooks",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/press",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/brand",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/editorial-standards",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/privacy-policy",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/terms",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/data-rights",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/carrd",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/hotjar",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/kit",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/beehiiv",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/unbounce",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/webflow",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/framer",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/notion",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/calendly",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/hubspot",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/mailchimp",
+          "block_hash": "ee0084a80d9206b88e3f9ef98fd4e6cb46a53eebedfc6996a9f999de3fa9ce32"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/#webpage",
+      "types": [
+        "WebPage"
+      ],
+      "names": [
+        "Nebula Components: Free Landing Page Audit"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "6616f330546fe43107ca3092845da3d8abdf7d8bcac9e0e9fa6cbd3cb5df47d9"
+        },
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "6616f330546fe43107ca3092845da3d8abdf7d8bcac9e0e9fa6cbd3cb5df47d9"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/#website",
+      "types": [
+        "WebSite"
+      ],
+      "names": [
+        "Nebula Components"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/repair-sprint",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/pricing",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/learning-centre",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/blog",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/about",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/research/landing-page-performance-q3-2026",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/resources/citable",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/knallhart",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/postmint",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/basecamp",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/benchmarks",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/case-studies",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/compare",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/ecommerce-landing-page-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/saas-landing-page-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/mobile-landing-page-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/landing-page-cta-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/landing-page-message-match",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/what-is-landing-page-audit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/best-landing-page-audit-tools",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/playbooks",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/press",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/brand",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/editorial-standards",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/privacy-policy",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/terms",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/data-rights",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/carrd",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/hotjar",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/kit",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/beehiiv",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/unbounce",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/webflow",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/framer",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/notion",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/calendly",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/hubspot",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        },
+        {
+          "url": "https://nebulacomponents.com/teardowns/mailchimp",
+          "block_hash": "ab131eb3a989a41ad08afee7890a36f66636d1c5bb68a0e6cb54a9cbaa7ccd15"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/about#webpage",
+      "types": [
+        "AboutPage"
+      ],
+      "names": [
+        "About Nebula Components"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/about",
+          "block_hash": "e748a081fe36c06dac49d97fbbfbfbc2f4e72345f34cdbe2f7acb9916beb458a"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/audit#app",
+      "types": [
+        "WebApplication"
+      ],
+      "names": [
+        "Nebula Landing Page Audit"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "05fcc0e848c29d3b223d51df33187263c4ebf5bc3d06e5e751aeb50eb1f3b89b"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "05fcc0e848c29d3b223d51df33187263c4ebf5bc3d06e5e751aeb50eb1f3b89b"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "05fcc0e848c29d3b223d51df33187263c4ebf5bc3d06e5e751aeb50eb1f3b89b"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "05fcc0e848c29d3b223d51df33187263c4ebf5bc3d06e5e751aeb50eb1f3b89b"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "05fcc0e848c29d3b223d51df33187263c4ebf5bc3d06e5e751aeb50eb1f3b89b"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/audit#service",
+      "types": [
+        "Service"
+      ],
+      "names": [
+        "Nebula Landing Page Audit"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "7d46c2c461a428a4dfc989f4b07651cdef426431f54cda643e6dcf13d5741508"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "7d46c2c461a428a4dfc989f4b07651cdef426431f54cda643e6dcf13d5741508"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "7d46c2c461a428a4dfc989f4b07651cdef426431f54cda643e6dcf13d5741508"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "7d46c2c461a428a4dfc989f4b07651cdef426431f54cda643e6dcf13d5741508"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "7d46c2c461a428a4dfc989f4b07651cdef426431f54cda643e6dcf13d5741508"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/case-studies#webpage",
+      "types": [
+        "CollectionPage"
+      ],
+      "names": [
+        "Nebula Components Case Studies"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/case-studies",
+          "block_hash": "4143efc8e6694657d6a55a1cb23185a3743566b46dc2bcb4d542150f5ee4c1fd"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/pricing#fix-pack",
+      "types": [
+        "Service"
+      ],
+      "names": [
+        "One-Leak Repair Sprint"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/pricing",
+          "block_hash": "8b361c1a3dbf8adc789ec867dba62378fe09bd5d62cbbbf2b7940247107798fc"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/pricing#repair-sprint",
+      "types": [
+        "Product"
+      ],
+      "names": [
+        "Nebula One-Leak Repair Sprint"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/pricing",
+          "block_hash": "88e0404f3e043167bc300a6ddee0ec8adcd62dc4582dca13afff540bc3aa0b43"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/repair-sprint#service",
+      "types": [
+        "Service"
+      ],
+      "names": [
+        "One-Leak Repair Sprint"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/repair-sprint",
+          "block_hash": "6cb2e49cb1e515e477274b834b6cc7edd15429489f1c4ec12b8eabc20d3063a0"
+        },
+        {
+          "url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+          "block_hash": "6cb2e49cb1e515e477274b834b6cc7edd15429489f1c4ec12b8eabc20d3063a0"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "https://nebulacomponents.com/resources/citable#software",
+      "types": [
+        "SoftwareApplication"
+      ],
+      "names": [
+        "Citable"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/resources/citable",
+          "block_hash": "64723ef96b57f301d7cba4f0bbef058772142203489f9feffca7bc14829fdba1"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:012161eac6823fa7b49c650d98f5af9d814c9c9a7345242c223824ceb17524a7",
+      "types": [
+        "CollectionPage"
+      ],
+      "names": [
+        "Learning Centre - Landing Page Conversion Leaks"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/learning-centre",
+          "block_hash": "012161eac6823fa7b49c650d98f5af9d814c9c9a7345242c223824ceb17524a7"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:07c2d9056fa8755331589f8192d1bbd8f32d7779c63f055d341a7f0cd48729ab",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/saas-landing-page-audit",
+          "block_hash": "07c2d9056fa8755331589f8192d1bbd8f32d7779c63f055d341a7f0cd48729ab"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:0a15a48a8c24d319fd20148fe1a2a29e5c34a8c012d26ceed261db96ec5aa4f9",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+          "block_hash": "0a15a48a8c24d319fd20148fe1a2a29e5c34a8c012d26ceed261db96ec5aa4f9"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:141b88fc4133046a6f6f55473bc5c6dd9f138c18e70743b63beef5d1489842bb",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+          "block_hash": "141b88fc4133046a6f6f55473bc5c6dd9f138c18e70743b63beef5d1489842bb"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:169286e7e2ce31b5a6bd79c17a169537d44e01bb50f6fed84e31727743b8c73f",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/press",
+          "block_hash": "169286e7e2ce31b5a6bd79c17a169537d44e01bb50f6fed84e31727743b8c73f"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:188591f96264577f46fc440dd080175f28798660f92f201d53ef652d5dd98f77",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+          "block_hash": "188591f96264577f46fc440dd080175f28798660f92f201d53ef652d5dd98f77"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:19d31ea15c19be4f868bb522c390c825afcf8bd24322926cab9713239b8eec42",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/benchmarks",
+          "block_hash": "19d31ea15c19be4f868bb522c390c825afcf8bd24322926cab9713239b8eec42"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:20847b62e5da7ba9ff89229a0a58793f2f3aba02be35f0ea6672dca2aeaf4a99",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/mobile-landing-page-audit",
+          "block_hash": "20847b62e5da7ba9ff89229a0a58793f2f3aba02be35f0ea6672dca2aeaf4a99"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:291d2ddb209229980ac3af55d1f06cd479984782f0e480f7f5fa61f39ba1b77b",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-cta-audit",
+          "block_hash": "291d2ddb209229980ac3af55d1f06cd479984782f0e480f7f5fa61f39ba1b77b"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:3978f7242c829b10e76d50025d62f8152c72a163c13e0b0326281d1405b5b874",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/resources/citable",
+          "block_hash": "3978f7242c829b10e76d50025d62f8152c72a163c13e0b0326281d1405b5b874"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:554f68fca6f9032b2412d11725318af24651a29ea7d8753705923944cfba557d",
+      "types": [
+        "CollectionPage"
+      ],
+      "names": [
+        "Public Audit Teardowns"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/teardowns",
+          "block_hash": "554f68fca6f9032b2412d11725318af24651a29ea7d8753705923944cfba557d"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:5a8a577bb6cd5eb5aba39f00474237f72a50a58d7647cd645f3eaef239c8fe72",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+          "block_hash": "5a8a577bb6cd5eb5aba39f00474237f72a50a58d7647cd645f3eaef239c8fe72"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:5ba429cc74a42c96e4aa0f5263823655ef5020267ebd2f88488a9d85dea9a6ff",
+      "types": [
+        "WebPage"
+      ],
+      "names": [
+        "Nebula Components Press Kit - Key Metrics and Insights for Journalists"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/press",
+          "block_hash": "5ba429cc74a42c96e4aa0f5263823655ef5020267ebd2f88488a9d85dea9a6ff"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46",
+      "types": [
+        "SoftwareApplication"
+      ],
+      "names": [
+        "Nebula Landing Page Audit"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "6ec25468a4f999d2b016451ede8f69af3ad01ea405cf53e8b7065d5a6d537c46"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:70380494b627e74e06aefe7b0752a294ccdea7ca2e9aecd2564e57ab664d2937",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/learning-centre",
+          "block_hash": "70380494b627e74e06aefe7b0752a294ccdea7ca2e9aecd2564e57ab664d2937"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:74ce710de44e290052d4c5f4b6b156b9317f0bd6e3d7af3f32044e03341d5f82",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-message-match",
+          "block_hash": "74ce710de44e290052d4c5f4b6b156b9317f0bd6e3d7af3f32044e03341d5f82"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:80edd644889d34f59be6095129a8c1ca599065b2fcebc29ee0cae80b3781e564",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/mobile-landing-page-audit",
+          "block_hash": "80edd644889d34f59be6095129a8c1ca599065b2fcebc29ee0cae80b3781e564"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:87852afe6c8068e4d422c93175d9eca65604e939a9ccb54867a5d26d90ea6205",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-cta-audit",
+          "block_hash": "87852afe6c8068e4d422c93175d9eca65604e939a9ccb54867a5d26d90ea6205"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:91409063555e52d1d4a539f5615da3fb86979a9c281916c327312d6d1d150126",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/mobile-landing-page-audit",
+          "block_hash": "91409063555e52d1d4a539f5615da3fb86979a9c281916c327312d6d1d150126"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:92463019374cc7f097bfa07253f6ec0b57a3069110eba5183b5920379ef07a1b",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-cta-audit",
+          "block_hash": "92463019374cc7f097bfa07253f6ec0b57a3069110eba5183b5920379ef07a1b"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:95b0fdc672702f9e93bbc884e58b78433a1d875d3ec1245eb9b8891f48e8870b",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "95b0fdc672702f9e93bbc884e58b78433a1d875d3ec1245eb9b8891f48e8870b"
+        },
+        {
+          "url": "https://nebulacomponents.com/",
+          "block_hash": "95b0fdc672702f9e93bbc884e58b78433a1d875d3ec1245eb9b8891f48e8870b"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:964e8bc044acccbb7f67a5b1485400c0517b2e0463f3f556cf06405d4e69b6d2",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/about",
+          "block_hash": "964e8bc044acccbb7f67a5b1485400c0517b2e0463f3f556cf06405d4e69b6d2"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:a0f6dc48b822274f93746e169f1dc52b3449c39b30539234255c9aa6a659465f",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+          "block_hash": "a0f6dc48b822274f93746e169f1dc52b3449c39b30539234255c9aa6a659465f"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:a64fe5431ff9497883e7221fe386bc45da8498c45659609c92781376a450f157",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/resources/citable",
+          "block_hash": "a64fe5431ff9497883e7221fe386bc45da8498c45659609c92781376a450f157"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:b5297698c204c2e667d278dd3fa715b8c32e42777a34967de18fbd5aa036ac40",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/best-landing-page-audit-tools",
+          "block_hash": "b5297698c204c2e667d278dd3fa715b8c32e42777a34967de18fbd5aa036ac40"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:b80513999806afed48817c6d933ebc7f2b1bad44c4eaa952ffc5f5851447f7ed",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/pricing",
+          "block_hash": "b80513999806afed48817c6d933ebc7f2b1bad44c4eaa952ffc5f5851447f7ed"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:b8cac7043e90174aff959dda78dfb21cd4ea806a08e9c0f15c3e38c9b85b24eb",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+          "block_hash": "b8cac7043e90174aff959dda78dfb21cd4ea806a08e9c0f15c3e38c9b85b24eb"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:bf5c6d57330ee2abc52cc9abf13ae85be8fd2c31681491b78639f86f7c49a538",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-message-match",
+          "block_hash": "bf5c6d57330ee2abc52cc9abf13ae85be8fd2c31681491b78639f86f7c49a538"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:c3b59a80cc1ad41b13d4a9168bebc88889ac8d2fd220580a9e80747af360830e",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/saas-landing-page-audit",
+          "block_hash": "c3b59a80cc1ad41b13d4a9168bebc88889ac8d2fd220580a9e80747af360830e"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:c731c0e279477cfdf1a112e0a3447794a63862844cda1a389459e4c75c784ccd",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/saas-landing-page-audit",
+          "block_hash": "c731c0e279477cfdf1a112e0a3447794a63862844cda1a389459e4c75c784ccd"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:ca3ed74defd0a6e49f599c0faeb1b9448258b35a48538ef31009cf0be360975d",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+          "block_hash": "ca3ed74defd0a6e49f599c0faeb1b9448258b35a48538ef31009cf0be360975d"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:d135c0e09e8c20613e0ceffeaf2ca9330a82a9cfaf824651ab86802a481071af",
+      "types": [
+        "Dataset"
+      ],
+      "names": [
+        "The Landing Page Leak Index"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/benchmarks",
+          "block_hash": "d135c0e09e8c20613e0ceffeaf2ca9330a82a9cfaf824651ab86802a481071af"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:d3627054ad6db5c6be290d9c1a2d23732723e2666386422c3ee7b199bdba52fd",
+      "types": [
+        "Article"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/landing-page-message-match",
+          "block_hash": "d3627054ad6db5c6be290d9c1a2d23732723e2666386422c3ee7b199bdba52fd"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:dbfa58290defcc89c37653a20b687932c9995adc6f259f50f315e170509eb3bf",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+          "block_hash": "dbfa58290defcc89c37653a20b687932c9995adc6f259f50f315e170509eb3bf"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817",
+      "types": [
+        "HowTo"
+      ],
+      "names": [
+        "How to Run a Landing Page Audit with Nebula"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "e47717b99969774a99c653c5f95cd34522ecefcbf19d7fe3fa16c93ffcae7817"
+        }
+      ],
+      "visible_support": {
+        "status": "not_observed",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:eecb1de1a161f5e0d60f5acf1956b1f7d1aabdf585e67f00de22118c2443cdce",
+      "types": [
+        "Person"
+      ],
+      "names": [
+        "Mike Holownych"
+      ],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/press",
+          "block_hash": "eecb1de1a161f5e0d60f5acf1956b1f7d1aabdf585e67f00de22118c2443cdce"
+        }
+      ],
+      "visible_support": {
+        "status": "supported",
+        "matched_fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550",
+      "types": [
+        "FAQPage"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+          "block_hash": "f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+          "block_hash": "f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit",
+          "block_hash": "f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+          "block_hash": "f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550"
+        },
+        {
+          "url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+          "block_hash": "f43cab1ecc5604210fa68e91e78955112136363fc36c4ebfd6664dc1773b7550"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    },
+    {
+      "node_id": "urn:citable:jsonld:f7eb750ce761d133104bee4808e883eaedcd023519320b68443761ac79128e80",
+      "types": [
+        "BreadcrumbList"
+      ],
+      "names": [],
+      "source_blocks": [
+        {
+          "url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+          "block_hash": "f7eb750ce761d133104bee4808e883eaedcd023519320b68443761ac79128e80"
+        }
+      ],
+      "visible_support": {
+        "status": "not_testable",
+        "matched_fields": []
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "https://nebulacomponents.com/#webpage",
+      "relation": "about",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#webpage",
+      "relation": "about",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#webpage",
+      "relation": "isPartOf",
+      "target_id": "https://nebulacomponents.com/#website",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#webpage",
+      "relation": "isPartOf",
+      "target_id": "https://nebulacomponents.com/#website",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/repair-sprint",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/pricing",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/learning-centre",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/blog",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/about",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/research/landing-page-performance-q3-2026",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/resources/citable",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/knallhart",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/postmint",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/basecamp",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/benchmarks",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/case-studies",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/compare",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/ecommerce-landing-page-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/saas-landing-page-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/mobile-landing-page-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/landing-page-cta-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/landing-page-message-match",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/what-is-landing-page-audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/best-landing-page-audit-tools",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/playbooks",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/press",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/brand",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/editorial-standards",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/privacy-policy",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/terms",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/data-rights",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/carrd",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/hotjar",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/kit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/beehiiv",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/unbounce",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/webflow",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/framer",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/notion",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/calendly",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/hubspot",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#website",
+      "relation": "publisher",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/teardowns/mailchimp",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/about#webpage",
+      "relation": "about",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/about",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/about#webpage",
+      "relation": "isPartOf",
+      "target_id": "https://nebulacomponents.com/#website",
+      "source_url": "https://nebulacomponents.com/about",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/audit#app",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/audit#app",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/audit#app",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/audit#app",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/audit#app",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/case-studies#webpage",
+      "relation": "about",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/case-studies",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/case-studies#webpage",
+      "relation": "isPartOf",
+      "target_id": "https://nebulacomponents.com/#website",
+      "source_url": "https://nebulacomponents.com/case-studies",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/pricing#fix-pack",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/pricing",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/repair-sprint#service",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/repair-sprint",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/repair-sprint#service",
+      "relation": "provider",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+      "target_declared": true
+    },
+    {
+      "source_id": "https://nebulacomponents.com/resources/citable#software",
+      "relation": "author",
+      "target_id": "https://nebulacomponents.com/#organization",
+      "source_url": "https://nebulacomponents.com/resources/citable",
+      "target_declared": true
+    }
+  ],
+  "unresolved_references": [
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/repair-sprint",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/pricing",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/learning-centre",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/blog",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/about",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=site-nav&utm_medium=internal",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/research/landing-page-performance-q3-2026",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/resources/citable",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/knallhart",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/postmint",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/basecamp",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/repair-sprint?utm_source=homepage&utm_medium=internal",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/benchmarks",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/case-studies",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/compare",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/ecommerce-landing-page-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/saas-landing-page-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/mobile-landing-page-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/lead-generation-landing-page-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/landing-page-cta-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/landing-page-message-match",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/what-is-landing-page-audit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/best-landing-page-audit-tools",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/playbooks",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/press",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/brand",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/editorial-standards",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=footer&utm_medium=internal",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/privacy-policy",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/terms",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/data-rights",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/audit?utm_source=teardowns-hero&utm_medium=hero-cta",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/carrd",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/hotjar",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/kit",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/beehiiv",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/unbounce",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/webflow",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/framer",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/notion",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/calendly",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/hubspot",
+      "target_declared": false
+    },
+    {
+      "source_id": "https://nebulacomponents.com/#organization",
+      "relation": "founder",
+      "target_id": "https://nebulacomponents.com/#founder",
+      "source_url": "https://nebulacomponents.com/teardowns/mailchimp",
+      "target_declared": false
+    }
+  ],
+  "parse_failures": [],
+  "limitations": [
+    "Normalization reports declared JSON-LD structure and literal visible-text matches; it does not establish semantic correctness, eligibility, search-engine recognition, or ranking impact."
+  ]
+}
