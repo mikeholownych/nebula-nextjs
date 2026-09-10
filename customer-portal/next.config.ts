@@ -391,6 +391,15 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
+      // Retired public handlers must override the HTML catch-all cache policy.
+      ...['/api/referral/:path*', '/api/benchmarks/:path*', '/api/share/:path*', '/api/shared', '/api/whitelabel'].map(source => ({
+        source,
+        headers: [
+          { key: 'Cache-Control', value: 'no-store' },
+          { key: 'CDN-Cache-Control', value: 'no-store' },
+          { key: 'Cloudflare-CDN-Cache-Control', value: 'no-store' },
+        ],
+      })),
       // Liveness/readiness must never be CDN-cached. The HTML catch-all
       // s-maxage=300 would otherwise win for these JSON probes.
       {
