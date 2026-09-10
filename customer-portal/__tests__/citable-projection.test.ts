@@ -45,23 +45,23 @@ describe('Citable public projection', () => {
     // verified against the release manifest by deployment receipts.
     const resourceDataRaw = read('public/resources/citable/resource-data.json')
     const resourceDataHash = require('node:crypto').createHash('sha256').update(resourceDataRaw).digest('hex')
-    expect(resourceDataHash).toBe('95fdc56bd0e199dba6baef47c29ee62881f9cb9af3c1a85f8fe2a72fb4318d65')
+    expect(resourceDataHash).toBe('6aac65403b4a7694daf0a2c5d92dce836c92dae71bf143617ed2adea3dede90c')
 
     const resourceData = JSON.parse(resourceDataRaw)
     expect(resourceData.product).toBe('Citable')
-    expect(resourceData.version).toBe('1.18.0')
-    expect(resourceData.commit).toBe('9b01dcd4ce43482e3c82883088689c908a94fb7d')
+    expect(resourceData.version).toBe('1.18.1')
+    expect(resourceData.commit).toBe('dccdf5c8ffbcb9134a35c7a89a01f81afe73f8ac')
     expect(resourceData.facts).toEqual({
       detectors: 181,
       namespaces: 19,
       registries: 29,
       providers: 12,
-      distribution_files_per_provider: 102,
+      distribution_files_per_provider: 106,
     })
 
     const llms = read('public/resources/citable/llms.txt')
     const llmsHash = require('node:crypto').createHash('sha256').update(llms).digest('hex')
-    expect(llmsHash).toBe('94a6b78b4643297721d5471375085ef4008b3d579eb26d182354ff00a385d173')
+    expect(llmsHash).toBe('bc626e3b7dfb6261d169bd5ddda9446dd35eda37443239cde9c5b8560ae58c8d')
 
     expect(llms.startsWith('# Citable\n')).toBe(true)
     expect(llms).toContain(`- Version: ${resourceData.version}`)
