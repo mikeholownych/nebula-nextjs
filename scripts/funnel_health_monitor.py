@@ -79,37 +79,73 @@ def _empty_counts() -> dict[str, int]:
     return {event: 0 for event in EVENTS}
 
 
-def ledger_counts(
-    conn: psycopg.Connection[Any],
-    period: Period,
-    *,
-    exclude_probe_audits: bool = False,
-) -> dict[str, int]:
-    probe_clause = ""
-    params: list[Any] = [period.start, period.end, list(EVENTS)]
-    if exclude_probe_audits:
-        probe_clause = "AND (audit_id IS NULL OR audit_id <> ALL(%s))"
-        params.append(list(PROBE_AUDIT_IDS))
+# Mutually exclusive, ordered classifications. Never update the source ledger.
+# Unknown traffic remains customer-eligible unless explicit exclusion evidence
+# exists; missing environment/payment mode is unverified, not proven live.
+LEDGER_CLASSIFICATION_SQL = """
+    SELECT event_name,
+           CASE
+             WHEN e.audit_id = ANY(%s)
+               OR e.properties->>'audit_id' = ANY(%s)
+               THEN 'known_monitor_probe'
+             WHEN e.is_synthetic IS TRUE
+               OR e.properties->>'is_synthetic' = 'true'
+               THEN 'synthetic'
+             WHEN e.environment IS DISTINCT FROM 'production'
+               THEN 'non_production_or_unknown'
+             WHEN e.payment_mode IS DISTINCT FROM 'live'
+               OR starts_with(COALESCE(e.checkout_session_id, ''), 'cs_test_')
+               OR starts_with(COALESCE(e.transaction_id, ''), 'cs_test_')
+               OR starts_with(COALESCE(e.properties->>'checkout_session_id', ''), 'cs_test_')
+               OR starts_with(COALESCE(e.properties->>'transaction_id', ''), 'cs_test_')
+               OR e.properties->>'livemode' = 'false'
+               OR e.properties->>'payment_mode' = 'test'
+               OR EXISTS (
+                   SELECT 1 FROM purchases p
+                   WHERE p.livemode IS FALSE
+                     AND p.stripe_session_id IN (
+                         e.checkout_session_id, e.transaction_id,
+                         e.properties->>'checkout_session_id',
+                         e.properties->>'transaction_id'
+                     )
+               ) THEN 'test_payment_or_unverified_mode'
+             ELSE 'customer_eligible'
+           END AS traffic_class,
+           COUNT(*)
+    FROM analytics_event_ledger e
+    WHERE occurred_at >= %s::date::timestamp AT TIME ZONE 'UTC'
+      AND occurred_at < %s::date::timestamp AT TIME ZONE 'UTC'
+      AND event_name = ANY(%s)
+    GROUP BY event_name, traffic_class
+"""
+
+
+def classified_ledger_counts(
+    conn: psycopg.Connection[Any], period: Period,
+) -> dict[str, dict[str, int]]:
+    result = {name: _empty_counts() for name in (
+        'customer_eligible', 'known_monitor_probe', 'synthetic',
+        'non_production_or_unknown', 'test_payment_or_unverified_mode',
+    )}
     with conn.cursor() as cur:
-        cur.execute(
-            f"""
-            SELECT event_name, COUNT(*)
-            FROM analytics_event_ledger
-            WHERE occurred_at >= %s
-              AND occurred_at < %s
-              AND event_name = ANY(%s)
-              AND is_synthetic = FALSE
-              AND environment = 'production'
-              AND payment_mode = 'live'
-              {probe_clause}
-            GROUP BY event_name
-            """,
-            params,
-        )
-        result = _empty_counts()
-        for event_name, count in cur.fetchall():
-            result[event_name] = int(count)
-        return result
+        cur.execute(LEDGER_CLASSIFICATION_SQL, [
+            list(PROBE_AUDIT_IDS), list(PROBE_AUDIT_IDS),
+            period.start, period.end, list(EVENTS),
+        ])
+        for event_name, traffic_class, count in cur.fetchall():
+            result[traffic_class][event_name] = int(count)
+    return result
+
+
+def ledger_counts(
+    conn: psycopg.Connection[Any], period: Period,
+) -> dict[str, int]:
+    """Customer-eligible metrics, never the monitor's own probe or test payment."""
+    return classified_ledger_counts(conn, period)['customer_eligible']
+
+
+def raw_counts(classes: dict[str, dict[str, int]]) -> dict[str, int]:
+    return {event: sum(counts[event] for counts in classes.values()) for event in EVENTS}
 
 
 def posthog_query(sql: str) -> list[list[Any]] | None:
@@ -150,7 +186,8 @@ def posthog_event_count(event: str, period: Period) -> int | None:
 
 
 def period_snapshot(conn: psycopg.Connection[Any], period: Period) -> dict[str, Any]:
-    current = ledger_counts(conn, period)
+    current_classes = classified_ledger_counts(conn, period)
+    current = current_classes["customer_eligible"]
     previous_period = Period(
         f"{period.name}_previous",
         period.previous_start,
@@ -158,8 +195,8 @@ def period_snapshot(conn: psycopg.Connection[Any], period: Period) -> dict[str, 
         period.previous_start,
         period.previous_end,
     )
-    previous = ledger_counts(conn, previous_period)
-    commercial = ledger_counts(conn, period, exclude_probe_audits=True)
+    previous_classes = classified_ledger_counts(conn, previous_period)
+    previous = previous_classes["customer_eligible"]
     unlocks = current["audit_results_unlocked"]
     previous_unlocks = previous["audit_results_unlocked"]
     posthog_unlocks = posthog_event_count("audit_results_unlocked", period)
@@ -170,7 +207,11 @@ def period_snapshot(conn: psycopg.Connection[Any], period: Period) -> dict[str, 
         "previous_start": period.previous_start.isoformat(),
         "previous_end_exclusive": period.previous_end.isoformat(),
         "ledger": current,
-        "commercial_ledger": commercial,
+        "commercial_ledger": current,
+        "raw_ledger": raw_counts(current_classes),
+        "previous_raw_ledger": raw_counts(previous_classes),
+        "excluded_ledger_by_class": {k: v for k, v in current_classes.items() if k != "customer_eligible"},
+        "previous_excluded_ledger_by_class": {k: v for k, v in previous_classes.items() if k != "customer_eligible"},
         "previous_ledger": previous,
         "unlock_reconciliation": {
             "ledger": unlocks,
@@ -210,7 +251,10 @@ def flags(snapshot: dict[str, Any]) -> list[str]:
 def build_report(today: date | None = None, connection_factory: Callable[[], psycopg.Connection[Any]] | None = None) -> dict[str, Any]:
     today = today or datetime.now(timezone.utc).date()
     periods = build_periods(today)
-    factory = connection_factory or (lambda: psycopg.connect(DB_CONNINFO))
+    factory = connection_factory or (lambda: psycopg.connect(
+        DB_CONNINFO,
+        options='-c default_transaction_read_only=on -c timezone=UTC -c statement_timeout=30000',
+    ))
     with factory() as conn:
         snapshots = {name: period_snapshot(conn, period) for name, period in periods.items()}
     return {
@@ -232,6 +276,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend([
             f"## {name.title()} ({snapshot['start']} to {snapshot['end_exclusive']})",
             "",
+            "Customer-eligible events only. Exclusions are classifications, not deleted evidence.",
+            "",
             "| Signal | Current | Previous | Delta |",
             "|---|---:|---:|---:|",
         ])
@@ -246,6 +292,17 @@ def render_markdown(report: dict[str, Any]) -> str:
         for label, current, prior in rows:
             d = delta(current if isinstance(current, int) else None, prior if isinstance(prior, int) else None)
             lines.append(f"| {label} | {current} | {prior} | {d if d is not None else 'N/A'} |")
+        if "raw_ledger" in snapshot:
+            lines.extend(["", "### Raw ledger and excluded evidence", "",
+                          "| Classification | Signal | Current | Previous |",
+                          "|---|---|---:|---:|"])
+            for event in EVENTS:
+                lines.append(f"| Raw ledger | {event} | {snapshot['raw_ledger'][event]} | {snapshot['previous_raw_ledger'][event]} |")
+            for classification, counts in snapshot["excluded_ledger_by_class"].items():
+                for event in EVENTS:
+                    prior = snapshot["previous_excluded_ledger_by_class"][classification][event]
+                    if counts[event] or prior:
+                        lines.append(f"| {classification} | {event} | {counts[event]} | {prior} |")
         alerts = report["attention"][name]
         lines.extend(["", "**Attention:** " + (", ".join(alerts) if alerts else "none"), ""])
     return "\n".join(lines)

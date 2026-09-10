@@ -49,7 +49,7 @@ async def subscribe(req: NewsletterSignupRequest):
         utm_campaign=req.utm_campaign,
     )
     token = row["confirmation_token"]
-    confirm_url = f"https://api.nebulacomponents.com/api/newsletter/confirm?token={quote(token)}"
+    confirm_url = f"https://nebulacomponents.com/api/newsletter/confirm?token={quote(token, safe='')}"
     unsubscribe_url = f"{UNSUBSCRIBE_URL}?email={quote(email)}"
     text = f"""Confirm your Nebula Components newsletter subscription
 

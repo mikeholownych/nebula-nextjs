@@ -1,0 +1,172 @@
+{
+  "captured_at": "2026-09-10T18:33:43.703836+00:00",
+  "read_only": "on",
+  "periods": {
+    "14d": {
+      "start": "2026-08-27",
+      "end_exclusive": "2026-09-10",
+      "before_live_nonsynthetic": {
+        "audit_completed": 127,
+        "audit_results_unlocked": 2,
+        "audit_started": 9,
+        "audit_result_viewed": 465,
+        "checkout_creation_failed": 170
+      },
+      "after_classification": {
+        "customer_eligible": {
+          "audit_started": 9,
+          "audit_completed": 127,
+          "audit_results_unlocked": 2,
+          "audit_result_viewed": 465,
+          "checkout_creation_failed": 8,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "known_monitor_probe": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 162,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "synthetic": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 0,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "non_production_or_unknown": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 0,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "test_payment_or_unverified_mode": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 0,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        }
+      },
+      "raw": {
+        "audit_started": 9,
+        "audit_completed": 127,
+        "audit_results_unlocked": 2,
+        "audit_result_viewed": 465,
+        "checkout_creation_failed": 170,
+        "checkout_started": 0,
+        "purchase_completed": 0
+      },
+      "nonprobe_failure_reasons": [
+        [
+          "checkout_provider_error",
+          "checkout_provider_error",
+          7
+        ],
+        [
+          "audit_not_unlocked",
+          "audit_not_unlocked",
+          1
+        ]
+      ]
+    },
+    "30d": {
+      "start": "2026-08-11",
+      "end_exclusive": "2026-09-10",
+      "before_live_nonsynthetic": {
+        "audit_completed": 861,
+        "audit_results_unlocked": 2,
+        "audit_result_viewed": 754,
+        "audit_started": 268,
+        "checkout_creation_failed": 758
+      },
+      "after_classification": {
+        "customer_eligible": {
+          "audit_started": 268,
+          "audit_completed": 861,
+          "audit_results_unlocked": 2,
+          "audit_result_viewed": 754,
+          "checkout_creation_failed": 159,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "known_monitor_probe": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 602,
+          "checkout_started": 3,
+          "purchase_completed": 0
+        },
+        "synthetic": {
+          "audit_started": 12,
+          "audit_completed": 1,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 1,
+          "checkout_creation_failed": 1,
+          "checkout_started": 1,
+          "purchase_completed": 1
+        },
+        "non_production_or_unknown": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 0,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        },
+        "test_payment_or_unverified_mode": {
+          "audit_started": 0,
+          "audit_completed": 0,
+          "audit_results_unlocked": 0,
+          "audit_result_viewed": 0,
+          "checkout_creation_failed": 0,
+          "checkout_started": 0,
+          "purchase_completed": 0
+        }
+      },
+      "raw": {
+        "audit_started": 280,
+        "audit_completed": 862,
+        "audit_results_unlocked": 2,
+        "audit_result_viewed": 755,
+        "checkout_creation_failed": 762,
+        "checkout_started": 4,
+        "purchase_completed": 1
+      },
+      "nonprobe_failure_reasons": [
+        [
+          "checkout_provider_error",
+          "checkout_provider_error",
+          157
+        ],
+        [
+          "audit_not_unlocked",
+          "audit_not_unlocked",
+          2
+        ]
+      ]
+    }
+  },
+  "purchases_by_mode": [
+    [
+      false,
+      "paid",
+      1,
+      9700
+    ]
+  ]
+}

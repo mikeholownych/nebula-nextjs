@@ -7,6 +7,8 @@ import { getArticles } from './learning-centre/lib/getArticles'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { COMPARISONS } from './vs/[slug]/data'
 import { PRICING_GUIDE_SLUGS } from './pricing-guides/data'
+import { comparisons } from './compare/comparisons'
+import { getAllVerticalSlugs } from './for/[vertical]/data'
 
 export const dynamic = 'force-dynamic'
 
@@ -53,6 +55,16 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/resources',
       '/observatory',
       '/case-studies',
+      '/repair-sprint',
+      '/repair-sprint/example',
+      '/proof',
+      '/research/landing-page-performance-q3-2026',
+      '/score',
+      '/roi-calculator',
+      '/funnel-audit',
+      '/paid-traffic-leak-scorecard',
+      '/ads-not-converting-two-percent',
+      '/fix-conversion-leak-before-campaign',
       '/why-is-my-landing-page-not-converting',
       '/ads-getting-clicks-but-no-sales',
       '/best-landing-page-audit-tools',
@@ -76,10 +88,8 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/7-systems',
       '/ai-sdr-vs-audit',
       '/compare',
-      '/compare/unbounce',
-      '/compare/instapage',
-      '/compare/pagespeed-insights',
-      '/compare/leadpages',
+      ...comparisons.map(({ slug }) => `/compare/${slug}`),
+      ...getAllVerticalSlugs().map((slug) => `/for/${slug}`),
       '/concepts',
       '/cta-optimization',
       '/editorial-standards',

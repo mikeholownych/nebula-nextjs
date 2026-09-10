@@ -1,0 +1,487 @@
+{
+  "captured_at": "2026-09-10T18:30:39.932982+00:00",
+  "method": "GET only; invalid/missing tokens only",
+  "legacy_confirmation_dns": {
+    "error": "[Errno -5] No address associated with hostname"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/",
+      "canonical": [
+        "https://nebulacomponents.com"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/audit",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/audit",
+      "canonical": [
+        "https://nebulacomponents.com/audit"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/sitemap.xml",
+      "canonical": [],
+      "robots": [],
+      "x_robots_tag": null,
+      "urls": [
+        "https://nebulacomponents.com",
+        "https://nebulacomponents.com/7-systems",
+        "https://nebulacomponents.com/about",
+        "https://nebulacomponents.com/about/team",
+        "https://nebulacomponents.com/ads-getting-clicks-but-no-sales",
+        "https://nebulacomponents.com/ai-info",
+        "https://nebulacomponents.com/ai-readiness-landing-page-check",
+        "https://nebulacomponents.com/ai-sdr-vs-audit",
+        "https://nebulacomponents.com/audit",
+        "https://nebulacomponents.com/benchmarks",
+        "https://nebulacomponents.com/best-landing-page-audit-tools",
+        "https://nebulacomponents.com/blog",
+        "https://nebulacomponents.com/blog/paid-traffic-not-converting",
+        "https://nebulacomponents.com/blog/what-we-got-wrong-about-filter-based-targeting",
+        "https://nebulacomponents.com/brand",
+        "https://nebulacomponents.com/case-studies",
+        "https://nebulacomponents.com/compare",
+        "https://nebulacomponents.com/compare/instapage",
+        "https://nebulacomponents.com/compare/leadpages",
+        "https://nebulacomponents.com/compare/pagespeed-insights",
+        "https://nebulacomponents.com/compare/unbounce",
+        "https://nebulacomponents.com/concepts",
+        "https://nebulacomponents.com/conversion-rate-optimization-audit",
+        "https://nebulacomponents.com/cta-optimization",
+        "https://nebulacomponents.com/data-rights",
+        "https://nebulacomponents.com/ecommerce-landing-page-audit",
+        "https://nebulacomponents.com/editorial-standards",
+        "https://nebulacomponents.com/faq",
+        "https://nebulacomponents.com/headline-optimization",
+        "https://nebulacomponents.com/how-nebula-audits",
+        "https://nebulacomponents.com/lab",
+        "https://nebulacomponents.com/landing-page-audit-tools-pricing",
+        "https://nebulacomponents.com/landing-page-cta-audit",
+        "https://nebulacomponents.com/landing-page-message-match",
+        "https://nebulacomponents.com/landing-page-trust-signals",
+        "https://nebulacomponents.com/lead-generation-landing-page-audit",
+        "https://nebulacomponents.com/learning-centre",
+        "https://nebulacomponents.com/learning-centre/above-fold-landing-page",
+        "https://nebulacomponents.com/learning-centre/ad-says-one-thing-page-says-another",
+        "https://nebulacomponents.com/learning-centre/agency-handoff-debt",
+        "https://nebulacomponents.com/learning-centre/b2b-saas-landing-page-not-converting",
+        "https://nebulacomponents.com/learning-centre/before-you-raise-ad-budget",
+        "https://nebulacomponents.com/learning-centre/coach-consultant-landing-page",
+        "https://nebulacomponents.com/learning-centre/confessions",
+        "https://nebulacomponents.com/learning-centre/cpc-break-even-landing-page",
+        "https://nebulacomponents.com/learning-centre/cta-below-fold-mobile",
+        "https://nebulacomponents.com/learning-centre/cta-not-working",
+        "https://nebulacomponents.com/learning-centre/cta-not-working-7-fixes",
+        "https://nebulacomponents.com/learning-centre/ecommerce-landing-page-not-converting",
+        "https://nebulacomponents.com/learning-centre/facebook-ads-no-leads",
+        "https://nebulacomponents.com/learning-centre/form-has-zero-friction",
+        "https://nebulacomponents.com/learning-centre/ghost-variant-ab-test",
+        "https://nebulacomponents.com/learning-centre/google-ads-clicks-no-sales",
+        "https://nebulacomponents.com/learning-centre/google-ads-disapproved-ads-still-spending",
+        "https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion",
+        "https://nebulacomponents.com/learning-centre/google-ads-quality-score-low",
+        "https://nebulacomponents.com/learning-centre/headline-cta-mismatch",
+        "https://nebulacomponents.com/learning-centre/headline-fails-message-match",
+        "https://nebulacomponents.com/learning-centre/high-cpc-low-conversion",
+        "https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high",
+        "https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark",
+        "https://nebulacomponents.com/learning-centre/landing-page-headline-formula",
+        "https://nebulacomponents.com/learning-centre/landing-page-intelligence-stack",
+        "https://nebulacomponents.com/learning-centre/landing-page-lcp",
+        "https://nebulacomponents.com/learning-centre/landing-page-load-time-slow",
+        "https://nebulacomponents.com/learning-centre/landing-page-not-converting",
+        "https://nebulacomponents.com/learning-centre/landing-page-speed-test",
+        "https://nebulacomponents.com/learning-centre/linkedin-ad-copy-landing-page-mismatch",
+        "https://nebulacomponents.com/learning-centre/linkedin-ads-not-converting",
+        "https://nebulacomponents.com/learning-centre/linkedin-authority-gap",
+        "https://nebulacomponents.com/learning-centre/message-match-checklist",
+        "https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting",
+        "https://nebulacomponents.com/learning-centre/mobile-landing-page-leaks",
+        "https://nebulacomponents.com/learning-centre/paid-traffic-leak-map",
+        "https://nebulacomponents.com/learning-centre/pricing-page-not-converting",
+        "https://nebulacomponents.com/learning-centre/proof-before-cta",
+        "https://nebulacomponents.com/learning-centre/retargeting-ads-not-converting",
+        "https://nebulacomponents.com/learning-centre/slow-landing-page-causes",
+        "https://nebulacomponents.com/learning-centre/social-proof-above-fold",
+        "https://nebulacomponents.com/learning-centre/social-proof-backfire",
+        "https://nebulacomponents.com/learning-centre/the-11pm-founder-spiral",
+        "https://nebulacomponents.com/learning-centre/tiktok-ads-not-converting",
+        "https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap",
+        "https://nebulacomponents.com/learning-centre/tiktok-trust-collapse",
+        "https://nebulacomponents.com/learning-centre/topic-guides/ad-spend-roi-improvement",
+        "https://nebulacomponents.com/learning-centre/topic-guides/ai-traffic-optimization-vs-landing-page-builders",
+        "https://nebulacomponents.com/learning-centre/topic-guides/conversion-rate-optimization-tools",
+        "https://nebulacomponents.com/learning-centre/topic-guides/landing-page-conversion-leaks",
+        "https://nebulacomponents.com/learning-centre/traffic-but-no-form-fills",
+        "https://nebulacomponents.com/learning-centre/types-of-social-proof",
+        "https://nebulacomponents.com/learning-centre/what-is-message-match",
+        "https://nebulacomponents.com/learning-centre/what-is-social-proof-landing-page",
+        "https://nebulacomponents.com/mobile-landing-page-audit",
+        "https://nebulacomponents.com/mobile-landing-page-optimization",
+        "https://nebulacomponents.com/observatory",
+        "https://nebulacomponents.com/page-intent-aware-audit",
+        "https://nebulacomponents.com/page-speed-conversion",
+        "https://nebulacomponents.com/playbooks",
+        "https://nebulacomponents.com/playbooks/founder-second-brain",
+        "https://nebulacomponents.com/playbooks/linkedin-skill-engine",
+        "https://nebulacomponents.com/playbooks/specialist-ai-agent-library",
+        "https://nebulacomponents.com/press",
+        "https://nebulacomponents.com/pricing",
+        "https://nebulacomponents.com/pricing-guides/crazy-egg-pricing",
+        "https://nebulacomponents.com/pricing-guides/hotjar-pricing",
+        "https://nebulacomponents.com/pricing-guides/semrush-pricing",
+        "https://nebulacomponents.com/pricing-guides/unbounce-pricing",
+        "https://nebulacomponents.com/privacy-policy",
+        "https://nebulacomponents.com/research",
+        "https://nebulacomponents.com/resources",
+        "https://nebulacomponents.com/resources/citable",
+        "https://nebulacomponents.com/resources/citable/compare",
+        "https://nebulacomponents.com/resources/citable/jobs/answer-extractability-audit",
+        "https://nebulacomponents.com/resources/citable/jobs/claim-evidence-governance",
+        "https://nebulacomponents.com/resources/citable/jobs/entity-narrative-audit",
+        "https://nebulacomponents.com/resources/citable/jobs/release-deployment-verification",
+        "https://nebulacomponents.com/resources/citable/jobs/technical-retrieval-audit",
+        "https://nebulacomponents.com/resources/citable/quick-start",
+        "https://nebulacomponents.com/resources/citable/releases",
+        "https://nebulacomponents.com/roas-cliff",
+        "https://nebulacomponents.com/saas-landing-page-audit",
+        "https://nebulacomponents.com/signals",
+        "https://nebulacomponents.com/signals/above-fold-clarity",
+        "https://nebulacomponents.com/signals/ad-signal-continuity",
+        "https://nebulacomponents.com/signals/ai-readiness",
+        "https://nebulacomponents.com/signals/cta-clarity",
+        "https://nebulacomponents.com/signals/load-speed",
+        "https://nebulacomponents.com/signals/message-match",
+        "https://nebulacomponents.com/signals/mobile-cta",
+        "https://nebulacomponents.com/signals/seo-foundations",
+        "https://nebulacomponents.com/signals/trust-signals",
+        "https://nebulacomponents.com/social-proof-landing-page",
+        "https://nebulacomponents.com/spec/landing-page-diagnostic-v1",
+        "https://nebulacomponents.com/teardowns",
+        "https://nebulacomponents.com/teardowns/airtable",
+        "https://nebulacomponents.com/teardowns/amplitude",
+        "https://nebulacomponents.com/teardowns/asana",
+        "https://nebulacomponents.com/teardowns/basecamp",
+        "https://nebulacomponents.com/teardowns/beehiiv",
+        "https://nebulacomponents.com/teardowns/calendly",
+        "https://nebulacomponents.com/teardowns/canva",
+        "https://nebulacomponents.com/teardowns/carrd",
+        "https://nebulacomponents.com/teardowns/clickup",
+        "https://nebulacomponents.com/teardowns/cloudwise",
+        "https://nebulacomponents.com/teardowns/drift",
+        "https://nebulacomponents.com/teardowns/figma",
+        "https://nebulacomponents.com/teardowns/folioverse",
+        "https://nebulacomponents.com/teardowns/framer",
+        "https://nebulacomponents.com/teardowns/hotjar",
+        "https://nebulacomponents.com/teardowns/hubspot",
+        "https://nebulacomponents.com/teardowns/intercom",
+        "https://nebulacomponents.com/teardowns/kit",
+        "https://nebulacomponents.com/teardowns/knallhart",
+        "https://nebulacomponents.com/teardowns/linear",
+        "https://nebulacomponents.com/teardowns/loom",
+        "https://nebulacomponents.com/teardowns/mailchimp",
+        "https://nebulacomponents.com/teardowns/miro",
+        "https://nebulacomponents.com/teardowns/mixpanel",
+        "https://nebulacomponents.com/teardowns/monday",
+        "https://nebulacomponents.com/teardowns/notion",
+        "https://nebulacomponents.com/teardowns/pipedrive",
+        "https://nebulacomponents.com/teardowns/postdew",
+        "https://nebulacomponents.com/teardowns/postmint",
+        "https://nebulacomponents.com/teardowns/shopify",
+        "https://nebulacomponents.com/teardowns/slack",
+        "https://nebulacomponents.com/teardowns/smartwatermark",
+        "https://nebulacomponents.com/teardowns/squarespace",
+        "https://nebulacomponents.com/teardowns/typeform",
+        "https://nebulacomponents.com/teardowns/unbounce",
+        "https://nebulacomponents.com/teardowns/webflow",
+        "https://nebulacomponents.com/teardowns/zapier",
+        "https://nebulacomponents.com/terms",
+        "https://nebulacomponents.com/vs",
+        "https://nebulacomponents.com/vs/crazy-egg",
+        "https://nebulacomponents.com/vs/fixroast",
+        "https://nebulacomponents.com/vs/google-analytics",
+        "https://nebulacomponents.com/vs/google-lighthouse",
+        "https://nebulacomponents.com/vs/hotjar",
+        "https://nebulacomponents.com/vs/hubspot-website-grader",
+        "https://nebulacomponents.com/vs/pagespeed-insights",
+        "https://nebulacomponents.com/vs/screaming-frog",
+        "https://nebulacomponents.com/vs/semrush-site-audit",
+        "https://nebulacomponents.com/vs/silktide",
+        "https://nebulacomponents.com/vs/unbounce",
+        "https://nebulacomponents.com/what-is-landing-page-audit",
+        "https://nebulacomponents.com/what-is-nebula-components",
+        "https://nebulacomponents.com/why-cro-agencies-dont-work",
+        "https://nebulacomponents.com/why-is-my-landing-page-not-converting"
+      ],
+      "count": 188
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/robots.txt",
+      "canonical": [],
+      "robots": [],
+      "x_robots_tag": null,
+      "body": "# nebulacomponents.com - robots.txt\n# Policy: answer-engine retrieval and search indexing are welcome.\n#         Model-training crawlers are disallowed.\n#\n# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF RIGHTS\n# UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED\n# RIGHTS IN THE DIGITAL SINGLE MARKET.\n\n# \u2500\u2500 Training-only crawlers - blocked \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nUser-Agent: Google-Extended\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\nUser-Agent: Applebot-Extended\nDisallow: /\nContent-Signal: ai-train=no, search=no, ai-input=no\n\nUser-Agent: CCBot\nDisallow: /\nContent-Signal: ai-train=no, search=no, ai-input=no\n\nUser-Agent: omgili\nDisallow: /\nContent-Signal: ai-train=no, search=no, ai-input=no\n\nUser-Agent: Bytespider\nDisallow: /\nContent-Signal: ai-train=no, search=no, ai-input=no\n\n# \u2500\u2500 AI answer/search crawlers - allowed; training still prohibited \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# GPTBot: powers ChatGPT web search and browsing (must be allowed for citations)\nUser-Agent: GPTBot\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# OAI-SearchBot: OpenAI search-specific crawler\nUser-Agent: OAI-SearchBot\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# ChatGPT-User: user-triggered ChatGPT browsing (ignores robots.txt by spec, but explicit)\nUser-Agent: ChatGPT-User\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# ClaudeBot: Claude.ai web features and search (must be allowed for citations)\nUser-Agent: ClaudeBot\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# anthropic-ai: Anthropic training opt-in signal (search=yes preserves retrieval)\nUser-Agent: anthropic-ai\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# Claude-SearchBot: Claude search-specific crawler\nUser-Agent: Claude-SearchBot\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# PerplexityBot: Perplexity AI search\nUser-Agent: PerplexityBot\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\nUser-Agent: Perplexity-User\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# GoogleOther: Google AI Mode and experimental features\nUser-Agent: GoogleOther\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# cohere-ai: Cohere search retrieval\nUser-Agent: cohere-ai\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# meta-externalagent: Meta AI search features\nUser-Agent: meta-externalagent\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# \u2500\u2500 Standard crawlers \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nUser-Agent: *\nAllow: /\nDisallow: /api/\nDisallow: /audit/*/results\nDisallow: /workspace/\nDisallow: /checkout/\nDisallow: /audit/*/processing\nDisallow: /dashboard/\nDisallow: /lead-dashboard/\nDisallow: /audit-dashboard/\nContent-Signal: ai-train=no, search=yes, ai-input=yes\n\n# \u2500\u2500 Nebula first-party diagnostic crawler \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# NebulaSEOBot is the Nebula Components CRO diagnostic crawler.\n# Crawl policy: https://nebulacomponents.com/crawler-policy\nUser-Agent: NebulaSEOBot\nAllow: /\n\nSitemap: https://nebulacomponents.com/sitemap.xml\n"
+    },
+    {
+      "path": "/newsletter",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/newsletter",
+      "canonical": [
+        "https://nebulacomponents.com"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/newsletter/confirmed",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/newsletter/confirmed",
+      "canonical": [
+        "https://nebulacomponents.com"
+      ],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/api/newsletter/confirm",
+      "status": 400,
+      "final_url": "https://nebulacomponents.com/api/newsletter/confirm",
+      "canonical": [],
+      "robots": [],
+      "x_robots_tag": null,
+      "body": "{\"error\":\"Confirmation token required\"}"
+    },
+    {
+      "path": "/api/newsletter/confirm?token=invalid-integrity-check",
+      "status": 400,
+      "final_url": "https://nebulacomponents.com/api/newsletter/confirm?token=invalid-integrity-check",
+      "canonical": [],
+      "robots": [],
+      "x_robots_tag": null,
+      "body": "{\"code\":\"http_error\",\"message\":\"Invalid or expired confirmation link\",\"request_id\":\"fa4ec486-86c0-41cc-b338-cdf6e710ab24\"}"
+    },
+    {
+      "path": "/repair-sprint",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/repair-sprint",
+      "canonical": [
+        "https://nebulacomponents.com/repair-sprint"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/repair-sprint/example",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/repair-sprint/example",
+      "canonical": [
+        "https://nebulacomponents.com/repair-sprint/example"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/proof",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/proof",
+      "canonical": [
+        "https://nebulacomponents.com/proof"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/research/landing-page-performance-q3-2026",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/research/landing-page-performance-q3-2026",
+      "canonical": [
+        "https://nebulacomponents.com/research/landing-page-performance-q3-2026"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/score",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/score",
+      "canonical": [
+        "https://nebulacomponents.com/score"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/roi-calculator",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/roi-calculator",
+      "canonical": [
+        "https://nebulacomponents.com/roi-calculator"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/funnel-audit",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/funnel-audit",
+      "canonical": [
+        "https://nebulacomponents.com/funnel-audit"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/paid-traffic-leak-scorecard",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/paid-traffic-leak-scorecard",
+      "canonical": [
+        "https://nebulacomponents.com/paid-traffic-leak-scorecard"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/ads-not-converting-two-percent",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/ads-not-converting-two-percent",
+      "canonical": [
+        "https://nebulacomponents.com/ads-not-converting-two-percent"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/fix-conversion-leak-before-campaign",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/fix-conversion-leak-before-campaign",
+      "canonical": [
+        "https://nebulacomponents.com/fix-conversion-leak-before-campaign"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/saas",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/saas",
+      "canonical": [
+        "https://nebulacomponents.com/for/saas"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/ecommerce",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/ecommerce",
+      "canonical": [
+        "https://nebulacomponents.com/for/ecommerce"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/agencies",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/agencies",
+      "canonical": [
+        "https://nebulacomponents.com/for/agencies"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/coaching",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/coaching",
+      "canonical": [
+        "https://nebulacomponents.com/for/coaching"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/fintech",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/fintech",
+      "canonical": [
+        "https://nebulacomponents.com/for/fintech"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/healthtech",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/healthtech",
+      "canonical": [
+        "https://nebulacomponents.com/for/healthtech"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/b2b-software",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/b2b-software",
+      "canonical": [
+        "https://nebulacomponents.com/for/b2b-software"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/for/lead-gen",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/for/lead-gen",
+      "canonical": [
+        "https://nebulacomponents.com/for/lead-gen"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/compare/whyiq",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/compare/whyiq",
+      "canonical": [
+        "https://nebulacomponents.com/compare/whyiq"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/compare/landing-doctors",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/compare/landing-doctors",
+      "canonical": [
+        "https://nebulacomponents.com/compare/landing-doctors"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    },
+    {
+      "path": "/compare/fixroast",
+      "status": 200,
+      "final_url": "https://nebulacomponents.com/compare/fixroast",
+      "canonical": [
+        "https://nebulacomponents.com/compare/fixroast"
+      ],
+      "robots": [],
+      "x_robots_tag": null
+    }
+  ]
+}
