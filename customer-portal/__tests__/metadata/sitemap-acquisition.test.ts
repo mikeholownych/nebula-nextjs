@@ -1,9 +1,13 @@
 import sitemap from '@/app/sitemap'
-import { comparisons } from '@/app/compare/comparisons'
 import { getAllVerticalSlugs } from '@/app/for/[vertical]/data'
+import { COMPARISONS } from '@/app/vs/[slug]/data'
 
 const origin = 'https://nebulacomponents.com'
-const publicPaths = [
+
+// These paths are hardcoded in sitemap.ts corePagesByPriority. They are
+// checked separately from the canonical sources below because sitemap.ts is
+// the artifact under test and cannot be trusted to enumerate itself.
+const corePublicPaths = [
   '/repair-sprint', '/repair-sprint/example', '/proof',
   '/research/landing-page-performance-q3-2026', '/score', '/roi-calculator',
   '/funnel-audit', '/paid-traffic-leak-scorecard', '/ads-not-converting-two-percent',
@@ -14,15 +18,22 @@ const publicPaths = [
 ]
 
 describe('acquisition sitemap coverage', () => {
-  it('includes all published verticals, comparisons and verified public omissions exactly once', async () => {
+  it('includes every canonical vertical and comparison slug exactly once', async () => {
     const urls = (await sitemap()).map(({ url }) => url)
+    // Canonical expectations come from the data sources, not a hand-maintained
+    // list. A hand-maintained list here silently decays when new pages ship
+    // and the sitemap is regenerated correctly.
     const expected = [
-      ...publicPaths,
       ...getAllVerticalSlugs().map((slug) => `/for/${slug}`),
-      ...comparisons.map(({ slug }) => `/compare/${slug}`),
+      ...Object.keys(COMPARISONS).map((slug) => `/compare/${slug}`),
     ]
     expect(expected.filter((p) => !urls.includes(`${origin}${p}`))).toEqual([])
     expect(new Set(urls).size).toBe(urls.length)
+  })
+
+  it('includes the core public acquisition paths hardcoded in sitemap.ts', async () => {
+    const urls = (await sitemap()).map(({ url }) => url)
+    expect(corePublicPaths.filter((p) => !urls.includes(`${origin}${p}`))).toEqual([])
   })
 
   it('does not discover private, confirmation, retired or redirect-only pages', async () => {

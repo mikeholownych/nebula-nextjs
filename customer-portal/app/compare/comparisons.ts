@@ -338,6 +338,66 @@ export const comparisons: Comparison[] = [
       },
     ],
   },
+  {
+    slug: 'optimizely',
+    toolName: 'Optimizely',
+    toolUrl: 'https://optimizely.com',
+    category: 'A/B testing and experimentation platform',
+    shortDescription:
+      'Enterprise A/B testing platform vs. instant conversion diagnostic. Optimizely measures which variant wins. Nebula tells you what to fix before you run the test.',
+    intro:
+      'Optimizely is an enterprise experimentation platform built for running controlled A/B and multivariate tests at scale. It requires a JavaScript snippet installed on your site, a minimum traffic volume to reach statistical significance, and weeks to produce a result. Nebula Components is a conversion diagnostic that inspects the HTML of any public URL in under 2 minutes with no code install, identifies the highest-priority conversion leak, and delivers an exact repair artifact for $97.',
+    whatItDoesWell: [
+      'Controlled A/B and multivariate experiments at enterprise scale',
+      'Statistical significance engine with configurable confidence thresholds',
+      'Feature flagging and progressive rollouts across web and mobile',
+      'Visual editor for building page variants without developer involvement',
+    ],
+    whereItStops: [
+      'Requires a JavaScript snippet installed on every page - no instant audit of an arbitrary URL.',
+      'Requires sufficient traffic volume to reach statistical significance - ineffective for new campaigns or low-traffic pages.',
+      'Does not diagnose root cause. It measures which variant converted better, not why the losing variant failed.',
+      'Does not check ad-to-page message match, trust signals, or mobile CTA conditions - the structural issues that prevent conversion regardless of variant.',
+      'Enterprise pricing (typically $50k+/year) puts it out of reach for founders and small growth teams.',
+    ],
+    nebulaFit: [
+      'Nebula diagnoses what is broken on your existing page before you build a variant.',
+      'Audits any public URL in under 2 minutes - no code install, no traffic minimum, no waiting.',
+      'Identifies the specific failing condition (message match, CTA, trust signal, mobile) with HTML evidence.',
+      '$97 One-Leak Repair Sprint delivers the exact copy, code, or config change to implement.',
+      'After the repair, Nebula re-audits the same signal at 30 days to confirm it held.',
+    ],
+    table: [
+      { dimension: 'Time to first insight', tool: 'Weeks - setup, traffic accrual, significance', nebula: 'Under 2 minutes on any public URL' },
+      { dimension: 'Code install required', tool: 'Yes - JavaScript snippet on every page', nebula: 'No - audits any public URL with no site access' },
+      { dimension: 'Traffic minimum', tool: 'Yes - needs visitors to reach significance', nebula: 'No - works on day 1 before any paid spend' },
+      { dimension: 'Diagnoses root cause', tool: 'No - measures outcome variance only', nebula: 'Yes - identifies the specific failing condition' },
+      { dimension: 'Checks message match', tool: 'No - evaluates conversion rate, not message quality', nebula: 'Yes - ad headline alignment, UTM context' },
+      { dimension: 'Cost', tool: 'Enterprise, typically $50k+/year', nebula: 'Free audit; $97 one-time repair sprint' },
+    ],
+    useBoth:
+      'Use Nebula first to diagnose what is broken on your existing page. Once you have the specific finding and the repair implemented, use Optimizely to run a controlled experiment validating the conversion lift - if you have the traffic volume and budget to justify it.',
+    verdict:
+      'Optimizely is built for enterprise teams running high-volume experiments who already know what to test. Nebula is built for founders and growth teams spending on ads who need to know what is broken before they run any test. Run the Nebula free audit first.',
+    faqs: [
+      {
+        q: 'Should I use Optimizely or Nebula for landing page optimization?',
+        a: 'Use Nebula first. Optimizely measures which of two variants converts better, but only after you have built both variants, installed tracking, and accumulated enough traffic for statistical significance. Nebula identifies the highest-priority conversion leak on your existing page in under 2 minutes. Run the free audit to find out what to fix, then use Optimizely to validate the fix at scale if you have the traffic and budget for it.',
+      },
+      {
+        q: 'Does Optimizely audit landing pages?',
+        a: 'No. Optimizely does not audit a page for conversion failures. It provides an experimentation framework for running controlled tests. You still need to form a hypothesis about what to change. Nebula produces that hypothesis by inspecting observable conversion conditions on your actual page HTML.',
+      },
+      {
+        q: 'Can a founder or small team use Optimizely?',
+        a: 'In practice, no. Optimizely is priced for enterprise teams and requires engineering resources to install and maintain. For founders running paid campaigns who need to understand why their page is not converting, the Nebula free audit and $97 repair sprint are the practical alternative.',
+      },
+      {
+        q: 'What does Nebula check that Optimizely does not?',
+        a: 'Nebula checks 9 observable conversion signals: headline-to-ad message match, above-the-fold CTA clarity, trust signal placement, mobile CTA visibility, form friction, load speed, social proof presence, structured data completeness, and AI readiness. Optimizely measures conversion rate variance between variants - it does not inspect these underlying conditions.',
+      },
+    ],
+  },
 ]
 
 export const getComparison = (slug: string): Comparison | undefined =>

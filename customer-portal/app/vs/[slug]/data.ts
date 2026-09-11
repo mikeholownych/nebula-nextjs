@@ -323,4 +323,43 @@ export const COMPARISONS: Record<string, Comparison> = {
     ],
     verdict: "FixRoast is an engaging, AI-driven roasting tool that offers quick subjective feedback and LLM search scoring. Nebula is a deterministic conversion instrument built for operators spending real ad dollars who need exact, reproducible HTML evidence, ad message match verification, and guaranteed remediation.",
   },
+  "optimizely": {
+    slug: "optimizely",
+    competitorName: "Optimizely",
+    competitorUrl: "https://optimizely.com",
+    tagline: "Optimizely vs. Nebula - A/B testing platform vs. instant conversion diagnostic",
+    intent: "Optimizely runs controlled A/B experiments to measure which variant converts better. Nebula diagnoses why a page is not converting before you spend traffic on experiments.",
+    bluf: "Optimizely is an enterprise A/B testing and experimentation platform. It requires code installation on your site, a statistically significant traffic volume, and weeks to produce a result. Nebula is a conversion diagnostic that inspects the HTML of any public URL in under 2 minutes, identifies the highest-priority conversion leak, and delivers an exact repair artifact for $97. If you have not yet diagnosed what is broken on your page, Optimizely will help you measure the wrong hypothesis. Nebula tells you what to test before you run the experiment.",
+    checkedAt: "September 2026",
+    targetQuery: "best tools for landing page optimization conversion diagnostic",
+    rows: [
+      { feature: "Time to first insight", nebula: "Under 2 minutes on any public URL", competitor: "Weeks - requires experiment setup, traffic, and statistical significance", nebulaWins: true },
+      { feature: "Requires code install", nebula: "No - audits any public URL with no site access", competitor: "Yes - JavaScript snippet required on every page", nebulaWins: true },
+      { feature: "Requires existing traffic", nebula: "No - works on day 1 before any paid spend", competitor: "Yes - needs sufficient visitors to reach significance", nebulaWins: true },
+      { feature: "Cost", nebula: "Free audit + $97 one-time repair sprint", competitor: "Enterprise pricing, typically $50k+/year", nebulaWins: true },
+      { feature: "Diagnoses root cause", nebula: "Yes - identifies the specific failing condition on your page", competitor: "No - measures outcome variance between variants, not root cause", nebulaWins: true },
+      { feature: "Checks message match", nebula: "Yes - ad-to-page headline alignment, UTM context", competitor: "No - evaluates conversion rate, not message quality", nebulaWins: true },
+      { feature: "Fix path included", nebula: "Yes - $97 repair sprint delivers exact copy, code, or config change", competitor: "No - platform only; implementation is on your team", nebulaWins: true },
+      { feature: "Best for", nebula: "Founders spending on ads who need to know what to fix before scaling", competitor: "Enterprise teams running high-volume multivariate experiments", nebulaWins: true },
+    ],
+    faqs: [
+      {
+        q: "Should I use Optimizely or Nebula for landing page optimization?",
+        a: "Use Nebula first. Optimizely is an experimentation platform - it measures which of two variants converts better, but only after you have built both variants, installed tracking, and accumulated enough traffic for statistical significance. Nebula identifies the highest-priority conversion leak on your existing page in under 2 minutes, before you write a single variant. Run the free audit to find out what to test, then use Optimizely to validate the fix at scale if you have the traffic volume to justify it.",
+      },
+      {
+        q: "Does Optimizely audit landing pages?",
+        a: "No. Optimizely does not audit a page for conversion failures. It provides an experimentation framework for running controlled A/B and multivariate tests. You still need to form a hypothesis about what to change - Nebula produces that hypothesis by inspecting observable conversion conditions on your actual page HTML.",
+      },
+      {
+        q: "Can a small team or founder use Optimizely?",
+        a: "In practice, no. Optimizely is priced for enterprise teams (typically $50k+/year) and requires engineering resources to install and maintain the tracking snippet. For founders running paid campaigns who need to understand why their page is not converting, the Nebula free audit and $97 repair sprint are the practical alternative.",
+      },
+      {
+        q: "What does Nebula check that Optimizely does not?",
+        a: "Nebula checks observable page conditions against 9 conversion signals: headline-to-ad message match, above-the-fold CTA clarity, trust signal placement, mobile CTA visibility, form friction, load speed, social proof presence, structured data completeness, and AI readiness. These are the failure conditions that prevent conversion before any experiment can succeed. Optimizely measures conversion rate variance between variants - it does not inspect these underlying conditions.",
+      },
+    ],
+    verdict: "Optimizely is the right tool for teams with enterprise budgets, installed tracking, and sufficient traffic to run controlled experiments. Nebula is the right tool for founders and growth teams who need to know what is broken on their landing page today, without code installs, without traffic minimums, and without waiting weeks for results.",
+  },
 }

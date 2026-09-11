@@ -80,6 +80,15 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/conversion-rate-optimization-audit',
       '/why-cro-agencies-dont-work',
       '/lead-generation-landing-page-audit',
+      '/mobile-viewport-conversion-rates',
+      '/free-landing-page-audit-tools-startups',
+      '/landing-page-performance-analysis',
+      '/cro-agency-alternative',
+      '/landing-page-code-fixes',
+      '/landing-page-mistakes',
+      '/no-retainer-cro-tools',
+      '/status',
+      '/audit/compare',
     ],
     priority: 0.8,
   },
@@ -88,7 +97,12 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/7-systems',
       '/ai-sdr-vs-audit',
       '/compare',
-      ...comparisons.map(({ slug }) => `/compare/${slug}`),
+      // Only include compare/comparisons.ts slugs that are NOT also in COMPARISONS
+      // (vs/[slug]/data.ts). Those are covered by publicComparisonEntries below.
+      // Slugs present in BOTH sources would appear twice otherwise.
+      ...comparisons
+        .filter(({ slug }) => !Object.prototype.hasOwnProperty.call(COMPARISONS, slug))
+        .map(({ slug }) => `/compare/${slug}`),
       ...getAllVerticalSlugs().map((slug) => `/for/${slug}`),
       '/concepts',
       '/cta-optimization',
@@ -185,6 +199,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const comparisonEntries: MetadataRoute.Sitemap = Object.keys(COMPARISONS).sort().map((slug) => ({
     url: `${BASE_URL}/vs/${slug}`,
     lastModified: BUILD_DATE,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }))
+
+  // /compare/{slug} is the public-facing canonical URL for the same comparison
+  // content. Both routes render from vs/[slug]/data.ts; the sitemap must list
+  // the one search engines actually discover, not just the internal mount.
+  const publicComparisonEntries: MetadataRoute.Sitemap = Object.keys(COMPARISONS).sort().map((slug) => ({
+    url: `${BASE_URL}/compare/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'yearly',
     priority: 0.6,
   }))
@@ -210,5 +234,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [homeEntry, ...coreEntries, ...articleEntries, ...blogHubEntry, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...blogHubEntry, ...localBlogEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...publicComparisonEntries, ...pricingGuideEntries]
 }

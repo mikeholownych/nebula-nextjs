@@ -34,8 +34,17 @@ describe('sitemap canonical inventory', () => {
     // dashboards) must never be submitted. A 307-to-login URL in the sitemap
     // wastes crawl budget and can be read as a soft-404 by Google.
     const urlList = (await sitemap()).map(({ url }) => url)
+    // Gated/robots-Disallowed paths (workspace, checkout, api, audit results,
+    // dashboards) must never be submitted. A 307-to-login URL in the sitemap
+    // wastes crawl budget and can be read as a soft-404 by Google.
+    // /audit/compare is explicitly excluded: it is a public comparison tool page,
+    // not an auth-gated audit result route.
+    const PUBLIC_AUDIT_EXCEPTIONS = new Set([
+      'https://nebulacomponents.com/audit/compare',
+    ])
     const gatedSubstrings = ['/workspace', '/checkout', '/api/', '/dashboard', '/audit/', '/login']
     const offenders = urlList.filter((url) =>
+      !PUBLIC_AUDIT_EXCEPTIONS.has(url) &&
       gatedSubstrings.some((g) => url.includes(g))
     )
     expect(offenders).toEqual([])
