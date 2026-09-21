@@ -1,17 +1,17 @@
 {
   "package": "@nebulacomponents/citable",
-  "version": "1.13.0",
-  "releasedAt": "2026-07-19",
-  "detectorCount": 123,
-  "namespaceCount": 18,
-  "registryCount": 27,
+  "version": "1.21.0",
+  "releasedAt": "2026-09-21",
+  "detectorCount": 181,
+  "namespaceCount": 19,
+  "registryCount": 29,
   "nodeRequirement": ">=24.0.0",
   "license": "Apache-2.0",
-  "source": "npm:@nebulacomponents/citable@1.13.0",
+  "source": "npm:@nebulacomponents/citable@1.21.0",
   "highlights": [
-    "Canonical release manifests that bind executable detector, namespace, registry, provider, distribution, documentation, and generated publisher projections to the release commit with fail-closed checksum validation.",
-    "Two-phase release governance with `published_unfinalized`, immutable finalization, bounded dwell, terminal withdrawal or supersession, and owner-controlled deployment receipts that cannot be mistaken for independent attestation.",
-    "Direct and cache-busted representation-drift observations with longitudinal divergence and convergence evidence that remains `external_unverified` and cannot satisfy release gates.",
-    "Acceptance-corpus contracts and bounded accuracy metrics covering detector confusion matrices, incomplete evidence, reviewer agreement, execution cost, reproducibility, and remediation verification."
+    "Added a provider-neutral external observation contract for immutable page, provider, and derived evidence with explicit provenance, coverage, and limitations.",
+    "Added normalized Search Console discovery observations with bounded pagination, query/page relationship accessors, provider-scoped metrics, and fail-closed retrieval semantics.",
+    "Added immutable, versioned prompt populations and provider-neutral AI representation observations that distinguish mentions, domain mentions, citations, and exact URL citations.",
+    "Extended longitudinal comparability and bounded claim verification to external observations without treating provider responses as universal truth or introducing an AI visibility score."
   ]
 }

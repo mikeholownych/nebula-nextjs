@@ -40,7 +40,7 @@ async function getLastRelease(): Promise<{ tag: string; date: string }> {
 export const metadata: Metadata = {
   title: `Citable ${citableTag} — Evidence Layer for Defensible SEO, AEO, and GEO Audits | Nebula Components`,
   description:
-    'Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. 123 detectors across 18 namespaces. Apache 2.0 licensed.',
+    `Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. ${citableRelease.detectorCount} detectors across ${citableRelease.namespaceCount} namespaces. Apache 2.0 licensed.`,
   alternates: { canonical: 'https://nebulacomponents.shop/resources/citable' },
   openGraph: {
     title: 'Citable — The Evidence Layer for Defensible SEO, AEO, and GEO Audits',
@@ -68,7 +68,7 @@ const citableSchema = {
       '@id': 'https://nebulacomponents.shop/resources/citable#article',
       headline: 'Citable — The Evidence Layer for Defensible SEO, AEO, and GEO Audits',
       description:
-        'Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. 123 detectors across 18 namespaces. Apache 2.0 licensed.',
+        `Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. ${citableRelease.detectorCount} detectors across ${citableRelease.namespaceCount} namespaces. Apache 2.0 licensed.`,
       author: {
         '@type': 'Organization',
         '@id': 'https://nebulacomponents.shop/#organization',

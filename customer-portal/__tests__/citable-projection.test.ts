@@ -15,12 +15,12 @@ describe('Citable public projection', () => {
     expect(fs.existsSync(path.join(repoRoot, '.github/workflows/sync-citable-projection.yml'))).toBe(true)
   })
 
-  test('projects the published v1.13.0 package across discoverable surfaces', () => {
+  test('projects the published v1.21.0 package across discoverable surfaces', () => {
     const projection = JSON.parse(read('data/citable-release.json'))
-    expect(projection.version).toBe('1.13.0')
-    expect(projection.detectorCount).toBe(123)
-    expect(projection.namespaceCount).toBe(18)
-    expect(projection.registryCount).toBe(27)
+    expect(projection.version).toBe('1.21.0')
+    expect(projection.detectorCount).toBe(181)
+    expect(projection.namespaceCount).toBe(19)
+    expect(projection.registryCount).toBe(29)
 
     for (const file of [
       'app/resources/citable/page.tsx',
@@ -33,8 +33,8 @@ describe('Citable public projection', () => {
       expect(content).not.toContain('softwareVersion: \'1.12.0\'')
     }
 
-    expect(read('public/llms.txt')).toContain('Citable v1.13.0')
-    expect(read('public/llms-full.txt')).toContain('- Version: 1.13.0')
+    expect(read('public/llms.txt')).toContain('Citable v1.21.0')
+    expect(read('public/llms-full.txt')).toContain('- Version: 1.21.0')
   })
 
   test('serves the vendored release governance projections as controlled surfaces', () => {

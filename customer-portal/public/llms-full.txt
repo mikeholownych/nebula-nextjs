@@ -49,7 +49,7 @@ Automated URL submission and 7-point scoring across message-match, trust signals
 
 Citable is an open-source CLI for search and AI discoverability governance. It was built to address a specific internal need: auditing whether a site was actually retrievable by search engines and AI systems, with evidence rather than opinions.
 
-- Version: 1.13.0
+- Version: 1.21.0
 - License: Apache 2.0
 - npm: @nebulacomponents/citable
 - GitHub: https://github.com/mikeholownych/citable
@@ -57,7 +57,7 @@ Citable is an open-source CLI for search and AI discoverability governance. It w
 
 ### What Citable Does
 
-Citable runs 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture explicitly):
+Citable runs 181 detectors across 19 namespaces and 29 schema-validated registries (not all detectors are deterministic — each declares its determinism posture explicitly):
 - CRAWL: robots.txt, sitemap, canonical, redirect chains
 - PAGE: title uniqueness, meta description, word count, content quality
 - SEO: structured data presence, heading hierarchy, image alt text
